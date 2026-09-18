@@ -575,6 +575,7 @@ func TestCheckRequestSnapshot_CreateTrail(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2542,6 +2543,7 @@ func TestCheckRequestSnapshot_UpdateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2934,6 +2936,7 @@ func TestUpdateRequestSnapshot_CreateTrail(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4901,6 +4904,7 @@ func TestUpdateRequestSnapshot_UpdateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

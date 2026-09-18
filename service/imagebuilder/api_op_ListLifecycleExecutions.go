@@ -5,11 +5,13 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Get the lifecycle runtime history for the specified resource.
+// Retrieves the lifecycle runtime history for the specified resource.
 func (c *Client) ListLifecycleExecutions(ctx context.Context, params *ListLifecycleExecutionsInput, optFns ...func(*Options)) (*ListLifecycleExecutionsOutput, error) {
 	if params == nil {
 		params = &ListLifecycleExecutionsInput{}
@@ -33,14 +35,32 @@ type ListLifecycleExecutionsInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListLifecycleExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecycleExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListLifecycleExecutionsRequest_resourceArn, *v.ResourceArn)
+	}
 }
 
 type ListLifecycleExecutionsOutput struct {
@@ -59,13 +79,35 @@ type ListLifecycleExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecycleExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecycleExecutionsList(s, schemas.ListLifecycleExecutionsResponse_lifecycleExecutions, v.LifecycleExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLifecycleExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecycleExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecycleExecutionsResponse_lifecycleExecutions:
+			return deserializeLifecycleExecutionsList(d, schemas.ListLifecycleExecutionsResponse_lifecycleExecutions, &v.LifecycleExecutions)
+		case schemas.ListLifecycleExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecycleExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecycleExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLifecycleExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutions, schemas.ListLifecycleExecutionsRequest, schemas.ListLifecycleExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLifecycleExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutions, schemas.ListLifecycleExecutionsRequest, schemas.ListLifecycleExecutionsResponse), output: &ListLifecycleExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -105,7 +147,7 @@ func (c *Client) addOperationListLifecycleExecutionsMiddlewares(stack *middlewar
 // ListLifecycleExecutionsPaginatorOptions is the paginator options for
 // ListLifecycleExecutions
 type ListLifecycleExecutionsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

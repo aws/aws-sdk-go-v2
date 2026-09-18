@@ -1,3 +1,12 @@
+# v1.49.0 (2026-09-17)
+
+* **Feature**: Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate.
+
+# v1.48.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

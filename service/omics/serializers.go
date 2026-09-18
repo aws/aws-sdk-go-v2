@@ -8518,6 +8518,11 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.String(string(v.ScratchStorageMode))
 	}
 
+	if v.SessionPolicy != nil {
+		ok := object.Key("sessionPolicy")
+		ok.String(*v.SessionPolicy)
+	}
+
 	if v.StorageCapacity != nil {
 		ok := object.Key("storageCapacity")
 		ok.Integer(*v.StorageCapacity)
@@ -10142,6 +10147,11 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 	if len(v.ScratchStorageMode) > 0 {
 		ok := object.Key("scratchStorageMode")
 		ok.String(string(v.ScratchStorageMode))
+	}
+
+	if v.SessionPolicy != nil {
+		ok := object.Key("sessionPolicy")
+		ok.String(*v.SessionPolicy)
 	}
 
 	if v.StorageCapacity != nil {

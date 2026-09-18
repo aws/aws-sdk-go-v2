@@ -59,6 +59,33 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Your request has conflicting operations. This can occur if you're trying to
+// perform more than one operation on the same resource at the same time.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Thrown when performing an action because a dependency would be broken.
 type DependencyException struct {
 	Message *string

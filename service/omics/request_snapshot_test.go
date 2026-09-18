@@ -3325,6 +3325,7 @@ func TestCheckRequestSnapshot_StartRun(t *testing.T) {
 		NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 		ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
+		SessionPolicy:       ptr.String("__SessionPolicy__"),
 		EngineSettings:      document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
@@ -3380,6 +3381,7 @@ func TestCheckRequestSnapshot_StartRunBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
+			SessionPolicy:       ptr.String("__SessionPolicy__"),
 			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},
@@ -6933,6 +6935,7 @@ func TestUpdateRequestSnapshot_StartRun(t *testing.T) {
 		NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 		ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
+		SessionPolicy:       ptr.String("__SessionPolicy__"),
 		EngineSettings:      document.NewLazyDocument("__Document__"),
 	}
 	body := &bytes.Buffer{}
@@ -6988,6 +6991,7 @@ func TestUpdateRequestSnapshot_StartRunBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
+			SessionPolicy:       ptr.String("__SessionPolicy__"),
 			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},

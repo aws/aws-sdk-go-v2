@@ -4822,6 +4822,98 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9._-]+$"
             }
         },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Attaches an elastic network interface (ENI) to a node in a HyperPod cluster. </p> <p> To use this operation, you must have the <code>sagemaker:AttachClusterNodeNetworkInterface</code> permission. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The name or Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that contains the target node. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the cluster node to which you want to attach the network interface. The node must belong to your specified HyperPod cluster and cannot be part of a Restricted Instance Group (RIG). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the elastic network interface (ENI) to attach. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterfaceResponse": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster where the network interface attachment operation was performed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the cluster node where your network interface was attached. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the elastic network interface (ENI) that was attached. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p> The unique identifier of the network interface attachment. Use this value to reference or detach the network interface later. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#AttachClusterNodeVolume": {
             "type": "operation",
             "input": {
@@ -12805,6 +12897,16 @@
                 "smithy.api#documentation": "<p>The network interface configuration for a Amazon SageMaker HyperPod cluster instance group.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ClusterNetworkInterfaceAttachmentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 28
+                },
+                "smithy.api#pattern": "^eni-attach-[0-9a-f]{8}(?:[0-9a-f]{9})?$"
+            }
+        },
         "com.amazonaws.sagemaker#ClusterNetworkInterfaceDetails": {
             "type": "structure",
             "members": {
@@ -12817,6 +12919,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The network interface configuration details for a Amazon SageMaker HyperPod cluster instance group.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterNetworkInterfaceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^eni-[0-9a-f]{8}(?:[0-9a-f]{9})?$"
             }
         },
         "com.amazonaws.sagemaker#ClusterNodeDetails": {
@@ -46004,6 +46116,47 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#InstancePreference": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ML compute instance type. An instance type can appear only once in an <code>InstancePreferences</code> list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances to launch if this instance type is selected. Specify the instance count for the training job in one of the following two ways:</p> <ol> <li> <p> <b>Per preference</b> – Set <code>InstanceCount</code> on every preference in the <code>InstancePreferences</code> list and don't set <code>ResourceConfig$InstanceCount</code>. Use this when each instance type needs a different number of instances to deliver equivalent compute.</p> </li> <li> <p> <b>One count for the job</b> – Set <code>ResourceConfig$InstanceCount</code> and omit it from every preference. SageMaker applies this to all instance types in the list.</p> </li> </ol> <p>For example, in a list of five preferences, either all five specify <code>InstanceCount</code> or none of them do. SageMaker rejects requests that set <code>InstanceCount</code> on only some preferences, that set it both per preference and in <code>ResourceConfig</code>, or that omit it in both places.</p>"
+                    }
+                },
+                "TrainingPlanArns": {
+                    "target": "com.amazonaws.sagemaker#TrainingPlanArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a training plan to use if this instance type is selected. The plan's instance type must match <code>InstanceType</code>. A preference with a training plan uses that plan's reserved capacity; a preference without one uses on-demand capacity. Per-preference <code>TrainingPlanArns</code> is mutually exclusive with the job-level <code>TrainingPlanArn</code> in <code>ResourceConfig</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A candidate instance type preference in an <code>InstancePreferences</code> list.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InstancePreferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#InstancePreference"
+            },
+            "traits": {
+                "smithy.api#documentation": "Ordered list of candidate instance types, in priority order.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sagemaker#InstanceRequirementsEniConfiguration": {
             "type": "structure",
             "members": {
@@ -58305,7 +58458,7 @@
             "traits": {
                 "smithy.api#documentation": "Maximum job scheduler pending time in seconds.",
                 "smithy.api#range": {
-                    "min": 7200,
+                    "min": 1800,
                     "max": 2419200
                 }
             }
@@ -67267,6 +67420,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the processing job. </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>VolumeKmsKeyId</code> when using an instance type with local storage.</p> <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD Instance Store Volumes</a>.</p> </note>"
                     }
+                },
+                "InstancePreferences": {
+                    "target": "com.amazonaws.sagemaker#ProcessingInstancePreferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ordered list of ML compute instance types for the processing job, in priority order. Amazon SageMaker launches the job on the first instance type in the list that has available capacity. If capacity is insufficient, Amazon SageMaker evaluates the next instance type in the list. Exactly one instance type is selected for the job.</p> <p> <code>InstancePreferences</code> is mutually exclusive with <code>InstanceType</code>.</p>"
+                    }
+                },
+                "SelectedInstanceType": {
+                    "target": "com.amazonaws.sagemaker#ProcessingInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type that Amazon SageMaker selected for the job from <code>InstancePreferences</code>. Returned by <code> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeProcessingJob.html\">DescribeProcessingJob</a> </code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateProcessingJob</code> requests.</p>"
+                    }
+                },
+                "SelectedInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#ProcessingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances of <code>SelectedInstanceType</code> that the job launched with. The job is billed for this instance type and count. Returned by <code>DescribeProcessingJob</code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateProcessingJob</code> requests.</p>"
+                    }
                 }
             },
             "traits": {
@@ -67376,6 +67547,41 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ProcessingInstancePreference": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ProcessingInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ML compute instance type. An instance type can appear only once in an <code>InstancePreferences</code> list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#ProcessingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances to launch if this instance type is selected. Specify the instance count for the processing job in one of the following two ways:</p> <ol> <li> <p> <b>Per preference</b> – Set <code>InstanceCount</code> on every preference in the <code>InstancePreferences</code> list and don't set <code>ProcessingClusterConfig$InstanceCount</code>. Use this when each instance type needs a different number of instances to deliver equivalent compute.</p> </li> <li> <p> <b>One count for the job</b> – Set <code>ProcessingClusterConfig$InstanceCount</code> and omit it from every preference. Amazon SageMaker applies this to all instance types in the list.</p> </li> </ol> <p>For example, in a list of five preferences, either all five specify <code>InstanceCount</code> or none of them do. Amazon SageMaker rejects requests that set <code>InstanceCount</code> on only some preferences, that set it both per preference and in <code>ProcessingClusterConfig</code>, or that omit it in both places.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A candidate instance type preference in a processing <code>InstancePreferences</code> list.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ProcessingInstancePreferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ProcessingInstancePreference"
+            },
+            "traits": {
+                "smithy.api#documentation": "Ordered list of candidate instance types, in priority order.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
                 }
             }
         },
@@ -73876,6 +74082,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for how training job instances are placed and allocated within UltraServers. Only applicable for UltraServer capacity.</p>"
                     }
+                },
+                "InstancePreferences": {
+                    "target": "com.amazonaws.sagemaker#InstancePreferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ordered list of ML compute instance types for the training job, in priority order. SageMaker launches the training job on the first instance type in the list that has available capacity. If capacity is insufficient, SageMaker evaluates the next instance type in the preferred list. Exactly one instance type is selected for the job.</p> <p> <code>InstancePreferences</code> is mutually exclusive with <code>InstanceType</code>, <code>InstanceGroups</code>, <code>InstancePlacementConfig</code>, and <code>EnableManagedSpotTraining</code>, and supports only Flexible Training Plans (FTP) and On-Demand capacity.</p>"
+                    }
+                },
+                "SelectedInstanceType": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type that SageMaker selected for the job from the provided <code>InstancePreferences</code>. The job is billed for this instance type and count. Returned by <code> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html\">DescribeTrainingJob</a> </code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateTrainingJob</code> requests.</p>"
+                    }
+                },
+                "SelectedInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances of <code>SelectedInstanceType</code> that the training job launched with. The job is billed for this instance type and count. Returned by <code>DescribeTrainingJob</code> after an instance type is selected. This field is read-only and isn't accepted in <code>CreateTrainingJob</code> requests.</p>"
+                    }
                 }
             },
             "traits": {
@@ -74870,6 +75094,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#AssociateTrialComponent"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#AttachClusterNodeNetworkInterface"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#AttachClusterNodeVolume"
@@ -81118,7 +81345,7 @@
                 "MaxPendingTimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxPendingTimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p> <note> <p>When working with training jobs that use capacity from <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html\">training plans</a>, not all <code>Pending</code> job states count against the <code>MaxPendingTimeInSeconds</code> limit. The following scenarios do not increment the <code>MaxPendingTimeInSeconds</code> counter:</p> <ul> <li> <p>The plan is in a <code>Scheduled</code> state: Jobs queued (in <code>Pending</code> status) before a plan's start date (waiting for scheduled start time)</p> </li> <li> <p>Between capacity reservations: Jobs temporarily back to <code>Pending</code> status between two capacity reservation periods</p> </li> </ul> <p> <code>MaxPendingTimeInSeconds</code> only increments when jobs are actively waiting for capacity in an <code>Active</code> plan.</p> </note>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can be pending before it is stopped.</p> <note> <p>When working with training jobs that use capacity from <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html\">training plans</a>, not all <code>Pending</code> job states count against the <code>MaxPendingTimeInSeconds</code> limit. The following scenarios do not increment the <code>MaxPendingTimeInSeconds</code> counter:</p> <ul> <li> <p>The plan is in a <code>Scheduled</code> state: Jobs queued (in <code>Pending</code> status) before a plan's start date (waiting for scheduled start time)</p> </li> <li> <p>Between capacity reservations: Jobs temporarily back to <code>Pending</code> status between two capacity reservation periods</p> </li> </ul> <p> <code>MaxPendingTimeInSeconds</code> only increments when jobs are actively waiting for capacity in an <code>Active</code> plan.</p> </note> <note> <ul> <li> <p> <code>MaxPendingTimeInSeconds</code> takes effect only for jobs that request accelerated computing instance types, such as instances in the <code>ml.p</code>, <code>ml.g</code>, and <code>ml.trn</code> families. It has no effect on jobs that request CPU-only instance types.</p> </li> <li> <p>If the job specifies <code>InstancePreferences</code>, <code>MaxPendingTimeInSeconds</code> bounds the total time SageMaker spends working through your list of instance types. It is not applied per instance type preference, and takes effect only when the list includes at least one accelerated computing instance type.</p> </li> </ul> </note>"
                     }
                 }
             },
@@ -84661,6 +84888,19 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/"
+            }
+        },
+        "com.amazonaws.sagemaker#TrainingPlanArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#TrainingPlanArn"
+            },
+            "traits": {
+                "smithy.api#documentation": "Training plan ARNs for a single instance preference.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#TrainingPlanArns": {

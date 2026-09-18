@@ -4,7 +4,9 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,25 @@ type StartJobsQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobsQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobsQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobsQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfJobsQueryFilter(s, schemas.StartJobsQueryRequest_FilterList, v.FilterList)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.StartJobsQueryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.StartJobsQueryRequest_NextToken, *v.NextToken)
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.StartJobsQueryRequest_Order, string(v.Order))
+	}
+}
+
 type StartJobsQueryOutput struct {
 
 	// The ID of the jobs query.
@@ -55,13 +76,32 @@ type StartJobsQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobsQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobsQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobsQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartJobsQueryResponse_Id, *v.Id)
+	}
+}
+func (v *StartJobsQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobsQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobsQueryResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartJobsQueryResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartJobsQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJobsQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobsQuery, schemas.StartJobsQueryRequest, schemas.StartJobsQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartJobsQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobsQuery, schemas.StartJobsQueryRequest, schemas.StartJobsQueryResponse), output: &StartJobsQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

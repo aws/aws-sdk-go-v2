@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListPromptRoutersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPromptRoutersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPromptRoutersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPromptRoutersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPromptRoutersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPromptRoutersRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListPromptRoutersRequest_type, string(v.Type))
+	}
+}
+
 type ListPromptRoutersOutput struct {
 
 	// Specify the pagination token from a previous request to retrieve the next page
@@ -55,13 +75,35 @@ type ListPromptRoutersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPromptRoutersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPromptRoutersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPromptRoutersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPromptRoutersResponse_nextToken, *v.NextToken)
+	}
+	serializePromptRouterSummaries(s, schemas.ListPromptRoutersResponse_promptRouterSummaries, v.PromptRouterSummaries)
+}
+func (v *ListPromptRoutersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPromptRoutersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPromptRoutersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPromptRoutersResponse_nextToken, v.NextToken)
+		case schemas.ListPromptRoutersResponse_promptRouterSummaries:
+			return deserializePromptRouterSummaries(d, schemas.ListPromptRoutersResponse_promptRouterSummaries, &v.PromptRouterSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPromptRoutersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPromptRouters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPromptRouters, schemas.ListPromptRoutersRequest, schemas.ListPromptRoutersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPromptRouters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPromptRouters, schemas.ListPromptRoutersRequest, schemas.ListPromptRoutersResponse), output: &ListPromptRoutersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

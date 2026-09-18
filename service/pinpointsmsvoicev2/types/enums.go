@@ -992,6 +992,29 @@ func (PoolStatus) Values() []PoolStatus {
 	}
 }
 
+type PreferenceType string
+
+// Enum values for PreferenceType
+const (
+	PreferenceTypeStartsWith PreferenceType = "StartsWith"
+	PreferenceTypeEndsWith   PreferenceType = "EndsWith"
+	PreferenceTypeContains   PreferenceType = "Contains"
+	PreferenceTypeExactMatch PreferenceType = "ExactMatch"
+)
+
+// Values returns all known values for PreferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PreferenceType) Values() []PreferenceType {
+	return []PreferenceType{
+		"StartsWith",
+		"EndsWith",
+		"Contains",
+		"ExactMatch",
+	}
+}
+
 type ProtectConfigurationFilterName string
 
 // Enum values for ProtectConfigurationFilterName
@@ -1441,6 +1464,23 @@ func (ResourceType) Values() []ResourceType {
 		"policy",
 		"message",
 		"rcs-agent",
+	}
+}
+
+type SearchableNumberType string
+
+// Enum values for SearchableNumberType
+const (
+	SearchableNumberTypeTenDlc SearchableNumberType = "TEN_DLC"
+)
+
+// Values returns all known values for SearchableNumberType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchableNumberType) Values() []SearchableNumberType {
+	return []SearchableNumberType{
+		"TEN_DLC",
 	}
 }
 

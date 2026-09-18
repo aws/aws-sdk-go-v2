@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type GrantFlowEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrantFlowEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantFlowEntitlementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantFlowEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfGrantEntitlementRequest(s, schemas.GrantFlowEntitlementsRequest_Entitlements, v.Entitlements)
+	if v.FlowArn != nil {
+		s.WriteString(schemas.GrantFlowEntitlementsRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type GrantFlowEntitlementsOutput struct {
 
 	//  The entitlements that were just granted.
@@ -54,13 +69,35 @@ type GrantFlowEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrantFlowEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantFlowEntitlementsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantFlowEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfEntitlement(s, schemas.GrantFlowEntitlementsResponse_Entitlements, v.Entitlements)
+	if v.FlowArn != nil {
+		s.WriteString(schemas.GrantFlowEntitlementsResponse_FlowArn, *v.FlowArn)
+	}
+}
+func (v *GrantFlowEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrantFlowEntitlementsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrantFlowEntitlementsResponse_Entitlements:
+			return deserialize__listOfEntitlement(d, schemas.GrantFlowEntitlementsResponse_Entitlements, &v.Entitlements)
+		case schemas.GrantFlowEntitlementsResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.GrantFlowEntitlementsResponse_FlowArn, v.FlowArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGrantFlowEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGrantFlowEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GrantFlowEntitlements, schemas.GrantFlowEntitlementsRequest, schemas.GrantFlowEntitlementsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGrantFlowEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GrantFlowEntitlements, schemas.GrantFlowEntitlementsRequest, schemas.GrantFlowEntitlementsResponse), output: &GrantFlowEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

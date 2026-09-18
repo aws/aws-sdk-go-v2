@@ -10,11 +10,17 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Cancels a query if the query is not in a terminated state, such as CANCELLED ,
 // FAILED , TIMED_OUT , or FINISHED . You must specify an ARN value for
 // EventDataStore . The ID of the query that you want to cancel is also required.
 // When you run CancelQuery , the query status might show as CANCELLED even if the
 // operation is not yet finished.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optFns ...func(*Options)) (*CancelQueryOutput, error) {
 	if params == nil {
 		params = &CancelQueryInput{}

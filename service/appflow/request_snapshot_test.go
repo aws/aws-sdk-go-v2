@@ -353,16 +353,18 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Honeycode: &types.HoneycodeConnectorProfileCredentials{
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				InforNexus: &types.InforNexusConnectorProfileCredentials{
@@ -376,8 +378,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Redshift: &types.RedshiftConnectorProfileCredentials{
@@ -388,8 +391,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
@@ -404,8 +408,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -417,13 +422,15 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Snowflake: &types.SnowflakeConnectorProfileCredentials{
-					Username: ptr.String("__Username__"),
-					Password: ptr.String("__Password__"),
+					Username:   ptr.String("__Username__"),
+					Password:   ptr.String("__Password__"),
+					PrivateKey: ptr.String("__PrivateKey__"),
 				},
 				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
 					ApiSecretKey: ptr.String("__ApiSecretKey__"),
@@ -437,8 +444,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				SAPOData: &types.SAPODataConnectorProfileCredentials{
@@ -452,8 +460,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -469,8 +478,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 					ApiKey: &types.ApiKeyCredentials{
@@ -488,8 +498,9 @@ func TestCheckRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 				},
@@ -1708,16 +1719,18 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Honeycode: &types.HoneycodeConnectorProfileCredentials{
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				InforNexus: &types.InforNexusConnectorProfileCredentials{
@@ -1731,8 +1744,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Redshift: &types.RedshiftConnectorProfileCredentials{
@@ -1743,8 +1757,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
@@ -1759,8 +1774,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -1772,13 +1788,15 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Snowflake: &types.SnowflakeConnectorProfileCredentials{
-					Username: ptr.String("__Username__"),
-					Password: ptr.String("__Password__"),
+					Username:   ptr.String("__Username__"),
+					Password:   ptr.String("__Password__"),
+					PrivateKey: ptr.String("__PrivateKey__"),
 				},
 				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
 					ApiSecretKey: ptr.String("__ApiSecretKey__"),
@@ -1792,8 +1810,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				SAPOData: &types.SAPODataConnectorProfileCredentials{
@@ -1807,8 +1826,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -1824,8 +1844,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 					ApiKey: &types.ApiKeyCredentials{
@@ -1843,8 +1864,9 @@ func TestCheckRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 				},
@@ -2565,16 +2587,18 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Honeycode: &types.HoneycodeConnectorProfileCredentials{
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				InforNexus: &types.InforNexusConnectorProfileCredentials{
@@ -2588,8 +2612,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Redshift: &types.RedshiftConnectorProfileCredentials{
@@ -2600,8 +2625,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
@@ -2616,8 +2642,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -2629,13 +2656,15 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Snowflake: &types.SnowflakeConnectorProfileCredentials{
-					Username: ptr.String("__Username__"),
-					Password: ptr.String("__Password__"),
+					Username:   ptr.String("__Username__"),
+					Password:   ptr.String("__Password__"),
+					PrivateKey: ptr.String("__PrivateKey__"),
 				},
 				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
 					ApiSecretKey: ptr.String("__ApiSecretKey__"),
@@ -2649,8 +2678,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				SAPOData: &types.SAPODataConnectorProfileCredentials{
@@ -2664,8 +2694,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -2681,8 +2712,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 					ApiKey: &types.ApiKeyCredentials{
@@ -2700,8 +2732,9 @@ func TestUpdateRequestSnapshot_CreateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 				},
@@ -3920,16 +3953,18 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Honeycode: &types.HoneycodeConnectorProfileCredentials{
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				InforNexus: &types.InforNexusConnectorProfileCredentials{
@@ -3943,8 +3978,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Redshift: &types.RedshiftConnectorProfileCredentials{
@@ -3955,8 +3991,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 					OAuth2GrantType:      types.OAuth2GrantType("CLIENT_CREDENTIALS"),
@@ -3971,8 +4008,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -3984,13 +4022,15 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				Snowflake: &types.SnowflakeConnectorProfileCredentials{
-					Username: ptr.String("__Username__"),
-					Password: ptr.String("__Password__"),
+					Username:   ptr.String("__Username__"),
+					Password:   ptr.String("__Password__"),
+					PrivateKey: ptr.String("__PrivateKey__"),
 				},
 				Trendmicro: &types.TrendmicroConnectorProfileCredentials{
 					ApiSecretKey: ptr.String("__ApiSecretKey__"),
@@ -4004,8 +4044,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					ClientSecret: ptr.String("__ClientSecret__"),
 					AccessToken:  ptr.String("__AccessToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 				},
 				SAPOData: &types.SAPODataConnectorProfileCredentials{
@@ -4019,8 +4060,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 				},
@@ -4036,8 +4078,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 						AccessToken:  ptr.String("__AccessToken__"),
 						RefreshToken: ptr.String("__RefreshToken__"),
 						OAuthRequest: &types.ConnectorOAuthRequest{
-							AuthCode:    ptr.String("__AuthCode__"),
-							RedirectUri: ptr.String("__RedirectUri__"),
+							AuthCode:     ptr.String("__AuthCode__"),
+							RedirectUri:  ptr.String("__RedirectUri__"),
+							CodeVerifier: ptr.String("__CodeVerifier__"),
 						},
 					},
 					ApiKey: &types.ApiKeyCredentials{
@@ -4055,8 +4098,9 @@ func TestUpdateRequestSnapshot_UpdateConnectorProfile(t *testing.T) {
 					AccessToken:  ptr.String("__AccessToken__"),
 					RefreshToken: ptr.String("__RefreshToken__"),
 					OAuthRequest: &types.ConnectorOAuthRequest{
-						AuthCode:    ptr.String("__AuthCode__"),
-						RedirectUri: ptr.String("__RedirectUri__"),
+						AuthCode:     ptr.String("__AuthCode__"),
+						RedirectUri:  ptr.String("__RedirectUri__"),
+						CodeVerifier: ptr.String("__CodeVerifier__"),
 					},
 					ClientCredentialsArn: ptr.String("__ClientCredentialsArn__"),
 				},

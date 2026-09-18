@@ -110,6 +110,7 @@
         "api_op_PutProfileObjectType.go",
         "api_op_PutSegmentSubscription.go",
         "api_op_SearchProfiles.go",
+        "api_op_SearchRecommendations.go",
         "api_op_StartRecommender.go",
         "api_op_StartUploadJob.go",
         "api_op_StopRecommender.go",

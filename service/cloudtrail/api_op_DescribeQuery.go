@@ -10,6 +10,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns metadata about a query, including query run time in milliseconds,
 // number of events scanned and matched, and query status. If the query results
 // were delivered to an S3 bucket, the response also provides the S3 URI and the
@@ -19,6 +23,8 @@ import (
 // parameter returns information about the last query run for the alias. You can
 // provide RefreshId along with QueryAlias to view the query results of a
 // dashboard query for the specified RefreshId .
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) DescribeQuery(ctx context.Context, params *DescribeQueryInput, optFns ...func(*Options)) (*DescribeQueryOutput, error) {
 	if params == nil {
 		params = &DescribeQueryInput{}

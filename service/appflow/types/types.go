@@ -1266,6 +1266,9 @@ type ConnectorOAuthRequest struct {
 	// connected app.
 	AuthCode *string
 
+	//  The code verifier used in the PKCE (Proof Key for Code Exchange) OAuth flow.
+	CodeVerifier *string
+
 	//  The URL to which the authentication server redirects the browser after
 	// authorization has been granted.
 	RedirectUri *string
@@ -1283,6 +1286,9 @@ func (v *ConnectorOAuthRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthCode != nil {
 		s.WriteString(schemas.ConnectorOAuthRequest_authCode, *v.AuthCode)
 	}
+	if v.CodeVerifier != nil {
+		s.WriteString(schemas.ConnectorOAuthRequest_codeVerifier, *v.CodeVerifier)
+	}
 	if v.RedirectUri != nil {
 		s.WriteString(schemas.ConnectorOAuthRequest_redirectUri, *v.RedirectUri)
 	}
@@ -1293,6 +1299,9 @@ func (v *ConnectorOAuthRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConnectorOAuthRequest_authCode:
 			v.AuthCode = new(string)
 			return d.ReadString(schemas.ConnectorOAuthRequest_authCode, v.AuthCode)
+		case schemas.ConnectorOAuthRequest_codeVerifier:
+			v.CodeVerifier = new(string)
+			return d.ReadString(schemas.ConnectorOAuthRequest_codeVerifier, v.CodeVerifier)
 		case schemas.ConnectorOAuthRequest_redirectUri:
 			v.RedirectUri = new(string)
 			return d.ReadString(schemas.ConnectorOAuthRequest_redirectUri, v.RedirectUri)
@@ -7579,15 +7588,18 @@ func (v *SlackSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
 // The connector-specific profile credentials required when using Snowflake.
 type SnowflakeConnectorProfileCredentials struct {
 
-	//  The password that corresponds to the user name.
-	//
-	// This member is required.
-	Password *string
-
 	//  The name of the user.
 	//
 	// This member is required.
 	Username *string
+
+	//  The password that corresponds to the user name.
+	Password *string
+
+	//  The RSA private key used for key pair authentication with Snowflake. Provide
+	// this instead of a password when your Snowflake account uses key pair
+	// authentication.
+	PrivateKey *string
 
 	noSmithyDocumentSerde
 }
@@ -7602,6 +7614,9 @@ func (v *SnowflakeConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSe
 	if v.Password != nil {
 		s.WriteString(schemas.SnowflakeConnectorProfileCredentials_password, *v.Password)
 	}
+	if v.PrivateKey != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileCredentials_privateKey, *v.PrivateKey)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.SnowflakeConnectorProfileCredentials_username, *v.Username)
 	}
@@ -7612,6 +7627,9 @@ func (v *SnowflakeConnectorProfileCredentials) Deserialize(d smithy.ShapeDeseria
 		case schemas.SnowflakeConnectorProfileCredentials_password:
 			v.Password = new(string)
 			return d.ReadString(schemas.SnowflakeConnectorProfileCredentials_password, v.Password)
+		case schemas.SnowflakeConnectorProfileCredentials_privateKey:
+			v.PrivateKey = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileCredentials_privateKey, v.PrivateKey)
 		case schemas.SnowflakeConnectorProfileCredentials_username:
 			v.Username = new(string)
 			return d.ReadString(schemas.SnowflakeConnectorProfileCredentials_username, v.Username)

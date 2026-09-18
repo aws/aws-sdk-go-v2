@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,37 @@ type CreateAccessPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.CreateAccessPreviewRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessPreviewRequest_clientToken, *v.ClientToken)
+	}
+	serializeConfigurationsMap(s, schemas.CreateAccessPreviewRequest_configurations, v.Configurations)
+}
+func (v *CreateAccessPreviewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPreviewRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPreviewRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.CreateAccessPreviewRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.CreateAccessPreviewRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAccessPreviewRequest_clientToken, v.ClientToken)
+		case schemas.CreateAccessPreviewRequest_configurations:
+			return deserializeConfigurationsMap(d, schemas.CreateAccessPreviewRequest_configurations, &v.Configurations)
+		}
+		return nil
+	})
+}
+
 type CreateAccessPreviewOutput struct {
 
 	// The unique ID for the access preview.
@@ -63,13 +96,32 @@ type CreateAccessPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAccessPreviewResponse_id, *v.Id)
+	}
+}
+func (v *CreateAccessPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPreviewResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAccessPreviewResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPreview, schemas.CreateAccessPreviewRequest, schemas.CreateAccessPreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPreview, schemas.CreateAccessPreviewRequest, schemas.CreateAccessPreviewResponse), output: &CreateAccessPreviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

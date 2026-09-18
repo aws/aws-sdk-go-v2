@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type DescribeActionTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArnList(s, schemas.DescribeActionTargetsRequest_ActionTargetArns, v.ActionTargetArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeActionTargetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeActionTargetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeActionTargetsOutput struct {
 
 	// A list of ActionTarget objects. Each object includes the ActionTargetArn ,
@@ -61,13 +79,35 @@ type DescribeActionTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActionTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActionTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActionTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionTargetList(s, schemas.DescribeActionTargetsResponse_ActionTargets, v.ActionTargets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeActionTargetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeActionTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActionTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActionTargetsResponse_ActionTargets:
+			return deserializeActionTargetList(d, schemas.DescribeActionTargetsResponse_ActionTargets, &v.ActionTargets)
+		case schemas.DescribeActionTargetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeActionTargetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActionTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeActionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActionTargets, schemas.DescribeActionTargetsRequest, schemas.DescribeActionTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeActionTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActionTargets, schemas.DescribeActionTargetsRequest, schemas.DescribeActionTargetsResponse), output: &DescribeActionTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

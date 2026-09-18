@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListAutomatedReasoningPolicyBuildWorkflowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPolicyBuildWorkflowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPolicyBuildWorkflowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPolicyBuildWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomatedReasoningPolicyBuildWorkflowsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyBuildWorkflowsRequest_nextToken, *v.NextToken)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyBuildWorkflowsRequest_policyArn, *v.PolicyArn)
+	}
+}
+
 type ListAutomatedReasoningPolicyBuildWorkflowsOutput struct {
 
 	// A list of build workflow summaries, each containing key information about a
@@ -63,13 +83,35 @@ type ListAutomatedReasoningPolicyBuildWorkflowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomatedReasoningPolicyBuildWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomatedReasoningPolicyBuildWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyBuildWorkflowSummaries(s, schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse_automatedReasoningPolicyBuildWorkflowSummaries, v.AutomatedReasoningPolicyBuildWorkflowSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutomatedReasoningPolicyBuildWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse_automatedReasoningPolicyBuildWorkflowSummaries:
+			return deserializeAutomatedReasoningPolicyBuildWorkflowSummaries(d, schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse_automatedReasoningPolicyBuildWorkflowSummaries, &v.AutomatedReasoningPolicyBuildWorkflowSummaries)
+		case schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomatedReasoningPolicyBuildWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAutomatedReasoningPolicyBuildWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicyBuildWorkflows, schemas.ListAutomatedReasoningPolicyBuildWorkflowsRequest, schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAutomatedReasoningPolicyBuildWorkflows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomatedReasoningPolicyBuildWorkflows, schemas.ListAutomatedReasoningPolicyBuildWorkflowsRequest, schemas.ListAutomatedReasoningPolicyBuildWorkflowsResponse), output: &ListAutomatedReasoningPolicyBuildWorkflowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

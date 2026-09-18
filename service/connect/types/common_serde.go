@@ -288,6 +288,12 @@ func serializeReferenceSummary(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ReferenceSummaryMemberContactAnalysis:
+		s.WriteUnion(schema, schemas.ReferenceSummary_ContactAnalysis)
+		s.WriteStruct(schemas.ReferenceSummary_ContactAnalysis)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ReferenceSummaryMemberDate:
 		s.WriteUnion(schema, schemas.ReferenceSummary_Date)
 		s.WriteStruct(schemas.ReferenceSummary_Date)
@@ -650,6 +656,10 @@ func deserializeReferenceSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		switch ms {
 		case schemas.ReferenceSummary_Attachment:
 			vv := &ReferenceSummaryMemberAttachment{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ReferenceSummary_ContactAnalysis:
+			vv := &ReferenceSummaryMemberContactAnalysis{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ReferenceSummary_Date:
@@ -2009,6 +2019,19 @@ func serializeEvaluationAnswerDataStringValueList(s smithy.ShapeSerializer, sche
 }
 
 func serializeEvaluationAutomationRuleCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EvaluationAutomationRuleCategory) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEvaluationFormAIVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EvaluationFormAIVersionSummary) {
 	if v == nil {
 		return
 	}
@@ -4803,6 +4826,19 @@ func serializeWeekdayOccurrenceList(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeWorkloadTypeConcurrencies(s smithy.ShapeSerializer, schema *smithy.Schema, v []WorkloadTypeConcurrency) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeWorkspaceAssociationSearchConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WorkspaceAssociationSearchCriteria) {
 	if v == nil {
 		return
@@ -6339,6 +6375,20 @@ func deserializeEvaluationAutomationRuleCategoryList(d smithy.ShapeDeserializer,
 	var vv EvaluationAutomationRuleCategory
 	return smithy.ReadList(d, s, func() error {
 		vv = EvaluationAutomationRuleCategory{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEvaluationFormAIVersionSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EvaluationFormAIVersionSummary) error {
+	*v = make([]EvaluationFormAIVersionSummary, 0)
+	var vv EvaluationFormAIVersionSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = EvaluationFormAIVersionSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -9476,6 +9526,20 @@ func deserializeWeekdayOccurrenceList(d smithy.ShapeDeserializer, s *smithy.Sche
 	return smithy.ReadList(d, s, func() error {
 
 		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWorkloadTypeConcurrencies(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WorkloadTypeConcurrency) error {
+	*v = make([]WorkloadTypeConcurrency, 0)
+	var vv WorkloadTypeConcurrency
+	return smithy.ReadList(d, s, func() error {
+		vv = WorkloadTypeConcurrency{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

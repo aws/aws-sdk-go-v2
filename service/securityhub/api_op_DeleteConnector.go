@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.DeleteConnectorRequest_ConnectorId, *v.ConnectorId)
+	}
+}
+
 type DeleteConnectorOutput struct {
 
 	// The enablement status of the connector after the delete request.
@@ -47,13 +61,36 @@ type DeleteConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.DeleteConnectorResponse_EnablementStatus, string(v.EnablementStatus))
+	}
+}
+func (v *DeleteConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConnectorResponse_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteConnectorResponse_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.CspmEnablementStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnector, schemas.DeleteConnectorRequest, schemas.DeleteConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnector, schemas.DeleteConnectorRequest, schemas.DeleteConnectorResponse), output: &DeleteConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appSummaries":[{"appArn":"__AppArn__","assessmentSchedule":"Disabled","awsApplicationArn":"__AwsApplicationArn__","complianceStatus":"PolicyBreached","creationTime":946684800,"description":"__Description__","driftStatus":"NotChecked","lastAppComplianceEvaluationTime":946684800,"name":"__Name__","resiliencyScore":1,"rpoInSecs":1,"rtoInSecs":1,"status":"Active"},{"appArn":"__AppArn__","assessmentSchedule":"Disabled","awsApplicationArn":"__AwsApplicationArn__","complianceStatus":"PolicyBreached","creationTime":946684800,"description":"__Description__","driftStatus":"NotChecked","lastAppComplianceEvaluationTime":946684800,"name":"__Name__","resiliencyScore":1,"rpoInSecs":1,"rtoInSecs":1,"status":"Active"}],"nextToken":"__NextToken__"}

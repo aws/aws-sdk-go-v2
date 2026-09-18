@@ -9676,6 +9676,147 @@ func awsRestjson1_serializeOpDocumentSearchProfilesInput(v *SearchProfilesInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchRecommendations struct {
+}
+
+func (*awsRestjson1_serializeOpSearchRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/recommendations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSearchRecommendationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchRecommendationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchRecommendationsInput(v *SearchRecommendationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchRecommendationsInput(v *SearchRecommendationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CandidateIds != nil {
+		ok := object.Key("CandidateIds")
+		if err := awsRestjson1_serializeDocumentCandidateIdList(v.CandidateIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Context != nil {
+		ok := object.Key("Context")
+		if err := awsRestjson1_serializeDocumentRecommenderContext(v.Context, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Diversity != nil {
+		ok := object.Key("Diversity")
+		if err := awsRestjson1_serializeDocumentRecommendationDiversityConfig(v.Diversity, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyName != nil {
+		ok := object.Key("KeyName")
+		ok.String(*v.KeyName)
+	}
+
+	if v.KeyValues != nil {
+		ok := object.Key("KeyValues")
+		if err := awsRestjson1_serializeDocumentKeyValuesList(v.KeyValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxRecommendations != nil {
+		ok := object.Key("MaxRecommendations")
+		ok.Integer(*v.MaxRecommendations)
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("Metadata")
+		if err := awsRestjson1_serializeDocumentRecommendationMetadata(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Recommender != nil {
+		ok := object.Key("Recommender")
+		if err := awsRestjson1_serializeDocumentRecommender(v.Recommender, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartRecommender struct {
 }
 
@@ -12500,6 +12641,17 @@ func awsRestjson1_serializeDocumentKeyMap(v map[string][]types.ObjectTypeKey, va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKeyValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMarketoSourceProperties(v *types.MarketoSourceProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13138,6 +13290,46 @@ func awsRestjson1_serializeDocumentRecommendationDiversityConfig(v *types.Recomm
 	if v.Values != nil {
 		ok := object.Key("Values")
 		if err := awsRestjson1_serializeDocumentDiversityValuesMap(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecommendationMetadata(v *types.RecommendationMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Columns != nil {
+		ok := object.Key("Columns")
+		if err := awsRestjson1_serializeDocumentMetadataColumnsList(v.Columns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecommender(v *types.Recommender, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentRecommenderFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.PromotionalFilters != nil {
+		ok := object.Key("PromotionalFilters")
+		if err := awsRestjson1_serializeDocumentRecommenderPromotionalFilters(v.PromotionalFilters, ok); err != nil {
 			return err
 		}
 	}

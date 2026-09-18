@@ -1030,6 +1030,22 @@ func TestCheckRequestSnapshot_CreateDistribution(t *testing.T) {
 		},
 		CertificateName:                 ptr.String("__CertificateName__"),
 		ViewerMinimumTlsProtocolVersion: types.ViewerMinimumTlsProtocolVersionEnum("TLSv1.1_2016"),
+		EnablePrivateOriginAccess:       ptr.Bool(true),
+		DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+		CustomErrorResponses: []types.DistributionCustomErrorResponse{
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5275,6 +5291,22 @@ func TestCheckRequestSnapshot_UpdateDistribution(t *testing.T) {
 		ViewerMinimumTlsProtocolVersion: types.ViewerMinimumTlsProtocolVersionEnum("TLSv1.1_2016"),
 		CertificateName:                 ptr.String("__CertificateName__"),
 		UseDefaultCertificate:           ptr.Bool(true),
+		EnablePrivateOriginAccess:       ptr.Bool(true),
+		DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+		CustomErrorResponses: []types.DistributionCustomErrorResponse{
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6333,6 +6365,22 @@ func TestUpdateRequestSnapshot_CreateDistribution(t *testing.T) {
 		},
 		CertificateName:                 ptr.String("__CertificateName__"),
 		ViewerMinimumTlsProtocolVersion: types.ViewerMinimumTlsProtocolVersionEnum("TLSv1.1_2016"),
+		EnablePrivateOriginAccess:       ptr.Bool(true),
+		DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+		CustomErrorResponses: []types.DistributionCustomErrorResponse{
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10578,6 +10626,22 @@ func TestUpdateRequestSnapshot_UpdateDistribution(t *testing.T) {
 		ViewerMinimumTlsProtocolVersion: types.ViewerMinimumTlsProtocolVersionEnum("TLSv1.1_2016"),
 		CertificateName:                 ptr.String("__CertificateName__"),
 		UseDefaultCertificate:           ptr.Bool(true),
+		EnablePrivateOriginAccess:       ptr.Bool(true),
+		DefaultRootObject:               ptr.String("__DefaultRootObject__"),
+		CustomErrorResponses: []types.DistributionCustomErrorResponse{
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+			{
+				ErrorCode:          ptr.Int32(1),
+				ResponseCode:       ptr.String("__ResponseCode__"),
+				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
+				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

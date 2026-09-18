@@ -3212,6 +3212,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 											},
 										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
+										},
 									},
 								},
 								{
@@ -3397,6 +3402,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 												"__Member__",
 											},
+										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
 										},
 									},
 								},
@@ -5136,6 +5146,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 											},
 										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
+										},
 									},
 								},
 								{
@@ -5321,6 +5336,11 @@ func TestCheckResponseSnapshot_GetFindings(t *testing.T) {
 												"__Member__",
 												"__Member__",
 											},
+										},
+										BedrockGuardrail: &types.BedrockGuardrailResource{
+											Version:         ptr.String("__Version__"),
+											GuardrailAction: types.GuardrailAction("GUARDRAIL_INTERVENED"),
+											GuardrailSource: types.GuardrailSource("INPUT"),
 										},
 									},
 								},

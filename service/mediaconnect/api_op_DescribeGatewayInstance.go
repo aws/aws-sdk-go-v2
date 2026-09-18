@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.DescribeGatewayInstanceRequest_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+
 type DescribeGatewayInstanceOutput struct {
 
 	// The gateway instance that you requested a description of.
@@ -46,13 +60,34 @@ type DescribeGatewayInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGatewayInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGatewayInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGatewayInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayInstance != nil {
+		s.WriteStruct(schemas.DescribeGatewayInstanceResponse_GatewayInstance)
+		v.GatewayInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeGatewayInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGatewayInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGatewayInstanceResponse_GatewayInstance:
+			v.GatewayInstance = &types.GatewayInstance{}
+			return v.GatewayInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGatewayInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayInstance, schemas.DescribeGatewayInstanceRequest, schemas.DescribeGatewayInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGatewayInstance, schemas.DescribeGatewayInstanceRequest, schemas.DescribeGatewayInstanceResponse), output: &DescribeGatewayInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

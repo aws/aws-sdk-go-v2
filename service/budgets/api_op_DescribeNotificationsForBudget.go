@@ -5,7 +5,9 @@ package budgets
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type DescribeNotificationsForBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationsForBudgetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationsForBudgetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationsForBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeNotificationsForBudgetRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DescribeNotificationsForBudgetRequest_BudgetName, *v.BudgetName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeNotificationsForBudgetRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotificationsForBudgetRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Response of GetNotificationsForBudget
 type DescribeNotificationsForBudgetOutput struct {
 
@@ -66,13 +89,35 @@ type DescribeNotificationsForBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationsForBudgetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationsForBudgetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationsForBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotificationsForBudgetResponse_NextToken, *v.NextToken)
+	}
+	serializeNotifications(s, schemas.DescribeNotificationsForBudgetResponse_Notifications, v.Notifications)
+}
+func (v *DescribeNotificationsForBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotificationsForBudgetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotificationsForBudgetResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeNotificationsForBudgetResponse_NextToken, v.NextToken)
+		case schemas.DescribeNotificationsForBudgetResponse_Notifications:
+			return deserializeNotifications(d, schemas.DescribeNotificationsForBudgetResponse_Notifications, &v.Notifications)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotificationsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNotificationsForBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationsForBudget, schemas.DescribeNotificationsForBudgetRequest, schemas.DescribeNotificationsForBudgetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeNotificationsForBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationsForBudget, schemas.DescribeNotificationsForBudgetRequest, schemas.DescribeNotificationsForBudgetResponse), output: &DescribeNotificationsForBudgetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

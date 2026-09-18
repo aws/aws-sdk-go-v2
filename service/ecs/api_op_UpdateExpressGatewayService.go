@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type UpdateExpressGatewayServiceInput struct {
 	// The number of CPU units used by the task.
 	Cpu *string
 
+	// The CPU architecture that the tasks in the Express service run on. Amazon ECS
+	// applies this value to the task definition revision that it registers for the
+	// service. If you don't specify a value, the service keeps the architecture that
+	// it currently runs on.
+	//
+	// Valid values:
+	//
+	//   - X86_64 - The x86 64-bit architecture.
+	//
+	//   - ARM64 - The 64-bit ARM architecture.
+	//
+	// Changing the architecture starts a new deployment that replaces the running
+	// tasks. Make sure that the container image that the service uses supports the
+	// architecture that you choose. The operating system family for an Express service
+	// is always LINUX .
+	//
+	// You can't specify cpuArchitecture when you also specify taskDefinitionArn ,
+	// because this value applies only to a task definition that Amazon ECS registers
+	// on your behalf.
+	CpuArchitecture types.ExpressCpuArchitecture
+
 	// The Amazon Resource Name (ARN) of the task execution role for the Express
 	// service.
 	ExecutionRoleArn *string
@@ -73,13 +96,61 @@ type UpdateExpressGatewayServiceInput struct {
 	// also have FARGATE compatibility.
 	//
 	// If you provide a task definition ARN, you cannot also specify primaryContainer ,
-	// executionRoleArn , taskRoleArn , cpu , or memory .
+	// executionRoleArn , taskRoleArn , cpu , memory , or cpuArchitecture .
 	TaskDefinitionArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role for containers in this task.
 	TaskRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateExpressGatewayServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExpressGatewayServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cpu != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_cpu, *v.Cpu)
+	}
+	if v.CpuArchitecture != "" {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_cpuArchitecture, string(v.CpuArchitecture))
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_healthCheckPath, *v.HealthCheckPath)
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_memory, *v.Memory)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrimaryContainer != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_primaryContainer)
+		v.PrimaryContainer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingTarget != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_scalingTarget)
+		v.ScalingTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_taskDefinitionArn, *v.TaskDefinitionArn)
+	}
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_taskRoleArn, *v.TaskRoleArn)
+	}
 }
 
 type UpdateExpressGatewayServiceOutput struct {
@@ -93,13 +164,34 @@ type UpdateExpressGatewayServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExpressGatewayServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExpressGatewayServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExpressGatewayServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExpressGatewayServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExpressGatewayServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExpressGatewayServiceResponse_service:
+			v.Service = &types.UpdatedExpressGatewayService{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExpressGatewayServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExpressGatewayService, schemas.UpdateExpressGatewayServiceRequest, schemas.UpdateExpressGatewayServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExpressGatewayService, schemas.UpdateExpressGatewayServiceRequest, schemas.UpdateExpressGatewayServiceResponse), output: &UpdateExpressGatewayServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeQueries
+
+{"nextToken":"__NextToken__","queries":[{"bytesScanned":1,"createTime":1,"logGroupName":"__LogGroupName__","queryDuration":1,"queryId":"__QueryId__","queryLanguage":"CWLI","queryString":"__QueryString__","status":"Scheduled","userIdentity":"__UserIdentity__"},{"bytesScanned":1,"createTime":1,"logGroupName":"__LogGroupName__","queryDuration":1,"queryId":"__QueryId__","queryLanguage":"CWLI","queryString":"__QueryString__","status":"Scheduled","userIdentity":"__UserIdentity__"}]}

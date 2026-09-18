@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -36,6 +37,40 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBadRequestDetails(s, schemas.BadRequestException_Details, v.Details)
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.BadRequestException_Reason, string(v.Reason))
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_Details:
+			return deserializeBadRequestDetails(d, schemas.BadRequestException_Details, &v.Details)
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		case schemas.BadRequestException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.BadRequestException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = BadRequestReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // The request could not be processed because of conflict in the current state of
 // the resource.
@@ -63,6 +98,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There was an internal failure in the AppConfig service.
 type InternalServerException struct {
@@ -89,6 +145,27 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The configuration size is too large.
 type PayloadTooLargeException struct {
@@ -119,6 +196,47 @@ func (e *PayloadTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PayloadTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PayloadTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PayloadTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteFloat32(schemas.PayloadTooLargeException_Limit, v.Limit)
+	}
+	if v.Measure != "" {
+		s.WriteString(schemas.PayloadTooLargeException_Measure, string(v.Measure))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PayloadTooLargeException_Message, *v.Message)
+	}
+	if v.Size != 0 {
+		s.WriteFloat32(schemas.PayloadTooLargeException_Size, v.Size)
+	}
+}
+func (v *PayloadTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PayloadTooLargeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PayloadTooLargeException_Limit:
+			return d.ReadFloat32(schemas.PayloadTooLargeException_Limit, &v.Limit)
+		case schemas.PayloadTooLargeException_Measure:
+			var ev string
+			if err := d.ReadString(schemas.PayloadTooLargeException_Measure, &ev); err != nil {
+				return err
+			}
+			v.Measure = BytesMeasure(ev)
+			return nil
+		case schemas.PayloadTooLargeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PayloadTooLargeException_Message, v.Message)
+		case schemas.PayloadTooLargeException_Size:
+			return d.ReadFloat32(schemas.PayloadTooLargeException_Size, &v.Size)
+		}
+		return nil
+	})
+}
 
 // The requested resource could not be found.
 type ResourceNotFoundException struct {
@@ -147,6 +265,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_ResourceName, *v.ResourceName)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 // The number of one more AppConfig resources exceeds the maximum allowed. Verify
 // that your environment doesn't exceed the following service quotas:
@@ -182,3 +327,24 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}

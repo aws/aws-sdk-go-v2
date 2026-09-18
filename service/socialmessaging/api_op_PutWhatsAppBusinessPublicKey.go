@@ -32,11 +32,12 @@ type PutWhatsAppBusinessPublicKeyInput struct {
 	// This member is required.
 	OriginationPhoneNumberId *string
 
-	// PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn.
+	// The PEM-encoded 2048-bit RSA public key to set. Mutually exclusive with
+	// kmsKeyArn .
 	BusinessPublicKey *string
 
-	// Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with
-	// businessPublicKey.
+	// The ARN of a customer managed asymmetric RSA key in Amazon Web Services KMS.
+	// Mutually exclusive with businessPublicKey .
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde

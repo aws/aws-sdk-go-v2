@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type BatchGetRouterInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouterInputArnList(s, schemas.BatchGetRouterInputRequest_Arns, v.Arns)
+}
+
 type BatchGetRouterInputOutput struct {
 
 	// An array of errors that occurred when retrieving the requested router inputs.
@@ -54,13 +66,32 @@ type BatchGetRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetRouterInputErrorList(s, schemas.BatchGetRouterInputResponse_Errors, v.Errors)
+	serializeRouterInputList(s, schemas.BatchGetRouterInputResponse_RouterInputs, v.RouterInputs)
+}
+func (v *BatchGetRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRouterInputResponse_Errors:
+			return deserializeBatchGetRouterInputErrorList(d, schemas.BatchGetRouterInputResponse_Errors, &v.Errors)
+		case schemas.BatchGetRouterInputResponse_RouterInputs:
+			return deserializeRouterInputList(d, schemas.BatchGetRouterInputResponse_RouterInputs, &v.RouterInputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterInput, schemas.BatchGetRouterInputRequest, schemas.BatchGetRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterInput, schemas.BatchGetRouterInputRequest, schemas.BatchGetRouterInputResponse), output: &BatchGetRouterInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

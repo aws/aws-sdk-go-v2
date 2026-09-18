@@ -9,9 +9,14 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Deletes the specified dashboard. You cannot delete a dashboard that has
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Deletes the specified dashboard. You cannot delete a dashboard that has
 // termination protection enabled.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) DeleteDashboard(ctx context.Context, params *DeleteDashboardInput, optFns ...func(*Options)) (*DeleteDashboardOutput, error) {
 	if params == nil {
 		params = &DeleteDashboardInput{}

@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,64 @@ type UpdateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateFilterRequest_action, string(v.Action))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFilterRequest_description, *v.Description)
+	}
+	if v.FilterArn != nil {
+		s.WriteString(schemas.UpdateFilterRequest_filterArn, *v.FilterArn)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.UpdateFilterRequest_filterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFilterRequest_name, *v.Name)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.UpdateFilterRequest_reason, *v.Reason)
+	}
+}
+func (v *UpdateFilterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFilterRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFilterRequest_action:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFilterRequest_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.FilterAction(ev)
+			return nil
+		case schemas.UpdateFilterRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateFilterRequest_description, v.Description)
+		case schemas.UpdateFilterRequest_filterArn:
+			v.FilterArn = new(string)
+			return d.ReadString(schemas.UpdateFilterRequest_filterArn, v.FilterArn)
+		case schemas.UpdateFilterRequest_filterCriteria:
+			v.FilterCriteria = &types.FilterCriteria{}
+			return v.FilterCriteria.Deserialize(d)
+		case schemas.UpdateFilterRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFilterRequest_name, v.Name)
+		case schemas.UpdateFilterRequest_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.UpdateFilterRequest_reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 type UpdateFilterOutput struct {
 
 	// The Amazon Resource Number (ARN) of the successfully updated filter.
@@ -64,13 +124,32 @@ type UpdateFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateFilterResponse_arn, *v.Arn)
+	}
+}
+func (v *UpdateFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFilterResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateFilterResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFilter, schemas.UpdateFilterRequest, schemas.UpdateFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFilter, schemas.UpdateFilterRequest, schemas.UpdateFilterResponse), output: &UpdateFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

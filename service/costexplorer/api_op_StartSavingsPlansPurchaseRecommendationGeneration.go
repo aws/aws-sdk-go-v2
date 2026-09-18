@@ -4,6 +4,8 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,15 @@ type StartSavingsPlansPurchaseRecommendationGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSavingsPlansPurchaseRecommendationGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSavingsPlansPurchaseRecommendationGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSavingsPlansPurchaseRecommendationGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type StartSavingsPlansPurchaseRecommendationGenerationOutput struct {
 
 	// The estimated time for when the recommendation generation will complete.
@@ -51,13 +62,44 @@ type StartSavingsPlansPurchaseRecommendationGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSavingsPlansPurchaseRecommendationGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSavingsPlansPurchaseRecommendationGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedCompletionTime != nil {
+		s.WriteString(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_EstimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+	if v.GenerationStartedTime != nil {
+		s.WriteString(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_GenerationStartedTime, *v.GenerationStartedTime)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_RecommendationId, *v.RecommendationId)
+	}
+}
+func (v *StartSavingsPlansPurchaseRecommendationGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_EstimatedCompletionTime:
+			v.EstimatedCompletionTime = new(string)
+			return d.ReadString(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_EstimatedCompletionTime, v.EstimatedCompletionTime)
+		case schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_GenerationStartedTime:
+			v.GenerationStartedTime = new(string)
+			return d.ReadString(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_GenerationStartedTime, v.GenerationStartedTime)
+		case schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse_RecommendationId, v.RecommendationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSavingsPlansPurchaseRecommendationGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSavingsPlansPurchaseRecommendationGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSavingsPlansPurchaseRecommendationGeneration, schemas.StartSavingsPlansPurchaseRecommendationGenerationRequest, schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSavingsPlansPurchaseRecommendationGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSavingsPlansPurchaseRecommendationGeneration, schemas.StartSavingsPlansPurchaseRecommendationGenerationRequest, schemas.StartSavingsPlansPurchaseRecommendationGenerationResponse), output: &StartSavingsPlansPurchaseRecommendationGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

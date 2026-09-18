@@ -12,12 +12,18 @@ import (
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns a list of queries and query statuses for the past seven days. You must
 // specify an ARN value for EventDataStore . Optionally, to shorten the list of
 // results, you can specify a time range, formatted as timestamps, by adding
 // StartTime and EndTime parameters, and a QueryStatus value. Valid values for
 // QueryStatus include QUEUED , RUNNING , FINISHED , FAILED , TIMED_OUT , or
 // CANCELLED .
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) ListQueries(ctx context.Context, params *ListQueriesInput, optFns ...func(*Options)) (*ListQueriesOutput, error) {
 	if params == nil {
 		params = &ListQueriesInput{}

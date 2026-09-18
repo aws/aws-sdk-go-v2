@@ -9,6 +9,7 @@ on:
     types:
       - opened
       - closed
+      - ready_for_review
 
 permissions:
   contents: read
@@ -58,7 +59,12 @@ jobs:
 
   on-pr-opened:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    if: >-
+      github.event_name == 'pull_request' &&
+      (
+        (github.event.action == 'opened' && github.event.pull_request.draft == false) ||
+        github.event.action == 'ready_for_review'
+      )
     steps:
       - name: notify
         uses: actions/github-script@v9

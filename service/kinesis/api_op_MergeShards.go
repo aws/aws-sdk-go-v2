@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -90,6 +92,29 @@ type MergeShardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeShardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeShardsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeShardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjacentShardToMerge != nil {
+		s.WriteString(schemas.MergeShardsInput_AdjacentShardToMerge, *v.AdjacentShardToMerge)
+	}
+	if v.ShardToMerge != nil {
+		s.WriteString(schemas.MergeShardsInput_ShardToMerge, *v.ShardToMerge)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.MergeShardsInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.MergeShardsInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.MergeShardsInput_StreamName, *v.StreamName)
+	}
+}
 func (in *MergeShardsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -104,13 +129,26 @@ type MergeShardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeShardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeShardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MergeShardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeShardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeShards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeShards, schemas.MergeShardsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeShards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeShards, schemas.MergeShardsInput, nil), output: &MergeShardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

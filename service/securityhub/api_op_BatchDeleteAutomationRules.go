@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchDeleteAutomationRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAutomationRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAutomationRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAutomationRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationRulesArnsList(s, schemas.BatchDeleteAutomationRulesRequest_AutomationRulesArns, v.AutomationRulesArns)
+}
+
 type BatchDeleteAutomationRulesOutput struct {
 
 	//  A list of properly processed rule ARNs.
@@ -49,13 +61,32 @@ type BatchDeleteAutomationRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAutomationRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAutomationRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAutomationRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationRulesArnsList(s, schemas.BatchDeleteAutomationRulesResponse_ProcessedAutomationRules, v.ProcessedAutomationRules)
+	serializeUnprocessedAutomationRulesList(s, schemas.BatchDeleteAutomationRulesResponse_UnprocessedAutomationRules, v.UnprocessedAutomationRules)
+}
+func (v *BatchDeleteAutomationRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteAutomationRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteAutomationRulesResponse_ProcessedAutomationRules:
+			return deserializeAutomationRulesArnsList(d, schemas.BatchDeleteAutomationRulesResponse_ProcessedAutomationRules, &v.ProcessedAutomationRules)
+		case schemas.BatchDeleteAutomationRulesResponse_UnprocessedAutomationRules:
+			return deserializeUnprocessedAutomationRulesList(d, schemas.BatchDeleteAutomationRulesResponse_UnprocessedAutomationRules, &v.UnprocessedAutomationRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteAutomationRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteAutomationRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAutomationRules, schemas.BatchDeleteAutomationRulesRequest, schemas.BatchDeleteAutomationRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteAutomationRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAutomationRules, schemas.BatchDeleteAutomationRulesRequest, schemas.BatchDeleteAutomationRulesResponse), output: &BatchDeleteAutomationRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

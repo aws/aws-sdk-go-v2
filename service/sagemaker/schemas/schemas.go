@@ -23,6 +23,11 @@ var AssociateTrialComponent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateTrialComponent",
 }, smithy.ShapeTypeOperation, 0)
 
+var AttachClusterNodeNetworkInterface = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterface",
+}, smithy.ShapeTypeOperation, 0)
+
 var AttachClusterNodeVolume = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AttachClusterNodeVolume",
@@ -6843,11 +6848,21 @@ var ClusterNetworkInterface = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ClusterNetworkInterface_InterfaceType *smithy.Schema
 
+var _ClusterNetworkInterfaceAttachmentId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterNetworkInterfaceAttachmentId",
+}, smithy.ShapeTypeString, 0)
+
 var ClusterNetworkInterfaceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterNetworkInterfaceDetails",
 }, smithy.ShapeTypeStructure, 1)
 var ClusterNetworkInterfaceDetails_InterfaceType *smithy.Schema
+
+var _ClusterNetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ClusterNetworkInterfaceId",
+}, smithy.ShapeTypeString, 0)
 
 var ClusterNodeDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -12329,6 +12344,22 @@ var _InstancePoolSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _InstancePoolSummaryList_member *smithy.Schema
 
+var InstancePreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InstancePreference",
+}, smithy.ShapeTypeStructure, 3)
+var InstancePreference_InstanceType *smithy.Schema
+
+var InstancePreference_InstanceCount *smithy.Schema
+
+var InstancePreference_TrainingPlanArns *smithy.Schema
+
+var _InstancePreferenceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InstancePreferenceList",
+}, smithy.ShapeTypeList, 1)
+var _InstancePreferenceList_member *smithy.Schema
+
 var InstanceRequirementsEniConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "InstanceRequirementsEniConfiguration",
@@ -17488,7 +17519,7 @@ var ProblemType_REGRESSION *smithy.Schema
 var ProcessingClusterConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProcessingClusterConfig",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 7)
 var ProcessingClusterConfig_InstanceCount *smithy.Schema
 
 var ProcessingClusterConfig_InstanceType *smithy.Schema
@@ -17496,6 +17527,12 @@ var ProcessingClusterConfig_InstanceType *smithy.Schema
 var ProcessingClusterConfig_VolumeSizeInGB *smithy.Schema
 
 var ProcessingClusterConfig_VolumeKmsKeyId *smithy.Schema
+
+var ProcessingClusterConfig_InstancePreferences *smithy.Schema
+
+var ProcessingClusterConfig_SelectedInstanceType *smithy.Schema
+
+var ProcessingClusterConfig_SelectedInstanceCount *smithy.Schema
 
 var _ProcessingEnvironmentKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17543,6 +17580,20 @@ var _ProcessingInstanceCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProcessingInstanceCount",
 }, smithy.ShapeTypeInteger, 0)
+
+var ProcessingInstancePreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ProcessingInstancePreference",
+}, smithy.ShapeTypeStructure, 2)
+var ProcessingInstancePreference_InstanceType *smithy.Schema
+
+var ProcessingInstancePreference_InstanceCount *smithy.Schema
+
+var _ProcessingInstancePreferenceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ProcessingInstancePreferenceList",
+}, smithy.ShapeTypeList, 1)
+var _ProcessingInstancePreferenceList_member *smithy.Schema
 
 var ProcessingInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -19861,7 +19912,7 @@ var ResourceCatalogSortOrder_DESCENDING *smithy.Schema
 var ResourceConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceConfig",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 11)
 var ResourceConfig_InstanceType *smithy.Schema
 
 var ResourceConfig_InstanceCount *smithy.Schema
@@ -19877,6 +19928,12 @@ var ResourceConfig_InstanceGroups *smithy.Schema
 var ResourceConfig_TrainingPlanArn *smithy.Schema
 
 var ResourceConfig_InstancePlacementConfig *smithy.Schema
+
+var ResourceConfig_InstancePreferences *smithy.Schema
+
+var ResourceConfig_SelectedInstanceType *smithy.Schema
+
+var ResourceConfig_SelectedInstanceCount *smithy.Schema
 
 var ResourceConfigForUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -22733,6 +22790,12 @@ var _TrainingPlanArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TrainingPlanArn",
 }, smithy.ShapeTypeString, 0)
 
+var _TrainingPlanArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "TrainingPlanArnList",
+}, smithy.ShapeTypeList, 1)
+var _TrainingPlanArnList_member *smithy.Schema
+
 var _TrainingPlanArns = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TrainingPlanArns",
@@ -24598,6 +24661,28 @@ var AssociateTrialComponentResponse = smithy.NewSchema(smithy.ShapeID{
 var AssociateTrialComponentResponse_TrialComponentArn *smithy.Schema
 
 var AssociateTrialComponentResponse_TrialArn *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterfaceRequest",
+}, smithy.ShapeTypeStructure, 3)
+var AttachClusterNodeNetworkInterfaceRequest_ClusterName *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest_NodeId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceRequest_NetworkInterfaceId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AttachClusterNodeNetworkInterfaceResponse",
+}, smithy.ShapeTypeStructure, 4)
+var AttachClusterNodeNetworkInterfaceResponse_ClusterArn *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_NodeId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_NetworkInterfaceId *smithy.Schema
+
+var AttachClusterNodeNetworkInterfaceResponse_AttachmentId *smithy.Schema
 
 var AttachClusterNodeVolumeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -36355,6 +36440,16 @@ func init() {
 
 	InstancePlacementConfig_PlacementSpecifications = InstancePlacementConfig.AddMember("PlacementSpecifications", _PlacementSpecifications)
 
+	_TrainingPlanArnList_member = _TrainingPlanArnList.AddMember("member", _TrainingPlanArn)
+
+	InstancePreference_InstanceType = InstancePreference.AddMember("InstanceType", TrainingInstanceType)
+
+	InstancePreference_InstanceCount = InstancePreference.AddMember("InstanceCount", _TrainingInstanceCount)
+
+	InstancePreference_TrainingPlanArns = InstancePreference.AddMember("TrainingPlanArns", _TrainingPlanArnList)
+
+	_InstancePreferenceList_member = _InstancePreferenceList.AddMember("member", InstancePreference)
+
 	ResourceConfig_InstanceType = ResourceConfig.AddMember("InstanceType", TrainingInstanceType)
 
 	ResourceConfig_InstanceCount = ResourceConfig.AddMember("InstanceCount", _TrainingInstanceCount)
@@ -36370,6 +36465,12 @@ func init() {
 	ResourceConfig_TrainingPlanArn = ResourceConfig.AddMember("TrainingPlanArn", _TrainingPlanArn)
 
 	ResourceConfig_InstancePlacementConfig = ResourceConfig.AddMember("InstancePlacementConfig", InstancePlacementConfig)
+
+	ResourceConfig_InstancePreferences = ResourceConfig.AddMember("InstancePreferences", _InstancePreferenceList)
+
+	ResourceConfig_SelectedInstanceType = ResourceConfig.AddMember("SelectedInstanceType", TrainingInstanceType)
+
+	ResourceConfig_SelectedInstanceCount = ResourceConfig.AddMember("SelectedInstanceCount", _TrainingInstanceCount)
 
 	StoppingCondition_MaxRuntimeInSeconds = StoppingCondition.AddMember("MaxRuntimeInSeconds", _MaxRuntimeInSeconds)
 
@@ -44769,6 +44870,12 @@ func init() {
 
 	_PriorityClassList_member = _PriorityClassList.AddMember("member", PriorityClass)
 
+	ProcessingInstancePreference_InstanceType = ProcessingInstancePreference.AddMember("InstanceType", ProcessingInstanceType)
+
+	ProcessingInstancePreference_InstanceCount = ProcessingInstancePreference.AddMember("InstanceCount", _ProcessingInstanceCount)
+
+	_ProcessingInstancePreferenceList_member = _ProcessingInstancePreferenceList.AddMember("member", ProcessingInstancePreference)
+
 	ProcessingClusterConfig_InstanceCount = ProcessingClusterConfig.AddMember("InstanceCount", _ProcessingInstanceCount)
 
 	ProcessingClusterConfig_InstanceType = ProcessingClusterConfig.AddMember("InstanceType", ProcessingInstanceType)
@@ -44776,6 +44883,12 @@ func init() {
 	ProcessingClusterConfig_VolumeSizeInGB = ProcessingClusterConfig.AddMember("VolumeSizeInGB", _ProcessingVolumeSizeInGB)
 
 	ProcessingClusterConfig_VolumeKmsKeyId = ProcessingClusterConfig.AddMember("VolumeKmsKeyId", _KmsKeyId)
+
+	ProcessingClusterConfig_InstancePreferences = ProcessingClusterConfig.AddMember("InstancePreferences", _ProcessingInstancePreferenceList)
+
+	ProcessingClusterConfig_SelectedInstanceType = ProcessingClusterConfig.AddMember("SelectedInstanceType", ProcessingInstanceType)
+
+	ProcessingClusterConfig_SelectedInstanceCount = ProcessingClusterConfig.AddMember("SelectedInstanceCount", _ProcessingInstanceCount)
 
 	_ProcessingEnvironmentMap_key = _ProcessingEnvironmentMap.AddMember("key", _ProcessingEnvironmentKey)
 
@@ -46692,6 +46805,20 @@ func init() {
 	AssociateTrialComponentResponse_TrialComponentArn = AssociateTrialComponentResponse.AddMember("TrialComponentArn", _TrialComponentArn)
 
 	AssociateTrialComponentResponse_TrialArn = AssociateTrialComponentResponse.AddMember("TrialArn", _TrialArn)
+
+	AttachClusterNodeNetworkInterfaceRequest_ClusterName = AttachClusterNodeNetworkInterfaceRequest.AddMember("ClusterName", _ClusterNameOrArn)
+
+	AttachClusterNodeNetworkInterfaceRequest_NodeId = AttachClusterNodeNetworkInterfaceRequest.AddMember("NodeId", _ClusterNodeId)
+
+	AttachClusterNodeNetworkInterfaceRequest_NetworkInterfaceId = AttachClusterNodeNetworkInterfaceRequest.AddMember("NetworkInterfaceId", _ClusterNetworkInterfaceId)
+
+	AttachClusterNodeNetworkInterfaceResponse_ClusterArn = AttachClusterNodeNetworkInterfaceResponse.AddMember("ClusterArn", _ClusterArn)
+
+	AttachClusterNodeNetworkInterfaceResponse_NodeId = AttachClusterNodeNetworkInterfaceResponse.AddMember("NodeId", _ClusterNodeId)
+
+	AttachClusterNodeNetworkInterfaceResponse_NetworkInterfaceId = AttachClusterNodeNetworkInterfaceResponse.AddMember("NetworkInterfaceId", _ClusterNetworkInterfaceId)
+
+	AttachClusterNodeNetworkInterfaceResponse_AttachmentId = AttachClusterNodeNetworkInterfaceResponse.AddMember("AttachmentId", _ClusterNetworkInterfaceAttachmentId)
 
 	AttachClusterNodeVolumeRequest_ClusterArn = AttachClusterNodeVolumeRequest.AddMember("ClusterArn", _ClusterArn)
 

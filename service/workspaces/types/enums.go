@@ -419,6 +419,10 @@ const (
 	ComputeGraphicsG6f2xlarge    Compute = "GRAPHICS_G6F_2XLARGE"
 	ComputeGraphicsG6f4xlarge    Compute = "GRAPHICS_G6F_4XLARGE"
 	ComputeGraphicsGr6f4xlarge   Compute = "GRAPHICS_GR6F_4XLARGE"
+	ComputeGraphicsG72xlarge     Compute = "GRAPHICS_G7_2XLARGE"
+	ComputeGraphicsG74xlarge     Compute = "GRAPHICS_G7_4XLARGE"
+	ComputeGraphicsG78xlarge     Compute = "GRAPHICS_G7_8XLARGE"
+	ComputeGraphicsG712xlarge    Compute = "GRAPHICS_G7_12XLARGE"
 )
 
 // Values returns all known values for Compute. Note that this can be expanded in
@@ -450,6 +454,10 @@ func (Compute) Values() []Compute {
 		"GRAPHICS_G6F_2XLARGE",
 		"GRAPHICS_G6F_4XLARGE",
 		"GRAPHICS_GR6F_4XLARGE",
+		"GRAPHICS_G7_2XLARGE",
+		"GRAPHICS_G7_4XLARGE",
+		"GRAPHICS_G7_8XLARGE",
+		"GRAPHICS_G7_12XLARGE",
 	}
 }
 
@@ -799,6 +807,7 @@ const (
 	ImageComputeTypeBase         ImageComputeType = "BASE"
 	ImageComputeTypeGraphicsG4dn ImageComputeType = "GRAPHICS_G4DN"
 	ImageComputeTypeGraphicsG6   ImageComputeType = "GRAPHICS_G6"
+	ImageComputeTypeGraphicsG7   ImageComputeType = "GRAPHICS_G7"
 )
 
 // Values returns all known values for ImageComputeType. Note that this can be
@@ -810,6 +819,7 @@ func (ImageComputeType) Values() []ImageComputeType {
 		"BASE",
 		"GRAPHICS_G4DN",
 		"GRAPHICS_G6",
+		"GRAPHICS_G7",
 	}
 }
 

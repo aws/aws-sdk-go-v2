@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DescribeElasticsearchInstanceTypeLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchInstanceTypeLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchInstanceTypeLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchInstanceTypeLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeElasticsearchInstanceTypeLimitsRequest_DomainName, *v.DomainName)
+	}
+	if v.ElasticsearchVersion != nil {
+		s.WriteString(schemas.DescribeElasticsearchInstanceTypeLimitsRequest_ElasticsearchVersion, *v.ElasticsearchVersion)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.DescribeElasticsearchInstanceTypeLimitsRequest_InstanceType, string(v.InstanceType))
+	}
+}
+
 // Container for the parameters received from DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 
@@ -66,13 +86,29 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchInstanceTypeLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchInstanceTypeLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchInstanceTypeLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLimitsByRole(s, schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole, v.LimitsByRole)
+}
+func (v *DescribeElasticsearchInstanceTypeLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeElasticsearchInstanceTypeLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole:
+			return deserializeLimitsByRole(d, schemas.DescribeElasticsearchInstanceTypeLimitsResponse_LimitsByRole, &v.LimitsByRole)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchInstanceTypeLimits, schemas.DescribeElasticsearchInstanceTypeLimitsRequest, schemas.DescribeElasticsearchInstanceTypeLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeElasticsearchInstanceTypeLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchInstanceTypeLimits, schemas.DescribeElasticsearchInstanceTypeLimitsRequest, schemas.DescribeElasticsearchInstanceTypeLimitsResponse), output: &DescribeElasticsearchInstanceTypeLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

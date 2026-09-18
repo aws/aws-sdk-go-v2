@@ -4,7 +4,9 @@ package b2bi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,23 @@ type UpdateCapabilityInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityId != nil {
+		s.WriteString(schemas.UpdateCapabilityRequest_capabilityId, *v.CapabilityId)
+	}
+	serializeCapabilityConfiguration(s, schemas.UpdateCapabilityRequest_configuration, v.Configuration)
+	serializeInstructionsDocuments(s, schemas.UpdateCapabilityRequest_instructionsDocuments, v.InstructionsDocuments)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCapabilityRequest_name, *v.Name)
+	}
 }
 
 type UpdateCapabilityOutput struct {
@@ -95,13 +114,72 @@ type UpdateCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityArn != nil {
+		s.WriteString(schemas.UpdateCapabilityResponse_capabilityArn, *v.CapabilityArn)
+	}
+	if v.CapabilityId != nil {
+		s.WriteString(schemas.UpdateCapabilityResponse_capabilityId, *v.CapabilityId)
+	}
+	serializeCapabilityConfiguration(s, schemas.UpdateCapabilityResponse_configuration, v.Configuration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateCapabilityResponse_createdAt, *v.CreatedAt)
+	}
+	serializeInstructionsDocuments(s, schemas.UpdateCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateCapabilityResponse_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCapabilityResponse_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateCapabilityResponse_type, string(v.Type))
+	}
+}
+func (v *UpdateCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCapabilityResponse_capabilityArn:
+			v.CapabilityArn = new(string)
+			return d.ReadString(schemas.UpdateCapabilityResponse_capabilityArn, v.CapabilityArn)
+		case schemas.UpdateCapabilityResponse_capabilityId:
+			v.CapabilityId = new(string)
+			return d.ReadString(schemas.UpdateCapabilityResponse_capabilityId, v.CapabilityId)
+		case schemas.UpdateCapabilityResponse_configuration:
+			return deserializeCapabilityConfiguration(d, schemas.UpdateCapabilityResponse_configuration, &v.Configuration)
+		case schemas.UpdateCapabilityResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCapabilityResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateCapabilityResponse_instructionsDocuments:
+			return deserializeInstructionsDocuments(d, schemas.UpdateCapabilityResponse_instructionsDocuments, &v.InstructionsDocuments)
+		case schemas.UpdateCapabilityResponse_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCapabilityResponse_modifiedAt, v.ModifiedAt)
+		case schemas.UpdateCapabilityResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCapabilityResponse_name, v.Name)
+		case schemas.UpdateCapabilityResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCapabilityResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.CapabilityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapability, schemas.UpdateCapabilityRequest, schemas.UpdateCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapability, schemas.UpdateCapabilityRequest, schemas.UpdateCapabilityResponse), output: &UpdateCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

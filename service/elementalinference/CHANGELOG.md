@@ -1,3 +1,9 @@
+# v1.12.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Feature**: This release adds contextual metadata, a feed output type that generates a descriptive summary of your media content along with IAB taxonomy and GARM suitability classifications. It also adds feed resource policies for granting cross-account access to a feed.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

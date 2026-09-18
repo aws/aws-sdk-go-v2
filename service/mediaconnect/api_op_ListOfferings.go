@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOfferingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListOfferingsOutput struct {
 
 	//  The token that identifies the batch of results that you want to see.
@@ -74,13 +91,35 @@ type ListOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOfferingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOfferingsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfOffering(s, schemas.ListOfferingsResponse_Offerings, v.Offerings)
+}
+func (v *ListOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOfferingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOfferingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOfferingsResponse_NextToken, v.NextToken)
+		case schemas.ListOfferingsResponse_Offerings:
+			return deserialize__listOfOffering(d, schemas.ListOfferingsResponse_Offerings, &v.Offerings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferings, schemas.ListOfferingsRequest, schemas.ListOfferingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOfferings, schemas.ListOfferingsRequest, schemas.ListOfferingsResponse), output: &ListOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

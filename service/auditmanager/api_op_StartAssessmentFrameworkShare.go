@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,27 @@ type StartAssessmentFrameworkShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssessmentFrameworkShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssessmentFrameworkShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssessmentFrameworkShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.StartAssessmentFrameworkShareRequest_comment, *v.Comment)
+	}
+	if v.DestinationAccount != nil {
+		s.WriteString(schemas.StartAssessmentFrameworkShareRequest_destinationAccount, *v.DestinationAccount)
+	}
+	if v.DestinationRegion != nil {
+		s.WriteString(schemas.StartAssessmentFrameworkShareRequest_destinationRegion, *v.DestinationRegion)
+	}
+	if v.FrameworkId != nil {
+		s.WriteString(schemas.StartAssessmentFrameworkShareRequest_frameworkId, *v.FrameworkId)
+	}
+}
+
 type StartAssessmentFrameworkShareOutput struct {
 
 	//  The share request that's created by the StartAssessmentFrameworkShare API.
@@ -97,13 +120,34 @@ type StartAssessmentFrameworkShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssessmentFrameworkShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssessmentFrameworkShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssessmentFrameworkShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentFrameworkShareRequest != nil {
+		s.WriteStruct(schemas.StartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest)
+		v.AssessmentFrameworkShareRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartAssessmentFrameworkShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAssessmentFrameworkShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAssessmentFrameworkShareResponse_assessmentFrameworkShareRequest:
+			v.AssessmentFrameworkShareRequest = &types.AssessmentFrameworkShareRequest{}
+			return v.AssessmentFrameworkShareRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAssessmentFrameworkShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAssessmentFrameworkShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssessmentFrameworkShare, schemas.StartAssessmentFrameworkShareRequest, schemas.StartAssessmentFrameworkShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAssessmentFrameworkShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssessmentFrameworkShare, schemas.StartAssessmentFrameworkShareRequest, schemas.StartAssessmentFrameworkShareResponse), output: &StartAssessmentFrameworkShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

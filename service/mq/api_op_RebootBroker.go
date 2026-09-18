@@ -4,6 +4,8 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type RebootBrokerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootBrokerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootBrokerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.RebootBrokerRequest_BrokerId, *v.BrokerId)
+	}
+}
+
 type RebootBrokerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type RebootBrokerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootBrokerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootBrokerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RebootBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootBrokerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRebootBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootBroker, schemas.RebootBrokerRequest, schemas.RebootBrokerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRebootBroker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootBroker, schemas.RebootBrokerRequest, schemas.RebootBrokerResponse), output: &RebootBrokerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

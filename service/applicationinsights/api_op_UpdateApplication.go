@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,39 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachMissingPermission != nil {
+		s.WriteBool(schemas.UpdateApplicationRequest_AttachMissingPermission, *v.AttachMissingPermission)
+	}
+	if v.AutoConfigEnabled != nil {
+		s.WriteBool(schemas.UpdateApplicationRequest_AutoConfigEnabled, *v.AutoConfigEnabled)
+	}
+	if v.CWEMonitorEnabled != nil {
+		s.WriteBool(schemas.UpdateApplicationRequest_CWEMonitorEnabled, *v.CWEMonitorEnabled)
+	}
+	if v.OpsCenterEnabled != nil {
+		s.WriteBool(schemas.UpdateApplicationRequest_OpsCenterEnabled, *v.OpsCenterEnabled)
+	}
+	if v.OpsItemSNSTopicArn != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_OpsItemSNSTopicArn, *v.OpsItemSNSTopicArn)
+	}
+	if v.RemoveSNSTopic != nil {
+		s.WriteBool(schemas.UpdateApplicationRequest_RemoveSNSTopic, *v.RemoveSNSTopic)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.SNSNotificationArn != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_SNSNotificationArn, *v.SNSNotificationArn)
+	}
+}
+
 type UpdateApplicationOutput struct {
 
 	// Information about the application.
@@ -72,13 +107,34 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInfo != nil {
+		s.WriteStruct(schemas.UpdateApplicationResponse_ApplicationInfo)
+		v.ApplicationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationResponse_ApplicationInfo:
+			v.ApplicationInfo = &types.ApplicationInfo{}
+			return v.ApplicationInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

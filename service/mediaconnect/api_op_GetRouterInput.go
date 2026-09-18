@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -41,6 +43,18 @@ type GetRouterInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRouterInputRequest_Arn, *v.Arn)
+	}
+}
+
 type GetRouterInputOutput struct {
 
 	// The details of the requested router input, including its configuration, state,
@@ -55,13 +69,34 @@ type GetRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterInput != nil {
+		s.WriteStruct(schemas.GetRouterInputResponse_RouterInput)
+		v.RouterInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRouterInputResponse_RouterInput:
+			v.RouterInput = &types.RouterInput{}
+			return v.RouterInput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouterInput, schemas.GetRouterInputRequest, schemas.GetRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRouterInput, schemas.GetRouterInputRequest, schemas.GetRouterInputResponse), output: &GetRouterInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

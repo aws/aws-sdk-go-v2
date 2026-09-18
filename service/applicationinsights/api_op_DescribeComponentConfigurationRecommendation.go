@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type DescribeComponentConfigurationRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentConfigurationRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentConfigurationRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentConfigurationRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRecommendationRequest_ComponentName, *v.ComponentName)
+	}
+	if v.RecommendationType != "" {
+		s.WriteString(schemas.DescribeComponentConfigurationRecommendationRequest_RecommendationType, string(v.RecommendationType))
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRecommendationRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.DescribeComponentConfigurationRecommendationRequest_Tier, string(v.Tier))
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRecommendationRequest_WorkloadName, *v.WorkloadName)
+	}
+}
+
 type DescribeComponentConfigurationRecommendationOutput struct {
 
 	// The recommended configuration settings of the component. The value is the
@@ -63,13 +89,32 @@ type DescribeComponentConfigurationRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentConfigurationRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentConfigurationRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentConfigurationRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentConfiguration != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRecommendationResponse_ComponentConfiguration, *v.ComponentConfiguration)
+	}
+}
+func (v *DescribeComponentConfigurationRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComponentConfigurationRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComponentConfigurationRecommendationResponse_ComponentConfiguration:
+			v.ComponentConfiguration = new(string)
+			return d.ReadString(schemas.DescribeComponentConfigurationRecommendationResponse_ComponentConfiguration, v.ComponentConfiguration)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComponentConfigurationRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeComponentConfigurationRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponentConfigurationRecommendation, schemas.DescribeComponentConfigurationRecommendationRequest, schemas.DescribeComponentConfigurationRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeComponentConfigurationRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponentConfigurationRecommendation, schemas.DescribeComponentConfigurationRecommendationRequest, schemas.DescribeComponentConfigurationRecommendationResponse), output: &DescribeComponentConfigurationRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

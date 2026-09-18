@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type PrepareFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.PrepareFlowRequest_flowIdentifier, *v.FlowIdentifier)
+	}
+}
+
 type PrepareFlowOutput struct {
 
 	// The unique identifier of the flow.
@@ -57,13 +71,42 @@ type PrepareFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrepareFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrepareFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrepareFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PrepareFlowResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PrepareFlowResponse_status, string(v.Status))
+	}
+}
+func (v *PrepareFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrepareFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrepareFlowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PrepareFlowResponse_id, v.Id)
+		case schemas.PrepareFlowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.PrepareFlowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FlowStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPrepareFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPrepareFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareFlow, schemas.PrepareFlowRequest, schemas.PrepareFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPrepareFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PrepareFlow, schemas.PrepareFlowRequest, schemas.PrepareFlowResponse), output: &PrepareFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

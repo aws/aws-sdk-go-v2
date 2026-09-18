@@ -357,6 +357,11 @@ func awsRestjson1_serializeOpDocumentCreateAgentRuntimeInput(v *CreateAgentRunti
 		}
 	}
 
+	if v.PlatformVersion != nil {
+		ok := object.Key("platformVersion")
+		ok.String(*v.PlatformVersion)
+	}
+
 	if v.ProtocolConfiguration != nil {
 		ok := object.Key("protocolConfiguration")
 		if err := awsRestjson1_serializeDocumentProtocolConfiguration(v.ProtocolConfiguration, ok); err != nil {
@@ -12733,6 +12738,11 @@ func awsRestjson1_serializeOpDocumentUpdateAgentRuntimeInput(v *UpdateAgentRunti
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.PlatformVersion != nil {
+		ok := object.Key("platformVersion")
+		ok.String(*v.PlatformVersion)
 	}
 
 	if v.ProtocolConfiguration != nil {

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.AccessDeniedException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Code, v.Code)
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request causes conflict with the current state of the service resource.
 type ConflictException struct {
@@ -62,6 +90,33 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ConflictException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ConflictException_Code, v.Code)
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Internal server error.
 type InternalException struct {
@@ -90,6 +145,33 @@ func (e *InternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InternalException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalException_Message, *v.Message)
+	}
+}
+func (v *InternalException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InternalException_Code, v.Code)
+		case schemas.InternalException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request has failed due to an internal failure of the service.
 type InternalServerException struct {
@@ -118,6 +200,33 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InternalServerException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InternalServerException_Code, v.Code)
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The account doesn't have permission to perform this action.
 type InvalidAccessException struct {
@@ -146,6 +255,33 @@ func (e *InvalidAccessException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidAccessException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidAccessException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidAccessException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidAccessException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidAccessException_Message, *v.Message)
+	}
+}
+func (v *InvalidAccessException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidAccessException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidAccessException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidAccessException_Code, v.Code)
+		case schemas.InvalidAccessException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidAccessException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because you supplied an invalid or out-of-range value
 // for an input parameter.
@@ -175,6 +311,33 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidInputException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_Message, *v.Message)
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidInputException_Code, v.Code)
+		case schemas.InvalidInputException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it attempted to create resources beyond the
 // current Amazon Web Services account or throttling limits. The error code
@@ -205,6 +368,33 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.LimitExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.LimitExceededException_Code, v.Code)
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because one or more organizational units specified in the
 // request don't exist within the caller's organization.
@@ -236,6 +426,33 @@ func (e *OrganizationalUnitNotFoundException) ErrorCode() string {
 func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *OrganizationalUnitNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalUnitNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalUnitNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.OrganizationalUnitNotFoundException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationalUnitNotFoundException_Message, *v.Message)
+	}
+}
+func (v *OrganizationalUnitNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalUnitNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalUnitNotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.OrganizationalUnitNotFoundException_Code, v.Code)
+		case schemas.OrganizationalUnitNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationalUnitNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because one or more organizations specified in the request
 // don't exist or don't belong to the caller's organization.
@@ -265,6 +482,33 @@ func (e *OrganizationNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OrganizationNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.OrganizationNotFoundException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.OrganizationNotFoundException_Message, *v.Message)
+	}
+}
+func (v *OrganizationNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationNotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.OrganizationNotFoundException_Code, v.Code)
+		case schemas.OrganizationNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrganizationNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource specified in the request conflicts with an existing resource.
 type ResourceConflictException struct {
@@ -293,6 +537,33 @@ func (e *ResourceConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceConflictException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceConflictException_Message, *v.Message)
+	}
+}
+func (v *ResourceConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceConflictException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceConflictException_Code, v.Code)
+		case schemas.ResourceConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	The request was rejected because it conflicts with the resource's
 //
@@ -324,6 +595,33 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceInUseException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseException_Message, *v.Message)
+	}
+}
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Code, v.Code)
+		case schemas.ResourceInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because we can't find the specified resource.
 type ResourceNotFoundException struct {
@@ -352,6 +650,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Code, v.Code)
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because it would exceed the service quota limit.
 type ServiceQuotaExceededException struct {
@@ -380,6 +705,33 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Code, v.Code)
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
@@ -408,6 +760,33 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ThrottlingException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_Message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ThrottlingException_Code, v.Code)
+		case schemas.ThrottlingException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request has failed validation because it's missing required fields or has
 // invalid inputs.
@@ -437,3 +816,30 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ValidationException_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ValidationException_Code, v.Code)
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

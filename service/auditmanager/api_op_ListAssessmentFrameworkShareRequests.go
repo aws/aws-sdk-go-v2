@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAssessmentFrameworkShareRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentFrameworkShareRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentFrameworkShareRequestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentFrameworkShareRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentFrameworkShareRequestsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentFrameworkShareRequestsRequest_nextToken, *v.NextToken)
+	}
+	if v.RequestType != "" {
+		s.WriteString(schemas.ListAssessmentFrameworkShareRequestsRequest_requestType, string(v.RequestType))
+	}
+}
+
 type ListAssessmentFrameworkShareRequestsOutput struct {
 
 	//  The list of share requests that the ListAssessmentFrameworkShareRequests API
@@ -58,13 +78,35 @@ type ListAssessmentFrameworkShareRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentFrameworkShareRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentFrameworkShareRequestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentFrameworkShareRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentFrameworkShareRequestList(s, schemas.ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests, v.AssessmentFrameworkShareRequests)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentFrameworkShareRequestsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentFrameworkShareRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentFrameworkShareRequestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests:
+			return deserializeAssessmentFrameworkShareRequestList(d, schemas.ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests, &v.AssessmentFrameworkShareRequests)
+		case schemas.ListAssessmentFrameworkShareRequestsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentFrameworkShareRequestsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentFrameworkShareRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssessmentFrameworkShareRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentFrameworkShareRequests, schemas.ListAssessmentFrameworkShareRequestsRequest, schemas.ListAssessmentFrameworkShareRequestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssessmentFrameworkShareRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentFrameworkShareRequests, schemas.ListAssessmentFrameworkShareRequestsRequest, schemas.ListAssessmentFrameworkShareRequestsResponse), output: &ListAssessmentFrameworkShareRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

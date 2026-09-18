@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.GenerateDataKeyPair
+
+{"CiphertextForRecipient":"YmxvYg==","KeyId":"__KeyId__","KeyMaterialId":"__KeyMaterialId__","KeyPairSpec":"RSA_2048","PrivateKeyCiphertextBlob":"YmxvYg==","PrivateKeyPlaintext":"YmxvYg==","PublicKey":"YmxvYg=="}

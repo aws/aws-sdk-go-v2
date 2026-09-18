@@ -4,6 +4,8 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,18 @@ type CreateHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHapgInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHapgRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHapgInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Label != nil {
+		s.WriteString(schemas.CreateHapgRequest_Label, *v.Label)
+	}
+}
+
 // Contains the output of the CreateHAPartitionGroup action.
 type CreateHapgOutput struct {
 
@@ -61,13 +75,32 @@ type CreateHapgOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHapgOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHapgResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHapgOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HapgArn != nil {
+		s.WriteString(schemas.CreateHapgResponse_HapgArn, *v.HapgArn)
+	}
+}
+func (v *CreateHapgOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHapgResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHapgResponse_HapgArn:
+			v.HapgArn = new(string)
+			return d.ReadString(schemas.CreateHapgResponse_HapgArn, v.HapgArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHapg{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHapg, schemas.CreateHapgRequest, schemas.CreateHapgResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHapg{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHapg, schemas.CreateHapgRequest, schemas.CreateHapgResponse), output: &CreateHapgOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

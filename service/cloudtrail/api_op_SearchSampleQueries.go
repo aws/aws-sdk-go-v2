@@ -10,10 +10,15 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Searches sample queries and returns a list of sample queries that are sorted
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
-// by relevance. To search for sample queries, provide a natural language
-// SearchPhrase in English.
+// Searches sample queries and returns a list of sample queries that are sorted by
+// relevance. To search for sample queries, provide a natural language SearchPhrase
+// in English.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) SearchSampleQueries(ctx context.Context, params *SearchSampleQueriesInput, optFns ...func(*Options)) (*SearchSampleQueriesOutput, error) {
 	if params == nil {
 		params = &SearchSampleQueriesInput{}

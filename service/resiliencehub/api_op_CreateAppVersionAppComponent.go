@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,55 @@ type CreateAppVersionAppComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppVersionAppComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppVersionAppComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppVersionAppComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInfoMap(s, schemas.CreateAppVersionAppComponentRequest_additionalInfo, v.AdditionalInfo)
+	if v.AppArn != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentRequest_appArn, *v.AppArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentRequest_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentRequest_type, *v.Type)
+	}
+}
+func (v *CreateAppVersionAppComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppVersionAppComponentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppVersionAppComponentRequest_additionalInfo:
+			return deserializeAdditionalInfoMap(d, schemas.CreateAppVersionAppComponentRequest_additionalInfo, &v.AdditionalInfo)
+		case schemas.CreateAppVersionAppComponentRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentRequest_appArn, v.AppArn)
+		case schemas.CreateAppVersionAppComponentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentRequest_clientToken, v.ClientToken)
+		case schemas.CreateAppVersionAppComponentRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentRequest_id, v.Id)
+		case schemas.CreateAppVersionAppComponentRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentRequest_name, v.Name)
+		case schemas.CreateAppVersionAppComponentRequest_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentRequest_type, v.Type)
+		}
+		return nil
+	})
+}
+
 type CreateAppVersionAppComponentOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -95,13 +146,46 @@ type CreateAppVersionAppComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppVersionAppComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppVersionAppComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppVersionAppComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentResponse_appArn, *v.AppArn)
+	}
+	if v.AppComponent != nil {
+		s.WriteStruct(schemas.CreateAppVersionAppComponentResponse_appComponent)
+		v.AppComponent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.CreateAppVersionAppComponentResponse_appVersion, *v.AppVersion)
+	}
+}
+func (v *CreateAppVersionAppComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppVersionAppComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppVersionAppComponentResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentResponse_appArn, v.AppArn)
+		case schemas.CreateAppVersionAppComponentResponse_appComponent:
+			v.AppComponent = &types.AppComponent{}
+			return v.AppComponent.Deserialize(d)
+		case schemas.CreateAppVersionAppComponentResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.CreateAppVersionAppComponentResponse_appVersion, v.AppVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppVersionAppComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAppVersionAppComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppVersionAppComponent, schemas.CreateAppVersionAppComponentRequest, schemas.CreateAppVersionAppComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAppVersionAppComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppVersionAppComponent, schemas.CreateAppVersionAppComponentRequest, schemas.CreateAppVersionAppComponentResponse), output: &CreateAppVersionAppComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

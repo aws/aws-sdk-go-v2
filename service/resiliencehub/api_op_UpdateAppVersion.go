@@ -4,6 +4,8 @@ package resiliencehub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type UpdateAppVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInfoMap(s, schemas.UpdateAppVersionRequest_additionalInfo, v.AdditionalInfo)
+	if v.AppArn != nil {
+		s.WriteString(schemas.UpdateAppVersionRequest_appArn, *v.AppArn)
+	}
+}
+func (v *UpdateAppVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppVersionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppVersionRequest_additionalInfo:
+			return deserializeAdditionalInfoMap(d, schemas.UpdateAppVersionRequest_additionalInfo, &v.AdditionalInfo)
+		case schemas.UpdateAppVersionRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.UpdateAppVersionRequest_appArn, v.AppArn)
+		}
+		return nil
+	})
+}
+
 type UpdateAppVersionOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -88,13 +115,41 @@ type UpdateAppVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInfoMap(s, schemas.UpdateAppVersionResponse_additionalInfo, v.AdditionalInfo)
+	if v.AppArn != nil {
+		s.WriteString(schemas.UpdateAppVersionResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.UpdateAppVersionResponse_appVersion, *v.AppVersion)
+	}
+}
+func (v *UpdateAppVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppVersionResponse_additionalInfo:
+			return deserializeAdditionalInfoMap(d, schemas.UpdateAppVersionResponse_additionalInfo, &v.AdditionalInfo)
+		case schemas.UpdateAppVersionResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.UpdateAppVersionResponse_appArn, v.AppArn)
+		case schemas.UpdateAppVersionResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.UpdateAppVersionResponse_appVersion, v.AppVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppVersion, schemas.UpdateAppVersionRequest, schemas.UpdateAppVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppVersion, schemas.UpdateAppVersionRequest, schemas.UpdateAppVersionResponse), output: &UpdateAppVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

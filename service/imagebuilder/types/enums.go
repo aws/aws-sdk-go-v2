@@ -166,6 +166,31 @@ func (EbsVolumeType) Values() []EbsVolumeType {
 	}
 }
 
+type ImageConfigurationStep string
+
+// Enum values for ImageConfigurationStep
+const (
+	ImageConfigurationStepAssociateLicenses              ImageConfigurationStep = "ASSOCIATE_LICENSES"
+	ImageConfigurationStepUpdateLaunchTemplates          ImageConfigurationStep = "UPDATE_LAUNCH_TEMPLATES"
+	ImageConfigurationStepPutSsmParameters               ImageConfigurationStep = "PUT_SSM_PARAMETERS"
+	ImageConfigurationStepUpdateFastLaunchConfigurations ImageConfigurationStep = "UPDATE_FAST_LAUNCH_CONFIGURATIONS"
+	ImageConfigurationStepExportAmi                      ImageConfigurationStep = "EXPORT_AMI"
+)
+
+// Values returns all known values for ImageConfigurationStep. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageConfigurationStep) Values() []ImageConfigurationStep {
+	return []ImageConfigurationStep{
+		"ASSOCIATE_LICENSES",
+		"UPDATE_LAUNCH_TEMPLATES",
+		"PUT_SSM_PARAMETERS",
+		"UPDATE_FAST_LAUNCH_CONFIGURATIONS",
+		"EXPORT_AMI",
+	}
+}
+
 type ImageScanStatus string
 
 // Enum values for ImageScanStatus
@@ -591,6 +616,27 @@ const (
 func (ProductCodeType) Values() []ProductCodeType {
 	return []ProductCodeType{
 		"marketplace",
+	}
+}
+
+type RegionFailureStatus string
+
+// Enum values for RegionFailureStatus
+const (
+	RegionFailureStatusFailed    RegionFailureStatus = "FAILED"
+	RegionFailureStatusCancelled RegionFailureStatus = "CANCELLED"
+	RegionFailureStatusTimedOut  RegionFailureStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for RegionFailureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegionFailureStatus) Values() []RegionFailureStatus {
+	return []RegionFailureStatus{
+		"FAILED",
+		"CANCELLED",
+		"TIMED_OUT",
 	}
 }
 

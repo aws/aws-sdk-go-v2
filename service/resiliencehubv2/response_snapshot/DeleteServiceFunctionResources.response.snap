@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"resources":["__Member__","__Member__"],"serviceArn":"__ServiceArn__","serviceFunctionId":"__ServiceFunctionId__"}

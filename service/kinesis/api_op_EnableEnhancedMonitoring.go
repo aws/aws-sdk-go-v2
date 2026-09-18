@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -72,6 +74,24 @@ type EnableEnhancedMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableEnhancedMonitoringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableEnhancedMonitoringInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableEnhancedMonitoringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricsNameList(s, schemas.EnableEnhancedMonitoringInput_ShardLevelMetrics, v.ShardLevelMetrics)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamName, *v.StreamName)
+	}
+}
 func (in *EnableEnhancedMonitoringInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -102,13 +122,44 @@ type EnableEnhancedMonitoringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableEnhancedMonitoringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnhancedMonitoringOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableEnhancedMonitoringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics, v.CurrentShardLevelMetrics)
+	serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics, v.DesiredShardLevelMetrics)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.EnhancedMonitoringOutput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.EnhancedMonitoringOutput_StreamName, *v.StreamName)
+	}
+}
+func (v *EnableEnhancedMonitoringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnhancedMonitoringOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics:
+			return deserializeMetricsNameList(d, schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics, &v.CurrentShardLevelMetrics)
+		case schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics:
+			return deserializeMetricsNameList(d, schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics, &v.DesiredShardLevelMetrics)
+		case schemas.EnhancedMonitoringOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.EnhancedMonitoringOutput_StreamARN, v.StreamARN)
+		case schemas.EnhancedMonitoringOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.EnhancedMonitoringOutput_StreamName, v.StreamName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableEnhancedMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableEnhancedMonitoring{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableEnhancedMonitoring, schemas.EnableEnhancedMonitoringInput, schemas.EnhancedMonitoringOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableEnhancedMonitoring{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableEnhancedMonitoring, schemas.EnableEnhancedMonitoringInput, schemas.EnhancedMonitoringOutput), output: &EnableEnhancedMonitoringOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

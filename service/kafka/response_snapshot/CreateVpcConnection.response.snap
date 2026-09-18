@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authentication":"__Authentication__","clientSubnets":["__Member__","__Member__"],"creationTime":"2000-01-01T00:00:00Z","securityGroups":["__Member__","__Member__"],"state":"CREATING","tags":{"key0":"__Value__"},"vpcConnectionArn":"__VpcConnectionArn__","vpcId":"__VpcId__"}

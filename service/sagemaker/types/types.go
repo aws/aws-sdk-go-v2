@@ -28873,6 +28873,77 @@ func (v *InstancePoolSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A candidate instance type preference in an InstancePreferences list.
+type InstancePreference struct {
+
+	// The ML compute instance type. An instance type can appear only once in an
+	// InstancePreferences list.
+	//
+	// This member is required.
+	InstanceType TrainingInstanceType
+
+	// The number of instances to launch if this instance type is selected. Specify
+	// the instance count for the training job in one of the following two ways:
+	//
+	//   - Per preference – Set InstanceCount on every preference in the
+	//   InstancePreferences list and don't set ResourceConfig$InstanceCount . Use this
+	//   when each instance type needs a different number of instances to deliver
+	//   equivalent compute.
+	//
+	//   - One count for the job – Set ResourceConfig$InstanceCount and omit it from
+	//   every preference. SageMaker applies this to all instance types in the list.
+	//
+	// For example, in a list of five preferences, either all five specify
+	// InstanceCount or none of them do. SageMaker rejects requests that set
+	// InstanceCount on only some preferences, that set it both per preference and in
+	// ResourceConfig , or that omit it in both places.
+	InstanceCount *int32
+
+	// The Amazon Resource Name (ARN) of a training plan to use if this instance type
+	// is selected. The plan's instance type must match InstanceType . A preference
+	// with a training plan uses that plan's reserved capacity; a preference without
+	// one uses on-demand capacity. Per-preference TrainingPlanArns is mutually
+	// exclusive with the job-level TrainingPlanArn in ResourceConfig .
+	TrainingPlanArns []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstancePreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstancePreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstancePreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.InstancePreference_InstanceCount, *v.InstanceCount)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.InstancePreference_InstanceType, string(v.InstanceType))
+	}
+	serializeTrainingPlanArnList(s, schemas.InstancePreference_TrainingPlanArns, v.TrainingPlanArns)
+}
+func (v *InstancePreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstancePreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstancePreference_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.InstancePreference_InstanceCount, v.InstanceCount)
+		case schemas.InstancePreference_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.InstancePreference_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = TrainingInstanceType(ev)
+			return nil
+		case schemas.InstancePreference_TrainingPlanArns:
+			return deserializeTrainingPlanArnList(d, schemas.InstancePreference_TrainingPlanArns, &v.TrainingPlanArns)
+		}
+		return nil
+	})
+}
+
 // The customer ENI and additional ENIs associated with a network interface
 // category.
 type InstanceRequirementsEniConfiguration struct {
@@ -41895,8 +41966,30 @@ type ProcessingClusterConfig struct {
 	// is 1.
 	InstanceCount *int32
 
+	// An ordered list of ML compute instance types for the processing job, in
+	// priority order. Amazon SageMaker launches the job on the first instance type in
+	// the list that has available capacity. If capacity is insufficient, Amazon
+	// SageMaker evaluates the next instance type in the list. Exactly one instance
+	// type is selected for the job.
+	//
+	// InstancePreferences is mutually exclusive with InstanceType .
+	InstancePreferences []ProcessingInstancePreference
+
 	// The ML compute instance type for the processing job.
 	InstanceType ProcessingInstanceType
+
+	// The number of instances of SelectedInstanceType that the job launched with. The
+	// job is billed for this instance type and count. Returned by
+	// DescribeProcessingJob after an instance type is selected. This field is
+	// read-only and isn't accepted in CreateProcessingJob requests.
+	SelectedInstanceCount *int32
+
+	// The instance type that Amazon SageMaker selected for the job from
+	// InstancePreferences . Returned by [DescribeProcessingJob] after an instance type is selected. This
+	// field is read-only and isn't accepted in CreateProcessingJob requests.
+	//
+	// [DescribeProcessingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeProcessingJob.html
+	SelectedInstanceType ProcessingInstanceType
 
 	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
@@ -41928,8 +42021,15 @@ func (v *ProcessingClusterConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceCount != nil {
 		s.WriteInt32(schemas.ProcessingClusterConfig_InstanceCount, *v.InstanceCount)
 	}
+	serializeProcessingInstancePreferenceList(s, schemas.ProcessingClusterConfig_InstancePreferences, v.InstancePreferences)
 	if v.InstanceType != "" {
 		s.WriteString(schemas.ProcessingClusterConfig_InstanceType, string(v.InstanceType))
+	}
+	if v.SelectedInstanceCount != nil {
+		s.WriteInt32(schemas.ProcessingClusterConfig_SelectedInstanceCount, *v.SelectedInstanceCount)
+	}
+	if v.SelectedInstanceType != "" {
+		s.WriteString(schemas.ProcessingClusterConfig_SelectedInstanceType, string(v.SelectedInstanceType))
 	}
 	if v.VolumeKmsKeyId != nil {
 		s.WriteString(schemas.ProcessingClusterConfig_VolumeKmsKeyId, *v.VolumeKmsKeyId)
@@ -41944,12 +42044,24 @@ func (v *ProcessingClusterConfig) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.ProcessingClusterConfig_InstanceCount:
 			v.InstanceCount = new(int32)
 			return d.ReadInt32(schemas.ProcessingClusterConfig_InstanceCount, v.InstanceCount)
+		case schemas.ProcessingClusterConfig_InstancePreferences:
+			return deserializeProcessingInstancePreferenceList(d, schemas.ProcessingClusterConfig_InstancePreferences, &v.InstancePreferences)
 		case schemas.ProcessingClusterConfig_InstanceType:
 			var ev string
 			if err := d.ReadString(schemas.ProcessingClusterConfig_InstanceType, &ev); err != nil {
 				return err
 			}
 			v.InstanceType = ProcessingInstanceType(ev)
+			return nil
+		case schemas.ProcessingClusterConfig_SelectedInstanceCount:
+			v.SelectedInstanceCount = new(int32)
+			return d.ReadInt32(schemas.ProcessingClusterConfig_SelectedInstanceCount, v.SelectedInstanceCount)
+		case schemas.ProcessingClusterConfig_SelectedInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.ProcessingClusterConfig_SelectedInstanceType, &ev); err != nil {
+				return err
+			}
+			v.SelectedInstanceType = ProcessingInstanceType(ev)
 			return nil
 		case schemas.ProcessingClusterConfig_VolumeKmsKeyId:
 			v.VolumeKmsKeyId = new(string)
@@ -42060,6 +42172,68 @@ func (v *ProcessingInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProcessingInput_S3Input:
 			v.S3Input = &ProcessingS3Input{}
 			return v.S3Input.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A candidate instance type preference in a processing InstancePreferences list.
+type ProcessingInstancePreference struct {
+
+	// The ML compute instance type. An instance type can appear only once in an
+	// InstancePreferences list.
+	//
+	// This member is required.
+	InstanceType ProcessingInstanceType
+
+	// The number of instances to launch if this instance type is selected. Specify
+	// the instance count for the processing job in one of the following two ways:
+	//
+	//   - Per preference – Set InstanceCount on every preference in the
+	//   InstancePreferences list and don't set ProcessingClusterConfig$InstanceCount .
+	//   Use this when each instance type needs a different number of instances to
+	//   deliver equivalent compute.
+	//
+	//   - One count for the job – Set ProcessingClusterConfig$InstanceCount and omit
+	//   it from every preference. Amazon SageMaker applies this to all instance types in
+	//   the list.
+	//
+	// For example, in a list of five preferences, either all five specify
+	// InstanceCount or none of them do. Amazon SageMaker rejects requests that set
+	// InstanceCount on only some preferences, that set it both per preference and in
+	// ProcessingClusterConfig , or that omit it in both places.
+	InstanceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProcessingInstancePreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcessingInstancePreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcessingInstancePreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.ProcessingInstancePreference_InstanceCount, *v.InstanceCount)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.ProcessingInstancePreference_InstanceType, string(v.InstanceType))
+	}
+}
+func (v *ProcessingInstancePreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcessingInstancePreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcessingInstancePreference_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.ProcessingInstancePreference_InstanceCount, v.InstanceCount)
+		case schemas.ProcessingInstancePreference_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.ProcessingInstancePreference_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = ProcessingInstanceType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -46609,12 +46783,37 @@ type ResourceConfig struct {
 	// UltraServers. Only applicable for UltraServer capacity.
 	InstancePlacementConfig *InstancePlacementConfig
 
+	// An ordered list of ML compute instance types for the training job, in priority
+	// order. SageMaker launches the training job on the first instance type in the
+	// list that has available capacity. If capacity is insufficient, SageMaker
+	// evaluates the next instance type in the preferred list. Exactly one instance
+	// type is selected for the job.
+	//
+	// InstancePreferences is mutually exclusive with InstanceType , InstanceGroups ,
+	// InstancePlacementConfig , and EnableManagedSpotTraining , and supports only
+	// Flexible Training Plans (FTP) and On-Demand capacity.
+	InstancePreferences []InstancePreference
+
 	// The ML compute instance type.
 	InstanceType TrainingInstanceType
 
 	// The duration of time in seconds to retain configured resources in a warm pool
 	// for subsequent training jobs.
 	KeepAlivePeriodInSeconds *int32
+
+	// The number of instances of SelectedInstanceType that the training job launched
+	// with. The job is billed for this instance type and count. Returned by
+	// DescribeTrainingJob after an instance type is selected. This field is read-only
+	// and isn't accepted in CreateTrainingJob requests.
+	SelectedInstanceCount *int32
+
+	// The instance type that SageMaker selected for the job from the provided
+	// InstancePreferences . The job is billed for this instance type and count.
+	// Returned by [DescribeTrainingJob]after an instance type is selected. This field is read-only and
+	// isn't accepted in CreateTrainingJob requests.
+	//
+	// [DescribeTrainingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html
+	SelectedInstanceType TrainingInstanceType
 
 	// The Amazon Resource Name (ARN); of the training plan to use for this resource
 	// configuration.
@@ -46697,11 +46896,18 @@ func (v *ResourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InstancePlacementConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeInstancePreferenceList(s, schemas.ResourceConfig_InstancePreferences, v.InstancePreferences)
 	if v.InstanceType != "" {
 		s.WriteString(schemas.ResourceConfig_InstanceType, string(v.InstanceType))
 	}
 	if v.KeepAlivePeriodInSeconds != nil {
 		s.WriteInt32(schemas.ResourceConfig_KeepAlivePeriodInSeconds, *v.KeepAlivePeriodInSeconds)
+	}
+	if v.SelectedInstanceCount != nil {
+		s.WriteInt32(schemas.ResourceConfig_SelectedInstanceCount, *v.SelectedInstanceCount)
+	}
+	if v.SelectedInstanceType != "" {
+		s.WriteString(schemas.ResourceConfig_SelectedInstanceType, string(v.SelectedInstanceType))
 	}
 	if v.TrainingPlanArn != nil {
 		s.WriteString(schemas.ResourceConfig_TrainingPlanArn, *v.TrainingPlanArn)
@@ -46724,6 +46930,8 @@ func (v *ResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceConfig_InstancePlacementConfig:
 			v.InstancePlacementConfig = &InstancePlacementConfig{}
 			return v.InstancePlacementConfig.Deserialize(d)
+		case schemas.ResourceConfig_InstancePreferences:
+			return deserializeInstancePreferenceList(d, schemas.ResourceConfig_InstancePreferences, &v.InstancePreferences)
 		case schemas.ResourceConfig_InstanceType:
 			var ev string
 			if err := d.ReadString(schemas.ResourceConfig_InstanceType, &ev); err != nil {
@@ -46734,6 +46942,16 @@ func (v *ResourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceConfig_KeepAlivePeriodInSeconds:
 			v.KeepAlivePeriodInSeconds = new(int32)
 			return d.ReadInt32(schemas.ResourceConfig_KeepAlivePeriodInSeconds, v.KeepAlivePeriodInSeconds)
+		case schemas.ResourceConfig_SelectedInstanceCount:
+			v.SelectedInstanceCount = new(int32)
+			return d.ReadInt32(schemas.ResourceConfig_SelectedInstanceCount, v.SelectedInstanceCount)
+		case schemas.ResourceConfig_SelectedInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceConfig_SelectedInstanceType, &ev); err != nil {
+				return err
+			}
+			v.SelectedInstanceType = TrainingInstanceType(ev)
+			return nil
 		case schemas.ResourceConfig_TrainingPlanArn:
 			v.TrainingPlanArn = new(string)
 			return d.ReadString(schemas.ResourceConfig_TrainingPlanArn, v.TrainingPlanArn)
@@ -50290,6 +50508,15 @@ type StoppingCondition struct {
 	//
 	// MaxPendingTimeInSeconds only increments when jobs are actively waiting for
 	// capacity in an Active plan.
+	//
+	//   - MaxPendingTimeInSeconds takes effect only for jobs that request accelerated
+	//   computing instance types, such as instances in the ml.p , ml.g , and ml.trn
+	//   families. It has no effect on jobs that request CPU-only instance types.
+	//
+	//   - If the job specifies InstancePreferences , MaxPendingTimeInSeconds bounds
+	//   the total time SageMaker spends working through your list of instance types. It
+	//   is not applied per instance type preference, and takes effect only when the list
+	//   includes at least one accelerated computing instance type.
 	//
 	// [training plans]: https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html
 	MaxPendingTimeInSeconds *int32

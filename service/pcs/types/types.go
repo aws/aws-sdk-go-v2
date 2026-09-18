@@ -403,6 +403,13 @@ type ComputeNodeGroupConfiguration struct {
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfiguration struct {
 
+	// The additional Slurm gres.conf records for the compute node group. Each item is
+	// a map of gres.conf attribute names to values that describes one gres.conf
+	// record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the
+	// NodeName= prefix and merges these records with the GPU record it derives from
+	// the instance type.
+	GresCustomSettings []map[string]string
+
 	// The time (in seconds) before an idle node is scaled down. If not specified, the
 	// cluster-level setting applies. This overrides the cluster-level
 	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
@@ -418,6 +425,13 @@ type ComputeNodeGroupSlurmConfiguration struct {
 
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfigurationRequest struct {
+
+	// The additional Slurm gres.conf records for the compute node group. Each item is
+	// a map of gres.conf attribute names to values that describes one gres.conf
+	// record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the
+	// NodeName= prefix and merges these records with the GPU record it derives from
+	// the instance type.
+	GresCustomSettings []map[string]string
 
 	// The time (in seconds) before an idle node is scaled down. If not specified, the
 	// cluster-level setting applies. This overrides the cluster-level
@@ -939,7 +953,7 @@ type Scheduler struct {
 	// cluster scaling and job scheduling. You can update this version using the
 	// UpdateCluster API action. For more information, see [Updating the scheduler version on a cluster] and [Slurm versions in PCS] in the PCS User Guide.
 	//
-	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11
+	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11 | 26.05
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	// [Updating the scheduler version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
@@ -962,7 +976,7 @@ type SchedulerRequest struct {
 	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
 	// Guide.
 	//
-	// Valid Values: 24.11 | 25.05 | 25.11
+	// Valid Values: 24.11 | 25.05 | 25.11 | 26.05
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
@@ -1154,6 +1168,13 @@ type UpdateClusterSlurmConfigurationRequest struct {
 // Additional options related to the Slurm scheduler.
 type UpdateComputeNodeGroupSlurmConfigurationRequest struct {
 
+	// The additional Slurm gres.conf records for the compute node group. Each item is
+	// a map of gres.conf attribute names to values that describes one gres.conf
+	// record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the
+	// NodeName= prefix and merges these records with the GPU record it derives from
+	// the instance type.
+	GresCustomSettings []map[string]string
+
 	// The time (in seconds) before an idle node is scaled down. If not specified, the
 	// cluster-level setting applies. This overrides the cluster-level
 	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
@@ -1205,7 +1226,7 @@ type UpdateSchedulerRequest struct {
 	// version. For more information about supported versions and update paths, see [Updating the scheduler version on a cluster]in
 	// the PCS User Guide.
 	//
-	// Valid Values: 24.05 | 24.11 | 25.05 | 25.11
+	// Valid Values: 24.05 | 24.11 | 25.05 | 25.11 | 26.05
 	//
 	// [Updating the scheduler version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
 	//

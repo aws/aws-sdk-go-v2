@@ -43,6 +43,11 @@ import (
 //     the ListInsightsMetricData API operation is linked to the
 //     cloudtrail:LookupEvents action only. To use this operation, you must have
 //     permissions to perform the cloudtrail:LookupEvents action.
+//
+// For data event Insights on organization trails, only the management account and
+// delegated administrator accounts can call ListInsightsMetricData . For these
+// callers, the API returns Insights metrics only for the caller's own account.
+// Member accounts cannot call this API on organization trails.
 func (c *Client) ListInsightsMetricData(ctx context.Context, params *ListInsightsMetricDataInput, optFns ...func(*Options)) (*ListInsightsMetricDataOutput, error) {
 	if params == nil {
 		params = &ListInsightsMetricDataInput{}

@@ -11,9 +11,14 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Returns information on all imports, or a select set of imports by ImportStatus
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Returns information on all imports, or a select set of imports by ImportStatus
 // or Destination .
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
 		params = &ListImportsInput{}

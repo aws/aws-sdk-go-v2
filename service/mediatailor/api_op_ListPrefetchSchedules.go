@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,56 @@ type ListPrefetchSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrefetchSchedulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrefetchSchedulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrefetchSchedulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPrefetchSchedulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrefetchSchedulesRequest_NextToken, *v.NextToken)
+	}
+	if v.PlaybackConfigurationName != nil {
+		s.WriteString(schemas.ListPrefetchSchedulesRequest_PlaybackConfigurationName, *v.PlaybackConfigurationName)
+	}
+	if v.ScheduleType != "" {
+		s.WriteString(schemas.ListPrefetchSchedulesRequest_ScheduleType, string(v.ScheduleType))
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.ListPrefetchSchedulesRequest_StreamId, *v.StreamId)
+	}
+}
+func (v *ListPrefetchSchedulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrefetchSchedulesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrefetchSchedulesRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPrefetchSchedulesRequest_MaxResults, v.MaxResults)
+		case schemas.ListPrefetchSchedulesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPrefetchSchedulesRequest_NextToken, v.NextToken)
+		case schemas.ListPrefetchSchedulesRequest_PlaybackConfigurationName:
+			v.PlaybackConfigurationName = new(string)
+			return d.ReadString(schemas.ListPrefetchSchedulesRequest_PlaybackConfigurationName, v.PlaybackConfigurationName)
+		case schemas.ListPrefetchSchedulesRequest_ScheduleType:
+			var ev string
+			if err := d.ReadString(schemas.ListPrefetchSchedulesRequest_ScheduleType, &ev); err != nil {
+				return err
+			}
+			v.ScheduleType = types.ListPrefetchScheduleType(ev)
+			return nil
+		case schemas.ListPrefetchSchedulesRequest_StreamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.ListPrefetchSchedulesRequest_StreamId, v.StreamId)
+		}
+		return nil
+	})
+}
+
 type ListPrefetchSchedulesOutput struct {
 
 	// Lists the prefetch schedules. An empty Items list doesn't mean there aren't
@@ -83,13 +135,35 @@ type ListPrefetchSchedulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrefetchSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrefetchSchedulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrefetchSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfPrefetchSchedule(s, schemas.ListPrefetchSchedulesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrefetchSchedulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPrefetchSchedulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrefetchSchedulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrefetchSchedulesResponse_Items:
+			return deserialize__listOfPrefetchSchedule(d, schemas.ListPrefetchSchedulesResponse_Items, &v.Items)
+		case schemas.ListPrefetchSchedulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPrefetchSchedulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrefetchSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrefetchSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrefetchSchedules, schemas.ListPrefetchSchedulesRequest, schemas.ListPrefetchSchedulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrefetchSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrefetchSchedules, schemas.ListPrefetchSchedulesRequest, schemas.ListPrefetchSchedulesResponse), output: &ListPrefetchSchedulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

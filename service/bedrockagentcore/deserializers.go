@@ -17694,6 +17694,11 @@ func awsRestjson1_deserializeDocumentCloudWatchFilterConfig(v **types.CloudWatch
 				return err
 			}
 
+		case "sessionTraceIds":
+			if err := awsRestjson1_deserializeDocumentSessionTraceIdsList(&sv.SessionTraceIds, value); err != nil {
+				return err
+			}
+
 		case "timeRange":
 			if err := awsRestjson1_deserializeDocumentSessionFilterConfig(&sv.TimeRange, value); err != nil {
 				return err
@@ -25260,6 +25265,85 @@ func awsRestjson1_deserializeDocumentSessionSummaryList(v *[]types.SessionSummar
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSessionTraceIds(v **types.SessionTraceIds, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SessionTraceIds
+	if *v == nil {
+		sv = &types.SessionTraceIds{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sessionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SessionId = ptr.String(jtv)
+			}
+
+		case "traceIds":
+			if err := awsRestjson1_deserializeDocumentTraceIdList(&sv.TraceIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSessionTraceIdsList(v *[]types.SessionTraceIds, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SessionTraceIds
+	if *v == nil {
+		cv = []types.SessionTraceIds{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SessionTraceIds
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSessionTraceIds(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSkillDefinition(v **types.SkillDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26718,6 +26802,42 @@ func awsRestjson1_deserializeDocumentToolsFileSystemConfigurations(v *[]types.To
 		var col types.ToolsFileSystemConfiguration
 		if err := awsRestjson1_deserializeDocumentToolsFileSystemConfiguration(&col, value); err != nil {
 			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTraceIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TraceId to be of type string, got %T instead", value)
+			}
+			col = jtv
 		}
 		cv = append(cv, col)
 

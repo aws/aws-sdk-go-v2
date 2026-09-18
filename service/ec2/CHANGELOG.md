@@ -1,3 +1,25 @@
+# v1.334.0 (2026-09-17)
+
+* **Feature**: Adding support for "Tunnel" VPC Endpoint
+
+# v1.333.0 (2026-09-16)
+
+* **Feature**: Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage.
+
+# v1.332.0 (2026-09-10)
+
+* **Feature**: The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.
+
+# v1.331.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Feature**: This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.330.0 (2026-09-08)
+
+* **Feature**: Adds the InterfaceTypes field to NetworkCardInfo in the DescribeInstanceTypes response. This field identifies the network interface types supported by each network card.
+
 # v1.329.0 (2026-09-04)
 
 * **Feature**: Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.

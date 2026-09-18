@@ -10,8 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Enables Lake query federation on the specified event data store. Federating an
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Enables Lake query federation on the specified event data store. Federating an
 // event data store lets you view the metadata associated with the event data store
 // in the Glue [Data Catalog]and run SQL queries against your event data using Amazon Athena.
 // The table metadata stored in the Glue Data Catalog lets the Athena query engine
@@ -27,6 +30,7 @@ import (
 // For more information about Lake query federation, see [Federate an event data store].
 //
 // [Federate an event data store]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Lake Formation]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html
 // [Data Catalog]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
 func (c *Client) EnableFederation(ctx context.Context, params *EnableFederationInput, optFns ...func(*Options)) (*EnableFederationOutput, error) {

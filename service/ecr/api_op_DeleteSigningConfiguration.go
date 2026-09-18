@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,15 @@ type DeleteSigningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSigningConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSigningConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSigningConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteSigningConfigurationOutput struct {
 
 	// The Amazon Web Services account ID associated with the registry.
@@ -49,13 +60,40 @@ type DeleteSigningConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSigningConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSigningConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSigningConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteSigningConfigurationResponse_registryId, *v.RegistryId)
+	}
+	if v.SigningConfiguration != nil {
+		s.WriteStruct(schemas.DeleteSigningConfigurationResponse_signingConfiguration)
+		v.SigningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSigningConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSigningConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSigningConfigurationResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DeleteSigningConfigurationResponse_registryId, v.RegistryId)
+		case schemas.DeleteSigningConfigurationResponse_signingConfiguration:
+			v.SigningConfiguration = &types.SigningConfiguration{}
+			return v.SigningConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSigningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSigningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSigningConfiguration, schemas.DeleteSigningConfigurationRequest, schemas.DeleteSigningConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSigningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSigningConfiguration, schemas.DeleteSigningConfigurationRequest, schemas.DeleteSigningConfigurationResponse), output: &DeleteSigningConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -41,6 +41,10 @@ type GetLinkedWhatsAppBusinessAccountPhoneNumberInput struct {
 
 type GetLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
 
+	// The calling settings configured for the phone number. This value is absent when
+	// calling is not configured.
+	CallSettings *types.WhatsAppCallSettings
+
 	// The WABA identifier linked to the phone number, formatted as
 	// waba-01234567890123456789012345678901 .
 	LinkedWhatsAppBusinessAccountId *string

@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type ListStandardsControlAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStandardsControlAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStandardsControlAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStandardsControlAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStandardsControlAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStandardsControlAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SecurityControlId != nil {
+		s.WriteString(schemas.ListStandardsControlAssociationsRequest_SecurityControlId, *v.SecurityControlId)
+	}
+}
+
 type ListStandardsControlAssociationsOutput struct {
 
 	//  An array that provides the enablement status and other details for each
@@ -72,13 +92,35 @@ type ListStandardsControlAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStandardsControlAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStandardsControlAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStandardsControlAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStandardsControlAssociationsResponse_NextToken, *v.NextToken)
+	}
+	serializeStandardsControlAssociationSummaries(s, schemas.ListStandardsControlAssociationsResponse_StandardsControlAssociationSummaries, v.StandardsControlAssociationSummaries)
+}
+func (v *ListStandardsControlAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStandardsControlAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStandardsControlAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStandardsControlAssociationsResponse_NextToken, v.NextToken)
+		case schemas.ListStandardsControlAssociationsResponse_StandardsControlAssociationSummaries:
+			return deserializeStandardsControlAssociationSummaries(d, schemas.ListStandardsControlAssociationsResponse_StandardsControlAssociationSummaries, &v.StandardsControlAssociationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStandardsControlAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStandardsControlAssociations, schemas.ListStandardsControlAssociationsRequest, schemas.ListStandardsControlAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStandardsControlAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStandardsControlAssociations, schemas.ListStandardsControlAssociationsRequest, schemas.ListStandardsControlAssociationsResponse), output: &ListStandardsControlAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -396,6 +396,9 @@ func ExampleReferenceSummary_outputUsage() {
 	case *types.ReferenceSummaryMemberAttachment:
 		_ = v.Value // Value is types.AttachmentReference
 
+	case *types.ReferenceSummaryMemberContactAnalysis:
+		_ = v.Value // Value is types.ContactAnalysisReference
+
 	case *types.ReferenceSummaryMemberDate:
 		_ = v.Value // Value is types.DateReference
 
@@ -437,6 +440,7 @@ var _ *types.UrlReference
 var _ *types.EmailMessageReference
 var _ *types.NumberReference
 var _ *types.StringReference
+var _ *types.ContactAnalysisReference
 var _ *types.DateReference
 var _ *types.EmailReference
 

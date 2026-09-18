@@ -3310,6 +3310,11 @@ func validateManagedKnowledgeBaseConfiguration(v *types.ManagedKnowledgeBaseConf
 			invalidParams.AddNested("EmbeddingModelConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SupplementalDataStorageConfiguration != nil {
+		if err := validateSupplementalDataStorageConfiguration(v.SupplementalDataStorageConfiguration); err != nil {
+			invalidParams.AddNested("SupplementalDataStorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

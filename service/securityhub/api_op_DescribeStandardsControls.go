@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DescribeStandardsControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStandardsControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStandardsControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStandardsControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeStandardsControlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStandardsControlsRequest_NextToken, *v.NextToken)
+	}
+	if v.StandardsSubscriptionArn != nil {
+		s.WriteString(schemas.DescribeStandardsControlsRequest_StandardsSubscriptionArn, *v.StandardsSubscriptionArn)
+	}
+}
+
 type DescribeStandardsControlsOutput struct {
 
 	// A list of security standards controls.
@@ -67,13 +87,35 @@ type DescribeStandardsControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStandardsControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStandardsControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStandardsControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardsControls(s, schemas.DescribeStandardsControlsResponse_Controls, v.Controls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStandardsControlsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeStandardsControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStandardsControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStandardsControlsResponse_Controls:
+			return deserializeStandardsControls(d, schemas.DescribeStandardsControlsResponse_Controls, &v.Controls)
+		case schemas.DescribeStandardsControlsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeStandardsControlsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStandardsControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStandardsControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStandardsControls, schemas.DescribeStandardsControlsRequest, schemas.DescribeStandardsControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeStandardsControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStandardsControls, schemas.DescribeStandardsControlsRequest, schemas.DescribeStandardsControlsResponse), output: &DescribeStandardsControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

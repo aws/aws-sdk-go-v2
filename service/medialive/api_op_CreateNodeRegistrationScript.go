@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,31 @@ type CreateNodeRegistrationScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNodeRegistrationScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNodeRegistrationScriptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNodeRegistrationScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeRegistrationScriptRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_RequestId, *v.RequestId)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Role, string(v.Role))
+	}
+}
+
 // Placeholder documentation for CreateNodeRegistrationScriptResponse
 type CreateNodeRegistrationScriptOutput struct {
 
@@ -75,13 +102,32 @@ type CreateNodeRegistrationScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNodeRegistrationScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNodeRegistrationScriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNodeRegistrationScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeRegistrationScript != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptResponse_NodeRegistrationScript, *v.NodeRegistrationScript)
+	}
+}
+func (v *CreateNodeRegistrationScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNodeRegistrationScriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNodeRegistrationScriptResponse_NodeRegistrationScript:
+			v.NodeRegistrationScript = new(string)
+			return d.ReadString(schemas.CreateNodeRegistrationScriptResponse_NodeRegistrationScript, v.NodeRegistrationScript)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNodeRegistrationScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNodeRegistrationScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNodeRegistrationScript, schemas.CreateNodeRegistrationScriptRequest, schemas.CreateNodeRegistrationScriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNodeRegistrationScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNodeRegistrationScript, schemas.CreateNodeRegistrationScriptRequest, schemas.CreateNodeRegistrationScriptResponse), output: &CreateNodeRegistrationScriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

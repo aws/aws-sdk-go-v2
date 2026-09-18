@@ -1043,6 +1043,10 @@
                         "value": "RUNS_DELETING"
                     },
                     {
+                        "name": "RUNS_DELETE_FAILED",
+                        "value": "RUNS_DELETE_FAILED"
+                    },
+                    {
                         "name": "RUNS_DELETED",
                         "value": "RUNS_DELETED"
                     }
@@ -3023,7 +3027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an AWS user with a different account than the resource owner).</p> <p>The following resources support cross-account sharing:</p> <ul> <li> <p>HealthOmics variant stores</p> </li> <li> <p>HealthOmics annotation stores</p> </li> <li> <p>Private workflows</p> </li> </ul>",
+                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource with the principal subscriber (an Amazon Web Services user with a different account than the resource owner).</p> <p>The following resources support cross-account sharing:</p> <ul> <li> <p>HealthOmics variant stores</p> </li> <li> <p>HealthOmics annotation stores</p> </li> <li> <p>Private workflows</p> </li> </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -3720,7 +3724,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.omics#RunRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role ARN that grants HealthOmics permissions to access required AWS resources such as Amazon S3 and CloudWatch. The role must have the same permissions required for individual <code>StartRun</code> calls.</p>",
+                        "smithy.api#documentation": "<p>The IAM role ARN that grants HealthOmics permissions to access required Amazon Web Services resources such as Amazon S3 and CloudWatch. The role must have the same permissions required for individual <code>StartRun</code> calls.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3789,7 +3793,7 @@
                 "runTags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS tags to associate with each workflow run. Merged with per-run <code>runTags</code>; run-specific values take precedence when keys overlap.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services tags to associate with each workflow run. Merged with per-run <code>runTags</code>; run-specific values take precedence when keys overlap.</p>"
                     }
                 },
                 "retentionMode": {
@@ -3807,13 +3811,13 @@
                 "workflowOwnerId": {
                     "target": "com.amazonaws.omics#WorkflowOwnerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the workflow owner, used for cross-account workflow sharing.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the workflow owner, used for cross-account workflow sharing.</p>"
                     }
                 },
                 "outputBucketOwnerId": {
                     "target": "com.amazonaws.omics#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expected AWS account ID of the owner of the output S3 bucket. Can be overridden per run.</p>"
+                        "smithy.api#documentation": "<p>The expected Amazon Web Services account ID of the owner of the output S3 bucket. Can be overridden per run.</p>"
                     }
                 },
                 "workflowVersionName": {
@@ -3832,6 +3836,12 @@
                     "target": "com.amazonaws.omics#ConfigurationName",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
+                    }
+                },
+                "sessionPolicy": {
+                    "target": "com.amazonaws.omics#SessionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter."
                     }
                 },
                 "engineSettings": {
@@ -4127,7 +4137,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a run batch resource and its associated metadata. This operation does not delete the individual workflow runs. To delete the runs, call <code>DeleteRunBatch</code> before calling <code>DeleteBatch</code>.</p> <p> <code>DeleteBatch</code> requires the batch to be in a terminal state: <code>PROCESSED</code>, <code>FAILED</code>, <code>CANCELLED</code>, or <code>RUNS_DELETED</code>. After <code>DeleteBatch</code> completes, the batch metadata is no longer accessible. You cannot call <code>GetBatch</code>, <code>ListRunsInBatch</code>, <code>DeleteRunBatch</code>, or <code>CancelRunBatch</code> on a deleted batch.</p>",
+                "smithy.api#documentation": "<p>Deletes a run batch resource and its associated metadata. This operation does not delete the individual workflow runs. To delete the runs, call <code>DeleteRunBatch</code> before calling <code>DeleteBatch</code>.</p> <p> <code>DeleteBatch</code> requires the batch to be in a terminal state: <code>PROCESSED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>RUNS_DELETE_FAILED</code>, or <code>RUNS_DELETED</code>. After <code>DeleteBatch</code> completes, the batch metadata is no longer accessible. You cannot call <code>GetBatch</code>, <code>ListRunsInBatch</code>, <code>DeleteRunBatch</code>, or <code>CancelRunBatch</code> on a deleted batch.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -6340,13 +6350,13 @@
                 "status": {
                     "target": "com.amazonaws.omics#BatchStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the run batch. Possible values: <code>CREATING</code> (initial setup), <code>PENDING</code> (ready to submit runs), <code>SUBMITTING</code> (submitting runs), <code>INPROGRESS</code> (runs executing), <code>STOPPING</code> (cancellation in progress), <code>PROCESSED</code> (all runs completed), <code>CANCELLED</code> (batch cancelled), <code>FAILED</code> (batch failed), <code>RUNS_DELETING</code> (deleting runs), <code>RUNS_DELETED</code> (runs deleted).</p>"
+                        "smithy.api#documentation": "<p>The current status of the run batch. Possible values: <code>CREATING</code> (initial setup), <code>PENDING</code> (ready to submit runs), <code>SUBMITTING</code> (submitting runs), <code>INPROGRESS</code> (runs executing), <code>STOPPING</code> (cancellation in progress), <code>PROCESSED</code> (all runs completed), <code>CANCELLED</code> (batch cancelled), <code>FAILED</code> (batch failed), <code>RUNS_DELETING</code> (deleting runs), <code>RUNS_DELETE_FAILED</code> (run deletion failed for some or all runs), <code>RUNS_DELETED</code> (runs deleted).</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS tags associated with the run batch.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services tags associated with the run batch.</p>"
                     }
                 },
                 "totalRuns": {
@@ -8741,6 +8751,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The engine-specific settings for the workflow run.</p>"
                     }
+                },
+                "sessionPolicy": {
+                    "target": "com.amazonaws.omics#SessionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "Inline policy json for scoping down permissions via a session policy on the IAM role."
+                    }
                 }
             },
             "traits": {
@@ -10865,13 +10881,13 @@
                 "outputBucketOwnerId": {
                     "target": "com.amazonaws.omics#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expected AWS account ID of the owner of the output S3 bucket for this run.</p>"
+                        "smithy.api#documentation": "<p>The expected Amazon Web Services account ID of the owner of the output S3 bucket for this run.</p>"
                     }
                 },
                 "runTags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Per-run AWS tags. Merged with <code>defaultRunSetting.runTags</code>; values in this object take precedence when keys overlap.</p>"
+                        "smithy.api#documentation": "<p>Per-run Amazon Web Services tags. Merged with <code>defaultRunSetting.runTags</code>; values in this object take precedence when keys overlap.</p>"
                     }
                 },
                 "engineSettings": {
@@ -18040,6 +18056,16 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.omics#SessionPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\t\\n\\r]+$"
+            }
+        },
         "com.amazonaws.omics#Share": {
             "type": "resource",
             "identifiers": {
@@ -18439,7 +18465,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to start a Read Set activation job from the given Sequence Store",
-                "smithy.api#documentation": "<p>Activates an archived read set and returns its metadata in a JSON formatted output. AWS HealthOmics automatically archives unused read sets after 30 days. To monitor the status of your read set activation job, use the <code>GetReadSetActivationJob</code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html\">Activating read sets</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Activates an archived read set and returns its metadata in a JSON formatted output. Amazon Web Services HealthOmics automatically archives unused read sets after 30 days. To monitor the status of your read set activation job, use the <code>GetReadSetActivationJob</code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html\">Activating read sets</a> in the <i>Amazon Web Services HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "control-storage-"
                 },
@@ -19152,7 +19178,7 @@
                 "tags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS tags to associate with the batch resource. These tags are not inherited by individual runs. To tag individual runs, use <code>defaultRunSetting.runTags</code>.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services tags to associate with the batch resource. These tags are not inherited by individual runs. To tag individual runs, use <code>defaultRunSetting.runTags</code>.</p>"
                     }
                 },
                 "defaultRunSetting": {
@@ -19204,7 +19230,7 @@
                 "tags": {
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS tags associated with the run batch.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services tags associated with the run batch.</p>"
                     }
                 }
             },
@@ -19236,7 +19262,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.omics#RunRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A service role for the run. The <code>roleArn</code> requires access to Amazon Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example <code>roleArn</code> is <code>arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ</code>. In this example, the AWS account ID is <code>123456789012</code> and the role name is <code>omics-service-role-serviceRole-W8O1XMPL7QZ</code>.</p>",
+                        "smithy.api#documentation": "<p>A service role for the run. The <code>roleArn</code> requires access to Amazon Web Services HealthOmics, S3, Cloudwatch logs, and EC2. An example <code>roleArn</code> is <code>arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ</code>. In this example, the Amazon Web Services account ID is <code>123456789012</code> and the role name is <code>omics-service-role-serviceRole-W8O1XMPL7QZ</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19357,6 +19383,12 @@
                     "target": "com.amazonaws.omics#ConfigurationName",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
+                    }
+                },
+                "sessionPolicy": {
+                    "target": "com.amazonaws.omics#SessionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "Optional inline policy json for scoping down permissions via a session policy on the IAM role provided in the roleArn parameter."
                     }
                 },
                 "engineSettings": {
@@ -21503,7 +21535,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

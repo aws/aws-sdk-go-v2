@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -64,6 +66,39 @@ type SubmitTaskStateChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitTaskStateChangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitTaskStateChangeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitTaskStateChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentStateChanges(s, schemas.SubmitTaskStateChangeRequest_attachments, v.Attachments)
+	if v.Cluster != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_cluster, *v.Cluster)
+	}
+	serializeContainerStateChanges(s, schemas.SubmitTaskStateChangeRequest_containers, v.Containers)
+	if v.ExecutionStoppedAt != nil {
+		s.WriteTime(schemas.SubmitTaskStateChangeRequest_executionStoppedAt, *v.ExecutionStoppedAt)
+	}
+	serializeManagedAgentStateChanges(s, schemas.SubmitTaskStateChangeRequest_managedAgents, v.ManagedAgents)
+	if v.PullStartedAt != nil {
+		s.WriteTime(schemas.SubmitTaskStateChangeRequest_pullStartedAt, *v.PullStartedAt)
+	}
+	if v.PullStoppedAt != nil {
+		s.WriteTime(schemas.SubmitTaskStateChangeRequest_pullStoppedAt, *v.PullStoppedAt)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_reason, *v.Reason)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_status, *v.Status)
+	}
+	if v.Task != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeRequest_task, *v.Task)
+	}
+}
+
 type SubmitTaskStateChangeOutput struct {
 
 	// Acknowledgement of the state change.
@@ -75,13 +110,32 @@ type SubmitTaskStateChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitTaskStateChangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitTaskStateChangeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitTaskStateChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Acknowledgment != nil {
+		s.WriteString(schemas.SubmitTaskStateChangeResponse_acknowledgment, *v.Acknowledgment)
+	}
+}
+func (v *SubmitTaskStateChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitTaskStateChangeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitTaskStateChangeResponse_acknowledgment:
+			v.Acknowledgment = new(string)
+			return d.ReadString(schemas.SubmitTaskStateChangeResponse_acknowledgment, v.Acknowledgment)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSubmitTaskStateChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitTaskStateChange, schemas.SubmitTaskStateChangeRequest, schemas.SubmitTaskStateChangeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSubmitTaskStateChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitTaskStateChange, schemas.SubmitTaskStateChangeRequest, schemas.SubmitTaskStateChangeResponse), output: &SubmitTaskStateChangeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

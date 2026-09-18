@@ -725,6 +725,11 @@ type CloudWatchFilterConfig struct {
 	// are included in the evaluation.
 	SessionIds []string
 
+	// A list of session and trace ID pairs that restrict evaluation to specific
+	// traces within a session. If specified, only the listed traces are evaluated
+	// instead of the entire session.
+	SessionTraceIds []SessionTraceIds
+
 	// The time range filter for selecting sessions to evaluate.
 	TimeRange *SessionFilterConfig
 
@@ -5188,6 +5193,23 @@ type SessionSummary struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A pairing of a session with the specific trace IDs to evaluate within that
+// session. Use this to evaluate individual traces rather than an entire session.
+type SessionTraceIds struct {
+
+	// The unique identifier of the session that contains the traces to evaluate.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The list of trace IDs within the session to evaluate.
+	//
+	// This member is required.
+	TraceIds []string
 
 	noSmithyDocumentSerde
 }

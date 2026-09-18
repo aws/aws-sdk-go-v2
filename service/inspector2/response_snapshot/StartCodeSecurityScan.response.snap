@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"scanId":"__ScanId__","status":"IN_PROGRESS"}

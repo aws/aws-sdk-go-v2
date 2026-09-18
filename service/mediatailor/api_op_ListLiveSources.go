@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,40 @@ type ListLiveSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLiveSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLiveSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLiveSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLiveSourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLiveSourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.ListLiveSourcesRequest_SourceLocationName, *v.SourceLocationName)
+	}
+}
+func (v *ListLiveSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLiveSourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLiveSourcesRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListLiveSourcesRequest_MaxResults, v.MaxResults)
+		case schemas.ListLiveSourcesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLiveSourcesRequest_NextToken, v.NextToken)
+		case schemas.ListLiveSourcesRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.ListLiveSourcesRequest_SourceLocationName, v.SourceLocationName)
+		}
+		return nil
+	})
+}
+
 type ListLiveSourcesOutput struct {
 
 	// Lists the live sources.
@@ -73,13 +109,35 @@ type ListLiveSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLiveSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLiveSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLiveSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfLiveSource(s, schemas.ListLiveSourcesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLiveSourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLiveSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLiveSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLiveSourcesResponse_Items:
+			return deserialize__listOfLiveSource(d, schemas.ListLiveSourcesResponse_Items, &v.Items)
+		case schemas.ListLiveSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLiveSourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLiveSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLiveSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLiveSources, schemas.ListLiveSourcesRequest, schemas.ListLiveSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLiveSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLiveSources, schemas.ListLiveSourcesRequest, schemas.ListLiveSourcesResponse), output: &ListLiveSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

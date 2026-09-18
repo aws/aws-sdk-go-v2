@@ -296,6 +296,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AttachedMultiviewChannels":
+			if err := awsRestjson1_deserializeDocumentAttachedMultiviewChannelList(&sv.AttachedMultiviewChannels, value); err != nil {
+				return err
+			}
+
 		case "ChannelGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -381,6 +386,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MultiviewConfiguration":
+			if err := awsRestjson1_deserializeDocumentMultiviewConfiguration(&sv.MultiviewConfiguration, value); err != nil {
+				return err
 			}
 
 		case "OutputHeaderConfiguration":
@@ -1965,6 +1975,11 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AttachedMultiviewChannels":
+			if err := awsRestjson1_deserializeDocumentAttachedMultiviewChannelList(&sv.AttachedMultiviewChannels, value); err != nil {
+				return err
+			}
+
 		case "ChannelGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2050,6 +2065,11 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MultiviewConfiguration":
+			if err := awsRestjson1_deserializeDocumentMultiviewConfiguration(&sv.MultiviewConfiguration, value); err != nil {
+				return err
 			}
 
 		case "OutputHeaderConfiguration":
@@ -5218,6 +5238,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AttachedMultiviewChannels":
+			if err := awsRestjson1_deserializeDocumentAttachedMultiviewChannelList(&sv.AttachedMultiviewChannels, value); err != nil {
+				return err
+			}
+
 		case "ChannelGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5303,6 +5328,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MultiviewConfiguration":
+			if err := awsRestjson1_deserializeDocumentMultiviewConfiguration(&sv.MultiviewConfiguration, value); err != nil {
+				return err
 			}
 
 		case "OutputHeaderConfiguration":
@@ -6201,6 +6231,42 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAttachedMultiviewChannelList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCdnAuthConfiguration(v **types.CdnAuthConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6471,6 +6537,11 @@ func awsRestjson1_deserializeDocumentChannelListConfiguration(v **types.ChannelL
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AttachedMultiviewChannels":
+			if err := awsRestjson1_deserializeDocumentAttachedMultiviewChannelList(&sv.AttachedMultiviewChannels, value); err != nil {
+				return err
+			}
+
 		case "ChannelGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6537,6 +6608,11 @@ func awsRestjson1_deserializeDocumentChannelListConfiguration(v **types.ChannelL
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "MultiviewConfiguration":
+			if err := awsRestjson1_deserializeDocumentMultiviewConfiguration(&sv.MultiviewConfiguration, value); err != nil {
+				return err
 			}
 
 		case "OutputLockingMode":
@@ -9374,6 +9450,119 @@ func awsRestjson1_deserializeDocumentListMssManifests(v *[]types.ListMssManifest
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiviewConfiguration(v **types.MultiviewConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiviewConfiguration
+	if *v == nil {
+		sv = &types.MultiviewConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailableLayouts":
+			if err := awsRestjson1_deserializeDocumentMultiviewLayoutList(&sv.AvailableLayouts, value); err != nil {
+				return err
+			}
+
+		case "AvailableSources":
+			if err := awsRestjson1_deserializeDocumentMultiviewSourceList(&sv.AvailableSources, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiviewLayoutList(v *[]types.MultiviewLayoutType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MultiviewLayoutType
+	if *v == nil {
+		cv = []types.MultiviewLayoutType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MultiviewLayoutType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MultiviewLayoutType to be of type string, got %T instead", value)
+			}
+			col = types.MultiviewLayoutType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiviewSourceList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

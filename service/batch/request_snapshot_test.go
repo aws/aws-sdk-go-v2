@@ -233,6 +233,37 @@ func TestCheckRequestSnapshot_CancelJob(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelJobs(t *testing.T) {
+	input := &CancelJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateComputeEnvironment(t *testing.T) {
 	input := &CreateComputeEnvironmentInput{
 		ComputeEnvironmentName: ptr.String("__ComputeEnvironmentName__"),
@@ -6158,6 +6189,37 @@ func TestCheckRequestSnapshot_TerminateJob(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_TerminateJobs(t *testing.T) {
+	input := &TerminateJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TerminateJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TerminateJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TerminateServiceJob(t *testing.T) {
 	input := &TerminateServiceJobInput{
 		JobId:  ptr.String("__JobId__"),
@@ -6182,6 +6244,37 @@ func TestCheckRequestSnapshot_TerminateServiceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TerminateServiceJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_TerminateServiceJobs(t *testing.T) {
+	input := &TerminateServiceJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TerminateServiceJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TerminateServiceJobs"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6641,6 +6734,37 @@ func TestUpdateRequestSnapshot_CancelJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CancelJobs(t *testing.T) {
+	input := &CancelJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelJobs"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12570,6 +12694,37 @@ func TestUpdateRequestSnapshot_TerminateJob(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_TerminateJobs(t *testing.T) {
+	input := &TerminateJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TerminateJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TerminateJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TerminateServiceJob(t *testing.T) {
 	input := &TerminateServiceJobInput{
 		JobId:  ptr.String("__JobId__"),
@@ -12594,6 +12749,37 @@ func TestUpdateRequestSnapshot_TerminateServiceJob(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TerminateServiceJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_TerminateServiceJobs(t *testing.T) {
+	input := &TerminateServiceJobsInput{
+		Jobs: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TerminateServiceJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TerminateServiceJobs"); err != nil {
 		t.Fatal(err)
 	}
 }

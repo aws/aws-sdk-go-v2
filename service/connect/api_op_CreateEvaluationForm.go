@@ -51,6 +51,10 @@ type CreateEvaluationFormInput struct {
 	// This member is required.
 	Title *string
 
+	// The AI version to use for the evaluation form. This specifies which AI model
+	// version is used for automated evaluations.
+	AIVersion *string
+
 	// A boolean flag indicating whether to create evaluation form in draft state.
 	AsDraft bool
 
@@ -93,6 +97,9 @@ func (v *CreateEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIVersion != nil {
+		s.WriteString(schemas.CreateEvaluationFormRequest_AIVersion, *v.AIVersion)
+	}
 	if v.AsDraft != false {
 		s.WriteBool(schemas.CreateEvaluationFormRequest_AsDraft, v.AsDraft)
 	}

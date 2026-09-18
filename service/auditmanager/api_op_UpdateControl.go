@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,34 @@ type UpdateControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionPlanInstructions != nil {
+		s.WriteString(schemas.UpdateControlRequest_actionPlanInstructions, *v.ActionPlanInstructions)
+	}
+	if v.ActionPlanTitle != nil {
+		s.WriteString(schemas.UpdateControlRequest_actionPlanTitle, *v.ActionPlanTitle)
+	}
+	if v.ControlId != nil {
+		s.WriteString(schemas.UpdateControlRequest_controlId, *v.ControlId)
+	}
+	serializeControlMappingSources(s, schemas.UpdateControlRequest_controlMappingSources, v.ControlMappingSources)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateControlRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateControlRequest_name, *v.Name)
+	}
+	if v.TestingInformation != nil {
+		s.WriteString(schemas.UpdateControlRequest_testingInformation, *v.TestingInformation)
+	}
+}
+
 type UpdateControlOutput struct {
 
 	//  The name of the updated control set that the UpdateControl API returned.
@@ -67,13 +97,34 @@ type UpdateControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteStruct(schemas.UpdateControlResponse_control)
+		v.Control.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateControlResponse_control:
+			v.Control = &types.Control{}
+			return v.Control.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateControl, schemas.UpdateControlRequest, schemas.UpdateControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateControl, schemas.UpdateControlRequest, schemas.UpdateControlResponse), output: &UpdateControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

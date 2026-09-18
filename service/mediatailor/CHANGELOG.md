@@ -1,3 +1,13 @@
+# v1.71.0 (2026-09-15)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.70.0 (2026-09-09)
+
+* **Feature**: Added the AWS Service Request function type for MediaTailor Functions, enabling authenticated requests to AWS Elemental Inference for contextual ad targeting during ad insertion.
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2026-09-04)
 
 * **Feature**: Elemental MediaTailor now supports two new Monetization Functions lifecycle hooks, Post Ads Response and Pre Manifest Insertion, and a VAST Request function type that calls a VAST or VMAP ad server. This release also adds Yield Optimization with demand from Amazon Publisher Services.

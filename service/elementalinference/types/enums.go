@@ -159,6 +159,25 @@ func (ProfanityFilterMode) Values() []ProfanityFilterMode {
 	}
 }
 
+type SummaryGenerationMode string
+
+// Enum values for SummaryGenerationMode
+const (
+	SummaryGenerationModeEnabled  SummaryGenerationMode = "ENABLED"
+	SummaryGenerationModeDisabled SummaryGenerationMode = "DISABLED"
+)
+
+// Values returns all known values for SummaryGenerationMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SummaryGenerationMode) Values() []SummaryGenerationMode {
+	return []SummaryGenerationMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type TranscriptionLanguage string
 
 // Enum values for TranscriptionLanguage

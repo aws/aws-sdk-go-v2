@@ -5,7 +5,9 @@ package elasticsearchservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListElasticsearchInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchInstanceTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesRequest_DomainName, *v.DomainName)
+	}
+	if v.ElasticsearchVersion != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesRequest_ElasticsearchVersion, *v.ElasticsearchVersion)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListElasticsearchInstanceTypesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the parameters returned by ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesOutput struct {
 
@@ -68,13 +91,35 @@ type ListElasticsearchInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListElasticsearchInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListElasticsearchInstanceTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListElasticsearchInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElasticsearchInstanceTypeList(s, schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, v.ElasticsearchInstanceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListElasticsearchInstanceTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListElasticsearchInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListElasticsearchInstanceTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes:
+			return deserializeElasticsearchInstanceTypeList(d, schemas.ListElasticsearchInstanceTypesResponse_ElasticsearchInstanceTypes, &v.ElasticsearchInstanceTypes)
+		case schemas.ListElasticsearchInstanceTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListElasticsearchInstanceTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListElasticsearchInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchInstanceTypes, schemas.ListElasticsearchInstanceTypesRequest, schemas.ListElasticsearchInstanceTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListElasticsearchInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListElasticsearchInstanceTypes, schemas.ListElasticsearchInstanceTypesRequest, schemas.ListElasticsearchInstanceTypesResponse), output: &ListElasticsearchInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

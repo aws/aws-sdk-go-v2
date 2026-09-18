@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type DeletePlaybackConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlaybackConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlaybackConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlaybackConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePlaybackConfigurationRequest_Name, *v.Name)
+	}
+}
+func (v *DeletePlaybackConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePlaybackConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePlaybackConfigurationRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeletePlaybackConfigurationRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeletePlaybackConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +67,26 @@ type DeletePlaybackConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlaybackConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlaybackConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePlaybackConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePlaybackConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePlaybackConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlaybackConfiguration, schemas.DeletePlaybackConfigurationRequest, schemas.DeletePlaybackConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePlaybackConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlaybackConfiguration, schemas.DeletePlaybackConfigurationRequest, schemas.DeletePlaybackConfigurationResponse), output: &DeletePlaybackConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -113,6 +113,9 @@ type GetAgentRuntimeOutput struct {
 	// The network configuration for the AgentCore Runtime.
 	NetworkConfiguration *types.NetworkConfiguration
 
+	// The version of the runtime platform used by the AgentCore Runtime.
+	PlatformVersion *string
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration

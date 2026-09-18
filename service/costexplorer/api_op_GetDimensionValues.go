@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -306,6 +308,44 @@ type GetDimensionValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDimensionValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDimensionValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDimensionValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Context != "" {
+		s.WriteString(schemas.GetDimensionValuesRequest_Context, string(v.Context))
+	}
+	if v.Dimension != "" {
+		s.WriteString(schemas.GetDimensionValuesRequest_Dimension, string(v.Dimension))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetDimensionValuesRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDimensionValuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SearchString != nil {
+		s.WriteString(schemas.GetDimensionValuesRequest_SearchString, *v.SearchString)
+	}
+	serializeSortDefinitions(s, schemas.GetDimensionValuesRequest_SortBy, v.SortBy)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetDimensionValuesRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetDimensionValuesOutput struct {
 
 	// The filters that you used to filter your request. Some dimensions are available
@@ -427,13 +467,47 @@ type GetDimensionValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDimensionValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDimensionValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDimensionValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionValuesWithAttributesList(s, schemas.GetDimensionValuesResponse_DimensionValues, v.DimensionValues)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDimensionValuesResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.ReturnSize != nil {
+		s.WriteInt32(schemas.GetDimensionValuesResponse_ReturnSize, *v.ReturnSize)
+	}
+	if v.TotalSize != nil {
+		s.WriteInt32(schemas.GetDimensionValuesResponse_TotalSize, *v.TotalSize)
+	}
+}
+func (v *GetDimensionValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDimensionValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDimensionValuesResponse_DimensionValues:
+			return deserializeDimensionValuesWithAttributesList(d, schemas.GetDimensionValuesResponse_DimensionValues, &v.DimensionValues)
+		case schemas.GetDimensionValuesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetDimensionValuesResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetDimensionValuesResponse_ReturnSize:
+			v.ReturnSize = new(int32)
+			return d.ReadInt32(schemas.GetDimensionValuesResponse_ReturnSize, v.ReturnSize)
+		case schemas.GetDimensionValuesResponse_TotalSize:
+			v.TotalSize = new(int32)
+			return d.ReadInt32(schemas.GetDimensionValuesResponse_TotalSize, v.TotalSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDimensionValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDimensionValues, schemas.GetDimensionValuesRequest, schemas.GetDimensionValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDimensionValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDimensionValues, schemas.GetDimensionValuesRequest, schemas.GetDimensionValuesResponse), output: &GetDimensionValuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

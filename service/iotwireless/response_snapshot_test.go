@@ -2281,6 +2281,25 @@ func TestCheckResponseSnapshot_GetPositionEstimate(t *testing.T) {
 			AssistAltitude: ptr.Float32(1.0),
 			Use2DSolver:    true,
 		},
+		GnssMultiFrame: &types.GnssMultiFrame{
+			Captures: []types.GnssCapture{
+				{
+					Payload:     ptr.String("__Payload__"),
+					CaptureTime: ptr.Float32(1.0),
+				},
+				{
+					Payload:     ptr.String("__Payload__"),
+					CaptureTime: ptr.Float32(1.0),
+				},
+			},
+			CaptureTimeAccuracy: ptr.Float32(1.0),
+			AssistPosition: []float32{
+				1.0,
+				1.0,
+			},
+			AssistAltitude: ptr.Float32(1.0),
+			Use2DSolver:    true,
+		},
 		Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		AdvancedConfiguration: &types.AdvancedConfiguration{
 			WiFiCellular: &types.WiFiCellular{

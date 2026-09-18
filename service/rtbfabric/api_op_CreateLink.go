@@ -35,7 +35,11 @@ type CreateLinkInput struct {
 	// This member is required.
 	GatewayId *string
 
-	// Settings for the application logs.
+	// Application log settings for the link. This value is required. Under
+	// applicationLogs.sampling , the errorLog and filterLog fields set the percentage
+	// of eligible events to log. Valid values range from 0 through 100 . To turn off
+	// application logs, set both fields to 0 , as in
+	// {"applicationLogs":{"sampling":{"errorLog":0,"filterLog":0}}} .
 	//
 	// This member is required.
 	LogSettings *types.LinkLogSettings

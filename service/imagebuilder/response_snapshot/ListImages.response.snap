@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"imageVersionList":[{"arn":"__Arn__","buildType":"USER_INITIATED","dateCreated":"__DateCreated__","imageSource":"AMAZON_MANAGED","name":"__Name__","osVersion":"__OsVersion__","owner":"__Owner__","platform":"Windows","type":"AMI","version":"__Version__"},{"arn":"__Arn__","buildType":"USER_INITIATED","dateCreated":"__DateCreated__","imageSource":"AMAZON_MANAGED","name":"__Name__","osVersion":"__OsVersion__","owner":"__Owner__","platform":"Windows","type":"AMI","version":"__Version__"}],"nextToken":"__NextToken__","requestId":"__RequestId__"}

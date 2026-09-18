@@ -1099,6 +1099,18 @@ func TestUpdateResponseSnapshot_ListPricingRules(t *testing.T) {
 					FreeTier: &types.FreeTierConfig{
 						Activated: ptr.Bool(true),
 					},
+					CustomTiers: []types.CustomTier{
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
+					},
 				},
 				UsageType: ptr.String("__UsageType__"),
 				Operation: ptr.String("__Operation__"),
@@ -1118,6 +1130,18 @@ func TestUpdateResponseSnapshot_ListPricingRules(t *testing.T) {
 				Tiering: &types.Tiering{
 					FreeTier: &types.FreeTierConfig{
 						Activated: ptr.Bool(true),
+					},
+					CustomTiers: []types.CustomTier{
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
+						{
+							BeginRangeInclusive: ptr.Float64(1.0),
+							EndRangeExclusive:   ptr.Float64(1.0),
+							RateValue:           ptr.Float64(1.0),
+						},
 					},
 				},
 				UsageType: ptr.String("__UsageType__"),
@@ -1426,6 +1450,18 @@ func TestUpdateResponseSnapshot_UpdatePricingRule(t *testing.T) {
 		Tiering: &types.UpdateTieringInput{
 			FreeTier: &types.UpdateFreeTierConfig{
 				Activated: ptr.Bool(true),
+			},
+			CustomTiers: []types.CustomTier{
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
+				{
+					BeginRangeInclusive: ptr.Float64(1.0),
+					EndRangeExclusive:   ptr.Float64(1.0),
+					RateValue:           ptr.Float64(1.0),
+				},
 			},
 		},
 		UsageType: ptr.String("__UsageType__"),

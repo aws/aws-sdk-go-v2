@@ -5,7 +5,9 @@ package inspector2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,40 @@ type ListMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMembersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembersRequest_nextToken, *v.NextToken)
+	}
+	if v.OnlyAssociated != nil {
+		s.WriteBool(schemas.ListMembersRequest_onlyAssociated, *v.OnlyAssociated)
+	}
+}
+func (v *ListMembersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembersRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListMembersRequest_maxResults, v.MaxResults)
+		case schemas.ListMembersRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembersRequest_nextToken, v.NextToken)
+		case schemas.ListMembersRequest_onlyAssociated:
+			v.OnlyAssociated = new(bool)
+			return d.ReadBool(schemas.ListMembersRequest_onlyAssociated, v.OnlyAssociated)
+		}
+		return nil
+	})
+}
+
 type ListMembersOutput struct {
 
 	// An object that contains details for each member account.
@@ -63,13 +99,35 @@ type ListMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberList(s, schemas.ListMembersResponse_members, v.Members)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembersResponse_members:
+			return deserializeMemberList(d, schemas.ListMembersResponse_members, &v.Members)
+		case schemas.ListMembersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembers, schemas.ListMembersRequest, schemas.ListMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMembers, schemas.ListMembersRequest, schemas.ListMembersResponse), output: &ListMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

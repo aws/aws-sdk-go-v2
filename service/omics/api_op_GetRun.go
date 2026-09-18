@@ -139,6 +139,10 @@ type GetRunOutput struct {
 	// for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
 	ScratchStorageMode types.ScratchStorageMode
 
+	// Inline policy json for scoping down permissions via a session policy on the IAM
+	// role.
+	SessionPolicy *string
+
 	// When the run started.
 	StartTime *time.Time
 

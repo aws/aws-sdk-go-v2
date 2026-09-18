@@ -12463,6 +12463,15 @@ func awsRestjson1_deserializeOpDocumentGetAgentRuntimeOutput(v **GetAgentRuntime
 				return err
 			}
 
+		case "platformVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PlatformVersion to be of type string, got %T instead", value)
+				}
+				sv.PlatformVersion = ptr.String(jtv)
+			}
+
 		case "protocolConfiguration":
 			if err := awsRestjson1_deserializeDocumentProtocolConfiguration(&sv.ProtocolConfiguration, value); err != nil {
 				return err

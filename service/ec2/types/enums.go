@@ -1047,6 +1047,23 @@ func (BlockPublicAccessMode) Values() []BlockPublicAccessMode {
 	}
 }
 
+type BootModeOverrideValues string
+
+// Enum values for BootModeOverrideValues
+const (
+	BootModeOverrideValuesUefi BootModeOverrideValues = "uefi"
+)
+
+// Values returns all known values for BootModeOverrideValues. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BootModeOverrideValues) Values() []BootModeOverrideValues {
+	return []BootModeOverrideValues{
+		"uefi",
+	}
+}
+
 type BootModeType string
 
 // Enum values for BootModeType
@@ -5660,6 +5677,29 @@ const (
 	InstanceTypeC9gd24xlarge       InstanceType = "c9gd.24xlarge"
 	InstanceTypeC9gd48xlarge       InstanceType = "c9gd.48xlarge"
 	InstanceTypeC9gdMetal48xl      InstanceType = "c9gd.metal-48xl"
+	InstanceTypeR9gMedium          InstanceType = "r9g.medium"
+	InstanceTypeR9gLarge           InstanceType = "r9g.large"
+	InstanceTypeR9gXlarge          InstanceType = "r9g.xlarge"
+	InstanceTypeR9g2xlarge         InstanceType = "r9g.2xlarge"
+	InstanceTypeR9g4xlarge         InstanceType = "r9g.4xlarge"
+	InstanceTypeR9g8xlarge         InstanceType = "r9g.8xlarge"
+	InstanceTypeR9g12xlarge        InstanceType = "r9g.12xlarge"
+	InstanceTypeR9g16xlarge        InstanceType = "r9g.16xlarge"
+	InstanceTypeR9g24xlarge        InstanceType = "r9g.24xlarge"
+	InstanceTypeR9g48xlarge        InstanceType = "r9g.48xlarge"
+	InstanceTypeR9gMetal48xl       InstanceType = "r9g.metal-48xl"
+	InstanceTypeR9gdMedium         InstanceType = "r9gd.medium"
+	InstanceTypeR9gdLarge          InstanceType = "r9gd.large"
+	InstanceTypeR9gdXlarge         InstanceType = "r9gd.xlarge"
+	InstanceTypeR9gd2xlarge        InstanceType = "r9gd.2xlarge"
+	InstanceTypeR9gd4xlarge        InstanceType = "r9gd.4xlarge"
+	InstanceTypeR9gd8xlarge        InstanceType = "r9gd.8xlarge"
+	InstanceTypeR9gd12xlarge       InstanceType = "r9gd.12xlarge"
+	InstanceTypeR9gd16xlarge       InstanceType = "r9gd.16xlarge"
+	InstanceTypeR9gd24xlarge       InstanceType = "r9gd.24xlarge"
+	InstanceTypeR9gd48xlarge       InstanceType = "r9gd.48xlarge"
+	InstanceTypeR9gdMetal48xl      InstanceType = "r9gd.metal-48xl"
+	InstanceTypeM9gMedium          InstanceType = "m9g.medium"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -7073,6 +7113,29 @@ func (InstanceType) Values() []InstanceType {
 		"c9gd.24xlarge",
 		"c9gd.48xlarge",
 		"c9gd.metal-48xl",
+		"r9g.medium",
+		"r9g.large",
+		"r9g.xlarge",
+		"r9g.2xlarge",
+		"r9g.4xlarge",
+		"r9g.8xlarge",
+		"r9g.12xlarge",
+		"r9g.16xlarge",
+		"r9g.24xlarge",
+		"r9g.48xlarge",
+		"r9g.metal-48xl",
+		"r9gd.medium",
+		"r9gd.large",
+		"r9gd.xlarge",
+		"r9gd.2xlarge",
+		"r9gd.4xlarge",
+		"r9gd.8xlarge",
+		"r9gd.12xlarge",
+		"r9gd.16xlarge",
+		"r9gd.24xlarge",
+		"r9gd.48xlarge",
+		"r9gd.metal-48xl",
+		"m9g.medium",
 	}
 }
 
@@ -9447,6 +9510,29 @@ func (NestedVirtualizationSpecification) Values() []NestedVirtualizationSpecific
 	}
 }
 
+type NetworkCardInterfaceType string
+
+// Enum values for NetworkCardInterfaceType
+const (
+	NetworkCardInterfaceTypeInterface NetworkCardInterfaceType = "interface"
+	NetworkCardInterfaceTypeEfa       NetworkCardInterfaceType = "efa"
+	NetworkCardInterfaceTypeEfaOnly   NetworkCardInterfaceType = "efa-only"
+	NetworkCardInterfaceTypeSecondary NetworkCardInterfaceType = "secondary"
+)
+
+// Values returns all known values for NetworkCardInterfaceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkCardInterfaceType) Values() []NetworkCardInterfaceType {
+	return []NetworkCardInterfaceType{
+		"interface",
+		"efa",
+		"efa-only",
+		"secondary",
+	}
+}
+
 type NetworkInterfaceAttribute string
 
 // Enum values for NetworkInterfaceAttribute
@@ -9800,7 +9886,8 @@ type PayerResponsibilityScope string
 
 // Enum values for PayerResponsibilityScope
 const (
-	PayerResponsibilityScopeVpcEndpointCharges PayerResponsibilityScope = "vpc-endpoint-charges"
+	PayerResponsibilityScopeVpcEndpointCharges     PayerResponsibilityScope = "vpc-endpoint-charges"
+	PayerResponsibilityScopeResourceGatewayCharges PayerResponsibilityScope = "resource-gateway-charges"
 )
 
 // Values returns all known values for PayerResponsibilityScope. Note that this
@@ -9810,6 +9897,7 @@ const (
 func (PayerResponsibilityScope) Values() []PayerResponsibilityScope {
 	return []PayerResponsibilityScope{
 		"vpc-endpoint-charges",
+		"resource-gateway-charges",
 	}
 }
 
@@ -9818,6 +9906,7 @@ type PayerResponsibilityType string
 // Enum values for PayerResponsibilityType
 const (
 	PayerResponsibilityTypeVpcEndpointAccount        PayerResponsibilityType = "vpc-endpoint-account"
+	PayerResponsibilityTypeResourceGatewayAccount    PayerResponsibilityType = "resource-gateway-account"
 	PayerResponsibilityTypeVpcEndpointServiceAccount PayerResponsibilityType = "vpc-endpoint-service-account"
 )
 
@@ -9828,6 +9917,7 @@ const (
 func (PayerResponsibilityType) Values() []PayerResponsibilityType {
 	return []PayerResponsibilityType{
 		"vpc-endpoint-account",
+		"resource-gateway-account",
 		"vpc-endpoint-service-account",
 	}
 }
@@ -13601,6 +13691,7 @@ const (
 	VpcEndpointTypeGatewayLoadBalancer VpcEndpointType = "GatewayLoadBalancer"
 	VpcEndpointTypeResource            VpcEndpointType = "Resource"
 	VpcEndpointTypeServiceNetwork      VpcEndpointType = "ServiceNetwork"
+	VpcEndpointTypeTunnel              VpcEndpointType = "Tunnel"
 )
 
 // Values returns all known values for VpcEndpointType. Note that this can be
@@ -13614,6 +13705,7 @@ func (VpcEndpointType) Values() []VpcEndpointType {
 		"GatewayLoadBalancer",
 		"Resource",
 		"ServiceNetwork",
+		"Tunnel",
 	}
 }
 

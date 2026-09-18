@@ -13,7 +13,7 @@ import (
 // the configuration settings to an entirely new configuration template, or updates
 // select configuration option values in the running environment.
 //
-// Attempting to update both the release and configuration is not allowed and AWS
+// Attempting to update both the release and configuration is not allowed and
 // Elastic Beanstalk returns an InvalidParameterCombination error.
 //
 // When updating the configuration settings to a new template or individual
@@ -40,26 +40,25 @@ type UpdateEnvironmentInput struct {
 	// The name of the application with which the environment is associated.
 	ApplicationName *string
 
-	// If this parameter is specified, AWS Elastic Beanstalk updates the description
-	// of this environment.
+	// If this parameter is specified, Elastic Beanstalk updates the description of
+	// this environment.
 	Description *string
 
 	// The ID of the environment to update.
 	//
-	// If no environment with this ID exists, AWS Elastic Beanstalk returns an
+	// If no environment with this ID exists, Elastic Beanstalk returns an
 	// InvalidParameterValue error.
 	//
 	// Condition: You must specify either this or an EnvironmentName, or both. If you
-	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// do not specify either, Elastic Beanstalk returns MissingRequiredParameter
 	// error.
 	EnvironmentId *string
 
 	// The name of the environment to update. If no environment with this name exists,
-	// AWS Elastic Beanstalk returns an InvalidParameterValue error.
+	// Elastic Beanstalk returns an InvalidParameterValue error.
 	//
 	// Condition: You must specify either this or an EnvironmentId, or both. If you do
-	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
-	// error.
+	// not specify either, Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
 
 	// The name of the group to which the target environment belongs. Specify a group
@@ -69,8 +68,8 @@ type UpdateEnvironmentInput struct {
 	// [Environment Manifest (env.yaml)]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
 	GroupName *string
 
-	// If specified, AWS Elastic Beanstalk updates the configuration set associated
-	// with the running environment and sets the specified configuration options to the
+	// If specified, Elastic Beanstalk updates the configuration set associated with
+	// the running environment and sets the specified configuration options to the
 	// requested value.
 	OptionSettings []types.ConfigurationOptionSetting
 
@@ -85,20 +84,20 @@ type UpdateEnvironmentInput struct {
 	// environment is updated.
 	SolutionStackName *string
 
-	// If this parameter is specified, AWS Elastic Beanstalk deploys this
-	// configuration template to the environment. If no such configuration template is
-	// found, AWS Elastic Beanstalk returns an InvalidParameterValue error.
+	// If this parameter is specified, Elastic Beanstalk deploys this configuration
+	// template to the environment. If no such configuration template is found, Elastic
+	// Beanstalk returns an InvalidParameterValue error.
 	TemplateName *string
 
 	// This specifies the tier to use to update the environment.
 	//
-	// Condition: At this time, if you change the tier version, name, or type, AWS
-	// Elastic Beanstalk returns InvalidParameterValue error.
+	// Condition: At this time, if you change the tier version, name, or type, Elastic
+	// Beanstalk returns InvalidParameterValue error.
 	Tier *types.EnvironmentTier
 
-	// If this parameter is specified, AWS Elastic Beanstalk deploys the named
-	// application version to the environment. If no such application version is found,
-	// returns an InvalidParameterValue error.
+	// If this parameter is specified, Elastic Beanstalk deploys the named application
+	// version to the environment. If no such application version is found, returns an
+	// InvalidParameterValue error.
 	VersionLabel *string
 
 	noSmithyDocumentSerde
@@ -147,8 +146,8 @@ type UpdateEnvironmentOutput struct {
 	// The name of this environment.
 	EnvironmentName *string
 
-	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
-	// the failure levels for a running environment:
+	// Describes the health status of the environment. Elastic Beanstalk indicates the
+	// failure levels for a running environment:
 	//
 	//   - Red : Indicates the environment is not responsive. Occurs when three or more
 	//   consecutive failures occur for an environment.
@@ -171,16 +170,16 @@ type UpdateEnvironmentOutput struct {
 	// [Health Colors and Statuses]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	HealthStatus types.EnvironmentHealthStatus
 
-	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
+	// The operations role feature of Elastic Beanstalk is in beta release and is
+	// subject to change.
 	//
-	// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+	// The Amazon Resource Name (ARN) of the environment's operations role.
 	OperationsRole *string
 
 	// The ARN of the platform version.
 	PlatformArn *string
 
-	// The description of the AWS resources used by this environment.
+	// The description of the Amazon Web Services resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
 
 	//  The name of the SolutionStack deployed with this environment.
@@ -188,7 +187,15 @@ type UpdateEnvironmentOutput struct {
 
 	// The current operational status of the environment:
 	//
+	//   - Aborting : Environment is in the process of aborting a deployment.
+	//
 	//   - Launching : Environment is in the process of initial deployment.
+	//
+	//   - LinkingFrom : Environment is in the process of being linked to by another
+	//   environment. See [Environment links]for details.
+	//
+	//   - LinkingTo : Environment is in the process of linking to another environment.
+	//   See [Environment links]for details.
 	//
 	//   - Updating : Environment is in the process of updating its configuration
 	//   settings or application version.
@@ -199,6 +206,8 @@ type UpdateEnvironmentOutput struct {
 	//   - Terminating : Environment is in the shut-down process.
 	//
 	//   - Terminated : Environment is not running.
+	//
+	// [Environment links]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

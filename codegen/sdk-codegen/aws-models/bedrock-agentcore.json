@@ -2575,6 +2575,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time range filter for selecting sessions to evaluate.</p>"
                     }
+                },
+                "sessionTraceIds": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionTraceIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of session and trace ID pairs that restrict evaluation to specific traces within a session. If specified, only the listed traces are evaluated instead of the entire session.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17241,6 +17247,40 @@
                 "target": "com.amazonaws.bedrockagentcore#SessionSummary"
             }
         },
+        "com.amazonaws.bedrockagentcore#SessionTraceIds": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session that contains the traces to evaluate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "traceIds": {
+                    "target": "com.amazonaws.bedrockagentcore#TraceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of trace IDs within the session to evaluate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pairing of a session with the specific trace IDs to evaluate within that session. Use this to evaluate individual traces rather than an entire session.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#SessionTraceIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#SessionTraceIds"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#SessionType": {
             "type": "string",
             "traits": {
@@ -19586,6 +19626,18 @@
                 "smithy.api#length": {
                     "min": 32,
                     "max": 32
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#TraceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#TraceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },

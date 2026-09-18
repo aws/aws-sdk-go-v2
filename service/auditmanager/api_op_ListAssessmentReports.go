@@ -5,7 +5,9 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListAssessmentReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentReportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentReportsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssessmentReportsOutput struct {
 
 	//  The list of assessment reports that the ListAssessmentReports API returned.
@@ -50,13 +67,35 @@ type ListAssessmentReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentReportsMetadata(s, schemas.ListAssessmentReportsResponse_assessmentReports, v.AssessmentReports)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentReportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentReportsResponse_assessmentReports:
+			return deserializeAssessmentReportsMetadata(d, schemas.ListAssessmentReportsResponse_assessmentReports, &v.AssessmentReports)
+		case schemas.ListAssessmentReportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentReportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssessmentReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentReports, schemas.ListAssessmentReportsRequest, schemas.ListAssessmentReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssessmentReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentReports, schemas.ListAssessmentReportsRequest, schemas.ListAssessmentReportsResponse), output: &ListAssessmentReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

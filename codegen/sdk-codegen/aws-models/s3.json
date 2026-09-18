@@ -29392,6 +29392,27 @@
                         "smithy.api#httpHeader": "x-amz-object-lock-legal-hold"
                     }
                 },
+                "ObjectLockEventHold": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold status to apply to the object copy. Set to <code>ON</code> to enable or\n      <code>OFF</code> to disable.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold"
+                    }
+                },
+                "ObjectLockEventHoldDurationDays": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration in days to apply to the object copy. You cannot specify a duration\n      in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
+                    }
+                },
+                "ObjectLockEventHoldDurationYears": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration in years to apply to the object copy. You cannot specify a\n      duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
+                    }
+                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
@@ -29435,7 +29456,7 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. This checksum is only present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 },
                 "ChecksumCRC32C": {
@@ -30306,6 +30327,27 @@
                         "smithy.api#httpHeader": "x-amz-object-lock-legal-hold"
                     }
                 },
+                "ObjectLockEventHold": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event hold status to apply to the uploaded object. Set to <code>ON</code> to enable\n      or <code>OFF</code> to disable.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold"
+                    }
+                },
+                "ObjectLockEventHoldDurationDays": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in days to apply to the uploaded object. You cannot\n      specify a duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
+                    }
+                },
+                "ObjectLockEventHoldDurationYears": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in years to apply to the uploaded object. You cannot\n      specify a duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
+                    }
+                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
@@ -30509,6 +30551,12 @@
                     "target": "com.amazonaws.s3#Years",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of years that you want to specify for the default retention period. Must be used with\n        <code>Mode</code>.</p>"
+                    }
+                },
+                "DefaultEventHold": {
+                    "target": "com.amazonaws.s3#EventHoldDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default event hold duration to be applied to new objects placed in the specified bucket. When\n      configured, new objects will automatically have an event hold enabled with this duration.</p>"
                     }
                 }
             },
@@ -32520,6 +32568,12 @@
                     "traits": {
                         "smithy.api#enumValue": "s3:ObjectAnnotation:Delete"
                     }
+                },
+                "s3_ObjectRetention_Put": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3:ObjectRetention:Put"
+                    }
                 }
             },
             "traits": {
@@ -32531,6 +32585,26 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>A container for specifying the configuration for Amazon EventBridge.</p>"
+            }
+        },
+        "com.amazonaws.s3#EventHoldDuration": {
+            "type": "structure",
+            "members": {
+                "Days": {
+                    "target": "com.amazonaws.s3#Days",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for the event hold duration. The minimum value is 1 and the maximum value is\n      36,500.</p>"
+                    }
+                },
+                "Years": {
+                    "target": "com.amazonaws.s3#Years",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of years for the event hold duration. The minimum value is 1 and the maximum value is\n      100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the event hold duration configuration, specified in either days or years.</p>"
             }
         },
         "com.amazonaws.s3#EventList": {
@@ -35335,7 +35409,7 @@
                 "ChecksumCRC32": {
                     "target": "com.amazonaws.s3#ChecksumCRC32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. This checksum is only present if the object was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Base64 encoded, 32-bit <code>CRC32</code> checksum of the object. This checksum is only present if the checksum was uploaded\n    with the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">\n    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-checksum-crc32"
                     }
                 },
@@ -35574,6 +35648,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether this object has an active legal hold. This field is only returned if you have\n      permission to view an object's legal hold status. </p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-legal-hold"
+                    }
+                },
+                "ObjectLockEventHold": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold status for this object. This header is only returned if the requester has the\n      <code>s3:GetObjectRetention</code> permission.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold"
+                    }
+                },
+                "ObjectLockEventHoldDurationDays": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration in days for this object. Only returned when the event hold is\n      enabled.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
+                    }
+                },
+                "ObjectLockEventHoldDurationYears": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration in years for this object. Only returned when the event hold is\n      enabled.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
                     }
                 }
             },
@@ -36714,6 +36809,27 @@
                         "smithy.api#documentation": "<p>Specifies whether a legal hold is in effect for this object. This header is only returned if the\n      requester has the <code>s3:GetObjectLegalHold</code> permission. This header is not returned if the\n      specified version of this object has never had a legal hold applied. For more information about S3\n      Object Lock, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html\">Object\n        Lock</a>.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-legal-hold"
                     }
+                },
+                "ObjectLockEventHold": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold status for this object. This header is only returned if the requester has the\n      <code>s3:GetObjectRetention</code> permission.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold"
+                    }
+                },
+                "ObjectLockEventHoldDurationDays": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration in days for this object. Only returned when the event hold is\n      enabled.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
+                    }
+                },
+                "ObjectLockEventHoldDurationYears": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration in years for this object. Only returned when the event hold is\n      enabled.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
+                    }
                 }
             },
             "traits": {
@@ -37431,6 +37547,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ObjectLockLegalHoldStatus"
+                    }
+                },
+                "ObjectLockEventHoldStatus": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ObjectLockEventHoldStatus"
+                    }
+                },
+                "ObjectLockEventHoldDuration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ObjectLockEventHoldDuration"
                     }
                 },
                 "IntelligentTieringAccessTier": {
@@ -40897,6 +41025,29 @@
         "com.amazonaws.s3#ObjectLockEnabledForBucket": {
             "type": "boolean"
         },
+        "com.amazonaws.s3#ObjectLockEventHold": {
+            "type": "enum",
+            "members": {
+                "ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON"
+                    }
+                },
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3#ObjectLockEventHoldDurationDays": {
+            "type": "integer"
+        },
+        "com.amazonaws.s3#ObjectLockEventHoldDurationYears": {
+            "type": "integer"
+        },
         "com.amazonaws.s3#ObjectLockLegalHold": {
             "type": "structure",
             "members": {
@@ -40965,6 +41116,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date on which this Object Lock Retention will expire.</p>"
                     }
+                },
+                "EventHold": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold status for the object. Set to <code>ON</code> to enable an event hold or\n      <code>OFF</code> to disable it.</p>"
+                    }
+                },
+                "EventHoldDuration": {
+                    "target": "com.amazonaws.s3#EventHoldDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hold duration for the object. Specifies how long the object remains protected after the\n      event hold is released.</p>"
+                    }
                 }
             },
             "traits": {
@@ -40994,7 +41157,7 @@
                 "DefaultRetention": {
                     "target": "com.amazonaws.s3#DefaultRetention",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Object Lock retention mode and period that you want to apply to new objects placed in\n      the specified bucket. Bucket settings require both a mode and a period. The period can be either\n        <code>Days</code> or <code>Years</code> but you must select one. You cannot specify <code>Days</code>\n      and <code>Years</code> at the same time.</p>"
+                        "smithy.api#documentation": "<p>The default Object Lock retention settings for new objects in this bucket. You can\n      specify:</p>\n         <ul>\n            <li>\n               <p>A default retention period, by using <code>Days</code> or <code>Years</code>.</p>\n            </li>\n            <li>\n               <p>A default event hold duration, by using <code>DefaultEventHold</code>. This setting also\n          uses days or years.</p>\n            </li>\n         </ul>\n         <p>You can set one or both. You cannot use days and years in the same setting.</p>"
                     }
                 }
             },
@@ -44730,6 +44893,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether a legal hold will be applied to this object. For more information about S3 Object\n      Lock, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html\">Object Lock</a> in\n      the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
                         "smithy.api#httpHeader": "x-amz-object-lock-legal-hold"
+                    }
+                },
+                "ObjectLockEventHold": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event hold status to apply to this object. Set to <code>ON</code> to enable or\n      <code>OFF</code> to disable.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold"
+                    }
+                },
+                "ObjectLockEventHoldDurationDays": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in days to apply to this object. You cannot specify a\n      duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-days"
+                    }
+                },
+                "ObjectLockEventHoldDurationYears": {
+                    "target": "com.amazonaws.s3#ObjectLockEventHoldDurationYears",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the event hold duration in years to apply to this object. You cannot specify a\n      duration in both days and years.</p>\n         <note>\n            <p>This functionality is not supported for directory buckets.</p>\n         </note>",
+                        "smithy.api#httpHeader": "x-amz-object-lock-event-hold-duration-years"
                     }
                 },
                 "ExpectedBucketOwner": {

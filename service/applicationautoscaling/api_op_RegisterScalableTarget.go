@@ -4,7 +4,9 @@ package applicationautoscaling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -338,6 +340,39 @@ type RegisterScalableTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterScalableTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterScalableTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterScalableTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCapacity != nil {
+		s.WriteInt32(schemas.RegisterScalableTargetRequest_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.MinCapacity != nil {
+		s.WriteInt32(schemas.RegisterScalableTargetRequest_MinCapacity, *v.MinCapacity)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.RegisterScalableTargetRequest_ResourceId, *v.ResourceId)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.RegisterScalableTargetRequest_RoleARN, *v.RoleARN)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.RegisterScalableTargetRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.RegisterScalableTargetRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+	if v.SuspendedState != nil {
+		s.WriteStruct(schemas.RegisterScalableTargetRequest_SuspendedState)
+		v.SuspendedState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.RegisterScalableTargetRequest_Tags, v.Tags)
+}
+
 type RegisterScalableTargetOutput struct {
 
 	// The ARN of the scalable target.
@@ -349,13 +384,32 @@ type RegisterScalableTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterScalableTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterScalableTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterScalableTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScalableTargetARN != nil {
+		s.WriteString(schemas.RegisterScalableTargetResponse_ScalableTargetARN, *v.ScalableTargetARN)
+	}
+}
+func (v *RegisterScalableTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterScalableTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterScalableTargetResponse_ScalableTargetARN:
+			v.ScalableTargetARN = new(string)
+			return d.ReadString(schemas.RegisterScalableTargetResponse_ScalableTargetARN, v.ScalableTargetARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterScalableTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterScalableTarget, schemas.RegisterScalableTargetRequest, schemas.RegisterScalableTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterScalableTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterScalableTarget, schemas.RegisterScalableTargetRequest, schemas.RegisterScalableTargetResponse), output: &RegisterScalableTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

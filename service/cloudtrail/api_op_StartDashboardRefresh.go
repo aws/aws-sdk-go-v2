@@ -9,7 +9,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Starts a refresh of the specified dashboard.
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
+// Starts a refresh of the specified dashboard.
 //
 // Each time a dashboard is refreshed, CloudTrail runs queries to populate the
 // dashboard's widgets. CloudTrail must be granted permissions to run the
@@ -17,6 +21,7 @@ import (
 // PutResourcePolicy operation to attach a resource-based policy to each event data
 // store. For more information, see [Example: Allow CloudTrail to run queries to populate a dashboard]in the CloudTrail User Guide.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Example: Allow CloudTrail to run queries to populate a dashboard]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
 func (c *Client) StartDashboardRefresh(ctx context.Context, params *StartDashboardRefreshInput, optFns ...func(*Options)) (*StartDashboardRefreshOutput, error) {
 	if params == nil {

@@ -655,6 +655,7 @@ func TestCheckResponseSnapshot_CreateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateTrail.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -686,6 +687,7 @@ func TestCheckResponseSnapshot_CreateTrail(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -882,6 +884,7 @@ func TestCheckResponseSnapshot_DescribeTrails(t *testing.T) {
 				HasCustomEventSelectors:    ptr.Bool(true),
 				HasInsightSelectors:        ptr.Bool(true),
 				IsOrganizationTrail:        ptr.Bool(true),
+				RecursiveLogging:           ptr.Bool(true),
 			},
 			{
 				Name:                       ptr.String("__Name__"),
@@ -900,6 +903,7 @@ func TestCheckResponseSnapshot_DescribeTrails(t *testing.T) {
 				HasCustomEventSelectors:    ptr.Bool(true),
 				HasInsightSelectors:        ptr.Bool(true),
 				IsOrganizationTrail:        ptr.Bool(true),
+				RecursiveLogging:           ptr.Bool(true),
 			},
 		},
 	}
@@ -1832,6 +1836,7 @@ func TestCheckResponseSnapshot_GetTrail(t *testing.T) {
 			HasCustomEventSelectors:    ptr.Bool(true),
 			HasInsightSelectors:        ptr.Bool(true),
 			IsOrganizationTrail:        ptr.Bool(true),
+			RecursiveLogging:           ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetTrail.response")
@@ -4162,6 +4167,7 @@ func TestCheckResponseSnapshot_UpdateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateTrail.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4183,6 +4189,7 @@ func TestCheckResponseSnapshot_UpdateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4799,6 +4806,7 @@ func TestCheckResponseSnapshot_Error_CloudTrailInvalidClientTokenIdException(t *
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -4846,6 +4854,7 @@ func TestCheckResponseSnapshot_Error_CloudWatchLogsDeliveryUnavailableException(
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5912,6 +5921,7 @@ func TestCheckResponseSnapshot_Error_InsufficientS3BucketPolicyException(t *test
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5959,6 +5969,7 @@ func TestCheckResponseSnapshot_Error_InsufficientSnsTopicPolicyException(t *test
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6006,6 +6017,7 @@ func TestCheckResponseSnapshot_Error_InvalidCloudWatchLogsLogGroupArnException(t
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6053,6 +6065,7 @@ func TestCheckResponseSnapshot_Error_InvalidCloudWatchLogsRoleArnException(t *te
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6792,6 +6805,7 @@ func TestCheckResponseSnapshot_Error_InvalidParameterCombinationException(t *tes
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6968,6 +6982,7 @@ func TestCheckResponseSnapshot_Error_InvalidS3BucketNameException(t *testing.T) 
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7015,6 +7030,7 @@ func TestCheckResponseSnapshot_Error_InvalidS3PrefixException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7062,6 +7078,7 @@ func TestCheckResponseSnapshot_Error_InvalidSnsTopicNameException(t *testing.T) 
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7453,6 +7470,7 @@ func TestCheckResponseSnapshot_Error_KmsKeyDisabledException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7698,6 +7716,7 @@ func TestCheckResponseSnapshot_Error_MaximumNumberOfTrailsExceededException(t *t
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8396,6 +8415,7 @@ func TestCheckResponseSnapshot_Error_S3BucketDoesNotExistException(t *testing.T)
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8712,6 +8732,7 @@ func TestCheckResponseSnapshot_Error_TrailAlreadyExistsException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8786,6 +8807,7 @@ func TestCheckResponseSnapshot_Error_TrailNotProvidedException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		RecursiveLogging: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

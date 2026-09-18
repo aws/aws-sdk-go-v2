@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type SendCisSessionHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCisSessionHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCisSessionHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCisSessionHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.SendCisSessionHealthRequest_scanJobId, *v.ScanJobId)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.SendCisSessionHealthRequest_sessionToken, *v.SessionToken)
+	}
+}
+
 type SendCisSessionHealthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type SendCisSessionHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCisSessionHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCisSessionHealthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCisSessionHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendCisSessionHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendCisSessionHealthResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendCisSessionHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendCisSessionHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCisSessionHealth, schemas.SendCisSessionHealthRequest, schemas.SendCisSessionHealthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendCisSessionHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCisSessionHealth, schemas.SendCisSessionHealthRequest, schemas.SendCisSessionHealthResponse), output: &SendCisSessionHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

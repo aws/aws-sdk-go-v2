@@ -1,3 +1,16 @@
+# v1.105.0 (2026-09-15)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.104.0 (2026-09-11)
+
+* **Feature**: Adds Dolby Vision metadata to Probe results, including profile, level, and presence of the RPU, base layer, and enhancement layer. Adds video sample and display aspect ratios. Adds the UnprocessableEntityException (HTTP 422) error to Probe for recognized but malformed or corrupt inputs.
+
+# v1.103.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.102.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

@@ -59,6 +59,21 @@ type AssociatedGateway struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a billing mode available at an Direct Connect location.
+type AvailableBillingMode struct {
+
+	// The port speeds available for the billing mode.
+	AvailablePortSpeeds []string
+
+	// The billing mode.
+	BillingMode BillingMode
+
+	// The Amazon Web Services Regions included with the billing mode.
+	IncludedRegions []string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a BGP peer.
 type BGPPeer struct {
 
@@ -167,6 +182,9 @@ type Connection struct {
 
 	// The bandwidth of the connection.
 	Bandwidth *string
+
+	// The billing mode of the connection.
+	BillingMode BillingMode
 
 	// The ID of the connection.
 	ConnectionId *string
@@ -576,6 +594,9 @@ type Lag struct {
 	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
+	// The billing mode of the LAG.
+	BillingMode BillingMode
+
 	// The connections bundled by the LAG.
 	Connections []Connection
 
@@ -692,6 +713,10 @@ type Loa struct {
 
 // Information about an Direct Connect location.
 type Location struct {
+
+	// The billing modes available at the location, including the port speeds and
+	// Amazon Web Services Regions supported by each mode.
+	AvailableBillingModes []AvailableBillingMode
 
 	// The available MAC Security (MACsec) port speeds for the location.
 	AvailableMacSecPortSpeeds []string
@@ -1298,6 +1323,74 @@ type RateLimiterStatus struct {
 
 	// The total bandwidth allocated across all rate limiters on the connection.
 	TotalBandwidth *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a resiliency group.
+type ResiliencyGroup struct {
+
+	// The ID of the Amazon Web Services account that owns the resiliency group.
+	OwnerAccount *string
+
+	// The Amazon Resource Name (ARN) of the resiliency group.
+	ResiliencyGroupArn *string
+
+	// The ID of the resiliency group.
+	ResiliencyGroupId *string
+
+	// The name of the resiliency group.
+	ResiliencyGroupName *string
+
+	// The type of the resiliency group. The valid value is Managed .
+	ResiliencyGroupType ResiliencyGroupType
+
+	// The state of the resiliency group. The valid values are pending , available ,
+	// deleting , and deleted .
+	State ResiliencyGroupState
+
+	// The tags associated with the resiliency group.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Information about an association between a connection and a resiliency group.
+type ResiliencyGroupAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the associated connection.
+	ConnectionArn *string
+
+	// The ID of the resiliency group.
+	ResiliencyGroupId *string
+
+	// The state of the association. The valid values are associating , associated ,
+	// disassociating , and disassociated .
+	State ResiliencyGroupAssociationState
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a resiliency group.
+type ResiliencyGroupSummary struct {
+
+	// The ID of the Amazon Web Services account that owns the resiliency group.
+	OwnerAccount *string
+
+	// The Amazon Resource Name (ARN) of the resiliency group.
+	ResiliencyGroupArn *string
+
+	// The ID of the resiliency group.
+	ResiliencyGroupId *string
+
+	// The name of the resiliency group.
+	ResiliencyGroupName *string
+
+	// The type of the resiliency group. The valid value is Managed .
+	ResiliencyGroupType ResiliencyGroupType
+
+	// The state of the resiliency group.
+	State ResiliencyGroupState
 
 	noSmithyDocumentSerde
 }

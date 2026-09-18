@@ -11,10 +11,16 @@ import (
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Restores a deleted event data store specified by EventDataStore , which accepts
 // an event data store ARN. You can only restore a deleted event data store within
 // the seven-day wait period after deletion. Restoring an event data store can take
 // several minutes, depending on the size of the event data store.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) RestoreEventDataStore(ctx context.Context, params *RestoreEventDataStoreInput, optFns ...func(*Options)) (*RestoreEventDataStoreOutput, error) {
 	if params == nil {
 		params = &RestoreEventDataStoreInput{}

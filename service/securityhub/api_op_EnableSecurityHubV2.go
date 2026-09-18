@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,16 @@ type EnableSecurityHubV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableSecurityHubV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableSecurityHubV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableSecurityHubV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.EnableSecurityHubV2Request_Tags, v.Tags)
+}
+
 type EnableSecurityHubV2Output struct {
 
 	// The ARN of the V2 resource that was created.
@@ -43,13 +55,32 @@ type EnableSecurityHubV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableSecurityHubV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableSecurityHubV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableSecurityHubV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubV2Arn != nil {
+		s.WriteString(schemas.EnableSecurityHubV2Response_HubV2Arn, *v.HubV2Arn)
+	}
+}
+func (v *EnableSecurityHubV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableSecurityHubV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableSecurityHubV2Response_HubV2Arn:
+			v.HubV2Arn = new(string)
+			return d.ReadString(schemas.EnableSecurityHubV2Response_HubV2Arn, v.HubV2Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableSecurityHubV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableSecurityHubV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableSecurityHubV2, schemas.EnableSecurityHubV2Request, schemas.EnableSecurityHubV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableSecurityHubV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableSecurityHubV2, schemas.EnableSecurityHubV2Request, schemas.EnableSecurityHubV2Response), output: &EnableSecurityHubV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

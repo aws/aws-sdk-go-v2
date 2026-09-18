@@ -753,9 +753,10 @@ type QuoteConstraintType string
 
 // Enum values for QuoteConstraintType
 const (
-	QuoteConstraintTypeRackMaximum      QuoteConstraintType = "RACK_MAXIMUM"
-	QuoteConstraintTypeRackMaxPowerKva  QuoteConstraintType = "RACK_MAX_POWER_KVA"
-	QuoteConstraintTypeRackMaxWeightLbs QuoteConstraintType = "RACK_MAX_WEIGHT_LBS"
+	QuoteConstraintTypeRackMaximum          QuoteConstraintType = "RACK_MAXIMUM"
+	QuoteConstraintTypeRackMaxPowerKva      QuoteConstraintType = "RACK_MAX_POWER_KVA"
+	QuoteConstraintTypeRackMaxWeightLbs     QuoteConstraintType = "RACK_MAX_WEIGHT_LBS"
+	QuoteConstraintTypeRackSpaceConstrained QuoteConstraintType = "RACK_SPACE_CONSTRAINED"
 )
 
 // Values returns all known values for QuoteConstraintType. Note that this can be
@@ -767,6 +768,7 @@ func (QuoteConstraintType) Values() []QuoteConstraintType {
 		"RACK_MAXIMUM",
 		"RACK_MAX_POWER_KVA",
 		"RACK_MAX_WEIGHT_LBS",
+		"RACK_SPACE_CONSTRAINED",
 	}
 }
 
@@ -847,6 +849,25 @@ func (QuoteStatus) Values() []QuoteStatus {
 		"CREATED",
 		"ORDER_SUBMITTED",
 		"EXPIRED",
+	}
+}
+
+type RackScalingType string
+
+// Enum values for RackScalingType
+const (
+	RackScalingTypeSingleRack RackScalingType = "SINGLE_RACK"
+	RackScalingTypeMultiRack  RackScalingType = "MULTI_RACK"
+)
+
+// Values returns all known values for RackScalingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RackScalingType) Values() []RackScalingType {
+	return []RackScalingType{
+		"SINGLE_RACK",
+		"MULTI_RACK",
 	}
 }
 

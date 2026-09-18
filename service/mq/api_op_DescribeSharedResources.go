@@ -5,7 +5,9 @@ package mq
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DescribeSharedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DescribeSharedResourcesRequest_BrokerId, *v.BrokerId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSharedResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSharedResourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeSharedResourcesOutput struct {
 
 	// The token that specifies the next page of results Amazon MQ should return. To
@@ -58,13 +78,35 @@ type DescribeSharedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSharedResourcesResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfSharedResource(s, schemas.DescribeSharedResourcesResponse_SharedResources, v.SharedResources)
+}
+func (v *DescribeSharedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSharedResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSharedResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSharedResourcesResponse_NextToken, v.NextToken)
+		case schemas.DescribeSharedResourcesResponse_SharedResources:
+			return deserialize__listOfSharedResource(d, schemas.DescribeSharedResourcesResponse_SharedResources, &v.SharedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSharedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSharedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedResources, schemas.DescribeSharedResourcesRequest, schemas.DescribeSharedResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSharedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedResources, schemas.DescribeSharedResourcesRequest, schemas.DescribeSharedResourcesResponse), output: &DescribeSharedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

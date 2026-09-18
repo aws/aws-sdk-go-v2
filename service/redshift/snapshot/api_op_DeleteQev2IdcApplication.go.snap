@@ -13,7 +13,6 @@ DeleteQev2IdcApplication
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2

@@ -728,7 +728,7 @@ var DeploymentIdRequiredException_message *smithy.Schema
 var DeploymentInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codedeploy",
 	Name:      "DeploymentInfo",
-}, smithy.ShapeTypeStructure, 30)
+}, smithy.ShapeTypeStructure, 31)
 var DeploymentInfo_applicationName *smithy.Schema
 
 var DeploymentInfo_deploymentGroupName *smithy.Schema
@@ -778,6 +778,8 @@ var DeploymentInfo_loadBalancerInfo *smithy.Schema
 var DeploymentInfo_additionalDeploymentStatusInfo *smithy.Schema
 
 var DeploymentInfo_fileExistsBehavior *smithy.Schema
+
+var DeploymentInfo_deploymentMode *smithy.Schema
 
 var DeploymentInfo_deploymentStatusMessages *smithy.Schema
 
@@ -3988,6 +3990,10 @@ func init() {
 
 	FileExistsBehavior_RETAIN = FileExistsBehavior.AddMember("RETAIN", smithyprelude.Unit)
 
+	DeploymentMode_STANDARD = DeploymentMode.AddMember("STANDARD", smithyprelude.Unit)
+
+	DeploymentMode_RESTART = DeploymentMode.AddMember("RESTART", smithyprelude.Unit)
+
 	_DeploymentStatusMessageList_member = _DeploymentStatusMessageList.AddMember("member", _ErrorMessage)
 
 	_DeploymentsList_member = _DeploymentsList.AddMember("member", _DeploymentId)
@@ -4046,6 +4052,8 @@ func init() {
 
 	DeploymentInfo_fileExistsBehavior = DeploymentInfo.AddMember("fileExistsBehavior", FileExistsBehavior)
 
+	DeploymentInfo_deploymentMode = DeploymentInfo.AddMember("deploymentMode", DeploymentMode)
+
 	DeploymentInfo_deploymentStatusMessages = DeploymentInfo.AddMember("deploymentStatusMessages", _DeploymentStatusMessageList)
 
 	DeploymentInfo_computePlatform = DeploymentInfo.AddMember("computePlatform", ComputePlatform)
@@ -4059,10 +4067,6 @@ func init() {
 	DeploymentIsNotInReadyStateException_message = DeploymentIsNotInReadyStateException.AddMember("message", _Message)
 
 	DeploymentLimitExceededException_message = DeploymentLimitExceededException.AddMember("message", _Message)
-
-	DeploymentMode_STANDARD = DeploymentMode.AddMember("STANDARD", smithyprelude.Unit)
-
-	DeploymentMode_RESTART = DeploymentMode.AddMember("RESTART", smithyprelude.Unit)
 
 	DeploymentNotStartedException_message = DeploymentNotStartedException.AddMember("message", _Message)
 

@@ -5,7 +5,9 @@ package applicationautoscaling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -208,6 +210,28 @@ type DescribeScalableTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalableTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalableTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalableTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeScalableTargetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalableTargetsRequest_NextToken, *v.NextToken)
+	}
+	serializeResourceIdsMaxLen1600(s, schemas.DescribeScalableTargetsRequest_ResourceIds, v.ResourceIds)
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.DescribeScalableTargetsRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.DescribeScalableTargetsRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+}
+
 type DescribeScalableTargetsOutput struct {
 
 	// The token required to get the next set of results. This value is null if there
@@ -223,13 +247,35 @@ type DescribeScalableTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScalableTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScalableTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScalableTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeScalableTargetsResponse_NextToken, *v.NextToken)
+	}
+	serializeScalableTargets(s, schemas.DescribeScalableTargetsResponse_ScalableTargets, v.ScalableTargets)
+}
+func (v *DescribeScalableTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScalableTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScalableTargetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeScalableTargetsResponse_NextToken, v.NextToken)
+		case schemas.DescribeScalableTargetsResponse_ScalableTargets:
+			return deserializeScalableTargets(d, schemas.DescribeScalableTargetsResponse_ScalableTargets, &v.ScalableTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScalableTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeScalableTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalableTargets, schemas.DescribeScalableTargetsRequest, schemas.DescribeScalableTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeScalableTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScalableTargets, schemas.DescribeScalableTargetsRequest, schemas.DescribeScalableTargetsResponse), output: &DescribeScalableTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

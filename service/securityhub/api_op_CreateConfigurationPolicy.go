@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,23 @@ type CreateConfigurationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePolicy(s, schemas.CreateConfigurationPolicyRequest_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfigurationPolicyRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationPolicyRequest_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateConfigurationPolicyRequest_Tags, v.Tags)
+}
+
 type CreateConfigurationPolicyOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the configuration policy.
@@ -100,13 +119,65 @@ type CreateConfigurationPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfigurationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfigurationPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfigurationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateConfigurationPolicyResponse_Arn, *v.Arn)
+	}
+	serializePolicy(s, schemas.CreateConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateConfigurationPolicyResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfigurationPolicyResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateConfigurationPolicyResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfigurationPolicyResponse_Name, *v.Name)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateConfigurationPolicyResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateConfigurationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfigurationPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfigurationPolicyResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateConfigurationPolicyResponse_Arn, v.Arn)
+		case schemas.CreateConfigurationPolicyResponse_ConfigurationPolicy:
+			return deserializePolicy(d, schemas.CreateConfigurationPolicyResponse_ConfigurationPolicy, &v.ConfigurationPolicy)
+		case schemas.CreateConfigurationPolicyResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConfigurationPolicyResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateConfigurationPolicyResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateConfigurationPolicyResponse_Description, v.Description)
+		case schemas.CreateConfigurationPolicyResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateConfigurationPolicyResponse_Id, v.Id)
+		case schemas.CreateConfigurationPolicyResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateConfigurationPolicyResponse_Name, v.Name)
+		case schemas.CreateConfigurationPolicyResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateConfigurationPolicyResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfigurationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfigurationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationPolicy, schemas.CreateConfigurationPolicyRequest, schemas.CreateConfigurationPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfigurationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfigurationPolicy, schemas.CreateConfigurationPolicyRequest, schemas.CreateConfigurationPolicyResponse), output: &CreateConfigurationPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

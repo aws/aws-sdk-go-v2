@@ -5,8 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -290,6 +292,66 @@ type CreateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeDefinitions(s, schemas.CreateTableInput_AttributeDefinitions, v.AttributeDefinitions)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.CreateTableInput_BillingMode, string(v.BillingMode))
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateTableInput_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	serializeGlobalSecondaryIndexList(s, schemas.CreateTableInput_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalTableSettingsReplicationMode != "" {
+		s.WriteString(schemas.CreateTableInput_GlobalTableSettingsReplicationMode, string(v.GlobalTableSettingsReplicationMode))
+	}
+	if v.GlobalTableSourceArn != nil {
+		s.WriteString(schemas.CreateTableInput_GlobalTableSourceArn, *v.GlobalTableSourceArn)
+	}
+	serializeKeySchema(s, schemas.CreateTableInput_KeySchema, v.KeySchema)
+	serializeLocalSecondaryIndexList(s, schemas.CreateTableInput_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	if v.OnDemandThroughput != nil {
+		s.WriteStruct(schemas.CreateTableInput_OnDemandThroughput)
+		v.OnDemandThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisionedThroughput != nil {
+		s.WriteStruct(schemas.CreateTableInput_ProvisionedThroughput)
+		v.ProvisionedThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.CreateTableInput_ResourcePolicy, *v.ResourcePolicy)
+	}
+	if v.SSESpecification != nil {
+		s.WriteStruct(schemas.CreateTableInput_SSESpecification)
+		v.SSESpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamSpecification != nil {
+		s.WriteStruct(schemas.CreateTableInput_StreamSpecification)
+		v.StreamSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableClass != "" {
+		s.WriteString(schemas.CreateTableInput_TableClass, string(v.TableClass))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.CreateTableInput_TableName, *v.TableName)
+	}
+	serializeTagList(s, schemas.CreateTableInput_Tags, v.Tags)
+	serializeVectorIndexList(s, schemas.CreateTableInput_VectorIndexes, v.VectorIndexes)
+	if v.WarmThroughput != nil {
+		s.WriteStruct(schemas.CreateTableInput_WarmThroughput)
+		v.WarmThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
 func (in *CreateTableInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -308,13 +370,34 @@ type CreateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableDescription != nil {
+		s.WriteStruct(schemas.CreateTableOutput_TableDescription)
+		v.TableDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTableOutput_TableDescription:
+			v.TableDescription = &types.TableDescription{}
+			return v.TableDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableInput, schemas.CreateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTable, schemas.CreateTableInput, schemas.CreateTableOutput), output: &CreateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

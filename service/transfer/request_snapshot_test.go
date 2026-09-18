@@ -475,6 +475,9 @@ func TestCheckRequestSnapshot_CreateServer(t *testing.T) {
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
 			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		Tags: []types.Tag{
@@ -2745,6 +2748,9 @@ func TestCheckRequestSnapshot_UpdateServer(t *testing.T) {
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
 			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
+			},
 		},
 		EndpointDetails: &types.EndpointDetails{
 			AddressAllocationIds: []string{
@@ -3229,6 +3235,9 @@ func TestUpdateRequestSnapshot_CreateServer(t *testing.T) {
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
@@ -5499,6 +5508,9 @@ func TestUpdateRequestSnapshot_UpdateServer(t *testing.T) {
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		EndpointDetails: &types.EndpointDetails{

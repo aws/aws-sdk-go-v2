@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,33 @@ type UpdateBridgeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBridgeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBridgeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBridgeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.UpdateBridgeRequest_BridgeArn, *v.BridgeArn)
+	}
+	if v.EgressGatewayBridge != nil {
+		s.WriteStruct(schemas.UpdateBridgeRequest_EgressGatewayBridge)
+		v.EgressGatewayBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngressGatewayBridge != nil {
+		s.WriteStruct(schemas.UpdateBridgeRequest_IngressGatewayBridge)
+		v.IngressGatewayBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceFailoverConfig != nil {
+		s.WriteStruct(schemas.UpdateBridgeRequest_SourceFailoverConfig)
+		v.SourceFailoverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateBridgeOutput struct {
 
 	//  The bridge that was updated.
@@ -56,13 +85,34 @@ type UpdateBridgeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBridgeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBridgeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBridgeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bridge != nil {
+		s.WriteStruct(schemas.UpdateBridgeResponse_Bridge)
+		v.Bridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBridgeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBridgeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBridgeResponse_Bridge:
+			v.Bridge = &types.Bridge{}
+			return v.Bridge.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBridgeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBridge, schemas.UpdateBridgeRequest, schemas.UpdateBridgeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBridge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBridge, schemas.UpdateBridgeRequest, schemas.UpdateBridgeResponse), output: &UpdateBridgeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

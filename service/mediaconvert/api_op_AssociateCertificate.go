@@ -4,6 +4,8 @@ package mediaconvert
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type AssociateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociateCertificateRequest_Arn, *v.Arn)
+	}
+}
+
 type AssociateCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type AssociateCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCertificate, schemas.AssociateCertificateRequest, schemas.AssociateCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCertificate, schemas.AssociateCertificateRequest, schemas.AssociateCertificateResponse), output: &AssociateCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

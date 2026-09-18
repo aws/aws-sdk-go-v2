@@ -6338,6 +6338,34 @@ func awsAwsquery_deserializeDocumentApplicationVersionDescription(v **types.Appl
 				sv.Description = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ImageBuildConfiguration", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentImageBuildConfiguration(&sv.ImageBuildConfiguration, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("ImageSource", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentImageSource(&sv.ImageSource, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Process", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected ApplicationVersionProccess to be of type *bool, got %T instead", val)
+				}
+				sv.Process = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SourceBuildInformation", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSourceBuildInformation(&sv.SourceBuildInformation, nodeDecoder); err != nil {
@@ -6900,6 +6928,55 @@ func awsAwsquery_deserializeDocumentCausesUnwrapped(v *[]string, decoder smithyx
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Cluster
+	if *v == nil {
+		sv = &types.Cluster{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ClusterArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterArn = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentCodeBuildNotInServiceRegionException(v **types.CodeBuildNotInServiceRegionException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8880,6 +8957,12 @@ func awsAwsquery_deserializeDocumentEnvironmentResourceDescription(v **types.Env
 				return err
 			}
 
+		case strings.EqualFold("Cluster", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCluster(&sv.Cluster, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("EnvironmentName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -9285,6 +9368,186 @@ func awsAwsquery_deserializeDocumentEventDescriptionListUnwrapped(v *[]types.Eve
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentImageBuildConfiguration(v **types.ImageBuildConfiguration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ImageBuildConfiguration
+	if *v == nil {
+		sv = &types.ImageBuildConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Architecture", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Architecture = types.ArchitectureType(xtv)
+			}
+
+		case strings.EqualFold("Buildpack", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Buildpack = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CodeBuildServiceRole", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CodeBuildServiceRole = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ComputeType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ComputeType = types.ComputeType(xtv)
+			}
+
+		case strings.EqualFold("DockerfileLocation", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DockerfileLocation = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TimeoutInMinutes", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("Type", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Type = types.ImageBuildType(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentImageSource(v **types.ImageSource, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ImageSource
+	if *v == nil {
+		sv = &types.ImageSource{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Uri", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Uri = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentInstance(v **types.Instance, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

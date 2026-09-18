@@ -4,7 +4,9 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetExperimentDefinitionInput struct {
 	ExperimentDefinitionIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetExperimentDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExperimentDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExperimentDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.GetExperimentDefinitionRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.ExperimentDefinitionIdentifier != nil {
+		s.WriteString(schemas.GetExperimentDefinitionRequest_ExperimentDefinitionIdentifier, *v.ExperimentDefinitionIdentifier)
+	}
 }
 
 // Describes an experiment definition, including the target audience, feature
@@ -100,13 +117,125 @@ type GetExperimentDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExperimentDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExperimentDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ExperimentDefinition_ApplicationId, *v.ApplicationId)
+	}
+	if v.AudienceDescription != nil {
+		s.WriteString(schemas.ExperimentDefinition_AudienceDescription, *v.AudienceDescription)
+	}
+	if v.AudienceRule != nil {
+		s.WriteString(schemas.ExperimentDefinition_AudienceRule, *v.AudienceRule)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.ExperimentDefinition_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.Control != nil {
+		s.WriteStruct(schemas.ExperimentDefinition_Control)
+		v.Control.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExperimentDefinition_CreatedAt, *v.CreatedAt)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ExperimentDefinition_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.FlagKey != nil {
+		s.WriteString(schemas.ExperimentDefinition_FlagKey, *v.FlagKey)
+	}
+	if v.Hypothesis != nil {
+		s.WriteString(schemas.ExperimentDefinition_Hypothesis, *v.Hypothesis)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExperimentDefinition_Id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.ExperimentDefinition_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LaunchCriteria != nil {
+		s.WriteString(schemas.ExperimentDefinition_LaunchCriteria, *v.LaunchCriteria)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ExperimentDefinition_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExperimentDefinition_Status, string(v.Status))
+	}
+	serializeTreatmentList(s, schemas.ExperimentDefinition_Treatments, v.Treatments)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ExperimentDefinition_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetExperimentDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentDefinition_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_ApplicationId, v.ApplicationId)
+		case schemas.ExperimentDefinition_AudienceDescription:
+			v.AudienceDescription = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_AudienceDescription, v.AudienceDescription)
+		case schemas.ExperimentDefinition_AudienceRule:
+			v.AudienceRule = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_AudienceRule, v.AudienceRule)
+		case schemas.ExperimentDefinition_ConfigurationProfileId:
+			v.ConfigurationProfileId = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_ConfigurationProfileId, v.ConfigurationProfileId)
+		case schemas.ExperimentDefinition_Control:
+			v.Control = &types.Treatment{}
+			return v.Control.Deserialize(d)
+		case schemas.ExperimentDefinition_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExperimentDefinition_CreatedAt, v.CreatedAt)
+		case schemas.ExperimentDefinition_EnvironmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_EnvironmentId, v.EnvironmentId)
+		case schemas.ExperimentDefinition_FlagKey:
+			v.FlagKey = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_FlagKey, v.FlagKey)
+		case schemas.ExperimentDefinition_Hypothesis:
+			v.Hypothesis = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_Hypothesis, v.Hypothesis)
+		case schemas.ExperimentDefinition_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_Id, v.Id)
+		case schemas.ExperimentDefinition_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.ExperimentDefinition_LaunchCriteria:
+			v.LaunchCriteria = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_LaunchCriteria, v.LaunchCriteria)
+		case schemas.ExperimentDefinition_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ExperimentDefinition_Name, v.Name)
+		case schemas.ExperimentDefinition_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentDefinition_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExperimentDefinitionStatus(ev)
+			return nil
+		case schemas.ExperimentDefinition_Treatments:
+			return deserializeTreatmentList(d, schemas.ExperimentDefinition_Treatments, &v.Treatments)
+		case schemas.ExperimentDefinition_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExperimentDefinition_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExperimentDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExperimentDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExperimentDefinition, schemas.GetExperimentDefinitionRequest, schemas.ExperimentDefinition)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExperimentDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExperimentDefinition, schemas.GetExperimentDefinitionRequest, schemas.ExperimentDefinition), output: &GetExperimentDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

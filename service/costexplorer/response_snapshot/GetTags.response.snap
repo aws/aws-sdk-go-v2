@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetTags
+
+{"NextPageToken":"__NextPageToken__","ReturnSize":1,"Tags":["__Member__","__Member__"],"TotalSize":1}

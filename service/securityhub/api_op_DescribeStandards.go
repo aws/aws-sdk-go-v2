@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type DescribeStandardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStandardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStandardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStandardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeStandardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStandardsRequest_NextToken, *v.NextToken)
+	}
+	serializeStandardsProviders(s, schemas.DescribeStandardsRequest_Providers, v.Providers)
+}
+
 type DescribeStandardsOutput struct {
 
 	// The pagination token to use to request the next page of results.
@@ -61,13 +79,35 @@ type DescribeStandardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStandardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStandardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStandardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStandardsResponse_NextToken, *v.NextToken)
+	}
+	serializeStandards(s, schemas.DescribeStandardsResponse_Standards, v.Standards)
+}
+func (v *DescribeStandardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStandardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStandardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeStandardsResponse_NextToken, v.NextToken)
+		case schemas.DescribeStandardsResponse_Standards:
+			return deserializeStandards(d, schemas.DescribeStandardsResponse_Standards, &v.Standards)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStandards, schemas.DescribeStandardsRequest, schemas.DescribeStandardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeStandards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStandards, schemas.DescribeStandardsRequest, schemas.DescribeStandardsResponse), output: &DescribeStandardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3080,6 +3080,25 @@ func (DolbyVisionMapping) Values() []DolbyVisionMapping {
 	}
 }
 
+type DolbyVisionPresence string
+
+// Enum values for DolbyVisionPresence
+const (
+	DolbyVisionPresencePresent DolbyVisionPresence = "PRESENT"
+	DolbyVisionPresenceAbsent  DolbyVisionPresence = "ABSENT"
+)
+
+// Values returns all known values for DolbyVisionPresence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyVisionPresence) Values() []DolbyVisionPresence {
+	return []DolbyVisionPresence{
+		"PRESENT",
+		"ABSENT",
+	}
+}
+
 type DolbyVisionProfile string
 
 // Enum values for DolbyVisionProfile

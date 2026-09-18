@@ -5,7 +5,9 @@ package costandusagereportservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DescribeReportDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeReportDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReportDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response.
 type DescribeReportDefinitionsOutput struct {
 
@@ -53,13 +70,35 @@ type DescribeReportDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReportDefinitionsResponse_NextToken, *v.NextToken)
+	}
+	serializeReportDefinitionList(s, schemas.DescribeReportDefinitionsResponse_ReportDefinitions, v.ReportDefinitions)
+}
+func (v *DescribeReportDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReportDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReportDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReportDefinitionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeReportDefinitionsResponse_ReportDefinitions:
+			return deserializeReportDefinitionList(d, schemas.DescribeReportDefinitionsResponse_ReportDefinitions, &v.ReportDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReportDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportDefinitions, schemas.DescribeReportDefinitionsRequest, schemas.DescribeReportDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReportDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportDefinitions, schemas.DescribeReportDefinitionsRequest, schemas.DescribeReportDefinitionsResponse), output: &DescribeReportDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

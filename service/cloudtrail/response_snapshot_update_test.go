@@ -483,6 +483,7 @@ func TestUpdateResponseSnapshot_CreateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	}
 	proto := awsjson.New11(schemas.CloudTrail_20131101)
 	opSchema := smithy.NewOperationSchema(schemas.CreateTrail, schemas.CreateTrailResponse, schemas.CreateTrailResponse)
@@ -694,6 +695,7 @@ func TestUpdateResponseSnapshot_DescribeTrails(t *testing.T) {
 				HasCustomEventSelectors:    ptr.Bool(true),
 				HasInsightSelectors:        ptr.Bool(true),
 				IsOrganizationTrail:        ptr.Bool(true),
+				RecursiveLogging:           ptr.Bool(true),
 			},
 			{
 				Name:                       ptr.String("__Name__"),
@@ -712,6 +714,7 @@ func TestUpdateResponseSnapshot_DescribeTrails(t *testing.T) {
 				HasCustomEventSelectors:    ptr.Bool(true),
 				HasInsightSelectors:        ptr.Bool(true),
 				IsOrganizationTrail:        ptr.Bool(true),
+				RecursiveLogging:           ptr.Bool(true),
 			},
 		},
 	}
@@ -1642,6 +1645,7 @@ func TestUpdateResponseSnapshot_GetTrail(t *testing.T) {
 			HasCustomEventSelectors:    ptr.Bool(true),
 			HasInsightSelectors:        ptr.Bool(true),
 			IsOrganizationTrail:        ptr.Bool(true),
+			RecursiveLogging:           ptr.Bool(true),
 		},
 	}
 	proto := awsjson.New11(schemas.CloudTrail_20131101)
@@ -3525,6 +3529,7 @@ func TestUpdateResponseSnapshot_UpdateTrail(t *testing.T) {
 		CloudWatchLogsRoleArn:      ptr.String("__CloudWatchLogsRoleArn__"),
 		KmsKeyId:                   ptr.String("__KmsKeyId__"),
 		IsOrganizationTrail:        ptr.Bool(true),
+		RecursiveLogging:           ptr.Bool(true),
 	}
 	proto := awsjson.New11(schemas.CloudTrail_20131101)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateTrail, schemas.UpdateTrailResponse, schemas.UpdateTrailResponse)

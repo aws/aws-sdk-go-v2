@@ -5,7 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListReplicatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplicatorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplicatorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplicatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReplicatorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplicatorsRequest_NextToken, *v.NextToken)
+	}
+	if v.ReplicatorNameFilter != nil {
+		s.WriteString(schemas.ListReplicatorsRequest_ReplicatorNameFilter, *v.ReplicatorNameFilter)
+	}
+}
+
 type ListReplicatorsOutput struct {
 
 	// If the response of ListReplicators is truncated, it returns a NextToken in the
@@ -58,13 +78,35 @@ type ListReplicatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplicatorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplicatorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplicatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplicatorsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfReplicatorSummary(s, schemas.ListReplicatorsResponse_Replicators, v.Replicators)
+}
+func (v *ListReplicatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplicatorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplicatorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplicatorsResponse_NextToken, v.NextToken)
+		case schemas.ListReplicatorsResponse_Replicators:
+			return deserialize__listOfReplicatorSummary(d, schemas.ListReplicatorsResponse_Replicators, &v.Replicators)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplicatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReplicators{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplicators, schemas.ListReplicatorsRequest, schemas.ListReplicatorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReplicators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplicators, schemas.ListReplicatorsRequest, schemas.ListReplicatorsResponse), output: &ListReplicatorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

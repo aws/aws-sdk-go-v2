@@ -4,6 +4,8 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,26 @@ type CreateExtensionAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExtensionAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExtensionAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExtensionAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtensionIdentifier != nil {
+		s.WriteString(schemas.CreateExtensionAssociationRequest_ExtensionIdentifier, *v.ExtensionIdentifier)
+	}
+	if v.ExtensionVersionNumber != nil {
+		s.WriteInt32(schemas.CreateExtensionAssociationRequest_ExtensionVersionNumber, *v.ExtensionVersionNumber)
+	}
+	serializeParameterValueMap(s, schemas.CreateExtensionAssociationRequest_Parameters, v.Parameters)
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreateExtensionAssociationRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	serializeTagMap(s, schemas.CreateExtensionAssociationRequest_Tags, v.Tags)
+}
+
 type CreateExtensionAssociationOutput struct {
 
 	// The system-generated Amazon Resource Name (ARN) for the extension.
@@ -90,13 +112,58 @@ type CreateExtensionAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExtensionAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExtensionAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ExtensionAssociation_Arn, *v.Arn)
+	}
+	if v.ExtensionArn != nil {
+		s.WriteString(schemas.ExtensionAssociation_ExtensionArn, *v.ExtensionArn)
+	}
+	if v.ExtensionVersionNumber != 0 {
+		s.WriteInt32(schemas.ExtensionAssociation_ExtensionVersionNumber, v.ExtensionVersionNumber)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExtensionAssociation_Id, *v.Id)
+	}
+	serializeParameterValueMap(s, schemas.ExtensionAssociation_Parameters, v.Parameters)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ExtensionAssociation_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *CreateExtensionAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionAssociation_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_Arn, v.Arn)
+		case schemas.ExtensionAssociation_ExtensionArn:
+			v.ExtensionArn = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_ExtensionArn, v.ExtensionArn)
+		case schemas.ExtensionAssociation_ExtensionVersionNumber:
+			return d.ReadInt32(schemas.ExtensionAssociation_ExtensionVersionNumber, &v.ExtensionVersionNumber)
+		case schemas.ExtensionAssociation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_Id, v.Id)
+		case schemas.ExtensionAssociation_Parameters:
+			return deserializeParameterValueMap(d, schemas.ExtensionAssociation_Parameters, &v.Parameters)
+		case schemas.ExtensionAssociation_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ExtensionAssociation_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExtensionAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExtensionAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExtensionAssociation, schemas.CreateExtensionAssociationRequest, schemas.ExtensionAssociation)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateExtensionAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExtensionAssociation, schemas.CreateExtensionAssociationRequest, schemas.ExtensionAssociation), output: &CreateExtensionAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

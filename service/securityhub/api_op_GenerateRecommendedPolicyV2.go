@@ -4,6 +4,8 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GenerateRecommendedPolicyV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateRecommendedPolicyV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateRecommendedPolicyV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateRecommendedPolicyV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataUid != nil {
+		s.WriteString(schemas.GenerateRecommendedPolicyV2Request_MetadataUid, *v.MetadataUid)
+	}
+}
+
 type GenerateRecommendedPolicyV2Output struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type GenerateRecommendedPolicyV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateRecommendedPolicyV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateRecommendedPolicyV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateRecommendedPolicyV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GenerateRecommendedPolicyV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateRecommendedPolicyV2Response, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateRecommendedPolicyV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateRecommendedPolicyV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateRecommendedPolicyV2, schemas.GenerateRecommendedPolicyV2Request, schemas.GenerateRecommendedPolicyV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateRecommendedPolicyV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateRecommendedPolicyV2, schemas.GenerateRecommendedPolicyV2Request, schemas.GenerateRecommendedPolicyV2Response), output: &GenerateRecommendedPolicyV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

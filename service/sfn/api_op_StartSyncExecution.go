@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -73,6 +75,30 @@ type StartSyncExecutionInput struct {
 	TraceHeader *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartSyncExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSyncExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSyncExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludedData != "" {
+		s.WriteString(schemas.StartSyncExecutionInput_includedData, string(v.IncludedData))
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.StartSyncExecutionInput_input, *v.Input)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartSyncExecutionInput_name, *v.Name)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.StartSyncExecutionInput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.TraceHeader != nil {
+		s.WriteString(schemas.StartSyncExecutionInput_traceHeader, *v.TraceHeader)
+	}
 }
 
 type StartSyncExecutionOutput struct {
@@ -147,13 +173,120 @@ type StartSyncExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSyncExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSyncExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSyncExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingDetails != nil {
+		s.WriteStruct(schemas.StartSyncExecutionOutput_billingDetails)
+		v.BillingDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Cause != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_error, *v.Error)
+	}
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_executionArn, *v.ExecutionArn)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_input, *v.Input)
+	}
+	if v.InputDetails != nil {
+		s.WriteStruct(schemas.StartSyncExecutionOutput_inputDetails)
+		v.InputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_name, *v.Name)
+	}
+	if v.Output != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.StartSyncExecutionOutput_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.StartSyncExecutionOutput_startDate, *v.StartDate)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartSyncExecutionOutput_status, string(v.Status))
+	}
+	if v.StopDate != nil {
+		s.WriteTime(schemas.StartSyncExecutionOutput_stopDate, *v.StopDate)
+	}
+	if v.TraceHeader != nil {
+		s.WriteString(schemas.StartSyncExecutionOutput_traceHeader, *v.TraceHeader)
+	}
+}
+func (v *StartSyncExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSyncExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSyncExecutionOutput_billingDetails:
+			v.BillingDetails = &types.BillingDetails{}
+			return v.BillingDetails.Deserialize(d)
+		case schemas.StartSyncExecutionOutput_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_cause, v.Cause)
+		case schemas.StartSyncExecutionOutput_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_error, v.Error)
+		case schemas.StartSyncExecutionOutput_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_executionArn, v.ExecutionArn)
+		case schemas.StartSyncExecutionOutput_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_input, v.Input)
+		case schemas.StartSyncExecutionOutput_inputDetails:
+			v.InputDetails = &types.CloudWatchEventsExecutionDataDetails{}
+			return v.InputDetails.Deserialize(d)
+		case schemas.StartSyncExecutionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_name, v.Name)
+		case schemas.StartSyncExecutionOutput_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_output, v.Output)
+		case schemas.StartSyncExecutionOutput_outputDetails:
+			v.OutputDetails = &types.CloudWatchEventsExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		case schemas.StartSyncExecutionOutput_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.StartSyncExecutionOutput_startDate, v.StartDate)
+		case schemas.StartSyncExecutionOutput_stateMachineArn:
+			v.StateMachineArn = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_stateMachineArn, v.StateMachineArn)
+		case schemas.StartSyncExecutionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartSyncExecutionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SyncExecutionStatus(ev)
+			return nil
+		case schemas.StartSyncExecutionOutput_stopDate:
+			v.StopDate = new(time.Time)
+			return d.ReadTime(schemas.StartSyncExecutionOutput_stopDate, v.StopDate)
+		case schemas.StartSyncExecutionOutput_traceHeader:
+			v.TraceHeader = new(string)
+			return d.ReadString(schemas.StartSyncExecutionOutput_traceHeader, v.TraceHeader)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSyncExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartSyncExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSyncExecution, schemas.StartSyncExecutionInput, schemas.StartSyncExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartSyncExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSyncExecution, schemas.StartSyncExecutionInput, schemas.StartSyncExecutionOutput), output: &StartSyncExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

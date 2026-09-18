@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AIVersionSummaries":[{"AIVersionLifecycle":{"EndOfLifeTime":946684800,"StartOfLifeTime":946684800,"Status":"LATEST"},"AIVersionName":"__AIVersionName__"},{"AIVersionLifecycle":{"EndOfLifeTime":946684800,"StartOfLifeTime":946684800,"Status":"LATEST"},"AIVersionName":"__AIVersionName__"}],"NextToken":"__NextToken__"}

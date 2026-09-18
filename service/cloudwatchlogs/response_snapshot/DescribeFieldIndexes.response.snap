@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeFieldIndexes
+
+{"fieldIndexes":[{"fieldIndexName":"__FieldIndexName__","firstEventTime":1,"indexCategory":"DEFAULT","lastEventTime":1,"lastScanTime":1,"logGroupIdentifier":"__LogGroupIdentifier__","type":"FACET"},{"fieldIndexName":"__FieldIndexName__","firstEventTime":1,"indexCategory":"DEFAULT","lastEventTime":1,"lastScanTime":1,"logGroupIdentifier":"__LogGroupIdentifier__","type":"FACET"}],"nextToken":"__NextToken__"}

@@ -1,3 +1,21 @@
+# v1.200.0 (2026-09-17)
+
+* **Feature**: Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+
+# v1.199.0 (2026-09-16)
+
+* **Feature**: Adds support for ContactAnalysis via ListContactReferences.
+
+# v1.198.0 (2026-09-09)
+
+* **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.197.0 (2026-09-08)
+
+* **Feature**: Releasing workload types feature. A proper launch announcement or details will follow up.
+
 # v1.196.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

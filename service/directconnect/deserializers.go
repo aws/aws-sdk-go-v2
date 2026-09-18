@@ -756,6 +756,126 @@ func awsAwsjson11_deserializeOpErrorAllocateTransitVirtualInterface(response *sm
 	}
 }
 
+type awsAwsjson11_deserializeOpAssociateConnectionsToResiliencyGroup struct {
+}
+
+func (*awsAwsjson11_deserializeOpAssociateConnectionsToResiliencyGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpAssociateConnectionsToResiliencyGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorAssociateConnectionsToResiliencyGroup(response, &metadata)
+	}
+	output := &AssociateConnectionsToResiliencyGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentAssociateConnectionsToResiliencyGroupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorAssociateConnectionsToResiliencyGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpAssociateConnectionWithLag struct {
 }
 
@@ -2901,6 +3021,132 @@ func awsAwsjson11_deserializeOpErrorCreatePublicVirtualInterface(response *smith
 	}
 }
 
+type awsAwsjson11_deserializeOpCreateResiliencyGroup struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateResiliencyGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateResiliencyGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateResiliencyGroup(response, &metadata)
+	}
+	output := &CreateResiliencyGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateResiliencyGroupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateResiliencyGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	case strings.EqualFold("DuplicateTagKeysException", errorCode):
+		return awsAwsjson11_deserializeErrorDuplicateTagKeysException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpCreateTransitVirtualInterface struct {
 }
 
@@ -3794,6 +4040,123 @@ func (m *awsAwsjson11_deserializeOpDeleteLag) HandleDeserialize(ctx context.Cont
 }
 
 func awsAwsjson11_deserializeOpErrorDeleteLag(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDeleteResiliencyGroup struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteResiliencyGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteResiliencyGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteResiliencyGroup(response, &metadata)
+	}
+	output := &DeleteResiliencyGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteResiliencyGroupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteResiliencyGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6186,6 +6549,123 @@ func awsAwsjson11_deserializeOpErrorDisassociateConnectionFromLag(response *smit
 	}
 }
 
+type awsAwsjson11_deserializeOpDisassociateConnectionsFromResiliencyGroup struct {
+}
+
+func (*awsAwsjson11_deserializeOpDisassociateConnectionsFromResiliencyGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDisassociateConnectionsFromResiliencyGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDisassociateConnectionsFromResiliencyGroup(response, &metadata)
+	}
+	output := &DisassociateConnectionsFromResiliencyGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDisassociateConnectionsFromResiliencyGroupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDisassociateConnectionsFromResiliencyGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDisassociateMacSecKey struct {
 }
 
@@ -6251,6 +6731,357 @@ func (m *awsAwsjson11_deserializeOpDisassociateMacSecKey) HandleDeserialize(ctx 
 }
 
 func awsAwsjson11_deserializeOpErrorDisassociateMacSecKey(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpGetResiliencyGroup struct {
+}
+
+func (*awsAwsjson11_deserializeOpGetResiliencyGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpGetResiliencyGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetResiliencyGroup(response, &metadata)
+	}
+	output := &GetResiliencyGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetResiliencyGroupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorGetResiliencyGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListResiliencyGroupAssociations struct {
+}
+
+func (*awsAwsjson11_deserializeOpListResiliencyGroupAssociations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListResiliencyGroupAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListResiliencyGroupAssociations(response, &metadata)
+	}
+	output := &ListResiliencyGroupAssociationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListResiliencyGroupAssociationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListResiliencyGroupAssociations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListResiliencyGroups struct {
+}
+
+func (*awsAwsjson11_deserializeOpListResiliencyGroups) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListResiliencyGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListResiliencyGroups(response, &metadata)
+	}
+	output := &ListResiliencyGroupsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListResiliencyGroupsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListResiliencyGroups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7128,6 +7959,123 @@ func awsAwsjson11_deserializeOpErrorUpdateConnection(response *smithyhttp.Respon
 	}
 }
 
+type awsAwsjson11_deserializeOpUpdateConnectionsBillingMode struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateConnectionsBillingMode) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateConnectionsBillingMode) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateConnectionsBillingMode(response, &metadata)
+	}
+	output := &UpdateConnectionsBillingModeOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateConnectionsBillingModeOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateConnectionsBillingMode(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpUpdateDirectConnectGateway struct {
 }
 
@@ -7427,6 +8375,123 @@ func (m *awsAwsjson11_deserializeOpUpdateLag) HandleDeserialize(ctx context.Cont
 }
 
 func awsAwsjson11_deserializeOpErrorUpdateLag(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpUpdateResiliencyGroup struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateResiliencyGroup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateResiliencyGroup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateResiliencyGroup(response, &metadata)
+	}
+	output := &UpdateResiliencyGroupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateResiliencyGroupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateResiliencyGroup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8049,6 +9114,90 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAvailableBillingMode(v **types.AvailableBillingMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AvailableBillingMode
+	if *v == nil {
+		sv = &types.AvailableBillingMode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "availablePortSpeeds":
+			if err := awsAwsjson11_deserializeDocumentAvailablePortSpeeds(&sv.AvailablePortSpeeds, value); err != nil {
+				return err
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
+		case "includedRegions":
+			if err := awsAwsjson11_deserializeDocumentIncludedRegionList(&sv.IncludedRegions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAvailableBillingModeList(v *[]types.AvailableBillingMode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AvailableBillingMode
+	if *v == nil {
+		cv = []types.AvailableBillingMode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AvailableBillingMode
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAvailableBillingMode(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAvailableMacSecPortSpeeds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8421,6 +9570,15 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
 				sv.Bandwidth = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connectionId":
@@ -9403,6 +10561,42 @@ func awsAwsjson11_deserializeDocumentDuplicateTagKeysException(v **types.Duplica
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIncludedRegionList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9694,6 +10888,15 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connections":
@@ -10060,6 +11263,11 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "availableBillingModes":
+			if err := awsAwsjson11_deserializeDocumentAvailableBillingModeList(&sv.AvailableBillingModes, value); err != nil {
+				return err
+			}
+
 		case "availableMacSecPortSpeeds":
 			if err := awsAwsjson11_deserializeDocumentAvailableMacSecPortSpeeds(&sv.AvailableMacSecPortSpeeds, value); err != nil {
 				return err
@@ -10358,6 +11566,307 @@ func awsAwsjson11_deserializeDocumentRateLimiterStatus(v **types.RateLimiterStat
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResiliencyGroup(v **types.ResiliencyGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResiliencyGroup
+	if *v == nil {
+		sv = &types.ResiliencyGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ownerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupArn to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupArn = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupId to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupId = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupName to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupName = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupType to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupType = types.ResiliencyGroupType(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ResiliencyGroupState(jtv)
+			}
+
+		case "tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResiliencyGroupAssociation(v **types.ResiliencyGroupAssociation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResiliencyGroupAssociation
+	if *v == nil {
+		sv = &types.ResiliencyGroupAssociation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionArn to be of type string, got %T instead", value)
+				}
+				sv.ConnectionArn = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupId to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupId = ptr.String(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupAssociationState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ResiliencyGroupAssociationState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResiliencyGroupAssociationList(v *[]types.ResiliencyGroupAssociation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResiliencyGroupAssociation
+	if *v == nil {
+		cv = []types.ResiliencyGroupAssociation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResiliencyGroupAssociation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentResiliencyGroupAssociation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResiliencyGroupSummary(v **types.ResiliencyGroupSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResiliencyGroupSummary
+	if *v == nil {
+		sv = &types.ResiliencyGroupSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ownerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupArn to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupArn = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupId to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupId = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupName to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupName = ptr.String(jtv)
+			}
+
+		case "resiliencyGroupType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupType to be of type string, got %T instead", value)
+				}
+				sv.ResiliencyGroupType = types.ResiliencyGroupType(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResiliencyGroupState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ResiliencyGroupState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResiliencyGroupSummaryList(v *[]types.ResiliencyGroupSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResiliencyGroupSummary
+	if *v == nil {
+		cv = []types.ResiliencyGroupSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResiliencyGroupSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentResiliencyGroupSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11528,6 +13037,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.Bandwidth = ptr.String(jtv)
 			}
 
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11824,6 +13342,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
 				sv.Bandwidth = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connectionId":
@@ -12736,6 +14263,42 @@ func awsAwsjson11_deserializeOpDocumentAllocateTransitVirtualInterfaceOutput(v *
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentAssociateConnectionsToResiliencyGroupOutput(v **AssociateConnectionsToResiliencyGroupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *AssociateConnectionsToResiliencyGroupOutput
+	if *v == nil {
+		sv = &AssociateConnectionsToResiliencyGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resiliencyGroupAssociations":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroupAssociationList(&sv.ResiliencyGroupAssociations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **AssociateConnectionWithLagOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12792,6 +14355,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
 				sv.Bandwidth = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connectionId":
@@ -13090,6 +14662,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
 				sv.Bandwidth = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connectionId":
@@ -13988,6 +15569,15 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				sv.Bandwidth = ptr.String(jtv)
 			}
 
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14593,6 +16183,15 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connections":
@@ -15444,6 +17043,42 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentCreateResiliencyGroupOutput(v **CreateResiliencyGroupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateResiliencyGroupOutput
+	if *v == nil {
+		sv = &CreateResiliencyGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resiliencyGroup":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroup(&sv.ResiliencyGroup, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentCreateTransitVirtualInterfaceOutput(v **CreateTransitVirtualInterfaceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15572,6 +17207,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
 				sv.Bandwidth = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connectionId":
@@ -16020,6 +17664,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
 			}
 
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "connections":
 			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
@@ -16223,6 +17876,42 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDeleteResiliencyGroupOutput(v **DeleteResiliencyGroupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteResiliencyGroupOutput
+	if *v == nil {
+		sv = &DeleteResiliencyGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resiliencyGroup":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroup(&sv.ResiliencyGroup, value); err != nil {
 				return err
 			}
 
@@ -17124,6 +18813,15 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.Bandwidth = ptr.String(jtv)
 			}
 
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17364,6 +19062,42 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentDisassociateConnectionsFromResiliencyGroupOutput(v **DisassociateConnectionsFromResiliencyGroupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DisassociateConnectionsFromResiliencyGroupOutput
+	if *v == nil {
+		sv = &DisassociateConnectionsFromResiliencyGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resiliencyGroupAssociations":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroupAssociationList(&sv.ResiliencyGroupAssociations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentDisassociateMacSecKeyOutput(v **DisassociateMacSecKeyOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17398,6 +19132,132 @@ func awsAwsjson11_deserializeOpDocumentDisassociateMacSecKeyOutput(v **Disassoci
 		case "macSecKeys":
 			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentGetResiliencyGroupOutput(v **GetResiliencyGroupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetResiliencyGroupOutput
+	if *v == nil {
+		sv = &GetResiliencyGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resiliencyGroup":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroup(&sv.ResiliencyGroup, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListResiliencyGroupAssociationsOutput(v **ListResiliencyGroupAssociationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListResiliencyGroupAssociationsOutput
+	if *v == nil {
+		sv = &ListResiliencyGroupAssociationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroupAssociationList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListResiliencyGroupsOutput(v **ListResiliencyGroupsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListResiliencyGroupsOutput
+	if *v == nil {
+		sv = &ListResiliencyGroupsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroupSummaryList(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -17700,6 +19560,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 				sv.Bandwidth = ptr.String(jtv)
 			}
 
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17940,6 +19809,51 @@ func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentUpdateConnectionsBillingModeOutput(v **UpdateConnectionsBillingModeOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateConnectionsBillingModeOutput
+	if *v == nil {
+		sv = &UpdateConnectionsBillingModeOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
+			}
+
+		case "connections":
+			if err := awsAwsjson11_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentUpdateDirectConnectGatewayAssociationOutput(v **UpdateDirectConnectGatewayAssociationOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18068,6 +19982,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 					return fmt.Errorf("expected AwsLogicalDeviceId to be of type string, got %T instead", value)
 				}
 				sv.AwsLogicalDeviceId = ptr.String(jtv)
+			}
+
+		case "billingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingMode to be of type string, got %T instead", value)
+				}
+				sv.BillingMode = types.BillingMode(jtv)
 			}
 
 		case "connections":
@@ -18273,6 +20196,42 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateResiliencyGroupOutput(v **UpdateResiliencyGroupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateResiliencyGroupOutput
+	if *v == nil {
+		sv = &UpdateResiliencyGroupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resiliencyGroup":
+			if err := awsAwsjson11_deserializeDocumentResiliencyGroup(&sv.ResiliencyGroup, value); err != nil {
 				return err
 			}
 

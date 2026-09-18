@@ -16926,6 +16926,9 @@ type NetworkCardInfo struct {
 	// The default number of the ENA queues for each interface.
 	DefaultEnaQueueCountPerInterface *int32
 
+	// The supported interface types for the network card.
+	InterfaceTypes []NetworkCardInterfaceType
+
 	// The maximum number of the ENA queues.
 	MaximumEnaQueueCount *int32
 
@@ -26344,6 +26347,9 @@ type Volume struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
+	// The ID of the Amazon Web Services account that owns the volume.
+	OwnerId *string
+
 	// The size of the volume, in GiBs.
 	Size *int32
 
@@ -26367,6 +26373,9 @@ type Volume struct {
 
 	// The throughput that the volume supports, in MiB/s.
 	Throughput *int32
+
+	// The Amazon Resource Name (ARN) of the volume.
+	VolumeArn *string
 
 	// The ID of the volume.
 	VolumeId *string

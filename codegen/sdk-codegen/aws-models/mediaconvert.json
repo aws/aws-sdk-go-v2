@@ -1272,7 +1272,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9."
+                "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use."
             }
         },
         "com.amazonaws.mediaconvert#AssociateCertificate": {
@@ -5745,6 +5745,20 @@
                         "smithy.api#jsonName": "contentLightLevel"
                     }
                 },
+                "DisplayAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "displayAspectRatio"
+                    }
+                },
+                "DolbyVision": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Dolby Vision characteristics of the video track: the profile and level, and whether the RPU (dynamic metadata), base layer, and enhancement layer are present. Use this to distinguish Dolby Vision content from standard HEVC and to choose your encoding or passthrough settings. Omitted when the content is not Dolby Vision.",
+                        "smithy.api#jsonName": "dolbyVision"
+                    }
+                },
                 "FieldOrder": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -5792,6 +5806,13 @@
                     "traits": {
                         "smithy.api#documentation": "The clockwise rotation angle of the video, in degrees, as specified in the codec bitstream via a Display Orientation SEI message (payload type 47 for both H.264 and H.265). This field is null when the video essence does not contain a Display Orientation SEI message or when the rotation is 0 degrees.",
                         "smithy.api#jsonName": "rotation"
+                    }
+                },
+                "SampleAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "sampleAspectRatio"
                     }
                 },
                 "ScanType": {
@@ -6254,7 +6275,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media / WMA), OGG. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media / WMA), or OGG. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -8435,6 +8456,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "Required when you set Dolby Vision Profile to Profile 8.1. When you set Content mapping to None, content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to HDR10 1000, the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims."
+            }
+        },
+        "com.amazonaws.mediaconvert#DolbyVisionMetadata": {
+            "type": "structure",
+            "members": {
+                "BaseLayer": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "baseLayer"
+                    }
+                },
+                "EnhancementLayer": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "enhancementLayer"
+                    }
+                },
+                "Level": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The Dolby Vision level, which indicates the maximum resolution and frame rate.",
+                        "smithy.api#jsonName": "level"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The Dolby Vision profile, for example 5, 7, or 8. The profile determines the layer structure and playback compatibility of the content.",
+                        "smithy.api#jsonName": "profile"
+                    }
+                },
+                "Rpu": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "rpu"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dolby Vision characteristics of the video track: the profile and level, and whether the RPU (dynamic metadata), base layer, and enhancement layer are present. Use this to distinguish Dolby Vision content from standard HEVC and to choose your encoding or passthrough settings. Omitted when the content is not Dolby Vision."
+            }
+        },
+        "com.amazonaws.mediaconvert#DolbyVisionPresence": {
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Whether a Dolby Vision component is present in the track."
             }
         },
         "com.amazonaws.mediaconvert#DolbyVisionProfile": {
@@ -24399,6 +24483,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#UnprocessableEntityException"
                 }
             ],
             "traits": {
@@ -27472,6 +27559,22 @@
                 "smithy.api#documentation": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
             }
         },
+        "com.amazonaws.mediaconvert#UnprocessableEntityException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The input file was recognized but appears to be malformed or corrupt.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 422
+            }
+        },
         "com.amazonaws.mediaconvert#UntagResource": {
             "type": "operation",
             "input": {
@@ -28859,7 +28962,7 @@
                 "DisplayAspectRatio": {
                     "target": "com.amazonaws.mediaconvert#AspectRatio",
                     "traits": {
-                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.",
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
                         "smithy.api#jsonName": "displayAspectRatio"
                     }
                 },
@@ -28901,7 +29004,7 @@
                 "SampleAspectRatio": {
                     "target": "com.amazonaws.mediaconvert#AspectRatio",
                     "traits": {
-                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.",
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
                         "smithy.api#jsonName": "sampleAspectRatio"
                     }
                 },

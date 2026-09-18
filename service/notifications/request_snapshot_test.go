@@ -238,6 +238,7 @@ func TestCheckRequestSnapshot_AssociateManagedNotificationAccountContact(t *test
 	input := &AssociateManagedNotificationAccountContactInput{
 		ContactIdentifier:                   types.AccountContactType("ACCOUNT_PRIMARY"),
 		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -266,6 +267,7 @@ func TestCheckRequestSnapshot_AssociateManagedNotificationAdditionalChannel(t *t
 	input := &AssociateManagedNotificationAdditionalChannelInput{
 		ChannelArn:                          ptr.String("__ChannelArn__"),
 		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -969,14 +971,15 @@ func TestCheckRequestSnapshot_ListManagedNotificationConfigurations(t *testing.T
 
 func TestCheckRequestSnapshot_ListManagedNotificationEvents(t *testing.T) {
 	input := &ListManagedNotificationEventsInput{
-		StartTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Locale:               types.LocaleCode("de_DE"),
-		Source:               ptr.String("__Source__"),
-		MaxResults:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
-		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
-		RelatedAccount:       ptr.String("__RelatedAccount__"),
+		StartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:                 types.LocaleCode("de_DE"),
+		Source:                 ptr.String("__Source__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		OrganizationalUnitId:   ptr.String("__OrganizationalUnitId__"),
+		RelatedAccount:         ptr.String("__RelatedAccount__"),
+		IncludeSensitiveEvents: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1304,6 +1307,35 @@ func TestCheckRequestSnapshot_UpdateEventRule(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateManagedNotificationChannelAssociation(t *testing.T) {
+	input := &UpdateManagedNotificationChannelAssociationInput{
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		ChannelIdentifier:                   ptr.String("__ChannelIdentifier__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateManagedNotificationChannelAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateManagedNotificationChannelAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateNotificationConfiguration(t *testing.T) {
 	input := &UpdateNotificationConfigurationInput{
 		Arn:                 ptr.String("__Arn__"),
@@ -1365,6 +1397,7 @@ func TestUpdateRequestSnapshot_AssociateManagedNotificationAccountContact(t *tes
 	input := &AssociateManagedNotificationAccountContactInput{
 		ContactIdentifier:                   types.AccountContactType("ACCOUNT_PRIMARY"),
 		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1393,6 +1426,7 @@ func TestUpdateRequestSnapshot_AssociateManagedNotificationAdditionalChannel(t *
 	input := &AssociateManagedNotificationAdditionalChannelInput{
 		ChannelArn:                          ptr.String("__ChannelArn__"),
 		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2096,14 +2130,15 @@ func TestUpdateRequestSnapshot_ListManagedNotificationConfigurations(t *testing.
 
 func TestUpdateRequestSnapshot_ListManagedNotificationEvents(t *testing.T) {
 	input := &ListManagedNotificationEventsInput{
-		StartTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		EndTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Locale:               types.LocaleCode("de_DE"),
-		Source:               ptr.String("__Source__"),
-		MaxResults:           ptr.Int32(1),
-		NextToken:            ptr.String("__NextToken__"),
-		OrganizationalUnitId: ptr.String("__OrganizationalUnitId__"),
-		RelatedAccount:       ptr.String("__RelatedAccount__"),
+		StartTime:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Locale:                 types.LocaleCode("de_DE"),
+		Source:                 ptr.String("__Source__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+		OrganizationalUnitId:   ptr.String("__OrganizationalUnitId__"),
+		RelatedAccount:         ptr.String("__RelatedAccount__"),
+		IncludeSensitiveEvents: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2427,6 +2462,35 @@ func TestUpdateRequestSnapshot_UpdateEventRule(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateEventRule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateManagedNotificationChannelAssociation(t *testing.T) {
+	input := &UpdateManagedNotificationChannelAssociationInput{
+		ManagedNotificationConfigurationArn: ptr.String("__ManagedNotificationConfigurationArn__"),
+		ChannelIdentifier:                   ptr.String("__ChannelIdentifier__"),
+		IsSensitiveEventsSubscribed:         ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateManagedNotificationChannelAssociation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateManagedNotificationChannelAssociation"); err != nil {
 		t.Fatal(err)
 	}
 }

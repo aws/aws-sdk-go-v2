@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListSignalMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalMapsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchAlarmTemplateGroupIdentifier != nil {
+		s.WriteString(schemas.ListSignalMapsRequest_CloudWatchAlarmTemplateGroupIdentifier, *v.CloudWatchAlarmTemplateGroupIdentifier)
+	}
+	if v.EventBridgeRuleTemplateGroupIdentifier != nil {
+		s.WriteString(schemas.ListSignalMapsRequest_EventBridgeRuleTemplateGroupIdentifier, *v.EventBridgeRuleTemplateGroupIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSignalMapsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalMapsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Placeholder documentation for ListSignalMapsResponse
 type ListSignalMapsOutput struct {
 
@@ -60,13 +83,35 @@ type ListSignalMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalMapsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalMapsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfSignalMapSummary(s, schemas.ListSignalMapsResponse_SignalMaps, v.SignalMaps)
+}
+func (v *ListSignalMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSignalMapsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSignalMapsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSignalMapsResponse_NextToken, v.NextToken)
+		case schemas.ListSignalMapsResponse_SignalMaps:
+			return deserialize__listOfSignalMapSummary(d, schemas.ListSignalMapsResponse_SignalMaps, &v.SignalMaps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSignalMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSignalMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalMaps, schemas.ListSignalMapsRequest, schemas.ListSignalMapsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSignalMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalMaps, schemas.ListSignalMapsRequest, schemas.ListSignalMapsResponse), output: &ListSignalMapsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

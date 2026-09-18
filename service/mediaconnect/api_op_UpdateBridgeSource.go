@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,31 @@ type UpdateBridgeSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBridgeSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBridgeSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBridgeSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.UpdateBridgeSourceRequest_BridgeArn, *v.BridgeArn)
+	}
+	if v.FlowSource != nil {
+		s.WriteStruct(schemas.UpdateBridgeSourceRequest_FlowSource)
+		v.FlowSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkSource != nil {
+		s.WriteStruct(schemas.UpdateBridgeSourceRequest_NetworkSource)
+		v.NetworkSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.UpdateBridgeSourceRequest_SourceName, *v.SourceName)
+	}
+}
+
 type UpdateBridgeSourceOutput struct {
 
 	//  The ARN of the updated bridge source.
@@ -59,13 +86,40 @@ type UpdateBridgeSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBridgeSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBridgeSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBridgeSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.UpdateBridgeSourceResponse_BridgeArn, *v.BridgeArn)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.UpdateBridgeSourceResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBridgeSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBridgeSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBridgeSourceResponse_BridgeArn:
+			v.BridgeArn = new(string)
+			return d.ReadString(schemas.UpdateBridgeSourceResponse_BridgeArn, v.BridgeArn)
+		case schemas.UpdateBridgeSourceResponse_Source:
+			v.Source = &types.BridgeSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBridgeSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBridgeSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBridgeSource, schemas.UpdateBridgeSourceRequest, schemas.UpdateBridgeSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBridgeSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBridgeSource, schemas.UpdateBridgeSourceRequest, schemas.UpdateBridgeSourceResponse), output: &UpdateBridgeSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

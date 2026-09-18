@@ -1017,6 +1017,7 @@ func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
@@ -1067,10 +1068,27 @@ func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
+					StorageLocations: []types.SupplementalDataStorageLocation{
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+					},
 				},
 			},
 			KendraKnowledgeBaseConfiguration: &types.KendraKnowledgeBaseConfiguration{
@@ -3925,6 +3943,7 @@ func TestCheckRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
@@ -3975,10 +3994,27 @@ func TestCheckRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
+					StorageLocations: []types.SupplementalDataStorageLocation{
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+					},
 				},
 			},
 			KendraKnowledgeBaseConfiguration: &types.KendraKnowledgeBaseConfiguration{
@@ -5246,6 +5282,7 @@ func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
@@ -5296,10 +5333,27 @@ func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
+					StorageLocations: []types.SupplementalDataStorageLocation{
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+					},
 				},
 			},
 			KendraKnowledgeBaseConfiguration: &types.KendraKnowledgeBaseConfiguration{
@@ -8154,6 +8208,7 @@ func TestUpdateRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
@@ -8204,10 +8259,27 @@ func TestUpdateRequestSnapshot_UpdateKnowledgeBase(t *testing.T) {
 								},
 							},
 						},
+						ModelConfiguration: document.NewLazyDocument("__Document__"),
 					},
 				},
 				ServerSideEncryptionConfiguration: &types.ServerSideEncryptionConfiguration{
 					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				SupplementalDataStorageConfiguration: &types.SupplementalDataStorageConfiguration{
+					StorageLocations: []types.SupplementalDataStorageLocation{
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+						{
+							Type: types.SupplementalDataStorageLocationType("S3"),
+							S3Location: &types.S3Location{
+								Uri: ptr.String("__Uri__"),
+							},
+						},
+					},
 				},
 			},
 			KendraKnowledgeBaseConfiguration: &types.KendraKnowledgeBaseConfiguration{

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.GetKeyLastUsage
+
+{"KeyCreationDate":946684800,"KeyId":"__KeyId__","KeyLastUsage":{"CloudTrailEventId":"__CloudTrailEventId__","KmsRequestId":"__KmsRequestId__","Operation":"Decrypt","Timestamp":946684800},"TrackingStartDate":946684800}

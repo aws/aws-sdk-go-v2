@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,34 @@ type UpdateMonitoringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitoringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitoringRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitoringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateMonitoringRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateMonitoringRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.EnhancedMonitoring != "" {
+		s.WriteString(schemas.UpdateMonitoringRequest_EnhancedMonitoring, string(v.EnhancedMonitoring))
+	}
+	if v.LoggingInfo != nil {
+		s.WriteStruct(schemas.UpdateMonitoringRequest_LoggingInfo)
+		v.LoggingInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenMonitoring != nil {
+		s.WriteStruct(schemas.UpdateMonitoringRequest_OpenMonitoring)
+		v.OpenMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateMonitoringOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -67,13 +97,38 @@ type UpdateMonitoringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitoringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitoringResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitoringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateMonitoringResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateMonitoringResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateMonitoringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMonitoringResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMonitoringResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateMonitoringResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateMonitoringResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateMonitoringResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMonitoringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMonitoring{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitoring, schemas.UpdateMonitoringRequest, schemas.UpdateMonitoringResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMonitoring{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitoring, schemas.UpdateMonitoringRequest, schemas.UpdateMonitoringResponse), output: &UpdateMonitoringOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

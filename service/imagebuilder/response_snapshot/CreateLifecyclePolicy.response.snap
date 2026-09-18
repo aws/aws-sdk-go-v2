@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","lifecyclePolicyArn":"__LifecyclePolicyArn__"}

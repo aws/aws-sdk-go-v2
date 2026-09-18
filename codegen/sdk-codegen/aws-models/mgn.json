@@ -6731,6 +6731,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Launch template disk throughput configuration.</p>"
                     }
+                },
+                "volumeInitializationRate": {
+                    "target": "com.amazonaws.mgn#VolumeInitializationRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch template disk volume initialization rate configuration.</p>"
+                    }
+                },
+                "deleteOnTermination": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch template disk delete on termination configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15297,7 +15309,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 125,
-                    "max": 1000
+                    "max": 2000
                 }
             }
         },
@@ -16762,6 +16774,15 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "vcenter-client/{vcenterClientID}"
+                }
+            }
+        },
+        "com.amazonaws.mgn#VolumeInitializationRate": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 300
                 }
             }
         },

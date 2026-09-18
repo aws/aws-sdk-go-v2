@@ -10,17 +10,21 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Creates a custom dashboard or the Highlights dashboard.
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
-//	 - Custom dashboards - Custom dashboards allow you to query events in any
-//	 event data store type. You can add up to 10 widgets to a custom dashboard. You
-//	 can manually refresh a custom dashboard, or you can set a refresh schedule.
+// Creates a custom dashboard or the Highlights dashboard.
 //
-//	 - Highlights dashboard - You can create the Highlights dashboard to see a
-//	 summary of key user activities and API usage across all your event data stores.
-//	 CloudTrail Lake manages the Highlights dashboard and refreshes the dashboard
-//	 every 6 hours. To create the Highlights dashboard, you must set and enable a
-//	 refresh schedule.
+//   - Custom dashboards - Custom dashboards allow you to query events in any
+//     event data store type. You can add up to 10 widgets to a custom dashboard. You
+//     can manually refresh a custom dashboard, or you can set a refresh schedule.
+//
+//   - Highlights dashboard - You can create the Highlights dashboard to see a
+//     summary of key user activities and API usage across all your event data stores.
+//     CloudTrail Lake manages the Highlights dashboard and refreshes the dashboard
+//     every 6 hours. To create the Highlights dashboard, you must set and enable a
+//     refresh schedule.
 //
 // CloudTrail runs queries to populate the dashboard's widgets during a manual or
 // scheduled refresh. CloudTrail must be granted permissions to run the StartQuery
@@ -37,6 +41,7 @@ import (
 // For more information about dashboards, see [CloudTrail Lake dashboards] in the CloudTrail User Guide.
 //
 // [CloudTrail Lake dashboards]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-dashboard.html
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Example: Allow CloudTrail to run queries to populate a dashboard]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
 // [Resource-based policy example for a dashboard]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {

@@ -854,6 +854,18 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAvailablePhoneNumbers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAvailablePhoneNumbers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAvailablePhoneNumbers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNotifyCountries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifyCountries(context.Background(), nil, func(o *Options) {
@@ -2154,6 +2166,18 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAvailablePhoneNumbers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAvailablePhoneNumbers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAvailablePhoneNumbers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

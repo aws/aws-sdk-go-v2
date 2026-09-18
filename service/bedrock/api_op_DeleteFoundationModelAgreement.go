@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteFoundationModelAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFoundationModelAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFoundationModelAgreementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFoundationModelAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.DeleteFoundationModelAgreementRequest_modelId, *v.ModelId)
+	}
+}
+
 type DeleteFoundationModelAgreementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteFoundationModelAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFoundationModelAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFoundationModelAgreementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFoundationModelAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFoundationModelAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFoundationModelAgreementResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFoundationModelAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFoundationModelAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFoundationModelAgreement, schemas.DeleteFoundationModelAgreementRequest, schemas.DeleteFoundationModelAgreementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFoundationModelAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFoundationModelAgreement, schemas.DeleteFoundationModelAgreementRequest, schemas.DeleteFoundationModelAgreementResponse), output: &DeleteFoundationModelAgreementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

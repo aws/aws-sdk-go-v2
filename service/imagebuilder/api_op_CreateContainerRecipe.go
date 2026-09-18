@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,8 +30,10 @@ func (c *Client) CreateContainerRecipe(ctx context.Context, params *CreateContai
 
 type CreateContainerRecipeInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -57,9 +61,9 @@ type CreateContainerRecipeInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -82,9 +86,13 @@ type CreateContainerRecipeInput struct {
 	// The Dockerfile template used to build your image as an inline data blob.
 	DockerfileTemplateData *string
 
-	// The Amazon S3 URI for the Dockerfile that will be used to build your container
-	// image.
+	// The Amazon S3 URI for the Dockerfile that is used to build your container image.
 	DockerfileTemplateUri *string
+
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
 
 	// Specifies the operating system version for the base image.
 	ImageOsVersionOverride *string
@@ -112,6 +120,66 @@ type CreateContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_clientToken, *v.ClientToken)
+	}
+	serializeComponentConfigurationList(s, schemas.CreateContainerRecipeRequest_components, v.Components)
+	if v.ContainerType != "" {
+		s.WriteString(schemas.CreateContainerRecipeRequest_containerType, string(v.ContainerType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_description, *v.Description)
+	}
+	if v.DockerfileTemplateData != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateData, *v.DockerfileTemplateData)
+	}
+	if v.DockerfileTemplateUri != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_dockerfileTemplateUri, *v.DockerfileTemplateUri)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateContainerRecipeRequest_dryRun, v.DryRun)
+	}
+	if v.ImageOsVersionOverride != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_imageOsVersionOverride, *v.ImageOsVersionOverride)
+	}
+	if v.InstanceConfiguration != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeRequest_instanceConfiguration)
+		v.InstanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_name, *v.Name)
+	}
+	if v.ParentImage != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_parentImage, *v.ParentImage)
+	}
+	if v.PlatformOverride != "" {
+		s.WriteString(schemas.CreateContainerRecipeRequest_platformOverride, string(v.PlatformOverride))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.CreateContainerRecipeRequest_tags, v.Tags)
+	if v.TargetRepository != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeRequest_targetRepository)
+		v.TargetRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkingDirectory != nil {
+		s.WriteString(schemas.CreateContainerRecipeRequest_workingDirectory, *v.WorkingDirectory)
+	}
+}
+
 type CreateContainerRecipeOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -133,13 +201,52 @@ type CreateContainerRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateContainerRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateContainerRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateContainerRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerRecipeResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_clientToken, v.ClientToken)
+		case schemas.CreateContainerRecipeResponse_containerRecipeArn:
+			v.ContainerRecipeArn = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_containerRecipeArn, v.ContainerRecipeArn)
+		case schemas.CreateContainerRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateContainerRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateContainerRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerRecipe, schemas.CreateContainerRecipeRequest, schemas.CreateContainerRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerRecipe, schemas.CreateContainerRecipeRequest, schemas.CreateContainerRecipeResponse), output: &CreateContainerRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetExperimentRequest_id, *v.Id)
+	}
+}
+
 type GetExperimentOutput struct {
 
 	// Information about the experiment.
@@ -45,13 +59,34 @@ type GetExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Experiment != nil {
+		s.WriteStruct(schemas.GetExperimentResponse_experiment)
+		v.Experiment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExperimentResponse_experiment:
+			v.Experiment = &types.Experiment{}
+			return v.Experiment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExperiment, schemas.GetExperimentRequest, schemas.GetExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExperiment, schemas.GetExperimentRequest, schemas.GetExperimentResponse), output: &GetExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

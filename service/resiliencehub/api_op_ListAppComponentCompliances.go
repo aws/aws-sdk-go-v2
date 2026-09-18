@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,40 @@ type ListAppComponentCompliancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppComponentCompliancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppComponentCompliancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppComponentCompliancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListAppComponentCompliancesRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppComponentCompliancesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppComponentCompliancesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppComponentCompliancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppComponentCompliancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppComponentCompliancesRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.ListAppComponentCompliancesRequest_assessmentArn, v.AssessmentArn)
+		case schemas.ListAppComponentCompliancesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppComponentCompliancesRequest_maxResults, v.MaxResults)
+		case schemas.ListAppComponentCompliancesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppComponentCompliancesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAppComponentCompliancesOutput struct {
 
 	// The compliances for an Resilience Hub Application Component, returned as an
@@ -65,13 +101,35 @@ type ListAppComponentCompliancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppComponentCompliancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppComponentCompliancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppComponentCompliancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentCompliancesList(s, schemas.ListAppComponentCompliancesResponse_componentCompliances, v.ComponentCompliances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppComponentCompliancesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppComponentCompliancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppComponentCompliancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppComponentCompliancesResponse_componentCompliances:
+			return deserializeComponentCompliancesList(d, schemas.ListAppComponentCompliancesResponse_componentCompliances, &v.ComponentCompliances)
+		case schemas.ListAppComponentCompliancesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppComponentCompliancesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppComponentCompliancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppComponentCompliances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppComponentCompliances, schemas.ListAppComponentCompliancesRequest, schemas.ListAppComponentCompliancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppComponentCompliances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppComponentCompliances, schemas.ListAppComponentCompliancesRequest, schemas.ListAppComponentCompliancesResponse), output: &ListAppComponentCompliancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,13 +4,14 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Applies a policy to an image recipe. We recommend that you call the RAM API [CreateResourceShare] to
-// share resources. If you call the Image Builder API PutImageRecipePolicy , you
-// must also call the RAM API [PromoteResourceShareCreatedFromPolicy]in order for the resource to be visible to all
-// principals with whom the resource is shared.
+// Applies a policy to an image recipe. To share resources, call the RAM API [CreateResourceShare]. If
+// you call this API, you must also call the RAM API [PromoteResourceShareCreatedFromPolicy]so that the resource is
+// visible to all principals with whom the resource is shared.
 //
 // [PromoteResourceShareCreatedFromPolicy]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
 // [CreateResourceShare]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
@@ -45,6 +46,21 @@ type PutImageRecipePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImageRecipePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImageRecipePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImageRecipePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.PutImageRecipePolicyRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutImageRecipePolicyRequest_policy, *v.Policy)
+	}
+}
+
 type PutImageRecipePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image recipe that this policy was applied
@@ -60,13 +76,38 @@ type PutImageRecipePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImageRecipePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImageRecipePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImageRecipePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.PutImageRecipePolicyResponse_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PutImageRecipePolicyResponse_requestId, *v.RequestId)
+	}
+}
+func (v *PutImageRecipePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutImageRecipePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutImageRecipePolicyResponse_imageRecipeArn:
+			v.ImageRecipeArn = new(string)
+			return d.ReadString(schemas.PutImageRecipePolicyResponse_imageRecipeArn, v.ImageRecipeArn)
+		case schemas.PutImageRecipePolicyResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PutImageRecipePolicyResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutImageRecipePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutImageRecipePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImageRecipePolicy, schemas.PutImageRecipePolicyRequest, schemas.PutImageRecipePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutImageRecipePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImageRecipePolicy, schemas.PutImageRecipePolicyRequest, schemas.PutImageRecipePolicyResponse), output: &PutImageRecipePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

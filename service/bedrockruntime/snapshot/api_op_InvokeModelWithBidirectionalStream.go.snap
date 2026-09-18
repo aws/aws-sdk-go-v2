@@ -16,7 +16,6 @@ InvokeModelWithBidirectionalStream
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -27,7 +26,6 @@ InvokeModelWithBidirectionalStream
 	Deserialize stack step
 		AddRawResponseToMetadata
 		OperationEventStreamDeserializer
-		RequireMinimumProtocol
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domainNameConfig":{"appsyncDomainName":"__AppsyncDomainName__","certificateArn":"__CertificateArn__","description":"__Description__","domainName":"__DomainName__","domainNameArn":"__DomainNameArn__","hostedZoneId":"__HostedZoneId__","tags":{"key0":"__Value__"}}}

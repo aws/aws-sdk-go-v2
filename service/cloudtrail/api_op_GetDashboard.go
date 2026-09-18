@@ -11,7 +11,13 @@ import (
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns the specified dashboard.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) GetDashboard(ctx context.Context, params *GetDashboardInput, optFns ...func(*Options)) (*GetDashboardOutput, error) {
 	if params == nil {
 		params = &GetDashboardInput{}

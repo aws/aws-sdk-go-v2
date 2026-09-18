@@ -5,7 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type DescribeTopicPartitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicPartitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicPartitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicPartitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeTopicPartitionsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeTopicPartitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTopicPartitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.DescribeTopicPartitionsRequest_TopicName, *v.TopicName)
+	}
+}
+
 type DescribeTopicPartitionsOutput struct {
 
 	// The paginated results marker. When the result of a DescribeTopicPartitions
@@ -65,13 +88,35 @@ type DescribeTopicPartitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicPartitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicPartitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicPartitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTopicPartitionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfTopicPartitionInfo(s, schemas.DescribeTopicPartitionsResponse_Partitions, v.Partitions)
+}
+func (v *DescribeTopicPartitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTopicPartitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTopicPartitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeTopicPartitionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeTopicPartitionsResponse_Partitions:
+			return deserialize__listOfTopicPartitionInfo(d, schemas.DescribeTopicPartitionsResponse_Partitions, &v.Partitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTopicPartitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTopicPartitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicPartitions, schemas.DescribeTopicPartitionsRequest, schemas.DescribeTopicPartitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTopicPartitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicPartitions, schemas.DescribeTopicPartitionsRequest, schemas.DescribeTopicPartitionsResponse), output: &DescribeTopicPartitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

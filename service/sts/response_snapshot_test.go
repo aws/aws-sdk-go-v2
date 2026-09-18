@@ -119,8 +119,10 @@ func TestCheckResponseSnapshot_AssumeRole(t *testing.T) {
 			AssumedRoleId: ptr.String("__AssumedRoleId__"),
 			Arn:           ptr.String("__Arn__"),
 		},
-		PackedPolicySize: ptr.Int32(1),
-		SourceIdentity:   ptr.String("__SourceIdentity__"),
+		PackedPolicySize:        ptr.Int32(1),
+		SourceIdentity:          ptr.String("__SourceIdentity__"),
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRole.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -171,6 +173,7 @@ func TestCheckResponseSnapshot_AssumeRole(t *testing.T) {
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -192,13 +195,15 @@ func TestCheckResponseSnapshot_AssumeRoleWithSAML(t *testing.T) {
 			AssumedRoleId: ptr.String("__AssumedRoleId__"),
 			Arn:           ptr.String("__Arn__"),
 		},
-		PackedPolicySize: ptr.Int32(1),
-		Subject:          ptr.String("__Subject__"),
-		SubjectType:      ptr.String("__SubjectType__"),
-		Issuer:           ptr.String("__Issuer__"),
-		Audience:         ptr.String("__Audience__"),
-		NameQualifier:    ptr.String("__NameQualifier__"),
-		SourceIdentity:   ptr.String("__SourceIdentity__"),
+		PackedPolicySize:        ptr.Int32(1),
+		Subject:                 ptr.String("__Subject__"),
+		SubjectType:             ptr.String("__SubjectType__"),
+		Issuer:                  ptr.String("__Issuer__"),
+		Audience:                ptr.String("__Audience__"),
+		NameQualifier:           ptr.String("__NameQualifier__"),
+		SourceIdentity:          ptr.String("__SourceIdentity__"),
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRoleWithSAML.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -220,8 +225,9 @@ func TestCheckResponseSnapshot_AssumeRoleWithSAML(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -244,10 +250,12 @@ func TestCheckResponseSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 			AssumedRoleId: ptr.String("__AssumedRoleId__"),
 			Arn:           ptr.String("__Arn__"),
 		},
-		PackedPolicySize: ptr.Int32(1),
-		Provider:         ptr.String("__Provider__"),
-		Audience:         ptr.String("__Audience__"),
-		SourceIdentity:   ptr.String("__SourceIdentity__"),
+		PackedPolicySize:        ptr.Int32(1),
+		Provider:                ptr.String("__Provider__"),
+		Audience:                ptr.String("__Audience__"),
+		SourceIdentity:          ptr.String("__SourceIdentity__"),
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRoleWithWebIdentity.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -270,8 +278,9 @@ func TestCheckResponseSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -289,7 +298,9 @@ func TestCheckResponseSnapshot_AssumeRoot(t *testing.T) {
 			SessionToken:    ptr.String("__SessionToken__"),
 			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
-		SourceIdentity: ptr.String("__SourceIdentity__"),
+		SourceIdentity:          ptr.String("__SourceIdentity__"),
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRoot.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -304,7 +315,8 @@ func TestCheckResponseSnapshot_AssumeRoot(t *testing.T) {
 		TaskPolicyArn: &types.PolicyDescriptorType{
 			Arn: ptr.String("__Arn__"),
 		},
-		DurationSeconds: ptr.Int32(1),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -425,7 +437,9 @@ func TestCheckResponseSnapshot_GetFederationToken(t *testing.T) {
 			FederatedUserId: ptr.String("__FederatedUserId__"),
 			Arn:             ptr.String("__Arn__"),
 		},
-		PackedPolicySize: ptr.Int32(1),
+		PackedPolicySize:        ptr.Int32(1),
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFederationToken.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -457,6 +471,7 @@ func TestCheckResponseSnapshot_GetFederationToken(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -474,6 +489,8 @@ func TestCheckResponseSnapshot_GetSessionToken(t *testing.T) {
 			SessionToken:    ptr.String("__SessionToken__"),
 			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetSessionToken.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -484,9 +501,10 @@ func TestCheckResponseSnapshot_GetSessionToken(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetSessionToken(context.Background(), &GetSessionTokenInput{
-		DurationSeconds: ptr.Int32(1),
-		SerialNumber:    ptr.String("__SerialNumber__"),
-		TokenCode:       ptr.String("__TokenCode__"),
+		DurationSeconds:         ptr.Int32(1),
+		SerialNumber:            ptr.String("__SerialNumber__"),
+		TokenCode:               ptr.String("__TokenCode__"),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -588,6 +606,7 @@ func TestCheckResponseSnapshot_Error_ExpiredTokenException(t *testing.T) {
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -653,8 +672,9 @@ func TestCheckResponseSnapshot_Error_IDPCommunicationErrorException(t *testing.T
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -692,8 +712,9 @@ func TestCheckResponseSnapshot_Error_IDPRejectedClaimException(t *testing.T) {
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -758,8 +779,9 @@ func TestCheckResponseSnapshot_Error_InvalidIdentityTokenException(t *testing.T)
 				Arn: ptr.String("__Arn__"),
 			},
 		},
-		Policy:          ptr.String("__Policy__"),
-		DurationSeconds: ptr.Int32(1),
+		Policy:                  ptr.String("__Policy__"),
+		DurationSeconds:         ptr.Int32(1),
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -868,6 +890,7 @@ func TestCheckResponseSnapshot_Error_MalformedPolicyDocumentException(t *testing
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -976,6 +999,7 @@ func TestCheckResponseSnapshot_Error_PackedPolicyTooLargeException(t *testing.T)
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1042,6 +1066,7 @@ func TestCheckResponseSnapshot_Error_RegionDisabledException(t *testing.T) {
 				ContextAssertion: ptr.String("__ContextAssertion__"),
 			},
 		},
+		MinimumSessionTokenSize: ptr.Int32(1),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -2509,6 +2509,63 @@ func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListAvailablePhoneNumbers(t *testing.T) {
+	input := &ListAvailablePhoneNumbersInput{
+		IsoCountryCode: ptr.String("__IsoCountryCode__"),
+		NumberCapabilities: []types.NumberCapability{
+			types.NumberCapability("SMS"),
+			types.NumberCapability("SMS"),
+		},
+		NumberType:     types.SearchableNumberType("TEN_DLC"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		NumberPreference: []types.NumberPreferenceItem{
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAvailablePhoneNumbers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailablePhoneNumbers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListNotifyCountries(t *testing.T) {
 	input := &ListNotifyCountriesInput{
 		Channels: []types.NumberCapability{
@@ -2950,10 +3007,32 @@ func TestCheckRequestSnapshot_RequestPhoneNumber(t *testing.T) {
 			types.NumberCapability("SMS"),
 			types.NumberCapability("SMS"),
 		},
-		NumberType:                  types.RequestableNumberType("LONG_CODE"),
-		OptOutListName:              ptr.String("__OptOutListName__"),
-		PoolId:                      ptr.String("__PoolId__"),
-		RegistrationId:              ptr.String("__RegistrationId__"),
+		NumberType:     types.RequestableNumberType("LONG_CODE"),
+		OptOutListName: ptr.String("__OptOutListName__"),
+		PoolId:         ptr.String("__PoolId__"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		NumberPreference: []types.NumberPreferenceItem{
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		InternationalSendingEnabled: ptr.Bool(true),
 		DeletionProtectionEnabled:   ptr.Bool(true),
 		Tags: []types.Tag{
@@ -6296,6 +6375,63 @@ func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListAvailablePhoneNumbers(t *testing.T) {
+	input := &ListAvailablePhoneNumbersInput{
+		IsoCountryCode: ptr.String("__IsoCountryCode__"),
+		NumberCapabilities: []types.NumberCapability{
+			types.NumberCapability("SMS"),
+			types.NumberCapability("SMS"),
+		},
+		NumberType:     types.SearchableNumberType("TEN_DLC"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		NumberPreference: []types.NumberPreferenceItem{
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAvailablePhoneNumbers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailablePhoneNumbers"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListNotifyCountries(t *testing.T) {
 	input := &ListNotifyCountriesInput{
 		Channels: []types.NumberCapability{
@@ -6737,10 +6873,32 @@ func TestUpdateRequestSnapshot_RequestPhoneNumber(t *testing.T) {
 			types.NumberCapability("SMS"),
 			types.NumberCapability("SMS"),
 		},
-		NumberType:                  types.RequestableNumberType("LONG_CODE"),
-		OptOutListName:              ptr.String("__OptOutListName__"),
-		PoolId:                      ptr.String("__PoolId__"),
-		RegistrationId:              ptr.String("__RegistrationId__"),
+		NumberType:     types.RequestableNumberType("LONG_CODE"),
+		OptOutListName: ptr.String("__OptOutListName__"),
+		PoolId:         ptr.String("__PoolId__"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		NumberPreference: []types.NumberPreferenceItem{
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		InternationalSendingEnabled: ptr.Bool(true),
 		DeletionProtectionEnabled:   ptr.Bool(true),
 		Tags: []types.Tag{

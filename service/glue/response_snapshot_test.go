@@ -11107,6 +11107,7 @@ func TestCheckResponseSnapshot_CreateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	})
 	if err != nil {
@@ -20278,6 +20279,7 @@ func TestCheckResponseSnapshot_GetIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetIntegrationTableProperties.response")
@@ -37310,6 +37312,114 @@ func TestCheckResponseSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	want := &ListIntegrationTablePropertiesOutput{
+		IntegrationTablePropertiesList: []types.IntegrationTableProperties{
+			{
+				ResourceArn: ptr.String("__ResourceArn__"),
+				TableName:   ptr.String("__TableName__"),
+				SourceTableConfig: &types.SourceTableConfig{
+					Fields: []string{
+						"__Member__",
+						"__Member__",
+					},
+					FilterPredicate: ptr.String("__FilterPredicate__"),
+					PrimaryKey: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RecordUpdateField: ptr.String("__RecordUpdateField__"),
+				},
+				TargetTableConfig: &types.TargetTableConfig{
+					UnnestSpec: types.UnnestSpec("TOPLEVEL"),
+					PartitionSpec: []types.IntegrationPartition{
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+					},
+					TargetTableName: ptr.String("__TargetTableName__"),
+					IntegrationArn:  ptr.String("__IntegrationArn__"),
+				},
+			},
+			{
+				ResourceArn: ptr.String("__ResourceArn__"),
+				TableName:   ptr.String("__TableName__"),
+				SourceTableConfig: &types.SourceTableConfig{
+					Fields: []string{
+						"__Member__",
+						"__Member__",
+					},
+					FilterPredicate: ptr.String("__FilterPredicate__"),
+					PrimaryKey: []string{
+						"__Member__",
+						"__Member__",
+					},
+					RecordUpdateField: ptr.String("__RecordUpdateField__"),
+				},
+				TargetTableConfig: &types.TargetTableConfig{
+					UnnestSpec: types.UnnestSpec("TOPLEVEL"),
+					PartitionSpec: []types.IntegrationPartition{
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+						{
+							FieldName:      ptr.String("__FieldName__"),
+							FunctionSpec:   ptr.String("__FunctionSpec__"),
+							ConversionSpec: ptr.String("__ConversionSpec__"),
+						},
+					},
+					TargetTableName: ptr.String("__TargetTableName__"),
+					IntegrationArn:  ptr.String("__IntegrationArn__"),
+				},
+			},
+		},
+		Marker: ptr.String("__Marker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListIntegrationTableProperties.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListIntegrationTableProperties(context.Background(), &ListIntegrationTablePropertiesInput{
+		Marker: ptr.String("__Marker__"),
+		Filters: []types.IntegrationTablePropertiesFilter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxRecords: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListIntegrationTableProperties.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListIterableForms(t *testing.T) {
 	want := &ListIterableFormsOutput{
 		Items: []types.IterableFormListItem{
@@ -42349,6 +42459,7 @@ func TestCheckResponseSnapshot_UpdateIntegrationTableProperties(t *testing.T) {
 				},
 			},
 			TargetTableName: ptr.String("__TargetTableName__"),
+			IntegrationArn:  ptr.String("__IntegrationArn__"),
 		},
 	})
 	if err != nil {

@@ -4,6 +4,8 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type DeleteServiceFunctionResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceFunctionResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceFunctionResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceFunctionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceList(s, schemas.DeleteServiceFunctionResourcesRequest_resources, v.Resources)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DeleteServiceFunctionResourcesRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.DeleteServiceFunctionResourcesRequest_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+
 type DeleteServiceFunctionResourcesOutput struct {
 
 	// The list of resources that were removed.
@@ -60,13 +78,41 @@ type DeleteServiceFunctionResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceFunctionResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceFunctionResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceFunctionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceList(s, schemas.DeleteServiceFunctionResourcesResponse_resources, v.Resources)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DeleteServiceFunctionResourcesResponse_serviceArn, *v.ServiceArn)
+	}
+	if v.ServiceFunctionId != nil {
+		s.WriteString(schemas.DeleteServiceFunctionResourcesResponse_serviceFunctionId, *v.ServiceFunctionId)
+	}
+}
+func (v *DeleteServiceFunctionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceFunctionResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteServiceFunctionResourcesResponse_resources:
+			return deserializeResourceList(d, schemas.DeleteServiceFunctionResourcesResponse_resources, &v.Resources)
+		case schemas.DeleteServiceFunctionResourcesResponse_serviceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.DeleteServiceFunctionResourcesResponse_serviceArn, v.ServiceArn)
+		case schemas.DeleteServiceFunctionResourcesResponse_serviceFunctionId:
+			v.ServiceFunctionId = new(string)
+			return d.ReadString(schemas.DeleteServiceFunctionResourcesResponse_serviceFunctionId, v.ServiceFunctionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceFunctionResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceFunctionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceFunctionResources, schemas.DeleteServiceFunctionResourcesRequest, schemas.DeleteServiceFunctionResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceFunctionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceFunctionResources, schemas.DeleteServiceFunctionResourcesRequest, schemas.DeleteServiceFunctionResourcesResponse), output: &DeleteServiceFunctionResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

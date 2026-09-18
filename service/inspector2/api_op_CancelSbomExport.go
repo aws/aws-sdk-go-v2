@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type CancelSbomExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSbomExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSbomExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSbomExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.CancelSbomExportRequest_reportId, *v.ReportId)
+	}
+}
+
 type CancelSbomExportOutput struct {
 
 	// The report ID of the canceled SBOM export.
@@ -44,13 +58,32 @@ type CancelSbomExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelSbomExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelSbomExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelSbomExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.CancelSbomExportResponse_reportId, *v.ReportId)
+	}
+}
+func (v *CancelSbomExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelSbomExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelSbomExportResponse_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.CancelSbomExportResponse_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelSbomExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSbomExport, schemas.CancelSbomExportRequest, schemas.CancelSbomExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelSbomExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSbomExport, schemas.CancelSbomExportRequest, schemas.CancelSbomExportResponse), output: &CancelSbomExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

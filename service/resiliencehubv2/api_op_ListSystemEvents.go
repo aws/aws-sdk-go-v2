@@ -5,7 +5,9 @@ package resiliencehubv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,7 +38,7 @@ type ListSystemEventsInput struct {
 	// The end time for filtering events.
 	EndTime *time.Time
 
-	// Filter events by type.
+	// The type of events to include in the results.
 	EventTypes []types.SystemEventType
 
 	// Pagination page size.
@@ -49,6 +51,31 @@ type ListSystemEventsInput struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListSystemEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSystemEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSystemEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListSystemEventsRequest_endTime, *v.EndTime)
+	}
+	serializeSystemEventTypeList(s, schemas.ListSystemEventsRequest_eventTypes, v.EventTypes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSystemEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSystemEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListSystemEventsRequest_startTime, *v.StartTime)
+	}
+	if v.SystemArn != nil {
+		s.WriteString(schemas.ListSystemEventsRequest_systemArn, *v.SystemArn)
+	}
 }
 
 type ListSystemEventsOutput struct {
@@ -67,13 +94,35 @@ type ListSystemEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSystemEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSystemEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSystemEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSystemEventList(s, schemas.ListSystemEventsResponse_events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSystemEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSystemEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSystemEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSystemEventsResponse_events:
+			return deserializeSystemEventList(d, schemas.ListSystemEventsResponse_events, &v.Events)
+		case schemas.ListSystemEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSystemEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSystemEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSystemEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSystemEvents, schemas.ListSystemEventsRequest, schemas.ListSystemEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSystemEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSystemEvents, schemas.ListSystemEventsRequest, schemas.ListSystemEventsResponse), output: &ListSystemEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

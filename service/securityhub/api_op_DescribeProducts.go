@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DescribeProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProductsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeProductsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProductsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProductArn != nil {
+		s.WriteString(schemas.DescribeProductsRequest_ProductArn, *v.ProductArn)
+	}
+}
+
 type DescribeProductsOutput struct {
 
 	// A list of products, including details for each product.
@@ -65,13 +85,35 @@ type DescribeProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProductsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProductsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeProductsResponse_NextToken, *v.NextToken)
+	}
+	serializeProductsList(s, schemas.DescribeProductsResponse_Products, v.Products)
+}
+func (v *DescribeProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProductsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProductsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeProductsResponse_NextToken, v.NextToken)
+		case schemas.DescribeProductsResponse_Products:
+			return deserializeProductsList(d, schemas.DescribeProductsResponse_Products, &v.Products)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProducts, schemas.DescribeProductsRequest, schemas.DescribeProductsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProducts, schemas.DescribeProductsRequest, schemas.DescribeProductsResponse), output: &DescribeProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

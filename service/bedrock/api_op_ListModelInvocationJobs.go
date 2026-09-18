@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -110,6 +112,39 @@ type ListModelInvocationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelInvocationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelInvocationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelInvocationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelInvocationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelInvocationJobsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelInvocationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelInvocationJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelInvocationJobsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListModelInvocationJobsRequest_statusEquals, string(v.StatusEquals))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.ListModelInvocationJobsRequest_submitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.ListModelInvocationJobsRequest_submitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+
 type ListModelInvocationJobsOutput struct {
 
 	// A list of items, each of which contains a summary about a batch inference job.
@@ -125,13 +160,35 @@ type ListModelInvocationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelInvocationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelInvocationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelInvocationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelInvocationJobSummaries(s, schemas.ListModelInvocationJobsResponse_invocationJobSummaries, v.InvocationJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelInvocationJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListModelInvocationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelInvocationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelInvocationJobsResponse_invocationJobSummaries:
+			return deserializeModelInvocationJobSummaries(d, schemas.ListModelInvocationJobsResponse_invocationJobSummaries, &v.InvocationJobSummaries)
+		case schemas.ListModelInvocationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelInvocationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelInvocationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModelInvocationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelInvocationJobs, schemas.ListModelInvocationJobsRequest, schemas.ListModelInvocationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModelInvocationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelInvocationJobs, schemas.ListModelInvocationJobsRequest, schemas.ListModelInvocationJobsResponse), output: &ListModelInvocationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -84,6 +84,9 @@ type UpdateLagOutput struct {
 	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
+	// The billing mode of the LAG.
+	BillingMode types.BillingMode
+
 	// The connections bundled by the LAG.
 	Connections []types.Connection
 

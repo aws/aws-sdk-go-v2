@@ -5,14 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new image. This request will create a new image along with all of the
-// configured output resources defined in the distribution configuration. You must
-// specify exactly one recipe for your image, using either a ContainerRecipeArn or
-// an ImageRecipeArn.
+// Creates a new image along with all configured output resources defined in the
+// distribution configuration. You must specify exactly one recipe for your image,
+// using either a ContainerRecipeArn or an ImageRecipeArn.
 func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optFns ...func(*Options)) (*CreateImageOutput, error) {
 	if params == nil {
 		params = &CreateImageInput{}
@@ -30,8 +31,10 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 
 type CreateImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -52,9 +55,9 @@ type CreateImageInput struct {
 	// and configures the outputs of your pipeline.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
@@ -71,7 +74,7 @@ type CreateImageInput struct {
 	// The image tests configuration of the image.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
-	// Define logging configuration for the image build process.
+	// The logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// The tags of the image.
@@ -81,6 +84,53 @@ type CreateImageInput struct {
 	Workflows []types.WorkflowConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.CreateImageRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.CreateImageRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.EnhancedImageMetadataEnabled != nil {
+		s.WriteBool(schemas.CreateImageRequest_enhancedImageMetadataEnabled, *v.EnhancedImageMetadataEnabled)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.CreateImageRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.CreateImageRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.ImageScanningConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRequest_imageScanningConfiguration)
+		v.ImageScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageTestsConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRequest_imageTestsConfiguration)
+		v.ImageTestsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.CreateImageRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateImageRequest_tags, v.Tags)
+	serializeWorkflowConfigurationList(s, schemas.CreateImageRequest_workflows, v.Workflows)
 }
 
 type CreateImageOutput struct {
@@ -103,13 +153,52 @@ type CreateImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.CreateImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateImageResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateImageResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateImageResponse_clientToken, v.ClientToken)
+		case schemas.CreateImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.CreateImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.CreateImageResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateImageResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateImageResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImage, schemas.CreateImageRequest, schemas.CreateImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImage, schemas.CreateImageRequest, schemas.CreateImageResponse), output: &CreateImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

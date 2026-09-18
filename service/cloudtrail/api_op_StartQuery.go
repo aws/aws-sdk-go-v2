@@ -9,6 +9,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Starts a CloudTrail Lake query. Use the QueryStatement parameter to provide
 // your SQL query, enclosed in single quotation marks. Use the optional
 // DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
@@ -17,6 +21,8 @@ import (
 // QueryAlias and any QueryParameters . In the current release, the QueryAlias and
 // QueryParameters parameters are used only for the queries that populate the
 // CloudTrail Lake dashboards.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}

@@ -2941,6 +2941,19 @@ func serializeInstancePoolSummaryList(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeInstancePreferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstancePreference) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeInstanceRequirementsEniConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstanceRequirementsEniConfiguration) {
 	if v == nil {
 		return
@@ -3882,6 +3895,19 @@ func serializeProcessingInputs(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeProcessingInstancePreferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProcessingInstancePreference) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeProcessingJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProcessingJobSummary) {
 	if v == nil {
 		return
@@ -4497,6 +4523,17 @@ func serializeTrainingJobSummaries(s smithy.ShapeSerializer, schema *smithy.Sche
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTrainingPlanArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -7512,6 +7549,20 @@ func deserializeInstancePoolSummaryList(d smithy.ShapeDeserializer, s *smithy.Sc
 	})
 }
 
+func deserializeInstancePreferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InstancePreference) error {
+	*v = make([]types.InstancePreference, 0)
+	var vv types.InstancePreference
+	return smithy.ReadList(d, s, func() error {
+		vv = types.InstancePreference{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeInstanceRequirementsEniConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InstanceRequirementsEniConfiguration) error {
 	*v = make([]types.InstanceRequirementsEniConfiguration, 0)
 	var vv types.InstanceRequirementsEniConfiguration
@@ -8562,6 +8613,20 @@ func deserializeProcessingInputs(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeProcessingInstancePreferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProcessingInstancePreference) error {
+	*v = make([]types.ProcessingInstancePreference, 0)
+	var vv types.ProcessingInstancePreference
+	return smithy.ReadList(d, s, func() error {
+		vv = types.ProcessingInstancePreference{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeProcessingJobSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProcessingJobSummary) error {
 	*v = make([]types.ProcessingJobSummary, 0)
 	var vv types.ProcessingJobSummary
@@ -9268,6 +9333,20 @@ func deserializeTrainingJobSummaries(d smithy.ShapeDeserializer, s *smithy.Schem
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TrainingJobSummary{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTrainingPlanArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

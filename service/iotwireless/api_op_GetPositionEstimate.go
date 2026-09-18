@@ -29,8 +29,7 @@ func (c *Client) GetPositionEstimate(ctx context.Context, params *GetPositionEst
 
 type GetPositionEstimateInput struct {
 
-	// Optional configuration to customize position estimates. If not provided,
-	// defaults are applied.
+	// Optional configuration for customizing position measurement data.
 	AdvancedConfiguration *types.AdvancedConfiguration
 
 	// Retrieves an estimated device position by resolving measurement data from
@@ -40,8 +39,15 @@ type GetPositionEstimateInput struct {
 
 	// Retrieves an estimated device position by resolving the global navigation
 	// satellite system (GNSS) scan data. The position is resolved using the GNSS
-	// solver powered by LoRa Cloud.
+	// solver powered by LoRa Cloud. This field is mutually exclusive with the
+	// GnssMultiFrame field.
 	Gnss *types.Gnss
+
+	// Retrieves an estimated device position by resolving multiple global navigation
+	// satellite system (GNSS) scan captures. The position is resolved using the
+	// multi-frame GNSS solver powered by LoRa Cloud. This field is mutually exclusive
+	// with the Gnss field.
+	GnssMultiFrame *types.GnssMultiFrame
 
 	// Retrieves an estimated device position by resolving the IP address information
 	// from the device. The position is resolved using MaxMind's IP-based solver.

@@ -4,7 +4,9 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DescribeUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DescribeUserRequest_BrokerId, *v.BrokerId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.DescribeUserRequest_Username, *v.Username)
+	}
+}
+
 type DescribeUserOutput struct {
 
 	// Required. The unique ID that Amazon MQ generates for the broker.
@@ -71,13 +88,61 @@ type DescribeUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.DescribeUserResponse_BrokerId, *v.BrokerId)
+	}
+	if v.ConsoleAccess != nil {
+		s.WriteBool(schemas.DescribeUserResponse_ConsoleAccess, *v.ConsoleAccess)
+	}
+	serialize__listOf__string(s, schemas.DescribeUserResponse_Groups, v.Groups)
+	if v.Pending != nil {
+		s.WriteStruct(schemas.DescribeUserResponse_Pending)
+		v.Pending.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationUser != nil {
+		s.WriteBool(schemas.DescribeUserResponse_ReplicationUser, *v.ReplicationUser)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.DescribeUserResponse_Username, *v.Username)
+	}
+}
+func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserResponse_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_BrokerId, v.BrokerId)
+		case schemas.DescribeUserResponse_ConsoleAccess:
+			v.ConsoleAccess = new(bool)
+			return d.ReadBool(schemas.DescribeUserResponse_ConsoleAccess, v.ConsoleAccess)
+		case schemas.DescribeUserResponse_Groups:
+			return deserialize__listOf__string(d, schemas.DescribeUserResponse_Groups, &v.Groups)
+		case schemas.DescribeUserResponse_Pending:
+			v.Pending = &types.UserPendingChanges{}
+			return v.Pending.Deserialize(d)
+		case schemas.DescribeUserResponse_ReplicationUser:
+			v.ReplicationUser = new(bool)
+			return d.ReadBool(schemas.DescribeUserResponse_ReplicationUser, v.ReplicationUser)
+		case schemas.DescribeUserResponse_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_Username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse), output: &DescribeUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -56,6 +58,26 @@ type DescribeStreamConsumerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamConsumerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamConsumerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamConsumerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerARN != nil {
+		s.WriteString(schemas.DescribeStreamConsumerInput_ConsumerARN, *v.ConsumerARN)
+	}
+	if v.ConsumerName != nil {
+		s.WriteString(schemas.DescribeStreamConsumerInput_ConsumerName, *v.ConsumerName)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DescribeStreamConsumerInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.DescribeStreamConsumerInput_StreamId, *v.StreamId)
+	}
+}
 func (in *DescribeStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -77,13 +99,34 @@ type DescribeStreamConsumerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamConsumerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamConsumerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamConsumerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerDescription != nil {
+		s.WriteStruct(schemas.DescribeStreamConsumerOutput_ConsumerDescription)
+		v.ConsumerDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStreamConsumerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStreamConsumerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStreamConsumerOutput_ConsumerDescription:
+			v.ConsumerDescription = &types.ConsumerDescription{}
+			return v.ConsumerDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStreamConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamConsumer, schemas.DescribeStreamConsumerInput, schemas.DescribeStreamConsumerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStreamConsumer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStreamConsumer, schemas.DescribeStreamConsumerInput, schemas.DescribeStreamConsumerOutput), output: &DescribeStreamConsumerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

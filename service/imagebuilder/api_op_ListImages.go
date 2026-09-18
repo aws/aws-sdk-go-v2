@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,20 +49,43 @@ type ListImagesInput struct {
 	// Includes deprecated images in the response list.
 	IncludeDeprecated *bool
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
-	// The owner defines which images you want to list. By default, this request will
-	// only show images owned by your account. You can use this field to specify if you
-	// want to view images owned by yourself, by Amazon, or those images that have been
-	// shared with you by other customers.
+	// Filters the list to images owned by you, by Amazon, or shared with you by other
+	// accounts. By default, only your account's images are returned.
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByName != false {
+		s.WriteBool(schemas.ListImagesRequest_byName, v.ByName)
+	}
+	serializeFilterList(s, schemas.ListImagesRequest_filters, v.Filters)
+	if v.IncludeDeprecated != nil {
+		s.WriteBool(schemas.ListImagesRequest_includeDeprecated, *v.IncludeDeprecated)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImagesRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListImagesRequest_owner, string(v.Owner))
+	}
 }
 
 type ListImagesOutput struct {
@@ -70,10 +95,10 @@ type ListImagesOutput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	ImageVersionList []types.ImageVersion
 
 	// The next token used for paginated responses. When this field isn't empty, there
@@ -90,13 +115,41 @@ type ListImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageVersionList(s, schemas.ListImagesResponse_imageVersionList, v.ImageVersionList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImagesResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImagesResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImagesResponse_imageVersionList:
+			return deserializeImageVersionList(d, schemas.ListImagesResponse_imageVersionList, &v.ImageVersionList)
+		case schemas.ListImagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImagesResponse_nextToken, v.NextToken)
+		case schemas.ListImagesResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImagesResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImages, schemas.ListImagesRequest, schemas.ListImagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImages, schemas.ListImagesRequest, schemas.ListImagesResponse), output: &ListImagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -132,7 +185,7 @@ func (c *Client) addOperationListImagesMiddlewares(stack *middleware.Stack, opti
 
 // ListImagesPaginatorOptions is the paginator options for ListImages
 type ListImagesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

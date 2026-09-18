@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeChannelInput struct {
 	ClusterArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeChannelRequest_ClusterArn, *v.ClusterArn)
+	}
 }
 
 // Contains the current configuration and state of a channel.
@@ -102,13 +119,116 @@ type DescribeChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DescribeChannelResponse_ChannelName, *v.ChannelName)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.DescribeChannelResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeChannelResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.DescribeChannelResponse_DestinationType, string(v.DestinationType))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeChannelResponse_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergDestinationConfiguration != nil {
+		s.WriteStruct(schemas.DescribeChannelResponse_IcebergDestinationConfiguration)
+		v.IcebergDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingInfo != nil {
+		s.WriteStruct(schemas.DescribeChannelResponse_LoggingInfo)
+		v.LoggingInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationConfiguration != nil {
+		s.WriteStruct(schemas.DescribeChannelResponse_S3DestinationConfiguration)
+		v.S3DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateInfo != nil {
+		s.WriteStruct(schemas.DescribeChannelResponse_StateInfo)
+		v.StateInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeChannelResponse_Status, string(v.Status))
+	}
+	serialize__mapOf__string(s, schemas.DescribeChannelResponse_Tags, v.Tags)
+	serialize__listOfTopicConfiguration(s, schemas.DescribeChannelResponse_TopicConfigurationList, v.TopicConfigurationList)
+}
+func (v *DescribeChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.DescribeChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.DescribeChannelResponse_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.DescribeChannelResponse_ChannelName, v.ChannelName)
+		case schemas.DescribeChannelResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.DescribeChannelResponse_ClusterOperationArn, v.ClusterOperationArn)
+		case schemas.DescribeChannelResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeChannelResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeChannelResponse_DestinationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChannelResponse_DestinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = types.ChannelDestinationType(ev)
+			return nil
+		case schemas.DescribeChannelResponse_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DescribeChannelResponse_IcebergDestinationConfiguration:
+			v.IcebergDestinationConfiguration = &types.IcebergDestinationConfiguration{}
+			return v.IcebergDestinationConfiguration.Deserialize(d)
+		case schemas.DescribeChannelResponse_LoggingInfo:
+			v.LoggingInfo = &types.ChannelLoggingInfo{}
+			return v.LoggingInfo.Deserialize(d)
+		case schemas.DescribeChannelResponse_S3DestinationConfiguration:
+			v.S3DestinationConfiguration = &types.S3DestinationConfiguration{}
+			return v.S3DestinationConfiguration.Deserialize(d)
+		case schemas.DescribeChannelResponse_StateInfo:
+			v.StateInfo = &types.ChannelStateInfo{}
+			return v.StateInfo.Deserialize(d)
+		case schemas.DescribeChannelResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeChannelResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ChannelStatus(ev)
+			return nil
+		case schemas.DescribeChannelResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeChannelResponse_Tags, &v.Tags)
+		case schemas.DescribeChannelResponse_TopicConfigurationList:
+			return deserialize__listOfTopicConfiguration(d, schemas.DescribeChannelResponse_TopicConfigurationList, &v.TopicConfigurationList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannel, schemas.DescribeChannelRequest, schemas.DescribeChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannel, schemas.DescribeChannelRequest, schemas.DescribeChannelResponse), output: &DescribeChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

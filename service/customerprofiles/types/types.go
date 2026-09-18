@@ -2439,6 +2439,36 @@ type RecommendationDiversityConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for metadata to include in recommendation responses.
+type RecommendationMetadata struct {
+
+	// A list of metadata column names from your Items dataset to include in the
+	// recommendation response.
+	Columns []string
+
+	noSmithyDocumentSerde
+}
+
+// The recommender used to generate the recommendations.
+type Recommender struct {
+
+	// The unique name of the recommender.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of filters to apply to the returned recommendations. Filters define
+	// criteria for including or excluding items from the recommendation results.
+	Filters []RecommenderFilter
+
+	// A list of promotional filters to apply to the recommendations. Promotional
+	// filters allow you to promote specific items within a configurable subset of
+	// recommendation results.
+	PromotionalFilters []RecommenderPromotionalFilter
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings that define the behavior and parameters of a recommender.
 type RecommenderConfig struct {
 

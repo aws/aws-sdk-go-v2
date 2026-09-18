@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -66,6 +68,39 @@ type ListModelCustomizationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCustomizationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCustomizationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCustomizationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelCustomizationJobsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelCustomizationJobsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelCustomizationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelCustomizationJobsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCustomizationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelCustomizationJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelCustomizationJobsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListModelCustomizationJobsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListModelCustomizationJobsOutput struct {
 
 	// Job summaries.
@@ -82,13 +117,35 @@ type ListModelCustomizationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelCustomizationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelCustomizationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelCustomizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelCustomizationJobSummaries(s, schemas.ListModelCustomizationJobsResponse_modelCustomizationJobSummaries, v.ModelCustomizationJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelCustomizationJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListModelCustomizationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelCustomizationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelCustomizationJobsResponse_modelCustomizationJobSummaries:
+			return deserializeModelCustomizationJobSummaries(d, schemas.ListModelCustomizationJobsResponse_modelCustomizationJobSummaries, &v.ModelCustomizationJobSummaries)
+		case schemas.ListModelCustomizationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelCustomizationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelCustomizationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModelCustomizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCustomizationJobs, schemas.ListModelCustomizationJobsRequest, schemas.ListModelCustomizationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModelCustomizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelCustomizationJobs, schemas.ListModelCustomizationJobsRequest, schemas.ListModelCustomizationJobsResponse), output: &ListModelCustomizationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

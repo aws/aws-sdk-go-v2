@@ -17360,6 +17360,64 @@ func awsRestjson1_deserializeDocumentBedrockGuardrailDetails(v **types.BedrockGu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBedrockGuardrailResource(v **types.BedrockGuardrailResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockGuardrailResource
+	if *v == nil {
+		sv = &types.BedrockGuardrailResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guardrailAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailAction to be of type string, got %T instead", value)
+				}
+				sv.GuardrailAction = types.GuardrailAction(jtv)
+			}
+
+		case "guardrailSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSource to be of type string, got %T instead", value)
+				}
+				sv.GuardrailSource = types.GuardrailSource(jtv)
+			}
+
+		case "version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBedrockGuardrails(v *[]types.BedrockGuardrail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29554,6 +29612,11 @@ func awsRestjson1_deserializeDocumentResourceData(v **types.ResourceData, value 
 
 		case "autoscalingAutoScalingGroup":
 			if err := awsRestjson1_deserializeDocumentAutoscalingAutoScalingGroup(&sv.AutoscalingAutoScalingGroup, value); err != nil {
+				return err
+			}
+
+		case "bedrockGuardrail":
+			if err := awsRestjson1_deserializeDocumentBedrockGuardrailResource(&sv.BedrockGuardrail, value); err != nil {
 				return err
 			}
 

@@ -5,13 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
 
-// Begin asynchronous resource state update for lifecycle changes to the specified
-// image resources.
+// Begins an asynchronous resource state update for lifecycle changes to the
+// specified image resources.
 func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartResourceStateUpdateInput, optFns ...func(*Options)) (*StartResourceStateUpdateOutput, error) {
 	if params == nil {
 		params = &StartResourceStateUpdateInput{}
@@ -29,8 +31,10 @@ func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartReso
 
 type StartResourceStateUpdateInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -77,6 +81,42 @@ type StartResourceStateUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceStateUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceStateUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceStateUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_clientToken, *v.ClientToken)
+	}
+	if v.ExclusionRules != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_exclusionRules)
+		v.ExclusionRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.IncludeResources != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_includeResources)
+		v.IncludeResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateAt != nil {
+		s.WriteTime(schemas.StartResourceStateUpdateRequest_updateAt, *v.UpdateAt)
+	}
+}
+
 type StartResourceStateUpdateOutput struct {
 
 	// Identifies the lifecycle runtime instance that started the resource state
@@ -93,13 +133,38 @@ type StartResourceStateUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceStateUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceStateUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceStateUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.StartResourceStateUpdateResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceStateUpdateResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *StartResourceStateUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartResourceStateUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartResourceStateUpdateResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.StartResourceStateUpdateResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		case schemas.StartResourceStateUpdateResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.StartResourceStateUpdateResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartResourceStateUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceStateUpdate, schemas.StartResourceStateUpdateRequest, schemas.StartResourceStateUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartResourceStateUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceStateUpdate, schemas.StartResourceStateUpdateRequest, schemas.StartResourceStateUpdateResponse), output: &StartResourceStateUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

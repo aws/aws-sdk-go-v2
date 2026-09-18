@@ -595,6 +595,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
                     }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
                 }
             }
         },
@@ -653,6 +659,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
                     }
                 }
             }
@@ -5088,6 +5100,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of tag keys and values to assign to the agent runtime. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.</p>"
+                    }
+                },
+                "platformVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the runtime platform to use for the AgentCore Runtime.</p>"
                     }
                 }
             },
@@ -15846,6 +15864,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The capacity provider configuration for the AgentCore Runtime.</p>"
+                    }
+                },
+                "platformVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the runtime platform used by the AgentCore Runtime.</p>"
                     }
                 }
             },
@@ -30425,6 +30449,16 @@
                 "smithy.api#documentation": "<p>The permissions configuration for a capacity provider. This specifies the IAM role that AgentCore uses to manage the Amazon EC2 instances for the capacity provider on your behalf.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#PlatformVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[^\\s]+$"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Policies": {
             "type": "list",
             "member": {
@@ -36247,6 +36281,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#CapacityProviderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated capacity provider configuration for the AgentCore Runtime.</p>"
+                    }
+                },
+                "platformVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated version of the runtime platform to use for the AgentCore Runtime.</p>"
                     }
                 },
                 "clientToken": {

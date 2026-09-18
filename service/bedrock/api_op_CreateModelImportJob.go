@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,38 @@ type CreateModelImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateModelImportJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ImportedModelKmsKeyId != nil {
+		s.WriteString(schemas.CreateModelImportJobRequest_importedModelKmsKeyId, *v.ImportedModelKmsKeyId)
+	}
+	if v.ImportedModelName != nil {
+		s.WriteString(schemas.CreateModelImportJobRequest_importedModelName, *v.ImportedModelName)
+	}
+	serializeTagList(s, schemas.CreateModelImportJobRequest_importedModelTags, v.ImportedModelTags)
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateModelImportJobRequest_jobName, *v.JobName)
+	}
+	serializeTagList(s, schemas.CreateModelImportJobRequest_jobTags, v.JobTags)
+	serializeModelDataSource(s, schemas.CreateModelImportJobRequest_modelDataSource, v.ModelDataSource)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelImportJobRequest_roleArn, *v.RoleArn)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateModelImportJobRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelImportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model import job.
@@ -85,13 +119,32 @@ type CreateModelImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateModelImportJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateModelImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelImportJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateModelImportJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModelImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelImportJob, schemas.CreateModelImportJobRequest, schemas.CreateModelImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModelImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelImportJob, schemas.CreateModelImportJobRequest, schemas.CreateModelImportJobResponse), output: &CreateModelImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

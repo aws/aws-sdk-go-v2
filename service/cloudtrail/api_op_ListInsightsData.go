@@ -29,6 +29,11 @@ import (
 //
 // The rate of ListInsightsData requests is limited to two per second, per
 // account, per Region. If this limit is exceeded, a throttling error occurs.
+//
+// For data event Insights on organization trails, only the management account and
+// delegated administrator accounts can call ListInsightsData . For these callers,
+// the API returns Insights events only for the caller's own account. Member
+// accounts cannot call this API on organization trails.
 func (c *Client) ListInsightsData(ctx context.Context, params *ListInsightsDataInput, optFns ...func(*Options)) (*ListInsightsDataOutput, error) {
 	if params == nil {
 		params = &ListInsightsDataInput{}

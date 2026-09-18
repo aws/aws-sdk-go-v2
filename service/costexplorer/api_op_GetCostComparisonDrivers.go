@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -150,6 +152,43 @@ type GetCostComparisonDriversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostComparisonDriversInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostComparisonDriversRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostComparisonDriversInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostComparisonDriversRequest_BaselineTimePeriod)
+		v.BaselineTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostComparisonDriversRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.ComparisonTimePeriod != nil {
+		s.WriteStruct(schemas.GetCostComparisonDriversRequest_ComparisonTimePeriod)
+		v.ComparisonTimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostComparisonDriversRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGroupDefinitions(s, schemas.GetCostComparisonDriversRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCostComparisonDriversRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MetricForComparison != nil {
+		s.WriteString(schemas.GetCostComparisonDriversRequest_MetricForComparison, *v.MetricForComparison)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostComparisonDriversRequest_NextPageToken, *v.NextPageToken)
+	}
+}
+
 type GetCostComparisonDriversOutput struct {
 
 	// An array of comparison results showing factors that drive significant cost
@@ -165,13 +204,35 @@ type GetCostComparisonDriversOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostComparisonDriversOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostComparisonDriversResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostComparisonDriversOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostComparisonDrivers(s, schemas.GetCostComparisonDriversResponse_CostComparisonDrivers, v.CostComparisonDrivers)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostComparisonDriversResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetCostComparisonDriversOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostComparisonDriversResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostComparisonDriversResponse_CostComparisonDrivers:
+			return deserializeCostComparisonDrivers(d, schemas.GetCostComparisonDriversResponse_CostComparisonDrivers, &v.CostComparisonDrivers)
+		case schemas.GetCostComparisonDriversResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostComparisonDriversResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostComparisonDriversMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostComparisonDrivers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostComparisonDrivers, schemas.GetCostComparisonDriversRequest, schemas.GetCostComparisonDriversResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostComparisonDrivers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostComparisonDrivers, schemas.GetCostComparisonDriversRequest, schemas.GetCostComparisonDriversResponse), output: &GetCostComparisonDriversOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

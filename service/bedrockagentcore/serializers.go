@@ -7294,6 +7294,13 @@ func awsRestjson1_serializeDocumentCloudWatchFilterConfig(v *types.CloudWatchFil
 		}
 	}
 
+	if v.SessionTraceIds != nil {
+		ok := object.Key("sessionTraceIds")
+		if err := awsRestjson1_serializeDocumentSessionTraceIdsList(v.SessionTraceIds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TimeRange != nil {
 		ok := object.Key("timeRange")
 		if err := awsRestjson1_serializeDocumentSessionFilterConfig(v.TimeRange, ok); err != nil {
@@ -10759,6 +10766,38 @@ func awsRestjson1_serializeDocumentSessionMetadataShape(v *types.SessionMetadata
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSessionTraceIds(v *types.SessionTraceIds, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SessionId != nil {
+		ok := object.Key("sessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if v.TraceIds != nil {
+		ok := object.Key("traceIds")
+		if err := awsRestjson1_serializeDocumentTraceIdList(v.TraceIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSessionTraceIdsList(v []types.SessionTraceIds, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSessionTraceIds(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSpan(v document.Interface, value smithyjson.Value) error {
 	if v == nil {
 		return nil
@@ -11235,6 +11274,17 @@ func awsRestjson1_serializeDocumentToolsFileSystemConfigurations(v []types.Tools
 		if err := awsRestjson1_serializeDocumentToolsFileSystemConfiguration(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTraceIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

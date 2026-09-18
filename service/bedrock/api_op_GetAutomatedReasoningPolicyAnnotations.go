@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetAutomatedReasoningPolicyAnnotationsInput struct {
 	PolicyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAutomatedReasoningPolicyAnnotationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyAnnotationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyAnnotationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsRequest_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsRequest_policyArn, *v.PolicyArn)
+	}
 }
 
 type GetAutomatedReasoningPolicyAnnotationsOutput struct {
@@ -84,13 +101,59 @@ type GetAutomatedReasoningPolicyAnnotationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutomatedReasoningPolicyAnnotationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutomatedReasoningPolicyAnnotationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutomatedReasoningPolicyAnnotationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnnotationSetHash != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotationSetHash, *v.AnnotationSetHash)
+	}
+	serializeAutomatedReasoningPolicyAnnotationList(s, schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotations, v.Annotations)
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_policyArn, *v.PolicyArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAutomatedReasoningPolicyAnnotationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutomatedReasoningPolicyAnnotationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotationSetHash:
+			v.AnnotationSetHash = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotationSetHash, v.AnnotationSetHash)
+		case schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotations:
+			return deserializeAutomatedReasoningPolicyAnnotationList(d, schemas.GetAutomatedReasoningPolicyAnnotationsResponse_annotations, &v.Annotations)
+		case schemas.GetAutomatedReasoningPolicyAnnotationsResponse_buildWorkflowId:
+			v.BuildWorkflowId = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_buildWorkflowId, v.BuildWorkflowId)
+		case schemas.GetAutomatedReasoningPolicyAnnotationsResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_name, v.Name)
+		case schemas.GetAutomatedReasoningPolicyAnnotationsResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_policyArn, v.PolicyArn)
+		case schemas.GetAutomatedReasoningPolicyAnnotationsResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAutomatedReasoningPolicyAnnotationsResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutomatedReasoningPolicyAnnotationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAutomatedReasoningPolicyAnnotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyAnnotations, schemas.GetAutomatedReasoningPolicyAnnotationsRequest, schemas.GetAutomatedReasoningPolicyAnnotationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAutomatedReasoningPolicyAnnotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutomatedReasoningPolicyAnnotations, schemas.GetAutomatedReasoningPolicyAnnotationsRequest, schemas.GetAutomatedReasoningPolicyAnnotationsResponse), output: &GetAutomatedReasoningPolicyAnnotationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

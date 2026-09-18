@@ -589,8 +589,10 @@ var CreateFreeTierConfig_Activated *smithy.Schema
 var CreateTieringInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "CreateTieringInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CreateTieringInput_FreeTier *smithy.Schema
+
+var CreateTieringInput_CustomTiers *smithy.Schema
 
 var _Currency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -797,6 +799,37 @@ var CustomLineItemVersionListElement_AccountId *smithy.Schema
 var CustomLineItemVersionListElement_ComputationRule *smithy.Schema
 
 var CustomLineItemVersionListElement_PresentationDetails *smithy.Schema
+
+var CustomTier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTier",
+}, smithy.ShapeTypeStructure, 3)
+var CustomTier_BeginRangeInclusive *smithy.Schema
+
+var CustomTier_EndRangeExclusive *smithy.Schema
+
+var CustomTier_RateValue *smithy.Schema
+
+var _CustomTierBeginRangeInclusive = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTierBeginRangeInclusive",
+}, smithy.ShapeTypeDouble, 0)
+
+var _CustomTierEndRangeExclusive = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTierEndRangeExclusive",
+}, smithy.ShapeTypeDouble, 0)
+
+var _CustomTierRateValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTierRateValue",
+}, smithy.ShapeTypeDouble, 0)
+
+var _CustomTiersList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.billingconductor",
+	Name:      "CustomTiersList",
+}, smithy.ShapeTypeList, 1)
+var _CustomTiersList_member *smithy.Schema
 
 var DisassociateResourceResponseElement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -1352,8 +1385,10 @@ var ThrottlingException_RetryAfterSeconds *smithy.Schema
 var Tiering = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "Tiering",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var Tiering_FreeTier *smithy.Schema
+
+var Tiering_CustomTiers *smithy.Schema
 
 var _TieringActivated = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -1404,8 +1439,10 @@ var UpdateFreeTierConfig_Activated *smithy.Schema
 var UpdateTieringInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
 	Name:      "UpdateTieringInput",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var UpdateTieringInput_FreeTier *smithy.Schema
+
+var UpdateTieringInput_CustomTiers *smithy.Schema
 
 var _UsageType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.billingconductor",
@@ -2397,7 +2434,17 @@ func init() {
 
 	CreateFreeTierConfig_Activated = CreateFreeTierConfig.AddMember("Activated", _TieringActivated)
 
+	CustomTier_BeginRangeInclusive = CustomTier.AddMember("BeginRangeInclusive", _CustomTierBeginRangeInclusive)
+
+	CustomTier_EndRangeExclusive = CustomTier.AddMember("EndRangeExclusive", _CustomTierEndRangeExclusive)
+
+	CustomTier_RateValue = CustomTier.AddMember("RateValue", _CustomTierRateValue)
+
+	_CustomTiersList_member = _CustomTiersList.AddMember("member", CustomTier)
+
 	CreateTieringInput_FreeTier = CreateTieringInput.AddMember("FreeTier", CreateFreeTierConfig)
+
+	CreateTieringInput_CustomTiers = CreateTieringInput.AddMember("CustomTiers", _CustomTiersList)
 
 	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
 
@@ -2657,6 +2704,8 @@ func init() {
 
 	Tiering_FreeTier = Tiering.AddMember("FreeTier", FreeTierConfig)
 
+	Tiering_CustomTiers = Tiering.AddMember("CustomTiers", _CustomTiersList)
+
 	PricingRuleListElement_Name = PricingRuleListElement.AddMember("Name", _PricingRuleName)
 
 	PricingRuleListElement_Arn = PricingRuleListElement.AddMember("Arn", _PricingRuleArn)
@@ -2730,6 +2779,8 @@ func init() {
 	UpdateFreeTierConfig_Activated = UpdateFreeTierConfig.AddMember("Activated", _TieringActivated)
 
 	UpdateTieringInput_FreeTier = UpdateTieringInput.AddMember("FreeTier", UpdateFreeTierConfig)
+
+	UpdateTieringInput_CustomTiers = UpdateTieringInput.AddMember("CustomTiers", _CustomTiersList)
 
 	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
 

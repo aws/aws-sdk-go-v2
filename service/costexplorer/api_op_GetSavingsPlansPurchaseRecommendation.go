@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,41 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansPurchaseRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansPurchaseRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_AccountScope, string(v.AccountScope))
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookbackPeriodInDays != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.GetSavingsPlansPurchaseRecommendationRequest_PageSize, v.PageSize)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_PaymentOption, string(v.PaymentOption))
+	}
+	if v.SavingsPlansType != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_SavingsPlansType, string(v.SavingsPlansType))
+	}
+	if v.TermInYears != "" {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationRequest_TermInYears, string(v.TermInYears))
+	}
+}
+
 type GetSavingsPlansPurchaseRecommendationOutput struct {
 
 	// Information that regards this specific recommendation set.
@@ -100,13 +137,48 @@ type GetSavingsPlansPurchaseRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSavingsPlansPurchaseRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSavingsPlansPurchaseRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetSavingsPlansPurchaseRecommendationResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.SavingsPlansPurchaseRecommendation != nil {
+		s.WriteStruct(schemas.GetSavingsPlansPurchaseRecommendationResponse_SavingsPlansPurchaseRecommendation)
+		v.SavingsPlansPurchaseRecommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSavingsPlansPurchaseRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSavingsPlansPurchaseRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSavingsPlansPurchaseRecommendationResponse_Metadata:
+			v.Metadata = &types.SavingsPlansPurchaseRecommendationMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetSavingsPlansPurchaseRecommendationResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetSavingsPlansPurchaseRecommendationResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetSavingsPlansPurchaseRecommendationResponse_SavingsPlansPurchaseRecommendation:
+			v.SavingsPlansPurchaseRecommendation = &types.SavingsPlansPurchaseRecommendation{}
+			return v.SavingsPlansPurchaseRecommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSavingsPlansPurchaseRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansPurchaseRecommendation, schemas.GetSavingsPlansPurchaseRecommendationRequest, schemas.GetSavingsPlansPurchaseRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSavingsPlansPurchaseRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSavingsPlansPurchaseRecommendation, schemas.GetSavingsPlansPurchaseRecommendationRequest, schemas.GetSavingsPlansPurchaseRecommendationResponse), output: &GetSavingsPlansPurchaseRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

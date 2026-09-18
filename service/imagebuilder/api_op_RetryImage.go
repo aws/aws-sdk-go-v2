@@ -5,10 +5,12 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// RetryImage retries an image distribution without rebuilding the image.
+// Retries an image distribution or test without rebuilding the image.
 func (c *Client) RetryImage(ctx context.Context, params *RetryImageInput, optFns ...func(*Options)) (*RetryImageOutput, error) {
 	if params == nil {
 		params = &RetryImageInput{}
@@ -26,8 +28,10 @@ func (c *Client) RetryImage(ctx context.Context, params *RetryImageInput, optFns
 
 type RetryImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -40,6 +44,21 @@ type RetryImageInput struct {
 	ImageBuildVersionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetryImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RetryImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.RetryImageRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
 }
 
 type RetryImageOutput struct {
@@ -56,13 +75,38 @@ type RetryImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetryImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RetryImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.RetryImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+func (v *RetryImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.RetryImageResponse_clientToken, v.ClientToken)
+		case schemas.RetryImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.RetryImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetryImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetryImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryImage, schemas.RetryImageRequest, schemas.RetryImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetryImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetryImage, schemas.RetryImageRequest, schemas.RetryImageResponse), output: &RetryImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

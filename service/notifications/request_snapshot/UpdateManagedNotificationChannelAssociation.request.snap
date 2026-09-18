@@ -1,0 +1,5 @@
+PUT /channels/update-managed-notification-channel-association
+
+Content-Type: application/json
+
+{"channelIdentifier":"__ChannelIdentifier__","isSensitiveEventsSubscribed":true,"managedNotificationConfigurationArn":"__ManagedNotificationConfigurationArn__"}

@@ -529,6 +529,7 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 					},
 				},
 				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				AnnotationDirective:     types.S3AnnotationDirective("COPY"),
 				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				NewObjectMetadata: &types.S3ObjectMetadata{
 					CacheControl:       ptr.String("__CacheControl__"),
@@ -566,6 +567,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				BucketKeyEnabled:          true,
 				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+				ObjectLockEventHold:       types.S3ObjectLockEventHold("ON"),
+				ObjectLockEventHoldDuration: &types.S3ObjectLockEventHoldDuration{
+					Days:  ptr.Int32(1),
+					Years: ptr.Int32(1),
+				},
 			},
 			S3PutObjectAcl: &types.S3SetObjectAclOperation{
 				AccessControlPolicy: &types.S3AccessControlPolicy{
@@ -623,6 +629,11 @@ func TestCheckRequestSnapshot_CreateJob(t *testing.T) {
 				Retention: &types.S3Retention{
 					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+					EventHold:       types.S3ObjectLockRetentionEventHold("ON"),
+					EventHoldDuration: &types.S3ObjectLockRetentionEventHoldDuration{
+						Days:  ptr.Int32(1),
+						Years: ptr.Int32(1),
+					},
 				},
 			},
 			S3ReplicateObject: &types.S3ReplicateObjectOperation{},
@@ -4356,6 +4367,7 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 					},
 				},
 				MetadataDirective:       types.S3MetadataDirective("COPY"),
+				AnnotationDirective:     types.S3AnnotationDirective("COPY"),
 				ModifiedSinceConstraint: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				NewObjectMetadata: &types.S3ObjectMetadata{
 					CacheControl:       ptr.String("__CacheControl__"),
@@ -4393,6 +4405,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 				ObjectLockRetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				BucketKeyEnabled:          true,
 				ChecksumAlgorithm:         types.S3ChecksumAlgorithm("CRC32"),
+				ObjectLockEventHold:       types.S3ObjectLockEventHold("ON"),
+				ObjectLockEventHoldDuration: &types.S3ObjectLockEventHoldDuration{
+					Days:  ptr.Int32(1),
+					Years: ptr.Int32(1),
+				},
 			},
 			S3PutObjectAcl: &types.S3SetObjectAclOperation{
 				AccessControlPolicy: &types.S3AccessControlPolicy{
@@ -4450,6 +4467,11 @@ func TestUpdateRequestSnapshot_CreateJob(t *testing.T) {
 				Retention: &types.S3Retention{
 					RetainUntilDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Mode:            types.S3ObjectLockRetentionMode("COMPLIANCE"),
+					EventHold:       types.S3ObjectLockRetentionEventHold("ON"),
+					EventHoldDuration: &types.S3ObjectLockRetentionEventHoldDuration{
+						Days:  ptr.Int32(1),
+						Years: ptr.Int32(1),
+					},
 				},
 			},
 			S3ReplicateObject: &types.S3ReplicateObjectOperation{},

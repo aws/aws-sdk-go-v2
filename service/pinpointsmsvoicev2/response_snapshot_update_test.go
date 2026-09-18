@@ -1934,7 +1934,15 @@ func TestUpdateResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 				DeletionProtectionEnabled:   true,
 				PoolId:                      ptr.String("__PoolId__"),
 				RegistrationId:              ptr.String("__RegistrationId__"),
-				CreatedTimestamp:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
+				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				PhoneNumberArn: ptr.String("__PhoneNumberArn__"),
@@ -1958,7 +1966,15 @@ func TestUpdateResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 				DeletionProtectionEnabled:   true,
 				PoolId:                      ptr.String("__PoolId__"),
 				RegistrationId:              ptr.String("__RegistrationId__"),
-				CreatedTimestamp:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
+				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2164,6 +2180,14 @@ func TestUpdateResponseSnapshot_DescribeRcsAgents(t *testing.T) {
 					TestingAgentId: ptr.String("__TestingAgentId__"),
 					RegistrationId: ptr.String("__RegistrationId__"),
 				},
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
 			},
 			{
 				RcsAgentArn:               ptr.String("__RcsAgentArn__"),
@@ -2188,6 +2212,14 @@ func TestUpdateResponseSnapshot_DescribeRcsAgents(t *testing.T) {
 					Status:         types.TestingAgentStatus("CREATED"),
 					TestingAgentId: ptr.String("__TestingAgentId__"),
 					RegistrationId: ptr.String("__RegistrationId__"),
+				},
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
 				},
 			},
 		},
@@ -2825,6 +2857,14 @@ func TestUpdateResponseSnapshot_DescribeSenderIds(t *testing.T) {
 				DeletionProtectionEnabled: true,
 				Registered:                true,
 				RegistrationId:            ptr.String("__RegistrationId__"),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
 			},
 			{
 				SenderIdArn:    ptr.String("__SenderIdArn__"),
@@ -2838,6 +2878,14 @@ func TestUpdateResponseSnapshot_DescribeSenderIds(t *testing.T) {
 				DeletionProtectionEnabled: true,
 				Registered:                true,
 				RegistrationId:            ptr.String("__RegistrationId__"),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3089,6 +3137,34 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListAvailablePhoneNumbers(t *testing.T) {
+	want := &ListAvailablePhoneNumbersOutput{
+		AvailablePhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.PinpointSMSVoiceV2)
+	opSchema := smithy.NewOperationSchema(schemas.ListAvailablePhoneNumbers, schemas.ListAvailablePhoneNumbersResult, schemas.ListAvailablePhoneNumbersResult)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAvailablePhoneNumbers.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

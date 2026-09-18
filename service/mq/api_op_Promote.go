@@ -4,7 +4,9 @@ package mq
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type PromoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.PromoteRequest_BrokerId, *v.BrokerId)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.PromoteRequest_Mode, string(v.Mode))
+	}
+}
+
 type PromoteOutput struct {
 
 	// The unique ID that Amazon MQ generates for the broker.
@@ -52,13 +69,32 @@ type PromoteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromoteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromoteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromoteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerId != nil {
+		s.WriteString(schemas.PromoteResponse_BrokerId, *v.BrokerId)
+	}
+}
+func (v *PromoteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromoteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromoteResponse_BrokerId:
+			v.BrokerId = new(string)
+			return d.ReadString(schemas.PromoteResponse_BrokerId, v.BrokerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPromoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPromote{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Promote, schemas.PromoteRequest, schemas.PromoteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPromote{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Promote, schemas.PromoteRequest, schemas.PromoteResponse), output: &PromoteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

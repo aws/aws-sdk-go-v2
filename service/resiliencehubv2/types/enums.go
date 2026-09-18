@@ -61,6 +61,27 @@ func (ActorType) Values() []ActorType {
 	}
 }
 
+type AlarmState string
+
+// Enum values for AlarmState
+const (
+	AlarmStateOk               AlarmState = "OK"
+	AlarmStateAlarm            AlarmState = "ALARM"
+	AlarmStateInsufficientData AlarmState = "INSUFFICIENT_DATA"
+)
+
+// Values returns all known values for AlarmState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AlarmState) Values() []AlarmState {
+	return []AlarmState{
+		"OK",
+		"ALARM",
+		"INSUFFICIENT_DATA",
+	}
+}
+
 type AssertionSource string
 
 // Enum values for AssertionSource
@@ -258,6 +279,71 @@ func (DependencyDiscoveryStatus) Values() []DependencyDiscoveryStatus {
 	}
 }
 
+type DependencyInsightsErrorCode string
+
+// Enum values for DependencyInsightsErrorCode
+const (
+	DependencyInsightsErrorCodeInsufficientData    DependencyInsightsErrorCode = "INSUFFICIENT_DATA"
+	DependencyInsightsErrorCodeLlmGenerationFailed DependencyInsightsErrorCode = "LLM_GENERATION_FAILED"
+	DependencyInsightsErrorCodeInternalError       DependencyInsightsErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for DependencyInsightsErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyInsightsErrorCode) Values() []DependencyInsightsErrorCode {
+	return []DependencyInsightsErrorCode{
+		"INSUFFICIENT_DATA",
+		"LLM_GENERATION_FAILED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type DependencyInsightsStatus string
+
+// Enum values for DependencyInsightsStatus
+const (
+	DependencyInsightsStatusInProgress DependencyInsightsStatus = "IN_PROGRESS"
+	DependencyInsightsStatusCompleted  DependencyInsightsStatus = "COMPLETED"
+	DependencyInsightsStatusFailed     DependencyInsightsStatus = "FAILED"
+)
+
+// Values returns all known values for DependencyInsightsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DependencyInsightsStatus) Values() []DependencyInsightsStatus {
+	return []DependencyInsightsStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type EksLabelSelectorOperator string
+
+// Enum values for EksLabelSelectorOperator
+const (
+	EksLabelSelectorOperatorIn           EksLabelSelectorOperator = "IN"
+	EksLabelSelectorOperatorNotIn        EksLabelSelectorOperator = "NOT_IN"
+	EksLabelSelectorOperatorExists       EksLabelSelectorOperator = "EXISTS"
+	EksLabelSelectorOperatorDoesNotExist EksLabelSelectorOperator = "DOES_NOT_EXIST"
+)
+
+// Values returns all known values for EksLabelSelectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EksLabelSelectorOperator) Values() []EksLabelSelectorOperator {
+	return []EksLabelSelectorOperator{
+		"IN",
+		"NOT_IN",
+		"EXISTS",
+		"DOES_NOT_EXIST",
+	}
+}
+
 type FailureCategory string
 
 // Enum values for FailureCategory
@@ -349,6 +435,31 @@ func (InputSourceType) Values() []InputSourceType {
 		"TERRAFORM",
 		"DESIGN_FILE",
 		"MONITORING",
+	}
+}
+
+type InsightsCategory string
+
+// Enum values for InsightsCategory
+const (
+	InsightsCategoryCrossRegion   InsightsCategory = "CROSS_REGION"
+	InsightsCategoryNewDependency InsightsCategory = "NEW_DEPENDENCY"
+	InsightsCategoryThirdParty    InsightsCategory = "THIRD_PARTY"
+	InsightsCategoryUnevenUsage   InsightsCategory = "UNEVEN_USAGE"
+	InsightsCategoryAwsService    InsightsCategory = "AWS_SERVICE"
+)
+
+// Values returns all known values for InsightsCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightsCategory) Values() []InsightsCategory {
+	return []InsightsCategory{
+		"CROSS_REGION",
+		"NEW_DEPENDENCY",
+		"THIRD_PARTY",
+		"UNEVEN_USAGE",
+		"AWS_SERVICE",
 	}
 }
 
@@ -445,6 +556,50 @@ func (PolicyComponent) Values() []PolicyComponent {
 		"MULTI_AZ_DISASTER_RECOVERY",
 		"MULTI_REGION_DISASTER_RECOVERY",
 		"DATA_RECOVERY",
+	}
+}
+
+type PolicyDisassociationReason string
+
+// Enum values for PolicyDisassociationReason
+const (
+	PolicyDisassociationReasonReplacedByUpdate PolicyDisassociationReason = "REPLACED_BY_UPDATE"
+	PolicyDisassociationReasonSharingRevoked   PolicyDisassociationReason = "SHARING_REVOKED"
+	PolicyDisassociationReasonPolicyDeleted    PolicyDisassociationReason = "POLICY_DELETED"
+)
+
+// Values returns all known values for PolicyDisassociationReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyDisassociationReason) Values() []PolicyDisassociationReason {
+	return []PolicyDisassociationReason{
+		"REPLACED_BY_UPDATE",
+		"SHARING_REVOKED",
+		"POLICY_DELETED",
+	}
+}
+
+type PolicyEventType string
+
+// Enum values for PolicyEventType
+const (
+	PolicyEventTypePolicyAttachedToService   PolicyEventType = "POLICY_ATTACHED_TO_SERVICE"
+	PolicyEventTypePolicyDetachedFromService PolicyEventType = "POLICY_DETACHED_FROM_SERVICE"
+	PolicyEventTypePolicySharingRevoked      PolicyEventType = "POLICY_SHARING_REVOKED"
+	PolicyEventTypePolicyDeleted             PolicyEventType = "POLICY_DELETED"
+)
+
+// Values returns all known values for PolicyEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEventType) Values() []PolicyEventType {
+	return []PolicyEventType{
+		"POLICY_ATTACHED_TO_SERVICE",
+		"POLICY_DETACHED_FROM_SERVICE",
+		"POLICY_SHARING_REVOKED",
+		"POLICY_DELETED",
 	}
 }
 
@@ -760,6 +915,61 @@ func (SystemEventType) Values() []SystemEventType {
 		"SYSTEM_SERVICE_DISASSOCIATED",
 		"SYSTEM_POLICY_ASSOCIATED",
 		"SYSTEM_POLICY_DISASSOCIATED",
+	}
+}
+
+type TestRunDependencySource string
+
+// Enum values for TestRunDependencySource
+const (
+	TestRunDependencySourceDiscovered TestRunDependencySource = "DISCOVERED"
+	TestRunDependencySourceManual     TestRunDependencySource = "MANUAL"
+)
+
+// Values returns all known values for TestRunDependencySource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunDependencySource) Values() []TestRunDependencySource {
+	return []TestRunDependencySource{
+		"DISCOVERED",
+		"MANUAL",
+	}
+}
+
+type TestRunSourceEventErrorCode string
+
+// Enum values for TestRunSourceEventErrorCode
+const (
+	TestRunSourceEventErrorCodeAccessDenied  TestRunSourceEventErrorCode = "ACCESS_DENIED"
+	TestRunSourceEventErrorCodeInternalError TestRunSourceEventErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for TestRunSourceEventErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceEventErrorCode) Values() []TestRunSourceEventErrorCode {
+	return []TestRunSourceEventErrorCode{
+		"ACCESS_DENIED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type TestRunSourceEventType string
+
+// Enum values for TestRunSourceEventType
+const (
+	TestRunSourceEventTypeAlarm TestRunSourceEventType = "ALARM"
+)
+
+// Values returns all known values for TestRunSourceEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestRunSourceEventType) Values() []TestRunSourceEventType {
+	return []TestRunSourceEventType{
+		"ALARM",
 	}
 }
 

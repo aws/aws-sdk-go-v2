@@ -4,10 +4,12 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an image policy.
+// Retrieves an image policy.
 func (c *Client) GetImagePolicy(ctx context.Context, params *GetImagePolicyInput, optFns ...func(*Options)) (*GetImagePolicyOutput, error) {
 	if params == nil {
 		params = &GetImagePolicyInput{}
@@ -33,6 +35,18 @@ type GetImagePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImagePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImagePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImagePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.GetImagePolicyRequest_imageArn, *v.ImageArn)
+	}
+}
+
 type GetImagePolicyOutput struct {
 
 	// The image policy object.
@@ -47,13 +61,38 @@ type GetImagePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImagePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImagePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImagePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetImagePolicyResponse_policy, *v.Policy)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetImagePolicyResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetImagePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImagePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImagePolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetImagePolicyResponse_policy, v.Policy)
+		case schemas.GetImagePolicyResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetImagePolicyResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImagePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImagePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImagePolicy, schemas.GetImagePolicyRequest, schemas.GetImagePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImagePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImagePolicy, schemas.GetImagePolicyRequest, schemas.GetImagePolicyResponse), output: &GetImagePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package accessanalyzer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,22 @@ type CheckAccessNotGrantedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckAccessNotGrantedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckAccessNotGrantedRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckAccessNotGrantedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessList(s, schemas.CheckAccessNotGrantedRequest_access, v.Access)
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.CheckAccessNotGrantedRequest_policyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.CheckAccessNotGrantedRequest_policyType, string(v.PolicyType))
+	}
+}
+
 type CheckAccessNotGrantedOutput struct {
 
 	// The message indicating whether the specified access is allowed.
@@ -76,13 +94,45 @@ type CheckAccessNotGrantedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckAccessNotGrantedOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckAccessNotGrantedResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckAccessNotGrantedOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CheckAccessNotGrantedResponse_message, *v.Message)
+	}
+	serializeReasonSummaryList(s, schemas.CheckAccessNotGrantedResponse_reasons, v.Reasons)
+	if v.Result != "" {
+		s.WriteString(schemas.CheckAccessNotGrantedResponse_result, string(v.Result))
+	}
+}
+func (v *CheckAccessNotGrantedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckAccessNotGrantedResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckAccessNotGrantedResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CheckAccessNotGrantedResponse_message, v.Message)
+		case schemas.CheckAccessNotGrantedResponse_reasons:
+			return deserializeReasonSummaryList(d, schemas.CheckAccessNotGrantedResponse_reasons, &v.Reasons)
+		case schemas.CheckAccessNotGrantedResponse_result:
+			var ev string
+			if err := d.ReadString(schemas.CheckAccessNotGrantedResponse_result, &ev); err != nil {
+				return err
+			}
+			v.Result = types.CheckAccessNotGrantedResult(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckAccessNotGrantedMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCheckAccessNotGranted{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckAccessNotGranted, schemas.CheckAccessNotGrantedRequest, schemas.CheckAccessNotGrantedResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCheckAccessNotGranted{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckAccessNotGranted, schemas.CheckAccessNotGrantedRequest, schemas.CheckAccessNotGrantedResponse), output: &CheckAccessNotGrantedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

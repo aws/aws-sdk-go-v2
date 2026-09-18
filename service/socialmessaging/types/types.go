@@ -620,6 +620,139 @@ type WhatsAppBusinessAccountEventDestination struct {
 	noSmithyDocumentSerde
 }
 
+// The operating hours during which a business phone number accepts WhatsApp
+// calls, including the time zone, weekly schedule, and any holiday overrides.
+type WhatsAppCallHours struct {
+
+	// Specifies whether call hours are enforced. When disabled, the business accepts
+	// calls at any time.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The IANA time zone in which the operating hours are interpreted, such as
+	// America/New_York .
+	//
+	// This member is required.
+	Timezone *string
+
+	// The weekly schedule of hours during which the business accepts calls.
+	//
+	// This member is required.
+	WeeklyOperatingHours []WhatsAppWeeklyOperatingHoursEntry
+
+	// Date-specific overrides to the weekly operating hours, such as holidays.
+	HolidaySchedule []WhatsAppHolidayScheduleEntry
+
+	noSmithyDocumentSerde
+}
+
+// The current calling permission state for a business phone number and a specific
+// WhatsApp end user.
+type WhatsAppCallPermission struct {
+
+	// The permission status for the end user.
+	//
+	// This member is required.
+	Status *string
+
+	// The time when a temporary permission expires. This value is absent for
+	// permanent permissions and when there is no permission.
+	ExpirationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes a single calling action the business can take with an end user,
+// including whether the action is currently allowed and any limits that apply to
+// it. Returned as an item in the actions list from GetWhatsAppCallPermission .
+type WhatsAppCallPermissionAction struct {
+
+	// The name of the calling action.
+	//
+	// This member is required.
+	ActionName *string
+
+	// Specifies whether the business can currently perform the action.
+	//
+	// This member is required.
+	CanPerformAction *bool
+
+	// The time-bound limits that apply to the action.
+	//
+	// This member is required.
+	Limits []WhatsAppCallPermissionLimit
+
+	noSmithyDocumentSerde
+}
+
+// A time-bound restriction on a calling action, such as the number of calls
+// allowed within a time period.
+type WhatsAppCallPermissionLimit struct {
+
+	// The number of times the action has been used within the current time period.
+	//
+	// This member is required.
+	CurrentUsage *int32
+
+	// The maximum number of times the action is allowed within the time period.
+	//
+	// This member is required.
+	MaxAllowed *int32
+
+	// The time period over which the limit applies, as an ISO 8601 duration.
+	//
+	// This member is required.
+	TimePeriod *string
+
+	// The time when the limit resets. This value is present only when the current
+	// usage has reached the maximum allowed.
+	LimitExpirationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The calling configuration for a WhatsApp business phone number.
+type WhatsAppCallSettings struct {
+
+	// Specifies whether calling is enabled for the phone number.
+	//
+	// This member is required.
+	CallEnabled *bool
+
+	// The hours during which the business accepts calls on the phone number.
+	CallHours *WhatsAppCallHours
+
+	// The visibility setting for the call icon shown to end users in WhatsApp.
+	CallIconVisibility *string
+
+	// The callback permission status for the phone number.
+	CallbackPermissionStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// A date-specific override to the weekly operating hours, such as a holiday.
+type WhatsAppHolidayScheduleEntry struct {
+
+	// The date that the override applies to, in ISO 8601 format ( YYYY-MM-DD ).
+	//
+	// This member is required.
+	Date *string
+
+	// The time of day when the business stops accepting calls on the override date.
+	//
+	// This member is required.
+	EndTime *WhatsAppTimeOfDay
+
+	// The time of day when the business begins accepting calls on the override date.
+	//
+	// This member is required.
+	StartTime *WhatsAppTimeOfDay
+
+	noSmithyDocumentSerde
+}
+
 // The details of your WhatsApp phone number.
 type WhatsAppPhoneNumberDetail struct {
 
@@ -764,6 +897,44 @@ type WhatsAppSignupCallbackResult struct {
 	// A LinkedWhatsAppBusinessAccountIdMetaData object map containing the details of
 	// any WhatsAppBusiness accounts that have incomplete setup.
 	LinkedAccountsWithIncompleteSetup map[string]LinkedWhatsAppBusinessAccountIdMetaData
+
+	noSmithyDocumentSerde
+}
+
+// A time of day, expressed as an hour and minute.
+type WhatsAppTimeOfDay struct {
+
+	// The hour of the day, from 0 to 23.
+	//
+	// This member is required.
+	Hours *int32
+
+	// The minute of the hour, from 0 to 59.
+	//
+	// This member is required.
+	Minutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// A single entry in a weekly calling schedule, defining the open and close times
+// for one day of the week.
+type WhatsAppWeeklyOperatingHoursEntry struct {
+
+	// The time of day when the business stops accepting calls.
+	//
+	// This member is required.
+	CloseTime *WhatsAppTimeOfDay
+
+	// The day of the week that the entry applies to.
+	//
+	// This member is required.
+	DayOfWeek WhatsAppDayOfWeek
+
+	// The time of day when the business begins accepting calls.
+	//
+	// This member is required.
+	OpenTime *WhatsAppTimeOfDay
 
 	noSmithyDocumentSerde
 }

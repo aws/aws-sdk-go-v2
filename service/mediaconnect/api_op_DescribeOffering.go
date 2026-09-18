@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingArn != nil {
+		s.WriteString(schemas.DescribeOfferingRequest_OfferingArn, *v.OfferingArn)
+	}
+}
+
 type DescribeOfferingOutput struct {
 
 	// The offering that you requested a description of.
@@ -48,13 +62,34 @@ type DescribeOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOfferingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Offering != nil {
+		s.WriteStruct(schemas.DescribeOfferingResponse_Offering)
+		v.Offering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOfferingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOfferingResponse_Offering:
+			v.Offering = &types.Offering{}
+			return v.Offering.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOffering, schemas.DescribeOfferingRequest, schemas.DescribeOfferingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOffering, schemas.DescribeOfferingRequest, schemas.DescribeOfferingResponse), output: &DescribeOfferingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

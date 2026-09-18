@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageDescription != nil {
+		s.WriteString(schemas.CreatePackageRequest_PackageDescription, *v.PackageDescription)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.CreatePackageRequest_PackageName, *v.PackageName)
+	}
+	if v.PackageSource != nil {
+		s.WriteStruct(schemas.CreatePackageRequest_PackageSource)
+		v.PackageSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PackageType != "" {
+		s.WriteString(schemas.CreatePackageRequest_PackageType, string(v.PackageType))
+	}
+}
+
 // Container for response returned by CreatePackage operation.
 type CreatePackageOutput struct {
 
@@ -60,13 +85,34 @@ type CreatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageDetails != nil {
+		s.WriteStruct(schemas.CreatePackageResponse_PackageDetails)
+		v.PackageDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePackageResponse_PackageDetails:
+			v.PackageDetails = &types.PackageDetails{}
+			return v.PackageDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse), output: &CreatePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

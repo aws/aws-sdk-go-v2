@@ -334,6 +334,14 @@ func TestCheckRequestSnapshot_CreateComputeNodeGroup(t *testing.T) {
 					ParameterValue: ptr.String("__ParameterValue__"),
 				},
 			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
 		},
 		NodeLifecycleActions: &types.NodeLifecycleActionsRequest{
 			Stages: &types.NodeLifecycleStages{
@@ -956,6 +964,14 @@ func TestCheckRequestSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 					ParameterValue: ptr.String("__ParameterValue__"),
 				},
 			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
+				},
+			},
 		},
 		NodeLifecycleActions: &types.UpdateNodeLifecycleActionsRequest{
 			Stages: &types.NodeLifecycleStages{
@@ -1222,6 +1238,14 @@ func TestUpdateRequestSnapshot_CreateComputeNodeGroup(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -1844,6 +1868,14 @@ func TestUpdateRequestSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			GresCustomSettings: []map[string]string{
+				{
+					"key0": "__Value__",
+				},
+				{
+					"key0": "__Value__",
 				},
 			},
 		},

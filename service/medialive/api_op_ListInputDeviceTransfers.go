@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListInputDeviceTransfersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputDeviceTransfersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputDeviceTransfersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputDeviceTransfersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInputDeviceTransfersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputDeviceTransfersRequest_NextToken, *v.NextToken)
+	}
+	if v.TransferType != nil {
+		s.WriteString(schemas.ListInputDeviceTransfersRequest_TransferType, *v.TransferType)
+	}
+}
+
 // Placeholder documentation for ListInputDeviceTransfersResponse
 type ListInputDeviceTransfersOutput struct {
 
@@ -59,13 +79,35 @@ type ListInputDeviceTransfersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInputDeviceTransfersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInputDeviceTransfersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInputDeviceTransfersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfTransferringInputDeviceSummary(s, schemas.ListInputDeviceTransfersResponse_InputDeviceTransfers, v.InputDeviceTransfers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInputDeviceTransfersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInputDeviceTransfersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInputDeviceTransfersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInputDeviceTransfersResponse_InputDeviceTransfers:
+			return deserialize__listOfTransferringInputDeviceSummary(d, schemas.ListInputDeviceTransfersResponse_InputDeviceTransfers, &v.InputDeviceTransfers)
+		case schemas.ListInputDeviceTransfersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInputDeviceTransfersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInputDeviceTransfersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInputDeviceTransfers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputDeviceTransfers, schemas.ListInputDeviceTransfersRequest, schemas.ListInputDeviceTransfersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInputDeviceTransfers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInputDeviceTransfers, schemas.ListInputDeviceTransfersRequest, schemas.ListInputDeviceTransfersResponse), output: &ListInputDeviceTransfersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

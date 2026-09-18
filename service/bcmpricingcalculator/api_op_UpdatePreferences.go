@@ -4,7 +4,9 @@ package bcmpricingcalculator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type UpdatePreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRateTypes(s, schemas.UpdatePreferencesRequest_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
+	serializeRateTypes(s, schemas.UpdatePreferencesRequest_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
+	serializeRateTypes(s, schemas.UpdatePreferencesRequest_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+}
+
 type UpdatePreferencesOutput struct {
 
 	//  The updated preferred rate types for the management account.
@@ -55,13 +69,35 @@ type UpdatePreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRateTypes(s, schemas.UpdatePreferencesResponse_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
+	serializeRateTypes(s, schemas.UpdatePreferencesResponse_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
+	serializeRateTypes(s, schemas.UpdatePreferencesResponse_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+}
+func (v *UpdatePreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePreferencesResponse_managementAccountRateTypeSelections:
+			return deserializeRateTypes(d, schemas.UpdatePreferencesResponse_managementAccountRateTypeSelections, &v.ManagementAccountRateTypeSelections)
+		case schemas.UpdatePreferencesResponse_memberAccountRateTypeSelections:
+			return deserializeRateTypes(d, schemas.UpdatePreferencesResponse_memberAccountRateTypeSelections, &v.MemberAccountRateTypeSelections)
+		case schemas.UpdatePreferencesResponse_standaloneAccountRateTypeSelections:
+			return deserializeRateTypes(d, schemas.UpdatePreferencesResponse_standaloneAccountRateTypeSelections, &v.StandaloneAccountRateTypeSelections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePreferences, schemas.UpdatePreferencesRequest, schemas.UpdatePreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePreferences, schemas.UpdatePreferencesRequest, schemas.UpdatePreferencesResponse), output: &UpdatePreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

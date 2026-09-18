@@ -9,8 +9,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Generates a query from a natural language prompt. This operation uses
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Generates a query from a natural language prompt. This operation uses
 // generative artificial intelligence (generative AI) to produce a ready-to-use SQL
 // query from the prompt.
 //
@@ -27,6 +30,7 @@ import (
 // This feature uses generative AI large language models (LLMs); we recommend
 // double-checking the LLM response.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Create CloudTrail Lake queries from natural language prompts]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
 func (c *Client) GenerateQuery(ctx context.Context, params *GenerateQueryInput, optFns ...func(*Options)) (*GenerateQueryOutput, error) {
 	if params == nil {

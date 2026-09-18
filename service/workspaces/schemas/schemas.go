@@ -1000,7 +1000,7 @@ var _ClientUrl = smithy.NewSchema(smithy.ShapeID{
 var Compute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "Compute",
-}, smithy.ShapeTypeEnum, 23)
+}, smithy.ShapeTypeEnum, 27)
 var Compute_VALUE *smithy.Schema
 
 var Compute_STANDARD *smithy.Schema
@@ -1046,6 +1046,14 @@ var Compute_GRAPHICS_G6F_2XLARGE *smithy.Schema
 var Compute_GRAPHICS_G6F_4XLARGE *smithy.Schema
 
 var Compute_GRAPHICS_GR6F_4XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_2XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_4XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_8XLARGE *smithy.Schema
+
+var Compute_GRAPHICS_G7_12XLARGE *smithy.Schema
 
 var _ComputeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -1691,12 +1699,14 @@ var _ImageBuildVersionArn = smithy.NewSchema(smithy.ShapeID{
 var ImageComputeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "ImageComputeType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ImageComputeType_BASE *smithy.Schema
 
 var ImageComputeType_GRAPHICS_G4DN *smithy.Schema
 
 var ImageComputeType_GRAPHICS_G6 *smithy.Schema
+
+var ImageComputeType_GRAPHICS_G7 *smithy.Schema
 
 var _ImageErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -5334,6 +5344,14 @@ func init() {
 
 	Compute_GRAPHICS_GR6F_4XLARGE = Compute.AddMember("GRAPHICS_GR6F_4XLARGE", smithyprelude.Unit)
 
+	Compute_GRAPHICS_G7_2XLARGE = Compute.AddMember("GRAPHICS_G7_2XLARGE", smithyprelude.Unit)
+
+	Compute_GRAPHICS_G7_4XLARGE = Compute.AddMember("GRAPHICS_G7_4XLARGE", smithyprelude.Unit)
+
+	Compute_GRAPHICS_G7_8XLARGE = Compute.AddMember("GRAPHICS_G7_8XLARGE", smithyprelude.Unit)
+
+	Compute_GRAPHICS_G7_12XLARGE = Compute.AddMember("GRAPHICS_G7_12XLARGE", smithyprelude.Unit)
+
 	ComputeType_Name = ComputeType.AddMember("Name", Compute)
 
 	WorkspaceBundleState_AVAILABLE = WorkspaceBundleState.AddMember("AVAILABLE", smithyprelude.Unit)
@@ -6075,6 +6093,8 @@ func init() {
 	ImageComputeType_GRAPHICS_G4DN = ImageComputeType.AddMember("GRAPHICS_G4DN", smithyprelude.Unit)
 
 	ImageComputeType_GRAPHICS_G6 = ImageComputeType.AddMember("GRAPHICS_G6", smithyprelude.Unit)
+
+	ImageComputeType_GRAPHICS_G7 = ImageComputeType.AddMember("GRAPHICS_G7", smithyprelude.Unit)
 
 	ImagePermission_SharedAccountId = ImagePermission.AddMember("SharedAccountId", _AwsAccount)
 

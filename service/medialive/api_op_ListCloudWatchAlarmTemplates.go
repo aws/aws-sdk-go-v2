@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListCloudWatchAlarmTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCloudWatchAlarmTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCloudWatchAlarmTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCloudWatchAlarmTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupIdentifier != nil {
+		s.WriteString(schemas.ListCloudWatchAlarmTemplatesRequest_GroupIdentifier, *v.GroupIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCloudWatchAlarmTemplatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCloudWatchAlarmTemplatesRequest_NextToken, *v.NextToken)
+	}
+	if v.Scope != nil {
+		s.WriteString(schemas.ListCloudWatchAlarmTemplatesRequest_Scope, *v.Scope)
+	}
+	if v.SignalMapIdentifier != nil {
+		s.WriteString(schemas.ListCloudWatchAlarmTemplatesRequest_SignalMapIdentifier, *v.SignalMapIdentifier)
+	}
+}
+
 // Placeholder documentation for ListCloudWatchAlarmTemplatesResponse
 type ListCloudWatchAlarmTemplatesOutput struct {
 
@@ -63,13 +89,35 @@ type ListCloudWatchAlarmTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCloudWatchAlarmTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCloudWatchAlarmTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCloudWatchAlarmTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCloudWatchAlarmTemplateSummary(s, schemas.ListCloudWatchAlarmTemplatesResponse_CloudWatchAlarmTemplates, v.CloudWatchAlarmTemplates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCloudWatchAlarmTemplatesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCloudWatchAlarmTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCloudWatchAlarmTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCloudWatchAlarmTemplatesResponse_CloudWatchAlarmTemplates:
+			return deserialize__listOfCloudWatchAlarmTemplateSummary(d, schemas.ListCloudWatchAlarmTemplatesResponse_CloudWatchAlarmTemplates, &v.CloudWatchAlarmTemplates)
+		case schemas.ListCloudWatchAlarmTemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCloudWatchAlarmTemplatesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCloudWatchAlarmTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCloudWatchAlarmTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudWatchAlarmTemplates, schemas.ListCloudWatchAlarmTemplatesRequest, schemas.ListCloudWatchAlarmTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCloudWatchAlarmTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudWatchAlarmTemplates, schemas.ListCloudWatchAlarmTemplatesRequest, schemas.ListCloudWatchAlarmTemplatesResponse), output: &ListCloudWatchAlarmTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

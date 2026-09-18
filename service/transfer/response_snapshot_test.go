@@ -372,6 +372,9 @@ func TestCheckResponseSnapshot_CreateServer(t *testing.T) {
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
 			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
+			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),
 		Tags: []types.Tag{
@@ -1547,6 +1550,9 @@ func TestCheckResponseSnapshot_DescribeServer(t *testing.T) {
 				As2Transports: []types.As2Transport{
 					types.As2Transport("HTTP"),
 					types.As2Transport("HTTP"),
+				},
+				ProxyConfig: &types.ProxyConfig{
+					SftpMode: types.ProxyMode("NONE"),
 				},
 			},
 			Domain: types.Domain("S3"),
@@ -3337,6 +3343,9 @@ func TestCheckResponseSnapshot_UpdateServer(t *testing.T) {
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
 			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
+			},
 		},
 		EndpointDetails: &types.EndpointDetails{
 			AddressAllocationIds: []string{
@@ -3583,6 +3592,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			As2Transports: []types.As2Transport{
 				types.As2Transport("HTTP"),
 				types.As2Transport("HTTP"),
+			},
+			ProxyConfig: &types.ProxyConfig{
+				SftpMode: types.ProxyMode("NONE"),
 			},
 		},
 		SecurityPolicyName: ptr.String("__SecurityPolicyName__"),

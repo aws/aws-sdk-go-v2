@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.PutLogEvents
+
+{"nextSequenceToken":"__NextSequenceToken__","rejectedEntityInfo":{"errorType":"InvalidEntity"},"rejectedLogEventsInfo":{"expiredLogEventEndIndex":1,"tooNewLogEventStartIndex":1,"tooOldLogEventEndIndex":1}}

@@ -92635,13 +92635,28 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
-									FieldOrder:              ptr.String("__FieldOrder__"),
-									Hdr10PlusPresence:       types.Hdr10PlusPresence("PRESENT"),
-									Height:                  ptr.Int32(1),
-									Level:                   ptr.String("__Level__"),
-									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
-									Profile:                 ptr.String("__Profile__"),
-									Rotation:                ptr.Int32(1),
+									DisplayAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
+									DolbyVision: &types.DolbyVisionMetadata{
+										BaseLayer:        types.DolbyVisionPresence("PRESENT"),
+										EnhancementLayer: types.DolbyVisionPresence("PRESENT"),
+										Level:            ptr.Int32(1),
+										Profile:          ptr.Int32(1),
+										Rpu:              types.DolbyVisionPresence("PRESENT"),
+									},
+									FieldOrder:         ptr.String("__FieldOrder__"),
+									Hdr10PlusPresence:  types.Hdr10PlusPresence("PRESENT"),
+									Height:             ptr.Int32(1),
+									Level:              ptr.String("__Level__"),
+									MatrixCoefficients: types.MatrixCoefficients("RGB"),
+									Profile:            ptr.String("__Profile__"),
+									Rotation:           ptr.Int32(1),
+									SampleAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
 									ScanType:                ptr.String("__ScanType__"),
 									TransferCharacteristics: types.TransferCharacteristics("ITU_709"),
 									Width:                   ptr.Int32(1),
@@ -92720,13 +92735,28 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
-									FieldOrder:              ptr.String("__FieldOrder__"),
-									Hdr10PlusPresence:       types.Hdr10PlusPresence("PRESENT"),
-									Height:                  ptr.Int32(1),
-									Level:                   ptr.String("__Level__"),
-									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
-									Profile:                 ptr.String("__Profile__"),
-									Rotation:                ptr.Int32(1),
+									DisplayAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
+									DolbyVision: &types.DolbyVisionMetadata{
+										BaseLayer:        types.DolbyVisionPresence("PRESENT"),
+										EnhancementLayer: types.DolbyVisionPresence("PRESENT"),
+										Level:            ptr.Int32(1),
+										Profile:          ptr.Int32(1),
+										Rpu:              types.DolbyVisionPresence("PRESENT"),
+									},
+									FieldOrder:         ptr.String("__FieldOrder__"),
+									Hdr10PlusPresence:  types.Hdr10PlusPresence("PRESENT"),
+									Height:             ptr.Int32(1),
+									Level:              ptr.String("__Level__"),
+									MatrixCoefficients: types.MatrixCoefficients("RGB"),
+									Profile:            ptr.String("__Profile__"),
+									Rotation:           ptr.Int32(1),
+									SampleAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
 									ScanType:                ptr.String("__ScanType__"),
 									TransferCharacteristics: types.TransferCharacteristics("ITU_709"),
 									Width:                   ptr.Int32(1),
@@ -92851,13 +92881,28 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
-									FieldOrder:              ptr.String("__FieldOrder__"),
-									Hdr10PlusPresence:       types.Hdr10PlusPresence("PRESENT"),
-									Height:                  ptr.Int32(1),
-									Level:                   ptr.String("__Level__"),
-									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
-									Profile:                 ptr.String("__Profile__"),
-									Rotation:                ptr.Int32(1),
+									DisplayAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
+									DolbyVision: &types.DolbyVisionMetadata{
+										BaseLayer:        types.DolbyVisionPresence("PRESENT"),
+										EnhancementLayer: types.DolbyVisionPresence("PRESENT"),
+										Level:            ptr.Int32(1),
+										Profile:          ptr.Int32(1),
+										Rpu:              types.DolbyVisionPresence("PRESENT"),
+									},
+									FieldOrder:         ptr.String("__FieldOrder__"),
+									Hdr10PlusPresence:  types.Hdr10PlusPresence("PRESENT"),
+									Height:             ptr.Int32(1),
+									Level:              ptr.String("__Level__"),
+									MatrixCoefficients: types.MatrixCoefficients("RGB"),
+									Profile:            ptr.String("__Profile__"),
+									Rotation:           ptr.Int32(1),
+									SampleAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
 									ScanType:                ptr.String("__ScanType__"),
 									TransferCharacteristics: types.TransferCharacteristics("ITU_709"),
 									Width:                   ptr.Int32(1),
@@ -92936,13 +92981,28 @@ func TestCheckResponseSnapshot_Probe(t *testing.T) {
 										MaxContentLightLevel:      ptr.Int32(1),
 										MaxFrameAverageLightLevel: ptr.Int32(1),
 									},
-									FieldOrder:              ptr.String("__FieldOrder__"),
-									Hdr10PlusPresence:       types.Hdr10PlusPresence("PRESENT"),
-									Height:                  ptr.Int32(1),
-									Level:                   ptr.String("__Level__"),
-									MatrixCoefficients:      types.MatrixCoefficients("RGB"),
-									Profile:                 ptr.String("__Profile__"),
-									Rotation:                ptr.Int32(1),
+									DisplayAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
+									DolbyVision: &types.DolbyVisionMetadata{
+										BaseLayer:        types.DolbyVisionPresence("PRESENT"),
+										EnhancementLayer: types.DolbyVisionPresence("PRESENT"),
+										Level:            ptr.Int32(1),
+										Profile:          ptr.Int32(1),
+										Rpu:              types.DolbyVisionPresence("PRESENT"),
+									},
+									FieldOrder:         ptr.String("__FieldOrder__"),
+									Hdr10PlusPresence:  types.Hdr10PlusPresence("PRESENT"),
+									Height:             ptr.Int32(1),
+									Level:              ptr.String("__Level__"),
+									MatrixCoefficients: types.MatrixCoefficients("RGB"),
+									Profile:            ptr.String("__Profile__"),
+									Rotation:           ptr.Int32(1),
+									SampleAspectRatio: &types.AspectRatio{
+										Denominator: ptr.Int32(1),
+										Numerator:   ptr.Int32(1),
+									},
 									ScanType:                ptr.String("__ScanType__"),
 									TransferCharacteristics: types.TransferCharacteristics("ITU_709"),
 									Width:                   ptr.Int32(1),
@@ -124456,5 +124516,39 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "TooManyRequestsException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_UnprocessableEntityException(t *testing.T) {
+	want := &types.UnprocessableEntityException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UnprocessableEntityException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.Probe(context.Background(), &ProbeInput{
+		InputFiles: []types.ProbeInputFile{
+			{
+				FileUrl: ptr.String("__FileUrl__"),
+			},
+			{
+				FileUrl: ptr.String("__FileUrl__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.UnprocessableEntityException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.UnprocessableEntityException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "UnprocessableEntityException.error", err)
 	}
 }

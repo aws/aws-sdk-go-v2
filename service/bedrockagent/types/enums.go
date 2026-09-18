@@ -1223,6 +1223,7 @@ const (
 	ParsingStrategyBedrockFoundationModel ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"
 	ParsingStrategyBedrockDataAutomation  ParsingStrategy = "BEDROCK_DATA_AUTOMATION"
 	ParsingStrategySmartParsing           ParsingStrategy = "SMART_PARSING"
+	ParsingStrategyMultiModalEmbeddings   ParsingStrategy = "MULTI_MODAL_EMBEDDINGS"
 )
 
 // Values returns all known values for ParsingStrategy. Note that this can be
@@ -1234,6 +1235,7 @@ func (ParsingStrategy) Values() []ParsingStrategy {
 		"BEDROCK_FOUNDATION_MODEL",
 		"BEDROCK_DATA_AUTOMATION",
 		"SMART_PARSING",
+		"MULTI_MODAL_EMBEDDINGS",
 	}
 }
 

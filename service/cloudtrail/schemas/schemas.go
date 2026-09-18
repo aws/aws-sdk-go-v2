@@ -2150,7 +2150,7 @@ var _Timestamps_member *smithy.Schema
 var Trail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "Trail",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var Trail_Name *smithy.Schema
 
 var Trail_S3BucketName *smithy.Schema
@@ -2182,6 +2182,8 @@ var Trail_HasCustomEventSelectors *smithy.Schema
 var Trail_HasInsightSelectors *smithy.Schema
 
 var Trail_IsOrganizationTrail *smithy.Schema
+
+var Trail_RecursiveLogging *smithy.Schema
 
 var TrailAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
@@ -2440,7 +2442,7 @@ var CreateEventDataStoreResponse_BillingMode *smithy.Schema
 var CreateTrailRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CreateTrailRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateTrailRequest_Name *smithy.Schema
 
 var CreateTrailRequest_S3BucketName *smithy.Schema
@@ -2465,10 +2467,12 @@ var CreateTrailRequest_IsOrganizationTrail *smithy.Schema
 
 var CreateTrailRequest_TagsList *smithy.Schema
 
+var CreateTrailRequest_RecursiveLogging *smithy.Schema
+
 var CreateTrailResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "CreateTrailResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var CreateTrailResponse_Name *smithy.Schema
 
 var CreateTrailResponse_S3BucketName *smithy.Schema
@@ -2494,6 +2498,8 @@ var CreateTrailResponse_CloudWatchLogsRoleArn *smithy.Schema
 var CreateTrailResponse_KmsKeyId *smithy.Schema
 
 var CreateTrailResponse_IsOrganizationTrail *smithy.Schema
+
+var CreateTrailResponse_RecursiveLogging *smithy.Schema
 
 var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
@@ -3616,7 +3622,7 @@ var UpdateEventDataStoreResponse_FederationRoleArn *smithy.Schema
 var UpdateTrailRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "UpdateTrailRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateTrailRequest_Name *smithy.Schema
 
 var UpdateTrailRequest_S3BucketName *smithy.Schema
@@ -3639,10 +3645,12 @@ var UpdateTrailRequest_KmsKeyId *smithy.Schema
 
 var UpdateTrailRequest_IsOrganizationTrail *smithy.Schema
 
+var UpdateTrailRequest_RecursiveLogging *smithy.Schema
+
 var UpdateTrailResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudtrail",
 	Name:      "UpdateTrailResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateTrailResponse_Name *smithy.Schema
 
 var UpdateTrailResponse_S3BucketName *smithy.Schema
@@ -3668,6 +3676,8 @@ var UpdateTrailResponse_CloudWatchLogsRoleArn *smithy.Schema
 var UpdateTrailResponse_KmsKeyId *smithy.Schema
 
 var UpdateTrailResponse_IsOrganizationTrail *smithy.Schema
+
+var UpdateTrailResponse_RecursiveLogging *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -4332,6 +4342,8 @@ func init() {
 
 	Trail_IsOrganizationTrail = Trail.AddMember("IsOrganizationTrail", _Boolean)
 
+	Trail_RecursiveLogging = Trail.AddMember("RecursiveLogging", _Boolean)
+
 	TrailAlreadyExistsException_Message = TrailAlreadyExistsException.AddMember("Message", _ErrorMessage)
 
 	TrailInfo_TrailARN = TrailInfo.AddMember("TrailARN", _String)
@@ -4490,6 +4502,8 @@ func init() {
 
 	CreateTrailRequest_TagsList = CreateTrailRequest.AddMember("TagsList", _TagsList)
 
+	CreateTrailRequest_RecursiveLogging = CreateTrailRequest.AddMember("RecursiveLogging", _Boolean)
+
 	CreateTrailResponse_Name = CreateTrailResponse.AddMember("Name", _String)
 
 	CreateTrailResponse_S3BucketName = CreateTrailResponse.AddMember("S3BucketName", _String)
@@ -4515,6 +4529,8 @@ func init() {
 	CreateTrailResponse_KmsKeyId = CreateTrailResponse.AddMember("KmsKeyId", _String)
 
 	CreateTrailResponse_IsOrganizationTrail = CreateTrailResponse.AddMember("IsOrganizationTrail", _Boolean)
+
+	CreateTrailResponse_RecursiveLogging = CreateTrailResponse.AddMember("RecursiveLogging", _Boolean)
 
 	DeleteChannelRequest_Channel = DeleteChannelRequest.AddMember("Channel", _ChannelArn)
 
@@ -5220,6 +5236,8 @@ func init() {
 
 	UpdateTrailRequest_IsOrganizationTrail = UpdateTrailRequest.AddMember("IsOrganizationTrail", _Boolean)
 
+	UpdateTrailRequest_RecursiveLogging = UpdateTrailRequest.AddMember("RecursiveLogging", _Boolean)
+
 	UpdateTrailResponse_Name = UpdateTrailResponse.AddMember("Name", _String)
 
 	UpdateTrailResponse_S3BucketName = UpdateTrailResponse.AddMember("S3BucketName", _String)
@@ -5245,5 +5263,7 @@ func init() {
 	UpdateTrailResponse_KmsKeyId = UpdateTrailResponse.AddMember("KmsKeyId", _String)
 
 	UpdateTrailResponse_IsOrganizationTrail = UpdateTrailResponse.AddMember("IsOrganizationTrail", _Boolean)
+
+	UpdateTrailResponse_RecursiveLogging = UpdateTrailResponse.AddMember("RecursiveLogging", _Boolean)
 
 }

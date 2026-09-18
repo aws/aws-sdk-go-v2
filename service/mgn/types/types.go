@@ -2700,11 +2700,17 @@ func (v *LaunchedInstance) Deserialize(d smithy.ShapeDeserializer) error {
 // Launch template disk configuration.
 type LaunchTemplateDiskConf struct {
 
+	// Launch template disk delete on termination configuration.
+	DeleteOnTermination *bool
+
 	// Launch template disk iops configuration.
 	Iops *int64
 
 	// Launch template disk throughput configuration.
 	Throughput *int64
+
+	// Launch template disk volume initialization rate configuration.
+	VolumeInitializationRate *int64
 
 	// Launch template disk volume type configuration.
 	VolumeType VolumeType
@@ -2719,11 +2725,17 @@ func (v *LaunchTemplateDiskConf) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LaunchTemplateDiskConf) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteOnTermination != nil {
+		s.WriteBool(schemas.LaunchTemplateDiskConf_deleteOnTermination, *v.DeleteOnTermination)
+	}
 	if v.Iops != nil {
 		s.WriteInt64(schemas.LaunchTemplateDiskConf_iops, *v.Iops)
 	}
 	if v.Throughput != nil {
 		s.WriteInt64(schemas.LaunchTemplateDiskConf_throughput, *v.Throughput)
+	}
+	if v.VolumeInitializationRate != nil {
+		s.WriteInt64(schemas.LaunchTemplateDiskConf_volumeInitializationRate, *v.VolumeInitializationRate)
 	}
 	if v.VolumeType != "" {
 		s.WriteString(schemas.LaunchTemplateDiskConf_volumeType, string(v.VolumeType))
@@ -2732,12 +2744,18 @@ func (v *LaunchTemplateDiskConf) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *LaunchTemplateDiskConf) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LaunchTemplateDiskConf, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.LaunchTemplateDiskConf_deleteOnTermination:
+			v.DeleteOnTermination = new(bool)
+			return d.ReadBool(schemas.LaunchTemplateDiskConf_deleteOnTermination, v.DeleteOnTermination)
 		case schemas.LaunchTemplateDiskConf_iops:
 			v.Iops = new(int64)
 			return d.ReadInt64(schemas.LaunchTemplateDiskConf_iops, v.Iops)
 		case schemas.LaunchTemplateDiskConf_throughput:
 			v.Throughput = new(int64)
 			return d.ReadInt64(schemas.LaunchTemplateDiskConf_throughput, v.Throughput)
+		case schemas.LaunchTemplateDiskConf_volumeInitializationRate:
+			v.VolumeInitializationRate = new(int64)
+			return d.ReadInt64(schemas.LaunchTemplateDiskConf_volumeInitializationRate, v.VolumeInitializationRate)
 		case schemas.LaunchTemplateDiskConf_volumeType:
 			var ev string
 			if err := d.ReadString(schemas.LaunchTemplateDiskConf_volumeType, &ev); err != nil {

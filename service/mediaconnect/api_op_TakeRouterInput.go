@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type TakeRouterInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TakeRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TakeRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TakeRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterInputArn != nil {
+		s.WriteString(schemas.TakeRouterInputRequest_RouterInputArn, *v.RouterInputArn)
+	}
+	if v.RouterOutputArn != nil {
+		s.WriteString(schemas.TakeRouterInputRequest_RouterOutputArn, *v.RouterOutputArn)
+	}
+}
+
 type TakeRouterInputOutput struct {
 
 	// The state of the association between the router input and output.
@@ -68,13 +85,60 @@ type TakeRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TakeRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TakeRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TakeRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoutedState != "" {
+		s.WriteString(schemas.TakeRouterInputResponse_RoutedState, string(v.RoutedState))
+	}
+	if v.RouterInputArn != nil {
+		s.WriteString(schemas.TakeRouterInputResponse_RouterInputArn, *v.RouterInputArn)
+	}
+	if v.RouterInputName != nil {
+		s.WriteString(schemas.TakeRouterInputResponse_RouterInputName, *v.RouterInputName)
+	}
+	if v.RouterOutputArn != nil {
+		s.WriteString(schemas.TakeRouterInputResponse_RouterOutputArn, *v.RouterOutputArn)
+	}
+	if v.RouterOutputName != nil {
+		s.WriteString(schemas.TakeRouterInputResponse_RouterOutputName, *v.RouterOutputName)
+	}
+}
+func (v *TakeRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TakeRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TakeRouterInputResponse_RoutedState:
+			var ev string
+			if err := d.ReadString(schemas.TakeRouterInputResponse_RoutedState, &ev); err != nil {
+				return err
+			}
+			v.RoutedState = types.RouterOutputRoutedState(ev)
+			return nil
+		case schemas.TakeRouterInputResponse_RouterInputArn:
+			v.RouterInputArn = new(string)
+			return d.ReadString(schemas.TakeRouterInputResponse_RouterInputArn, v.RouterInputArn)
+		case schemas.TakeRouterInputResponse_RouterInputName:
+			v.RouterInputName = new(string)
+			return d.ReadString(schemas.TakeRouterInputResponse_RouterInputName, v.RouterInputName)
+		case schemas.TakeRouterInputResponse_RouterOutputArn:
+			v.RouterOutputArn = new(string)
+			return d.ReadString(schemas.TakeRouterInputResponse_RouterOutputArn, v.RouterOutputArn)
+		case schemas.TakeRouterInputResponse_RouterOutputName:
+			v.RouterOutputName = new(string)
+			return d.ReadString(schemas.TakeRouterInputResponse_RouterOutputName, v.RouterOutputName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTakeRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTakeRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TakeRouterInput, schemas.TakeRouterInputRequest, schemas.TakeRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTakeRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TakeRouterInput, schemas.TakeRouterInputRequest, schemas.TakeRouterInputResponse), output: &TakeRouterInputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

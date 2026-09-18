@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"ApplicationId":"__ApplicationId__","Id":"__Id__","LocationUri":"__LocationUri__","Name":"__Name__","Type":"__Type__","ValidatorTypes":["JSON_SCHEMA","JSON_SCHEMA"]},{"ApplicationId":"__ApplicationId__","Id":"__Id__","LocationUri":"__LocationUri__","Name":"__Name__","Type":"__Type__","ValidatorTypes":["JSON_SCHEMA","JSON_SCHEMA"]}],"NextToken":"__NextToken__"}

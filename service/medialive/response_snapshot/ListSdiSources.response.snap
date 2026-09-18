@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","sdiSources":[{"arn":"__Arn__","id":"__Id__","inputs":["__Member__","__Member__"],"mode":"QUADRANT","name":"__Name__","state":"IDLE","type":"SINGLE"},{"arn":"__Arn__","id":"__Id__","inputs":["__Member__","__Member__"],"mode":"QUADRANT","name":"__Name__","state":"IDLE","type":"SINGLE"}]}

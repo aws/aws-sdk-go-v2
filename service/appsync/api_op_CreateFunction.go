@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,52 @@ type CreateFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateFunctionRequest_apiId, *v.ApiId)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.CreateFunctionRequest_code, *v.Code)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.CreateFunctionRequest_dataSourceName, *v.DataSourceName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFunctionRequest_description, *v.Description)
+	}
+	if v.FunctionVersion != nil {
+		s.WriteString(schemas.CreateFunctionRequest_functionVersion, *v.FunctionVersion)
+	}
+	if v.MaxBatchSize != 0 {
+		s.WriteInt32(schemas.CreateFunctionRequest_maxBatchSize, v.MaxBatchSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFunctionRequest_name, *v.Name)
+	}
+	if v.RequestMappingTemplate != nil {
+		s.WriteString(schemas.CreateFunctionRequest_requestMappingTemplate, *v.RequestMappingTemplate)
+	}
+	if v.ResponseMappingTemplate != nil {
+		s.WriteString(schemas.CreateFunctionRequest_responseMappingTemplate, *v.ResponseMappingTemplate)
+	}
+	if v.Runtime != nil {
+		s.WriteStruct(schemas.CreateFunctionRequest_runtime)
+		v.Runtime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SyncConfig != nil {
+		s.WriteStruct(schemas.CreateFunctionRequest_syncConfig)
+		v.SyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFunctionOutput struct {
 
 	// The Function object.
@@ -92,13 +140,34 @@ type CreateFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionConfiguration != nil {
+		s.WriteStruct(schemas.CreateFunctionResponse_functionConfiguration)
+		v.FunctionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFunctionResponse_functionConfiguration:
+			v.FunctionConfiguration = &types.FunctionConfiguration{}
+			return v.FunctionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFunction, schemas.CreateFunctionRequest, schemas.CreateFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFunction, schemas.CreateFunctionRequest, schemas.CreateFunctionResponse), output: &CreateFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

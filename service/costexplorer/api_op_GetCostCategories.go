@@ -4,7 +4,9 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -172,6 +174,41 @@ type GetCostCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostCategoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostCategoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostCategoriesRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.CostCategoryName != nil {
+		s.WriteString(schemas.GetCostCategoriesRequest_CostCategoryName, *v.CostCategoryName)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostCategoriesRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCostCategoriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostCategoriesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SearchString != nil {
+		s.WriteString(schemas.GetCostCategoriesRequest_SearchString, *v.SearchString)
+	}
+	serializeSortDefinitions(s, schemas.GetCostCategoriesRequest_SortBy, v.SortBy)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetCostCategoriesRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetCostCategoriesOutput struct {
 
 	// The number of objects that are returned.
@@ -205,13 +242,50 @@ type GetCostCategoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostCategoriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostCategoryNamesList(s, schemas.GetCostCategoriesResponse_CostCategoryNames, v.CostCategoryNames)
+	serializeCostCategoryValuesList(s, schemas.GetCostCategoriesResponse_CostCategoryValues, v.CostCategoryValues)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostCategoriesResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.ReturnSize != nil {
+		s.WriteInt32(schemas.GetCostCategoriesResponse_ReturnSize, *v.ReturnSize)
+	}
+	if v.TotalSize != nil {
+		s.WriteInt32(schemas.GetCostCategoriesResponse_TotalSize, *v.TotalSize)
+	}
+}
+func (v *GetCostCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostCategoriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostCategoriesResponse_CostCategoryNames:
+			return deserializeCostCategoryNamesList(d, schemas.GetCostCategoriesResponse_CostCategoryNames, &v.CostCategoryNames)
+		case schemas.GetCostCategoriesResponse_CostCategoryValues:
+			return deserializeCostCategoryValuesList(d, schemas.GetCostCategoriesResponse_CostCategoryValues, &v.CostCategoryValues)
+		case schemas.GetCostCategoriesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostCategoriesResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetCostCategoriesResponse_ReturnSize:
+			v.ReturnSize = new(int32)
+			return d.ReadInt32(schemas.GetCostCategoriesResponse_ReturnSize, v.ReturnSize)
+		case schemas.GetCostCategoriesResponse_TotalSize:
+			v.TotalSize = new(int32)
+			return d.ReadInt32(schemas.GetCostCategoriesResponse_TotalSize, v.TotalSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostCategories, schemas.GetCostCategoriesRequest, schemas.GetCostCategoriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostCategories, schemas.GetCostCategoriesRequest, schemas.GetCostCategoriesResponse), output: &GetCostCategoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

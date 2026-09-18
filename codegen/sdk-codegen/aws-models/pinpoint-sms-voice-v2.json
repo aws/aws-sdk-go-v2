@@ -414,6 +414,18 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#AvailablePhoneNumberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumber"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of available phone numbers returned by the search.\nMax aligns with ListAvailablePhoneNumbersMaxResults (page size bound).",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#CarrierLookup": {
             "type": "operation",
             "input": {
@@ -8198,6 +8210,158 @@
                 ]
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Search available phone numbers from aggregator inventory, optionally filtered by pattern.\nIf NumberPreference is omitted, returns unfiltered available numbers.\nReturns empty list (not an exception) when no numbers match.\nResourceNotFoundException is thrown only for invalid RegistrationId (campaign not found).",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListAvailablePhoneNumbers",
+                        "documentation": "Search for available TEN_DLC phone numbers in the US that start with a specific area code.",
+                        "input": {
+                            "IsoCountryCode": "US",
+                            "NumberCapabilities": [
+                                "SMS"
+                            ],
+                            "NumberType": "TEN_DLC",
+                            "RegistrationId": "reg-1234567890abcdef0",
+                            "NumberPreference": [
+                                {
+                                    "PreferenceType": [
+                                        "StartsWith"
+                                    ],
+                                    "Filter": [
+                                        "+1206"
+                                    ]
+                                }
+                            ],
+                            "MaxResults": 10
+                        },
+                        "output": {
+                            "AvailablePhoneNumbers": [
+                                "+12065550100",
+                                "+12065550142",
+                                "+12065550187"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "items": "AvailablePhoneNumbers"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum number of results per page for ListAvailablePhoneNumbers.\nAligned with AvailablePhoneNumberList max of 10.",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersRequest": {
+            "type": "structure",
+            "members": {
+                "IsoCountryCode": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region in which to search for available phone numbers. This operation currently supports only <code>US</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberCapabilities": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capabilities to filter by, such as SMS. Only phone numbers that support all of the specified capabilities are returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberType": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SearchableNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of phone number to search for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegistrationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RegistrationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration associated with the request. A registration is required for regulated number types. You can specify either:</p> <ul> <li> <p>The unique identifier of the registration.</p> </li> <li> <p>The Amazon Resource Name (ARN) of the registration.</p> </li> </ul>"
+                    }
+                },
+                "NumberPreference": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. If omitted, returns unfiltered available numbers.\nMax 1 element for List API."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous request to retrieve the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page. If you don't specify a value, the default is 10.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbersResult": {
+            "type": "structure",
+            "members": {
+                "AvailablePhoneNumbers": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AvailablePhoneNumberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of phone numbers, in E.164 format, that are available to request based on the specified filters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in the next request to retrieve the next page of results. This value is null when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountries": {
             "type": "operation",
             "input": {
@@ -8720,6 +8884,15 @@
                 "smithy.api#pattern": "^arn:\\S+$"
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#LongMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#PrimitiveLong"
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#MCCType": {
             "type": "string",
             "traits": {
@@ -8840,6 +9013,26 @@
                 "smithy.api#length": {
                     "max": 2
                 }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#MessagingLimits": {
+            "type": "structure",
+            "members": {
+                "RateLimits": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#LongMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum send rate for each supported capability, in messages per second. The map is keyed by capability, such as <code>SMS</code>, <code>MMS</code>, <code>VOICE</code>, or <code>RCS</code>.</p>"
+                    }
+                },
+                "DailyMessageCaps": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#LongMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The advisory maximum number of messages that can be sent per day, keyed by provider (for example, <code>T-MOBILE</code>). Applies to 10DLC phone numbers and is omitted when no daily cap applies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The messaging limits that apply to an origination identity, such as a phone number, sender ID, or RCS agent. Includes the per-capability send rates and, for supported origination identities, advisory per-provider daily message caps.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit": {
@@ -9556,6 +9749,65 @@
                 }
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#NumberFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NumberFilterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of filter values. Max 1 for pattern types (StartsWith/EndsWith/Contains), max 10 for ExactMatch.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NumberFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A filter value — either a pattern (e.g., \"+1510\") or full E.164 number.",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^\\+?[0-9]{1,15}$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceItem": {
+            "type": "structure",
+            "members": {
+                "PreferenceType": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#PreferenceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of match to apply to the filter values.</p> <ul> <li> <p> <code>StartsWith</code>: Returns numbers that begin with the filter value.</p> </li> <li> <p> <code>EndsWith</code>: Returns numbers that end with the filter value.</p> </li> <li> <p> <code>Contains</code>: Returns numbers that contain the filter value.</p> </li> <li> <p> <code>ExactMatch</code>: Returns the number that exactly matches the filter value.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The digit pattern values to match against available phone numbers, using the specified preference type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A single number preference — specifies a pattern type and filter value."
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceItem"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of number preference objects. Max 1 element.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#NumberStatus": {
             "type": "string",
             "traits": {
@@ -10068,6 +10320,12 @@
                         "smithy.api#documentation": "<p>The unique identifier for the registration.</p>"
                     }
                 },
+                "MessagingLimits": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MessagingLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The messaging limits that apply to the phone number, including the per-capability send rates and any advisory per-provider daily message caps.</p>"
+                    }
+                },
                 "CreatedTimestamp": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -10330,6 +10588,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ListAvailablePhoneNumbers"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountries"
@@ -11642,6 +11903,43 @@
                 ]
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#PreferenceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The type of pattern matching to apply.",
+                "smithy.api#enum": [
+                    {
+                        "value": "StartsWith",
+                        "name": "STARTS_WITH"
+                    },
+                    {
+                        "value": "EndsWith",
+                        "name": "ENDS_WITH"
+                    },
+                    {
+                        "value": "Contains",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "ExactMatch",
+                        "name": "EXACT_MATCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#PreferenceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#PreferenceType"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of preference types. Max 1 at launch.\nModeled as list for forward compatibility — will support multiple types in future phases.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn": {
             "type": "string",
             "traits": {
@@ -12765,6 +13063,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#TestingAgentInformation",
                     "traits": {
                         "smithy.api#documentation": "<p>The testing agent information associated with the RCS agent.</p>"
+                    }
+                },
+                "MessagingLimits": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MessagingLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The messaging limits that apply to the RCS agent, including the per-capability send rates.</p>"
                     }
                 }
             },
@@ -15058,6 +15362,12 @@
                         "smithy.api#documentation": "<p>Use this field to attach your phone number for an external registration process.</p>"
                     }
                 },
+                "NumberPreference": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberPreferenceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional selection preference used to request a specific phone number, such as a number that starts with, ends with, or contains a particular digit pattern. You can specify at most one preference. Number preferences apply only to <code>TEN_DLC</code> requests in the <code>US</code>.</p>"
+                    }
+                },
                 "InternationalSendingEnabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -15510,6 +15820,18 @@
                     {
                         "value": "rcs-agent",
                         "name": "RCS_AGENT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SearchableNumberType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The type of phone number to search for with ListAvailablePhoneNumbers.\nCurrently only TEN_DLC is supported; additional number types (for example\nTOLL_FREE) will be added in future phases. Modeled as a dedicated enum rather\nthan RequestableNumberType so this operation advertises only the values it\nactually supports. New values may be added over time (backward compatible).",
+                "smithy.api#enum": [
+                    {
+                        "value": "TEN_DLC",
+                        "name": "TEN_DLC"
                     }
                 ]
             }
@@ -16695,6 +17017,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the registration.</p>"
+                    }
+                },
+                "MessagingLimits": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MessagingLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The messaging limits that apply to the sender ID, including the per-capability send rates.</p>"
                     }
                 }
             },

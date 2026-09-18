@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type BatchCreateDelegationByAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateDelegationByAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateDelegationByAssessmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateDelegationByAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.BatchCreateDelegationByAssessmentRequest_assessmentId, *v.AssessmentId)
+	}
+	serializeCreateDelegationRequests(s, schemas.BatchCreateDelegationByAssessmentRequest_createDelegationRequests, v.CreateDelegationRequests)
+}
+
 type BatchCreateDelegationByAssessmentOutput struct {
 
 	//  The delegations that are associated with the assessment.
@@ -53,13 +68,32 @@ type BatchCreateDelegationByAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateDelegationByAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateDelegationByAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateDelegationByAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDelegations(s, schemas.BatchCreateDelegationByAssessmentResponse_delegations, v.Delegations)
+	serializeBatchCreateDelegationByAssessmentErrors(s, schemas.BatchCreateDelegationByAssessmentResponse_errors, v.Errors)
+}
+func (v *BatchCreateDelegationByAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateDelegationByAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateDelegationByAssessmentResponse_delegations:
+			return deserializeDelegations(d, schemas.BatchCreateDelegationByAssessmentResponse_delegations, &v.Delegations)
+		case schemas.BatchCreateDelegationByAssessmentResponse_errors:
+			return deserializeBatchCreateDelegationByAssessmentErrors(d, schemas.BatchCreateDelegationByAssessmentResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateDelegationByAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateDelegationByAssessment, schemas.BatchCreateDelegationByAssessmentRequest, schemas.BatchCreateDelegationByAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateDelegationByAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateDelegationByAssessment, schemas.BatchCreateDelegationByAssessmentRequest, schemas.BatchCreateDelegationByAssessmentResponse), output: &BatchCreateDelegationByAssessmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

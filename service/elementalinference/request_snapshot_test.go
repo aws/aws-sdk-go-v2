@@ -455,6 +455,33 @@ func TestCheckRequestSnapshot_DeleteFeed(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteFeedPolicy(t *testing.T) {
+	input := &DeleteFeedPolicyInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteFeedPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisassociateFeed(t *testing.T) {
 	input := &DisassociateFeedInput{
 		Id:                     ptr.String("__Id__"),
@@ -565,6 +592,33 @@ func TestCheckRequestSnapshot_GetFeed(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetFeedPolicy(t *testing.T) {
+	input := &GetFeedPolicyInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetFeedPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetFixture(t *testing.T) {
 	input := &GetFixtureInput{
 		FixtureId: ptr.String("__FixtureId__"),
@@ -671,6 +725,34 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutFeedPolicy(t *testing.T) {
+	input := &PutFeedPolicyInput{
+		Id:     ptr.String("__Id__"),
+		Policy: ptr.String("__Policy__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutFeedPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutFeedPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1145,6 +1227,33 @@ func TestUpdateRequestSnapshot_DeleteFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteFeedPolicy(t *testing.T) {
+	input := &DeleteFeedPolicyInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteFeedPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisassociateFeed(t *testing.T) {
 	input := &DisassociateFeedInput{
 		Id:                     ptr.String("__Id__"),
@@ -1255,6 +1364,33 @@ func TestUpdateRequestSnapshot_GetFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetFeedPolicy(t *testing.T) {
+	input := &GetFeedPolicyInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetFeedPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetFixture(t *testing.T) {
 	input := &GetFixtureInput{
 		FixtureId: ptr.String("__FixtureId__"),
@@ -1361,6 +1497,34 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutFeedPolicy(t *testing.T) {
+	input := &PutFeedPolicyInput{
+		Id:     ptr.String("__Id__"),
+		Policy: ptr.String("__Policy__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutFeedPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutFeedPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -4993,6 +4993,91 @@ func (v *ContactAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about a reference when the referenceType is CONTACT_ANALYSIS .
+// Otherwise, null.
+type ContactAnalysisReference struct {
+
+	// The analytics mode of the contact analysis.
+	AnalyticsMode AnalyticsMode
+
+	// The Amazon Resource Name (ARN) of the contact analysis reference.
+	Arn *string
+
+	// Indicates whether sensitive data has been redacted from the contact analysis.
+	IsRedacted *bool
+
+	// Identifier of the contact analysis reference.
+	Name *string
+
+	// Status of the contact analysis reference type.
+	Status ReferenceStatus
+
+	// The location path of the contact analysis reference.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContactAnalysisReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactAnalysisReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactAnalysisReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMode != "" {
+		s.WriteString(schemas.ContactAnalysisReference_AnalyticsMode, string(v.AnalyticsMode))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Arn, *v.Arn)
+	}
+	if v.IsRedacted != nil {
+		s.WriteBool(schemas.ContactAnalysisReference_IsRedacted, *v.IsRedacted)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContactAnalysisReference_Status, string(v.Status))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ContactAnalysisReference_Value, *v.Value)
+	}
+}
+func (v *ContactAnalysisReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactAnalysisReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactAnalysisReference_AnalyticsMode:
+			var ev string
+			if err := d.ReadString(schemas.ContactAnalysisReference_AnalyticsMode, &ev); err != nil {
+				return err
+			}
+			v.AnalyticsMode = AnalyticsMode(ev)
+			return nil
+		case schemas.ContactAnalysisReference_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Arn, v.Arn)
+		case schemas.ContactAnalysisReference_IsRedacted:
+			v.IsRedacted = new(bool)
+			return d.ReadBool(schemas.ContactAnalysisReference_IsRedacted, v.IsRedacted)
+		case schemas.ContactAnalysisReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Name, v.Name)
+		case schemas.ContactAnalysisReference_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContactAnalysisReference_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReferenceStatus(ev)
+			return nil
+		case schemas.ContactAnalysisReference_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ContactAnalysisReference_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The contact configuration for push notification registration.
 type ContactConfiguration struct {
 
@@ -7493,6 +7578,44 @@ func (v *CrossChannelBehavior) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.BehaviorType = BehaviorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Defines the cross-channel and workload type routing behavior that allows an
+// agent working on a contact to be offered a contact from a different channel or
+// workload type.
+type CrossChannelWorkloadBehavior struct {
+
+	// Specifies the routing behavior for an agent handling their current channel and
+	// workload type.
+	ChannelWorkloadBehaviorType ChannelWorkloadBehaviorType
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrossChannelWorkloadBehavior) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrossChannelWorkloadBehavior)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrossChannelWorkloadBehavior) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelWorkloadBehaviorType != "" {
+		s.WriteString(schemas.CrossChannelWorkloadBehavior_ChannelWorkloadBehaviorType, string(v.ChannelWorkloadBehaviorType))
+	}
+}
+func (v *CrossChannelWorkloadBehavior) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrossChannelWorkloadBehavior, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrossChannelWorkloadBehavior_ChannelWorkloadBehaviorType:
+			var ev string
+			if err := d.ReadString(schemas.CrossChannelWorkloadBehavior_ChannelWorkloadBehaviorType, &ev); err != nil {
+				return err
+			}
+			v.ChannelWorkloadBehaviorType = ChannelWorkloadBehaviorType(ev)
 			return nil
 		}
 		return nil
@@ -10746,6 +10869,10 @@ type EvaluationForm struct {
 	// This member is required.
 	Title *string
 
+	// The AI version to use for the evaluation form. This specifies which AI model
+	// version is used for automated evaluations.
+	AIVersion *string
+
 	// The automatic evaluation configuration of an evaluation form.
 	AutoEvaluationConfiguration *EvaluationFormAutoEvaluationConfiguration
 
@@ -10786,6 +10913,9 @@ func (v *EvaluationForm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationForm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIVersion != nil {
+		s.WriteString(schemas.EvaluationForm_AIVersion, *v.AIVersion)
+	}
 	if v.AutoEvaluationConfiguration != nil {
 		s.WriteStruct(schemas.EvaluationForm_AutoEvaluationConfiguration)
 		v.AutoEvaluationConfiguration.SerializeMembers(s)
@@ -10852,6 +10982,9 @@ func (v *EvaluationForm) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *EvaluationForm) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationForm, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluationForm_AIVersion:
+			v.AIVersion = new(string)
+			return d.ReadString(schemas.EvaluationForm_AIVersion, v.AIVersion)
 		case schemas.EvaluationForm_AutoEvaluationConfiguration:
 			v.AutoEvaluationConfiguration = &EvaluationFormAutoEvaluationConfiguration{}
 			return v.AutoEvaluationConfiguration.Deserialize(d)
@@ -10921,6 +11054,122 @@ func (v *EvaluationForm) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the status and availability dates for an AI version, indicating when
+// the version became active and when it reaches end of life.
+type EvaluationFormAIVersionLifecycle struct {
+
+	// The timestamp for when this AI version became available.
+	//
+	// This member is required.
+	StartOfLifeTime *time.Time
+
+	// The status of the AI version. Valid values:
+	//
+	//   - Latest - The most recent AI version.
+	//
+	//   - Preview - An AI version available for preview.
+	//
+	//   - Active - An AI version that is currently available.
+	//
+	//   - Deprecated - An AI version that is no longer recommended for use.
+	//
+	//   - Removed - An AI version that is no longer available.
+	//
+	// This member is required.
+	Status EvaluationFormAIVersionStatus
+
+	// The timestamp when this AI version reaches or reached end of life.
+	EndOfLifeTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *EvaluationFormAIVersionLifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationFormAIVersionLifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationFormAIVersionLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndOfLifeTime != nil {
+		s.WriteTime(schemas.EvaluationFormAIVersionLifecycle_EndOfLifeTime, *v.EndOfLifeTime)
+	}
+	if v.StartOfLifeTime != nil {
+		s.WriteTime(schemas.EvaluationFormAIVersionLifecycle_StartOfLifeTime, *v.StartOfLifeTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EvaluationFormAIVersionLifecycle_Status, string(v.Status))
+	}
+}
+func (v *EvaluationFormAIVersionLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationFormAIVersionLifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationFormAIVersionLifecycle_EndOfLifeTime:
+			v.EndOfLifeTime = new(time.Time)
+			return d.ReadTime(schemas.EvaluationFormAIVersionLifecycle_EndOfLifeTime, v.EndOfLifeTime)
+		case schemas.EvaluationFormAIVersionLifecycle_StartOfLifeTime:
+			v.StartOfLifeTime = new(time.Time)
+			return d.ReadTime(schemas.EvaluationFormAIVersionLifecycle_StartOfLifeTime, v.StartOfLifeTime)
+		case schemas.EvaluationFormAIVersionLifecycle_Status:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationFormAIVersionLifecycle_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EvaluationFormAIVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains the name and lifecycle information for an AI version that you can use
+// when creating or updating an evaluation form.
+type EvaluationFormAIVersionSummary struct {
+
+	// The lifecycle information for this AI version, including its status and
+	// availability dates.
+	//
+	// This member is required.
+	AIVersionLifecycle *EvaluationFormAIVersionLifecycle
+
+	// The name of the AI version.
+	//
+	// This member is required.
+	AIVersionName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EvaluationFormAIVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationFormAIVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationFormAIVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIVersionLifecycle != nil {
+		s.WriteStruct(schemas.EvaluationFormAIVersionSummary_AIVersionLifecycle)
+		v.AIVersionLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AIVersionName != nil {
+		s.WriteString(schemas.EvaluationFormAIVersionSummary_AIVersionName, *v.AIVersionName)
+	}
+}
+func (v *EvaluationFormAIVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationFormAIVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationFormAIVersionSummary_AIVersionLifecycle:
+			v.AIVersionLifecycle = &EvaluationFormAIVersionLifecycle{}
+			return v.AIVersionLifecycle.Deserialize(d)
+		case schemas.EvaluationFormAIVersionSummary_AIVersionName:
+			v.AIVersionName = new(string)
+			return d.ReadString(schemas.EvaluationFormAIVersionSummary_AIVersionName, v.AIVersionName)
+		}
+		return nil
+	})
+}
+
 // The automatic evaluation configuration of an evaluation form.
 type EvaluationFormAutoEvaluationConfiguration struct {
 
@@ -10980,6 +11229,10 @@ type EvaluationFormContent struct {
 	// This member is required.
 	Title *string
 
+	// The AI version to use for the evaluation form. This specifies which AI model
+	// version is used for automated evaluations.
+	AIVersion *string
+
 	// The configuration of the automated evaluation.
 	AutoEvaluationConfiguration *EvaluationFormAutoEvaluationConfiguration
 
@@ -11008,6 +11261,9 @@ func (v *EvaluationFormContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationFormContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIVersion != nil {
+		s.WriteString(schemas.EvaluationFormContent_AIVersion, *v.AIVersion)
+	}
 	if v.AutoEvaluationConfiguration != nil {
 		s.WriteStruct(schemas.EvaluationFormContent_AutoEvaluationConfiguration)
 		v.AutoEvaluationConfiguration.SerializeMembers(s)
@@ -11051,6 +11307,9 @@ func (v *EvaluationFormContent) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *EvaluationFormContent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationFormContent, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluationFormContent_AIVersion:
+			v.AIVersion = new(string)
+			return d.ReadString(schemas.EvaluationFormContent_AIVersion, v.AIVersion)
 		case schemas.EvaluationFormContent_AutoEvaluationConfiguration:
 			v.AutoEvaluationConfiguration = &EvaluationFormAutoEvaluationConfiguration{}
 			return v.AutoEvaluationConfiguration.Deserialize(d)
@@ -11469,6 +11728,65 @@ func (v *EvaluationFormLanguageConfiguration) Deserialize(d smithy.ShapeDeserial
 	})
 }
 
+// Information about the metric configuration for an evaluation form question. Use
+// this to associate a business outcome metric with a question.
+type EvaluationFormMetricConfiguration struct {
+
+	// The name of the metric. Valid values are:
+	//
+	//   - SALE_SUCCESS – Sale success.
+	//
+	//   - CSAT – Customer satisfaction.
+	//
+	//   - CHURN_PROPENSITY – Churn propensity.
+	//
+	//   - SELF_SERVICE_SUCCESS – Self-service success.
+	//
+	//   - PARTIAL_SELF_SERVICE_SUCCESS – Partial self-service success.
+	//
+	// This member is required.
+	MetricName *string
+
+	// The type of metric. Currently, only BUSINESS_OUTCOME is supported.
+	//
+	// This member is required.
+	MetricType EvaluationFormMetricType
+
+	noSmithyDocumentSerde
+}
+
+func (v *EvaluationFormMetricConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationFormMetricConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationFormMetricConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != nil {
+		s.WriteString(schemas.EvaluationFormMetricConfiguration_MetricName, *v.MetricName)
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.EvaluationFormMetricConfiguration_MetricType, string(v.MetricType))
+	}
+}
+func (v *EvaluationFormMetricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationFormMetricConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationFormMetricConfiguration_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.EvaluationFormMetricConfiguration_MetricName, v.MetricName)
+		case schemas.EvaluationFormMetricConfiguration_MetricType:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationFormMetricConfiguration_MetricType, &ev); err != nil {
+				return err
+			}
+			v.MetricType = EvaluationFormMetricType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Automation configuration for multi-select questions.
 type EvaluationFormMultiSelectQuestionAutomation struct {
 
@@ -11876,6 +12194,10 @@ type EvaluationFormQuestion struct {
 	// The instructions of the section.
 	Instructions *string
 
+	// The metric configuration for the question. Use this to associate a business
+	// outcome metric with the question.
+	MetricConfiguration *EvaluationFormMetricConfiguration
+
 	// The flag to enable not applicable answers to the question.
 	NotApplicableEnabled bool
 
@@ -11906,6 +12228,11 @@ func (v *EvaluationFormQuestion) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Instructions != nil {
 		s.WriteString(schemas.EvaluationFormQuestion_Instructions, *v.Instructions)
+	}
+	if v.MetricConfiguration != nil {
+		s.WriteStruct(schemas.EvaluationFormQuestion_MetricConfiguration)
+		v.MetricConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.NotApplicableEnabled != false {
 		s.WriteBool(schemas.EvaluationFormQuestion_NotApplicableEnabled, v.NotApplicableEnabled)
@@ -11938,6 +12265,9 @@ func (v *EvaluationFormQuestion) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EvaluationFormQuestion_Instructions:
 			v.Instructions = new(string)
 			return d.ReadString(schemas.EvaluationFormQuestion_Instructions, v.Instructions)
+		case schemas.EvaluationFormQuestion_MetricConfiguration:
+			v.MetricConfiguration = &EvaluationFormMetricConfiguration{}
+			return v.MetricConfiguration.Deserialize(d)
 		case schemas.EvaluationFormQuestion_NotApplicableEnabled:
 			return d.ReadBool(schemas.EvaluationFormQuestion_NotApplicableEnabled, &v.NotApplicableEnabled)
 		case schemas.EvaluationFormQuestion_QuestionType:
@@ -12412,6 +12742,10 @@ type EvaluationFormSearchSummary struct {
 	// This member is required.
 	Title *string
 
+	// The AI version to use for the evaluation form. This specifies which AI model
+	// version is used for automated evaluations.
+	AIVersion *string
+
 	// Active version of the evaluation form.
 	ActiveVersion *int32
 
@@ -12447,6 +12781,9 @@ func (v *EvaluationFormSearchSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluationFormSearchSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIVersion != nil {
+		s.WriteString(schemas.EvaluationFormSearchSummary_AIVersion, *v.AIVersion)
+	}
 	if v.ActiveVersion != nil {
 		s.WriteInt32(schemas.EvaluationFormSearchSummary_ActiveVersion, *v.ActiveVersion)
 	}
@@ -12500,6 +12837,9 @@ func (v *EvaluationFormSearchSummary) SerializeMembers(s smithy.ShapeSerializer)
 func (v *EvaluationFormSearchSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationFormSearchSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EvaluationFormSearchSummary_AIVersion:
+			v.AIVersion = new(string)
+			return d.ReadString(schemas.EvaluationFormSearchSummary_AIVersion, v.AIVersion)
 		case schemas.EvaluationFormSearchSummary_ActiveVersion:
 			v.ActiveVersion = new(int32)
 			return d.ReadInt32(schemas.EvaluationFormSearchSummary_ActiveVersion, v.ActiveVersion)
@@ -19100,8 +19440,6 @@ type MediaConcurrency struct {
 	// Valid Range for CHAT : Minimum value of 1. Maximum value of 10.
 	//
 	// Valid Range for TASK : Minimum value of 1. Maximum value of 10.
-	//
-	// This member is required.
 	Concurrency *int32
 
 	// Defines the cross-channel routing behavior for each channel that is enabled for
@@ -19109,6 +19447,11 @@ type MediaConcurrency struct {
 	// contact from another channel when they are currently working with a contact from
 	// a Voice channel.
 	CrossChannelBehavior *CrossChannelBehavior
+
+	// Defines the list of workload type concurrency configurations for a channel.
+	// When provided, enables granular concurrency control based on workload type
+	// values.
+	WorkloadTypeConcurrencies []WorkloadTypeConcurrency
 
 	noSmithyDocumentSerde
 }
@@ -19131,6 +19474,7 @@ func (v *MediaConcurrency) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CrossChannelBehavior.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serializeWorkloadTypeConcurrencies(s, schemas.MediaConcurrency_WorkloadTypeConcurrencies, v.WorkloadTypeConcurrencies)
 }
 func (v *MediaConcurrency) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MediaConcurrency, func(s *smithy.Schema) error {
@@ -19148,6 +19492,8 @@ func (v *MediaConcurrency) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MediaConcurrency_CrossChannelBehavior:
 			v.CrossChannelBehavior = &CrossChannelBehavior{}
 			return v.CrossChannelBehavior.Deserialize(d)
+		case schemas.MediaConcurrency_WorkloadTypeConcurrencies:
+			return deserializeWorkloadTypeConcurrencies(d, schemas.MediaConcurrency_WorkloadTypeConcurrencies, &v.WorkloadTypeConcurrencies)
 		}
 		return nil
 	})
@@ -26392,6 +26738,7 @@ func (v *Reference) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	ReferenceSummaryMemberAttachment
+//	ReferenceSummaryMemberContactAnalysis
 //	ReferenceSummaryMemberDate
 //	ReferenceSummaryMemberEmail
 //	ReferenceSummaryMemberEmailMessage
@@ -26420,6 +26767,24 @@ func (v *ReferenceSummaryMemberAttachment) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ReferenceSummaryMemberAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about a reference when the referenceType is CONTACT_ANALYSIS .
+// Otherwise, null.
+type ReferenceSummaryMemberContactAnalysis struct {
+	Value ContactAnalysisReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberContactAnalysis) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberContactAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_ContactAnalysis)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberContactAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -34834,6 +35199,70 @@ func (v *WisdomInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WisdomInfo_SessionArn:
 			v.SessionArn = new(string)
 			return d.ReadString(schemas.WisdomInfo_SessionArn, v.SessionArn)
+		}
+		return nil
+	})
+}
+
+// Defines the maximum number of contacts an agent can handle simultaneously for a
+// specific channel and workload type combination.
+type WorkloadTypeConcurrency struct {
+
+	// The maximum number of contacts an agent can handle simultaneously for a
+	// specific channel and workload type combination.
+	//
+	// Valid Range for VOICE : Minimum value of 1. Maximum value of 1.
+	//
+	// Valid Range for CHAT : Minimum value of 1. Maximum value of 10.
+	//
+	// Valid Range for TASK : Minimum value of 1. Maximum value of 10.
+	//
+	// This member is required.
+	Concurrency *int32
+
+	// The value of the workload type.
+	//
+	// This member is required.
+	WorkloadType *string
+
+	// Defines the cross-channel and workload type routing behavior for each channel
+	// and workload type combination that is enabled for this Routing Profile.
+	CrossChannelWorkloadBehavior *CrossChannelWorkloadBehavior
+
+	noSmithyDocumentSerde
+}
+
+func (v *WorkloadTypeConcurrency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadTypeConcurrency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadTypeConcurrency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Concurrency != nil {
+		s.WriteInt32(schemas.WorkloadTypeConcurrency_Concurrency, *v.Concurrency)
+	}
+	if v.CrossChannelWorkloadBehavior != nil {
+		s.WriteStruct(schemas.WorkloadTypeConcurrency_CrossChannelWorkloadBehavior)
+		v.CrossChannelWorkloadBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadType != nil {
+		s.WriteString(schemas.WorkloadTypeConcurrency_WorkloadType, *v.WorkloadType)
+	}
+}
+func (v *WorkloadTypeConcurrency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadTypeConcurrency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadTypeConcurrency_Concurrency:
+			v.Concurrency = new(int32)
+			return d.ReadInt32(schemas.WorkloadTypeConcurrency_Concurrency, v.Concurrency)
+		case schemas.WorkloadTypeConcurrency_CrossChannelWorkloadBehavior:
+			v.CrossChannelWorkloadBehavior = &CrossChannelWorkloadBehavior{}
+			return v.CrossChannelWorkloadBehavior.Deserialize(d)
+		case schemas.WorkloadTypeConcurrency_WorkloadType:
+			v.WorkloadType = new(string)
+			return d.ReadString(schemas.WorkloadTypeConcurrency_WorkloadType, v.WorkloadType)
 		}
 		return nil
 	})

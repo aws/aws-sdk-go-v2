@@ -4,7 +4,9 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetRegistryScanningConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryScanningConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryScanningConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryScanningConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetRegistryScanningConfigurationOutput struct {
 
 	// The registry ID associated with the request.
@@ -42,13 +53,40 @@ type GetRegistryScanningConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegistryScanningConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegistryScanningConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegistryScanningConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.GetRegistryScanningConfigurationResponse_registryId, *v.RegistryId)
+	}
+	if v.ScanningConfiguration != nil {
+		s.WriteStruct(schemas.GetRegistryScanningConfigurationResponse_scanningConfiguration)
+		v.ScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRegistryScanningConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegistryScanningConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegistryScanningConfigurationResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.GetRegistryScanningConfigurationResponse_registryId, v.RegistryId)
+		case schemas.GetRegistryScanningConfigurationResponse_scanningConfiguration:
+			v.ScanningConfiguration = &types.RegistryScanningConfiguration{}
+			return v.ScanningConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegistryScanningConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRegistryScanningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistryScanningConfiguration, schemas.GetRegistryScanningConfigurationRequest, schemas.GetRegistryScanningConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRegistryScanningConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegistryScanningConfiguration, schemas.GetRegistryScanningConfigurationRequest, schemas.GetRegistryScanningConfigurationResponse), output: &GetRegistryScanningConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

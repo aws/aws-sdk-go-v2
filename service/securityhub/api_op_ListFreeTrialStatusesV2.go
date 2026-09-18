@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,23 @@ type ListFreeTrialStatusesV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFreeTrialStatusesV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFreeTrialStatusesV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFreeTrialStatusesV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFreeTrialAccountIdList(s, schemas.ListFreeTrialStatusesV2Request_AccountIds, v.AccountIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFreeTrialStatusesV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFreeTrialStatusesV2Request_NextToken, *v.NextToken)
+	}
+	serializeFreeTrialStatusValueList(s, schemas.ListFreeTrialStatusesV2Request_Statuses, v.Statuses)
+}
+
 type ListFreeTrialStatusesV2Output struct {
 
 	// An array of free trial statuses, one for each account in scope.
@@ -70,13 +89,35 @@ type ListFreeTrialStatusesV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFreeTrialStatusesV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFreeTrialStatusesV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFreeTrialStatusesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountFreeTrialStatusList(s, schemas.ListFreeTrialStatusesV2Response_AccountFreeTrialStatuses, v.AccountFreeTrialStatuses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFreeTrialStatusesV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFreeTrialStatusesV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFreeTrialStatusesV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFreeTrialStatusesV2Response_AccountFreeTrialStatuses:
+			return deserializeAccountFreeTrialStatusList(d, schemas.ListFreeTrialStatusesV2Response_AccountFreeTrialStatuses, &v.AccountFreeTrialStatuses)
+		case schemas.ListFreeTrialStatusesV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFreeTrialStatusesV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFreeTrialStatusesV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFreeTrialStatusesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFreeTrialStatusesV2, schemas.ListFreeTrialStatusesV2Request, schemas.ListFreeTrialStatusesV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFreeTrialStatusesV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFreeTrialStatusesV2, schemas.ListFreeTrialStatusesV2Request, schemas.ListFreeTrialStatusesV2Response), output: &ListFreeTrialStatusesV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

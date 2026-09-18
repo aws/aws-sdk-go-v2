@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,8 +36,10 @@ func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInp
 
 type CreateComponentInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -58,9 +62,9 @@ type CreateComponentInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -82,9 +86,9 @@ type CreateComponentInput struct {
 	// Describes the contents of the component.
 	Description *string
 
-	// Validates the required permissions for the operation and the request
-	// parameters, without actually making the request, and provides an error response.
-	// Upon a successful request, the error response is DryRunOperationException .
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
 	DryRun bool
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
@@ -103,15 +107,56 @@ type CreateComponentInput struct {
 	Tags map[string]string
 
 	// The uri of a YAML component document file. This must be an S3 URL (
-	// s3://bucket/key ), and the requester must have permission to access the S3
-	// bucket it points to. If you use Amazon S3, you can specify component content up
-	// to your service quota.
+	// s3://bucket/key ), and you must have permission to access the S3 bucket it
+	// points to. If you use Amazon S3, you can specify component content up to your
+	// service quota.
 	//
 	// Alternatively, you can specify the YAML document inline, using the component
 	// data property. You cannot specify both properties.
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.CreateComponentRequest_changeDescription, *v.ChangeDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.CreateComponentRequest_data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateComponentRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateComponentRequest_dryRun, v.DryRun)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateComponentRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateComponentRequest_name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.CreateComponentRequest_platform, string(v.Platform))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateComponentRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeOsVersionList(s, schemas.CreateComponentRequest_supportedOsVersions, v.SupportedOsVersions)
+	serializeTagMap(s, schemas.CreateComponentRequest_tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.CreateComponentRequest_uri, *v.Uri)
+	}
 }
 
 type CreateComponentOutput struct {
@@ -134,13 +179,52 @@ type CreateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComponentResponse_clientToken, *v.ClientToken)
+	}
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.CreateComponentResponse_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateComponentResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateComponentResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateComponentResponse_clientToken, v.ClientToken)
+		case schemas.CreateComponentResponse_componentBuildVersionArn:
+			v.ComponentBuildVersionArn = new(string)
+			return d.ReadString(schemas.CreateComponentResponse_componentBuildVersionArn, v.ComponentBuildVersionArn)
+		case schemas.CreateComponentResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateComponentResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateComponentResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponent, schemas.CreateComponentRequest, schemas.CreateComponentResponse), output: &CreateComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

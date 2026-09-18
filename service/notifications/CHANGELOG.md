@@ -1,3 +1,12 @@
+# v1.17.0 (2026-09-17)
+
+* **Feature**: Added support for attachments on managed notification events. Added support to access and subscribe sensitive managed notification events.
+
+# v1.16.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

@@ -11,7 +11,11 @@ import (
 	"time"
 )
 
-//	Updates the specified dashboard.
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
+// Updates the specified dashboard.
 //
 // To set a refresh schedule, CloudTrail must be granted permissions to run the
 // StartDashboardRefresh operation to refresh the dashboard on your behalf. To
@@ -25,6 +29,7 @@ import (
 // operation to attach a resource-based policy to each event data store. For more
 // information, see [Example: Allow CloudTrail to run queries to populate a dashboard]in the CloudTrail User Guide.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Example: Allow CloudTrail to run queries to populate a dashboard]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
 // [Resource-based policy example for a dashboard]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards
 func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInput, optFns ...func(*Options)) (*UpdateDashboardOutput, error) {

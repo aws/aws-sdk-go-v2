@@ -11,6 +11,10 @@ import (
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Updates an event data store. The required EventDataStore value is an ARN or the
 // ID portion of the ARN. Other parameters are optional, but at least one optional
 // parameter must be specified, or CloudTrail throws an error. RetentionPeriod is
@@ -26,6 +30,7 @@ import (
 // items, Audit Manager evidence, or non-Amazon Web Services events,
 // AdvancedEventSelectors includes events of that type in your event data store.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [AdvancedEventSelectors]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
 func (c *Client) UpdateEventDataStore(ctx context.Context, params *UpdateEventDataStoreInput, optFns ...func(*Options)) (*UpdateEventDataStoreOutput, error) {
 	if params == nil {

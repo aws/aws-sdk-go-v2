@@ -300,6 +300,35 @@ func TestCheckRequestSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	input := &AttachClusterNodeNetworkInterfaceInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AttachClusterNodeNetworkInterface(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachClusterNodeNetworkInterface"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	input := &AttachClusterNodeVolumeInput{
 		ClusterArn: ptr.String("__ClusterArn__"),
@@ -1235,6 +1264,26 @@ func TestCheckRequestSnapshot_CreateAlgorithm(t *testing.T) {
 									},
 								},
 							},
+							InstancePreferences: []types.InstancePreference{
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							SelectedInstanceCount: ptr.Int32(1),
 						},
 						StoppingCondition: &types.StoppingCondition{
 							MaxRuntimeInSeconds:     ptr.Int32(1),
@@ -1400,6 +1449,26 @@ func TestCheckRequestSnapshot_CreateAlgorithm(t *testing.T) {
 									},
 								},
 							},
+							InstancePreferences: []types.InstancePreference{
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							SelectedInstanceCount: ptr.Int32(1),
 						},
 						StoppingCondition: &types.StoppingCondition{
 							MaxRuntimeInSeconds:     ptr.Int32(1),
@@ -4691,6 +4760,26 @@ func TestCheckRequestSnapshot_CreateHyperParameterTuningJob(t *testing.T) {
 						},
 					},
 				},
+				InstancePreferences: []types.InstancePreference{
+					{
+						InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+						InstanceCount: ptr.Int32(1),
+						TrainingPlanArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+						InstanceCount: ptr.Int32(1),
+						TrainingPlanArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+				SelectedInstanceCount: ptr.Int32(1),
 			},
 			HyperParameterTuningResourceConfig: &types.HyperParameterTuningResourceConfig{
 				InstanceType:       types.TrainingInstanceType("ml.m4.xlarge"),
@@ -4941,6 +5030,26 @@ func TestCheckRequestSnapshot_CreateHyperParameterTuningJob(t *testing.T) {
 							},
 						},
 					},
+					InstancePreferences: []types.InstancePreference{
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					SelectedInstanceCount: ptr.Int32(1),
 				},
 				HyperParameterTuningResourceConfig: &types.HyperParameterTuningResourceConfig{
 					InstanceType:       types.TrainingInstanceType("ml.m4.xlarge"),
@@ -5190,6 +5299,26 @@ func TestCheckRequestSnapshot_CreateHyperParameterTuningJob(t *testing.T) {
 							},
 						},
 					},
+					InstancePreferences: []types.InstancePreference{
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					SelectedInstanceCount: ptr.Int32(1),
 				},
 				HyperParameterTuningResourceConfig: &types.HyperParameterTuningResourceConfig{
 					InstanceType:       types.TrainingInstanceType("ml.m4.xlarge"),
@@ -8542,6 +8671,18 @@ func TestCheckRequestSnapshot_CreateProcessingJob(t *testing.T) {
 				InstanceType:   types.ProcessingInstanceType("ml.t3.medium"),
 				VolumeSizeInGB: ptr.Int32(1),
 				VolumeKmsKeyId: ptr.String("__VolumeKmsKeyId__"),
+				InstancePreferences: []types.ProcessingInstancePreference{
+					{
+						InstanceType:  types.ProcessingInstanceType("ml.t3.medium"),
+						InstanceCount: ptr.Int32(1),
+					},
+					{
+						InstanceType:  types.ProcessingInstanceType("ml.t3.medium"),
+						InstanceCount: ptr.Int32(1),
+					},
+				},
+				SelectedInstanceType:  types.ProcessingInstanceType("ml.t3.medium"),
+				SelectedInstanceCount: ptr.Int32(1),
 			},
 		},
 		StoppingCondition: &types.ProcessingStoppingCondition{
@@ -9053,6 +9194,26 @@ func TestCheckRequestSnapshot_CreateTrainingJob(t *testing.T) {
 					},
 				},
 			},
+			InstancePreferences: []types.InstancePreference{
+				{
+					InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					InstanceCount: ptr.Int32(1),
+					TrainingPlanArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					InstanceCount: ptr.Int32(1),
+					TrainingPlanArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+			SelectedInstanceCount: ptr.Int32(1),
 		},
 		VpcConfig: &types.VpcConfig{
 			SecurityGroupIds: []string{
@@ -22676,6 +22837,35 @@ func TestUpdateRequestSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	input := &AttachClusterNodeNetworkInterfaceInput{
+		ClusterName:        ptr.String("__ClusterName__"),
+		NodeId:             ptr.String("__NodeId__"),
+		NetworkInterfaceId: ptr.String("__NetworkInterfaceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AttachClusterNodeNetworkInterface(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AttachClusterNodeNetworkInterface"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	input := &AttachClusterNodeVolumeInput{
 		ClusterArn: ptr.String("__ClusterArn__"),
@@ -23611,6 +23801,26 @@ func TestUpdateRequestSnapshot_CreateAlgorithm(t *testing.T) {
 									},
 								},
 							},
+							InstancePreferences: []types.InstancePreference{
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							SelectedInstanceCount: ptr.Int32(1),
 						},
 						StoppingCondition: &types.StoppingCondition{
 							MaxRuntimeInSeconds:     ptr.Int32(1),
@@ -23776,6 +23986,26 @@ func TestUpdateRequestSnapshot_CreateAlgorithm(t *testing.T) {
 									},
 								},
 							},
+							InstancePreferences: []types.InstancePreference{
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+									InstanceCount: ptr.Int32(1),
+									TrainingPlanArns: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							SelectedInstanceCount: ptr.Int32(1),
 						},
 						StoppingCondition: &types.StoppingCondition{
 							MaxRuntimeInSeconds:     ptr.Int32(1),
@@ -27067,6 +27297,26 @@ func TestUpdateRequestSnapshot_CreateHyperParameterTuningJob(t *testing.T) {
 						},
 					},
 				},
+				InstancePreferences: []types.InstancePreference{
+					{
+						InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+						InstanceCount: ptr.Int32(1),
+						TrainingPlanArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+						InstanceCount: ptr.Int32(1),
+						TrainingPlanArns: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+				SelectedInstanceCount: ptr.Int32(1),
 			},
 			HyperParameterTuningResourceConfig: &types.HyperParameterTuningResourceConfig{
 				InstanceType:       types.TrainingInstanceType("ml.m4.xlarge"),
@@ -27317,6 +27567,26 @@ func TestUpdateRequestSnapshot_CreateHyperParameterTuningJob(t *testing.T) {
 							},
 						},
 					},
+					InstancePreferences: []types.InstancePreference{
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					SelectedInstanceCount: ptr.Int32(1),
 				},
 				HyperParameterTuningResourceConfig: &types.HyperParameterTuningResourceConfig{
 					InstanceType:       types.TrainingInstanceType("ml.m4.xlarge"),
@@ -27566,6 +27836,26 @@ func TestUpdateRequestSnapshot_CreateHyperParameterTuningJob(t *testing.T) {
 							},
 						},
 					},
+					InstancePreferences: []types.InstancePreference{
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+							InstanceCount: ptr.Int32(1),
+							TrainingPlanArns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					SelectedInstanceCount: ptr.Int32(1),
 				},
 				HyperParameterTuningResourceConfig: &types.HyperParameterTuningResourceConfig{
 					InstanceType:       types.TrainingInstanceType("ml.m4.xlarge"),
@@ -30918,6 +31208,18 @@ func TestUpdateRequestSnapshot_CreateProcessingJob(t *testing.T) {
 				InstanceType:   types.ProcessingInstanceType("ml.t3.medium"),
 				VolumeSizeInGB: ptr.Int32(1),
 				VolumeKmsKeyId: ptr.String("__VolumeKmsKeyId__"),
+				InstancePreferences: []types.ProcessingInstancePreference{
+					{
+						InstanceType:  types.ProcessingInstanceType("ml.t3.medium"),
+						InstanceCount: ptr.Int32(1),
+					},
+					{
+						InstanceType:  types.ProcessingInstanceType("ml.t3.medium"),
+						InstanceCount: ptr.Int32(1),
+					},
+				},
+				SelectedInstanceType:  types.ProcessingInstanceType("ml.t3.medium"),
+				SelectedInstanceCount: ptr.Int32(1),
 			},
 		},
 		StoppingCondition: &types.ProcessingStoppingCondition{
@@ -31429,6 +31731,26 @@ func TestUpdateRequestSnapshot_CreateTrainingJob(t *testing.T) {
 					},
 				},
 			},
+			InstancePreferences: []types.InstancePreference{
+				{
+					InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					InstanceCount: ptr.Int32(1),
+					TrainingPlanArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					InstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+					InstanceCount: ptr.Int32(1),
+					TrainingPlanArns: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+			SelectedInstanceType:  types.TrainingInstanceType("ml.m4.xlarge"),
+			SelectedInstanceCount: ptr.Int32(1),
 		},
 		VpcConfig: &types.VpcConfig{
 			SecurityGroupIds: []string{

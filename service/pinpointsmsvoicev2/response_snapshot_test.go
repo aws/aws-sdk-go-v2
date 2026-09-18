@@ -2101,7 +2101,15 @@ func TestCheckResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 				DeletionProtectionEnabled:   true,
 				PoolId:                      ptr.String("__PoolId__"),
 				RegistrationId:              ptr.String("__RegistrationId__"),
-				CreatedTimestamp:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
+				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				PhoneNumberArn: ptr.String("__PhoneNumberArn__"),
@@ -2125,7 +2133,15 @@ func TestCheckResponseSnapshot_DescribePhoneNumbers(t *testing.T) {
 				DeletionProtectionEnabled:   true,
 				PoolId:                      ptr.String("__PoolId__"),
 				RegistrationId:              ptr.String("__RegistrationId__"),
-				CreatedTimestamp:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
+				CreatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2414,6 +2430,14 @@ func TestCheckResponseSnapshot_DescribeRcsAgents(t *testing.T) {
 					TestingAgentId: ptr.String("__TestingAgentId__"),
 					RegistrationId: ptr.String("__RegistrationId__"),
 				},
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
 			},
 			{
 				RcsAgentArn:               ptr.String("__RcsAgentArn__"),
@@ -2438,6 +2462,14 @@ func TestCheckResponseSnapshot_DescribeRcsAgents(t *testing.T) {
 					Status:         types.TestingAgentStatus("CREATED"),
 					TestingAgentId: ptr.String("__TestingAgentId__"),
 					RegistrationId: ptr.String("__RegistrationId__"),
+				},
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
 				},
 			},
 		},
@@ -3195,6 +3227,14 @@ func TestCheckResponseSnapshot_DescribeSenderIds(t *testing.T) {
 				DeletionProtectionEnabled: true,
 				Registered:                true,
 				RegistrationId:            ptr.String("__RegistrationId__"),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
 			},
 			{
 				SenderIdArn:    ptr.String("__SenderIdArn__"),
@@ -3208,6 +3248,14 @@ func TestCheckResponseSnapshot_DescribeSenderIds(t *testing.T) {
 				DeletionProtectionEnabled: true,
 				Registered:                true,
 				RegistrationId:            ptr.String("__RegistrationId__"),
+				MessagingLimits: &types.MessagingLimits{
+					RateLimits: map[string]int64{
+						"key0": 1,
+					},
+					DailyMessageCaps: map[string]int64{
+						"key0": 1,
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3511,6 +3559,63 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAvailablePhoneNumbers(t *testing.T) {
+	want := &ListAvailablePhoneNumbersOutput{
+		AvailablePhoneNumbers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAvailablePhoneNumbers.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAvailablePhoneNumbers(context.Background(), &ListAvailablePhoneNumbersInput{
+		IsoCountryCode: ptr.String("__IsoCountryCode__"),
+		NumberCapabilities: []types.NumberCapability{
+			types.NumberCapability("SMS"),
+			types.NumberCapability("SMS"),
+		},
+		NumberType:     types.SearchableNumberType("TEN_DLC"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		NumberPreference: []types.NumberPreferenceItem{
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAvailablePhoneNumbers.response", err)
 	}
 }
 
@@ -4105,10 +4210,32 @@ func TestCheckResponseSnapshot_RequestPhoneNumber(t *testing.T) {
 			types.NumberCapability("SMS"),
 			types.NumberCapability("SMS"),
 		},
-		NumberType:                  types.RequestableNumberType("LONG_CODE"),
-		OptOutListName:              ptr.String("__OptOutListName__"),
-		PoolId:                      ptr.String("__PoolId__"),
-		RegistrationId:              ptr.String("__RegistrationId__"),
+		NumberType:     types.RequestableNumberType("LONG_CODE"),
+		OptOutListName: ptr.String("__OptOutListName__"),
+		PoolId:         ptr.String("__PoolId__"),
+		RegistrationId: ptr.String("__RegistrationId__"),
+		NumberPreference: []types.NumberPreferenceItem{
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				PreferenceType: []types.PreferenceType{
+					types.PreferenceType("StartsWith"),
+					types.PreferenceType("StartsWith"),
+				},
+				Filter: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		InternationalSendingEnabled: ptr.Bool(true),
 		DeletionProtectionEnabled:   ptr.Bool(true),
 		Tags: []types.Tag{

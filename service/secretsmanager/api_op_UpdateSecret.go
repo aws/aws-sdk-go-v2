@@ -5,6 +5,8 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -165,6 +167,36 @@ type UpdateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateSecretRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSecretRequest_Description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateSecretRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SecretBinary != nil {
+		s.WriteBlob(schemas.UpdateSecretRequest_SecretBinary, v.SecretBinary)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.UpdateSecretRequest_SecretId, *v.SecretId)
+	}
+	if v.SecretString != nil {
+		s.WriteString(schemas.UpdateSecretRequest_SecretString, *v.SecretString)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.UpdateSecretRequest_Type, *v.Type)
+	}
+}
+
 type UpdateSecretOutput struct {
 
 	// The ARN of the secret that was updated.
@@ -183,13 +215,44 @@ type UpdateSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.UpdateSecretResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSecretResponse_Name, *v.Name)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.UpdateSecretResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *UpdateSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.UpdateSecretResponse_ARN, v.ARN)
+		case schemas.UpdateSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSecretResponse_Name, v.Name)
+		case schemas.UpdateSecretResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.UpdateSecretResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecret, schemas.UpdateSecretRequest, schemas.UpdateSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecret, schemas.UpdateSecretRequest, schemas.UpdateSecretResponse), output: &UpdateSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -440,6 +440,11 @@ var _ClusterIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClusterIdentifier",
 }, smithy.ShapeTypeString, 0)
 
+var _CodeVerifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appflow",
+	Name:      "CodeVerifier",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appflow",
 	Name:      "ConflictException",
@@ -695,10 +700,12 @@ var _ConnectorName = smithy.NewSchema(smithy.ShapeID{
 var ConnectorOAuthRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appflow",
 	Name:      "ConnectorOAuthRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ConnectorOAuthRequest_authCode *smithy.Schema
 
 var ConnectorOAuthRequest_redirectUri *smithy.Schema
+
+var ConnectorOAuthRequest_codeVerifier *smithy.Schema
 
 var ConnectorOperator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appflow",
@@ -2434,6 +2441,11 @@ var PrivateConnectionProvisioningStatus_PENDING *smithy.Schema
 
 var PrivateConnectionProvisioningStatus_CREATED *smithy.Schema
 
+var _PrivateKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appflow",
+	Name:      "PrivateKey",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _PrivateLinkServiceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appflow",
 	Name:      "PrivateLinkServiceName",
@@ -3173,10 +3185,12 @@ var SlackSourceProperties_object *smithy.Schema
 var SnowflakeConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appflow",
 	Name:      "SnowflakeConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var SnowflakeConnectorProfileCredentials_username *smithy.Schema
 
 var SnowflakeConnectorProfileCredentials_password *smithy.Schema
+
+var SnowflakeConnectorProfileCredentials_privateKey *smithy.Schema
 
 var SnowflakeConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appflow",
@@ -4834,6 +4848,8 @@ func init() {
 
 	ConnectorOAuthRequest_redirectUri = ConnectorOAuthRequest.AddMember("redirectUri", _RedirectUri)
 
+	ConnectorOAuthRequest_codeVerifier = ConnectorOAuthRequest.AddMember("codeVerifier", _CodeVerifier)
+
 	DatadogConnectorOperator_PROJECTION = DatadogConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
 
 	DatadogConnectorOperator_BETWEEN = DatadogConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
@@ -5615,6 +5631,8 @@ func init() {
 	SnowflakeConnectorProfileCredentials_username = SnowflakeConnectorProfileCredentials.AddMember("username", _Username)
 
 	SnowflakeConnectorProfileCredentials_password = SnowflakeConnectorProfileCredentials.AddMember("password", _Password)
+
+	SnowflakeConnectorProfileCredentials_privateKey = SnowflakeConnectorProfileCredentials.AddMember("privateKey", _PrivateKey)
 
 	TrendmicroConnectorProfileCredentials_apiSecretKey = TrendmicroConnectorProfileCredentials.AddMember("apiSecretKey", _ApiSecretKey)
 

@@ -4,7 +4,9 @@ package sfn
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,21 @@ type DescribeExecutionInput struct {
 	IncludedData types.IncludedData
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.DescribeExecutionInput_executionArn, *v.ExecutionArn)
+	}
+	if v.IncludedData != "" {
+		s.WriteString(schemas.DescribeExecutionInput_includedData, string(v.IncludedData))
+	}
 }
 
 type DescribeExecutionOutput struct {
@@ -223,13 +240,158 @@ type DescribeExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_error, *v.Error)
+	}
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_executionArn, *v.ExecutionArn)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_input, *v.Input)
+	}
+	if v.InputDetails != nil {
+		s.WriteStruct(schemas.DescribeExecutionOutput_inputDetails)
+		v.InputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_mapRunArn, *v.MapRunArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_name, *v.Name)
+	}
+	if v.Output != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_output, *v.Output)
+	}
+	if v.OutputDetails != nil {
+		s.WriteStruct(schemas.DescribeExecutionOutput_outputDetails)
+		v.OutputDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedriveCount != nil {
+		s.WriteInt32(schemas.DescribeExecutionOutput_redriveCount, *v.RedriveCount)
+	}
+	if v.RedriveDate != nil {
+		s.WriteTime(schemas.DescribeExecutionOutput_redriveDate, *v.RedriveDate)
+	}
+	if v.RedriveStatus != "" {
+		s.WriteString(schemas.DescribeExecutionOutput_redriveStatus, string(v.RedriveStatus))
+	}
+	if v.RedriveStatusReason != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_redriveStatusReason, *v.RedriveStatusReason)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.DescribeExecutionOutput_startDate, *v.StartDate)
+	}
+	if v.StateMachineAliasArn != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_stateMachineAliasArn, *v.StateMachineAliasArn)
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.StateMachineVersionArn != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_stateMachineVersionArn, *v.StateMachineVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeExecutionOutput_status, string(v.Status))
+	}
+	if v.StopDate != nil {
+		s.WriteTime(schemas.DescribeExecutionOutput_stopDate, *v.StopDate)
+	}
+	if v.TraceHeader != nil {
+		s.WriteString(schemas.DescribeExecutionOutput_traceHeader, *v.TraceHeader)
+	}
+}
+func (v *DescribeExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExecutionOutput_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_cause, v.Cause)
+		case schemas.DescribeExecutionOutput_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_error, v.Error)
+		case schemas.DescribeExecutionOutput_executionArn:
+			v.ExecutionArn = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_executionArn, v.ExecutionArn)
+		case schemas.DescribeExecutionOutput_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_input, v.Input)
+		case schemas.DescribeExecutionOutput_inputDetails:
+			v.InputDetails = &types.CloudWatchEventsExecutionDataDetails{}
+			return v.InputDetails.Deserialize(d)
+		case schemas.DescribeExecutionOutput_mapRunArn:
+			v.MapRunArn = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_mapRunArn, v.MapRunArn)
+		case schemas.DescribeExecutionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_name, v.Name)
+		case schemas.DescribeExecutionOutput_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_output, v.Output)
+		case schemas.DescribeExecutionOutput_outputDetails:
+			v.OutputDetails = &types.CloudWatchEventsExecutionDataDetails{}
+			return v.OutputDetails.Deserialize(d)
+		case schemas.DescribeExecutionOutput_redriveCount:
+			v.RedriveCount = new(int32)
+			return d.ReadInt32(schemas.DescribeExecutionOutput_redriveCount, v.RedriveCount)
+		case schemas.DescribeExecutionOutput_redriveDate:
+			v.RedriveDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeExecutionOutput_redriveDate, v.RedriveDate)
+		case schemas.DescribeExecutionOutput_redriveStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeExecutionOutput_redriveStatus, &ev); err != nil {
+				return err
+			}
+			v.RedriveStatus = types.ExecutionRedriveStatus(ev)
+			return nil
+		case schemas.DescribeExecutionOutput_redriveStatusReason:
+			v.RedriveStatusReason = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_redriveStatusReason, v.RedriveStatusReason)
+		case schemas.DescribeExecutionOutput_startDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeExecutionOutput_startDate, v.StartDate)
+		case schemas.DescribeExecutionOutput_stateMachineAliasArn:
+			v.StateMachineAliasArn = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_stateMachineAliasArn, v.StateMachineAliasArn)
+		case schemas.DescribeExecutionOutput_stateMachineArn:
+			v.StateMachineArn = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_stateMachineArn, v.StateMachineArn)
+		case schemas.DescribeExecutionOutput_stateMachineVersionArn:
+			v.StateMachineVersionArn = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_stateMachineVersionArn, v.StateMachineVersionArn)
+		case schemas.DescribeExecutionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeExecutionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExecutionStatus(ev)
+			return nil
+		case schemas.DescribeExecutionOutput_stopDate:
+			v.StopDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeExecutionOutput_stopDate, v.StopDate)
+		case schemas.DescribeExecutionOutput_traceHeader:
+			v.TraceHeader = new(string)
+			return d.ReadString(schemas.DescribeExecutionOutput_traceHeader, v.TraceHeader)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExecution, schemas.DescribeExecutionInput, schemas.DescribeExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExecution, schemas.DescribeExecutionInput, schemas.DescribeExecutionOutput), output: &DescribeExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

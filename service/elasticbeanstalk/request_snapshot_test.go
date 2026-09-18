@@ -413,6 +413,20 @@ func TestCheckRequestSnapshot_CreateApplicationVersion(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ImageConfiguration: &types.ImageConfiguration{
+			Source: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			Build: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2089,6 +2103,20 @@ func TestUpdateRequestSnapshot_CreateApplicationVersion(t *testing.T) {
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
+			},
+		},
+		ImageConfiguration: &types.ImageConfiguration{
+			Source: &types.ImageSource{
+				Uri: ptr.String("__Uri__"),
+			},
+			Build: &types.ImageBuildConfiguration{
+				Type:                 types.ImageBuildType("docker"),
+				DockerfileLocation:   ptr.String("__DockerfileLocation__"),
+				Buildpack:            ptr.String("__Buildpack__"),
+				Architecture:         types.ArchitectureType("amd64"),
+				CodeBuildServiceRole: ptr.String("__CodeBuildServiceRole__"),
+				ComputeType:          types.ComputeType("BUILD_GENERAL1_SMALL"),
+				TimeoutInMinutes:     ptr.Int32(1),
 			},
 		},
 	}

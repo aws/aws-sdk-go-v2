@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type StopCisSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCisSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCisSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCisSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteStruct(schemas.StopCisSessionRequest_message)
+		v.Message.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.StopCisSessionRequest_scanJobId, *v.ScanJobId)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.StopCisSessionRequest_sessionToken, *v.SessionToken)
+	}
+}
+
 type StopCisSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +77,26 @@ type StopCisSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCisSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCisSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCisSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopCisSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopCisSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopCisSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopCisSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCisSession, schemas.StopCisSessionRequest, schemas.StopCisSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopCisSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCisSession, schemas.StopCisSessionRequest, schemas.StopCisSessionResponse), output: &StopCisSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

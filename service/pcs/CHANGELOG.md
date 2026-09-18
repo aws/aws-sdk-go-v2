@@ -1,3 +1,9 @@
+# v1.29.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Feature**: This release adds support for custom Gres.conf configuration and Slurm version 26.05 in AWS PCS. Customers can now specify generic resource (GRES) settings to control how GPUs and other resources are configured and shared on their compute node groups.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

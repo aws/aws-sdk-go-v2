@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type CreateTicketV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTicketV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTicketV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTicketV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTicketV2Request_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateTicketV2Request_ConnectorId, *v.ConnectorId)
+	}
+	if v.FindingMetadataUid != nil {
+		s.WriteString(schemas.CreateTicketV2Request_FindingMetadataUid, *v.FindingMetadataUid)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateTicketV2Request_Mode, string(v.Mode))
+	}
+}
+
 type CreateTicketV2Output struct {
 
 	// The ID for the ticketv2.
@@ -65,13 +88,38 @@ type CreateTicketV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTicketV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTicketV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTicketV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TicketId != nil {
+		s.WriteString(schemas.CreateTicketV2Response_TicketId, *v.TicketId)
+	}
+	if v.TicketSrcUrl != nil {
+		s.WriteString(schemas.CreateTicketV2Response_TicketSrcUrl, *v.TicketSrcUrl)
+	}
+}
+func (v *CreateTicketV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTicketV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTicketV2Response_TicketId:
+			v.TicketId = new(string)
+			return d.ReadString(schemas.CreateTicketV2Response_TicketId, v.TicketId)
+		case schemas.CreateTicketV2Response_TicketSrcUrl:
+			v.TicketSrcUrl = new(string)
+			return d.ReadString(schemas.CreateTicketV2Response_TicketSrcUrl, v.TicketSrcUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTicketV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTicketV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTicketV2, schemas.CreateTicketV2Request, schemas.CreateTicketV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTicketV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTicketV2, schemas.CreateTicketV2Request, schemas.CreateTicketV2Response), output: &CreateTicketV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

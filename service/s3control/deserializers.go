@@ -22885,6 +22885,19 @@ func awsRestxml_deserializeDocumentS3CopyObjectOperation(v **types.S3CopyObjectO
 				return err
 			}
 
+		case strings.EqualFold("AnnotationDirective", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AnnotationDirective = types.S3AnnotationDirective(xtv)
+			}
+
 		case strings.EqualFold("BucketKeyEnabled", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -22966,6 +22979,25 @@ func awsRestxml_deserializeDocumentS3CopyObjectOperation(v **types.S3CopyObjectO
 		case strings.EqualFold("NewObjectTagging", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentS3TagSet(&sv.NewObjectTagging, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("ObjectLockEventHold", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ObjectLockEventHold = types.S3ObjectLockEventHold(xtv)
+			}
+
+		case strings.EqualFold("ObjectLockEventHoldDuration", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentS3ObjectLockEventHoldDuration(&sv.ObjectLockEventHoldDuration, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -23663,6 +23695,76 @@ func awsRestxml_deserializeDocumentS3ManifestOutputLocation(v **types.S3Manifest
 	return nil
 }
 
+func awsRestxml_deserializeDocumentS3ObjectLockEventHoldDuration(v **types.S3ObjectLockEventHoldDuration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.S3ObjectLockEventHoldDuration
+	if *v == nil {
+		sv = &types.S3ObjectLockEventHoldDuration{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Days", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Days = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("Years", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Years = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentS3ObjectLockLegalHold(v **types.S3ObjectLockLegalHold, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23696,6 +23798,76 @@ func awsRestxml_deserializeDocumentS3ObjectLockLegalHold(v **types.S3ObjectLockL
 			{
 				xtv := string(val)
 				sv.Status = types.S3ObjectLockLegalHoldStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentS3ObjectLockRetentionEventHoldDuration(v **types.S3ObjectLockRetentionEventHoldDuration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.S3ObjectLockRetentionEventHoldDuration
+	if *v == nil {
+		sv = &types.S3ObjectLockRetentionEventHoldDuration{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Days", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Days = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("Years", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Years = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -24015,6 +24187,25 @@ func awsRestxml_deserializeDocumentS3Retention(v **types.S3Retention, decoder sm
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("EventHold", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EventHold = types.S3ObjectLockRetentionEventHold(xtv)
+			}
+
+		case strings.EqualFold("EventHoldDuration", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentS3ObjectLockRetentionEventHoldDuration(&sv.EventHoldDuration, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Mode", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

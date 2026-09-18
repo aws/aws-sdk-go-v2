@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,32 @@ type CreateControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionPlanInstructions != nil {
+		s.WriteString(schemas.CreateControlRequest_actionPlanInstructions, *v.ActionPlanInstructions)
+	}
+	if v.ActionPlanTitle != nil {
+		s.WriteString(schemas.CreateControlRequest_actionPlanTitle, *v.ActionPlanTitle)
+	}
+	serializeCreateControlMappingSources(s, schemas.CreateControlRequest_controlMappingSources, v.ControlMappingSources)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateControlRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateControlRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateControlRequest_tags, v.Tags)
+	if v.TestingInformation != nil {
+		s.WriteString(schemas.CreateControlRequest_testingInformation, *v.TestingInformation)
+	}
+}
+
 type CreateControlOutput struct {
 
 	//  The new control that the CreateControl API returned.
@@ -65,13 +93,34 @@ type CreateControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteStruct(schemas.CreateControlResponse_control)
+		v.Control.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateControlResponse_control:
+			v.Control = &types.Control{}
+			return v.Control.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateControl, schemas.CreateControlRequest, schemas.CreateControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateControl, schemas.CreateControlRequest, schemas.CreateControlResponse), output: &CreateControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

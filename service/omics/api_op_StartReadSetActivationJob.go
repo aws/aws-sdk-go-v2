@@ -12,8 +12,8 @@ import (
 )
 
 // Activates an archived read set and returns its metadata in a JSON formatted
-// output. AWS HealthOmics automatically archives unused read sets after 30 days.
-// To monitor the status of your read set activation job, use the
+// output. Amazon Web Services HealthOmics automatically archives unused read sets
+// after 30 days. To monitor the status of your read set activation job, use the
 // GetReadSetActivationJob operation.
 //
 // To learn more, see [Activating read sets] in the Amazon Web Services HealthOmics User Guide.

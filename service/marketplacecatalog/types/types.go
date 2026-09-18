@@ -4577,6 +4577,9 @@ type ResaleAuthorizationFilters struct {
 	// Allows filtering on the EntityId of a ResaleAuthorization.
 	EntityId *ResaleAuthorizationEntityIdFilter
 
+	// Allows filtering on the IssuerAccountId of a ResaleAuthorization.
+	IssuerAccountId *ResaleAuthorizationIssuerAccountIdFilter
+
 	// Allows filtering on the LastModifiedDate of a ResaleAuthorization.
 	LastModifiedDate *ResaleAuthorizationLastModifiedDateFilter
 
@@ -4607,6 +4610,9 @@ type ResaleAuthorizationFilters struct {
 	// Allows filtering on the ResellerRole of a ResaleAuthorization.
 	ResellerRole *ResaleAuthorizationResellerRoleFilter
 
+	// Allows filtering on the SourceAuthorization of a ResaleAuthorization.
+	SourceAuthorization *ResaleAuthorizationSourceAuthorizationFilter
+
 	// Allows filtering on the Status of a ResaleAuthorization.
 	Status *ResaleAuthorizationStatusFilter
 
@@ -4633,6 +4639,11 @@ func (v *ResaleAuthorizationFilters) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.EntityId != nil {
 		s.WriteStruct(schemas.ResaleAuthorizationFilters_EntityId)
 		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IssuerAccountId != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_IssuerAccountId)
+		v.IssuerAccountId.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.LastModifiedDate != nil {
@@ -4685,6 +4696,11 @@ func (v *ResaleAuthorizationFilters) SerializeMembers(s smithy.ShapeSerializer) 
 		v.ResellerRole.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SourceAuthorization != nil {
+		s.WriteStruct(schemas.ResaleAuthorizationFilters_SourceAuthorization)
+		v.SourceAuthorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.ResaleAuthorizationFilters_Status)
 		v.Status.SerializeMembers(s)
@@ -4703,6 +4719,9 @@ func (v *ResaleAuthorizationFilters) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.ResaleAuthorizationFilters_EntityId:
 			v.EntityId = &ResaleAuthorizationEntityIdFilter{}
 			return v.EntityId.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_IssuerAccountId:
+			v.IssuerAccountId = &ResaleAuthorizationIssuerAccountIdFilter{}
+			return v.IssuerAccountId.Deserialize(d)
 		case schemas.ResaleAuthorizationFilters_LastModifiedDate:
 			v.LastModifiedDate = &ResaleAuthorizationLastModifiedDateFilter{}
 			return v.LastModifiedDate.Deserialize(d)
@@ -4733,9 +4752,41 @@ func (v *ResaleAuthorizationFilters) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.ResaleAuthorizationFilters_ResellerRole:
 			v.ResellerRole = &ResaleAuthorizationResellerRoleFilter{}
 			return v.ResellerRole.Deserialize(d)
+		case schemas.ResaleAuthorizationFilters_SourceAuthorization:
+			v.SourceAuthorization = &ResaleAuthorizationSourceAuthorizationFilter{}
+			return v.SourceAuthorization.Deserialize(d)
 		case schemas.ResaleAuthorizationFilters_Status:
 			v.Status = &ResaleAuthorizationStatusFilter{}
 			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Allows filtering on the IssuerAccountId of a ResaleAuthorization.
+type ResaleAuthorizationIssuerAccountIdFilter struct {
+
+	// Allows filtering on the IssuerAccountId of a ResaleAuthorization with list
+	// input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationIssuerAccountIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationIssuerAccountIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationIssuerAccountIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationIssuerAccountIdFilterValueList(s, schemas.ResaleAuthorizationIssuerAccountIdFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationIssuerAccountIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationIssuerAccountIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationIssuerAccountIdFilter_ValueList:
+			return deserializeResaleAuthorizationIssuerAccountIdFilterValueList(d, schemas.ResaleAuthorizationIssuerAccountIdFilter_ValueList, &v.ValueList)
 		}
 		return nil
 	})
@@ -5189,6 +5240,35 @@ func (v *ResaleAuthorizationSort) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Allows filtering on the SourceAuthorization of a ResaleAuthorization.
+type ResaleAuthorizationSourceAuthorizationFilter struct {
+
+	// Allows filtering on the SourceAuthorization of a ResaleAuthorization with list
+	// input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResaleAuthorizationSourceAuthorizationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResaleAuthorizationSourceAuthorizationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResaleAuthorizationSourceAuthorizationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResaleAuthorizationSourceAuthorizationFilterValueList(s, schemas.ResaleAuthorizationSourceAuthorizationFilter_ValueList, v.ValueList)
+}
+func (v *ResaleAuthorizationSourceAuthorizationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResaleAuthorizationSourceAuthorizationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResaleAuthorizationSourceAuthorizationFilter_ValueList:
+			return deserializeResaleAuthorizationSourceAuthorizationFilterValueList(d, schemas.ResaleAuthorizationSourceAuthorizationFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Allows filtering on the Status of a ResaleAuthorization.
 type ResaleAuthorizationStatusFilter struct {
 
@@ -5226,6 +5306,9 @@ type ResaleAuthorizationSummary struct {
 	// The created date of the ResaleAuthorization.
 	CreatedDate *string
 
+	// The issuer account ID of the ResaleAuthorization.
+	IssuerAccountId *string
+
 	// The manufacturer account ID of the ResaleAuthorization.
 	ManufacturerAccountId *string
 
@@ -5253,6 +5336,9 @@ type ResaleAuthorizationSummary struct {
 	// The reseller role of the ResaleAuthorization.
 	ResellerRole ResaleAuthorizationResellerRoleString
 
+	// The source authorization of the ResaleAuthorization.
+	SourceAuthorization *string
+
 	// The status of the ResaleAuthorization.
 	Status ResaleAuthorizationStatusString
 
@@ -5271,6 +5357,9 @@ func (v *ResaleAuthorizationSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.CreatedDate != nil {
 		s.WriteString(schemas.ResaleAuthorizationSummary_CreatedDate, *v.CreatedDate)
+	}
+	if v.IssuerAccountId != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_IssuerAccountId, *v.IssuerAccountId)
 	}
 	if v.ManufacturerAccountId != nil {
 		s.WriteString(schemas.ResaleAuthorizationSummary_ManufacturerAccountId, *v.ManufacturerAccountId)
@@ -5299,6 +5388,9 @@ func (v *ResaleAuthorizationSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResellerRole != "" {
 		s.WriteString(schemas.ResaleAuthorizationSummary_ResellerRole, string(v.ResellerRole))
 	}
+	if v.SourceAuthorization != nil {
+		s.WriteString(schemas.ResaleAuthorizationSummary_SourceAuthorization, *v.SourceAuthorization)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ResaleAuthorizationSummary_Status, string(v.Status))
 	}
@@ -5312,6 +5404,9 @@ func (v *ResaleAuthorizationSummary) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.ResaleAuthorizationSummary_CreatedDate:
 			v.CreatedDate = new(string)
 			return d.ReadString(schemas.ResaleAuthorizationSummary_CreatedDate, v.CreatedDate)
+		case schemas.ResaleAuthorizationSummary_IssuerAccountId:
+			v.IssuerAccountId = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_IssuerAccountId, v.IssuerAccountId)
 		case schemas.ResaleAuthorizationSummary_ManufacturerAccountId:
 			v.ManufacturerAccountId = new(string)
 			return d.ReadString(schemas.ResaleAuthorizationSummary_ManufacturerAccountId, v.ManufacturerAccountId)
@@ -5343,6 +5438,9 @@ func (v *ResaleAuthorizationSummary) Deserialize(d smithy.ShapeDeserializer) err
 			}
 			v.ResellerRole = ResaleAuthorizationResellerRoleString(ev)
 			return nil
+		case schemas.ResaleAuthorizationSummary_SourceAuthorization:
+			v.SourceAuthorization = new(string)
+			return d.ReadString(schemas.ResaleAuthorizationSummary_SourceAuthorization, v.SourceAuthorization)
 		case schemas.ResaleAuthorizationSummary_Status:
 			var ev string
 			if err := d.ReadString(schemas.ResaleAuthorizationSummary_Status, &ev); err != nil {

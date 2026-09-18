@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,30 @@ type GetExecutionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExecutionHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExecutionHistoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExecutionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.GetExecutionHistoryInput_executionArn, *v.ExecutionArn)
+	}
+	if v.IncludeExecutionData != nil {
+		s.WriteBool(schemas.GetExecutionHistoryInput_includeExecutionData, *v.IncludeExecutionData)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.GetExecutionHistoryInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExecutionHistoryInput_nextToken, *v.NextToken)
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.GetExecutionHistoryInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 type GetExecutionHistoryOutput struct {
 
 	// The list of events that occurred in the execution.
@@ -87,13 +113,35 @@ type GetExecutionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExecutionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExecutionHistoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExecutionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHistoryEventList(s, schemas.GetExecutionHistoryOutput_events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExecutionHistoryOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *GetExecutionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExecutionHistoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExecutionHistoryOutput_events:
+			return deserializeHistoryEventList(d, schemas.GetExecutionHistoryOutput_events, &v.Events)
+		case schemas.GetExecutionHistoryOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetExecutionHistoryOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetExecutionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExecutionHistory, schemas.GetExecutionHistoryInput, schemas.GetExecutionHistoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetExecutionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExecutionHistory, schemas.GetExecutionHistoryInput, schemas.GetExecutionHistoryOutput), output: &GetExecutionHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

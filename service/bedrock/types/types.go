@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrock/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,6 +32,50 @@ type AccountEnforcedGuardrailInferenceInputConfiguration struct {
 	SelectiveContentGuarding *SelectiveContentGuarding
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountEnforcedGuardrailInferenceInputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountEnforcedGuardrailInferenceInputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountEnforcedGuardrailInferenceInputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailInferenceInputConfiguration_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailInferenceInputConfiguration_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.ModelEnforcement != nil {
+		s.WriteStruct(schemas.AccountEnforcedGuardrailInferenceInputConfiguration_modelEnforcement)
+		v.ModelEnforcement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelectiveContentGuarding != nil {
+		s.WriteStruct(schemas.AccountEnforcedGuardrailInferenceInputConfiguration_selectiveContentGuarding)
+		v.SelectiveContentGuarding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccountEnforcedGuardrailInferenceInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountEnforcedGuardrailInferenceInputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountEnforcedGuardrailInferenceInputConfiguration_guardrailIdentifier:
+			v.GuardrailIdentifier = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailInferenceInputConfiguration_guardrailIdentifier, v.GuardrailIdentifier)
+		case schemas.AccountEnforcedGuardrailInferenceInputConfiguration_guardrailVersion:
+			v.GuardrailVersion = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailInferenceInputConfiguration_guardrailVersion, v.GuardrailVersion)
+		case schemas.AccountEnforcedGuardrailInferenceInputConfiguration_modelEnforcement:
+			v.ModelEnforcement = &ModelEnforcement{}
+			return v.ModelEnforcement.Deserialize(d)
+		case schemas.AccountEnforcedGuardrailInferenceInputConfiguration_selectiveContentGuarding:
+			v.SelectiveContentGuarding = &SelectiveContentGuarding{}
+			return v.SelectiveContentGuarding.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Account enforced guardrail output configuration.
@@ -76,6 +123,106 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountEnforcedGuardrailOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountEnforcedGuardrailOutputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountEnforcedGuardrailOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigId != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_configId, *v.ConfigId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AccountEnforcedGuardrailOutputConfiguration_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_createdBy, *v.CreatedBy)
+	}
+	if v.GuardrailArn != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailArn, *v.GuardrailArn)
+	}
+	if v.GuardrailId != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailId, *v.GuardrailId)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.InputTags != "" {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_inputTags, string(v.InputTags))
+	}
+	if v.ModelEnforcement != nil {
+		s.WriteStruct(schemas.AccountEnforcedGuardrailOutputConfiguration_modelEnforcement)
+		v.ModelEnforcement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_owner, string(v.Owner))
+	}
+	if v.SelectiveContentGuarding != nil {
+		s.WriteStruct(schemas.AccountEnforcedGuardrailOutputConfiguration_selectiveContentGuarding)
+		v.SelectiveContentGuarding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AccountEnforcedGuardrailOutputConfiguration_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.AccountEnforcedGuardrailOutputConfiguration_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *AccountEnforcedGuardrailOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountEnforcedGuardrailOutputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_configId:
+			v.ConfigId = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_configId, v.ConfigId)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccountEnforcedGuardrailOutputConfiguration_createdAt, v.CreatedAt)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_createdBy, v.CreatedBy)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailArn:
+			v.GuardrailArn = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailArn, v.GuardrailArn)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailId:
+			v.GuardrailId = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailId, v.GuardrailId)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailVersion:
+			v.GuardrailVersion = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_guardrailVersion, v.GuardrailVersion)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_inputTags:
+			var ev string
+			if err := d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_inputTags, &ev); err != nil {
+				return err
+			}
+			v.InputTags = InputTags(ev)
+			return nil
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_modelEnforcement:
+			v.ModelEnforcement = &ModelEnforcement{}
+			return v.ModelEnforcement.Deserialize(d)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_owner:
+			var ev string
+			if err := d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_owner, &ev); err != nil {
+				return err
+			}
+			v.Owner = ConfigurationOwner(ev)
+			return nil
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_selectiveContentGuarding:
+			v.SelectiveContentGuarding = &SelectiveContentGuarding{}
+			return v.SelectiveContentGuarding.Deserialize(d)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccountEnforcedGuardrailOutputConfiguration_updatedAt, v.UpdatedAt)
+		case schemas.AccountEnforcedGuardrailOutputConfiguration_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.AccountEnforcedGuardrailOutputConfiguration_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
+
 // Contains the input data configuration for an advanced prompt optimization job.
 type AdvancedPromptOptimizationInputConfig struct {
 
@@ -86,6 +233,28 @@ type AdvancedPromptOptimizationInputConfig struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdvancedPromptOptimizationInputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedPromptOptimizationInputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedPromptOptimizationInputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.AdvancedPromptOptimizationInputConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *AdvancedPromptOptimizationInputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedPromptOptimizationInputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedPromptOptimizationInputConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.AdvancedPromptOptimizationInputConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // Contains a summary of an advanced prompt optimization job.
@@ -117,6 +286,56 @@ type AdvancedPromptOptimizationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdvancedPromptOptimizationJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedPromptOptimizationJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedPromptOptimizationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AdvancedPromptOptimizationJobSummary_creationTime, *v.CreationTime)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.AdvancedPromptOptimizationJobSummary_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.AdvancedPromptOptimizationJobSummary_jobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.AdvancedPromptOptimizationJobSummary_jobStatus, string(v.JobStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.AdvancedPromptOptimizationJobSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+}
+func (v *AdvancedPromptOptimizationJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedPromptOptimizationJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedPromptOptimizationJobSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AdvancedPromptOptimizationJobSummary_creationTime, v.CreationTime)
+		case schemas.AdvancedPromptOptimizationJobSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.AdvancedPromptOptimizationJobSummary_jobArn, v.JobArn)
+		case schemas.AdvancedPromptOptimizationJobSummary_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.AdvancedPromptOptimizationJobSummary_jobName, v.JobName)
+		case schemas.AdvancedPromptOptimizationJobSummary_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.AdvancedPromptOptimizationJobSummary_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = AdvancedPromptOptimizationJobStatus(ev)
+			return nil
+		case schemas.AdvancedPromptOptimizationJobSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.AdvancedPromptOptimizationJobSummary_lastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
+
 // Contains the output data configuration for an advanced prompt optimization job.
 type AdvancedPromptOptimizationOutputConfig struct {
 
@@ -126,6 +345,28 @@ type AdvancedPromptOptimizationOutputConfig struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdvancedPromptOptimizationOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedPromptOptimizationOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedPromptOptimizationOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.AdvancedPromptOptimizationOutputConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *AdvancedPromptOptimizationOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedPromptOptimizationOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedPromptOptimizationOutputConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.AdvancedPromptOptimizationOutputConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // Information about the agreement availability
@@ -140,6 +381,38 @@ type AgreementAvailability struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgreementAvailability) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementAvailability)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementAvailability) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.AgreementAvailability_errorMessage, *v.ErrorMessage)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgreementAvailability_status, string(v.Status))
+	}
+}
+func (v *AgreementAvailability) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementAvailability, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementAvailability_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.AgreementAvailability_errorMessage, v.ErrorMessage)
+		case schemas.AgreementAvailability_status:
+			var ev string
+			if err := d.ReadString(schemas.AgreementAvailability_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration details of an automated evaluation job. The
@@ -165,6 +438,36 @@ type AutomatedEvaluationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedEvaluationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedEvaluationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedEvaluationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomMetricConfig != nil {
+		s.WriteStruct(schemas.AutomatedEvaluationConfig_customMetricConfig)
+		v.CustomMetricConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEvaluationDatasetMetricConfigs(s, schemas.AutomatedEvaluationConfig_datasetMetricConfigs, v.DatasetMetricConfigs)
+	serializeEvaluatorModelConfig(s, schemas.AutomatedEvaluationConfig_evaluatorModelConfig, v.EvaluatorModelConfig)
+}
+func (v *AutomatedEvaluationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedEvaluationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedEvaluationConfig_customMetricConfig:
+			v.CustomMetricConfig = &AutomatedEvaluationCustomMetricConfig{}
+			return v.CustomMetricConfig.Deserialize(d)
+		case schemas.AutomatedEvaluationConfig_datasetMetricConfigs:
+			return deserializeEvaluationDatasetMetricConfigs(d, schemas.AutomatedEvaluationConfig_datasetMetricConfigs, &v.DatasetMetricConfigs)
+		case schemas.AutomatedEvaluationConfig_evaluatorModelConfig:
+			return deserializeEvaluatorModelConfig(d, schemas.AutomatedEvaluationConfig_evaluatorModelConfig, &v.EvaluatorModelConfig)
+		}
+		return nil
+	})
+}
+
 // Defines the configuration of custom metrics to be used in an evaluation job. To
 // learn more about using custom metrics in Amazon Bedrock evaluation jobs, see [Create a prompt for a custom metrics (LLM-as-a-judge model evaluations)]
 // and [Create a prompt for a custom metrics (RAG evaluations)].
@@ -187,6 +490,33 @@ type AutomatedEvaluationCustomMetricConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedEvaluationCustomMetricConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedEvaluationCustomMetricConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedEvaluationCustomMetricConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedEvaluationCustomMetrics(s, schemas.AutomatedEvaluationCustomMetricConfig_customMetrics, v.CustomMetrics)
+	if v.EvaluatorModelConfig != nil {
+		s.WriteStruct(schemas.AutomatedEvaluationCustomMetricConfig_evaluatorModelConfig)
+		v.EvaluatorModelConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedEvaluationCustomMetricConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedEvaluationCustomMetricConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedEvaluationCustomMetricConfig_customMetrics:
+			return deserializeAutomatedEvaluationCustomMetrics(d, schemas.AutomatedEvaluationCustomMetricConfig_customMetrics, &v.CustomMetrics)
+		case schemas.AutomatedEvaluationCustomMetricConfig_evaluatorModelConfig:
+			v.EvaluatorModelConfig = &CustomMetricEvaluatorModelConfig{}
+			return v.EvaluatorModelConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An array item definining a single custom metric for use in an Amazon Bedrock
 // evaluation job.
 //
@@ -205,6 +535,14 @@ type AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition struct {
 }
 
 func (*AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition) isAutomatedEvaluationCustomMetricSource() {
+}
+func (v *AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedEvaluationCustomMetricSource_customMetricDefinition)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedEvaluationCustomMetricSourceMemberCustomMetricDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Represents the result of an Automated Reasoning validation check, indicating
@@ -234,6 +572,14 @@ type AutomatedReasoningCheckFindingMemberImpossible struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberImpossible) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberImpossible) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_impossible)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberImpossible) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that the claims are false. The claims are not implied by the premises
 // and Automated Reasoning policy. Furthermore, there exist different claims that
@@ -245,6 +591,14 @@ type AutomatedReasoningCheckFindingMemberInvalid struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberInvalid) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberInvalid) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_invalid)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberInvalid) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Identifies that some or all of the input prompt wasn't translated into logic.
 // This can happen if the input isn't relevant to the Automated Reasoning policy,
@@ -256,6 +610,14 @@ type AutomatedReasoningCheckFindingMemberNoTranslations struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberNoTranslations) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberNoTranslations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_noTranslations)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberNoTranslations) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that the claims can be true or false. It depends on what assumptions
 // are made for the claim to be implied from the premises and Automated Reasoning
@@ -268,6 +630,14 @@ type AutomatedReasoningCheckFindingMemberSatisfiable struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberSatisfiable) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberSatisfiable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_satisfiable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberSatisfiable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that the input contains too much information for Automated Reasoning
 // to process within its latency limits.
@@ -278,6 +648,14 @@ type AutomatedReasoningCheckFindingMemberTooComplex struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberTooComplex) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberTooComplex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_tooComplex)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberTooComplex) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that an ambiguity was detected in the translation, making it unsound
 // to continue with validity checking. Additional context or follow-up questions
@@ -289,6 +667,14 @@ type AutomatedReasoningCheckFindingMemberTranslationAmbiguous struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberTranslationAmbiguous) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberTranslationAmbiguous) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_translationAmbiguous)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberTranslationAmbiguous) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that the claims are true. The claims are implied by the premises and
 // the Automated Reasoning policy. Given the Automated Reasoning policy and
@@ -300,6 +686,14 @@ type AutomatedReasoningCheckFindingMemberValid struct {
 }
 
 func (*AutomatedReasoningCheckFindingMemberValid) isAutomatedReasoningCheckFinding() {}
+func (v *AutomatedReasoningCheckFindingMemberValid) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckFinding_valid)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningCheckFindingMemberValid) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that no valid claims can be made due to logical contradictions in the
 // premises or rules.
@@ -319,6 +713,41 @@ type AutomatedReasoningCheckImpossibleFinding struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckImpossibleFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckImpossibleFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckImpossibleFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckImpossibleFinding_contradictingRules, v.ContradictingRules)
+	if v.LogicWarning != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckImpossibleFinding_logicWarning)
+		v.LogicWarning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Translation != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckImpossibleFinding_translation)
+		v.Translation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningCheckImpossibleFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckImpossibleFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckImpossibleFinding_contradictingRules:
+			return deserializeAutomatedReasoningCheckRuleList(d, schemas.AutomatedReasoningCheckImpossibleFinding_contradictingRules, &v.ContradictingRules)
+		case schemas.AutomatedReasoningCheckImpossibleFinding_logicWarning:
+			v.LogicWarning = &AutomatedReasoningCheckLogicWarning{}
+			return v.LogicWarning.Deserialize(d)
+		case schemas.AutomatedReasoningCheckImpossibleFinding_translation:
+			v.Translation = &AutomatedReasoningCheckTranslation{}
+			return v.Translation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // References a portion of the original input text that corresponds to logical
 // elements.
 type AutomatedReasoningCheckInputTextReference struct {
@@ -327,6 +756,28 @@ type AutomatedReasoningCheckInputTextReference struct {
 	Text *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningCheckInputTextReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckInputTextReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckInputTextReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.AutomatedReasoningCheckInputTextReference_text, *v.Text)
+	}
+}
+func (v *AutomatedReasoningCheckInputTextReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckInputTextReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckInputTextReference_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.AutomatedReasoningCheckInputTextReference_text, v.Text)
+		}
+		return nil
+	})
 }
 
 // Indicates that the claims are logically false and contradictory to the
@@ -344,6 +795,41 @@ type AutomatedReasoningCheckInvalidFinding struct {
 	Translation *AutomatedReasoningCheckTranslation
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningCheckInvalidFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckInvalidFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckInvalidFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckInvalidFinding_contradictingRules, v.ContradictingRules)
+	if v.LogicWarning != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckInvalidFinding_logicWarning)
+		v.LogicWarning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Translation != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckInvalidFinding_translation)
+		v.Translation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningCheckInvalidFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckInvalidFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckInvalidFinding_contradictingRules:
+			return deserializeAutomatedReasoningCheckRuleList(d, schemas.AutomatedReasoningCheckInvalidFinding_contradictingRules, &v.ContradictingRules)
+		case schemas.AutomatedReasoningCheckInvalidFinding_logicWarning:
+			v.LogicWarning = &AutomatedReasoningCheckLogicWarning{}
+			return v.LogicWarning.Deserialize(d)
+		case schemas.AutomatedReasoningCheckInvalidFinding_translation:
+			v.Translation = &AutomatedReasoningCheckTranslation{}
+			return v.Translation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Identifies logical issues in the translated statements that exist independent
@@ -365,10 +851,58 @@ type AutomatedReasoningCheckLogicWarning struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckLogicWarning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckLogicWarning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckLogicWarning) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckLogicWarning_claims, v.Claims)
+	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckLogicWarning_premises, v.Premises)
+	if v.Type != "" {
+		s.WriteString(schemas.AutomatedReasoningCheckLogicWarning_type, string(v.Type))
+	}
+}
+func (v *AutomatedReasoningCheckLogicWarning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckLogicWarning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckLogicWarning_claims:
+			return deserializeAutomatedReasoningLogicStatementList(d, schemas.AutomatedReasoningCheckLogicWarning_claims, &v.Claims)
+		case schemas.AutomatedReasoningCheckLogicWarning_premises:
+			return deserializeAutomatedReasoningLogicStatementList(d, schemas.AutomatedReasoningCheckLogicWarning_premises, &v.Premises)
+		case schemas.AutomatedReasoningCheckLogicWarning_type:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningCheckLogicWarning_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AutomatedReasoningCheckLogicWarningType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Indicates that no relevant logical information could be extracted from the
 // input for validation.
 type AutomatedReasoningCheckNoTranslationsFinding struct {
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningCheckNoTranslationsFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckNoTranslationsFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckNoTranslationsFinding) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutomatedReasoningCheckNoTranslationsFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckNoTranslationsFinding, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // References a specific automated reasoning policy rule that was applied during
@@ -382,6 +916,34 @@ type AutomatedReasoningCheckRule struct {
 	PolicyVersionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningCheckRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AutomatedReasoningCheckRule_id, *v.Id)
+	}
+	if v.PolicyVersionArn != nil {
+		s.WriteString(schemas.AutomatedReasoningCheckRule_policyVersionArn, *v.PolicyVersionArn)
+	}
+}
+func (v *AutomatedReasoningCheckRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckRule_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AutomatedReasoningCheckRule_id, v.Id)
+		case schemas.AutomatedReasoningCheckRule_policyVersionArn:
+			v.PolicyVersionArn = new(string)
+			return d.ReadString(schemas.AutomatedReasoningCheckRule_policyVersionArn, v.PolicyVersionArn)
+		}
+		return nil
+	})
 }
 
 // Indicates that the claims could be either true or false depending on additional
@@ -404,6 +966,54 @@ type AutomatedReasoningCheckSatisfiableFinding struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckSatisfiableFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckSatisfiableFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckSatisfiableFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClaimsFalseScenario != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckSatisfiableFinding_claimsFalseScenario)
+		v.ClaimsFalseScenario.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClaimsTrueScenario != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckSatisfiableFinding_claimsTrueScenario)
+		v.ClaimsTrueScenario.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogicWarning != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckSatisfiableFinding_logicWarning)
+		v.LogicWarning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Translation != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckSatisfiableFinding_translation)
+		v.Translation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningCheckSatisfiableFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckSatisfiableFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckSatisfiableFinding_claimsFalseScenario:
+			v.ClaimsFalseScenario = &AutomatedReasoningCheckScenario{}
+			return v.ClaimsFalseScenario.Deserialize(d)
+		case schemas.AutomatedReasoningCheckSatisfiableFinding_claimsTrueScenario:
+			v.ClaimsTrueScenario = &AutomatedReasoningCheckScenario{}
+			return v.ClaimsTrueScenario.Deserialize(d)
+		case schemas.AutomatedReasoningCheckSatisfiableFinding_logicWarning:
+			v.LogicWarning = &AutomatedReasoningCheckLogicWarning{}
+			return v.LogicWarning.Deserialize(d)
+		case schemas.AutomatedReasoningCheckSatisfiableFinding_translation:
+			v.Translation = &AutomatedReasoningCheckTranslation{}
+			return v.Translation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents a logical scenario where claims can be evaluated as true or false,
 // containing specific logical assignments.
 type AutomatedReasoningCheckScenario struct {
@@ -414,10 +1024,45 @@ type AutomatedReasoningCheckScenario struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckScenario) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckScenario)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckScenario) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckScenario_statements, v.Statements)
+}
+func (v *AutomatedReasoningCheckScenario) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckScenario, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckScenario_statements:
+			return deserializeAutomatedReasoningLogicStatementList(d, schemas.AutomatedReasoningCheckScenario_statements, &v.Statements)
+		}
+		return nil
+	})
+}
+
 // Indicates that the input exceeds the processing capacity due to the volume or
 // complexity of the logical information.
 type AutomatedReasoningCheckTooComplexFinding struct {
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningCheckTooComplexFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckTooComplexFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckTooComplexFinding) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutomatedReasoningCheckTooComplexFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTooComplexFinding, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Contains the logical translation of natural language input into formal logical
@@ -451,6 +1096,40 @@ type AutomatedReasoningCheckTranslation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckTranslation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckTranslation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckTranslation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckTranslation_claims, v.Claims)
+	if v.Confidence != nil {
+		s.WriteFloat64(schemas.AutomatedReasoningCheckTranslation_confidence, *v.Confidence)
+	}
+	serializeAutomatedReasoningLogicStatementList(s, schemas.AutomatedReasoningCheckTranslation_premises, v.Premises)
+	serializeAutomatedReasoningCheckInputTextReferenceList(s, schemas.AutomatedReasoningCheckTranslation_untranslatedClaims, v.UntranslatedClaims)
+	serializeAutomatedReasoningCheckInputTextReferenceList(s, schemas.AutomatedReasoningCheckTranslation_untranslatedPremises, v.UntranslatedPremises)
+}
+func (v *AutomatedReasoningCheckTranslation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTranslation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckTranslation_claims:
+			return deserializeAutomatedReasoningLogicStatementList(d, schemas.AutomatedReasoningCheckTranslation_claims, &v.Claims)
+		case schemas.AutomatedReasoningCheckTranslation_confidence:
+			v.Confidence = new(float64)
+			return d.ReadFloat64(schemas.AutomatedReasoningCheckTranslation_confidence, v.Confidence)
+		case schemas.AutomatedReasoningCheckTranslation_premises:
+			return deserializeAutomatedReasoningLogicStatementList(d, schemas.AutomatedReasoningCheckTranslation_premises, &v.Premises)
+		case schemas.AutomatedReasoningCheckTranslation_untranslatedClaims:
+			return deserializeAutomatedReasoningCheckInputTextReferenceList(d, schemas.AutomatedReasoningCheckTranslation_untranslatedClaims, &v.UntranslatedClaims)
+		case schemas.AutomatedReasoningCheckTranslation_untranslatedPremises:
+			return deserializeAutomatedReasoningCheckInputTextReferenceList(d, schemas.AutomatedReasoningCheckTranslation_untranslatedPremises, &v.UntranslatedPremises)
+		}
+		return nil
+	})
+}
+
 // Indicates that the input has multiple valid logical interpretations, requiring
 // additional context or clarification.
 type AutomatedReasoningCheckTranslationAmbiguousFinding struct {
@@ -465,6 +1144,28 @@ type AutomatedReasoningCheckTranslationAmbiguousFinding struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckTranslationAmbiguousFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckTranslationAmbiguousFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckTranslationAmbiguousFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningCheckDifferenceScenarioList(s, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_differenceScenarios, v.DifferenceScenarios)
+	serializeAutomatedReasoningCheckTranslationOptionList(s, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_options, v.Options)
+}
+func (v *AutomatedReasoningCheckTranslationAmbiguousFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_differenceScenarios:
+			return deserializeAutomatedReasoningCheckDifferenceScenarioList(d, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_differenceScenarios, &v.DifferenceScenarios)
+		case schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_options:
+			return deserializeAutomatedReasoningCheckTranslationOptionList(d, schemas.AutomatedReasoningCheckTranslationAmbiguousFinding_options, &v.Options)
+		}
+		return nil
+	})
+}
+
 // Represents one possible logical interpretation of ambiguous input content.
 type AutomatedReasoningCheckTranslationOption struct {
 
@@ -473,6 +1174,25 @@ type AutomatedReasoningCheckTranslationOption struct {
 	Translations []AutomatedReasoningCheckTranslation
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningCheckTranslationOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckTranslationOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckTranslationOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningCheckTranslationList(s, schemas.AutomatedReasoningCheckTranslationOption_translations, v.Translations)
+}
+func (v *AutomatedReasoningCheckTranslationOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckTranslationOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckTranslationOption_translations:
+			return deserializeAutomatedReasoningCheckTranslationList(d, schemas.AutomatedReasoningCheckTranslationOption_translations, &v.Translations)
+		}
+		return nil
+	})
 }
 
 // Indicates that the claims are definitively true and logically implied by the
@@ -496,6 +1216,49 @@ type AutomatedReasoningCheckValidFinding struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningCheckValidFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningCheckValidFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningCheckValidFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClaimsTrueScenario != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckValidFinding_claimsTrueScenario)
+		v.ClaimsTrueScenario.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogicWarning != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckValidFinding_logicWarning)
+		v.LogicWarning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutomatedReasoningCheckRuleList(s, schemas.AutomatedReasoningCheckValidFinding_supportingRules, v.SupportingRules)
+	if v.Translation != nil {
+		s.WriteStruct(schemas.AutomatedReasoningCheckValidFinding_translation)
+		v.Translation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningCheckValidFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningCheckValidFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningCheckValidFinding_claimsTrueScenario:
+			v.ClaimsTrueScenario = &AutomatedReasoningCheckScenario{}
+			return v.ClaimsTrueScenario.Deserialize(d)
+		case schemas.AutomatedReasoningCheckValidFinding_logicWarning:
+			v.LogicWarning = &AutomatedReasoningCheckLogicWarning{}
+			return v.LogicWarning.Deserialize(d)
+		case schemas.AutomatedReasoningCheckValidFinding_supportingRules:
+			return deserializeAutomatedReasoningCheckRuleList(d, schemas.AutomatedReasoningCheckValidFinding_supportingRules, &v.SupportingRules)
+		case schemas.AutomatedReasoningCheckValidFinding_translation:
+			v.Translation = &AutomatedReasoningCheckTranslation{}
+			return v.Translation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents a logical statement that can be expressed both in formal logic
 // notation and natural language, providing dual representations for better
 // understanding and validation.
@@ -514,6 +1277,34 @@ type AutomatedReasoningLogicStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningLogicStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningLogicStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningLogicStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Logic != nil {
+		s.WriteString(schemas.AutomatedReasoningLogicStatement_logic, *v.Logic)
+	}
+	if v.NaturalLanguage != nil {
+		s.WriteString(schemas.AutomatedReasoningLogicStatement_naturalLanguage, *v.NaturalLanguage)
+	}
+}
+func (v *AutomatedReasoningLogicStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningLogicStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningLogicStatement_logic:
+			v.Logic = new(string)
+			return d.ReadString(schemas.AutomatedReasoningLogicStatement_logic, v.Logic)
+		case schemas.AutomatedReasoningLogicStatement_naturalLanguage:
+			v.NaturalLanguage = new(string)
+			return d.ReadString(schemas.AutomatedReasoningLogicStatement_naturalLanguage, v.NaturalLanguage)
+		}
+		return nil
+	})
+}
+
 // An annotation for adding a new rule to an Automated Reasoning policy using a
 // formal logical expression.
 type AutomatedReasoningPolicyAddRuleAnnotation struct {
@@ -525,6 +1316,28 @@ type AutomatedReasoningPolicyAddRuleAnnotation struct {
 	Expression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAddRuleAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddRuleAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddRuleAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddRuleAnnotation_expression, *v.Expression)
+	}
+}
+func (v *AutomatedReasoningPolicyAddRuleAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddRuleAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddRuleAnnotation_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddRuleAnnotation_expression, v.Expression)
+		}
+		return nil
+	})
 }
 
 // An annotation for adding a new rule to the policy by converting a natural
@@ -540,6 +1353,28 @@ type AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NaturalLanguage != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation_naturalLanguage, *v.NaturalLanguage)
+	}
+}
+func (v *AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation_naturalLanguage:
+			v.NaturalLanguage = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddRuleFromNaturalLanguageAnnotation_naturalLanguage, v.NaturalLanguage)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that adds a new rule to the policy definition during the
 // build process.
 type AutomatedReasoningPolicyAddRuleMutation struct {
@@ -551,6 +1386,30 @@ type AutomatedReasoningPolicyAddRuleMutation struct {
 	Rule *AutomatedReasoningPolicyDefinitionRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAddRuleMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddRuleMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddRuleMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyAddRuleMutation_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningPolicyAddRuleMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddRuleMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddRuleMutation_rule:
+			v.Rule = &AutomatedReasoningPolicyDefinitionRule{}
+			return v.Rule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An annotation for adding a new custom type to an Automated Reasoning policy,
@@ -578,6 +1437,37 @@ type AutomatedReasoningPolicyAddTypeAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyAddTypeAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddTypeAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddTypeAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddTypeAnnotation_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddTypeAnnotation_name, *v.Name)
+	}
+	serializeAutomatedReasoningPolicyDefinitionTypeValueList(s, schemas.AutomatedReasoningPolicyAddTypeAnnotation_values, v.Values)
+}
+func (v *AutomatedReasoningPolicyAddTypeAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddTypeAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddTypeAnnotation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddTypeAnnotation_description, v.Description)
+		case schemas.AutomatedReasoningPolicyAddTypeAnnotation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddTypeAnnotation_name, v.Name)
+		case schemas.AutomatedReasoningPolicyAddTypeAnnotation_values:
+			return deserializeAutomatedReasoningPolicyDefinitionTypeValueList(d, schemas.AutomatedReasoningPolicyAddTypeAnnotation_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that adds a new custom type to the policy definition
 // during the build process.
 type AutomatedReasoningPolicyAddTypeMutation struct {
@@ -589,6 +1479,30 @@ type AutomatedReasoningPolicyAddTypeMutation struct {
 	Type *AutomatedReasoningPolicyDefinitionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAddTypeMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddTypeMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddTypeMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyAddTypeMutation_type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningPolicyAddTypeMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddTypeMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddTypeMutation_type:
+			v.Type = &AutomatedReasoningPolicyDefinitionType{}
+			return v.Type.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a single value that can be added to an existing custom type in the
@@ -604,6 +1518,34 @@ type AutomatedReasoningPolicyAddTypeValue struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAddTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddTypeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddTypeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddTypeValue_description, *v.Description)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddTypeValue_value, *v.Value)
+	}
+}
+func (v *AutomatedReasoningPolicyAddTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddTypeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddTypeValue_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddTypeValue_description, v.Description)
+		case schemas.AutomatedReasoningPolicyAddTypeValue_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddTypeValue_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An annotation for adding a new variable to an Automated Reasoning policy, which
@@ -631,6 +1573,40 @@ type AutomatedReasoningPolicyAddVariableAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyAddVariableAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddVariableAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddVariableAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddVariableAnnotation_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddVariableAnnotation_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAddVariableAnnotation_type, *v.Type)
+	}
+}
+func (v *AutomatedReasoningPolicyAddVariableAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddVariableAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddVariableAnnotation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddVariableAnnotation_description, v.Description)
+		case schemas.AutomatedReasoningPolicyAddVariableAnnotation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddVariableAnnotation_name, v.Name)
+		case schemas.AutomatedReasoningPolicyAddVariableAnnotation_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAddVariableAnnotation_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that adds a new variable to the policy definition during
 // the build process.
 type AutomatedReasoningPolicyAddVariableMutation struct {
@@ -642,6 +1618,30 @@ type AutomatedReasoningPolicyAddVariableMutation struct {
 	Variable *AutomatedReasoningPolicyDefinitionVariable
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAddVariableMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAddVariableMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAddVariableMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Variable != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyAddVariableMutation_variable)
+		v.Variable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningPolicyAddVariableMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAddVariableMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAddVariableMutation_variable:
+			v.Variable = &AutomatedReasoningPolicyDefinitionVariable{}
+			return v.Variable.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a portion of a source document with line number annotations. Chunks
@@ -658,6 +1658,31 @@ type AutomatedReasoningPolicyAnnotatedChunk struct {
 	PageNumber *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAnnotatedChunk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotatedChunk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAnnotatedChunk) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyAnnotatedContentList(s, schemas.AutomatedReasoningPolicyAnnotatedChunk_content, v.Content)
+	if v.PageNumber != nil {
+		s.WriteInt32(schemas.AutomatedReasoningPolicyAnnotatedChunk_pageNumber, *v.PageNumber)
+	}
+}
+func (v *AutomatedReasoningPolicyAnnotatedChunk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAnnotatedChunk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAnnotatedChunk_content:
+			return deserializeAutomatedReasoningPolicyAnnotatedContentList(d, schemas.AutomatedReasoningPolicyAnnotatedChunk_content, &v.Content)
+		case schemas.AutomatedReasoningPolicyAnnotatedChunk_pageNumber:
+			v.PageNumber = new(int32)
+			return d.ReadInt32(schemas.AutomatedReasoningPolicyAnnotatedChunk_pageNumber, v.PageNumber)
+		}
+		return nil
+	})
 }
 
 // Represents a content element within an annotated chunk. This union type allows
@@ -681,6 +1706,14 @@ type AutomatedReasoningPolicyAnnotatedContentMemberLine struct {
 
 func (*AutomatedReasoningPolicyAnnotatedContentMemberLine) isAutomatedReasoningPolicyAnnotatedContent() {
 }
+func (v *AutomatedReasoningPolicyAnnotatedContentMemberLine) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotatedContent_line)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotatedContentMemberLine) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Represents a single line of text from a source document, annotated with its
 // line number for precise referencing.
@@ -693,6 +1726,34 @@ type AutomatedReasoningPolicyAnnotatedLine struct {
 	LineText *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyAnnotatedLine) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotatedLine)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAnnotatedLine) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineNumber != nil {
+		s.WriteInt32(schemas.AutomatedReasoningPolicyAnnotatedLine_lineNumber, *v.LineNumber)
+	}
+	if v.LineText != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAnnotatedLine_lineText, *v.LineText)
+	}
+}
+func (v *AutomatedReasoningPolicyAnnotatedLine) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAnnotatedLine, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAnnotatedLine_lineNumber:
+			v.LineNumber = new(int32)
+			return d.ReadInt32(schemas.AutomatedReasoningPolicyAnnotatedLine_lineNumber, v.LineNumber)
+		case schemas.AutomatedReasoningPolicyAnnotatedLine_lineText:
+			v.LineText = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAnnotatedLine_lineText, v.LineText)
+		}
+		return nil
+	})
 }
 
 // Contains the various operations that can be performed on an Automated Reasoning
@@ -726,6 +1787,14 @@ type AutomatedReasoningPolicyAnnotationMemberAddRule struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberAddRule) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_addRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to add a new rule by converting natural language descriptions into
 // formal logical expressions.
@@ -737,6 +1806,14 @@ type AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage struct {
 
 func (*AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage) isAutomatedReasoningPolicyAnnotation() {
 }
+func (v *AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_addRuleFromNaturalLanguage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddRuleFromNaturalLanguage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to add a new custom type to the policy, defining a set of possible
 // values for policy variables.
@@ -747,6 +1824,14 @@ type AutomatedReasoningPolicyAnnotationMemberAddType struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberAddType) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_addType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to add a new variable to the policy, which can be used in rule
 // expressions to represent dynamic values.
@@ -757,6 +1842,14 @@ type AutomatedReasoningPolicyAnnotationMemberAddVariable struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberAddVariable) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_addVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberAddVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to remove a rule from the policy.
 type AutomatedReasoningPolicyAnnotationMemberDeleteRule struct {
@@ -766,6 +1859,14 @@ type AutomatedReasoningPolicyAnnotationMemberDeleteRule struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberDeleteRule) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberDeleteRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_deleteRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberDeleteRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to remove a custom type from the policy. The type must not be
 // referenced by any variables or rules.
@@ -776,6 +1877,14 @@ type AutomatedReasoningPolicyAnnotationMemberDeleteType struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberDeleteType) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberDeleteType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_deleteType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberDeleteType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to remove a variable from the policy. The variable must not be
 // referenced by any rules.
@@ -786,6 +1895,14 @@ type AutomatedReasoningPolicyAnnotationMemberDeleteVariable struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberDeleteVariable) isAutomatedReasoningPolicyAnnotation() {
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberDeleteVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_deleteVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberDeleteVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // An operation to process and incorporate new content into the policy, extracting
@@ -798,6 +1915,14 @@ type AutomatedReasoningPolicyAnnotationMemberIngestContent struct {
 
 func (*AutomatedReasoningPolicyAnnotationMemberIngestContent) isAutomatedReasoningPolicyAnnotation() {
 }
+func (v *AutomatedReasoningPolicyAnnotationMemberIngestContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_ingestContent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberIngestContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to update the policy based on feedback about how specific rules
 // performed during testing or validation.
@@ -808,6 +1933,14 @@ type AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback) isAutomatedReasoningPolicyAnnotation() {
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_updateFromRulesFeedback)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateFromRulesFeedback) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // An operation to update the policy based on feedback about how it performed on
@@ -820,6 +1953,14 @@ type AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback struct {
 
 func (*AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback) isAutomatedReasoningPolicyAnnotation() {
 }
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_updateFromScenarioFeedback)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateFromScenarioFeedback) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to modify an existing rule in the policy, such as changing its
 // logical expression or conditions.
@@ -830,6 +1971,14 @@ type AutomatedReasoningPolicyAnnotationMemberUpdateRule struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberUpdateRule) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_updateRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to modify an existing custom type in the policy, such as changing
 // its name, description, or allowed values.
@@ -840,6 +1989,14 @@ type AutomatedReasoningPolicyAnnotationMemberUpdateType struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberUpdateType) isAutomatedReasoningPolicyAnnotation() {}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_updateType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to modify an existing variable in the policy, such as changing its
 // name, type, or description.
@@ -850,6 +2007,14 @@ type AutomatedReasoningPolicyAnnotationMemberUpdateVariable struct {
 }
 
 func (*AutomatedReasoningPolicyAnnotationMemberUpdateVariable) isAutomatedReasoningPolicyAnnotation() {
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAnnotation_updateVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyAnnotationMemberUpdateVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Represents a single, indivisible statement extracted from a source document.
@@ -877,6 +2042,42 @@ type AutomatedReasoningPolicyAtomicStatement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyAtomicStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyAtomicStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyAtomicStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAtomicStatement_id, *v.Id)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyAtomicStatement_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyAtomicStatement_text, *v.Text)
+	}
+}
+func (v *AutomatedReasoningPolicyAtomicStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyAtomicStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyAtomicStatement_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAtomicStatement_id, v.Id)
+		case schemas.AutomatedReasoningPolicyAtomicStatement_location:
+			v.Location = &AutomatedReasoningPolicyStatementLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.AutomatedReasoningPolicyAtomicStatement_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyAtomicStatement_text, v.Text)
+		}
+		return nil
+	})
+}
+
 // Contains detailed logging information about the policy build process, including
 // steps taken, decisions made, and any issues encountered.
 type AutomatedReasoningPolicyBuildLog struct {
@@ -888,6 +2089,25 @@ type AutomatedReasoningPolicyBuildLog struct {
 	Entries []AutomatedReasoningPolicyBuildLogEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyBuildLog) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildLog)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildLog) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyBuildLogEntryList(s, schemas.AutomatedReasoningPolicyBuildLog_entries, v.Entries)
+}
+func (v *AutomatedReasoningPolicyBuildLog) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildLog, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildLog_entries:
+			return deserializeAutomatedReasoningPolicyBuildLogEntryList(d, schemas.AutomatedReasoningPolicyBuildLog_entries, &v.Entries)
+		}
+		return nil
+	})
 }
 
 // Represents a single entry in the policy build log, containing information about
@@ -914,6 +2134,38 @@ type AutomatedReasoningPolicyBuildLogEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyBuildLogEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildLogEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildLogEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyAnnotation(s, schemas.AutomatedReasoningPolicyBuildLogEntry_annotation, v.Annotation)
+	serializeAutomatedReasoningPolicyBuildStepList(s, schemas.AutomatedReasoningPolicyBuildLogEntry_buildSteps, v.BuildSteps)
+	if v.Status != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildLogEntry_status, string(v.Status))
+	}
+}
+func (v *AutomatedReasoningPolicyBuildLogEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildLogEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildLogEntry_annotation:
+			return deserializeAutomatedReasoningPolicyAnnotation(d, schemas.AutomatedReasoningPolicyBuildLogEntry_annotation, &v.Annotation)
+		case schemas.AutomatedReasoningPolicyBuildLogEntry_buildSteps:
+			return deserializeAutomatedReasoningPolicyBuildStepList(d, schemas.AutomatedReasoningPolicyBuildLogEntry_buildSteps, &v.BuildSteps)
+		case schemas.AutomatedReasoningPolicyBuildLogEntry_status:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyBuildLogEntry_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutomatedReasoningPolicyAnnotationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A catalog of all artifacts produced by a build workflow, providing a
 // comprehensive list of available assets including their types and identifiers.
 type AutomatedReasoningPolicyBuildResultAssetManifest struct {
@@ -925,6 +2177,25 @@ type AutomatedReasoningPolicyBuildResultAssetManifest struct {
 	Entries []AutomatedReasoningPolicyBuildResultAssetManifestEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyBuildResultAssetManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssetManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildResultAssetManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyBuildResultAssetManifestList(s, schemas.AutomatedReasoningPolicyBuildResultAssetManifest_entries, v.Entries)
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildResultAssetManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildResultAssetManifest_entries:
+			return deserializeAutomatedReasoningPolicyBuildResultAssetManifestList(d, schemas.AutomatedReasoningPolicyBuildResultAssetManifest_entries, &v.Entries)
+		}
+		return nil
+	})
 }
 
 // Represents a single entry in the asset manifest, describing one artifact
@@ -947,6 +2218,44 @@ type AutomatedReasoningPolicyBuildResultAssetManifestEntry struct {
 	AssetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyBuildResultAssetManifestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildResultAssetManifestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetId, *v.AssetId)
+	}
+	if v.AssetName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetName, *v.AssetName)
+	}
+	if v.AssetType != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetType, string(v.AssetType))
+	}
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetManifestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetId, v.AssetId)
+		case schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetName, v.AssetName)
+		case schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetType:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyBuildResultAssetManifestEntry_assetType, &ev); err != nil {
+				return err
+			}
+			v.AssetType = AutomatedReasoningPolicyBuildResultAssetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the various assets generated during a policy build workflow, including
@@ -977,6 +2286,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest struct {
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest) isAutomatedReasoningPolicyBuildResultAssets() {
 }
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_assetManifest)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberAssetManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The complete build log containing detailed information about each step in the
 // policy generation process.
@@ -987,6 +2304,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog struct {
 }
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_buildLog)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberBuildLog) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A source document that was used as input during the build workflow. This allows
@@ -999,6 +2324,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberDocument struct {
 }
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberDocument) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_document)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A comprehensive fidelity report that measures how accurately the generated
@@ -1013,6 +2346,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport struct {
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport) isAutomatedReasoningPolicyBuildResultAssets() {
 }
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_fidelityReport)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberFidelityReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A comprehensive test suite generated by the build workflow, providing
 // validation capabilities for automated reasoning policies.
@@ -1023,6 +2364,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases struct {
 }
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_generatedTestCases)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberGeneratedTestCases) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The complete policy definition generated by the build workflow, containing all
@@ -1035,6 +2384,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition struct {
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition) isAutomatedReasoningPolicyBuildResultAssets() {
 }
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_policyDefinition)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberPolicyDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An entity encompassing all the policy scenarios generated by the build
 // workflow, which can be used to validate an Automated Reasoning policy.
@@ -1046,6 +2403,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios struct {
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios) isAutomatedReasoningPolicyBuildResultAssets() {
 }
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_policyScenarios)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberPolicyScenarios) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A comprehensive report analyzing the quality of the generated policy, including
 // metrics about rule coverage, potential conflicts, and unused elements.
@@ -1056,6 +2421,14 @@ type AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport struct {
 }
 
 func (*AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport) isAutomatedReasoningPolicyBuildResultAssets() {
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildResultAssets_qualityReport)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildResultAssetsMemberQualityReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Represents a single step in the policy build process, containing context about
@@ -1081,6 +2454,31 @@ type AutomatedReasoningPolicyBuildStep struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyBuildStep) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildStep)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildStep) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyBuildStepContext(s, schemas.AutomatedReasoningPolicyBuildStep_context, v.Context)
+	serializeAutomatedReasoningPolicyBuildStepMessageList(s, schemas.AutomatedReasoningPolicyBuildStep_messages, v.Messages)
+	serializeAutomatedReasoningPolicyDefinitionElement(s, schemas.AutomatedReasoningPolicyBuildStep_priorElement, v.PriorElement)
+}
+func (v *AutomatedReasoningPolicyBuildStep) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildStep, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildStep_context:
+			return deserializeAutomatedReasoningPolicyBuildStepContext(d, schemas.AutomatedReasoningPolicyBuildStep_context, &v.Context)
+		case schemas.AutomatedReasoningPolicyBuildStep_messages:
+			return deserializeAutomatedReasoningPolicyBuildStepMessageList(d, schemas.AutomatedReasoningPolicyBuildStep_messages, &v.Messages)
+		case schemas.AutomatedReasoningPolicyBuildStep_priorElement:
+			return deserializeAutomatedReasoningPolicyDefinitionElement(d, schemas.AutomatedReasoningPolicyBuildStep_priorElement, &v.PriorElement)
+		}
+		return nil
+	})
+}
+
 // Provides context about what type of operation was being performed during a
 // build step.
 //
@@ -1102,6 +2500,12 @@ type AutomatedReasoningPolicyBuildStepContextMemberMutation struct {
 
 func (*AutomatedReasoningPolicyBuildStepContextMemberMutation) isAutomatedReasoningPolicyBuildStepContext() {
 }
+func (v *AutomatedReasoningPolicyBuildStepContextMemberMutation) Serialize(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyMutation(s, schemas.AutomatedReasoningPolicyBuildStepContext_mutation, v.Value)
+}
+func (v *AutomatedReasoningPolicyBuildStepContextMemberMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAutomatedReasoningPolicyMutation(d, schemas.AutomatedReasoningPolicyBuildStepContext_mutation, &v.Value)
+}
 
 // Indicates that this build step was part of the planning phase, where the system
 // determines what operations to perform.
@@ -1112,6 +2516,14 @@ type AutomatedReasoningPolicyBuildStepContextMemberPlanning struct {
 }
 
 func (*AutomatedReasoningPolicyBuildStepContextMemberPlanning) isAutomatedReasoningPolicyBuildStepContext() {
+}
+func (v *AutomatedReasoningPolicyBuildStepContextMemberPlanning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildStepContext_planning)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyBuildStepContextMemberPlanning) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Represents a message generated during a build step, providing information about
@@ -1130,6 +2542,38 @@ type AutomatedReasoningPolicyBuildStepMessage struct {
 	MessageType AutomatedReasoningPolicyBuildMessageType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyBuildStepMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildStepMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildStepMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildStepMessage_message, *v.Message)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildStepMessage_messageType, string(v.MessageType))
+	}
+}
+func (v *AutomatedReasoningPolicyBuildStepMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildStepMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildStepMessage_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildStepMessage_message, v.Message)
+		case schemas.AutomatedReasoningPolicyBuildStepMessage_messageType:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyBuildStepMessage_messageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = AutomatedReasoningPolicyBuildMessageType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents a source document used in the policy build workflow, containing the
@@ -1160,6 +2604,49 @@ type AutomatedReasoningPolicyBuildWorkflowDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyBuildWorkflowDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildWorkflowDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildWorkflowDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteBlob(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_document, v.Document)
+	}
+	if v.DocumentContentType != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentContentType, string(v.DocumentContentType))
+	}
+	if v.DocumentDescription != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentDescription, *v.DocumentDescription)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentName, *v.DocumentName)
+	}
+}
+func (v *AutomatedReasoningPolicyBuildWorkflowDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildWorkflowDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildWorkflowDocument_document:
+			return d.ReadBlob(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_document, &v.Document)
+		case schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentContentType:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentContentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentContentType = AutomatedReasoningPolicyBuildDocumentContentType(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentDescription:
+			v.DocumentDescription = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentDescription, v.DocumentDescription)
+		case schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentName:
+			v.DocumentName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowDocument_documentName, v.DocumentName)
+		}
+		return nil
+	})
+}
+
 // Contains content and instructions for repairing or improving an existing
 // Automated Reasoning policy.
 type AutomatedReasoningPolicyBuildWorkflowRepairContent struct {
@@ -1171,6 +2658,25 @@ type AutomatedReasoningPolicyBuildWorkflowRepairContent struct {
 	Annotations []AutomatedReasoningPolicyAnnotation
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyBuildWorkflowRepairContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildWorkflowRepairContent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyAnnotationList(s, schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent_annotations, v.Annotations)
+}
+func (v *AutomatedReasoningPolicyBuildWorkflowRepairContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent_annotations:
+			return deserializeAutomatedReasoningPolicyAnnotationList(d, schemas.AutomatedReasoningPolicyBuildWorkflowRepairContent_annotations, &v.Annotations)
+		}
+		return nil
+	})
 }
 
 // Defines the source content for a policy build workflow, which can include
@@ -1186,6 +2692,33 @@ type AutomatedReasoningPolicyBuildWorkflowSource struct {
 	WorkflowContent AutomatedReasoningPolicyWorkflowTypeContent
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyBuildWorkflowSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildWorkflowSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildWorkflowSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDefinition != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyBuildWorkflowSource_policyDefinition)
+		v.PolicyDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutomatedReasoningPolicyWorkflowTypeContent(s, schemas.AutomatedReasoningPolicyBuildWorkflowSource_workflowContent, v.WorkflowContent)
+}
+func (v *AutomatedReasoningPolicyBuildWorkflowSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildWorkflowSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSource_policyDefinition:
+			v.PolicyDefinition = &AutomatedReasoningPolicyDefinition{}
+			return v.PolicyDefinition.Deserialize(d)
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSource_workflowContent:
+			return deserializeAutomatedReasoningPolicyWorkflowTypeContent(d, schemas.AutomatedReasoningPolicyBuildWorkflowSource_workflowContent, &v.WorkflowContent)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of a policy build workflow, including its current status,
@@ -1227,6 +2760,66 @@ type AutomatedReasoningPolicyBuildWorkflowSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyBuildWorkflowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyBuildWorkflowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyBuildWorkflowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildWorkflowId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_buildWorkflowId, *v.BuildWorkflowId)
+	}
+	if v.BuildWorkflowType != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_buildWorkflowType, string(v.BuildWorkflowType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_createdAt, *v.CreatedAt)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_policyArn, *v.PolicyArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AutomatedReasoningPolicyBuildWorkflowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyBuildWorkflowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSummary_buildWorkflowId:
+			v.BuildWorkflowId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_buildWorkflowId, v.BuildWorkflowId)
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSummary_buildWorkflowType:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_buildWorkflowType, &ev); err != nil {
+				return err
+			}
+			v.BuildWorkflowType = AutomatedReasoningPolicyBuildWorkflowType(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_createdAt, v.CreatedAt)
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSummary_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_policyArn, v.PolicyArn)
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutomatedReasoningPolicyBuildWorkflowStatus(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyBuildWorkflowSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicyBuildWorkflowSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Contains the formal logic rules, variables, and custom variable types that
 // define an Automated Reasoning policy. The policy definition specifies the
 // constraints used to validate foundation model responses for accuracy and logical
@@ -1254,6 +2847,37 @@ type AutomatedReasoningPolicyDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyDefinitionRuleList(s, schemas.AutomatedReasoningPolicyDefinition_rules, v.Rules)
+	serializeAutomatedReasoningPolicyDefinitionTypeList(s, schemas.AutomatedReasoningPolicyDefinition_types, v.Types)
+	serializeAutomatedReasoningPolicyDefinitionVariableList(s, schemas.AutomatedReasoningPolicyDefinition_variables, v.Variables)
+	if v.Version != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinition_version, *v.Version)
+	}
+}
+func (v *AutomatedReasoningPolicyDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinition_rules:
+			return deserializeAutomatedReasoningPolicyDefinitionRuleList(d, schemas.AutomatedReasoningPolicyDefinition_rules, &v.Rules)
+		case schemas.AutomatedReasoningPolicyDefinition_types:
+			return deserializeAutomatedReasoningPolicyDefinitionTypeList(d, schemas.AutomatedReasoningPolicyDefinition_types, &v.Types)
+		case schemas.AutomatedReasoningPolicyDefinition_variables:
+			return deserializeAutomatedReasoningPolicyDefinitionVariableList(d, schemas.AutomatedReasoningPolicyDefinition_variables, &v.Variables)
+		case schemas.AutomatedReasoningPolicyDefinition_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinition_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Represents a single element in an Automated Reasoning policy definition, such
 // as a rule, variable, or type definition.
 //
@@ -1276,6 +2900,14 @@ type AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule struct 
 
 func (*AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule) isAutomatedReasoningPolicyDefinitionElement() {
 }
+func (v *AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionElement_policyDefinitionRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A custom type element within the policy definition that defines a set of
 // possible values for variables.
@@ -1287,6 +2919,14 @@ type AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType struct 
 
 func (*AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType) isAutomatedReasoningPolicyDefinitionElement() {
 }
+func (v *AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionElement_policyDefinitionType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A variable element within the policy definition that represents a concept used
 // in logical expressions and rules.
@@ -1297,6 +2937,14 @@ type AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable str
 }
 
 func (*AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable) isAutomatedReasoningPolicyDefinitionElement() {
+}
+func (v *AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionElement_policyDefinitionVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyDefinitionElementMemberPolicyDefinitionVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Provides a comprehensive analysis of the quality and completeness of an
@@ -1352,6 +3000,55 @@ type AutomatedReasoningPolicyDefinitionQualityReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDefinitionQualityReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionQualityReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinitionQualityReport) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyConflictedRuleIdList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_conflictingRules, v.ConflictingRules)
+	serializeAutomatedReasoningPolicyDisjointRuleSetList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_disjointRuleSets, v.DisjointRuleSets)
+	if v.RuleCount != nil {
+		s.WriteInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_ruleCount, *v.RuleCount)
+	}
+	if v.TypeCount != nil {
+		s.WriteInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_typeCount, *v.TypeCount)
+	}
+	serializeAutomatedReasoningPolicyDefinitionTypeValuePairList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypeValues, v.UnusedTypeValues)
+	serializeAutomatedReasoningPolicyDefinitionTypeNameList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypes, v.UnusedTypes)
+	serializeAutomatedReasoningPolicyDefinitionVariableNameList(s, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedVariables, v.UnusedVariables)
+	if v.VariableCount != nil {
+		s.WriteInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_variableCount, *v.VariableCount)
+	}
+}
+func (v *AutomatedReasoningPolicyDefinitionQualityReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionQualityReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_conflictingRules:
+			return deserializeAutomatedReasoningPolicyConflictedRuleIdList(d, schemas.AutomatedReasoningPolicyDefinitionQualityReport_conflictingRules, &v.ConflictingRules)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_disjointRuleSets:
+			return deserializeAutomatedReasoningPolicyDisjointRuleSetList(d, schemas.AutomatedReasoningPolicyDefinitionQualityReport_disjointRuleSets, &v.DisjointRuleSets)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_ruleCount:
+			v.RuleCount = new(int32)
+			return d.ReadInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_ruleCount, v.RuleCount)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_typeCount:
+			v.TypeCount = new(int32)
+			return d.ReadInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_typeCount, v.TypeCount)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypeValues:
+			return deserializeAutomatedReasoningPolicyDefinitionTypeValuePairList(d, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypeValues, &v.UnusedTypeValues)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypes:
+			return deserializeAutomatedReasoningPolicyDefinitionTypeNameList(d, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedTypes, &v.UnusedTypes)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedVariables:
+			return deserializeAutomatedReasoningPolicyDefinitionVariableNameList(d, schemas.AutomatedReasoningPolicyDefinitionQualityReport_unusedVariables, &v.UnusedVariables)
+		case schemas.AutomatedReasoningPolicyDefinitionQualityReport_variableCount:
+			v.VariableCount = new(int32)
+			return d.ReadInt32(schemas.AutomatedReasoningPolicyDefinitionQualityReport_variableCount, v.VariableCount)
+		}
+		return nil
+	})
+}
+
 // Represents a formal logic rule in an Automated Reasoning policy. For example,
 // rules can be expressed as if-then statements that define logical constraints.
 type AutomatedReasoningPolicyDefinitionRule struct {
@@ -1371,6 +3068,40 @@ type AutomatedReasoningPolicyDefinitionRule struct {
 	AlternateExpression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDefinitionRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinitionRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlternateExpression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionRule_alternateExpression, *v.AlternateExpression)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionRule_expression, *v.Expression)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionRule_id, *v.Id)
+	}
+}
+func (v *AutomatedReasoningPolicyDefinitionRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinitionRule_alternateExpression:
+			v.AlternateExpression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionRule_alternateExpression, v.AlternateExpression)
+		case schemas.AutomatedReasoningPolicyDefinitionRule_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionRule_expression, v.Expression)
+		case schemas.AutomatedReasoningPolicyDefinitionRule_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionRule_id, v.Id)
+		}
+		return nil
+	})
 }
 
 // Represents a custom user-defined viarble type in an Automated Reasoning policy.
@@ -1394,6 +3125,37 @@ type AutomatedReasoningPolicyDefinitionType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDefinitionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinitionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionType_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionType_name, *v.Name)
+	}
+	serializeAutomatedReasoningPolicyDefinitionTypeValueList(s, schemas.AutomatedReasoningPolicyDefinitionType_values, v.Values)
+}
+func (v *AutomatedReasoningPolicyDefinitionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinitionType_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionType_description, v.Description)
+		case schemas.AutomatedReasoningPolicyDefinitionType_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionType_name, v.Name)
+		case schemas.AutomatedReasoningPolicyDefinitionType_values:
+			return deserializeAutomatedReasoningPolicyDefinitionTypeValueList(d, schemas.AutomatedReasoningPolicyDefinitionType_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Represents a single value within a custom type definition, including its
 // identifier and description.
 type AutomatedReasoningPolicyDefinitionTypeValue struct {
@@ -1408,6 +3170,34 @@ type AutomatedReasoningPolicyDefinitionTypeValue struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDefinitionTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionTypeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinitionTypeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionTypeValue_description, *v.Description)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionTypeValue_value, *v.Value)
+	}
+}
+func (v *AutomatedReasoningPolicyDefinitionTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionTypeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinitionTypeValue_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionTypeValue_description, v.Description)
+		case schemas.AutomatedReasoningPolicyDefinitionTypeValue_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionTypeValue_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Associates a type name with a specific value name, used for referencing type
@@ -1425,6 +3215,34 @@ type AutomatedReasoningPolicyDefinitionTypeValuePair struct {
 	ValueName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDefinitionTypeValuePair) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionTypeValuePair)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinitionTypeValuePair) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TypeName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionTypeValuePair_typeName, *v.TypeName)
+	}
+	if v.ValueName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionTypeValuePair_valueName, *v.ValueName)
+	}
+}
+func (v *AutomatedReasoningPolicyDefinitionTypeValuePair) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionTypeValuePair, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinitionTypeValuePair_typeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionTypeValuePair_typeName, v.TypeName)
+		case schemas.AutomatedReasoningPolicyDefinitionTypeValuePair_valueName:
+			v.ValueName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionTypeValuePair_valueName, v.ValueName)
+		}
+		return nil
+	})
 }
 
 // Represents a variable in an Automated Reasoning policy. Variables represent
@@ -1453,6 +3271,40 @@ type AutomatedReasoningPolicyDefinitionVariable struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDefinitionVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDefinitionVariable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDefinitionVariable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionVariable_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionVariable_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDefinitionVariable_type, *v.Type)
+	}
+}
+func (v *AutomatedReasoningPolicyDefinitionVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDefinitionVariable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDefinitionVariable_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionVariable_description, v.Description)
+		case schemas.AutomatedReasoningPolicyDefinitionVariable_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionVariable_name, v.Name)
+		case schemas.AutomatedReasoningPolicyDefinitionVariable_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDefinitionVariable_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // An annotation for removing a rule from an Automated Reasoning policy.
 type AutomatedReasoningPolicyDeleteRuleAnnotation struct {
 
@@ -1462,6 +3314,28 @@ type AutomatedReasoningPolicyDeleteRuleAnnotation struct {
 	RuleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDeleteRuleAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteRuleAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteRuleAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteRuleAnnotation_ruleId, *v.RuleId)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteRuleAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteRuleAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteRuleAnnotation_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteRuleAnnotation_ruleId, v.RuleId)
+		}
+		return nil
+	})
 }
 
 // A mutation operation that removes a rule from the policy definition during the
@@ -1476,6 +3350,28 @@ type AutomatedReasoningPolicyDeleteRuleMutation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDeleteRuleMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteRuleMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteRuleMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteRuleMutation_id, *v.Id)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteRuleMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteRuleMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteRuleMutation_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteRuleMutation_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // An annotation for removing a custom type from an Automated Reasoning policy.
 type AutomatedReasoningPolicyDeleteTypeAnnotation struct {
 
@@ -1486,6 +3382,28 @@ type AutomatedReasoningPolicyDeleteTypeAnnotation struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDeleteTypeAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteTypeAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteTypeAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteTypeAnnotation_name, *v.Name)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteTypeAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteTypeAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteTypeAnnotation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteTypeAnnotation_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A mutation operation that removes a custom type from the policy definition
@@ -1500,6 +3418,28 @@ type AutomatedReasoningPolicyDeleteTypeMutation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDeleteTypeMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteTypeMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteTypeMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteTypeMutation_name, *v.Name)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteTypeMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteTypeMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteTypeMutation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteTypeMutation_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Represents a value to be removed from an existing custom type in the policy.
 type AutomatedReasoningPolicyDeleteTypeValue struct {
 
@@ -1509,6 +3449,28 @@ type AutomatedReasoningPolicyDeleteTypeValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDeleteTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteTypeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteTypeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteTypeValue_value, *v.Value)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteTypeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteTypeValue_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteTypeValue_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An annotation for removing a variable from an Automated Reasoning policy.
@@ -1523,6 +3485,28 @@ type AutomatedReasoningPolicyDeleteVariableAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyDeleteVariableAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteVariableAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteVariableAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteVariableAnnotation_name, *v.Name)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteVariableAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteVariableAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteVariableAnnotation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteVariableAnnotation_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that removes a variable from the policy definition during
 // the build process.
 type AutomatedReasoningPolicyDeleteVariableMutation struct {
@@ -1533,6 +3517,28 @@ type AutomatedReasoningPolicyDeleteVariableMutation struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDeleteVariableMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDeleteVariableMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDeleteVariableMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyDeleteVariableMutation_name, *v.Name)
+	}
+}
+func (v *AutomatedReasoningPolicyDeleteVariableMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDeleteVariableMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDeleteVariableMutation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyDeleteVariableMutation_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Represents a set of rules that operate on completely separate variables,
@@ -1551,6 +3557,28 @@ type AutomatedReasoningPolicyDisjointRuleSet struct {
 	Variables []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyDisjointRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyDisjointRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyDisjointRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyDisjointedRuleIdList(s, schemas.AutomatedReasoningPolicyDisjointRuleSet_rules, v.Rules)
+	serializeAutomatedReasoningPolicyDefinitionVariableNameList(s, schemas.AutomatedReasoningPolicyDisjointRuleSet_variables, v.Variables)
+}
+func (v *AutomatedReasoningPolicyDisjointRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyDisjointRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyDisjointRuleSet_rules:
+			return deserializeAutomatedReasoningPolicyDisjointedRuleIdList(d, schemas.AutomatedReasoningPolicyDisjointRuleSet_rules, &v.Rules)
+		case schemas.AutomatedReasoningPolicyDisjointRuleSet_variables:
+			return deserializeAutomatedReasoningPolicyDefinitionVariableNameList(d, schemas.AutomatedReasoningPolicyDisjointRuleSet_variables, &v.Variables)
+		}
+		return nil
+	})
 }
 
 // A comprehensive analysis report that measures how accurately a generated policy
@@ -1592,6 +3620,43 @@ type AutomatedReasoningPolicyFidelityReport struct {
 	VariableReports map[string]AutomatedReasoningPolicyVariableReport
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyFidelityReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyFidelityReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyFidelityReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccuracyScore != nil {
+		s.WriteFloat64(schemas.AutomatedReasoningPolicyFidelityReport_accuracyScore, *v.AccuracyScore)
+	}
+	if v.CoverageScore != nil {
+		s.WriteFloat64(schemas.AutomatedReasoningPolicyFidelityReport_coverageScore, *v.CoverageScore)
+	}
+	serializeAutomatedReasoningPolicyReportSourceDocumentList(s, schemas.AutomatedReasoningPolicyFidelityReport_documentSources, v.DocumentSources)
+	serializeAutomatedReasoningPolicyRuleReportMap(s, schemas.AutomatedReasoningPolicyFidelityReport_ruleReports, v.RuleReports)
+	serializeAutomatedReasoningPolicyVariableReportMap(s, schemas.AutomatedReasoningPolicyFidelityReport_variableReports, v.VariableReports)
+}
+func (v *AutomatedReasoningPolicyFidelityReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyFidelityReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyFidelityReport_accuracyScore:
+			v.AccuracyScore = new(float64)
+			return d.ReadFloat64(schemas.AutomatedReasoningPolicyFidelityReport_accuracyScore, v.AccuracyScore)
+		case schemas.AutomatedReasoningPolicyFidelityReport_coverageScore:
+			v.CoverageScore = new(float64)
+			return d.ReadFloat64(schemas.AutomatedReasoningPolicyFidelityReport_coverageScore, v.CoverageScore)
+		case schemas.AutomatedReasoningPolicyFidelityReport_documentSources:
+			return deserializeAutomatedReasoningPolicyReportSourceDocumentList(d, schemas.AutomatedReasoningPolicyFidelityReport_documentSources, &v.DocumentSources)
+		case schemas.AutomatedReasoningPolicyFidelityReport_ruleReports:
+			return deserializeAutomatedReasoningPolicyRuleReportMap(d, schemas.AutomatedReasoningPolicyFidelityReport_ruleReports, &v.RuleReports)
+		case schemas.AutomatedReasoningPolicyFidelityReport_variableReports:
+			return deserializeAutomatedReasoningPolicyVariableReportMap(d, schemas.AutomatedReasoningPolicyFidelityReport_variableReports, &v.VariableReports)
+		}
+		return nil
+	})
 }
 
 // Represents a generated test case, consisting of query content, guard content,
@@ -1636,6 +3701,44 @@ type AutomatedReasoningPolicyGeneratedTestCase struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyGeneratedTestCase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyGeneratedTestCase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyGeneratedTestCase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedAggregatedFindingsResult != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyGeneratedTestCase_expectedAggregatedFindingsResult, string(v.ExpectedAggregatedFindingsResult))
+	}
+	if v.GuardContent != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyGeneratedTestCase_guardContent, *v.GuardContent)
+	}
+	if v.QueryContent != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyGeneratedTestCase_queryContent, *v.QueryContent)
+	}
+}
+func (v *AutomatedReasoningPolicyGeneratedTestCase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyGeneratedTestCase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyGeneratedTestCase_expectedAggregatedFindingsResult:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyGeneratedTestCase_expectedAggregatedFindingsResult, &ev); err != nil {
+				return err
+			}
+			v.ExpectedAggregatedFindingsResult = AutomatedReasoningCheckResult(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyGeneratedTestCase_guardContent:
+			v.GuardContent = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyGeneratedTestCase_guardContent, v.GuardContent)
+		case schemas.AutomatedReasoningPolicyGeneratedTestCase_queryContent:
+			v.QueryContent = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyGeneratedTestCase_queryContent, v.QueryContent)
+		}
+		return nil
+	})
+}
+
 // Contains a comprehensive test suite generated by the build workflow, providing
 // validation capabilities for automated reasoning policies.
 type AutomatedReasoningPolicyGeneratedTestCases struct {
@@ -1646,6 +3749,25 @@ type AutomatedReasoningPolicyGeneratedTestCases struct {
 	GeneratedTestCases []AutomatedReasoningPolicyGeneratedTestCase
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyGeneratedTestCases) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyGeneratedTestCases)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyGeneratedTestCases) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyGeneratedTestCaseList(s, schemas.AutomatedReasoningPolicyGeneratedTestCases_generatedTestCases, v.GeneratedTestCases)
+}
+func (v *AutomatedReasoningPolicyGeneratedTestCases) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyGeneratedTestCases, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyGeneratedTestCases_generatedTestCases:
+			return deserializeAutomatedReasoningPolicyGeneratedTestCaseList(d, schemas.AutomatedReasoningPolicyGeneratedTestCases_generatedTestCases, &v.GeneratedTestCases)
+		}
+		return nil
+	})
 }
 
 // Configuration for generating a fidelity report, which can either analyze new
@@ -1668,6 +3790,12 @@ type AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments struct
 
 func (*AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments) isAutomatedReasoningPolicyGenerateFidelityReportContent() {
 }
+func (v *AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments) Serialize(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyGenerateFidelityReportDocumentList(s, schemas.AutomatedReasoningPolicyGenerateFidelityReportContent_documents, v.Value)
+}
+func (v *AutomatedReasoningPolicyGenerateFidelityReportContentMemberDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAutomatedReasoningPolicyGenerateFidelityReportDocumentList(d, schemas.AutomatedReasoningPolicyGenerateFidelityReportContent_documents, &v.Value)
+}
 
 // An annotation for processing and incorporating new content into an Automated
 // Reasoning policy.
@@ -1680,6 +3808,28 @@ type AutomatedReasoningPolicyIngestContentAnnotation struct {
 	Content *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyIngestContentAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyIngestContentAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyIngestContentAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyIngestContentAnnotation_content, *v.Content)
+	}
+}
+func (v *AutomatedReasoningPolicyIngestContentAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyIngestContentAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyIngestContentAnnotation_content:
+			v.Content = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyIngestContentAnnotation_content, v.Content)
+		}
+		return nil
+	})
 }
 
 // Configuration for an iterative policy refinement workflow, including source
@@ -1697,6 +3847,31 @@ type AutomatedReasoningPolicyIterativeRefinementContent struct {
 	Feedback *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyIterativeRefinementContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyIterativeRefinementContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyIterativeRefinementContent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyIterativeRefinementDocumentList(s, schemas.AutomatedReasoningPolicyIterativeRefinementContent_documents, v.Documents)
+	if v.Feedback != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyIterativeRefinementContent_feedback, *v.Feedback)
+	}
+}
+func (v *AutomatedReasoningPolicyIterativeRefinementContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyIterativeRefinementContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyIterativeRefinementContent_documents:
+			return deserializeAutomatedReasoningPolicyIterativeRefinementDocumentList(d, schemas.AutomatedReasoningPolicyIterativeRefinementContent_documents, &v.Documents)
+		case schemas.AutomatedReasoningPolicyIterativeRefinementContent_feedback:
+			v.Feedback = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyIterativeRefinementContent_feedback, v.Feedback)
+		}
+		return nil
+	})
 }
 
 // A container for various mutation operations that can be applied to an Automated
@@ -1725,6 +3900,14 @@ type AutomatedReasoningPolicyMutationMemberAddRule struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberAddRule) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberAddRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_addRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberAddRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to add a new custom type to the policy.
 type AutomatedReasoningPolicyMutationMemberAddType struct {
@@ -1734,6 +3917,14 @@ type AutomatedReasoningPolicyMutationMemberAddType struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberAddType) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberAddType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_addType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberAddType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to add a new variable to the policy.
 type AutomatedReasoningPolicyMutationMemberAddVariable struct {
@@ -1743,6 +3934,14 @@ type AutomatedReasoningPolicyMutationMemberAddVariable struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberAddVariable) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberAddVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_addVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberAddVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to remove a rule from the policy.
 type AutomatedReasoningPolicyMutationMemberDeleteRule struct {
@@ -1752,6 +3951,14 @@ type AutomatedReasoningPolicyMutationMemberDeleteRule struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberDeleteRule) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberDeleteRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_deleteRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberDeleteRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to remove a custom type from the policy.
 type AutomatedReasoningPolicyMutationMemberDeleteType struct {
@@ -1761,6 +3968,14 @@ type AutomatedReasoningPolicyMutationMemberDeleteType struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberDeleteType) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberDeleteType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_deleteType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberDeleteType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to remove a variable from the policy.
 type AutomatedReasoningPolicyMutationMemberDeleteVariable struct {
@@ -1770,6 +3985,14 @@ type AutomatedReasoningPolicyMutationMemberDeleteVariable struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberDeleteVariable) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberDeleteVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_deleteVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberDeleteVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to modify an existing rule in the policy.
 type AutomatedReasoningPolicyMutationMemberUpdateRule struct {
@@ -1779,6 +4002,14 @@ type AutomatedReasoningPolicyMutationMemberUpdateRule struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberUpdateRule) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberUpdateRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_updateRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberUpdateRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to modify an existing custom type in the policy.
 type AutomatedReasoningPolicyMutationMemberUpdateType struct {
@@ -1788,6 +4019,14 @@ type AutomatedReasoningPolicyMutationMemberUpdateType struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberUpdateType) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberUpdateType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_updateType)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberUpdateType) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A mutation to modify an existing variable in the policy.
 type AutomatedReasoningPolicyMutationMemberUpdateVariable struct {
@@ -1797,11 +4036,35 @@ type AutomatedReasoningPolicyMutationMemberUpdateVariable struct {
 }
 
 func (*AutomatedReasoningPolicyMutationMemberUpdateVariable) isAutomatedReasoningPolicyMutation() {}
+func (v *AutomatedReasoningPolicyMutationMemberUpdateVariable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyMutation_updateVariable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyMutationMemberUpdateVariable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Represents the planning phase of policy build workflow, where the system
 // analyzes source content and determines what operations to perform.
 type AutomatedReasoningPolicyPlanning struct {
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyPlanning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyPlanning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyPlanning) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutomatedReasoningPolicyPlanning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyPlanning, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Represents a source document that was analyzed during fidelity report
@@ -1840,6 +4103,46 @@ type AutomatedReasoningPolicyReportSourceDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyReportSourceDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyReportSourceDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyReportSourceDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyAtomicStatementList(s, schemas.AutomatedReasoningPolicyReportSourceDocument_atomicStatements, v.AtomicStatements)
+	serializeAutomatedReasoningPolicyAnnotatedChunkList(s, schemas.AutomatedReasoningPolicyReportSourceDocument_documentContent, v.DocumentContent)
+	if v.DocumentHash != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentHash, *v.DocumentHash)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentId, *v.DocumentId)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentName, *v.DocumentName)
+	}
+}
+func (v *AutomatedReasoningPolicyReportSourceDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyReportSourceDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyReportSourceDocument_atomicStatements:
+			return deserializeAutomatedReasoningPolicyAtomicStatementList(d, schemas.AutomatedReasoningPolicyReportSourceDocument_atomicStatements, &v.AtomicStatements)
+		case schemas.AutomatedReasoningPolicyReportSourceDocument_documentContent:
+			return deserializeAutomatedReasoningPolicyAnnotatedChunkList(d, schemas.AutomatedReasoningPolicyReportSourceDocument_documentContent, &v.DocumentContent)
+		case schemas.AutomatedReasoningPolicyReportSourceDocument_documentHash:
+			v.DocumentHash = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentHash, v.DocumentHash)
+		case schemas.AutomatedReasoningPolicyReportSourceDocument_documentId:
+			v.DocumentId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentId, v.DocumentId)
+		case schemas.AutomatedReasoningPolicyReportSourceDocument_documentName:
+			v.DocumentName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyReportSourceDocument_documentName, v.DocumentName)
+		}
+		return nil
+	})
+}
+
 // Provides detailed fidelity analysis for a specific policy rule, including which
 // source document statements support it and how accurate the rule is.
 type AutomatedReasoningPolicyRuleReport struct {
@@ -1866,6 +4169,46 @@ type AutomatedReasoningPolicyRuleReport struct {
 	GroundingStatements []AutomatedReasoningPolicyStatementReference
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyRuleReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyRuleReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyRuleReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccuracyJustification != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyRuleReport_accuracyJustification, *v.AccuracyJustification)
+	}
+	if v.AccuracyScore != nil {
+		s.WriteFloat64(schemas.AutomatedReasoningPolicyRuleReport_accuracyScore, *v.AccuracyScore)
+	}
+	serializeAutomatedReasoningPolicyJustificationList(s, schemas.AutomatedReasoningPolicyRuleReport_groundingJustifications, v.GroundingJustifications)
+	serializeAutomatedReasoningPolicyStatementReferenceList(s, schemas.AutomatedReasoningPolicyRuleReport_groundingStatements, v.GroundingStatements)
+	if v.Rule != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyRuleReport_rule, *v.Rule)
+	}
+}
+func (v *AutomatedReasoningPolicyRuleReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyRuleReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyRuleReport_accuracyJustification:
+			v.AccuracyJustification = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyRuleReport_accuracyJustification, v.AccuracyJustification)
+		case schemas.AutomatedReasoningPolicyRuleReport_accuracyScore:
+			v.AccuracyScore = new(float64)
+			return d.ReadFloat64(schemas.AutomatedReasoningPolicyRuleReport_accuracyScore, v.AccuracyScore)
+		case schemas.AutomatedReasoningPolicyRuleReport_groundingJustifications:
+			return deserializeAutomatedReasoningPolicyJustificationList(d, schemas.AutomatedReasoningPolicyRuleReport_groundingJustifications, &v.GroundingJustifications)
+		case schemas.AutomatedReasoningPolicyRuleReport_groundingStatements:
+			return deserializeAutomatedReasoningPolicyStatementReferenceList(d, schemas.AutomatedReasoningPolicyRuleReport_groundingStatements, &v.GroundingStatements)
+		case schemas.AutomatedReasoningPolicyRuleReport_rule:
+			v.Rule = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyRuleReport_rule, v.Rule)
+		}
+		return nil
+	})
 }
 
 // Represents a test scenario used to validate an Automated Reasoning policy,
@@ -1898,6 +4241,47 @@ type AutomatedReasoningPolicyScenario struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyScenario) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyScenario)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyScenario) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlternateExpression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyScenario_alternateExpression, *v.AlternateExpression)
+	}
+	if v.ExpectedResult != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyScenario_expectedResult, string(v.ExpectedResult))
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyScenario_expression, *v.Expression)
+	}
+	serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyScenario_ruleIds, v.RuleIds)
+}
+func (v *AutomatedReasoningPolicyScenario) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyScenario, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyScenario_alternateExpression:
+			v.AlternateExpression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyScenario_alternateExpression, v.AlternateExpression)
+		case schemas.AutomatedReasoningPolicyScenario_expectedResult:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyScenario_expectedResult, &ev); err != nil {
+				return err
+			}
+			v.ExpectedResult = AutomatedReasoningCheckResult(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyScenario_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyScenario_expression, v.Expression)
+		case schemas.AutomatedReasoningPolicyScenario_ruleIds:
+			return deserializeAutomatedReasoningPolicyDefinitionRuleIdList(d, schemas.AutomatedReasoningPolicyScenario_ruleIds, &v.RuleIds)
+		}
+		return nil
+	})
+}
+
 // Contains a comprehensive entity encompassing all the scenarios generated by the
 // build workflow, which can be used to validate an Automated Reasoning policy.
 type AutomatedReasoningPolicyScenarios struct {
@@ -1908,6 +4292,25 @@ type AutomatedReasoningPolicyScenarios struct {
 	PolicyScenarios []AutomatedReasoningPolicyScenario
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyScenarios) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyScenarios)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyScenarios) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyScenarioList(s, schemas.AutomatedReasoningPolicyScenarios_policyScenarios, v.PolicyScenarios)
+}
+func (v *AutomatedReasoningPolicyScenarios) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyScenarios, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyScenarios_policyScenarios:
+			return deserializeAutomatedReasoningPolicyScenarioList(d, schemas.AutomatedReasoningPolicyScenarios_policyScenarios, &v.PolicyScenarios)
+		}
+		return nil
+	})
 }
 
 // Represents a source document that was processed during a build workflow.
@@ -1942,6 +4345,55 @@ type AutomatedReasoningPolicySourceDocument struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicySourceDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicySourceDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicySourceDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteBlob(schemas.AutomatedReasoningPolicySourceDocument_document, v.Document)
+	}
+	if v.DocumentContentType != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicySourceDocument_documentContentType, string(v.DocumentContentType))
+	}
+	if v.DocumentDescription != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySourceDocument_documentDescription, *v.DocumentDescription)
+	}
+	if v.DocumentHash != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySourceDocument_documentHash, *v.DocumentHash)
+	}
+	if v.DocumentName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySourceDocument_documentName, *v.DocumentName)
+	}
+}
+func (v *AutomatedReasoningPolicySourceDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicySourceDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicySourceDocument_document:
+			return d.ReadBlob(schemas.AutomatedReasoningPolicySourceDocument_document, &v.Document)
+		case schemas.AutomatedReasoningPolicySourceDocument_documentContentType:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicySourceDocument_documentContentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentContentType = AutomatedReasoningPolicyBuildDocumentContentType(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicySourceDocument_documentDescription:
+			v.DocumentDescription = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySourceDocument_documentDescription, v.DocumentDescription)
+		case schemas.AutomatedReasoningPolicySourceDocument_documentHash:
+			v.DocumentHash = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySourceDocument_documentHash, v.DocumentHash)
+		case schemas.AutomatedReasoningPolicySourceDocument_documentName:
+			v.DocumentName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySourceDocument_documentName, v.DocumentName)
+		}
+		return nil
+	})
+}
+
 // Describes the location of a statement within a source document using line
 // numbers.
 type AutomatedReasoningPolicyStatementLocation struct {
@@ -1952,6 +4404,25 @@ type AutomatedReasoningPolicyStatementLocation struct {
 	Lines []int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyStatementLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyStatementLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyStatementLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyLineNumberList(s, schemas.AutomatedReasoningPolicyStatementLocation_lines, v.Lines)
+}
+func (v *AutomatedReasoningPolicyStatementLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyStatementLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyStatementLocation_lines:
+			return deserializeAutomatedReasoningPolicyLineNumberList(d, schemas.AutomatedReasoningPolicyStatementLocation_lines, &v.Lines)
+		}
+		return nil
+	})
 }
 
 // References a specific atomic statement within a source document, used to link
@@ -1969,6 +4440,34 @@ type AutomatedReasoningPolicyStatementReference struct {
 	StatementId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyStatementReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyStatementReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyStatementReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyStatementReference_documentId, *v.DocumentId)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyStatementReference_statementId, *v.StatementId)
+	}
+}
+func (v *AutomatedReasoningPolicyStatementReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyStatementReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyStatementReference_documentId:
+			v.DocumentId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyStatementReference_documentId, v.DocumentId)
+		case schemas.AutomatedReasoningPolicyStatementReference_statementId:
+			v.StatementId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyStatementReference_statementId, v.StatementId)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about an Automated Reasoning policy, including
@@ -2011,6 +4510,64 @@ type AutomatedReasoningPolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicySummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySummary_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySummary_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySummary_policyArn, *v.PolicyArn)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySummary_policyId, *v.PolicyId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicySummary_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicySummary_version, *v.Version)
+	}
+}
+func (v *AutomatedReasoningPolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicySummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicySummary_createdAt, v.CreatedAt)
+		case schemas.AutomatedReasoningPolicySummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySummary_description, v.Description)
+		case schemas.AutomatedReasoningPolicySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySummary_name, v.Name)
+		case schemas.AutomatedReasoningPolicySummary_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySummary_policyArn, v.PolicyArn)
+		case schemas.AutomatedReasoningPolicySummary_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySummary_policyId, v.PolicyId)
+		case schemas.AutomatedReasoningPolicySummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicySummary_updatedAt, v.UpdatedAt)
+		case schemas.AutomatedReasoningPolicySummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicySummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Represents a test for validating an Automated Reasoning policy. tests contain
 // sample inputs and expected outcomes to verify policy behavior.
 type AutomatedReasoningPolicyTestCase struct {
@@ -2048,6 +4605,68 @@ type AutomatedReasoningPolicyTestCase struct {
 	QueryContent *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyTestCase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyTestCase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyTestCase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.AutomatedReasoningPolicyTestCase_confidenceThreshold, *v.ConfidenceThreshold)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicyTestCase_createdAt, *v.CreatedAt)
+	}
+	if v.ExpectedAggregatedFindingsResult != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestCase_expectedAggregatedFindingsResult, string(v.ExpectedAggregatedFindingsResult))
+	}
+	if v.GuardContent != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestCase_guardContent, *v.GuardContent)
+	}
+	if v.QueryContent != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestCase_queryContent, *v.QueryContent)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestCase_testCaseId, *v.TestCaseId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicyTestCase_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AutomatedReasoningPolicyTestCase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyTestCase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyTestCase_confidenceThreshold:
+			v.ConfidenceThreshold = new(float64)
+			return d.ReadFloat64(schemas.AutomatedReasoningPolicyTestCase_confidenceThreshold, v.ConfidenceThreshold)
+		case schemas.AutomatedReasoningPolicyTestCase_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicyTestCase_createdAt, v.CreatedAt)
+		case schemas.AutomatedReasoningPolicyTestCase_expectedAggregatedFindingsResult:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyTestCase_expectedAggregatedFindingsResult, &ev); err != nil {
+				return err
+			}
+			v.ExpectedAggregatedFindingsResult = AutomatedReasoningCheckResult(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyTestCase_guardContent:
+			v.GuardContent = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyTestCase_guardContent, v.GuardContent)
+		case schemas.AutomatedReasoningPolicyTestCase_queryContent:
+			v.QueryContent = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyTestCase_queryContent, v.QueryContent)
+		case schemas.AutomatedReasoningPolicyTestCase_testCaseId:
+			v.TestCaseId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyTestCase_testCaseId, v.TestCaseId)
+		case schemas.AutomatedReasoningPolicyTestCase_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicyTestCase_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Contains the results of testing an Automated Reasoning policy against various
@@ -2091,6 +4710,75 @@ type AutomatedReasoningPolicyTestResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyTestResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyTestResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyTestResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregatedTestFindingsResult != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestResult_aggregatedTestFindingsResult, string(v.AggregatedTestFindingsResult))
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestResult_policyArn, *v.PolicyArn)
+	}
+	if v.TestCase != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyTestResult_testCase)
+		v.TestCase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutomatedReasoningCheckFindingList(s, schemas.AutomatedReasoningPolicyTestResult_testFindings, v.TestFindings)
+	if v.TestRunResult != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestResult_testRunResult, string(v.TestRunResult))
+	}
+	if v.TestRunStatus != "" {
+		s.WriteString(schemas.AutomatedReasoningPolicyTestResult_testRunStatus, string(v.TestRunStatus))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AutomatedReasoningPolicyTestResult_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AutomatedReasoningPolicyTestResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyTestResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyTestResult_aggregatedTestFindingsResult:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyTestResult_aggregatedTestFindingsResult, &ev); err != nil {
+				return err
+			}
+			v.AggregatedTestFindingsResult = AutomatedReasoningCheckResult(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyTestResult_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyTestResult_policyArn, v.PolicyArn)
+		case schemas.AutomatedReasoningPolicyTestResult_testCase:
+			v.TestCase = &AutomatedReasoningPolicyTestCase{}
+			return v.TestCase.Deserialize(d)
+		case schemas.AutomatedReasoningPolicyTestResult_testFindings:
+			return deserializeAutomatedReasoningCheckFindingList(d, schemas.AutomatedReasoningPolicyTestResult_testFindings, &v.TestFindings)
+		case schemas.AutomatedReasoningPolicyTestResult_testRunResult:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyTestResult_testRunResult, &ev); err != nil {
+				return err
+			}
+			v.TestRunResult = AutomatedReasoningPolicyTestRunResult(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyTestResult_testRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedReasoningPolicyTestResult_testRunStatus, &ev); err != nil {
+				return err
+			}
+			v.TestRunStatus = AutomatedReasoningPolicyTestRunStatus(ev)
+			return nil
+		case schemas.AutomatedReasoningPolicyTestResult_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutomatedReasoningPolicyTestResult_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // An annotation for managing values within custom types, including adding,
 // updating, or removing specific type values.
 //
@@ -2112,6 +4800,14 @@ type AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue struct {
 
 func (*AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue) isAutomatedReasoningPolicyTypeValueAnnotation() {
 }
+func (v *AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyTypeValueAnnotation_addTypeValue)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyTypeValueAnnotationMemberAddTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to remove a value from an existing custom type.
 type AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue struct {
@@ -2122,6 +4818,14 @@ type AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue struct {
 
 func (*AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue) isAutomatedReasoningPolicyTypeValueAnnotation() {
 }
+func (v *AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyTypeValueAnnotation_deleteTypeValue)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyTypeValueAnnotationMemberDeleteTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An operation to modify an existing value within a custom type.
 type AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue struct {
@@ -2131,6 +4835,14 @@ type AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue struct {
 }
 
 func (*AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue) isAutomatedReasoningPolicyTypeValueAnnotation() {
+}
+func (v *AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyTypeValueAnnotation_updateTypeValue)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyTypeValueAnnotationMemberUpdateTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // An annotation for updating the policy based on feedback about how specific
@@ -2147,6 +4859,31 @@ type AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation struct {
 	RuleIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Feedback != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_feedback, *v.Feedback)
+	}
+	serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_ruleIds, v.RuleIds)
+}
+func (v *AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_feedback:
+			v.Feedback = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_feedback, v.Feedback)
+		case schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_ruleIds:
+			return deserializeAutomatedReasoningPolicyDefinitionRuleIdList(d, schemas.AutomatedReasoningPolicyUpdateFromRuleFeedbackAnnotation_ruleIds, &v.RuleIds)
+		}
+		return nil
+	})
 }
 
 // An annotation for updating the policy based on feedback about how it performed
@@ -2169,6 +4906,37 @@ type AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Feedback != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_feedback, *v.Feedback)
+	}
+	serializeAutomatedReasoningPolicyDefinitionRuleIdList(s, schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_ruleIds, v.RuleIds)
+	if v.ScenarioExpression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_scenarioExpression, *v.ScenarioExpression)
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_feedback:
+			v.Feedback = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_feedback, v.Feedback)
+		case schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_ruleIds:
+			return deserializeAutomatedReasoningPolicyDefinitionRuleIdList(d, schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_ruleIds, &v.RuleIds)
+		case schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_scenarioExpression:
+			v.ScenarioExpression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateFromScenarioFeedbackAnnotation_scenarioExpression, v.ScenarioExpression)
+		}
+		return nil
+	})
+}
+
 // An annotation for modifying an existing rule in an Automated Reasoning policy.
 type AutomatedReasoningPolicyUpdateRuleAnnotation struct {
 
@@ -2186,6 +4954,34 @@ type AutomatedReasoningPolicyUpdateRuleAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyUpdateRuleAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateRuleAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateRuleAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateRuleAnnotation_expression, *v.Expression)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateRuleAnnotation_ruleId, *v.RuleId)
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateRuleAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateRuleAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateRuleAnnotation_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateRuleAnnotation_expression, v.Expression)
+		case schemas.AutomatedReasoningPolicyUpdateRuleAnnotation_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateRuleAnnotation_ruleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that modifies an existing rule in the policy definition
 // during the build process.
 type AutomatedReasoningPolicyUpdateRuleMutation struct {
@@ -2197,6 +4993,30 @@ type AutomatedReasoningPolicyUpdateRuleMutation struct {
 	Rule *AutomatedReasoningPolicyDefinitionRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyUpdateRuleMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateRuleMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateRuleMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateRuleMutation_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateRuleMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateRuleMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateRuleMutation_rule:
+			v.Rule = &AutomatedReasoningPolicyDefinitionRule{}
+			return v.Rule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An annotation for modifying an existing custom type in an Automated Reasoning
@@ -2224,6 +5044,43 @@ type AutomatedReasoningPolicyUpdateTypeAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyUpdateTypeAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateTypeAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_name, *v.Name)
+	}
+	if v.NewName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_newName, *v.NewName)
+	}
+	serializeAutomatedReasoningPolicyTypeValueAnnotationList(s, schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_values, v.Values)
+}
+func (v *AutomatedReasoningPolicyUpdateTypeAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateTypeAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_description, v.Description)
+		case schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_name, v.Name)
+		case schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_newName:
+			v.NewName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_newName, v.NewName)
+		case schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_values:
+			return deserializeAutomatedReasoningPolicyTypeValueAnnotationList(d, schemas.AutomatedReasoningPolicyUpdateTypeAnnotation_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that modifies an existing custom type in the policy
 // definition during the build process.
 type AutomatedReasoningPolicyUpdateTypeMutation struct {
@@ -2235,6 +5092,30 @@ type AutomatedReasoningPolicyUpdateTypeMutation struct {
 	Type *AutomatedReasoningPolicyDefinitionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyUpdateTypeMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateTypeMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateTypeMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateTypeMutation_type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateTypeMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateTypeMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateTypeMutation_type:
+			v.Type = &AutomatedReasoningPolicyDefinitionType{}
+			return v.Type.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Represents a modification to a value within an existing custom type.
@@ -2252,6 +5133,40 @@ type AutomatedReasoningPolicyUpdateTypeValue struct {
 	NewValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyUpdateTypeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateTypeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateTypeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeValue_description, *v.Description)
+	}
+	if v.NewValue != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeValue_newValue, *v.NewValue)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateTypeValue_value, *v.Value)
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateTypeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateTypeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateTypeValue_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateTypeValue_description, v.Description)
+		case schemas.AutomatedReasoningPolicyUpdateTypeValue_newValue:
+			v.NewValue = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateTypeValue_newValue, v.NewValue)
+		case schemas.AutomatedReasoningPolicyUpdateTypeValue_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateTypeValue_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An annotation for modifying an existing variable in an Automated Reasoning
@@ -2273,6 +5188,40 @@ type AutomatedReasoningPolicyUpdateVariableAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyUpdateVariableAnnotation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateVariableAnnotation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_name, *v.Name)
+	}
+	if v.NewName != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_newName, *v.NewName)
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateVariableAnnotation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateVariableAnnotation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_description, v.Description)
+		case schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_name, v.Name)
+		case schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_newName:
+			v.NewName = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyUpdateVariableAnnotation_newName, v.NewName)
+		}
+		return nil
+	})
+}
+
 // A mutation operation that modifies an existing variable in the policy
 // definition during the build process.
 type AutomatedReasoningPolicyUpdateVariableMutation struct {
@@ -2284,6 +5233,30 @@ type AutomatedReasoningPolicyUpdateVariableMutation struct {
 	Variable *AutomatedReasoningPolicyDefinitionVariable
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedReasoningPolicyUpdateVariableMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateVariableMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyUpdateVariableMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Variable != nil {
+		s.WriteStruct(schemas.AutomatedReasoningPolicyUpdateVariableMutation_variable)
+		v.Variable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedReasoningPolicyUpdateVariableMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyUpdateVariableMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyUpdateVariableMutation_variable:
+			v.Variable = &AutomatedReasoningPolicyDefinitionVariable{}
+			return v.Variable.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides detailed fidelity analysis for a specific policy variable, including
@@ -2315,6 +5288,46 @@ type AutomatedReasoningPolicyVariableReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedReasoningPolicyVariableReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyVariableReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedReasoningPolicyVariableReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccuracyJustification != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyVariableReport_accuracyJustification, *v.AccuracyJustification)
+	}
+	if v.AccuracyScore != nil {
+		s.WriteFloat64(schemas.AutomatedReasoningPolicyVariableReport_accuracyScore, *v.AccuracyScore)
+	}
+	serializeAutomatedReasoningPolicyJustificationList(s, schemas.AutomatedReasoningPolicyVariableReport_groundingJustifications, v.GroundingJustifications)
+	serializeAutomatedReasoningPolicyStatementReferenceList(s, schemas.AutomatedReasoningPolicyVariableReport_groundingStatements, v.GroundingStatements)
+	if v.PolicyVariable != nil {
+		s.WriteString(schemas.AutomatedReasoningPolicyVariableReport_policyVariable, *v.PolicyVariable)
+	}
+}
+func (v *AutomatedReasoningPolicyVariableReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedReasoningPolicyVariableReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedReasoningPolicyVariableReport_accuracyJustification:
+			v.AccuracyJustification = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyVariableReport_accuracyJustification, v.AccuracyJustification)
+		case schemas.AutomatedReasoningPolicyVariableReport_accuracyScore:
+			v.AccuracyScore = new(float64)
+			return d.ReadFloat64(schemas.AutomatedReasoningPolicyVariableReport_accuracyScore, v.AccuracyScore)
+		case schemas.AutomatedReasoningPolicyVariableReport_groundingJustifications:
+			return deserializeAutomatedReasoningPolicyJustificationList(d, schemas.AutomatedReasoningPolicyVariableReport_groundingJustifications, &v.GroundingJustifications)
+		case schemas.AutomatedReasoningPolicyVariableReport_groundingStatements:
+			return deserializeAutomatedReasoningPolicyStatementReferenceList(d, schemas.AutomatedReasoningPolicyVariableReport_groundingStatements, &v.GroundingStatements)
+		case schemas.AutomatedReasoningPolicyVariableReport_policyVariable:
+			v.PolicyVariable = new(string)
+			return d.ReadString(schemas.AutomatedReasoningPolicyVariableReport_policyVariable, v.PolicyVariable)
+		}
+		return nil
+	})
+}
+
 // Defines the content and configuration for different types of policy build
 // workflows.
 //
@@ -2337,6 +5350,12 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments struct {
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments) isAutomatedReasoningPolicyWorkflowTypeContent() {
 }
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments) Serialize(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyBuildWorkflowDocumentList(s, schemas.AutomatedReasoningPolicyWorkflowTypeContent_documents, v.Value)
+}
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAutomatedReasoningPolicyBuildWorkflowDocumentList(d, schemas.AutomatedReasoningPolicyWorkflowTypeContent_documents, &v.Value)
+}
 
 // The content configuration for generating a fidelity report workflow. This can
 // include source documents to analyze or an existing fidelity report to update
@@ -2348,6 +5367,12 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportCont
 }
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent) Serialize(s smithy.ShapeSerializer) {
+	serializeAutomatedReasoningPolicyGenerateFidelityReportContent(s, schemas.AutomatedReasoningPolicyWorkflowTypeContent_generateFidelityReportContent, v.Value)
+}
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAutomatedReasoningPolicyGenerateFidelityReportContent(d, schemas.AutomatedReasoningPolicyWorkflowTypeContent_generateFidelityReportContent, &v.Value)
 }
 
 // Content configuration to start an iterative policy refinement workflow that
@@ -2361,6 +5386,14 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent) isAutomatedReasoningPolicyWorkflowTypeContent() {
 }
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyWorkflowTypeContent_iterativeRefinementContent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The assets and instructions needed for a policy repair workflow, including
 // repair annotations and guidance.
@@ -2371,6 +5404,14 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets struct 
 }
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedReasoningPolicyWorkflowTypeContent_policyRepairAssets)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Contains information about an error that occurred when deleting an advanced
@@ -2393,6 +5434,40 @@ type BatchDeleteAdvancedPromptOptimizationJobError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAdvancedPromptOptimizationJobError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAdvancedPromptOptimizationJobError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BatchDeleteAdvancedPromptOptimizationJobError_code, *v.Code)
+	}
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.BatchDeleteAdvancedPromptOptimizationJobError_jobIdentifier, *v.JobIdentifier)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteAdvancedPromptOptimizationJobError_message, *v.Message)
+	}
+}
+func (v *BatchDeleteAdvancedPromptOptimizationJobError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteAdvancedPromptOptimizationJobError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchDeleteAdvancedPromptOptimizationJobError_code, v.Code)
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobError_jobIdentifier:
+			v.JobIdentifier = new(string)
+			return d.ReadString(schemas.BatchDeleteAdvancedPromptOptimizationJobError_jobIdentifier, v.JobIdentifier)
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteAdvancedPromptOptimizationJobError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Contains information about a successfully deleted advanced prompt optimization
 // job.
 type BatchDeleteAdvancedPromptOptimizationJobItem struct {
@@ -2408,6 +5483,38 @@ type BatchDeleteAdvancedPromptOptimizationJobItem struct {
 	JobStatus AdvancedPromptOptimizationJobStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAdvancedPromptOptimizationJobItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.BatchDeleteAdvancedPromptOptimizationJobItem_jobIdentifier, *v.JobIdentifier)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.BatchDeleteAdvancedPromptOptimizationJobItem_jobStatus, string(v.JobStatus))
+	}
+}
+func (v *BatchDeleteAdvancedPromptOptimizationJobItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteAdvancedPromptOptimizationJobItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobItem_jobIdentifier:
+			v.JobIdentifier = new(string)
+			return d.ReadString(schemas.BatchDeleteAdvancedPromptOptimizationJobItem_jobIdentifier, v.JobIdentifier)
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobItem_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteAdvancedPromptOptimizationJobItem_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = AdvancedPromptOptimizationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A JSON array that provides the status of the evaluation jobs being deleted.
@@ -2429,6 +5536,40 @@ type BatchDeleteEvaluationJobError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteEvaluationJobError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteEvaluationJobError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteEvaluationJobError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.BatchDeleteEvaluationJobError_code, *v.Code)
+	}
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.BatchDeleteEvaluationJobError_jobIdentifier, *v.JobIdentifier)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteEvaluationJobError_message, *v.Message)
+	}
+}
+func (v *BatchDeleteEvaluationJobError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteEvaluationJobError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteEvaluationJobError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchDeleteEvaluationJobError_code, v.Code)
+		case schemas.BatchDeleteEvaluationJobError_jobIdentifier:
+			v.JobIdentifier = new(string)
+			return d.ReadString(schemas.BatchDeleteEvaluationJobError_jobIdentifier, v.JobIdentifier)
+		case schemas.BatchDeleteEvaluationJobError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteEvaluationJobError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // An evaluation job for deletion, and it’s current status.
 type BatchDeleteEvaluationJobItem struct {
 
@@ -2445,6 +5586,38 @@ type BatchDeleteEvaluationJobItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteEvaluationJobItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteEvaluationJobItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteEvaluationJobItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.BatchDeleteEvaluationJobItem_jobIdentifier, *v.JobIdentifier)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.BatchDeleteEvaluationJobItem_jobStatus, string(v.JobStatus))
+	}
+}
+func (v *BatchDeleteEvaluationJobItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteEvaluationJobItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteEvaluationJobItem_jobIdentifier:
+			v.JobIdentifier = new(string)
+			return d.ReadString(schemas.BatchDeleteEvaluationJobItem_jobIdentifier, v.JobIdentifier)
+		case schemas.BatchDeleteEvaluationJobItem_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteEvaluationJobItem_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = EvaluationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The evaluator model used in knowledge base evaluation job or in model
 // evaluation job that use a model as judge. This model computes all evaluation
 // related metrics.
@@ -2457,6 +5630,28 @@ type BedrockEvaluatorModel struct {
 	ModelIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BedrockEvaluatorModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BedrockEvaluatorModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BedrockEvaluatorModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.BedrockEvaluatorModel_modelIdentifier, *v.ModelIdentifier)
+	}
+}
+func (v *BedrockEvaluatorModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BedrockEvaluatorModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BedrockEvaluatorModel_modelIdentifier:
+			v.ModelIdentifier = new(string)
+			return d.ReadString(schemas.BedrockEvaluatorModel_modelIdentifier, v.ModelIdentifier)
+		}
+		return nil
+	})
 }
 
 // Contains the document contained in the wrapper object, along with its
@@ -2481,6 +5676,39 @@ type ByteContentDoc struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByteContentDoc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByteContentDoc)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByteContentDoc) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.ByteContentDoc_contentType, *v.ContentType)
+	}
+	if v.Data != nil {
+		s.WriteBlob(schemas.ByteContentDoc_data, v.Data)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ByteContentDoc_identifier, *v.Identifier)
+	}
+}
+func (v *ByteContentDoc) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByteContentDoc, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByteContentDoc_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.ByteContentDoc_contentType, v.ContentType)
+		case schemas.ByteContentDoc_data:
+			return d.ReadBlob(schemas.ByteContentDoc_data, &v.Data)
+		case schemas.ByteContentDoc_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ByteContentDoc_identifier, v.Identifier)
+		}
+		return nil
+	})
+}
+
 // CloudWatch logging configuration.
 type CloudWatchConfig struct {
 
@@ -2498,6 +5726,42 @@ type CloudWatchConfig struct {
 	LargeDataDeliveryS3Config *S3Config
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LargeDataDeliveryS3Config != nil {
+		s.WriteStruct(schemas.CloudWatchConfig_largeDataDeliveryS3Config)
+		v.LargeDataDeliveryS3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.CloudWatchConfig_logGroupName, *v.LogGroupName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CloudWatchConfig_roleArn, *v.RoleArn)
+	}
+}
+func (v *CloudWatchConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchConfig_largeDataDeliveryS3Config:
+			v.LargeDataDeliveryS3Config = &S3Config{}
+			return v.LargeDataDeliveryS3Config.Deserialize(d)
+		case schemas.CloudWatchConfig_logGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.CloudWatchConfig_logGroupName, v.LogGroupName)
+		case schemas.CloudWatchConfig_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CloudWatchConfig_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // A model customization configuration
@@ -2518,6 +5782,14 @@ type CustomizationConfigMemberDistillationConfig struct {
 }
 
 func (*CustomizationConfigMemberDistillationConfig) isCustomizationConfig() {}
+func (v *CustomizationConfigMemberDistillationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomizationConfig_distillationConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CustomizationConfigMemberDistillationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 //	Configuration settings for reinforcement fine-tuning (RFT) model
 //
@@ -2529,6 +5801,14 @@ type CustomizationConfigMemberRftConfig struct {
 }
 
 func (*CustomizationConfigMemberRftConfig) isCustomizationConfig() {}
+func (v *CustomizationConfigMemberRftConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomizationConfig_rftConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CustomizationConfigMemberRftConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines the model you want to evaluate custom metrics in an Amazon Bedrock
 // evaluation job.
@@ -2544,6 +5824,28 @@ type CustomMetricBedrockEvaluatorModel struct {
 	ModelIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomMetricBedrockEvaluatorModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomMetricBedrockEvaluatorModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomMetricBedrockEvaluatorModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.CustomMetricBedrockEvaluatorModel_modelIdentifier, *v.ModelIdentifier)
+	}
+}
+func (v *CustomMetricBedrockEvaluatorModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomMetricBedrockEvaluatorModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomMetricBedrockEvaluatorModel_modelIdentifier:
+			v.ModelIdentifier = new(string)
+			return d.ReadString(schemas.CustomMetricBedrockEvaluatorModel_modelIdentifier, v.ModelIdentifier)
+		}
+		return nil
+	})
 }
 
 // The definition of a custom metric for use in an Amazon Bedrock evaluation job.
@@ -2583,6 +5885,37 @@ type CustomMetricDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomMetricDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomMetricDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomMetricDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instructions != nil {
+		s.WriteString(schemas.CustomMetricDefinition_instructions, *v.Instructions)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CustomMetricDefinition_name, *v.Name)
+	}
+	serializeRatingScale(s, schemas.CustomMetricDefinition_ratingScale, v.RatingScale)
+}
+func (v *CustomMetricDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomMetricDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomMetricDefinition_instructions:
+			v.Instructions = new(string)
+			return d.ReadString(schemas.CustomMetricDefinition_instructions, v.Instructions)
+		case schemas.CustomMetricDefinition_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomMetricDefinition_name, v.Name)
+		case schemas.CustomMetricDefinition_ratingScale:
+			return deserializeRatingScale(d, schemas.CustomMetricDefinition_ratingScale, &v.RatingScale)
+		}
+		return nil
+	})
+}
+
 // Configuration of the evaluator model you want to use to evaluate custom metrics
 // in an Amazon Bedrock evaluation job.
 type CustomMetricEvaluatorModelConfig struct {
@@ -2594,6 +5927,25 @@ type CustomMetricEvaluatorModelConfig struct {
 	BedrockEvaluatorModels []CustomMetricBedrockEvaluatorModel
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomMetricEvaluatorModelConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomMetricEvaluatorModelConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomMetricEvaluatorModelConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomMetricBedrockEvaluatorModels(s, schemas.CustomMetricEvaluatorModelConfig_bedrockEvaluatorModels, v.BedrockEvaluatorModels)
+}
+func (v *CustomMetricEvaluatorModelConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomMetricEvaluatorModelConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomMetricEvaluatorModelConfig_bedrockEvaluatorModels:
+			return deserializeCustomMetricBedrockEvaluatorModels(d, schemas.CustomMetricEvaluatorModelConfig_bedrockEvaluatorModels, &v.BedrockEvaluatorModels)
+		}
+		return nil
+	})
 }
 
 // The data source for a custom model. This is a union type that supports the
@@ -2619,6 +5971,14 @@ type CustomModelDataSourceMemberModelPackageArnDataSource struct {
 }
 
 func (*CustomModelDataSourceMemberModelPackageArnDataSource) isCustomModelDataSource() {}
+func (v *CustomModelDataSourceMemberModelPackageArnDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomModelDataSource_modelPackageArnDataSource)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CustomModelDataSourceMemberModelPackageArnDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains summary information about a custom model deployment, including its
 // ARN, name, status, and associated custom model.
@@ -2661,6 +6021,68 @@ type CustomModelDeploymentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomModelDeploymentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomModelDeploymentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomModelDeploymentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CustomModelDeploymentSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CustomModelDeploymentArn != nil {
+		s.WriteString(schemas.CustomModelDeploymentSummary_customModelDeploymentArn, *v.CustomModelDeploymentArn)
+	}
+	if v.CustomModelDeploymentName != nil {
+		s.WriteString(schemas.CustomModelDeploymentSummary_customModelDeploymentName, *v.CustomModelDeploymentName)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.CustomModelDeploymentSummary_failureMessage, *v.FailureMessage)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.CustomModelDeploymentSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CustomModelDeploymentSummary_modelArn, *v.ModelArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CustomModelDeploymentSummary_status, string(v.Status))
+	}
+}
+func (v *CustomModelDeploymentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomModelDeploymentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomModelDeploymentSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CustomModelDeploymentSummary_createdAt, v.CreatedAt)
+		case schemas.CustomModelDeploymentSummary_customModelDeploymentArn:
+			v.CustomModelDeploymentArn = new(string)
+			return d.ReadString(schemas.CustomModelDeploymentSummary_customModelDeploymentArn, v.CustomModelDeploymentArn)
+		case schemas.CustomModelDeploymentSummary_customModelDeploymentName:
+			v.CustomModelDeploymentName = new(string)
+			return d.ReadString(schemas.CustomModelDeploymentSummary_customModelDeploymentName, v.CustomModelDeploymentName)
+		case schemas.CustomModelDeploymentSummary_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.CustomModelDeploymentSummary_failureMessage, v.FailureMessage)
+		case schemas.CustomModelDeploymentSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CustomModelDeploymentSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CustomModelDeploymentSummary_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CustomModelDeploymentSummary_modelArn, v.ModelArn)
+		case schemas.CustomModelDeploymentSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.CustomModelDeploymentSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CustomModelDeploymentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Details about an update to a custom model deployment, including the new custom
 //
 // model resource ARN and current update status.
@@ -2677,6 +6099,38 @@ type CustomModelDeploymentUpdateDetails struct {
 	UpdateStatus CustomModelDeploymentUpdateStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomModelDeploymentUpdateDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomModelDeploymentUpdateDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomModelDeploymentUpdateDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CustomModelDeploymentUpdateDetails_modelArn, *v.ModelArn)
+	}
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.CustomModelDeploymentUpdateDetails_updateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *CustomModelDeploymentUpdateDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomModelDeploymentUpdateDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomModelDeploymentUpdateDetails_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CustomModelDeploymentUpdateDetails_modelArn, v.ModelArn)
+		case schemas.CustomModelDeploymentUpdateDetails_updateStatus:
+			var ev string
+			if err := d.ReadString(schemas.CustomModelDeploymentUpdateDetails_updateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = CustomModelDeploymentUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary information for a custom model.
@@ -2728,6 +6182,78 @@ type CustomModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomModelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomModelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelArn != nil {
+		s.WriteString(schemas.CustomModelSummary_baseModelArn, *v.BaseModelArn)
+	}
+	if v.BaseModelName != nil {
+		s.WriteString(schemas.CustomModelSummary_baseModelName, *v.BaseModelName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CustomModelSummary_creationTime, *v.CreationTime)
+	}
+	if v.CustomizationType != "" {
+		s.WriteString(schemas.CustomModelSummary_customizationType, string(v.CustomizationType))
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CustomModelSummary_modelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CustomModelSummary_modelName, *v.ModelName)
+	}
+	if v.ModelStatus != "" {
+		s.WriteString(schemas.CustomModelSummary_modelStatus, string(v.ModelStatus))
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.CustomModelSummary_ownerAccountId, *v.OwnerAccountId)
+	}
+}
+func (v *CustomModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomModelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomModelSummary_baseModelArn:
+			v.BaseModelArn = new(string)
+			return d.ReadString(schemas.CustomModelSummary_baseModelArn, v.BaseModelArn)
+		case schemas.CustomModelSummary_baseModelName:
+			v.BaseModelName = new(string)
+			return d.ReadString(schemas.CustomModelSummary_baseModelName, v.BaseModelName)
+		case schemas.CustomModelSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CustomModelSummary_creationTime, v.CreationTime)
+		case schemas.CustomModelSummary_customizationType:
+			var ev string
+			if err := d.ReadString(schemas.CustomModelSummary_customizationType, &ev); err != nil {
+				return err
+			}
+			v.CustomizationType = CustomizationType(ev)
+			return nil
+		case schemas.CustomModelSummary_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CustomModelSummary_modelArn, v.ModelArn)
+		case schemas.CustomModelSummary_modelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.CustomModelSummary_modelName, v.ModelName)
+		case schemas.CustomModelSummary_modelStatus:
+			var ev string
+			if err := d.ReadString(schemas.CustomModelSummary_modelStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelStatus = ModelStatus(ev)
+			return nil
+		case schemas.CustomModelSummary_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.CustomModelSummary_ownerAccountId, v.OwnerAccountId)
+		}
+		return nil
+	})
+}
+
 // A CustomModelUnit (CMU) is an abstract view of the hardware utilization that
 // Amazon Bedrock needs to host a single copy of your custom model. A model copy
 // represents a single instance of your imported model that is ready to serve
@@ -2749,6 +6275,34 @@ type CustomModelUnits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomModelUnits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomModelUnits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomModelUnits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomModelUnitsPerModelCopy != nil {
+		s.WriteInt32(schemas.CustomModelUnits_customModelUnitsPerModelCopy, *v.CustomModelUnitsPerModelCopy)
+	}
+	if v.CustomModelUnitsVersion != nil {
+		s.WriteString(schemas.CustomModelUnits_customModelUnitsVersion, *v.CustomModelUnitsVersion)
+	}
+}
+func (v *CustomModelUnits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomModelUnits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomModelUnits_customModelUnitsPerModelCopy:
+			v.CustomModelUnitsPerModelCopy = new(int32)
+			return d.ReadInt32(schemas.CustomModelUnits_customModelUnitsPerModelCopy, v.CustomModelUnitsPerModelCopy)
+		case schemas.CustomModelUnits_customModelUnitsVersion:
+			v.CustomModelUnitsVersion = new(string)
+			return d.ReadString(schemas.CustomModelUnits_customModelUnitsVersion, v.CustomModelUnitsVersion)
+		}
+		return nil
+	})
+}
+
 // For a Distillation job, the status details for the data processing sub-task of
 // the job.
 type DataProcessingDetails struct {
@@ -2763,6 +6317,44 @@ type DataProcessingDetails struct {
 	Status JobStatusDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProcessingDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProcessingDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProcessingDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DataProcessingDetails_creationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DataProcessingDetails_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DataProcessingDetails_status, string(v.Status))
+	}
+}
+func (v *DataProcessingDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProcessingDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProcessingDetails_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DataProcessingDetails_creationTime, v.CreationTime)
+		case schemas.DataProcessingDetails_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DataProcessingDetails_lastModifiedTime, v.LastModifiedTime)
+		case schemas.DataProcessingDetails_status:
+			var ev string
+			if err := d.ReadString(schemas.DataProcessingDetails_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatusDetails(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Dimensional price rate.
@@ -2783,6 +6375,46 @@ type DimensionalPriceRate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionalPriceRate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionalPriceRate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionalPriceRate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DimensionalPriceRate_description, *v.Description)
+	}
+	if v.Dimension != nil {
+		s.WriteString(schemas.DimensionalPriceRate_dimension, *v.Dimension)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.DimensionalPriceRate_price, *v.Price)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.DimensionalPriceRate_unit, *v.Unit)
+	}
+}
+func (v *DimensionalPriceRate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionalPriceRate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionalPriceRate_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DimensionalPriceRate_description, v.Description)
+		case schemas.DimensionalPriceRate_dimension:
+			v.Dimension = new(string)
+			return d.ReadString(schemas.DimensionalPriceRate_dimension, v.Dimension)
+		case schemas.DimensionalPriceRate_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.DimensionalPriceRate_price, v.Price)
+		case schemas.DimensionalPriceRate_unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.DimensionalPriceRate_unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // Settings for distilling a foundation model into a smaller and more efficient
 // model.
 type DistillationConfig struct {
@@ -2793,6 +6425,30 @@ type DistillationConfig struct {
 	TeacherModelConfig *TeacherModelConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *DistillationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistillationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistillationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TeacherModelConfig != nil {
+		s.WriteStruct(schemas.DistillationConfig_teacherModelConfig)
+		v.TeacherModelConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DistillationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistillationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistillationConfig_teacherModelConfig:
+			v.TeacherModelConfig = &TeacherModelConfig{}
+			return v.TeacherModelConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for the endpoint.
@@ -2812,6 +6468,14 @@ type EndpointConfigMemberSageMaker struct {
 }
 
 func (*EndpointConfigMemberSageMaker) isEndpointConfig() {}
+func (v *EndpointConfigMemberSageMaker) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointConfig_sageMaker)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EndpointConfigMemberSageMaker) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the ARN of the Amazon Bedrock model or [inference profile] specified in your evaluation
 // job. Each Amazon Bedrock model supports different inferenceParams . To learn
@@ -2841,6 +6505,42 @@ type EvaluationBedrockModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationBedrockModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationBedrockModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationBedrockModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceParams != nil {
+		s.WriteString(schemas.EvaluationBedrockModel_inferenceParams, *v.InferenceParams)
+	}
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.EvaluationBedrockModel_modelIdentifier, *v.ModelIdentifier)
+	}
+	if v.PerformanceConfig != nil {
+		s.WriteStruct(schemas.EvaluationBedrockModel_performanceConfig)
+		v.PerformanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EvaluationBedrockModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationBedrockModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationBedrockModel_inferenceParams:
+			v.InferenceParams = new(string)
+			return d.ReadString(schemas.EvaluationBedrockModel_inferenceParams, v.InferenceParams)
+		case schemas.EvaluationBedrockModel_modelIdentifier:
+			v.ModelIdentifier = new(string)
+			return d.ReadString(schemas.EvaluationBedrockModel_modelIdentifier, v.ModelIdentifier)
+		case schemas.EvaluationBedrockModel_performanceConfig:
+			v.PerformanceConfig = &PerformanceConfiguration{}
+			return v.PerformanceConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration details of either an automated or human-based evaluation job.
 //
 // The following types satisfy this interface:
@@ -2860,6 +6560,14 @@ type EvaluationConfigMemberAutomated struct {
 }
 
 func (*EvaluationConfigMemberAutomated) isEvaluationConfig() {}
+func (v *EvaluationConfigMemberAutomated) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationConfig_automated)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationConfigMemberAutomated) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the configuration details of an evaluation job that uses human workers.
 type EvaluationConfigMemberHuman struct {
@@ -2869,6 +6577,14 @@ type EvaluationConfigMemberHuman struct {
 }
 
 func (*EvaluationConfigMemberHuman) isEvaluationConfig() {}
+func (v *EvaluationConfigMemberHuman) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationConfig_human)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationConfigMemberHuman) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Used to specify the name of a built-in prompt dataset and optionally, the
 // Amazon S3 bucket where a custom prompt dataset is saved.
@@ -2889,6 +6605,31 @@ type EvaluationDataset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationDataset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationDataset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationDataset) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationDatasetLocation(s, schemas.EvaluationDataset_datasetLocation, v.DatasetLocation)
+	if v.Name != nil {
+		s.WriteString(schemas.EvaluationDataset_name, *v.Name)
+	}
+}
+func (v *EvaluationDataset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationDataset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationDataset_datasetLocation:
+			return deserializeEvaluationDatasetLocation(d, schemas.EvaluationDataset_datasetLocation, &v.DatasetLocation)
+		case schemas.EvaluationDataset_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EvaluationDataset_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // The location in Amazon S3 where your prompt dataset is stored.
 //
 // The following types satisfy this interface:
@@ -2906,6 +6647,12 @@ type EvaluationDatasetLocationMemberS3Uri struct {
 }
 
 func (*EvaluationDatasetLocationMemberS3Uri) isEvaluationDatasetLocation() {}
+func (v *EvaluationDatasetLocationMemberS3Uri) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.EvaluationDatasetLocation_s3Uri, v.Value)
+}
+func (v *EvaluationDatasetLocationMemberS3Uri) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.EvaluationDatasetLocation_s3Uri, &v.Value)
+}
 
 // Defines the prompt datasets, built-in metric names and custom metric names, and
 // the task type.
@@ -2950,6 +6697,43 @@ type EvaluationDatasetMetricConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationDatasetMetricConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationDatasetMetricConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationDatasetMetricConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dataset != nil {
+		s.WriteStruct(schemas.EvaluationDatasetMetricConfig_dataset)
+		v.Dataset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEvaluationMetricNames(s, schemas.EvaluationDatasetMetricConfig_metricNames, v.MetricNames)
+	if v.TaskType != "" {
+		s.WriteString(schemas.EvaluationDatasetMetricConfig_taskType, string(v.TaskType))
+	}
+}
+func (v *EvaluationDatasetMetricConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationDatasetMetricConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationDatasetMetricConfig_dataset:
+			v.Dataset = &EvaluationDataset{}
+			return v.Dataset.Deserialize(d)
+		case schemas.EvaluationDatasetMetricConfig_metricNames:
+			return deserializeEvaluationMetricNames(d, schemas.EvaluationDatasetMetricConfig_metricNames, &v.MetricNames)
+		case schemas.EvaluationDatasetMetricConfig_taskType:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationDatasetMetricConfig_taskType, &ev); err != nil {
+				return err
+			}
+			v.TaskType = EvaluationTaskType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration details of the inference model for an evaluation job.
 //
 // For automated model evaluation jobs, only a single model is supported.
@@ -2973,6 +6757,12 @@ type EvaluationInferenceConfigMemberModels struct {
 }
 
 func (*EvaluationInferenceConfigMemberModels) isEvaluationInferenceConfig() {}
+func (v *EvaluationInferenceConfigMemberModels) Serialize(s smithy.ShapeSerializer) {
+	serializeEvaluationModelConfigs(s, schemas.EvaluationInferenceConfig_models, v.Value)
+}
+func (v *EvaluationInferenceConfigMemberModels) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeEvaluationModelConfigs(d, schemas.EvaluationInferenceConfig_models, &v.Value)
+}
 
 // Contains the configuration details of the inference for a knowledge base
 // evaluation job, including either the retrieval only configuration or the
@@ -2984,6 +6774,12 @@ type EvaluationInferenceConfigMemberRagConfigs struct {
 }
 
 func (*EvaluationInferenceConfigMemberRagConfigs) isEvaluationInferenceConfig() {}
+func (v *EvaluationInferenceConfigMemberRagConfigs) Serialize(s smithy.ShapeSerializer) {
+	serializeRagConfigs(s, schemas.EvaluationInferenceConfig_ragConfigs, v.Value)
+}
+func (v *EvaluationInferenceConfigMemberRagConfigs) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRagConfigs(d, schemas.EvaluationInferenceConfig_ragConfigs, &v.Value)
+}
 
 // Identifies the models, Knowledge Bases, or other RAG sources evaluated in a
 // model or Knowledge Base evaluation job.
@@ -3001,6 +6797,38 @@ type EvaluationInferenceConfigSummary struct {
 	RagConfigSummary *EvaluationRagConfigSummary
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationInferenceConfigSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationInferenceConfigSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationInferenceConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelConfigSummary != nil {
+		s.WriteStruct(schemas.EvaluationInferenceConfigSummary_modelConfigSummary)
+		v.ModelConfigSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RagConfigSummary != nil {
+		s.WriteStruct(schemas.EvaluationInferenceConfigSummary_ragConfigSummary)
+		v.RagConfigSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EvaluationInferenceConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationInferenceConfigSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationInferenceConfigSummary_modelConfigSummary:
+			v.ModelConfigSummary = &EvaluationModelConfigSummary{}
+			return v.ModelConfigSummary.Deserialize(d)
+		case schemas.EvaluationInferenceConfigSummary_ragConfigSummary:
+			v.RagConfigSummary = &EvaluationRagConfigSummary{}
+			return v.RagConfigSummary.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines the models used in the model evaluation job.
@@ -3022,6 +6850,14 @@ type EvaluationModelConfigMemberBedrockModel struct {
 }
 
 func (*EvaluationModelConfigMemberBedrockModel) isEvaluationModelConfig() {}
+func (v *EvaluationModelConfigMemberBedrockModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationModelConfig_bedrockModel)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationModelConfigMemberBedrockModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines the model used to generate inference response data for a model
 // evaluation job where you provide your own inference response data.
@@ -3032,6 +6868,14 @@ type EvaluationModelConfigMemberPrecomputedInferenceSource struct {
 }
 
 func (*EvaluationModelConfigMemberPrecomputedInferenceSource) isEvaluationModelConfig() {}
+func (v *EvaluationModelConfigMemberPrecomputedInferenceSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationModelConfig_precomputedInferenceSource)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationModelConfigMemberPrecomputedInferenceSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A summary of the models used in an Amazon Bedrock model evaluation job. These
 // resources can be models in Amazon Bedrock or models outside of Amazon Bedrock
@@ -3048,6 +6892,28 @@ type EvaluationModelConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationModelConfigSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationModelConfigSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationModelConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationBedrockModelIdentifiers(s, schemas.EvaluationModelConfigSummary_bedrockModelIdentifiers, v.BedrockModelIdentifiers)
+	serializeEvaluationPrecomputedInferenceSourceIdentifiers(s, schemas.EvaluationModelConfigSummary_precomputedInferenceSourceIdentifiers, v.PrecomputedInferenceSourceIdentifiers)
+}
+func (v *EvaluationModelConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationModelConfigSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationModelConfigSummary_bedrockModelIdentifiers:
+			return deserializeEvaluationBedrockModelIdentifiers(d, schemas.EvaluationModelConfigSummary_bedrockModelIdentifiers, &v.BedrockModelIdentifiers)
+		case schemas.EvaluationModelConfigSummary_precomputedInferenceSourceIdentifiers:
+			return deserializeEvaluationPrecomputedInferenceSourceIdentifiers(d, schemas.EvaluationModelConfigSummary_precomputedInferenceSourceIdentifiers, &v.PrecomputedInferenceSourceIdentifiers)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 location where the results of your evaluation job are saved.
 type EvaluationOutputDataConfig struct {
 
@@ -3057,6 +6923,28 @@ type EvaluationOutputDataConfig struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationOutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationOutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationOutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.EvaluationOutputDataConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *EvaluationOutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationOutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationOutputDataConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.EvaluationOutputDataConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // A summary of a model used for a model evaluation job where you provide your own
@@ -3070,6 +6958,28 @@ type EvaluationPrecomputedInferenceSource struct {
 	InferenceSourceIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationPrecomputedInferenceSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationPrecomputedInferenceSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationPrecomputedInferenceSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceSourceIdentifier != nil {
+		s.WriteString(schemas.EvaluationPrecomputedInferenceSource_inferenceSourceIdentifier, *v.InferenceSourceIdentifier)
+	}
+}
+func (v *EvaluationPrecomputedInferenceSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationPrecomputedInferenceSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationPrecomputedInferenceSource_inferenceSourceIdentifier:
+			v.InferenceSourceIdentifier = new(string)
+			return d.ReadString(schemas.EvaluationPrecomputedInferenceSource_inferenceSourceIdentifier, v.InferenceSourceIdentifier)
+		}
+		return nil
+	})
 }
 
 // A summary of a RAG source used for a Knowledge Base evaluation job where you
@@ -3093,6 +7003,14 @@ type EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig s
 
 func (*EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig) isEvaluationPrecomputedRagSourceConfig() {
 }
+func (v *EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationPrecomputedRagSourceConfig_retrieveAndGenerateSourceConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationPrecomputedRagSourceConfigMemberRetrieveAndGenerateSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A summary of a RAG source used for a retrieve-only Knowledge Base evaluation
 // job where you provide your own inference response data.
@@ -3103,6 +7021,14 @@ type EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig struct {
 }
 
 func (*EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig) isEvaluationPrecomputedRagSourceConfig() {
+}
+func (v *EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationPrecomputedRagSourceConfig_retrieveSourceConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EvaluationPrecomputedRagSourceConfigMemberRetrieveSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A summary of a RAG source used for a retrieve-and-generate Knowledge Base
@@ -3119,6 +7045,28 @@ type EvaluationPrecomputedRetrieveAndGenerateSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationPrecomputedRetrieveAndGenerateSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationPrecomputedRetrieveAndGenerateSourceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationPrecomputedRetrieveAndGenerateSourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RagSourceIdentifier != nil {
+		s.WriteString(schemas.EvaluationPrecomputedRetrieveAndGenerateSourceConfig_ragSourceIdentifier, *v.RagSourceIdentifier)
+	}
+}
+func (v *EvaluationPrecomputedRetrieveAndGenerateSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationPrecomputedRetrieveAndGenerateSourceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationPrecomputedRetrieveAndGenerateSourceConfig_ragSourceIdentifier:
+			v.RagSourceIdentifier = new(string)
+			return d.ReadString(schemas.EvaluationPrecomputedRetrieveAndGenerateSourceConfig_ragSourceIdentifier, v.RagSourceIdentifier)
+		}
+		return nil
+	})
+}
+
 // A summary of a RAG source used for a retrieve-only Knowledge Base evaluation
 // job where you provide your own inference response data.
 type EvaluationPrecomputedRetrieveSourceConfig struct {
@@ -3130,6 +7078,28 @@ type EvaluationPrecomputedRetrieveSourceConfig struct {
 	RagSourceIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationPrecomputedRetrieveSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationPrecomputedRetrieveSourceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationPrecomputedRetrieveSourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RagSourceIdentifier != nil {
+		s.WriteString(schemas.EvaluationPrecomputedRetrieveSourceConfig_ragSourceIdentifier, *v.RagSourceIdentifier)
+	}
+}
+func (v *EvaluationPrecomputedRetrieveSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationPrecomputedRetrieveSourceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationPrecomputedRetrieveSourceConfig_ragSourceIdentifier:
+			v.RagSourceIdentifier = new(string)
+			return d.ReadString(schemas.EvaluationPrecomputedRetrieveSourceConfig_ragSourceIdentifier, v.RagSourceIdentifier)
+		}
+		return nil
+	})
 }
 
 // A summary of the RAG resources used in an Amazon Bedrock Knowledge Base
@@ -3148,6 +7118,28 @@ type EvaluationRagConfigSummary struct {
 	PrecomputedRagSourceIdentifiers []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationRagConfigSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationRagConfigSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationRagConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationBedrockKnowledgeBaseIdentifiers(s, schemas.EvaluationRagConfigSummary_bedrockKnowledgeBaseIdentifiers, v.BedrockKnowledgeBaseIdentifiers)
+	serializeEvaluationPrecomputedRagSourceIdentifiers(s, schemas.EvaluationRagConfigSummary_precomputedRagSourceIdentifiers, v.PrecomputedRagSourceIdentifiers)
+}
+func (v *EvaluationRagConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationRagConfigSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationRagConfigSummary_bedrockKnowledgeBaseIdentifiers:
+			return deserializeEvaluationBedrockKnowledgeBaseIdentifiers(d, schemas.EvaluationRagConfigSummary_bedrockKnowledgeBaseIdentifiers, &v.BedrockKnowledgeBaseIdentifiers)
+		case schemas.EvaluationRagConfigSummary_precomputedRagSourceIdentifiers:
+			return deserializeEvaluationPrecomputedRagSourceIdentifiers(d, schemas.EvaluationRagConfigSummary_precomputedRagSourceIdentifiers, &v.PrecomputedRagSourceIdentifiers)
+		}
+		return nil
+	})
 }
 
 // Summary information of an evaluation job.
@@ -3215,6 +7207,93 @@ type EvaluationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.EvaluationSummary_applicationType, string(v.ApplicationType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.EvaluationSummary_creationTime, *v.CreationTime)
+	}
+	serializeEvaluatorModelIdentifiers(s, schemas.EvaluationSummary_customMetricsEvaluatorModelIdentifiers, v.CustomMetricsEvaluatorModelIdentifiers)
+	serializeEvaluationTaskTypes(s, schemas.EvaluationSummary_evaluationTaskTypes, v.EvaluationTaskTypes)
+	serializeEvaluatorModelIdentifiers(s, schemas.EvaluationSummary_evaluatorModelIdentifiers, v.EvaluatorModelIdentifiers)
+	if v.InferenceConfigSummary != nil {
+		s.WriteStruct(schemas.EvaluationSummary_inferenceConfigSummary)
+		v.InferenceConfigSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.EvaluationSummary_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.EvaluationSummary_jobName, *v.JobName)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.EvaluationSummary_jobType, string(v.JobType))
+	}
+	serializeEvaluationBedrockModelIdentifiers(s, schemas.EvaluationSummary_modelIdentifiers, v.ModelIdentifiers)
+	serializeEvaluationBedrockKnowledgeBaseIdentifiers(s, schemas.EvaluationSummary_ragIdentifiers, v.RagIdentifiers)
+	if v.Status != "" {
+		s.WriteString(schemas.EvaluationSummary_status, string(v.Status))
+	}
+}
+func (v *EvaluationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationSummary_applicationType:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationSummary_applicationType, &ev); err != nil {
+				return err
+			}
+			v.ApplicationType = ApplicationType(ev)
+			return nil
+		case schemas.EvaluationSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.EvaluationSummary_creationTime, v.CreationTime)
+		case schemas.EvaluationSummary_customMetricsEvaluatorModelIdentifiers:
+			return deserializeEvaluatorModelIdentifiers(d, schemas.EvaluationSummary_customMetricsEvaluatorModelIdentifiers, &v.CustomMetricsEvaluatorModelIdentifiers)
+		case schemas.EvaluationSummary_evaluationTaskTypes:
+			return deserializeEvaluationTaskTypes(d, schemas.EvaluationSummary_evaluationTaskTypes, &v.EvaluationTaskTypes)
+		case schemas.EvaluationSummary_evaluatorModelIdentifiers:
+			return deserializeEvaluatorModelIdentifiers(d, schemas.EvaluationSummary_evaluatorModelIdentifiers, &v.EvaluatorModelIdentifiers)
+		case schemas.EvaluationSummary_inferenceConfigSummary:
+			v.InferenceConfigSummary = &EvaluationInferenceConfigSummary{}
+			return v.InferenceConfigSummary.Deserialize(d)
+		case schemas.EvaluationSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.EvaluationSummary_jobArn, v.JobArn)
+		case schemas.EvaluationSummary_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.EvaluationSummary_jobName, v.JobName)
+		case schemas.EvaluationSummary_jobType:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationSummary_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = EvaluationJobType(ev)
+			return nil
+		case schemas.EvaluationSummary_modelIdentifiers:
+			return deserializeEvaluationBedrockModelIdentifiers(d, schemas.EvaluationSummary_modelIdentifiers, &v.ModelIdentifiers)
+		case schemas.EvaluationSummary_ragIdentifiers:
+			return deserializeEvaluationBedrockKnowledgeBaseIdentifiers(d, schemas.EvaluationSummary_ragIdentifiers, &v.RagIdentifiers)
+		case schemas.EvaluationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EvaluationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the model configuration for the evaluator model. EvaluatorModelConfig
 // is required for evaluation jobs that use a knowledge base or in model evaluation
 // job that use a model as judge. This model computes all evaluation related
@@ -3237,6 +7316,12 @@ type EvaluatorModelConfigMemberBedrockEvaluatorModels struct {
 }
 
 func (*EvaluatorModelConfigMemberBedrockEvaluatorModels) isEvaluatorModelConfig() {}
+func (v *EvaluatorModelConfigMemberBedrockEvaluatorModels) Serialize(s smithy.ShapeSerializer) {
+	serializeBedrockEvaluatorModels(s, schemas.EvaluatorModelConfig_bedrockEvaluatorModels, v.Value)
+}
+func (v *EvaluatorModelConfigMemberBedrockEvaluatorModels) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeBedrockEvaluatorModels(d, schemas.EvaluatorModelConfig_bedrockEvaluatorModels, &v.Value)
+}
 
 // The unique external source of the content contained in the wrapper object.
 type ExternalSource struct {
@@ -3253,6 +7338,48 @@ type ExternalSource struct {
 	S3Location *S3ObjectDoc
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExternalSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteContent != nil {
+		s.WriteStruct(schemas.ExternalSource_byteContent)
+		v.ByteContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Location != nil {
+		s.WriteStruct(schemas.ExternalSource_s3Location)
+		v.S3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ExternalSource_sourceType, string(v.SourceType))
+	}
+}
+func (v *ExternalSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalSource_byteContent:
+			v.ByteContent = &ByteContentDoc{}
+			return v.ByteContent.Deserialize(d)
+		case schemas.ExternalSource_s3Location:
+			v.S3Location = &S3ObjectDoc{}
+			return v.S3Location.Deserialize(d)
+		case schemas.ExternalSource_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.ExternalSource_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = ExternalSourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The response generation configuration of the external source wrapper object.
@@ -3274,6 +7401,49 @@ type ExternalSourcesGenerationConfiguration struct {
 	PromptTemplate *PromptTemplate
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExternalSourcesGenerationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalSourcesGenerationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalSourcesGenerationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalModelRequestFields(s, schemas.ExternalSourcesGenerationConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.GuardrailConfiguration != nil {
+		s.WriteStruct(schemas.ExternalSourcesGenerationConfiguration_guardrailConfiguration)
+		v.GuardrailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KbInferenceConfig != nil {
+		s.WriteStruct(schemas.ExternalSourcesGenerationConfiguration_kbInferenceConfig)
+		v.KbInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PromptTemplate != nil {
+		s.WriteStruct(schemas.ExternalSourcesGenerationConfiguration_promptTemplate)
+		v.PromptTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExternalSourcesGenerationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalSourcesGenerationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalSourcesGenerationConfiguration_additionalModelRequestFields:
+			return deserializeAdditionalModelRequestFields(d, schemas.ExternalSourcesGenerationConfiguration_additionalModelRequestFields, &v.AdditionalModelRequestFields)
+		case schemas.ExternalSourcesGenerationConfiguration_guardrailConfiguration:
+			v.GuardrailConfiguration = &GuardrailConfiguration{}
+			return v.GuardrailConfiguration.Deserialize(d)
+		case schemas.ExternalSourcesGenerationConfiguration_kbInferenceConfig:
+			v.KbInferenceConfig = &KbInferenceConfig{}
+			return v.KbInferenceConfig.Deserialize(d)
+		case schemas.ExternalSourcesGenerationConfiguration_promptTemplate:
+			v.PromptTemplate = &PromptTemplate{}
+			return v.PromptTemplate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration of the external source wrapper object in the
@@ -3301,6 +7471,39 @@ type ExternalSourcesRetrieveAndGenerateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExternalSourcesRetrieveAndGenerateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalSourcesRetrieveAndGenerateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalSourcesRetrieveAndGenerateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GenerationConfiguration != nil {
+		s.WriteStruct(schemas.ExternalSourcesRetrieveAndGenerateConfiguration_generationConfiguration)
+		v.GenerationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ExternalSourcesRetrieveAndGenerateConfiguration_modelArn, *v.ModelArn)
+	}
+	serializeExternalSources(s, schemas.ExternalSourcesRetrieveAndGenerateConfiguration_sources, v.Sources)
+}
+func (v *ExternalSourcesRetrieveAndGenerateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalSourcesRetrieveAndGenerateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalSourcesRetrieveAndGenerateConfiguration_generationConfiguration:
+			v.GenerationConfiguration = &ExternalSourcesGenerationConfiguration{}
+			return v.GenerationConfiguration.Deserialize(d)
+		case schemas.ExternalSourcesRetrieveAndGenerateConfiguration_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ExternalSourcesRetrieveAndGenerateConfiguration_modelArn, v.ModelArn)
+		case schemas.ExternalSourcesRetrieveAndGenerateConfiguration_sources:
+			return deserializeExternalSources(d, schemas.ExternalSourcesRetrieveAndGenerateConfiguration_sources, &v.Sources)
+		}
+		return nil
+	})
+}
+
 // Specifies a field to be used during the reranking process in a Knowledge Base
 // vector search. This structure identifies metadata fields that should be
 // considered when reordering search results to improve relevance.
@@ -3312,6 +7515,28 @@ type FieldForReranking struct {
 	FieldName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FieldForReranking) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldForReranking)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldForReranking) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldName != nil {
+		s.WriteString(schemas.FieldForReranking_fieldName, *v.FieldName)
+	}
+}
+func (v *FieldForReranking) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldForReranking, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldForReranking_fieldName:
+			v.FieldName = new(string)
+			return d.ReadString(schemas.FieldForReranking_fieldName, v.FieldName)
+		}
+		return nil
+	})
 }
 
 // Specifies the name of the metadata attribute/field to apply filters. You must
@@ -3330,6 +7555,40 @@ type FilterAttribute struct {
 	Value document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.FilterAttribute_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteDocument(schemas.FilterAttribute_value, &smithydocument.Opaque{Value: v.Value})
+	}
+}
+func (v *FilterAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterAttribute_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.FilterAttribute_key, v.Key)
+		case schemas.FilterAttribute_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.FilterAttribute_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a foundation model.
@@ -3372,6 +7631,72 @@ type FoundationModelDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FoundationModelDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FoundationModelDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FoundationModelDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelCustomizationList(s, schemas.FoundationModelDetails_customizationsSupported, v.CustomizationsSupported)
+	serializeInferenceTypeList(s, schemas.FoundationModelDetails_inferenceTypesSupported, v.InferenceTypesSupported)
+	serializeModelModalityList(s, schemas.FoundationModelDetails_inputModalities, v.InputModalities)
+	if v.ModelArn != nil {
+		s.WriteString(schemas.FoundationModelDetails_modelArn, *v.ModelArn)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.FoundationModelDetails_modelId, *v.ModelId)
+	}
+	if v.ModelLifecycle != nil {
+		s.WriteStruct(schemas.FoundationModelDetails_modelLifecycle)
+		v.ModelLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.FoundationModelDetails_modelName, *v.ModelName)
+	}
+	serializeModelModalityList(s, schemas.FoundationModelDetails_outputModalities, v.OutputModalities)
+	if v.ProviderName != nil {
+		s.WriteString(schemas.FoundationModelDetails_providerName, *v.ProviderName)
+	}
+	if v.ResponseStreamingSupported != nil {
+		s.WriteBool(schemas.FoundationModelDetails_responseStreamingSupported, *v.ResponseStreamingSupported)
+	}
+}
+func (v *FoundationModelDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FoundationModelDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FoundationModelDetails_customizationsSupported:
+			return deserializeModelCustomizationList(d, schemas.FoundationModelDetails_customizationsSupported, &v.CustomizationsSupported)
+		case schemas.FoundationModelDetails_inferenceTypesSupported:
+			return deserializeInferenceTypeList(d, schemas.FoundationModelDetails_inferenceTypesSupported, &v.InferenceTypesSupported)
+		case schemas.FoundationModelDetails_inputModalities:
+			return deserializeModelModalityList(d, schemas.FoundationModelDetails_inputModalities, &v.InputModalities)
+		case schemas.FoundationModelDetails_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.FoundationModelDetails_modelArn, v.ModelArn)
+		case schemas.FoundationModelDetails_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.FoundationModelDetails_modelId, v.ModelId)
+		case schemas.FoundationModelDetails_modelLifecycle:
+			v.ModelLifecycle = &FoundationModelLifecycle{}
+			return v.ModelLifecycle.Deserialize(d)
+		case schemas.FoundationModelDetails_modelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.FoundationModelDetails_modelName, v.ModelName)
+		case schemas.FoundationModelDetails_outputModalities:
+			return deserializeModelModalityList(d, schemas.FoundationModelDetails_outputModalities, &v.OutputModalities)
+		case schemas.FoundationModelDetails_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.FoundationModelDetails_providerName, v.ProviderName)
+		case schemas.FoundationModelDetails_responseStreamingSupported:
+			v.ResponseStreamingSupported = new(bool)
+			return d.ReadBool(schemas.FoundationModelDetails_responseStreamingSupported, v.ResponseStreamingSupported)
+		}
+		return nil
+	})
+}
+
 // Details about whether a model version is available or deprecated.
 type FoundationModelLifecycle struct {
 
@@ -3397,6 +7722,56 @@ type FoundationModelLifecycle struct {
 	StartOfLifeTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *FoundationModelLifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FoundationModelLifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FoundationModelLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndOfLifeTime != nil {
+		s.WriteTime(schemas.FoundationModelLifecycle_endOfLifeTime, *v.EndOfLifeTime)
+	}
+	if v.LegacyTime != nil {
+		s.WriteTime(schemas.FoundationModelLifecycle_legacyTime, *v.LegacyTime)
+	}
+	if v.PublicExtendedAccessTime != nil {
+		s.WriteTime(schemas.FoundationModelLifecycle_publicExtendedAccessTime, *v.PublicExtendedAccessTime)
+	}
+	if v.StartOfLifeTime != nil {
+		s.WriteTime(schemas.FoundationModelLifecycle_startOfLifeTime, *v.StartOfLifeTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FoundationModelLifecycle_status, string(v.Status))
+	}
+}
+func (v *FoundationModelLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FoundationModelLifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FoundationModelLifecycle_endOfLifeTime:
+			v.EndOfLifeTime = new(time.Time)
+			return d.ReadTime(schemas.FoundationModelLifecycle_endOfLifeTime, v.EndOfLifeTime)
+		case schemas.FoundationModelLifecycle_legacyTime:
+			v.LegacyTime = new(time.Time)
+			return d.ReadTime(schemas.FoundationModelLifecycle_legacyTime, v.LegacyTime)
+		case schemas.FoundationModelLifecycle_publicExtendedAccessTime:
+			v.PublicExtendedAccessTime = new(time.Time)
+			return d.ReadTime(schemas.FoundationModelLifecycle_publicExtendedAccessTime, v.PublicExtendedAccessTime)
+		case schemas.FoundationModelLifecycle_startOfLifeTime:
+			v.StartOfLifeTime = new(time.Time)
+			return d.ReadTime(schemas.FoundationModelLifecycle_startOfLifeTime, v.StartOfLifeTime)
+		case schemas.FoundationModelLifecycle_status:
+			var ev string
+			if err := d.ReadString(schemas.FoundationModelLifecycle_status, &ev); err != nil {
+				return err
+			}
+			v.Status = FoundationModelLifecycleStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary information for a foundation model.
@@ -3439,6 +7814,72 @@ type FoundationModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FoundationModelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FoundationModelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FoundationModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelCustomizationList(s, schemas.FoundationModelSummary_customizationsSupported, v.CustomizationsSupported)
+	serializeInferenceTypeList(s, schemas.FoundationModelSummary_inferenceTypesSupported, v.InferenceTypesSupported)
+	serializeModelModalityList(s, schemas.FoundationModelSummary_inputModalities, v.InputModalities)
+	if v.ModelArn != nil {
+		s.WriteString(schemas.FoundationModelSummary_modelArn, *v.ModelArn)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.FoundationModelSummary_modelId, *v.ModelId)
+	}
+	if v.ModelLifecycle != nil {
+		s.WriteStruct(schemas.FoundationModelSummary_modelLifecycle)
+		v.ModelLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.FoundationModelSummary_modelName, *v.ModelName)
+	}
+	serializeModelModalityList(s, schemas.FoundationModelSummary_outputModalities, v.OutputModalities)
+	if v.ProviderName != nil {
+		s.WriteString(schemas.FoundationModelSummary_providerName, *v.ProviderName)
+	}
+	if v.ResponseStreamingSupported != nil {
+		s.WriteBool(schemas.FoundationModelSummary_responseStreamingSupported, *v.ResponseStreamingSupported)
+	}
+}
+func (v *FoundationModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FoundationModelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FoundationModelSummary_customizationsSupported:
+			return deserializeModelCustomizationList(d, schemas.FoundationModelSummary_customizationsSupported, &v.CustomizationsSupported)
+		case schemas.FoundationModelSummary_inferenceTypesSupported:
+			return deserializeInferenceTypeList(d, schemas.FoundationModelSummary_inferenceTypesSupported, &v.InferenceTypesSupported)
+		case schemas.FoundationModelSummary_inputModalities:
+			return deserializeModelModalityList(d, schemas.FoundationModelSummary_inputModalities, &v.InputModalities)
+		case schemas.FoundationModelSummary_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.FoundationModelSummary_modelArn, v.ModelArn)
+		case schemas.FoundationModelSummary_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.FoundationModelSummary_modelId, v.ModelId)
+		case schemas.FoundationModelSummary_modelLifecycle:
+			v.ModelLifecycle = &FoundationModelLifecycle{}
+			return v.ModelLifecycle.Deserialize(d)
+		case schemas.FoundationModelSummary_modelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.FoundationModelSummary_modelName, v.ModelName)
+		case schemas.FoundationModelSummary_outputModalities:
+			return deserializeModelModalityList(d, schemas.FoundationModelSummary_outputModalities, &v.OutputModalities)
+		case schemas.FoundationModelSummary_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.FoundationModelSummary_providerName, v.ProviderName)
+		case schemas.FoundationModelSummary_responseStreamingSupported:
+			v.ResponseStreamingSupported = new(bool)
+			return d.ReadBool(schemas.FoundationModelSummary_responseStreamingSupported, v.ResponseStreamingSupported)
+		}
+		return nil
+	})
+}
+
 // The configuration details for response generation based on retrieved text
 // chunks.
 type GenerationConfiguration struct {
@@ -3462,6 +7903,49 @@ type GenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalModelRequestFields(s, schemas.GenerationConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.GuardrailConfiguration != nil {
+		s.WriteStruct(schemas.GenerationConfiguration_guardrailConfiguration)
+		v.GuardrailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KbInferenceConfig != nil {
+		s.WriteStruct(schemas.GenerationConfiguration_kbInferenceConfig)
+		v.KbInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PromptTemplate != nil {
+		s.WriteStruct(schemas.GenerationConfiguration_promptTemplate)
+		v.PromptTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GenerationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationConfiguration_additionalModelRequestFields:
+			return deserializeAdditionalModelRequestFields(d, schemas.GenerationConfiguration_additionalModelRequestFields, &v.AdditionalModelRequestFields)
+		case schemas.GenerationConfiguration_guardrailConfiguration:
+			v.GuardrailConfiguration = &GuardrailConfiguration{}
+			return v.GuardrailConfiguration.Deserialize(d)
+		case schemas.GenerationConfiguration_kbInferenceConfig:
+			v.KbInferenceConfig = &KbInferenceConfig{}
+			return v.KbInferenceConfig.Deserialize(d)
+		case schemas.GenerationConfiguration_promptTemplate:
+			v.PromptTemplate = &PromptTemplate{}
+			return v.PromptTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Configuration for the grader used in reinforcement fine-tuning to evaluate
 //
 // model responses and provide reward signals.
@@ -3483,6 +7967,14 @@ type GraderConfigMemberLambdaGrader struct {
 }
 
 func (*GraderConfigMemberLambdaGrader) isGraderConfig() {}
+func (v *GraderConfigMemberLambdaGrader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraderConfig_lambdaGrader)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GraderConfigMemberLambdaGrader) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Represents the configuration of Automated Reasoning policies within a Amazon
 // Bedrock Guardrail, including the policies to apply and confidence thresholds.
@@ -3499,6 +7991,31 @@ type GuardrailAutomatedReasoningPolicy struct {
 	ConfidenceThreshold *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailAutomatedReasoningPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailAutomatedReasoningPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailAutomatedReasoningPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.GuardrailAutomatedReasoningPolicy_confidenceThreshold, *v.ConfidenceThreshold)
+	}
+	serializeAutomatedReasoningPolicyArnList(s, schemas.GuardrailAutomatedReasoningPolicy_policies, v.Policies)
+}
+func (v *GuardrailAutomatedReasoningPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailAutomatedReasoningPolicy_confidenceThreshold:
+			v.ConfidenceThreshold = new(float64)
+			return d.ReadFloat64(schemas.GuardrailAutomatedReasoningPolicy_confidenceThreshold, v.ConfidenceThreshold)
+		case schemas.GuardrailAutomatedReasoningPolicy_policies:
+			return deserializeAutomatedReasoningPolicyArnList(d, schemas.GuardrailAutomatedReasoningPolicy_policies, &v.Policies)
+		}
+		return nil
+	})
 }
 
 // Configuration settings for integrating Automated Reasoning policies with Amazon
@@ -3518,6 +8035,31 @@ type GuardrailAutomatedReasoningPolicyConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailAutomatedReasoningPolicyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailAutomatedReasoningPolicyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailAutomatedReasoningPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.GuardrailAutomatedReasoningPolicyConfig_confidenceThreshold, *v.ConfidenceThreshold)
+	}
+	serializeAutomatedReasoningPolicyArnList(s, schemas.GuardrailAutomatedReasoningPolicyConfig_policies, v.Policies)
+}
+func (v *GuardrailAutomatedReasoningPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningPolicyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailAutomatedReasoningPolicyConfig_confidenceThreshold:
+			v.ConfidenceThreshold = new(float64)
+			return d.ReadFloat64(schemas.GuardrailAutomatedReasoningPolicyConfig_confidenceThreshold, v.ConfidenceThreshold)
+		case schemas.GuardrailAutomatedReasoningPolicyConfig_policies:
+			return deserializeAutomatedReasoningPolicyArnList(d, schemas.GuardrailAutomatedReasoningPolicyConfig_policies, &v.Policies)
+		}
+		return nil
+	})
+}
+
 // The configuration details for the guardrail.
 type GuardrailConfiguration struct {
 
@@ -3532,6 +8074,34 @@ type GuardrailConfiguration struct {
 	GuardrailVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailId != nil {
+		s.WriteString(schemas.GuardrailConfiguration_guardrailId, *v.GuardrailId)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.GuardrailConfiguration_guardrailVersion, *v.GuardrailVersion)
+	}
+}
+func (v *GuardrailConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailConfiguration_guardrailId:
+			v.GuardrailId = new(string)
+			return d.ReadString(schemas.GuardrailConfiguration_guardrailId, v.GuardrailId)
+		case schemas.GuardrailConfiguration_guardrailVersion:
+			v.GuardrailVersion = new(string)
+			return d.ReadString(schemas.GuardrailConfiguration_guardrailVersion, v.GuardrailVersion)
+		}
+		return nil
+	})
 }
 
 // Contains filter strengths for harmful content. Guardrails support the following
@@ -3629,6 +8199,90 @@ type GuardrailContentFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContentFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContentFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailContentFilter_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailContentFilter_inputEnabled, *v.InputEnabled)
+	}
+	serializeGuardrailModalities(s, schemas.GuardrailContentFilter_inputModalities, v.InputModalities)
+	if v.InputStrength != "" {
+		s.WriteString(schemas.GuardrailContentFilter_inputStrength, string(v.InputStrength))
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailContentFilter_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailContentFilter_outputEnabled, *v.OutputEnabled)
+	}
+	serializeGuardrailModalities(s, schemas.GuardrailContentFilter_outputModalities, v.OutputModalities)
+	if v.OutputStrength != "" {
+		s.WriteString(schemas.GuardrailContentFilter_outputStrength, string(v.OutputStrength))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailContentFilter_type, string(v.Type))
+	}
+}
+func (v *GuardrailContentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContentFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContentFilter_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilter_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailContentFilterAction(ev)
+			return nil
+		case schemas.GuardrailContentFilter_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailContentFilter_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailContentFilter_inputModalities:
+			return deserializeGuardrailModalities(d, schemas.GuardrailContentFilter_inputModalities, &v.InputModalities)
+		case schemas.GuardrailContentFilter_inputStrength:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilter_inputStrength, &ev); err != nil {
+				return err
+			}
+			v.InputStrength = GuardrailFilterStrength(ev)
+			return nil
+		case schemas.GuardrailContentFilter_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilter_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailContentFilterAction(ev)
+			return nil
+		case schemas.GuardrailContentFilter_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailContentFilter_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailContentFilter_outputModalities:
+			return deserializeGuardrailModalities(d, schemas.GuardrailContentFilter_outputModalities, &v.OutputModalities)
+		case schemas.GuardrailContentFilter_outputStrength:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilter_outputStrength, &ev); err != nil {
+				return err
+			}
+			v.OutputStrength = GuardrailFilterStrength(ev)
+			return nil
+		case schemas.GuardrailContentFilter_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailContentFilterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains filter strengths for harmful content. Guardrails support the following
 // content filters to detect and filter harmful user inputs and FM-generated
 // outputs.
@@ -3719,6 +8373,90 @@ type GuardrailContentFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContentFilterConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContentFilterConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContentFilterConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailContentFilterConfig_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailContentFilterConfig_inputEnabled, *v.InputEnabled)
+	}
+	serializeGuardrailModalities(s, schemas.GuardrailContentFilterConfig_inputModalities, v.InputModalities)
+	if v.InputStrength != "" {
+		s.WriteString(schemas.GuardrailContentFilterConfig_inputStrength, string(v.InputStrength))
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailContentFilterConfig_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailContentFilterConfig_outputEnabled, *v.OutputEnabled)
+	}
+	serializeGuardrailModalities(s, schemas.GuardrailContentFilterConfig_outputModalities, v.OutputModalities)
+	if v.OutputStrength != "" {
+		s.WriteString(schemas.GuardrailContentFilterConfig_outputStrength, string(v.OutputStrength))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailContentFilterConfig_type, string(v.Type))
+	}
+}
+func (v *GuardrailContentFilterConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContentFilterConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContentFilterConfig_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilterConfig_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailContentFilterAction(ev)
+			return nil
+		case schemas.GuardrailContentFilterConfig_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailContentFilterConfig_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailContentFilterConfig_inputModalities:
+			return deserializeGuardrailModalities(d, schemas.GuardrailContentFilterConfig_inputModalities, &v.InputModalities)
+		case schemas.GuardrailContentFilterConfig_inputStrength:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilterConfig_inputStrength, &ev); err != nil {
+				return err
+			}
+			v.InputStrength = GuardrailFilterStrength(ev)
+			return nil
+		case schemas.GuardrailContentFilterConfig_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilterConfig_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailContentFilterAction(ev)
+			return nil
+		case schemas.GuardrailContentFilterConfig_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailContentFilterConfig_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailContentFilterConfig_outputModalities:
+			return deserializeGuardrailModalities(d, schemas.GuardrailContentFilterConfig_outputModalities, &v.OutputModalities)
+		case schemas.GuardrailContentFilterConfig_outputStrength:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilterConfig_outputStrength, &ev); err != nil {
+				return err
+			}
+			v.OutputStrength = GuardrailFilterStrength(ev)
+			return nil
+		case schemas.GuardrailContentFilterConfig_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFilterConfig_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailContentFilterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The tier that your guardrail uses for content filters.
 type GuardrailContentFiltersTier struct {
 
@@ -3737,6 +8475,32 @@ type GuardrailContentFiltersTier struct {
 	TierName GuardrailContentFiltersTierName
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailContentFiltersTier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContentFiltersTier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContentFiltersTier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierName != "" {
+		s.WriteString(schemas.GuardrailContentFiltersTier_tierName, string(v.TierName))
+	}
+}
+func (v *GuardrailContentFiltersTier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContentFiltersTier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContentFiltersTier_tierName:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFiltersTier_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = GuardrailContentFiltersTierName(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The tier that your guardrail uses for content filters. Consider using a tier
@@ -3761,6 +8525,32 @@ type GuardrailContentFiltersTierConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContentFiltersTierConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContentFiltersTierConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContentFiltersTierConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierName != "" {
+		s.WriteString(schemas.GuardrailContentFiltersTierConfig_tierName, string(v.TierName))
+	}
+}
+func (v *GuardrailContentFiltersTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContentFiltersTierConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContentFiltersTierConfig_tierName:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContentFiltersTierConfig_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = GuardrailContentFiltersTierName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about how to handle harmful content.
 //
 // This data type is used in the following API operations:
@@ -3780,6 +8570,33 @@ type GuardrailContentPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContentPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContentPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContentPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailContentFilters(s, schemas.GuardrailContentPolicy_filters, v.Filters)
+	if v.Tier != nil {
+		s.WriteStruct(schemas.GuardrailContentPolicy_tier)
+		v.Tier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GuardrailContentPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContentPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContentPolicy_filters:
+			return deserializeGuardrailContentFilters(d, schemas.GuardrailContentPolicy_filters, &v.Filters)
+		case schemas.GuardrailContentPolicy_tier:
+			v.Tier = &GuardrailContentFiltersTier{}
+			return v.Tier.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details about how to handle harmful content.
 type GuardrailContentPolicyConfig struct {
 
@@ -3793,6 +8610,33 @@ type GuardrailContentPolicyConfig struct {
 	TierConfig *GuardrailContentFiltersTierConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailContentPolicyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContentPolicyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContentPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailContentFiltersConfig(s, schemas.GuardrailContentPolicyConfig_filtersConfig, v.FiltersConfig)
+	if v.TierConfig != nil {
+		s.WriteStruct(schemas.GuardrailContentPolicyConfig_tierConfig)
+		v.TierConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GuardrailContentPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContentPolicyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContentPolicyConfig_filtersConfig:
+			return deserializeGuardrailContentFiltersConfig(d, schemas.GuardrailContentPolicyConfig_filtersConfig, &v.FiltersConfig)
+		case schemas.GuardrailContentPolicyConfig_tierConfig:
+			v.TierConfig = &GuardrailContentFiltersTierConfig{}
+			return v.TierConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The details for the guardrails contextual grounding filter.
@@ -3824,6 +8668,54 @@ type GuardrailContextualGroundingFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContextualGroundingFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContextualGroundingFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContextualGroundingFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GuardrailContextualGroundingFilter_action, string(v.Action))
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.GuardrailContextualGroundingFilter_enabled, *v.Enabled)
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.GuardrailContextualGroundingFilter_threshold, *v.Threshold)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailContextualGroundingFilter_type, string(v.Type))
+	}
+}
+func (v *GuardrailContextualGroundingFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContextualGroundingFilter_action:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContextualGroundingFilter_action, &ev); err != nil {
+				return err
+			}
+			v.Action = GuardrailContextualGroundingAction(ev)
+			return nil
+		case schemas.GuardrailContextualGroundingFilter_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.GuardrailContextualGroundingFilter_enabled, v.Enabled)
+		case schemas.GuardrailContextualGroundingFilter_threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.GuardrailContextualGroundingFilter_threshold, v.Threshold)
+		case schemas.GuardrailContextualGroundingFilter_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContextualGroundingFilter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailContextualGroundingFilterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The filter configuration details for the guardrails contextual grounding filter.
 type GuardrailContextualGroundingFilterConfig struct {
 
@@ -3853,6 +8745,54 @@ type GuardrailContextualGroundingFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContextualGroundingFilterConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContextualGroundingFilterConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContextualGroundingFilterConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GuardrailContextualGroundingFilterConfig_action, string(v.Action))
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.GuardrailContextualGroundingFilterConfig_enabled, *v.Enabled)
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.GuardrailContextualGroundingFilterConfig_threshold, *v.Threshold)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailContextualGroundingFilterConfig_type, string(v.Type))
+	}
+}
+func (v *GuardrailContextualGroundingFilterConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingFilterConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContextualGroundingFilterConfig_action:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContextualGroundingFilterConfig_action, &ev); err != nil {
+				return err
+			}
+			v.Action = GuardrailContextualGroundingAction(ev)
+			return nil
+		case schemas.GuardrailContextualGroundingFilterConfig_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.GuardrailContextualGroundingFilterConfig_enabled, v.Enabled)
+		case schemas.GuardrailContextualGroundingFilterConfig_threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.GuardrailContextualGroundingFilterConfig_threshold, v.Threshold)
+		case schemas.GuardrailContextualGroundingFilterConfig_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailContextualGroundingFilterConfig_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailContextualGroundingFilterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The details for the guardrails contextual grounding policy.
 type GuardrailContextualGroundingPolicy struct {
 
@@ -3864,6 +8804,25 @@ type GuardrailContextualGroundingPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailContextualGroundingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContextualGroundingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContextualGroundingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailContextualGroundingFilters(s, schemas.GuardrailContextualGroundingPolicy_filters, v.Filters)
+}
+func (v *GuardrailContextualGroundingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContextualGroundingPolicy_filters:
+			return deserializeGuardrailContextualGroundingFilters(d, schemas.GuardrailContextualGroundingPolicy_filters, &v.Filters)
+		}
+		return nil
+	})
+}
+
 // The policy configuration details for the guardrails contextual grounding policy.
 type GuardrailContextualGroundingPolicyConfig struct {
 
@@ -3873,6 +8832,25 @@ type GuardrailContextualGroundingPolicyConfig struct {
 	FiltersConfig []GuardrailContextualGroundingFilterConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailContextualGroundingPolicyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailContextualGroundingPolicyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailContextualGroundingPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailContextualGroundingFiltersConfig(s, schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig, v.FiltersConfig)
+}
+func (v *GuardrailContextualGroundingPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingPolicyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig:
+			return deserializeGuardrailContextualGroundingFiltersConfig(d, schemas.GuardrailContextualGroundingPolicyConfig_filtersConfig, &v.FiltersConfig)
+		}
+		return nil
+	})
 }
 
 // The system-defined guardrail profile that you're using with your guardrail.
@@ -3898,6 +8876,28 @@ type GuardrailCrossRegionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailCrossRegionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailCrossRegionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailCrossRegionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailProfileIdentifier != nil {
+		s.WriteString(schemas.GuardrailCrossRegionConfig_guardrailProfileIdentifier, *v.GuardrailProfileIdentifier)
+	}
+}
+func (v *GuardrailCrossRegionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailCrossRegionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailCrossRegionConfig_guardrailProfileIdentifier:
+			v.GuardrailProfileIdentifier = new(string)
+			return d.ReadString(schemas.GuardrailCrossRegionConfig_guardrailProfileIdentifier, v.GuardrailProfileIdentifier)
+		}
+		return nil
+	})
+}
+
 // Contains details about the system-defined guardrail profile that you're using
 // with your guardrail for cross-Region inference.
 //
@@ -3918,6 +8918,34 @@ type GuardrailCrossRegionDetails struct {
 	GuardrailProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailCrossRegionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailCrossRegionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailCrossRegionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GuardrailProfileArn != nil {
+		s.WriteString(schemas.GuardrailCrossRegionDetails_guardrailProfileArn, *v.GuardrailProfileArn)
+	}
+	if v.GuardrailProfileId != nil {
+		s.WriteString(schemas.GuardrailCrossRegionDetails_guardrailProfileId, *v.GuardrailProfileId)
+	}
+}
+func (v *GuardrailCrossRegionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailCrossRegionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailCrossRegionDetails_guardrailProfileArn:
+			v.GuardrailProfileArn = new(string)
+			return d.ReadString(schemas.GuardrailCrossRegionDetails_guardrailProfileArn, v.GuardrailProfileArn)
+		case schemas.GuardrailCrossRegionDetails_guardrailProfileId:
+			v.GuardrailProfileId = new(string)
+			return d.ReadString(schemas.GuardrailCrossRegionDetails_guardrailProfileId, v.GuardrailProfileId)
+		}
+		return nil
+	})
 }
 
 // The managed word list that was configured for the guardrail. (This is a list of
@@ -3959,6 +8987,64 @@ type GuardrailManagedWords struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailManagedWords) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailManagedWords)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailManagedWords) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailManagedWords_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailManagedWords_inputEnabled, *v.InputEnabled)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailManagedWords_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailManagedWords_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailManagedWords_type, string(v.Type))
+	}
+}
+func (v *GuardrailManagedWords) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailManagedWords, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailManagedWords_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailManagedWords_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailManagedWords_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailManagedWords_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailManagedWords_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailManagedWords_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailManagedWords_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailManagedWords_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailManagedWords_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailManagedWords_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailManagedWordsType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The managed word list to configure for the guardrail.
 type GuardrailManagedWordsConfig struct {
 
@@ -3994,6 +9080,64 @@ type GuardrailManagedWordsConfig struct {
 	OutputEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailManagedWordsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailManagedWordsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailManagedWordsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailManagedWordsConfig_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailManagedWordsConfig_inputEnabled, *v.InputEnabled)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailManagedWordsConfig_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailManagedWordsConfig_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailManagedWordsConfig_type, string(v.Type))
+	}
+}
+func (v *GuardrailManagedWordsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailManagedWordsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailManagedWordsConfig_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailManagedWordsConfig_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailManagedWordsConfig_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailManagedWordsConfig_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailManagedWordsConfig_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailManagedWordsConfig_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailManagedWordsConfig_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailManagedWordsConfig_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailManagedWordsConfig_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailManagedWordsConfig_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailManagedWordsType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The PII entity configured for the guardrail.
@@ -4040,6 +9184,74 @@ type GuardrailPiiEntity struct {
 	OutputEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailPiiEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailPiiEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailPiiEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GuardrailPiiEntity_action, string(v.Action))
+	}
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailPiiEntity_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailPiiEntity_inputEnabled, *v.InputEnabled)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailPiiEntity_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailPiiEntity_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailPiiEntity_type, string(v.Type))
+	}
+}
+func (v *GuardrailPiiEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailPiiEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailPiiEntity_action:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntity_action, &ev); err != nil {
+				return err
+			}
+			v.Action = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailPiiEntity_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntity_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailPiiEntity_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailPiiEntity_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailPiiEntity_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntity_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailPiiEntity_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailPiiEntity_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailPiiEntity_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntity_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailPiiEntityType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The PII entity to configure for the guardrail.
@@ -4287,6 +9499,74 @@ type GuardrailPiiEntityConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailPiiEntityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailPiiEntityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailPiiEntityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GuardrailPiiEntityConfig_action, string(v.Action))
+	}
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailPiiEntityConfig_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailPiiEntityConfig_inputEnabled, *v.InputEnabled)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailPiiEntityConfig_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailPiiEntityConfig_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailPiiEntityConfig_type, string(v.Type))
+	}
+}
+func (v *GuardrailPiiEntityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailPiiEntityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailPiiEntityConfig_action:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntityConfig_action, &ev); err != nil {
+				return err
+			}
+			v.Action = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailPiiEntityConfig_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntityConfig_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailPiiEntityConfig_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailPiiEntityConfig_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailPiiEntityConfig_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntityConfig_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailPiiEntityConfig_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailPiiEntityConfig_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailPiiEntityConfig_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailPiiEntityConfig_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailPiiEntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The regular expression configured for the guardrail.
 type GuardrailRegex struct {
 
@@ -4335,6 +9615,82 @@ type GuardrailRegex struct {
 	OutputEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailRegex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailRegex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailRegex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GuardrailRegex_action, string(v.Action))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GuardrailRegex_description, *v.Description)
+	}
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailRegex_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailRegex_inputEnabled, *v.InputEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GuardrailRegex_name, *v.Name)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailRegex_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailRegex_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.GuardrailRegex_pattern, *v.Pattern)
+	}
+}
+func (v *GuardrailRegex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailRegex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailRegex_action:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailRegex_action, &ev); err != nil {
+				return err
+			}
+			v.Action = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailRegex_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GuardrailRegex_description, v.Description)
+		case schemas.GuardrailRegex_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailRegex_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailRegex_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailRegex_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailRegex_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GuardrailRegex_name, v.Name)
+		case schemas.GuardrailRegex_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailRegex_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailRegex_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailRegex_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailRegex_pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.GuardrailRegex_pattern, v.Pattern)
+		}
+		return nil
+	})
 }
 
 // The regular expression to configure for the guardrail.
@@ -4387,6 +9743,82 @@ type GuardrailRegexConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailRegexConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailRegexConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailRegexConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GuardrailRegexConfig_action, string(v.Action))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GuardrailRegexConfig_description, *v.Description)
+	}
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailRegexConfig_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailRegexConfig_inputEnabled, *v.InputEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GuardrailRegexConfig_name, *v.Name)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailRegexConfig_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailRegexConfig_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.GuardrailRegexConfig_pattern, *v.Pattern)
+	}
+}
+func (v *GuardrailRegexConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailRegexConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailRegexConfig_action:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailRegexConfig_action, &ev); err != nil {
+				return err
+			}
+			v.Action = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailRegexConfig_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GuardrailRegexConfig_description, v.Description)
+		case schemas.GuardrailRegexConfig_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailRegexConfig_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailRegexConfig_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailRegexConfig_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailRegexConfig_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GuardrailRegexConfig_name, v.Name)
+		case schemas.GuardrailRegexConfig_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailRegexConfig_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailSensitiveInformationAction(ev)
+			return nil
+		case schemas.GuardrailRegexConfig_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailRegexConfig_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailRegexConfig_pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.GuardrailRegexConfig_pattern, v.Pattern)
+		}
+		return nil
+	})
+}
+
 // Contains details about PII entities and regular expressions configured for the
 // guardrail.
 type GuardrailSensitiveInformationPolicy struct {
@@ -4400,6 +9832,28 @@ type GuardrailSensitiveInformationPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailSensitiveInformationPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailSensitiveInformationPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailSensitiveInformationPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailPiiEntities(s, schemas.GuardrailSensitiveInformationPolicy_piiEntities, v.PiiEntities)
+	serializeGuardrailRegexes(s, schemas.GuardrailSensitiveInformationPolicy_regexes, v.Regexes)
+}
+func (v *GuardrailSensitiveInformationPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailSensitiveInformationPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailSensitiveInformationPolicy_piiEntities:
+			return deserializeGuardrailPiiEntities(d, schemas.GuardrailSensitiveInformationPolicy_piiEntities, &v.PiiEntities)
+		case schemas.GuardrailSensitiveInformationPolicy_regexes:
+			return deserializeGuardrailRegexes(d, schemas.GuardrailSensitiveInformationPolicy_regexes, &v.Regexes)
+		}
+		return nil
+	})
+}
+
 // Contains details about PII entities and regular expressions to configure for
 // the guardrail.
 type GuardrailSensitiveInformationPolicyConfig struct {
@@ -4411,6 +9865,28 @@ type GuardrailSensitiveInformationPolicyConfig struct {
 	RegexesConfig []GuardrailRegexConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailSensitiveInformationPolicyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailSensitiveInformationPolicyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailSensitiveInformationPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailPiiEntitiesConfig(s, schemas.GuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig, v.PiiEntitiesConfig)
+	serializeGuardrailRegexesConfig(s, schemas.GuardrailSensitiveInformationPolicyConfig_regexesConfig, v.RegexesConfig)
+}
+func (v *GuardrailSensitiveInformationPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailSensitiveInformationPolicyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig:
+			return deserializeGuardrailPiiEntitiesConfig(d, schemas.GuardrailSensitiveInformationPolicyConfig_piiEntitiesConfig, &v.PiiEntitiesConfig)
+		case schemas.GuardrailSensitiveInformationPolicyConfig_regexesConfig:
+			return deserializeGuardrailRegexesConfig(d, schemas.GuardrailSensitiveInformationPolicyConfig_regexesConfig, &v.RegexesConfig)
+		}
+		return nil
+	})
 }
 
 // Contains details about a guardrail.
@@ -4465,6 +9941,82 @@ type GuardrailSummary struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GuardrailSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GuardrailSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CrossRegionDetails != nil {
+		s.WriteStruct(schemas.GuardrailSummary_crossRegionDetails)
+		v.CrossRegionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GuardrailSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GuardrailSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GuardrailSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GuardrailSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GuardrailSummary_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GuardrailSummary_version, *v.Version)
+	}
+}
+func (v *GuardrailSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GuardrailSummary_arn, v.Arn)
+		case schemas.GuardrailSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GuardrailSummary_createdAt, v.CreatedAt)
+		case schemas.GuardrailSummary_crossRegionDetails:
+			v.CrossRegionDetails = &GuardrailCrossRegionDetails{}
+			return v.CrossRegionDetails.Deserialize(d)
+		case schemas.GuardrailSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GuardrailSummary_description, v.Description)
+		case schemas.GuardrailSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GuardrailSummary_id, v.Id)
+		case schemas.GuardrailSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GuardrailSummary_name, v.Name)
+		case schemas.GuardrailSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = GuardrailStatus(ev)
+			return nil
+		case schemas.GuardrailSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GuardrailSummary_updatedAt, v.UpdatedAt)
+		case schemas.GuardrailSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GuardrailSummary_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Details about topics for the guardrail to identify and deny.
@@ -4522,6 +10074,79 @@ type GuardrailTopic struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailTopic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailTopic)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailTopic) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.GuardrailTopic_definition, *v.Definition)
+	}
+	serializeGuardrailTopicExamples(s, schemas.GuardrailTopic_examples, v.Examples)
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailTopic_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailTopic_inputEnabled, *v.InputEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GuardrailTopic_name, *v.Name)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailTopic_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailTopic_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailTopic_type, string(v.Type))
+	}
+}
+func (v *GuardrailTopic) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailTopic, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailTopic_definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.GuardrailTopic_definition, v.Definition)
+		case schemas.GuardrailTopic_examples:
+			return deserializeGuardrailTopicExamples(d, schemas.GuardrailTopic_examples, &v.Examples)
+		case schemas.GuardrailTopic_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopic_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailTopicAction(ev)
+			return nil
+		case schemas.GuardrailTopic_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailTopic_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailTopic_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GuardrailTopic_name, v.Name)
+		case schemas.GuardrailTopic_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopic_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailTopicAction(ev)
+			return nil
+		case schemas.GuardrailTopic_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailTopic_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailTopic_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopic_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailTopicType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about topics for the guardrail to identify and deny.
 type GuardrailTopicConfig struct {
 
@@ -4573,6 +10198,79 @@ type GuardrailTopicConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailTopicConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailTopicConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailTopicConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.GuardrailTopicConfig_definition, *v.Definition)
+	}
+	serializeGuardrailTopicExamples(s, schemas.GuardrailTopicConfig_examples, v.Examples)
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailTopicConfig_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailTopicConfig_inputEnabled, *v.InputEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GuardrailTopicConfig_name, *v.Name)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailTopicConfig_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailTopicConfig_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GuardrailTopicConfig_type, string(v.Type))
+	}
+}
+func (v *GuardrailTopicConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailTopicConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailTopicConfig_definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.GuardrailTopicConfig_definition, v.Definition)
+		case schemas.GuardrailTopicConfig_examples:
+			return deserializeGuardrailTopicExamples(d, schemas.GuardrailTopicConfig_examples, &v.Examples)
+		case schemas.GuardrailTopicConfig_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopicConfig_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailTopicAction(ev)
+			return nil
+		case schemas.GuardrailTopicConfig_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailTopicConfig_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailTopicConfig_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GuardrailTopicConfig_name, v.Name)
+		case schemas.GuardrailTopicConfig_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopicConfig_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailTopicAction(ev)
+			return nil
+		case schemas.GuardrailTopicConfig_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailTopicConfig_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailTopicConfig_type:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopicConfig_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GuardrailTopicType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about topics that the guardrail should identify and deny.
 //
 // This data type is used in the following API operations:
@@ -4593,6 +10291,33 @@ type GuardrailTopicPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailTopicPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailTopicPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailTopicPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tier != nil {
+		s.WriteStruct(schemas.GuardrailTopicPolicy_tier)
+		v.Tier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGuardrailTopics(s, schemas.GuardrailTopicPolicy_topics, v.Topics)
+}
+func (v *GuardrailTopicPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailTopicPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailTopicPolicy_tier:
+			v.Tier = &GuardrailTopicsTier{}
+			return v.Tier.Deserialize(d)
+		case schemas.GuardrailTopicPolicy_topics:
+			return deserializeGuardrailTopics(d, schemas.GuardrailTopicPolicy_topics, &v.Topics)
+		}
+		return nil
+	})
+}
+
 // Contains details about topics that the guardrail should identify and deny.
 type GuardrailTopicPolicyConfig struct {
 
@@ -4605,6 +10330,33 @@ type GuardrailTopicPolicyConfig struct {
 	TierConfig *GuardrailTopicsTierConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailTopicPolicyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailTopicPolicyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailTopicPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierConfig != nil {
+		s.WriteStruct(schemas.GuardrailTopicPolicyConfig_tierConfig)
+		v.TierConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGuardrailTopicsConfig(s, schemas.GuardrailTopicPolicyConfig_topicsConfig, v.TopicsConfig)
+}
+func (v *GuardrailTopicPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailTopicPolicyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailTopicPolicyConfig_tierConfig:
+			v.TierConfig = &GuardrailTopicsTierConfig{}
+			return v.TierConfig.Deserialize(d)
+		case schemas.GuardrailTopicPolicyConfig_topicsConfig:
+			return deserializeGuardrailTopicsConfig(d, schemas.GuardrailTopicPolicyConfig_topicsConfig, &v.TopicsConfig)
+		}
+		return nil
+	})
 }
 
 // The tier that your guardrail uses for denied topic filters.
@@ -4628,6 +10380,32 @@ type GuardrailTopicsTier struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailTopicsTier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailTopicsTier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailTopicsTier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierName != "" {
+		s.WriteString(schemas.GuardrailTopicsTier_tierName, string(v.TierName))
+	}
+}
+func (v *GuardrailTopicsTier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailTopicsTier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailTopicsTier_tierName:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopicsTier_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = GuardrailTopicsTierName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The tier that your guardrail uses for denied topic filters. Consider using a
 // tier that balances performance, accuracy, and compatibility with your existing
 // generative AI workflows.
@@ -4649,6 +10427,32 @@ type GuardrailTopicsTierConfig struct {
 	TierName GuardrailTopicsTierName
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailTopicsTierConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailTopicsTierConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailTopicsTierConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TierName != "" {
+		s.WriteString(schemas.GuardrailTopicsTierConfig_tierName, string(v.TierName))
+	}
+}
+func (v *GuardrailTopicsTierConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailTopicsTierConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailTopicsTierConfig_tierName:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailTopicsTierConfig_tierName, &ev); err != nil {
+				return err
+			}
+			v.TierName = GuardrailTopicsTierName(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A word configured for the guardrail.
@@ -4688,6 +10492,60 @@ type GuardrailWord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailWord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailWord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailWord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailWord_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailWord_inputEnabled, *v.InputEnabled)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailWord_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailWord_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.GuardrailWord_text, *v.Text)
+	}
+}
+func (v *GuardrailWord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailWord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailWord_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailWord_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailWord_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailWord_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailWord_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailWord_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailWord_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailWord_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailWord_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.GuardrailWord_text, v.Text)
+		}
+		return nil
+	})
+}
+
 // A word to configure for the guardrail.
 type GuardrailWordConfig struct {
 
@@ -4725,6 +10583,60 @@ type GuardrailWordConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailWordConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailWordConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailWordConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputAction != "" {
+		s.WriteString(schemas.GuardrailWordConfig_inputAction, string(v.InputAction))
+	}
+	if v.InputEnabled != nil {
+		s.WriteBool(schemas.GuardrailWordConfig_inputEnabled, *v.InputEnabled)
+	}
+	if v.OutputAction != "" {
+		s.WriteString(schemas.GuardrailWordConfig_outputAction, string(v.OutputAction))
+	}
+	if v.OutputEnabled != nil {
+		s.WriteBool(schemas.GuardrailWordConfig_outputEnabled, *v.OutputEnabled)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.GuardrailWordConfig_text, *v.Text)
+	}
+}
+func (v *GuardrailWordConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailWordConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailWordConfig_inputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailWordConfig_inputAction, &ev); err != nil {
+				return err
+			}
+			v.InputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailWordConfig_inputEnabled:
+			v.InputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailWordConfig_inputEnabled, v.InputEnabled)
+		case schemas.GuardrailWordConfig_outputAction:
+			var ev string
+			if err := d.ReadString(schemas.GuardrailWordConfig_outputAction, &ev); err != nil {
+				return err
+			}
+			v.OutputAction = GuardrailWordAction(ev)
+			return nil
+		case schemas.GuardrailWordConfig_outputEnabled:
+			v.OutputEnabled = new(bool)
+			return d.ReadBool(schemas.GuardrailWordConfig_outputEnabled, v.OutputEnabled)
+		case schemas.GuardrailWordConfig_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.GuardrailWordConfig_text, v.Text)
+		}
+		return nil
+	})
+}
+
 // Contains details about the word policy configured for the guardrail.
 type GuardrailWordPolicy struct {
 
@@ -4737,6 +10649,28 @@ type GuardrailWordPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GuardrailWordPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailWordPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailWordPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailManagedWordLists(s, schemas.GuardrailWordPolicy_managedWordLists, v.ManagedWordLists)
+	serializeGuardrailWords(s, schemas.GuardrailWordPolicy_words, v.Words)
+}
+func (v *GuardrailWordPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailWordPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailWordPolicy_managedWordLists:
+			return deserializeGuardrailManagedWordLists(d, schemas.GuardrailWordPolicy_managedWordLists, &v.ManagedWordLists)
+		case schemas.GuardrailWordPolicy_words:
+			return deserializeGuardrailWords(d, schemas.GuardrailWordPolicy_words, &v.Words)
+		}
+		return nil
+	})
+}
+
 // Contains details about the word policy to configured for the guardrail.
 type GuardrailWordPolicyConfig struct {
 
@@ -4747,6 +10681,28 @@ type GuardrailWordPolicyConfig struct {
 	WordsConfig []GuardrailWordConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *GuardrailWordPolicyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GuardrailWordPolicyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GuardrailWordPolicyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGuardrailManagedWordListsConfig(s, schemas.GuardrailWordPolicyConfig_managedWordListsConfig, v.ManagedWordListsConfig)
+	serializeGuardrailWordsConfig(s, schemas.GuardrailWordPolicyConfig_wordsConfig, v.WordsConfig)
+}
+func (v *GuardrailWordPolicyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GuardrailWordPolicyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GuardrailWordPolicyConfig_managedWordListsConfig:
+			return deserializeGuardrailManagedWordListsConfig(d, schemas.GuardrailWordPolicyConfig_managedWordListsConfig, &v.ManagedWordListsConfig)
+		case schemas.GuardrailWordPolicyConfig_wordsConfig:
+			return deserializeGuardrailWordsConfig(d, schemas.GuardrailWordPolicyConfig_wordsConfig, &v.WordsConfig)
+		}
+		return nil
+	})
 }
 
 // Specifies the custom metrics, how tasks will be rated, the flow definition ARN,
@@ -4782,6 +10738,36 @@ type HumanEvaluationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HumanEvaluationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanEvaluationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanEvaluationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHumanEvaluationCustomMetrics(s, schemas.HumanEvaluationConfig_customMetrics, v.CustomMetrics)
+	serializeEvaluationDatasetMetricConfigs(s, schemas.HumanEvaluationConfig_datasetMetricConfigs, v.DatasetMetricConfigs)
+	if v.HumanWorkflowConfig != nil {
+		s.WriteStruct(schemas.HumanEvaluationConfig_humanWorkflowConfig)
+		v.HumanWorkflowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HumanEvaluationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanEvaluationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanEvaluationConfig_customMetrics:
+			return deserializeHumanEvaluationCustomMetrics(d, schemas.HumanEvaluationConfig_customMetrics, &v.CustomMetrics)
+		case schemas.HumanEvaluationConfig_datasetMetricConfigs:
+			return deserializeEvaluationDatasetMetricConfigs(d, schemas.HumanEvaluationConfig_datasetMetricConfigs, &v.DatasetMetricConfigs)
+		case schemas.HumanEvaluationConfig_humanWorkflowConfig:
+			v.HumanWorkflowConfig = &HumanWorkflowConfig{}
+			return v.HumanWorkflowConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // In a model evaluation job that uses human workers you must define the name of
 // the metric, and how you want that metric rated ratingMethod , and an optional
 // description of the metric.
@@ -4807,6 +10793,40 @@ type HumanEvaluationCustomMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HumanEvaluationCustomMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanEvaluationCustomMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanEvaluationCustomMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.HumanEvaluationCustomMetric_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.HumanEvaluationCustomMetric_name, *v.Name)
+	}
+	if v.RatingMethod != nil {
+		s.WriteString(schemas.HumanEvaluationCustomMetric_ratingMethod, *v.RatingMethod)
+	}
+}
+func (v *HumanEvaluationCustomMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanEvaluationCustomMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanEvaluationCustomMetric_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.HumanEvaluationCustomMetric_description, v.Description)
+		case schemas.HumanEvaluationCustomMetric_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HumanEvaluationCustomMetric_name, v.Name)
+		case schemas.HumanEvaluationCustomMetric_ratingMethod:
+			v.RatingMethod = new(string)
+			return d.ReadString(schemas.HumanEvaluationCustomMetric_ratingMethod, v.RatingMethod)
+		}
+		return nil
+	})
+}
+
 // Contains SageMakerFlowDefinition object. The object is used to specify the
 // prompt dataset, task type, rating method and metric names.
 type HumanWorkflowConfig struct {
@@ -4820,6 +10840,34 @@ type HumanWorkflowConfig struct {
 	Instructions *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HumanWorkflowConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HumanWorkflowConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HumanWorkflowConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.HumanWorkflowConfig_flowDefinitionArn, *v.FlowDefinitionArn)
+	}
+	if v.Instructions != nil {
+		s.WriteString(schemas.HumanWorkflowConfig_instructions, *v.Instructions)
+	}
+}
+func (v *HumanWorkflowConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HumanWorkflowConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HumanWorkflowConfig_flowDefinitionArn:
+			v.FlowDefinitionArn = new(string)
+			return d.ReadString(schemas.HumanWorkflowConfig_flowDefinitionArn, v.FlowDefinitionArn)
+		case schemas.HumanWorkflowConfig_instructions:
+			v.Instructions = new(string)
+			return d.ReadString(schemas.HumanWorkflowConfig_instructions, v.Instructions)
+		}
+		return nil
+	})
 }
 
 // Configuration for implicit filtering in Knowledge Base vector searches.
@@ -4842,6 +10890,31 @@ type ImplicitFilterConfiguration struct {
 	ModelArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImplicitFilterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImplicitFilterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImplicitFilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataAttributeSchemaList(s, schemas.ImplicitFilterConfiguration_metadataAttributes, v.MetadataAttributes)
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ImplicitFilterConfiguration_modelArn, *v.ModelArn)
+	}
+}
+func (v *ImplicitFilterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImplicitFilterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImplicitFilterConfiguration_metadataAttributes:
+			return deserializeMetadataAttributeSchemaList(d, schemas.ImplicitFilterConfiguration_metadataAttributes, &v.MetadataAttributes)
+		case schemas.ImplicitFilterConfiguration_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ImplicitFilterConfiguration_modelArn, v.ModelArn)
+		}
+		return nil
+	})
 }
 
 // Information about the imported model.
@@ -4869,6 +10942,52 @@ type ImportedModelSummary struct {
 	ModelArchitecture *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportedModelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportedModelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportedModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ImportedModelSummary_creationTime, *v.CreationTime)
+	}
+	if v.InstructSupported != nil {
+		s.WriteBool(schemas.ImportedModelSummary_instructSupported, *v.InstructSupported)
+	}
+	if v.ModelArchitecture != nil {
+		s.WriteString(schemas.ImportedModelSummary_modelArchitecture, *v.ModelArchitecture)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ImportedModelSummary_modelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ImportedModelSummary_modelName, *v.ModelName)
+	}
+}
+func (v *ImportedModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportedModelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportedModelSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ImportedModelSummary_creationTime, v.CreationTime)
+		case schemas.ImportedModelSummary_instructSupported:
+			v.InstructSupported = new(bool)
+			return d.ReadBool(schemas.ImportedModelSummary_instructSupported, v.InstructSupported)
+		case schemas.ImportedModelSummary_modelArchitecture:
+			v.ModelArchitecture = new(string)
+			return d.ReadString(schemas.ImportedModelSummary_modelArchitecture, v.ModelArchitecture)
+		case schemas.ImportedModelSummary_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ImportedModelSummary_modelArn, v.ModelArn)
+		case schemas.ImportedModelSummary_modelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.ImportedModelSummary_modelName, v.ModelName)
+		}
+		return nil
+	})
 }
 
 // Base inference parameters to pass to a model. For more information, see [Inference parameters for foundation models].
@@ -4899,6 +11018,43 @@ type InferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferenceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferenceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferenceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxTokens != nil {
+		s.WriteInt32(schemas.InferenceConfiguration_maxTokens, *v.MaxTokens)
+	}
+	serializeNonEmptyStringList(s, schemas.InferenceConfiguration_stopSequences, v.StopSequences)
+	if v.Temperature != nil {
+		s.WriteFloat32(schemas.InferenceConfiguration_temperature, *v.Temperature)
+	}
+	if v.TopP != nil {
+		s.WriteFloat32(schemas.InferenceConfiguration_topP, *v.TopP)
+	}
+}
+func (v *InferenceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferenceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferenceConfiguration_maxTokens:
+			v.MaxTokens = new(int32)
+			return d.ReadInt32(schemas.InferenceConfiguration_maxTokens, v.MaxTokens)
+		case schemas.InferenceConfiguration_stopSequences:
+			return deserializeNonEmptyStringList(d, schemas.InferenceConfiguration_stopSequences, &v.StopSequences)
+		case schemas.InferenceConfiguration_temperature:
+			v.Temperature = new(float32)
+			return d.ReadFloat32(schemas.InferenceConfiguration_temperature, v.Temperature)
+		case schemas.InferenceConfiguration_topP:
+			v.TopP = new(float32)
+			return d.ReadFloat32(schemas.InferenceConfiguration_topP, v.TopP)
+		}
+		return nil
+	})
+}
+
 // Contains information about a model.
 type InferenceProfileModel struct {
 
@@ -4906,6 +11062,28 @@ type InferenceProfileModel struct {
 	ModelArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InferenceProfileModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferenceProfileModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferenceProfileModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.InferenceProfileModel_modelArn, *v.ModelArn)
+	}
+}
+func (v *InferenceProfileModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferenceProfileModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferenceProfileModel_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.InferenceProfileModel_modelArn, v.ModelArn)
+		}
+		return nil
+	})
 }
 
 // Contains information about the model or system-defined inference profile that
@@ -4927,6 +11105,12 @@ type InferenceProfileModelSourceMemberCopyFrom struct {
 }
 
 func (*InferenceProfileModelSourceMemberCopyFrom) isInferenceProfileModelSource() {}
+func (v *InferenceProfileModelSourceMemberCopyFrom) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.InferenceProfileModelSource_copyFrom, v.Value)
+}
+func (v *InferenceProfileModelSourceMemberCopyFrom) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.InferenceProfileModelSource_copyFrom, &v.Value)
+}
 
 // Contains information about an inference profile.
 type InferenceProfileSummary struct {
@@ -4981,6 +11165,81 @@ type InferenceProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferenceProfileSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferenceProfileSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferenceProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InferenceProfileSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InferenceProfileSummary_description, *v.Description)
+	}
+	if v.InferenceProfileArn != nil {
+		s.WriteString(schemas.InferenceProfileSummary_inferenceProfileArn, *v.InferenceProfileArn)
+	}
+	if v.InferenceProfileId != nil {
+		s.WriteString(schemas.InferenceProfileSummary_inferenceProfileId, *v.InferenceProfileId)
+	}
+	if v.InferenceProfileName != nil {
+		s.WriteString(schemas.InferenceProfileSummary_inferenceProfileName, *v.InferenceProfileName)
+	}
+	serializeInferenceProfileModels(s, schemas.InferenceProfileSummary_models, v.Models)
+	if v.Status != "" {
+		s.WriteString(schemas.InferenceProfileSummary_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.InferenceProfileSummary_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.InferenceProfileSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *InferenceProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferenceProfileSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferenceProfileSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InferenceProfileSummary_createdAt, v.CreatedAt)
+		case schemas.InferenceProfileSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InferenceProfileSummary_description, v.Description)
+		case schemas.InferenceProfileSummary_inferenceProfileArn:
+			v.InferenceProfileArn = new(string)
+			return d.ReadString(schemas.InferenceProfileSummary_inferenceProfileArn, v.InferenceProfileArn)
+		case schemas.InferenceProfileSummary_inferenceProfileId:
+			v.InferenceProfileId = new(string)
+			return d.ReadString(schemas.InferenceProfileSummary_inferenceProfileId, v.InferenceProfileId)
+		case schemas.InferenceProfileSummary_inferenceProfileName:
+			v.InferenceProfileName = new(string)
+			return d.ReadString(schemas.InferenceProfileSummary_inferenceProfileName, v.InferenceProfileName)
+		case schemas.InferenceProfileSummary_models:
+			return deserializeInferenceProfileModels(d, schemas.InferenceProfileSummary_models, &v.Models)
+		case schemas.InferenceProfileSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.InferenceProfileSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = InferenceProfileStatus(ev)
+			return nil
+		case schemas.InferenceProfileSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.InferenceProfileSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = InferenceProfileType(ev)
+			return nil
+		case schemas.InferenceProfileSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.InferenceProfileSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Settings for using invocation logs to customize a model.
 type InvocationLogsConfig struct {
 
@@ -4997,6 +11256,33 @@ type InvocationLogsConfig struct {
 	UsePromptResponse bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvocationLogsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvocationLogsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvocationLogsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvocationLogSource(s, schemas.InvocationLogsConfig_invocationLogSource, v.InvocationLogSource)
+	serializeRequestMetadataFilters(s, schemas.InvocationLogsConfig_requestMetadataFilters, v.RequestMetadataFilters)
+	if v.UsePromptResponse != false {
+		s.WriteBool(schemas.InvocationLogsConfig_usePromptResponse, v.UsePromptResponse)
+	}
+}
+func (v *InvocationLogsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvocationLogsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvocationLogsConfig_invocationLogSource:
+			return deserializeInvocationLogSource(d, schemas.InvocationLogsConfig_invocationLogSource, &v.InvocationLogSource)
+		case schemas.InvocationLogsConfig_requestMetadataFilters:
+			return deserializeRequestMetadataFilters(d, schemas.InvocationLogsConfig_requestMetadataFilters, &v.RequestMetadataFilters)
+		case schemas.InvocationLogsConfig_usePromptResponse:
+			return d.ReadBool(schemas.InvocationLogsConfig_usePromptResponse, &v.UsePromptResponse)
+		}
+		return nil
+	})
 }
 
 // A storage location for invocation logs.
@@ -5016,6 +11302,12 @@ type InvocationLogSourceMemberS3Uri struct {
 }
 
 func (*InvocationLogSourceMemberS3Uri) isInvocationLogSource() {}
+func (v *InvocationLogSourceMemberS3Uri) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.InvocationLogSource_s3Uri, v.Value)
+}
+func (v *InvocationLogSourceMemberS3Uri) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.InvocationLogSource_s3Uri, &v.Value)
+}
 
 // Contains configuration details of the inference for knowledge base retrieval
 // and response generation.
@@ -5026,6 +11318,30 @@ type KbInferenceConfig struct {
 	TextInferenceConfig *TextInferenceConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *KbInferenceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KbInferenceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KbInferenceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TextInferenceConfig != nil {
+		s.WriteStruct(schemas.KbInferenceConfig_textInferenceConfig)
+		v.TextInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KbInferenceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KbInferenceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KbInferenceConfig_textInferenceConfig:
+			v.TextInferenceConfig = &TextInferenceConfig{}
+			return v.TextInferenceConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration details for retrieving information from a knowledge base and
@@ -5048,6 +11364,14 @@ type KnowledgeBaseConfigMemberRetrieveAndGenerateConfig struct {
 }
 
 func (*KnowledgeBaseConfigMemberRetrieveAndGenerateConfig) isKnowledgeBaseConfig() {}
+func (v *KnowledgeBaseConfigMemberRetrieveAndGenerateConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseConfig_retrieveAndGenerateConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *KnowledgeBaseConfigMemberRetrieveAndGenerateConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details for retrieving information from a knowledge base.
 type KnowledgeBaseConfigMemberRetrieveConfig struct {
@@ -5057,6 +11381,14 @@ type KnowledgeBaseConfigMemberRetrieveConfig struct {
 }
 
 func (*KnowledgeBaseConfigMemberRetrieveConfig) isKnowledgeBaseConfig() {}
+func (v *KnowledgeBaseConfigMemberRetrieveConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseConfig_retrieveConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *KnowledgeBaseConfigMemberRetrieveConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details for retrieving information from a knowledge base.
 type KnowledgeBaseRetrievalConfiguration struct {
@@ -5067,6 +11399,30 @@ type KnowledgeBaseRetrievalConfiguration struct {
 	VectorSearchConfiguration *KnowledgeBaseVectorSearchConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *KnowledgeBaseRetrievalConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseRetrievalConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnowledgeBaseRetrievalConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.KnowledgeBaseRetrievalConfiguration_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KnowledgeBaseRetrievalConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnowledgeBaseRetrievalConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnowledgeBaseRetrievalConfiguration_vectorSearchConfiguration:
+			v.VectorSearchConfiguration = &KnowledgeBaseVectorSearchConfiguration{}
+			return v.VectorSearchConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains configuration details for retrieving information from a knowledge base
@@ -5098,6 +11454,58 @@ type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 	RetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *KnowledgeBaseRetrieveAndGenerateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnowledgeBaseRetrieveAndGenerateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GenerationConfiguration != nil {
+		s.WriteStruct(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_generationConfiguration)
+		v.GenerationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_modelArn, *v.ModelArn)
+	}
+	if v.OrchestrationConfiguration != nil {
+		s.WriteStruct(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_orchestrationConfiguration)
+		v.OrchestrationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalConfiguration != nil {
+		s.WriteStruct(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_retrievalConfiguration)
+		v.RetrievalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KnowledgeBaseRetrieveAndGenerateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnowledgeBaseRetrieveAndGenerateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_generationConfiguration:
+			v.GenerationConfiguration = &GenerationConfiguration{}
+			return v.GenerationConfiguration.Deserialize(d)
+		case schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_modelArn, v.ModelArn)
+		case schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_orchestrationConfiguration:
+			v.OrchestrationConfiguration = &OrchestrationConfiguration{}
+			return v.OrchestrationConfiguration.Deserialize(d)
+		case schemas.KnowledgeBaseRetrieveAndGenerateConfiguration_retrievalConfiguration:
+			v.RetrievalConfiguration = &KnowledgeBaseRetrievalConfiguration{}
+			return v.RetrievalConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration details for returning the results from the knowledge base
@@ -5132,6 +11540,57 @@ type KnowledgeBaseVectorSearchConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KnowledgeBaseVectorSearchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseVectorSearchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnowledgeBaseVectorSearchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRetrievalFilter(s, schemas.KnowledgeBaseVectorSearchConfiguration_filter, v.Filter)
+	if v.ImplicitFilterConfiguration != nil {
+		s.WriteStruct(schemas.KnowledgeBaseVectorSearchConfiguration_implicitFilterConfiguration)
+		v.ImplicitFilterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfResults != nil {
+		s.WriteInt32(schemas.KnowledgeBaseVectorSearchConfiguration_numberOfResults, *v.NumberOfResults)
+	}
+	if v.OverrideSearchType != "" {
+		s.WriteString(schemas.KnowledgeBaseVectorSearchConfiguration_overrideSearchType, string(v.OverrideSearchType))
+	}
+	if v.RerankingConfiguration != nil {
+		s.WriteStruct(schemas.KnowledgeBaseVectorSearchConfiguration_rerankingConfiguration)
+		v.RerankingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KnowledgeBaseVectorSearchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnowledgeBaseVectorSearchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnowledgeBaseVectorSearchConfiguration_filter:
+			return deserializeRetrievalFilter(d, schemas.KnowledgeBaseVectorSearchConfiguration_filter, &v.Filter)
+		case schemas.KnowledgeBaseVectorSearchConfiguration_implicitFilterConfiguration:
+			v.ImplicitFilterConfiguration = &ImplicitFilterConfiguration{}
+			return v.ImplicitFilterConfiguration.Deserialize(d)
+		case schemas.KnowledgeBaseVectorSearchConfiguration_numberOfResults:
+			v.NumberOfResults = new(int32)
+			return d.ReadInt32(schemas.KnowledgeBaseVectorSearchConfiguration_numberOfResults, v.NumberOfResults)
+		case schemas.KnowledgeBaseVectorSearchConfiguration_overrideSearchType:
+			var ev string
+			if err := d.ReadString(schemas.KnowledgeBaseVectorSearchConfiguration_overrideSearchType, &ev); err != nil {
+				return err
+			}
+			v.OverrideSearchType = SearchType(ev)
+			return nil
+		case schemas.KnowledgeBaseVectorSearchConfiguration_rerankingConfiguration:
+			v.RerankingConfiguration = &VectorSearchRerankingConfiguration{}
+			return v.RerankingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Configuration for using an AWS Lambda function to grade model responses during
 //
 // reinforcement fine-tuning training.
@@ -5146,6 +11605,28 @@ type LambdaGraderConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaGraderConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaGraderConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaGraderConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.LambdaGraderConfig_lambdaArn, *v.LambdaArn)
+	}
+}
+func (v *LambdaGraderConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaGraderConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaGraderConfig_lambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.LambdaGraderConfig_lambdaArn, v.LambdaArn)
+		}
+		return nil
+	})
+}
+
 // The legal term of the agreement.
 type LegalTerm struct {
 
@@ -5153,6 +11634,28 @@ type LegalTerm struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LegalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LegalTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LegalTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Url != nil {
+		s.WriteString(schemas.LegalTerm_url, *v.Url)
+	}
+}
+func (v *LegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LegalTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LegalTerm_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.LegalTerm_url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Configuration fields for invocation logging.
@@ -5180,6 +11683,68 @@ type LoggingConfig struct {
 	VideoDataDeliveryEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDataDeliveryEnabled != nil {
+		s.WriteBool(schemas.LoggingConfig_audioDataDeliveryEnabled, *v.AudioDataDeliveryEnabled)
+	}
+	if v.CloudWatchConfig != nil {
+		s.WriteStruct(schemas.LoggingConfig_cloudWatchConfig)
+		v.CloudWatchConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmbeddingDataDeliveryEnabled != nil {
+		s.WriteBool(schemas.LoggingConfig_embeddingDataDeliveryEnabled, *v.EmbeddingDataDeliveryEnabled)
+	}
+	if v.ImageDataDeliveryEnabled != nil {
+		s.WriteBool(schemas.LoggingConfig_imageDataDeliveryEnabled, *v.ImageDataDeliveryEnabled)
+	}
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.LoggingConfig_s3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextDataDeliveryEnabled != nil {
+		s.WriteBool(schemas.LoggingConfig_textDataDeliveryEnabled, *v.TextDataDeliveryEnabled)
+	}
+	if v.VideoDataDeliveryEnabled != nil {
+		s.WriteBool(schemas.LoggingConfig_videoDataDeliveryEnabled, *v.VideoDataDeliveryEnabled)
+	}
+}
+func (v *LoggingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfig_audioDataDeliveryEnabled:
+			v.AudioDataDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.LoggingConfig_audioDataDeliveryEnabled, v.AudioDataDeliveryEnabled)
+		case schemas.LoggingConfig_cloudWatchConfig:
+			v.CloudWatchConfig = &CloudWatchConfig{}
+			return v.CloudWatchConfig.Deserialize(d)
+		case schemas.LoggingConfig_embeddingDataDeliveryEnabled:
+			v.EmbeddingDataDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.LoggingConfig_embeddingDataDeliveryEnabled, v.EmbeddingDataDeliveryEnabled)
+		case schemas.LoggingConfig_imageDataDeliveryEnabled:
+			v.ImageDataDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.LoggingConfig_imageDataDeliveryEnabled, v.ImageDataDeliveryEnabled)
+		case schemas.LoggingConfig_s3Config:
+			v.S3Config = &S3Config{}
+			return v.S3Config.Deserialize(d)
+		case schemas.LoggingConfig_textDataDeliveryEnabled:
+			v.TextDataDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.LoggingConfig_textDataDeliveryEnabled, v.TextDataDeliveryEnabled)
+		case schemas.LoggingConfig_videoDataDeliveryEnabled:
+			v.VideoDataDeliveryEnabled = new(bool)
+			return d.ReadBool(schemas.LoggingConfig_videoDataDeliveryEnabled, v.VideoDataDeliveryEnabled)
+		}
+		return nil
+	})
 }
 
 // Contains details about an endpoint for a model from Amazon Bedrock Marketplace.
@@ -5231,6 +11796,77 @@ type MarketplaceModelEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MarketplaceModelEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketplaceModelEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketplaceModelEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MarketplaceModelEndpoint_createdAt, *v.CreatedAt)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.MarketplaceModelEndpoint_endpointArn, *v.EndpointArn)
+	}
+	serializeEndpointConfig(s, schemas.MarketplaceModelEndpoint_endpointConfig, v.EndpointConfig)
+	if v.EndpointStatus != nil {
+		s.WriteString(schemas.MarketplaceModelEndpoint_endpointStatus, *v.EndpointStatus)
+	}
+	if v.EndpointStatusMessage != nil {
+		s.WriteString(schemas.MarketplaceModelEndpoint_endpointStatusMessage, *v.EndpointStatusMessage)
+	}
+	if v.ModelSourceIdentifier != nil {
+		s.WriteString(schemas.MarketplaceModelEndpoint_modelSourceIdentifier, *v.ModelSourceIdentifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MarketplaceModelEndpoint_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.MarketplaceModelEndpoint_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.MarketplaceModelEndpoint_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *MarketplaceModelEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketplaceModelEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketplaceModelEndpoint_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MarketplaceModelEndpoint_createdAt, v.CreatedAt)
+		case schemas.MarketplaceModelEndpoint_endpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpoint_endpointArn, v.EndpointArn)
+		case schemas.MarketplaceModelEndpoint_endpointConfig:
+			return deserializeEndpointConfig(d, schemas.MarketplaceModelEndpoint_endpointConfig, &v.EndpointConfig)
+		case schemas.MarketplaceModelEndpoint_endpointStatus:
+			v.EndpointStatus = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpoint_endpointStatus, v.EndpointStatus)
+		case schemas.MarketplaceModelEndpoint_endpointStatusMessage:
+			v.EndpointStatusMessage = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpoint_endpointStatusMessage, v.EndpointStatusMessage)
+		case schemas.MarketplaceModelEndpoint_modelSourceIdentifier:
+			v.ModelSourceIdentifier = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpoint_modelSourceIdentifier, v.ModelSourceIdentifier)
+		case schemas.MarketplaceModelEndpoint_status:
+			var ev string
+			if err := d.ReadString(schemas.MarketplaceModelEndpoint_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.MarketplaceModelEndpoint_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpoint_statusMessage, v.StatusMessage)
+		case schemas.MarketplaceModelEndpoint_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MarketplaceModelEndpoint_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Provides a summary of an endpoint for a model from Amazon Bedrock Marketplace.
 type MarketplaceModelEndpointSummary struct {
 
@@ -5264,6 +11900,62 @@ type MarketplaceModelEndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MarketplaceModelEndpointSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketplaceModelEndpointSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketplaceModelEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.MarketplaceModelEndpointSummary_createdAt, *v.CreatedAt)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.MarketplaceModelEndpointSummary_endpointArn, *v.EndpointArn)
+	}
+	if v.ModelSourceIdentifier != nil {
+		s.WriteString(schemas.MarketplaceModelEndpointSummary_modelSourceIdentifier, *v.ModelSourceIdentifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MarketplaceModelEndpointSummary_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.MarketplaceModelEndpointSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.MarketplaceModelEndpointSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *MarketplaceModelEndpointSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketplaceModelEndpointSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketplaceModelEndpointSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.MarketplaceModelEndpointSummary_createdAt, v.CreatedAt)
+		case schemas.MarketplaceModelEndpointSummary_endpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpointSummary_endpointArn, v.EndpointArn)
+		case schemas.MarketplaceModelEndpointSummary_modelSourceIdentifier:
+			v.ModelSourceIdentifier = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpointSummary_modelSourceIdentifier, v.ModelSourceIdentifier)
+		case schemas.MarketplaceModelEndpointSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.MarketplaceModelEndpointSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.MarketplaceModelEndpointSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.MarketplaceModelEndpointSummary_statusMessage, v.StatusMessage)
+		case schemas.MarketplaceModelEndpointSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.MarketplaceModelEndpointSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Defines the schema for a metadata attribute used in Knowledge Base vector
 // searches. Metadata attributes provide additional context for documents and can
 // be used for filtering and reranking search results.
@@ -5290,6 +11982,44 @@ type MetadataAttributeSchema struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetadataAttributeSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataAttributeSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataAttributeSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.MetadataAttributeSchema_description, *v.Description)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.MetadataAttributeSchema_key, *v.Key)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MetadataAttributeSchema_type, string(v.Type))
+	}
+}
+func (v *MetadataAttributeSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataAttributeSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataAttributeSchema_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.MetadataAttributeSchema_description, v.Description)
+		case schemas.MetadataAttributeSchema_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.MetadataAttributeSchema_key, v.Key)
+		case schemas.MetadataAttributeSchema_type:
+			var ev string
+			if err := d.ReadString(schemas.MetadataAttributeSchema_type, &ev); err != nil {
+				return err
+			}
+			v.Type = AttributeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for how metadata should be used during the reranking process in
 // Knowledge Base vector searches. This determines which metadata fields are
 // included or excluded when reordering search results.
@@ -5308,6 +12038,35 @@ type MetadataConfigurationForReranking struct {
 	SelectiveModeConfiguration RerankingMetadataSelectiveModeConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetadataConfigurationForReranking) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataConfigurationForReranking)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataConfigurationForReranking) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SelectionMode != "" {
+		s.WriteString(schemas.MetadataConfigurationForReranking_selectionMode, string(v.SelectionMode))
+	}
+	serializeRerankingMetadataSelectiveModeConfiguration(s, schemas.MetadataConfigurationForReranking_selectiveModeConfiguration, v.SelectiveModeConfiguration)
+}
+func (v *MetadataConfigurationForReranking) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataConfigurationForReranking, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataConfigurationForReranking_selectionMode:
+			var ev string
+			if err := d.ReadString(schemas.MetadataConfigurationForReranking_selectionMode, &ev); err != nil {
+				return err
+			}
+			v.SelectionMode = RerankingMetadataSelectionMode(ev)
+			return nil
+		case schemas.MetadataConfigurationForReranking_selectiveModeConfiguration:
+			return deserializeRerankingMetadataSelectiveModeConfiguration(d, schemas.MetadataConfigurationForReranking_selectiveModeConfiguration, &v.SelectiveModeConfiguration)
+		}
+		return nil
+	})
 }
 
 // Contains the configuration for a model used in an advanced prompt optimization
@@ -5342,6 +12101,39 @@ type ModelConfiguration struct {
 	InferenceConfig *InferenceConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModelConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalModelRequestFields(s, schemas.ModelConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.InferenceConfig != nil {
+		s.WriteStruct(schemas.ModelConfiguration_inferenceConfig)
+		v.InferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.ModelConfiguration_modelId, *v.ModelId)
+	}
+}
+func (v *ModelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelConfiguration_additionalModelRequestFields:
+			return deserializeAdditionalModelRequestFields(d, schemas.ModelConfiguration_additionalModelRequestFields, &v.AdditionalModelRequestFields)
+		case schemas.ModelConfiguration_inferenceConfig:
+			v.InferenceConfig = &InferenceConfiguration{}
+			return v.InferenceConfig.Deserialize(d)
+		case schemas.ModelConfiguration_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.ModelConfiguration_modelId, v.ModelId)
+		}
+		return nil
+	})
 }
 
 // Contains details about each model copy job.
@@ -5403,6 +12195,89 @@ type ModelCopyJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModelCopyJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelCopyJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelCopyJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ModelCopyJobSummary_creationTime, *v.CreationTime)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_failureMessage, *v.FailureMessage)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_jobArn, *v.JobArn)
+	}
+	if v.SourceAccountId != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_sourceAccountId, *v.SourceAccountId)
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_sourceModelArn, *v.SourceModelArn)
+	}
+	if v.SourceModelName != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_sourceModelName, *v.SourceModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ModelCopyJobSummary_status, string(v.Status))
+	}
+	if v.TargetModelArn != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_targetModelArn, *v.TargetModelArn)
+	}
+	if v.TargetModelKmsKeyArn != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_targetModelKmsKeyArn, *v.TargetModelKmsKeyArn)
+	}
+	if v.TargetModelName != nil {
+		s.WriteString(schemas.ModelCopyJobSummary_targetModelName, *v.TargetModelName)
+	}
+	serializeTagList(s, schemas.ModelCopyJobSummary_targetModelTags, v.TargetModelTags)
+}
+func (v *ModelCopyJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelCopyJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelCopyJobSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ModelCopyJobSummary_creationTime, v.CreationTime)
+		case schemas.ModelCopyJobSummary_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_failureMessage, v.FailureMessage)
+		case schemas.ModelCopyJobSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_jobArn, v.JobArn)
+		case schemas.ModelCopyJobSummary_sourceAccountId:
+			v.SourceAccountId = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_sourceAccountId, v.SourceAccountId)
+		case schemas.ModelCopyJobSummary_sourceModelArn:
+			v.SourceModelArn = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_sourceModelArn, v.SourceModelArn)
+		case schemas.ModelCopyJobSummary_sourceModelName:
+			v.SourceModelName = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_sourceModelName, v.SourceModelName)
+		case schemas.ModelCopyJobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ModelCopyJobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelCopyJobStatus(ev)
+			return nil
+		case schemas.ModelCopyJobSummary_targetModelArn:
+			v.TargetModelArn = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_targetModelArn, v.TargetModelArn)
+		case schemas.ModelCopyJobSummary_targetModelKmsKeyArn:
+			v.TargetModelKmsKeyArn = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_targetModelKmsKeyArn, v.TargetModelKmsKeyArn)
+		case schemas.ModelCopyJobSummary_targetModelName:
+			v.TargetModelName = new(string)
+			return d.ReadString(schemas.ModelCopyJobSummary_targetModelName, v.TargetModelName)
+		case schemas.ModelCopyJobSummary_targetModelTags:
+			return deserializeTagList(d, schemas.ModelCopyJobSummary_targetModelTags, &v.TargetModelTags)
+		}
+		return nil
+	})
+}
+
 // Information about one customization job
 type ModelCustomizationJobSummary struct {
 
@@ -5455,6 +12330,98 @@ type ModelCustomizationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModelCustomizationJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelCustomizationJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelCustomizationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelArn != nil {
+		s.WriteString(schemas.ModelCustomizationJobSummary_baseModelArn, *v.BaseModelArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ModelCustomizationJobSummary_creationTime, *v.CreationTime)
+	}
+	if v.CustomModelArn != nil {
+		s.WriteString(schemas.ModelCustomizationJobSummary_customModelArn, *v.CustomModelArn)
+	}
+	if v.CustomModelName != nil {
+		s.WriteString(schemas.ModelCustomizationJobSummary_customModelName, *v.CustomModelName)
+	}
+	if v.CustomizationType != "" {
+		s.WriteString(schemas.ModelCustomizationJobSummary_customizationType, string(v.CustomizationType))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ModelCustomizationJobSummary_endTime, *v.EndTime)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.ModelCustomizationJobSummary_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ModelCustomizationJobSummary_jobName, *v.JobName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ModelCustomizationJobSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ModelCustomizationJobSummary_status, string(v.Status))
+	}
+	if v.StatusDetails != nil {
+		s.WriteStruct(schemas.ModelCustomizationJobSummary_statusDetails)
+		v.StatusDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModelCustomizationJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelCustomizationJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelCustomizationJobSummary_baseModelArn:
+			v.BaseModelArn = new(string)
+			return d.ReadString(schemas.ModelCustomizationJobSummary_baseModelArn, v.BaseModelArn)
+		case schemas.ModelCustomizationJobSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ModelCustomizationJobSummary_creationTime, v.CreationTime)
+		case schemas.ModelCustomizationJobSummary_customModelArn:
+			v.CustomModelArn = new(string)
+			return d.ReadString(schemas.ModelCustomizationJobSummary_customModelArn, v.CustomModelArn)
+		case schemas.ModelCustomizationJobSummary_customModelName:
+			v.CustomModelName = new(string)
+			return d.ReadString(schemas.ModelCustomizationJobSummary_customModelName, v.CustomModelName)
+		case schemas.ModelCustomizationJobSummary_customizationType:
+			var ev string
+			if err := d.ReadString(schemas.ModelCustomizationJobSummary_customizationType, &ev); err != nil {
+				return err
+			}
+			v.CustomizationType = CustomizationType(ev)
+			return nil
+		case schemas.ModelCustomizationJobSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ModelCustomizationJobSummary_endTime, v.EndTime)
+		case schemas.ModelCustomizationJobSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.ModelCustomizationJobSummary_jobArn, v.JobArn)
+		case schemas.ModelCustomizationJobSummary_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ModelCustomizationJobSummary_jobName, v.JobName)
+		case schemas.ModelCustomizationJobSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ModelCustomizationJobSummary_lastModifiedTime, v.LastModifiedTime)
+		case schemas.ModelCustomizationJobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ModelCustomizationJobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelCustomizationJobStatus(ev)
+			return nil
+		case schemas.ModelCustomizationJobSummary_statusDetails:
+			v.StatusDetails = &StatusDetails{}
+			return v.StatusDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The data source of the model to import.
 //
 // The following types satisfy this interface:
@@ -5472,6 +12439,14 @@ type ModelDataSourceMemberS3DataSource struct {
 }
 
 func (*ModelDataSourceMemberS3DataSource) isModelDataSource() {}
+func (v *ModelDataSourceMemberS3DataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelDataSource_s3DataSource)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ModelDataSourceMemberS3DataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Model-specific information for the enforced guardrail configuration.
 type ModelEnforcement struct {
@@ -5487,6 +12462,28 @@ type ModelEnforcement struct {
 	IncludedModels []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModelEnforcement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelEnforcement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelEnforcement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExcludedModelsList(s, schemas.ModelEnforcement_excludedModels, v.ExcludedModels)
+	serializeIncludedModelsList(s, schemas.ModelEnforcement_includedModels, v.IncludedModels)
+}
+func (v *ModelEnforcement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelEnforcement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelEnforcement_excludedModels:
+			return deserializeExcludedModelsList(d, schemas.ModelEnforcement_excludedModels, &v.ExcludedModels)
+		case schemas.ModelEnforcement_includedModels:
+			return deserializeIncludedModelsList(d, schemas.ModelEnforcement_includedModels, &v.IncludedModels)
+		}
+		return nil
+	})
 }
 
 // Information about the import job.
@@ -5527,6 +12524,74 @@ type ModelImportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModelImportJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelImportJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelImportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ModelImportJobSummary_creationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ModelImportJobSummary_endTime, *v.EndTime)
+	}
+	if v.ImportedModelArn != nil {
+		s.WriteString(schemas.ModelImportJobSummary_importedModelArn, *v.ImportedModelArn)
+	}
+	if v.ImportedModelName != nil {
+		s.WriteString(schemas.ModelImportJobSummary_importedModelName, *v.ImportedModelName)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.ModelImportJobSummary_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ModelImportJobSummary_jobName, *v.JobName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ModelImportJobSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ModelImportJobSummary_status, string(v.Status))
+	}
+}
+func (v *ModelImportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelImportJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelImportJobSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ModelImportJobSummary_creationTime, v.CreationTime)
+		case schemas.ModelImportJobSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ModelImportJobSummary_endTime, v.EndTime)
+		case schemas.ModelImportJobSummary_importedModelArn:
+			v.ImportedModelArn = new(string)
+			return d.ReadString(schemas.ModelImportJobSummary_importedModelArn, v.ImportedModelArn)
+		case schemas.ModelImportJobSummary_importedModelName:
+			v.ImportedModelName = new(string)
+			return d.ReadString(schemas.ModelImportJobSummary_importedModelName, v.ImportedModelName)
+		case schemas.ModelImportJobSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.ModelImportJobSummary_jobArn, v.JobArn)
+		case schemas.ModelImportJobSummary_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ModelImportJobSummary_jobName, v.JobName)
+		case schemas.ModelImportJobSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ModelImportJobSummary_lastModifiedTime, v.LastModifiedTime)
+		case schemas.ModelImportJobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ModelImportJobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelImportJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about the location of the input to the batch inference job.
 //
 // The following types satisfy this interface:
@@ -5544,6 +12609,14 @@ type ModelInvocationJobInputDataConfigMemberS3InputDataConfig struct {
 }
 
 func (*ModelInvocationJobInputDataConfigMemberS3InputDataConfig) isModelInvocationJobInputDataConfig() {
+}
+func (v *ModelInvocationJobInputDataConfigMemberS3InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelInvocationJobInputDataConfig_s3InputDataConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ModelInvocationJobInputDataConfigMemberS3InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Contains the configuration of the S3 location of the output data.
@@ -5564,6 +12637,14 @@ type ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig struct {
 
 func (*ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig) isModelInvocationJobOutputDataConfig() {
 }
+func (v *ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelInvocationJobOutputDataConfig_s3OutputDataConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the configuration of the S3 location of the input data.
 type ModelInvocationJobS3InputDataConfig struct {
@@ -5583,6 +12664,44 @@ type ModelInvocationJobS3InputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModelInvocationJobS3InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelInvocationJobS3InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelInvocationJobS3InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.ModelInvocationJobS3InputDataConfig_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3InputFormat != "" {
+		s.WriteString(schemas.ModelInvocationJobS3InputDataConfig_s3InputFormat, string(v.S3InputFormat))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.ModelInvocationJobS3InputDataConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *ModelInvocationJobS3InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelInvocationJobS3InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelInvocationJobS3InputDataConfig_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.ModelInvocationJobS3InputDataConfig_s3BucketOwner, v.S3BucketOwner)
+		case schemas.ModelInvocationJobS3InputDataConfig_s3InputFormat:
+			var ev string
+			if err := d.ReadString(schemas.ModelInvocationJobS3InputDataConfig_s3InputFormat, &ev); err != nil {
+				return err
+			}
+			v.S3InputFormat = S3InputFormat(ev)
+			return nil
+		case schemas.ModelInvocationJobS3InputDataConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.ModelInvocationJobS3InputDataConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Contains the configuration of the S3 location of the output data.
 type ModelInvocationJobS3OutputDataConfig struct {
 
@@ -5600,6 +12719,40 @@ type ModelInvocationJobS3OutputDataConfig struct {
 	S3EncryptionKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModelInvocationJobS3OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelInvocationJobS3OutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelInvocationJobS3OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.ModelInvocationJobS3OutputDataConfig_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3EncryptionKeyId != nil {
+		s.WriteString(schemas.ModelInvocationJobS3OutputDataConfig_s3EncryptionKeyId, *v.S3EncryptionKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.ModelInvocationJobS3OutputDataConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *ModelInvocationJobS3OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelInvocationJobS3OutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelInvocationJobS3OutputDataConfig_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.ModelInvocationJobS3OutputDataConfig_s3BucketOwner, v.S3BucketOwner)
+		case schemas.ModelInvocationJobS3OutputDataConfig_s3EncryptionKeyId:
+			v.S3EncryptionKeyId = new(string)
+			return d.ReadString(schemas.ModelInvocationJobS3OutputDataConfig_s3EncryptionKeyId, v.S3EncryptionKeyId)
+		case schemas.ModelInvocationJobS3OutputDataConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.ModelInvocationJobS3OutputDataConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // A summary of a batch inference job.
@@ -5739,6 +12892,146 @@ type ModelInvocationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModelInvocationJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelInvocationJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelInvocationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ModelInvocationJobSummary_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ModelInvocationJobSummary_endTime, *v.EndTime)
+	}
+	if v.ErrorRecordCount != nil {
+		s.WriteInt64(schemas.ModelInvocationJobSummary_errorRecordCount, *v.ErrorRecordCount)
+	}
+	serializeModelInvocationJobInputDataConfig(s, schemas.ModelInvocationJobSummary_inputDataConfig, v.InputDataConfig)
+	if v.JobArn != nil {
+		s.WriteString(schemas.ModelInvocationJobSummary_jobArn, *v.JobArn)
+	}
+	if v.JobExpirationTime != nil {
+		s.WriteTime(schemas.ModelInvocationJobSummary_jobExpirationTime, *v.JobExpirationTime)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ModelInvocationJobSummary_jobName, *v.JobName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ModelInvocationJobSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ModelInvocationJobSummary_message, *v.Message)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.ModelInvocationJobSummary_modelId, *v.ModelId)
+	}
+	if v.ModelInvocationType != "" {
+		s.WriteString(schemas.ModelInvocationJobSummary_modelInvocationType, string(v.ModelInvocationType))
+	}
+	serializeModelInvocationJobOutputDataConfig(s, schemas.ModelInvocationJobSummary_outputDataConfig, v.OutputDataConfig)
+	if v.ProcessedRecordCount != nil {
+		s.WriteInt64(schemas.ModelInvocationJobSummary_processedRecordCount, *v.ProcessedRecordCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ModelInvocationJobSummary_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ModelInvocationJobSummary_status, string(v.Status))
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.ModelInvocationJobSummary_submitTime, *v.SubmitTime)
+	}
+	if v.SuccessRecordCount != nil {
+		s.WriteInt64(schemas.ModelInvocationJobSummary_successRecordCount, *v.SuccessRecordCount)
+	}
+	if v.TimeoutDurationInHours != nil {
+		s.WriteInt32(schemas.ModelInvocationJobSummary_timeoutDurationInHours, *v.TimeoutDurationInHours)
+	}
+	if v.TotalRecordCount != nil {
+		s.WriteInt64(schemas.ModelInvocationJobSummary_totalRecordCount, *v.TotalRecordCount)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.ModelInvocationJobSummary_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModelInvocationJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelInvocationJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelInvocationJobSummary_clientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.ModelInvocationJobSummary_clientRequestToken, v.ClientRequestToken)
+		case schemas.ModelInvocationJobSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ModelInvocationJobSummary_endTime, v.EndTime)
+		case schemas.ModelInvocationJobSummary_errorRecordCount:
+			v.ErrorRecordCount = new(int64)
+			return d.ReadInt64(schemas.ModelInvocationJobSummary_errorRecordCount, v.ErrorRecordCount)
+		case schemas.ModelInvocationJobSummary_inputDataConfig:
+			return deserializeModelInvocationJobInputDataConfig(d, schemas.ModelInvocationJobSummary_inputDataConfig, &v.InputDataConfig)
+		case schemas.ModelInvocationJobSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.ModelInvocationJobSummary_jobArn, v.JobArn)
+		case schemas.ModelInvocationJobSummary_jobExpirationTime:
+			v.JobExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.ModelInvocationJobSummary_jobExpirationTime, v.JobExpirationTime)
+		case schemas.ModelInvocationJobSummary_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ModelInvocationJobSummary_jobName, v.JobName)
+		case schemas.ModelInvocationJobSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ModelInvocationJobSummary_lastModifiedTime, v.LastModifiedTime)
+		case schemas.ModelInvocationJobSummary_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModelInvocationJobSummary_message, v.Message)
+		case schemas.ModelInvocationJobSummary_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.ModelInvocationJobSummary_modelId, v.ModelId)
+		case schemas.ModelInvocationJobSummary_modelInvocationType:
+			var ev string
+			if err := d.ReadString(schemas.ModelInvocationJobSummary_modelInvocationType, &ev); err != nil {
+				return err
+			}
+			v.ModelInvocationType = ModelInvocationType(ev)
+			return nil
+		case schemas.ModelInvocationJobSummary_outputDataConfig:
+			return deserializeModelInvocationJobOutputDataConfig(d, schemas.ModelInvocationJobSummary_outputDataConfig, &v.OutputDataConfig)
+		case schemas.ModelInvocationJobSummary_processedRecordCount:
+			v.ProcessedRecordCount = new(int64)
+			return d.ReadInt64(schemas.ModelInvocationJobSummary_processedRecordCount, v.ProcessedRecordCount)
+		case schemas.ModelInvocationJobSummary_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ModelInvocationJobSummary_roleArn, v.RoleArn)
+		case schemas.ModelInvocationJobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ModelInvocationJobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModelInvocationJobStatus(ev)
+			return nil
+		case schemas.ModelInvocationJobSummary_submitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.ModelInvocationJobSummary_submitTime, v.SubmitTime)
+		case schemas.ModelInvocationJobSummary_successRecordCount:
+			v.SuccessRecordCount = new(int64)
+			return d.ReadInt64(schemas.ModelInvocationJobSummary_successRecordCount, v.SuccessRecordCount)
+		case schemas.ModelInvocationJobSummary_timeoutDurationInHours:
+			v.TimeoutDurationInHours = new(int32)
+			return d.ReadInt32(schemas.ModelInvocationJobSummary_timeoutDurationInHours, v.TimeoutDurationInHours)
+		case schemas.ModelInvocationJobSummary_totalRecordCount:
+			v.TotalRecordCount = new(int64)
+			return d.ReadInt64(schemas.ModelInvocationJobSummary_totalRecordCount, v.TotalRecordCount)
+		case schemas.ModelInvocationJobSummary_vpcConfig:
+			v.VpcConfig = &VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the Amazon Resource Name (ARN) of a SageMaker AI model package to use
 // as the data source for a custom model.
 type ModelPackageArnDataSource struct {
@@ -5753,6 +13046,28 @@ type ModelPackageArnDataSource struct {
 	ModelPackageArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModelPackageArnDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelPackageArnDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelPackageArnDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.ModelPackageArnDataSource_modelPackageArn, *v.ModelPackageArn)
+	}
+}
+func (v *ModelPackageArnDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelPackageArnDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelPackageArnDataSource_modelPackageArn:
+			v.ModelPackageArn = new(string)
+			return d.ReadString(schemas.ModelPackageArnDataSource_modelPackageArn, v.ModelPackageArn)
+		}
+		return nil
+	})
 }
 
 // An offer dictates usage terms for the model.
@@ -5774,6 +13089,42 @@ type Offer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Offer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Offer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Offer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferId != nil {
+		s.WriteString(schemas.Offer_offerId, *v.OfferId)
+	}
+	if v.OfferToken != nil {
+		s.WriteString(schemas.Offer_offerToken, *v.OfferToken)
+	}
+	if v.TermDetails != nil {
+		s.WriteStruct(schemas.Offer_termDetails)
+		v.TermDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Offer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Offer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Offer_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.Offer_offerId, v.OfferId)
+		case schemas.Offer_offerToken:
+			v.OfferToken = new(string)
+			return d.ReadString(schemas.Offer_offerToken, v.OfferToken)
+		case schemas.Offer_termDetails:
+			v.TermDetails = &TermDetails{}
+			return v.TermDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration details for the model to process the prompt prior to
 // retrieval and response generation.
 type OrchestrationConfiguration struct {
@@ -5784,6 +13135,30 @@ type OrchestrationConfiguration struct {
 	QueryTransformationConfiguration *QueryTransformationConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrchestrationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrchestrationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrchestrationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryTransformationConfiguration != nil {
+		s.WriteStruct(schemas.OrchestrationConfiguration_queryTransformationConfiguration)
+		v.QueryTransformationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OrchestrationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrchestrationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrchestrationConfiguration_queryTransformationConfiguration:
+			v.QueryTransformationConfiguration = &QueryTransformationConfiguration{}
+			return v.QueryTransformationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // S3 Location of the output data.
@@ -5797,6 +13172,28 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.OutputDataConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDataConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.OutputDataConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Contains performance settings for a model.
 type PerformanceConfiguration struct {
 
@@ -5805,6 +13202,32 @@ type PerformanceConfiguration struct {
 	Latency PerformanceConfigLatency
 
 	noSmithyDocumentSerde
+}
+
+func (v *PerformanceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Latency != "" {
+		s.WriteString(schemas.PerformanceConfiguration_latency, string(v.Latency))
+	}
+}
+func (v *PerformanceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceConfiguration_latency:
+			var ev string
+			if err := d.ReadString(schemas.PerformanceConfiguration_latency, &ev); err != nil {
+				return err
+			}
+			v.Latency = PerformanceConfigLatency(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the usage-based pricing term.
@@ -5816,6 +13239,25 @@ type PricingTerm struct {
 	RateCard []DimensionalPriceRate
 
 	noSmithyDocumentSerde
+}
+
+func (v *PricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRateCard(s, schemas.PricingTerm_rateCard, v.RateCard)
+}
+func (v *PricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingTerm_rateCard:
+			return deserializeRateCard(d, schemas.PricingTerm_rateCard, &v.RateCard)
+		}
+		return nil
+	})
 }
 
 // Details about a prompt router.
@@ -5868,6 +13310,91 @@ type PromptRouterSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromptRouterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromptRouterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromptRouterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PromptRouterSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PromptRouterSummary_description, *v.Description)
+	}
+	if v.FallbackModel != nil {
+		s.WriteStruct(schemas.PromptRouterSummary_fallbackModel)
+		v.FallbackModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePromptRouterTargetModels(s, schemas.PromptRouterSummary_models, v.Models)
+	if v.PromptRouterArn != nil {
+		s.WriteString(schemas.PromptRouterSummary_promptRouterArn, *v.PromptRouterArn)
+	}
+	if v.PromptRouterName != nil {
+		s.WriteString(schemas.PromptRouterSummary_promptRouterName, *v.PromptRouterName)
+	}
+	if v.RoutingCriteria != nil {
+		s.WriteStruct(schemas.PromptRouterSummary_routingCriteria)
+		v.RoutingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PromptRouterSummary_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PromptRouterSummary_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.PromptRouterSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *PromptRouterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromptRouterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromptRouterSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PromptRouterSummary_createdAt, v.CreatedAt)
+		case schemas.PromptRouterSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PromptRouterSummary_description, v.Description)
+		case schemas.PromptRouterSummary_fallbackModel:
+			v.FallbackModel = &PromptRouterTargetModel{}
+			return v.FallbackModel.Deserialize(d)
+		case schemas.PromptRouterSummary_models:
+			return deserializePromptRouterTargetModels(d, schemas.PromptRouterSummary_models, &v.Models)
+		case schemas.PromptRouterSummary_promptRouterArn:
+			v.PromptRouterArn = new(string)
+			return d.ReadString(schemas.PromptRouterSummary_promptRouterArn, v.PromptRouterArn)
+		case schemas.PromptRouterSummary_promptRouterName:
+			v.PromptRouterName = new(string)
+			return d.ReadString(schemas.PromptRouterSummary_promptRouterName, v.PromptRouterName)
+		case schemas.PromptRouterSummary_routingCriteria:
+			v.RoutingCriteria = &RoutingCriteria{}
+			return v.RoutingCriteria.Deserialize(d)
+		case schemas.PromptRouterSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PromptRouterSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PromptRouterStatus(ev)
+			return nil
+		case schemas.PromptRouterSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.PromptRouterSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PromptRouterType(ev)
+			return nil
+		case schemas.PromptRouterSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PromptRouterSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The target model for a prompt router.
 type PromptRouterTargetModel struct {
 
@@ -5877,6 +13404,28 @@ type PromptRouterTargetModel struct {
 	ModelArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PromptRouterTargetModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromptRouterTargetModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromptRouterTargetModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.PromptRouterTargetModel_modelArn, *v.ModelArn)
+	}
+}
+func (v *PromptRouterTargetModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromptRouterTargetModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromptRouterTargetModel_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.PromptRouterTargetModel_modelArn, v.ModelArn)
+		}
+		return nil
+	})
 }
 
 // The template for the prompt that's sent to the model for response generation.
@@ -5895,6 +13444,28 @@ type PromptTemplate struct {
 	TextPromptTemplate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PromptTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromptTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromptTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TextPromptTemplate != nil {
+		s.WriteString(schemas.PromptTemplate_textPromptTemplate, *v.TextPromptTemplate)
+	}
+}
+func (v *PromptTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromptTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromptTemplate_textPromptTemplate:
+			v.TextPromptTemplate = new(string)
+			return d.ReadString(schemas.PromptTemplate_textPromptTemplate, v.TextPromptTemplate)
+		}
+		return nil
+	})
 }
 
 // A summary of information about a Provisioned Throughput.
@@ -5972,6 +13543,102 @@ type ProvisionedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProvisionedModelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedModelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedModelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitmentDuration != "" {
+		s.WriteString(schemas.ProvisionedModelSummary_commitmentDuration, string(v.CommitmentDuration))
+	}
+	if v.CommitmentExpirationTime != nil {
+		s.WriteTime(schemas.ProvisionedModelSummary_commitmentExpirationTime, *v.CommitmentExpirationTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ProvisionedModelSummary_creationTime, *v.CreationTime)
+	}
+	if v.DesiredModelArn != nil {
+		s.WriteString(schemas.ProvisionedModelSummary_desiredModelArn, *v.DesiredModelArn)
+	}
+	if v.DesiredModelUnits != nil {
+		s.WriteInt32(schemas.ProvisionedModelSummary_desiredModelUnits, *v.DesiredModelUnits)
+	}
+	if v.FoundationModelArn != nil {
+		s.WriteString(schemas.ProvisionedModelSummary_foundationModelArn, *v.FoundationModelArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ProvisionedModelSummary_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ProvisionedModelSummary_modelArn, *v.ModelArn)
+	}
+	if v.ModelUnits != nil {
+		s.WriteInt32(schemas.ProvisionedModelSummary_modelUnits, *v.ModelUnits)
+	}
+	if v.ProvisionedModelArn != nil {
+		s.WriteString(schemas.ProvisionedModelSummary_provisionedModelArn, *v.ProvisionedModelArn)
+	}
+	if v.ProvisionedModelName != nil {
+		s.WriteString(schemas.ProvisionedModelSummary_provisionedModelName, *v.ProvisionedModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProvisionedModelSummary_status, string(v.Status))
+	}
+}
+func (v *ProvisionedModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedModelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedModelSummary_commitmentDuration:
+			var ev string
+			if err := d.ReadString(schemas.ProvisionedModelSummary_commitmentDuration, &ev); err != nil {
+				return err
+			}
+			v.CommitmentDuration = CommitmentDuration(ev)
+			return nil
+		case schemas.ProvisionedModelSummary_commitmentExpirationTime:
+			v.CommitmentExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.ProvisionedModelSummary_commitmentExpirationTime, v.CommitmentExpirationTime)
+		case schemas.ProvisionedModelSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ProvisionedModelSummary_creationTime, v.CreationTime)
+		case schemas.ProvisionedModelSummary_desiredModelArn:
+			v.DesiredModelArn = new(string)
+			return d.ReadString(schemas.ProvisionedModelSummary_desiredModelArn, v.DesiredModelArn)
+		case schemas.ProvisionedModelSummary_desiredModelUnits:
+			v.DesiredModelUnits = new(int32)
+			return d.ReadInt32(schemas.ProvisionedModelSummary_desiredModelUnits, v.DesiredModelUnits)
+		case schemas.ProvisionedModelSummary_foundationModelArn:
+			v.FoundationModelArn = new(string)
+			return d.ReadString(schemas.ProvisionedModelSummary_foundationModelArn, v.FoundationModelArn)
+		case schemas.ProvisionedModelSummary_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ProvisionedModelSummary_lastModifiedTime, v.LastModifiedTime)
+		case schemas.ProvisionedModelSummary_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ProvisionedModelSummary_modelArn, v.ModelArn)
+		case schemas.ProvisionedModelSummary_modelUnits:
+			v.ModelUnits = new(int32)
+			return d.ReadInt32(schemas.ProvisionedModelSummary_modelUnits, v.ModelUnits)
+		case schemas.ProvisionedModelSummary_provisionedModelArn:
+			v.ProvisionedModelArn = new(string)
+			return d.ReadString(schemas.ProvisionedModelSummary_provisionedModelArn, v.ProvisionedModelArn)
+		case schemas.ProvisionedModelSummary_provisionedModelName:
+			v.ProvisionedModelName = new(string)
+			return d.ReadString(schemas.ProvisionedModelSummary_provisionedModelName, v.ProvisionedModelName)
+		case schemas.ProvisionedModelSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ProvisionedModelSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProvisionedModelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration details for transforming the prompt.
 type QueryTransformationConfiguration struct {
 
@@ -5981,6 +13648,32 @@ type QueryTransformationConfiguration struct {
 	Type QueryTransformationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryTransformationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryTransformationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTransformationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.QueryTransformationConfiguration_type, string(v.Type))
+	}
+}
+func (v *QueryTransformationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryTransformationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryTransformationConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.QueryTransformationConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = QueryTransformationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains configuration details for retrieval of information and response
@@ -6003,6 +13696,12 @@ type RAGConfigMemberKnowledgeBaseConfig struct {
 }
 
 func (*RAGConfigMemberKnowledgeBaseConfig) isRAGConfig() {}
+func (v *RAGConfigMemberKnowledgeBaseConfig) Serialize(s smithy.ShapeSerializer) {
+	serializeKnowledgeBaseConfig(s, schemas.RAGConfig_knowledgeBaseConfig, v.Value)
+}
+func (v *RAGConfigMemberKnowledgeBaseConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeKnowledgeBaseConfig(d, schemas.RAGConfig_knowledgeBaseConfig, &v.Value)
+}
 
 // Contains configuration details about the RAG source used to generate inference
 // response data for a Knowledge Base evaluation job.
@@ -6013,6 +13712,12 @@ type RAGConfigMemberPrecomputedRagSourceConfig struct {
 }
 
 func (*RAGConfigMemberPrecomputedRagSourceConfig) isRAGConfig() {}
+func (v *RAGConfigMemberPrecomputedRagSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	serializeEvaluationPrecomputedRagSourceConfig(s, schemas.RAGConfig_precomputedRagSourceConfig, v.Value)
+}
+func (v *RAGConfigMemberPrecomputedRagSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeEvaluationPrecomputedRagSourceConfig(d, schemas.RAGConfig_precomputedRagSourceConfig, &v.Value)
+}
 
 // Defines the value and corresponding definition for one rating in a custom
 // metric rating scale.
@@ -6029,6 +13734,31 @@ type RatingScaleItem struct {
 	Value RatingScaleItemValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *RatingScaleItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RatingScaleItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RatingScaleItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.RatingScaleItem_definition, *v.Definition)
+	}
+	serializeRatingScaleItemValue(s, schemas.RatingScaleItem_value, v.Value)
+}
+func (v *RatingScaleItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RatingScaleItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RatingScaleItem_definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.RatingScaleItem_definition, v.Definition)
+		case schemas.RatingScaleItem_value:
+			return deserializeRatingScaleItemValue(d, schemas.RatingScaleItem_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Defines the value for one rating in a custom metric rating scale.
@@ -6050,6 +13780,12 @@ type RatingScaleItemValueMemberFloatValue struct {
 }
 
 func (*RatingScaleItemValueMemberFloatValue) isRatingScaleItemValue() {}
+func (v *RatingScaleItemValueMemberFloatValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat32(schemas.RatingScaleItemValue_floatValue, v.Value)
+}
+func (v *RatingScaleItemValueMemberFloatValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat32(schemas.RatingScaleItemValue_floatValue, &v.Value)
+}
 
 // A string representing the value for a rating in a custom metric rating scale.
 type RatingScaleItemValueMemberStringValue struct {
@@ -6059,6 +13795,12 @@ type RatingScaleItemValueMemberStringValue struct {
 }
 
 func (*RatingScaleItemValueMemberStringValue) isRatingScaleItemValue() {}
+func (v *RatingScaleItemValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.RatingScaleItemValue_stringValue, v.Value)
+}
+func (v *RatingScaleItemValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.RatingScaleItemValue_stringValue, &v.Value)
+}
 
 // A mapping of a metadata key to a value that it should or should not equal.
 type RequestMetadataBaseFilters struct {
@@ -6070,6 +13812,28 @@ type RequestMetadataBaseFilters struct {
 	NotEquals map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestMetadataBaseFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestMetadataBaseFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestMetadataBaseFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRequestMetadataMap(s, schemas.RequestMetadataBaseFilters_equals, v.Equals)
+	serializeRequestMetadataMap(s, schemas.RequestMetadataBaseFilters_notEquals, v.NotEquals)
+}
+func (v *RequestMetadataBaseFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestMetadataBaseFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestMetadataBaseFilters_equals:
+			return deserializeRequestMetadataMap(d, schemas.RequestMetadataBaseFilters_equals, &v.Equals)
+		case schemas.RequestMetadataBaseFilters_notEquals:
+			return deserializeRequestMetadataMap(d, schemas.RequestMetadataBaseFilters_notEquals, &v.NotEquals)
+		}
+		return nil
+	})
 }
 
 // Rules for filtering invocation logs. A filter can be a mapping of a metadata
@@ -6094,6 +13858,12 @@ type RequestMetadataFiltersMemberAndAll struct {
 }
 
 func (*RequestMetadataFiltersMemberAndAll) isRequestMetadataFilters() {}
+func (v *RequestMetadataFiltersMemberAndAll) Serialize(s smithy.ShapeSerializer) {
+	serializeRequestMetadataFiltersList(s, schemas.RequestMetadataFilters_andAll, v.Value)
+}
+func (v *RequestMetadataFiltersMemberAndAll) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRequestMetadataFiltersList(d, schemas.RequestMetadataFilters_andAll, &v.Value)
+}
 
 // Include results where the key equals the value.
 type RequestMetadataFiltersMemberEquals struct {
@@ -6103,6 +13873,12 @@ type RequestMetadataFiltersMemberEquals struct {
 }
 
 func (*RequestMetadataFiltersMemberEquals) isRequestMetadataFilters() {}
+func (v *RequestMetadataFiltersMemberEquals) Serialize(s smithy.ShapeSerializer) {
+	serializeRequestMetadataMap(s, schemas.RequestMetadataFilters_equals, v.Value)
+}
+func (v *RequestMetadataFiltersMemberEquals) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRequestMetadataMap(d, schemas.RequestMetadataFilters_equals, &v.Value)
+}
 
 // Include results where the key does not equal the value.
 type RequestMetadataFiltersMemberNotEquals struct {
@@ -6112,6 +13888,12 @@ type RequestMetadataFiltersMemberNotEquals struct {
 }
 
 func (*RequestMetadataFiltersMemberNotEquals) isRequestMetadataFilters() {}
+func (v *RequestMetadataFiltersMemberNotEquals) Serialize(s smithy.ShapeSerializer) {
+	serializeRequestMetadataMap(s, schemas.RequestMetadataFilters_notEquals, v.Value)
+}
+func (v *RequestMetadataFiltersMemberNotEquals) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRequestMetadataMap(d, schemas.RequestMetadataFilters_notEquals, &v.Value)
+}
 
 // Include results where any of the base filters match.
 type RequestMetadataFiltersMemberOrAll struct {
@@ -6121,6 +13903,12 @@ type RequestMetadataFiltersMemberOrAll struct {
 }
 
 func (*RequestMetadataFiltersMemberOrAll) isRequestMetadataFilters() {}
+func (v *RequestMetadataFiltersMemberOrAll) Serialize(s smithy.ShapeSerializer) {
+	serializeRequestMetadataFiltersList(s, schemas.RequestMetadataFilters_orAll, v.Value)
+}
+func (v *RequestMetadataFiltersMemberOrAll) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRequestMetadataFiltersList(d, schemas.RequestMetadataFilters_orAll, &v.Value)
+}
 
 // Configuration for selectively including or excluding metadata fields during the
 // reranking process. This allows you to control which metadata attributes are
@@ -6145,6 +13933,12 @@ type RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude struct {
 
 func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) isRerankingMetadataSelectiveModeConfiguration() {
 }
+func (v *RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) Serialize(s smithy.ShapeSerializer) {
+	serializeFieldsForReranking(s, schemas.RerankingMetadataSelectiveModeConfiguration_fieldsToExclude, v.Value)
+}
+func (v *RerankingMetadataSelectiveModeConfigurationMemberFieldsToExclude) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeFieldsForReranking(d, schemas.RerankingMetadataSelectiveModeConfiguration_fieldsToExclude, &v.Value)
+}
 
 // A list of metadata field names to explicitly include in the reranking process.
 // Only these fields will be considered when reordering search results. This
@@ -6156,6 +13950,12 @@ type RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude struct {
 }
 
 func (*RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) isRerankingMetadataSelectiveModeConfiguration() {
+}
+func (v *RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) Serialize(s smithy.ShapeSerializer) {
+	serializeFieldsForReranking(s, schemas.RerankingMetadataSelectiveModeConfiguration_fieldsToInclude, v.Value)
+}
+func (v *RerankingMetadataSelectiveModeConfigurationMemberFieldsToInclude) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeFieldsForReranking(d, schemas.RerankingMetadataSelectiveModeConfiguration_fieldsToInclude, &v.Value)
 }
 
 // Specifies the filters to use on the metadata attributes/fields in the knowledge
@@ -6189,6 +13989,12 @@ type RetrievalFilterMemberAndAll struct {
 }
 
 func (*RetrievalFilterMemberAndAll) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberAndAll) Serialize(s smithy.ShapeSerializer) {
+	serializeRetrievalFilterList(s, schemas.RetrievalFilter_andAll, v.Value)
+}
+func (v *RetrievalFilterMemberAndAll) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRetrievalFilterList(d, schemas.RetrievalFilter_andAll, &v.Value)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value matches the value in this object.
@@ -6202,6 +14008,14 @@ type RetrievalFilterMemberEquals struct {
 }
 
 func (*RetrievalFilterMemberEquals) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberEquals) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_equals)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberEquals) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is greater than the value in this
@@ -6216,6 +14030,14 @@ type RetrievalFilterMemberGreaterThan struct {
 }
 
 func (*RetrievalFilterMemberGreaterThan) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberGreaterThan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_greaterThan)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberGreaterThan) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is greater than or equal to the value
@@ -6231,6 +14053,14 @@ type RetrievalFilterMemberGreaterThanOrEquals struct {
 }
 
 func (*RetrievalFilterMemberGreaterThanOrEquals) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberGreaterThanOrEquals) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_greaterThanOrEquals)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberGreaterThanOrEquals) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is in the list specified in the value
@@ -6245,6 +14075,14 @@ type RetrievalFilterMemberIn struct {
 }
 
 func (*RetrievalFilterMemberIn) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberIn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_in)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberIn) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is less than the value in this
@@ -6259,6 +14097,14 @@ type RetrievalFilterMemberLessThan struct {
 }
 
 func (*RetrievalFilterMemberLessThan) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberLessThan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_lessThan)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberLessThan) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is less than or equal to the value in
@@ -6274,6 +14120,14 @@ type RetrievalFilterMemberLessThanOrEquals struct {
 }
 
 func (*RetrievalFilterMemberLessThanOrEquals) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberLessThanOrEquals) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_lessThanOrEquals)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberLessThanOrEquals) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is a list that contains the value as
@@ -6289,6 +14143,14 @@ type RetrievalFilterMemberListContains struct {
 }
 
 func (*RetrievalFilterMemberListContains) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberListContains) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_listContains)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberListContains) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources that contain a metadata attribute whose name
 // matches the key and whose value doesn't match the value in this object are
@@ -6303,6 +14165,14 @@ type RetrievalFilterMemberNotEquals struct {
 }
 
 func (*RetrievalFilterMemberNotEquals) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberNotEquals) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_notEquals)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberNotEquals) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value isn't in the list specified in the
@@ -6317,6 +14187,14 @@ type RetrievalFilterMemberNotIn struct {
 }
 
 func (*RetrievalFilterMemberNotIn) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberNotIn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_notIn)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberNotIn) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if their metadata attributes fulfill
 // at least one of the filter conditions inside this list.
@@ -6327,6 +14205,12 @@ type RetrievalFilterMemberOrAll struct {
 }
 
 func (*RetrievalFilterMemberOrAll) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberOrAll) Serialize(s smithy.ShapeSerializer) {
+	serializeRetrievalFilterList(s, schemas.RetrievalFilter_orAll, v.Value)
+}
+func (v *RetrievalFilterMemberOrAll) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRetrievalFilterList(d, schemas.RetrievalFilter_orAll, &v.Value)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value starts with the value in this object.
@@ -6343,6 +14227,14 @@ type RetrievalFilterMemberStartsWith struct {
 }
 
 func (*RetrievalFilterMemberStartsWith) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberStartsWith) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_startsWith)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberStartsWith) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Knowledge base data sources are returned if they contain a metadata attribute
 // whose name matches the key and whose value is one of the following:
@@ -6362,6 +14254,14 @@ type RetrievalFilterMemberStringContains struct {
 }
 
 func (*RetrievalFilterMemberStringContains) isRetrievalFilter() {}
+func (v *RetrievalFilterMemberStringContains) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrievalFilter_stringContains)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RetrievalFilterMemberStringContains) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains configuration details for a knowledge base retrieval and response
 // generation.
@@ -6387,6 +14287,48 @@ type RetrieveAndGenerateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveAndGenerateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveAndGenerateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveAndGenerateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalSourcesConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateConfiguration_externalSourcesConfiguration)
+		v.ExternalSourcesConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveAndGenerateConfiguration_knowledgeBaseConfiguration)
+		v.KnowledgeBaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RetrieveAndGenerateConfiguration_type, string(v.Type))
+	}
+}
+func (v *RetrieveAndGenerateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveAndGenerateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveAndGenerateConfiguration_externalSourcesConfiguration:
+			v.ExternalSourcesConfiguration = &ExternalSourcesRetrieveAndGenerateConfiguration{}
+			return v.ExternalSourcesConfiguration.Deserialize(d)
+		case schemas.RetrieveAndGenerateConfiguration_knowledgeBaseConfiguration:
+			v.KnowledgeBaseConfiguration = &KnowledgeBaseRetrieveAndGenerateConfiguration{}
+			return v.KnowledgeBaseConfiguration.Deserialize(d)
+		case schemas.RetrieveAndGenerateConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.RetrieveAndGenerateConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = RetrieveAndGenerateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration details for retrieving information from a knowledge base.
 type RetrieveConfig struct {
 
@@ -6403,6 +14345,36 @@ type RetrieveConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.RetrieveConfig_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.KnowledgeBaseRetrievalConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveConfig_knowledgeBaseRetrievalConfiguration)
+		v.KnowledgeBaseRetrievalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RetrieveConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveConfig_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.RetrieveConfig_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.RetrieveConfig_knowledgeBaseRetrievalConfiguration:
+			v.KnowledgeBaseRetrievalConfiguration = &KnowledgeBaseRetrievalConfiguration{}
+			return v.KnowledgeBaseRetrievalConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Configuration settings for reinforcement fine-tuning (RFT), including grader
 //
 // configuration and training hyperparameters.
@@ -6417,6 +14389,33 @@ type RFTConfig struct {
 	HyperParameters *RFTHyperParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *RFTConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RFTConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RFTConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraderConfig(s, schemas.RFTConfig_graderConfig, v.GraderConfig)
+	if v.HyperParameters != nil {
+		s.WriteStruct(schemas.RFTConfig_hyperParameters)
+		v.HyperParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RFTConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RFTConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RFTConfig_graderConfig:
+			return deserializeGraderConfig(d, schemas.RFTConfig_graderConfig, &v.GraderConfig)
+		case schemas.RFTConfig_hyperParameters:
+			v.HyperParameters = &RFTHyperParameters{}
+			return v.HyperParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Hyperparameters for controlling the reinforcement fine-tuning training
@@ -6459,6 +14458,74 @@ type RFTHyperParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RFTHyperParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RFTHyperParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RFTHyperParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchSize != nil {
+		s.WriteInt32(schemas.RFTHyperParameters_batchSize, *v.BatchSize)
+	}
+	if v.EpochCount != nil {
+		s.WriteInt32(schemas.RFTHyperParameters_epochCount, *v.EpochCount)
+	}
+	if v.EvalInterval != nil {
+		s.WriteInt32(schemas.RFTHyperParameters_evalInterval, *v.EvalInterval)
+	}
+	if v.InferenceMaxTokens != nil {
+		s.WriteInt32(schemas.RFTHyperParameters_inferenceMaxTokens, *v.InferenceMaxTokens)
+	}
+	if v.LearningRate != nil {
+		s.WriteFloat32(schemas.RFTHyperParameters_learningRate, *v.LearningRate)
+	}
+	if v.MaxPromptLength != nil {
+		s.WriteInt32(schemas.RFTHyperParameters_maxPromptLength, *v.MaxPromptLength)
+	}
+	if v.ReasoningEffort != "" {
+		s.WriteString(schemas.RFTHyperParameters_reasoningEffort, string(v.ReasoningEffort))
+	}
+	if v.TrainingSamplePerPrompt != nil {
+		s.WriteInt32(schemas.RFTHyperParameters_trainingSamplePerPrompt, *v.TrainingSamplePerPrompt)
+	}
+}
+func (v *RFTHyperParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RFTHyperParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RFTHyperParameters_batchSize:
+			v.BatchSize = new(int32)
+			return d.ReadInt32(schemas.RFTHyperParameters_batchSize, v.BatchSize)
+		case schemas.RFTHyperParameters_epochCount:
+			v.EpochCount = new(int32)
+			return d.ReadInt32(schemas.RFTHyperParameters_epochCount, v.EpochCount)
+		case schemas.RFTHyperParameters_evalInterval:
+			v.EvalInterval = new(int32)
+			return d.ReadInt32(schemas.RFTHyperParameters_evalInterval, v.EvalInterval)
+		case schemas.RFTHyperParameters_inferenceMaxTokens:
+			v.InferenceMaxTokens = new(int32)
+			return d.ReadInt32(schemas.RFTHyperParameters_inferenceMaxTokens, v.InferenceMaxTokens)
+		case schemas.RFTHyperParameters_learningRate:
+			v.LearningRate = new(float32)
+			return d.ReadFloat32(schemas.RFTHyperParameters_learningRate, v.LearningRate)
+		case schemas.RFTHyperParameters_maxPromptLength:
+			v.MaxPromptLength = new(int32)
+			return d.ReadInt32(schemas.RFTHyperParameters_maxPromptLength, v.MaxPromptLength)
+		case schemas.RFTHyperParameters_reasoningEffort:
+			var ev string
+			if err := d.ReadString(schemas.RFTHyperParameters_reasoningEffort, &ev); err != nil {
+				return err
+			}
+			v.ReasoningEffort = ReasoningEffort(ev)
+			return nil
+		case schemas.RFTHyperParameters_trainingSamplePerPrompt:
+			v.TrainingSamplePerPrompt = new(int32)
+			return d.ReadInt32(schemas.RFTHyperParameters_trainingSamplePerPrompt, v.TrainingSamplePerPrompt)
+		}
+		return nil
+	})
+}
+
 // Routing criteria for a prompt router.
 type RoutingCriteria struct {
 
@@ -6468,6 +14535,28 @@ type RoutingCriteria struct {
 	ResponseQualityDifference *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RoutingCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResponseQualityDifference != nil {
+		s.WriteFloat64(schemas.RoutingCriteria_responseQualityDifference, *v.ResponseQualityDifference)
+	}
+}
+func (v *RoutingCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingCriteria_responseQualityDifference:
+			v.ResponseQualityDifference = new(float64)
+			return d.ReadFloat64(schemas.RoutingCriteria_responseQualityDifference, v.ResponseQualityDifference)
+		}
+		return nil
+	})
 }
 
 // S3 configuration for storing log data.
@@ -6484,6 +14573,34 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Config) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Config)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Config) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Config_bucketName, *v.BucketName)
+	}
+	if v.KeyPrefix != nil {
+		s.WriteString(schemas.S3Config_keyPrefix, *v.KeyPrefix)
+	}
+}
+func (v *S3Config) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Config, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Config_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Config_bucketName, v.BucketName)
+		case schemas.S3Config_keyPrefix:
+			v.KeyPrefix = new(string)
+			return d.ReadString(schemas.S3Config_keyPrefix, v.KeyPrefix)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 data source of the model to import.
 type S3DataSource struct {
 
@@ -6495,6 +14612,28 @@ type S3DataSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.S3DataSource_s3Uri, *v.S3Uri)
+	}
+}
+func (v *S3DataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DataSource_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.S3DataSource_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // The unique wrapper object of the document from the S3 location.
 type S3ObjectDoc struct {
 
@@ -6504,6 +14643,28 @@ type S3ObjectDoc struct {
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ObjectDoc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ObjectDoc)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ObjectDoc) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Uri != nil {
+		s.WriteString(schemas.S3ObjectDoc_uri, *v.Uri)
+	}
+}
+func (v *S3ObjectDoc) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ObjectDoc, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ObjectDoc_uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.S3ObjectDoc_uri, v.Uri)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for a Amazon SageMaker endpoint.
@@ -6538,6 +14699,54 @@ type SageMakerEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SageMakerEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.SageMakerEndpoint_executionRole, *v.ExecutionRole)
+	}
+	if v.InitialInstanceCount != nil {
+		s.WriteInt32(schemas.SageMakerEndpoint_initialInstanceCount, *v.InitialInstanceCount)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.SageMakerEndpoint_instanceType, *v.InstanceType)
+	}
+	if v.KmsEncryptionKey != nil {
+		s.WriteString(schemas.SageMakerEndpoint_kmsEncryptionKey, *v.KmsEncryptionKey)
+	}
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.SageMakerEndpoint_vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SageMakerEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerEndpoint_executionRole:
+			v.ExecutionRole = new(string)
+			return d.ReadString(schemas.SageMakerEndpoint_executionRole, v.ExecutionRole)
+		case schemas.SageMakerEndpoint_initialInstanceCount:
+			v.InitialInstanceCount = new(int32)
+			return d.ReadInt32(schemas.SageMakerEndpoint_initialInstanceCount, v.InitialInstanceCount)
+		case schemas.SageMakerEndpoint_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.SageMakerEndpoint_instanceType, v.InstanceType)
+		case schemas.SageMakerEndpoint_kmsEncryptionKey:
+			v.KmsEncryptionKey = new(string)
+			return d.ReadString(schemas.SageMakerEndpoint_kmsEncryptionKey, v.KmsEncryptionKey)
+		case schemas.SageMakerEndpoint_vpc:
+			v.Vpc = &VpcConfig{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Selective content guarding controls for enforced guardrails.
 type SelectiveContentGuarding struct {
 
@@ -6548,6 +14757,42 @@ type SelectiveContentGuarding struct {
 	System SelectiveGuardingMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelectiveContentGuarding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectiveContentGuarding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectiveContentGuarding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Messages != "" {
+		s.WriteString(schemas.SelectiveContentGuarding_messages, string(v.Messages))
+	}
+	if v.System != "" {
+		s.WriteString(schemas.SelectiveContentGuarding_system, string(v.System))
+	}
+}
+func (v *SelectiveContentGuarding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectiveContentGuarding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectiveContentGuarding_messages:
+			var ev string
+			if err := d.ReadString(schemas.SelectiveContentGuarding_messages, &ev); err != nil {
+				return err
+			}
+			v.Messages = SelectiveGuardingMode(ev)
+			return nil
+		case schemas.SelectiveContentGuarding_system:
+			var ev string
+			if err := d.ReadString(schemas.SelectiveContentGuarding_system, &ev); err != nil {
+				return err
+			}
+			v.System = SelectiveGuardingMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // For a Distillation job, the status details for sub-tasks of the job. Possible
@@ -6578,6 +14823,46 @@ type StatusDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StatusDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatusDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatusDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProcessingDetails != nil {
+		s.WriteStruct(schemas.StatusDetails_dataProcessingDetails)
+		v.DataProcessingDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingDetails != nil {
+		s.WriteStruct(schemas.StatusDetails_trainingDetails)
+		v.TrainingDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationDetails != nil {
+		s.WriteStruct(schemas.StatusDetails_validationDetails)
+		v.ValidationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatusDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatusDetails_dataProcessingDetails:
+			v.DataProcessingDetails = &DataProcessingDetails{}
+			return v.DataProcessingDetails.Deserialize(d)
+		case schemas.StatusDetails_trainingDetails:
+			v.TrainingDetails = &TrainingDetails{}
+			return v.TrainingDetails.Deserialize(d)
+		case schemas.StatusDetails_validationDetails:
+			v.ValidationDetails = &ValidationDetails{}
+			return v.ValidationDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a support term.
 type SupportTerm struct {
 
@@ -6585,6 +14870,28 @@ type SupportTerm struct {
 	RefundPolicyDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SupportTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RefundPolicyDescription != nil {
+		s.WriteString(schemas.SupportTerm_refundPolicyDescription, *v.RefundPolicyDescription)
+	}
+}
+func (v *SupportTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportTerm_refundPolicyDescription:
+			v.RefundPolicyDescription = new(string)
+			return d.ReadString(schemas.SupportTerm_refundPolicyDescription, v.RefundPolicyDescription)
+		}
+		return nil
+	})
 }
 
 // Definition of the key/value pair for a tag.
@@ -6603,6 +14910,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Details about a teacher model used for model customization.
 type TeacherModelConfig struct {
 
@@ -6616,6 +14951,34 @@ type TeacherModelConfig struct {
 	MaxResponseLengthForInference *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TeacherModelConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TeacherModelConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TeacherModelConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResponseLengthForInference != nil {
+		s.WriteInt32(schemas.TeacherModelConfig_maxResponseLengthForInference, *v.MaxResponseLengthForInference)
+	}
+	if v.TeacherModelIdentifier != nil {
+		s.WriteString(schemas.TeacherModelConfig_teacherModelIdentifier, *v.TeacherModelIdentifier)
+	}
+}
+func (v *TeacherModelConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TeacherModelConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TeacherModelConfig_maxResponseLengthForInference:
+			v.MaxResponseLengthForInference = new(int32)
+			return d.ReadInt32(schemas.TeacherModelConfig_maxResponseLengthForInference, v.MaxResponseLengthForInference)
+		case schemas.TeacherModelConfig_teacherModelIdentifier:
+			v.TeacherModelIdentifier = new(string)
+			return d.ReadString(schemas.TeacherModelConfig_teacherModelIdentifier, v.TeacherModelIdentifier)
+		}
+		return nil
+	})
 }
 
 // Describes the usage terms of an offer.
@@ -6640,6 +15003,54 @@ type TermDetails struct {
 	ValidityTerm *ValidityTerm
 
 	noSmithyDocumentSerde
+}
+
+func (v *TermDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TermDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TermDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LegalTerm != nil {
+		s.WriteStruct(schemas.TermDetails_legalTerm)
+		v.LegalTerm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupportTerm != nil {
+		s.WriteStruct(schemas.TermDetails_supportTerm)
+		v.SupportTerm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UsageBasedPricingTerm != nil {
+		s.WriteStruct(schemas.TermDetails_usageBasedPricingTerm)
+		v.UsageBasedPricingTerm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidityTerm != nil {
+		s.WriteStruct(schemas.TermDetails_validityTerm)
+		v.ValidityTerm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TermDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TermDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TermDetails_legalTerm:
+			v.LegalTerm = &LegalTerm{}
+			return v.LegalTerm.Deserialize(d)
+		case schemas.TermDetails_supportTerm:
+			v.SupportTerm = &SupportTerm{}
+			return v.SupportTerm.Deserialize(d)
+		case schemas.TermDetails_usageBasedPricingTerm:
+			v.UsageBasedPricingTerm = &PricingTerm{}
+			return v.UsageBasedPricingTerm.Deserialize(d)
+		case schemas.TermDetails_validityTerm:
+			v.ValidityTerm = &ValidityTerm{}
+			return v.ValidityTerm.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration details for text generation using a language model via the
@@ -6673,6 +15084,43 @@ type TextInferenceConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextInferenceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextInferenceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextInferenceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxTokens != nil {
+		s.WriteInt32(schemas.TextInferenceConfig_maxTokens, *v.MaxTokens)
+	}
+	serializeRAGStopSequences(s, schemas.TextInferenceConfig_stopSequences, v.StopSequences)
+	if v.Temperature != nil {
+		s.WriteFloat32(schemas.TextInferenceConfig_temperature, *v.Temperature)
+	}
+	if v.TopP != nil {
+		s.WriteFloat32(schemas.TextInferenceConfig_topP, *v.TopP)
+	}
+}
+func (v *TextInferenceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextInferenceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextInferenceConfig_maxTokens:
+			v.MaxTokens = new(int32)
+			return d.ReadInt32(schemas.TextInferenceConfig_maxTokens, v.MaxTokens)
+		case schemas.TextInferenceConfig_stopSequences:
+			return deserializeRAGStopSequences(d, schemas.TextInferenceConfig_stopSequences, &v.StopSequences)
+		case schemas.TextInferenceConfig_temperature:
+			v.Temperature = new(float32)
+			return d.ReadFloat32(schemas.TextInferenceConfig_temperature, v.Temperature)
+		case schemas.TextInferenceConfig_topP:
+			v.TopP = new(float32)
+			return d.ReadFloat32(schemas.TextInferenceConfig_topP, v.TopP)
+		}
+		return nil
+	})
+}
+
 // S3 Location of the training data.
 type TrainingDataConfig struct {
 
@@ -6683,6 +15131,36 @@ type TrainingDataConfig struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrainingDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvocationLogsConfig != nil {
+		s.WriteStruct(schemas.TrainingDataConfig_invocationLogsConfig)
+		v.InvocationLogsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.TrainingDataConfig_s3Uri, *v.S3Uri)
+	}
+}
+func (v *TrainingDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingDataConfig_invocationLogsConfig:
+			v.InvocationLogsConfig = &InvocationLogsConfig{}
+			return v.InvocationLogsConfig.Deserialize(d)
+		case schemas.TrainingDataConfig_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.TrainingDataConfig_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // For a Distillation job, the status details for the training sub-task of the job.
@@ -6700,6 +15178,44 @@ type TrainingDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TrainingDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TrainingDetails_creationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.TrainingDetails_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TrainingDetails_status, string(v.Status))
+	}
+}
+func (v *TrainingDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingDetails_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingDetails_creationTime, v.CreationTime)
+		case schemas.TrainingDetails_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.TrainingDetails_lastModifiedTime, v.LastModifiedTime)
+		case schemas.TrainingDetails_status:
+			var ev string
+			if err := d.ReadString(schemas.TrainingDetails_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatusDetails(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Metrics associated with the custom job.
 type TrainingMetrics struct {
 
@@ -6707,6 +15223,28 @@ type TrainingMetrics struct {
 	TrainingLoss *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrainingMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrainingMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrainingMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingLoss != nil {
+		s.WriteFloat32(schemas.TrainingMetrics_trainingLoss, *v.TrainingLoss)
+	}
+}
+func (v *TrainingMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrainingMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrainingMetrics_trainingLoss:
+			v.TrainingLoss = new(float32)
+			return d.ReadFloat32(schemas.TrainingMetrics_trainingLoss, v.TrainingLoss)
+		}
+		return nil
+	})
 }
 
 // Array of up to 10 validators.
@@ -6718,6 +15256,25 @@ type ValidationDataConfig struct {
 	Validators []Validator
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidators(s, schemas.ValidationDataConfig_validators, v.Validators)
+}
+func (v *ValidationDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationDataConfig_validators:
+			return deserializeValidators(d, schemas.ValidationDataConfig_validators, &v.Validators)
+		}
+		return nil
+	})
 }
 
 // For a Distillation job, the status details for the validation sub-task of the
@@ -6736,6 +15293,44 @@ type ValidationDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ValidationDetails_creationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ValidationDetails_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ValidationDetails_status, string(v.Status))
+	}
+}
+func (v *ValidationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationDetails_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ValidationDetails_creationTime, v.CreationTime)
+		case schemas.ValidationDetails_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ValidationDetails_lastModifiedTime, v.LastModifiedTime)
+		case schemas.ValidationDetails_status:
+			var ev string
+			if err := d.ReadString(schemas.ValidationDetails_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatusDetails(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about a validator.
 type Validator struct {
 
@@ -6747,6 +15342,28 @@ type Validator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Validator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Validator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Validator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.Validator_s3Uri, *v.S3Uri)
+	}
+}
+func (v *Validator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Validator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Validator_s3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.Validator_s3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // The metric for the validator.
 type ValidatorMetric struct {
 
@@ -6756,6 +15373,28 @@ type ValidatorMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidatorMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidatorMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidatorMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ValidationLoss != nil {
+		s.WriteFloat32(schemas.ValidatorMetric_validationLoss, *v.ValidationLoss)
+	}
+}
+func (v *ValidatorMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidatorMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidatorMetric_validationLoss:
+			v.ValidationLoss = new(float32)
+			return d.ReadFloat32(schemas.ValidatorMetric_validationLoss, v.ValidationLoss)
+		}
+		return nil
+	})
+}
+
 // Describes the validity terms.
 type ValidityTerm struct {
 
@@ -6763,6 +15402,28 @@ type ValidityTerm struct {
 	AgreementDuration *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidityTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidityTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidityTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementDuration != nil {
+		s.WriteString(schemas.ValidityTerm_agreementDuration, *v.AgreementDuration)
+	}
+}
+func (v *ValidityTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidityTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidityTerm_agreementDuration:
+			v.AgreementDuration = new(string)
+			return d.ReadString(schemas.ValidityTerm_agreementDuration, v.AgreementDuration)
+		}
+		return nil
+	})
 }
 
 // Configuration for using Amazon Bedrock foundation models to rerank Knowledge
@@ -6789,6 +15450,44 @@ type VectorSearchBedrockRerankingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VectorSearchBedrockRerankingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorSearchBedrockRerankingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorSearchBedrockRerankingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.VectorSearchBedrockRerankingConfiguration_metadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelConfiguration != nil {
+		s.WriteStruct(schemas.VectorSearchBedrockRerankingConfiguration_modelConfiguration)
+		v.ModelConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfRerankedResults != nil {
+		s.WriteInt32(schemas.VectorSearchBedrockRerankingConfiguration_numberOfRerankedResults, *v.NumberOfRerankedResults)
+	}
+}
+func (v *VectorSearchBedrockRerankingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorSearchBedrockRerankingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorSearchBedrockRerankingConfiguration_metadataConfiguration:
+			v.MetadataConfiguration = &MetadataConfigurationForReranking{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.VectorSearchBedrockRerankingConfiguration_modelConfiguration:
+			v.ModelConfiguration = &VectorSearchBedrockRerankingModelConfiguration{}
+			return v.ModelConfiguration.Deserialize(d)
+		case schemas.VectorSearchBedrockRerankingConfiguration_numberOfRerankedResults:
+			v.NumberOfRerankedResults = new(int32)
+			return d.ReadInt32(schemas.VectorSearchBedrockRerankingConfiguration_numberOfRerankedResults, v.NumberOfRerankedResults)
+		}
+		return nil
+	})
+}
+
 // Configuration for the Amazon Bedrock foundation model used for reranking vector
 // search results. This specifies which model to use and any additional parameters
 // required by the model.
@@ -6807,6 +15506,31 @@ type VectorSearchBedrockRerankingModelConfiguration struct {
 	AdditionalModelRequestFields map[string]document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *VectorSearchBedrockRerankingModelConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorSearchBedrockRerankingModelConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorSearchBedrockRerankingModelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalModelRequestFields(s, schemas.VectorSearchBedrockRerankingModelConfiguration_additionalModelRequestFields, v.AdditionalModelRequestFields)
+	if v.ModelArn != nil {
+		s.WriteString(schemas.VectorSearchBedrockRerankingModelConfiguration_modelArn, *v.ModelArn)
+	}
+}
+func (v *VectorSearchBedrockRerankingModelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorSearchBedrockRerankingModelConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorSearchBedrockRerankingModelConfiguration_additionalModelRequestFields:
+			return deserializeAdditionalModelRequestFields(d, schemas.VectorSearchBedrockRerankingModelConfiguration_additionalModelRequestFields, &v.AdditionalModelRequestFields)
+		case schemas.VectorSearchBedrockRerankingModelConfiguration_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.VectorSearchBedrockRerankingModelConfiguration_modelArn, v.ModelArn)
+		}
+		return nil
+	})
 }
 
 // Configuration for reranking vector search results to improve relevance.
@@ -6828,6 +15552,40 @@ type VectorSearchRerankingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VectorSearchRerankingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorSearchRerankingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorSearchRerankingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BedrockRerankingConfiguration != nil {
+		s.WriteStruct(schemas.VectorSearchRerankingConfiguration_bedrockRerankingConfiguration)
+		v.BedrockRerankingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.VectorSearchRerankingConfiguration_type, string(v.Type))
+	}
+}
+func (v *VectorSearchRerankingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorSearchRerankingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorSearchRerankingConfiguration_bedrockRerankingConfiguration:
+			v.BedrockRerankingConfiguration = &VectorSearchBedrockRerankingConfiguration{}
+			return v.BedrockRerankingConfiguration.Deserialize(d)
+		case schemas.VectorSearchRerankingConfiguration_type:
+			var ev string
+			if err := d.ReadString(schemas.VectorSearchRerankingConfiguration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = VectorSearchRerankingConfigurationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration of a virtual private cloud (VPC). For more information, see [Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink].
 //
 // [Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink]: https://docs.aws.amazon.com/bedrock/latest/userguide/usingVPC.html
@@ -6844,6 +15602,28 @@ type VpcConfig struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfig_subnetIds, v.SubnetIds)
+}
+func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfig_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfig_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfig_subnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfig_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

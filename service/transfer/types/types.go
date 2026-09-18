@@ -4835,6 +4835,12 @@ type ProtocolDetails struct {
 	// [Avoid placing NLBs and NATs in front of Transfer Family]: https://docs.aws.amazon.com/transfer/latest/userguide/infrastructure-security.html#nlb-considerations
 	PassiveIp *string
 
+	// The configuration for PROXY protocol version 2 (PPv2) support on the Transfer
+	// Family server. For more information, see [Working with Network Load Balancers].
+	//
+	// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+	ProxyConfig *ProxyConfig
+
 	// Use the SetStatOption to ignore the error that is generated when the client
 	// attempts to use SETSTAT on a file you are uploading to an S3 bucket.
 	//
@@ -4896,6 +4902,11 @@ func (v *ProtocolDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PassiveIp != nil {
 		s.WriteString(schemas.ProtocolDetails_PassiveIp, *v.PassiveIp)
 	}
+	if v.ProxyConfig != nil {
+		s.WriteStruct(schemas.ProtocolDetails_ProxyConfig)
+		v.ProxyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SetStatOption != "" {
 		s.WriteString(schemas.ProtocolDetails_SetStatOption, string(v.SetStatOption))
 	}
@@ -4911,6 +4922,9 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProtocolDetails_PassiveIp:
 			v.PassiveIp = new(string)
 			return d.ReadString(schemas.ProtocolDetails_PassiveIp, v.PassiveIp)
+		case schemas.ProtocolDetails_ProxyConfig:
+			v.ProxyConfig = &ProxyConfig{}
+			return v.ProxyConfig.Deserialize(d)
 		case schemas.ProtocolDetails_SetStatOption:
 			var ev string
 			if err := d.ReadString(schemas.ProtocolDetails_SetStatOption, &ev); err != nil {
@@ -4924,6 +4938,70 @@ func (v *ProtocolDetails) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.TlsSessionResumptionMode = TlsSessionResumptionMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains configuration for PROXY protocol version 2 (PPv2) support on an
+// Transfer Family server. When enabled, Transfer Family reads the added PPv2
+// header from incoming connections to extract the original client IP address. This
+// address is then available in Amazon CloudWatch Logs entries and is passed to
+// custom identity providers during authentication, enabling IP-based access
+// policies. For more information, see [Working with Network Load Balancers].
+//
+// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+type ProxyConfig struct {
+
+	// Specifies whether the Transfer Family server requires or ignores a PPv2 header
+	// containing the original client IP address on incoming SFTP connections. If you
+	// don't specify a value, the default is NONE
+	//
+	//   - NONE : the server reads and ignores any PPv2 header on incoming SFTP
+	//   connections. This is the default value. Use this value when your SFTP server is
+	//   not behind an NLB, or when you do not need to preserve client source IP
+	//   addresses through an NLB.
+	//
+	//   - PROXY_PROTOCOL_V2_ENFORCED : the server requires a valid PPv2 header on
+	//   every incoming SFTP connection. When a valid header is present, the server
+	//   applies it and uses the client IP address from the header. If a connection
+	//   arrives without a PPv2 header, the server refuses the connection and logs an
+	//   error to Amazon CloudWatch Logs indicating that the expected PPv2 header was
+	//   missing. Use this value when your SFTP server is behind an NLB with PPv2 enabled
+	//   on the target group.
+	//
+	// When you enable PROXY_PROTOCOL_V2_ENFORCED , the server trusts the source IP
+	//   address in the PPv2 header. You must configure security groups on your server's
+	//   VPC endpoint to restrict inbound traffic to only the NLB's private IP addresses.
+	//   For the full requirements, see [Working with Network Load Balancers].
+	//
+	// [Working with Network Load Balancers]: https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html
+	SftpMode ProxyMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProxyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProxyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProxyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SftpMode != "" {
+		s.WriteString(schemas.ProxyConfig_SftpMode, string(v.SftpMode))
+	}
+}
+func (v *ProxyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProxyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProxyConfig_SftpMode:
+			var ev string
+			if err := d.ReadString(schemas.ProxyConfig_SftpMode, &ev); err != nil {
+				return err
+			}
+			v.SftpMode = ProxyMode(ev)
 			return nil
 		}
 		return nil

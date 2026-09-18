@@ -48,6 +48,15 @@
                 }
             }
         },
+        "com.amazonaws.mediapackagev2#AttachedMultiviewChannelList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#ResourceName"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the names of multiview channels.</p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#CancelHarvestJob": {
             "type": "operation",
             "input": {
@@ -349,13 +358,25 @@
                 "InputType": {
                     "target": "com.amazonaws.mediapackagev2#InputType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>"
                     }
                 },
                 "OutputLockingMode": {
                     "target": "com.amazonaws.mediapackagev2#OutputLockingMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The output locking mode configured for the channel.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>EPOCH_LOCKED</code> - The channel uses epoch-locked behavior with deterministic sequence numbering and fixed segment boundaries aligned to epoch time.</p> </li> <li> <p> <code>NON_EPOCH_LOCKED</code> - The channel uses non-epoch-locked behavior with duration-based segment combining and monotonically increasing sequence numbers starting from 0.</p> </li> </ul>"
+                    }
+                },
+                "MultiviewConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>"
+                    }
+                },
+                "AttachedMultiviewChannels": {
+                    "target": "com.amazonaws.mediapackagev2#AttachedMultiviewChannelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field.</p>"
                     }
                 }
             },
@@ -847,7 +868,7 @@
                 "InputType": {
                     "target": "com.amazonaws.mediapackagev2#InputType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>"
                     }
                 },
                 "Description": {
@@ -866,6 +887,12 @@
                     "target": "com.amazonaws.mediapackagev2#OutputHeaderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>"
+                    }
+                },
+                "MultiviewConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview configuration for the channel. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>"
                     }
                 },
                 "OutputLockingMode": {
@@ -890,6 +917,18 @@
         "com.amazonaws.mediapackagev2#CreateChannelResponse": {
             "type": "structure",
             "members": {
+                "MultiviewConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>"
+                    }
+                },
+                "AttachedMultiviewChannels": {
+                    "target": "com.amazonaws.mediapackagev2#AttachedMultiviewChannelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>"
+                    }
+                },
                 "Arn": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -937,7 +976,7 @@
                 "InputType": {
                     "target": "com.amazonaws.mediapackagev2#InputType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>"
                     }
                 },
                 "ETag": {
@@ -4190,6 +4229,18 @@
         "com.amazonaws.mediapackagev2#GetChannelResponse": {
             "type": "structure",
             "members": {
+                "MultiviewConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>"
+                    }
+                },
+                "AttachedMultiviewChannels": {
+                    "target": "com.amazonaws.mediapackagev2#AttachedMultiviewChannelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>"
+                    }
+                },
                 "Arn": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -4243,7 +4294,7 @@
                 "InputType": {
                     "target": "com.amazonaws.mediapackagev2#InputType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>"
                     }
                 },
                 "ETag": {
@@ -5783,6 +5834,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CMAF"
                     }
+                },
+                "MULTIVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW"
+                    }
                 }
             }
         },
@@ -6919,6 +6976,98 @@
                     "traits": {
                         "smithy.api#enumValue": "COMPACT"
                     }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#MultiviewConfiguration": {
+            "type": "structure",
+            "members": {
+                "AvailableSources": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channels that players can use as tiles in this multiview channel's output. Each source channel must be in the same channel group as the multiview channel, and must have an <code>InputType</code> of <code>CMAF</code>. Only the channels that you list here are available as tiles.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailableLayouts": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewLayoutList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tile layouts that players can request from this multiview channel's origin endpoints. Only the layouts that you list here are available. Each layout must appear at most once.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The multiview configuration for a channel. A multiview channel composites video from several source channels into a single tiled output stream. Players receive one standard HLS or DASH stream instead of several separate streams. This setting is required when <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#MultiviewLayoutList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#MultiviewLayoutType"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tile layouts that players can request from a multiview channel's origin endpoints.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#MultiviewLayoutType": {
+            "type": "enum",
+            "members": {
+                "LAYOUT_2EH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_2EH"
+                    }
+                },
+                "LAYOUT_2PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_2PL"
+                    }
+                },
+                "LAYOUT_3EL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_3EL"
+                    }
+                },
+                "LAYOUT_3PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_3PL"
+                    }
+                },
+                "LAYOUT_4E": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_4E"
+                    }
+                },
+                "LAYOUT_4PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAYOUT_4PL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tile layout for a multiview channel. Each layout determines how many source tiles are composited into the output and how those tiles are arranged.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>LAYOUT_SINGLE</code> – One tile at full resolution. Use this to serve a single source as a standard stream.</p> </li> <li> <p> <code>LAYOUT_2EH</code> – Two tiles of equal size, arranged horizontally.</p> </li> <li> <p> <code>LAYOUT_2PL</code> – Two tiles, with one larger primary tile.</p> </li> <li> <p> <code>LAYOUT_3EB</code> – Three tiles of equal size, with two on top and one below.</p> </li> <li> <p> <code>LAYOUT_3EL</code> – Three tiles of equal size, arranged in two columns.</p> </li> <li> <p> <code>LAYOUT_3PL</code> – Three tiles, with one larger primary tile on the left and two stacked on the right.</p> </li> <li> <p> <code>LAYOUT_4E</code> – Four tiles of equal size, arranged in a two-by-two grid.</p> </li> <li> <p> <code>LAYOUT_4PL</code> – Four tiles, with one larger primary tile on the left and three stacked on the right.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#MultiviewSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#ResourceName"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of channel names that players can use as tiles in a multiview channel's output.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -8719,6 +8868,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>"
                     }
+                },
+                "MultiviewConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview configuration for the channel. This setting is required when the channel's <code>InputType</code> is <code>MULTIVIEW</code>, and can't be set for any other input type. Because <code>InputType</code> is immutable, you can change a multiview channel's sources and layouts. You can't add or remove the multiview configuration itself.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8728,6 +8883,18 @@
         "com.amazonaws.mediapackagev2#UpdateChannelResponse": {
             "type": "structure",
             "members": {
+                "MultiviewConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#MultiviewConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview configuration for the channel. This is present only when <code>InputType</code> is <code>MULTIVIEW</code>.</p>"
+                    }
+                },
+                "AttachedMultiviewChannels": {
+                    "target": "com.amazonaws.mediapackagev2#AttachedMultiviewChannelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multiview channels, in the same channel group, that list this channel as an available source. This is a read-only field. You can't delete a channel while any multiview channel still lists it as a source. Use this field to find the multiview channels that you need to update first.</p>"
+                    }
+                },
                 "Arn": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -8775,7 +8942,7 @@
                 "InputType": {
                     "target": "com.amazonaws.mediapackagev2#InputType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input type will be an immutable field which will be used to define whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default to HLS to preserve current behavior.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>The input type is an immutable field. It defines whether the channel allows CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels receive no ingest of their own. If unprovided, the value defaults to HLS.</p> <p>The allowed values are:</p> <ul> <li> <p> <code>HLS</code> - The HLS streaming specification (which defines M3U8 manifests and TS segments).</p> </li> <li> <p> <code>CMAF</code> - The DASH-IF CMAF Ingest specification (which defines CMAF segments with optional DASH manifests).</p> </li> <li> <p> <code>MULTIVIEW</code> – Server-side multiview. The channel receives no ingest of its own. Instead, it composites video from the source channels in its <code>MultiviewConfiguration</code> into a single tiled output stream.</p> </li> </ul>"
                     }
                 },
                 "ETag": {
@@ -10111,6 +10278,150 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "STREAM_NAME_OUTPUT_MODE_IMMUTABLE"
+                    }
+                },
+                "MULTIVIEW_CONFIGURATION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_CONFIGURATION_REQUIRED"
+                    }
+                },
+                "MULTIVIEW_CONFIGURATION_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_CONFIGURATION_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_SOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_SOURCE_NOT_FOUND"
+                    }
+                },
+                "MULTIVIEW_SOURCE_INVALID_INPUT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_SOURCE_INVALID_INPUT_TYPE"
+                    }
+                },
+                "MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_START_TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_START_TAG"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB"
+                    }
+                },
+                "MULTIVIEW_RESET_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_RESET_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_DUPLICATE_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_DUPLICATE_SOURCE"
+                    }
+                },
+                "MULTIVIEW_DUPLICATE_LAYOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_DUPLICATE_LAYOUT"
+                    }
+                },
+                "MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED"
+                    }
+                },
+                "MULTIVIEW_INVALID_TIME_DELAY_SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INVALID_TIME_DELAY_SECONDS"
+                    }
+                },
+                "MULTIVIEW_MANIFEST_WINDOW_TOO_LONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_MANIFEST_WINDOW_TOO_LONG"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED"
+                    }
+                },
+                "MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION"
+                    }
+                },
+                "MULTIVIEW_SOURCE_NON_EPOCH_LOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_SOURCE_NON_EPOCH_LOCKED"
+                    }
+                },
+                "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER"
                     }
                 }
             }

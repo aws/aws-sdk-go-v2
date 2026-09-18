@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type UpdateAgentKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentKnowledgeBaseRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.UpdateAgentKnowledgeBaseRequest_agentVersion, *v.AgentVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentKnowledgeBaseRequest_description, *v.Description)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateAgentKnowledgeBaseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.KnowledgeBaseState != "" {
+		s.WriteString(schemas.UpdateAgentKnowledgeBaseRequest_knowledgeBaseState, string(v.KnowledgeBaseState))
+	}
+}
+
 type UpdateAgentKnowledgeBaseOutput struct {
 
 	// Contains details about the knowledge base that has been associated with an
@@ -71,13 +97,34 @@ type UpdateAgentKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentKnowledgeBase != nil {
+		s.WriteStruct(schemas.UpdateAgentKnowledgeBaseResponse_agentKnowledgeBase)
+		v.AgentKnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentKnowledgeBaseResponse_agentKnowledgeBase:
+			v.AgentKnowledgeBase = &types.AgentKnowledgeBase{}
+			return v.AgentKnowledgeBase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentKnowledgeBase, schemas.UpdateAgentKnowledgeBaseRequest, schemas.UpdateAgentKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentKnowledgeBase, schemas.UpdateAgentKnowledgeBaseRequest, schemas.UpdateAgentKnowledgeBaseResponse), output: &UpdateAgentKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package costexplorer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,25 @@ type GetAnomalySubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomalySubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomalySubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomalySubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAnomalySubscriptionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.GetAnomalySubscriptionsRequest_MonitorArn, *v.MonitorArn)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomalySubscriptionsRequest_NextPageToken, *v.NextPageToken)
+	}
+	serializeValues(s, schemas.GetAnomalySubscriptionsRequest_SubscriptionArnList, v.SubscriptionArnList)
+}
+
 type GetAnomalySubscriptionsOutput struct {
 
 	// A list of cost anomaly subscriptions that includes the detailed metadata for
@@ -64,13 +85,35 @@ type GetAnomalySubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomalySubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomalySubscriptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomalySubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalySubscriptions(s, schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions, v.AnomalySubscriptions)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomalySubscriptionsResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetAnomalySubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnomalySubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions:
+			return deserializeAnomalySubscriptions(d, schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions, &v.AnomalySubscriptions)
+		case schemas.GetAnomalySubscriptionsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetAnomalySubscriptionsResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnomalySubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAnomalySubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalySubscriptions, schemas.GetAnomalySubscriptionsRequest, schemas.GetAnomalySubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAnomalySubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalySubscriptions, schemas.GetAnomalySubscriptionsRequest, schemas.GetAnomalySubscriptionsResponse), output: &GetAnomalySubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

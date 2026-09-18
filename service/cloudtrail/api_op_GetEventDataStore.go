@@ -11,8 +11,14 @@ import (
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns information about an event data store specified as either an ARN or the
 // ID portion of the ARN.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) GetEventDataStore(ctx context.Context, params *GetEventDataStoreInput, optFns ...func(*Options)) (*GetEventDataStoreOutput, error) {
 	if params == nil {
 		params = &GetEventDataStoreInput{}

@@ -159,6 +159,17 @@ func serializeAccountLimitList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeAvailablePhoneNumberList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCarrierStatusInformationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CarrierStatusInformation) {
 	if v == nil {
 		return
@@ -567,6 +578,30 @@ func serializeNumberCapabilityList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeNumberFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeNumberPreferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []NumberPreferenceItem) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOptedOutFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OptedOutFilter) {
 	if v == nil {
 		return
@@ -724,6 +759,17 @@ func serializePoolOriginationIdentitiesFilterList(s smithy.ShapeSerializer, sche
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePreferenceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PreferenceType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -1311,6 +1357,20 @@ func deserializeAccountLimitList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeAvailablePhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCarrierStatusInformationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CarrierStatusInformation) error {
 	*v = make([]CarrierStatusInformation, 0)
 	var vv CarrierStatusInformation
@@ -1787,6 +1847,34 @@ func deserializeNumberCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeNumberFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeNumberPreferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NumberPreferenceItem) error {
+	*v = make([]NumberPreferenceItem, 0)
+	var vv NumberPreferenceItem
+	return smithy.ReadList(d, s, func() error {
+		vv = NumberPreferenceItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOptedOutFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]OptedOutFilter) error {
 	*v = make([]OptedOutFilter, 0)
 	var vv OptedOutFilter
@@ -1965,6 +2053,20 @@ func deserializePoolOriginationIdentitiesFilterList(d smithy.ShapeDeserializer, 
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePreferenceTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PreferenceType) error {
+	*v = make([]PreferenceType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, PreferenceType(vv))
 		return nil
 	})
 }
@@ -2623,6 +2725,18 @@ func serializeDestinationCountryParameters(s smithy.ShapeSerializer, schema *smi
 	s.CloseMap()
 }
 
+func serializeLongMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]int64) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteInt64(schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
 func serializeProtectConfigurationCountryRuleSet(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ProtectConfigurationCountryRuleSetInformation) {
 	if v == nil {
 		return
@@ -2695,6 +2809,20 @@ func deserializeDestinationCountryParameters(d smithy.ShapeDeserializer, s *smit
 	return smithy.ReadMap(d, s, func(k string) error {
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeLongMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]int64) error {
+	*v = make(map[string]int64)
+	var vv int64
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadInt64(s.MapValue(), &vv); err != nil {
 			return err
 		}
 

@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,34 @@ type UpdateInputDeviceInput struct {
 	UhdDeviceSettings *types.InputDeviceConfigurableSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateInputDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.UpdateInputDeviceRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.HdDeviceSettings != nil {
+		s.WriteStruct(schemas.UpdateInputDeviceRequest_HdDeviceSettings)
+		v.HdDeviceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.UpdateInputDeviceRequest_InputDeviceId, *v.InputDeviceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateInputDeviceRequest_Name, *v.Name)
+	}
+	if v.UhdDeviceSettings != nil {
+		s.WriteStruct(schemas.UpdateInputDeviceRequest_UhdDeviceSettings)
+		v.UhdDeviceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 // Placeholder documentation for UpdateInputDeviceResponse
@@ -111,13 +141,142 @@ type UpdateInputDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInputDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInputDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInputDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateInputDeviceResponse_Arn, *v.Arn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.UpdateInputDeviceResponse_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.UpdateInputDeviceResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.DeviceSettingsSyncState != "" {
+		s.WriteString(schemas.UpdateInputDeviceResponse_DeviceSettingsSyncState, string(v.DeviceSettingsSyncState))
+	}
+	if v.DeviceUpdateStatus != "" {
+		s.WriteString(schemas.UpdateInputDeviceResponse_DeviceUpdateStatus, string(v.DeviceUpdateStatus))
+	}
+	if v.HdDeviceSettings != nil {
+		s.WriteStruct(schemas.UpdateInputDeviceResponse_HdDeviceSettings)
+		v.HdDeviceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateInputDeviceResponse_Id, *v.Id)
+	}
+	if v.MacAddress != nil {
+		s.WriteString(schemas.UpdateInputDeviceResponse_MacAddress, *v.MacAddress)
+	}
+	serialize__listOf__string(s, schemas.UpdateInputDeviceResponse_MedialiveInputArns, v.MedialiveInputArns)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateInputDeviceResponse_Name, *v.Name)
+	}
+	if v.NetworkSettings != nil {
+		s.WriteStruct(schemas.UpdateInputDeviceResponse_NetworkSettings)
+		v.NetworkSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputType != "" {
+		s.WriteString(schemas.UpdateInputDeviceResponse_OutputType, string(v.OutputType))
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.UpdateInputDeviceResponse_SerialNumber, *v.SerialNumber)
+	}
+	serializeTags(s, schemas.UpdateInputDeviceResponse_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateInputDeviceResponse_Type, string(v.Type))
+	}
+	if v.UhdDeviceSettings != nil {
+		s.WriteStruct(schemas.UpdateInputDeviceResponse_UhdDeviceSettings)
+		v.UhdDeviceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInputDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInputDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInputDeviceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateInputDeviceResponse_Arn, v.Arn)
+		case schemas.UpdateInputDeviceResponse_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.UpdateInputDeviceResponse_AvailabilityZone, v.AvailabilityZone)
+		case schemas.UpdateInputDeviceResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInputDeviceResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.InputDeviceConnectionState(ev)
+			return nil
+		case schemas.UpdateInputDeviceResponse_DeviceSettingsSyncState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInputDeviceResponse_DeviceSettingsSyncState, &ev); err != nil {
+				return err
+			}
+			v.DeviceSettingsSyncState = types.DeviceSettingsSyncState(ev)
+			return nil
+		case schemas.UpdateInputDeviceResponse_DeviceUpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInputDeviceResponse_DeviceUpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.DeviceUpdateStatus = types.DeviceUpdateStatus(ev)
+			return nil
+		case schemas.UpdateInputDeviceResponse_HdDeviceSettings:
+			v.HdDeviceSettings = &types.InputDeviceHdSettings{}
+			return v.HdDeviceSettings.Deserialize(d)
+		case schemas.UpdateInputDeviceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateInputDeviceResponse_Id, v.Id)
+		case schemas.UpdateInputDeviceResponse_MacAddress:
+			v.MacAddress = new(string)
+			return d.ReadString(schemas.UpdateInputDeviceResponse_MacAddress, v.MacAddress)
+		case schemas.UpdateInputDeviceResponse_MedialiveInputArns:
+			return deserialize__listOf__string(d, schemas.UpdateInputDeviceResponse_MedialiveInputArns, &v.MedialiveInputArns)
+		case schemas.UpdateInputDeviceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateInputDeviceResponse_Name, v.Name)
+		case schemas.UpdateInputDeviceResponse_NetworkSettings:
+			v.NetworkSettings = &types.InputDeviceNetworkSettings{}
+			return v.NetworkSettings.Deserialize(d)
+		case schemas.UpdateInputDeviceResponse_OutputType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInputDeviceResponse_OutputType, &ev); err != nil {
+				return err
+			}
+			v.OutputType = types.InputDeviceOutputType(ev)
+			return nil
+		case schemas.UpdateInputDeviceResponse_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.UpdateInputDeviceResponse_SerialNumber, v.SerialNumber)
+		case schemas.UpdateInputDeviceResponse_Tags:
+			return deserializeTags(d, schemas.UpdateInputDeviceResponse_Tags, &v.Tags)
+		case schemas.UpdateInputDeviceResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInputDeviceResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.InputDeviceType(ev)
+			return nil
+		case schemas.UpdateInputDeviceResponse_UhdDeviceSettings:
+			v.UhdDeviceSettings = &types.InputDeviceUhdSettings{}
+			return v.UhdDeviceSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInputDevice, schemas.UpdateInputDeviceRequest, schemas.UpdateInputDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInputDevice, schemas.UpdateInputDeviceRequest, schemas.UpdateInputDeviceResponse), output: &UpdateInputDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

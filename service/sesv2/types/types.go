@@ -2091,6 +2091,9 @@ type MessageInsightsFilters struct {
 	// The subject line of the message.
 	Subject []string
 
+	// The name of the tenant used when sending the message.
+	TenantName []string
+
 	noSmithyDocumentSerde
 }
 

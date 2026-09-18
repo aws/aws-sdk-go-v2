@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetEnterpriseSupportContractDetailsInput struct {
 	BillingMonth *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnterpriseSupportContractDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnterpriseSupportContractDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnterpriseSupportContractDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMonth != nil {
+		s.WriteString(schemas.GetEnterpriseSupportContractDetailsRequest_billingMonth, *v.BillingMonth)
+	}
 }
 
 // The response structure for GetEnterpriseSupportContractDetails.
@@ -114,13 +128,83 @@ type GetEnterpriseSupportContractDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnterpriseSupportContractDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnterpriseSupportContractDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnterpriseSupportContractDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalChargeList(s, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge, v.AdditionalSupportCharge)
+	serializeAdditionalChargeList(s, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend, v.AdditionalSupportEligibleUsageSpend)
+	serializeChargeAccountList(s, schemas.GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds, v.ChargedPayerAccountIds)
+	serializeContractAccountList(s, schemas.GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds, v.ContractPayerAccountIds)
+	if v.IsContractActive != nil {
+		s.WriteBool(schemas.GetEnterpriseSupportContractDetailsResponse_isContractActive, *v.IsContractActive)
+	}
+	serializePricingPlanList(s, schemas.GetEnterpriseSupportContractDetailsResponse_pricingPlans, v.PricingPlans)
+	if v.SupportAllocationMethod != nil {
+		s.WriteString(schemas.GetEnterpriseSupportContractDetailsResponse_supportAllocationMethod, *v.SupportAllocationMethod)
+	}
+	if v.SupportProrateStartDate != nil {
+		s.WriteTime(schemas.GetEnterpriseSupportContractDetailsResponse_supportProrateStartDate, *v.SupportProrateStartDate)
+	}
+	if v.SupportReservedInstanceAmortizationStartDate != nil {
+		s.WriteTime(schemas.GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceAmortizationStartDate, *v.SupportReservedInstanceAmortizationStartDate)
+	}
+	if v.SupportReservedInstanceTreatmentMethod != nil {
+		s.WriteString(schemas.GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceTreatmentMethod, *v.SupportReservedInstanceTreatmentMethod)
+	}
+	if v.SupportSavingsPlansAmortizationStartDate != nil {
+		s.WriteTime(schemas.GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansAmortizationStartDate, *v.SupportSavingsPlansAmortizationStartDate)
+	}
+	if v.SupportSavingsPlansTreatmentMethod != nil {
+		s.WriteString(schemas.GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansTreatmentMethod, *v.SupportSavingsPlansTreatmentMethod)
+	}
+}
+func (v *GetEnterpriseSupportContractDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnterpriseSupportContractDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge:
+			return deserializeAdditionalChargeList(d, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportCharge, &v.AdditionalSupportCharge)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend:
+			return deserializeAdditionalChargeList(d, schemas.GetEnterpriseSupportContractDetailsResponse_additionalSupportEligibleUsageSpend, &v.AdditionalSupportEligibleUsageSpend)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds:
+			return deserializeChargeAccountList(d, schemas.GetEnterpriseSupportContractDetailsResponse_chargedPayerAccountIds, &v.ChargedPayerAccountIds)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds:
+			return deserializeContractAccountList(d, schemas.GetEnterpriseSupportContractDetailsResponse_contractPayerAccountIds, &v.ContractPayerAccountIds)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_isContractActive:
+			v.IsContractActive = new(bool)
+			return d.ReadBool(schemas.GetEnterpriseSupportContractDetailsResponse_isContractActive, v.IsContractActive)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_pricingPlans:
+			return deserializePricingPlanList(d, schemas.GetEnterpriseSupportContractDetailsResponse_pricingPlans, &v.PricingPlans)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_supportAllocationMethod:
+			v.SupportAllocationMethod = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportContractDetailsResponse_supportAllocationMethod, v.SupportAllocationMethod)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_supportProrateStartDate:
+			v.SupportProrateStartDate = new(time.Time)
+			return d.ReadTime(schemas.GetEnterpriseSupportContractDetailsResponse_supportProrateStartDate, v.SupportProrateStartDate)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceAmortizationStartDate:
+			v.SupportReservedInstanceAmortizationStartDate = new(time.Time)
+			return d.ReadTime(schemas.GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceAmortizationStartDate, v.SupportReservedInstanceAmortizationStartDate)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceTreatmentMethod:
+			v.SupportReservedInstanceTreatmentMethod = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportContractDetailsResponse_supportReservedInstanceTreatmentMethod, v.SupportReservedInstanceTreatmentMethod)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansAmortizationStartDate:
+			v.SupportSavingsPlansAmortizationStartDate = new(time.Time)
+			return d.ReadTime(schemas.GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansAmortizationStartDate, v.SupportSavingsPlansAmortizationStartDate)
+		case schemas.GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansTreatmentMethod:
+			v.SupportSavingsPlansTreatmentMethod = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportContractDetailsResponse_supportSavingsPlansTreatmentMethod, v.SupportSavingsPlansTreatmentMethod)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnterpriseSupportContractDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEnterpriseSupportContractDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnterpriseSupportContractDetails, schemas.GetEnterpriseSupportContractDetailsRequest, schemas.GetEnterpriseSupportContractDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEnterpriseSupportContractDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnterpriseSupportContractDetails, schemas.GetEnterpriseSupportContractDetailsRequest, schemas.GetEnterpriseSupportContractDetailsResponse), output: &GetEnterpriseSupportContractDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

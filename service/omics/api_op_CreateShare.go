@@ -11,8 +11,8 @@ import (
 )
 
 // Creates a cross-account shared resource. The resource owner makes an offer to
-// share the resource with the principal subscriber (an AWS user with a different
-// account than the resource owner).
+// share the resource with the principal subscriber (an Amazon Web Services user
+// with a different account than the resource owner).
 //
 // The following resources support cross-account sharing:
 //

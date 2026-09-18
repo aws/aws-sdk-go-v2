@@ -4,6 +4,8 @@ package costexplorer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAnomalySubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalySubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalySubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalySubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.DeleteAnomalySubscriptionRequest_SubscriptionArn, *v.SubscriptionArn)
+	}
+}
+
 type DeleteAnomalySubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAnomalySubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalySubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalySubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalySubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAnomalySubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnomalySubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalySubscription, schemas.DeleteAnomalySubscriptionRequest, schemas.DeleteAnomalySubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalySubscription, schemas.DeleteAnomalySubscriptionRequest, schemas.DeleteAnomalySubscriptionResponse), output: &DeleteAnomalySubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,3 +1,9 @@
+# v1.49.0 (2026-09-09)
+
+* **Feature**: Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

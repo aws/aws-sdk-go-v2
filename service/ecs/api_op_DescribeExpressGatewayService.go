@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type DescribeExpressGatewayServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExpressGatewayServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExpressGatewayServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExpressGatewayServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpressGatewayServiceIncludeList(s, schemas.DescribeExpressGatewayServiceRequest_include, v.Include)
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DescribeExpressGatewayServiceRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type DescribeExpressGatewayServiceOutput struct {
 
 	// The full description of the described express service.
@@ -59,13 +74,34 @@ type DescribeExpressGatewayServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExpressGatewayServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExpressGatewayServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExpressGatewayServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.DescribeExpressGatewayServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeExpressGatewayServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExpressGatewayServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExpressGatewayServiceResponse_service:
+			v.Service = &types.ECSExpressGatewayService{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExpressGatewayServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExpressGatewayService, schemas.DescribeExpressGatewayServiceRequest, schemas.DescribeExpressGatewayServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExpressGatewayService, schemas.DescribeExpressGatewayServiceRequest, schemas.DescribeExpressGatewayServiceResponse), output: &DescribeExpressGatewayServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

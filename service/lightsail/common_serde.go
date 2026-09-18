@@ -483,6 +483,19 @@ func serializeDistributionBundleList(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeDistributionCustomErrorResponseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DistributionCustomErrorResponse) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDistributionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LightsailDistribution) {
 	if v == nil {
 		return
@@ -1643,6 +1656,20 @@ func deserializeDistributionBundleList(d smithy.ShapeDeserializer, s *smithy.Sch
 	var vv types.DistributionBundle
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DistributionBundle{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDistributionCustomErrorResponseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DistributionCustomErrorResponse) error {
+	*v = make([]types.DistributionCustomErrorResponse, 0)
+	var vv types.DistributionCustomErrorResponse
+	return smithy.ReadList(d, s, func() error {
+		vv = types.DistributionCustomErrorResponse{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

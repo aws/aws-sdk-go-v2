@@ -4,6 +4,8 @@ package backupgateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,34 @@ type UpdateGatewayInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInformationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.UpdateGatewayInformationInput_GatewayArn, *v.GatewayArn)
+	}
+	if v.GatewayDisplayName != nil {
+		s.WriteString(schemas.UpdateGatewayInformationInput_GatewayDisplayName, *v.GatewayDisplayName)
+	}
+}
+func (v *UpdateGatewayInformationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayInformationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayInformationInput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayInformationInput_GatewayArn, v.GatewayArn)
+		case schemas.UpdateGatewayInformationInput_GatewayDisplayName:
+			v.GatewayDisplayName = new(string)
+			return d.ReadString(schemas.UpdateGatewayInformationInput_GatewayDisplayName, v.GatewayDisplayName)
+		}
+		return nil
+	})
+}
+
 type UpdateGatewayInformationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you updated.
@@ -48,13 +78,32 @@ type UpdateGatewayInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInformationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.UpdateGatewayInformationOutput_GatewayArn, *v.GatewayArn)
+	}
+}
+func (v *UpdateGatewayInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayInformationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayInformationOutput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayInformationOutput_GatewayArn, v.GatewayArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGatewayInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInformation, schemas.UpdateGatewayInformationInput, schemas.UpdateGatewayInformationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGatewayInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInformation, schemas.UpdateGatewayInformationInput, schemas.UpdateGatewayInformationOutput), output: &UpdateGatewayInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -78,6 +80,103 @@ type ChannelDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.ChannelDescription_ChannelARN, *v.ChannelARN)
+	}
+	if v.ChannelCreationTimestamp != nil {
+		s.WriteTime(schemas.ChannelDescription_ChannelCreationTimestamp, *v.ChannelCreationTimestamp)
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.ChannelDescription_ChannelId, *v.ChannelId)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ChannelDescription_ChannelName, *v.ChannelName)
+	}
+	if v.ChannelStatus != "" {
+		s.WriteString(schemas.ChannelDescription_ChannelStatus, string(v.ChannelStatus))
+	}
+	if v.ChannelStatusReason != nil {
+		s.WriteString(schemas.ChannelDescription_ChannelStatusReason, *v.ChannelStatusReason)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ChannelDescription_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.ChannelDescription_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationConfiguration != nil {
+		s.WriteStruct(schemas.ChannelDescription_S3DestinationConfiguration)
+		v.S3DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3TablesDestinationConfiguration != nil {
+		s.WriteStruct(schemas.ChannelDescription_S3TablesDestinationConfiguration)
+		v.S3TablesDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceExecutionRoleARN != nil {
+		s.WriteString(schemas.ChannelDescription_ServiceExecutionRoleARN, *v.ServiceExecutionRoleARN)
+	}
+	serializeChannelStreamDescriptionList(s, schemas.ChannelDescription_StreamConfigurationList, v.StreamConfigurationList)
+}
+func (v *ChannelDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelDescription_ChannelARN:
+			v.ChannelARN = new(string)
+			return d.ReadString(schemas.ChannelDescription_ChannelARN, v.ChannelARN)
+		case schemas.ChannelDescription_ChannelCreationTimestamp:
+			v.ChannelCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ChannelDescription_ChannelCreationTimestamp, v.ChannelCreationTimestamp)
+		case schemas.ChannelDescription_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.ChannelDescription_ChannelId, v.ChannelId)
+		case schemas.ChannelDescription_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.ChannelDescription_ChannelName, v.ChannelName)
+		case schemas.ChannelDescription_ChannelStatus:
+			var ev string
+			if err := d.ReadString(schemas.ChannelDescription_ChannelStatus, &ev); err != nil {
+				return err
+			}
+			v.ChannelStatus = ChannelStatus(ev)
+			return nil
+		case schemas.ChannelDescription_ChannelStatusReason:
+			v.ChannelStatusReason = new(string)
+			return d.ReadString(schemas.ChannelDescription_ChannelStatusReason, v.ChannelStatusReason)
+		case schemas.ChannelDescription_EncryptionConfiguration:
+			v.EncryptionConfiguration = &ChannelEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.ChannelDescription_LoggingConfiguration:
+			v.LoggingConfiguration = &ChannelLoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.ChannelDescription_S3DestinationConfiguration:
+			v.S3DestinationConfiguration = &S3DestinationDescription{}
+			return v.S3DestinationConfiguration.Deserialize(d)
+		case schemas.ChannelDescription_S3TablesDestinationConfiguration:
+			v.S3TablesDestinationConfiguration = &S3TablesDestinationDescription{}
+			return v.S3TablesDestinationConfiguration.Deserialize(d)
+		case schemas.ChannelDescription_ServiceExecutionRoleARN:
+			v.ServiceExecutionRoleARN = new(string)
+			return d.ReadString(schemas.ChannelDescription_ServiceExecutionRoleARN, v.ServiceExecutionRoleARN)
+		case schemas.ChannelDescription_StreamConfigurationList:
+			return deserializeChannelStreamDescriptionList(d, schemas.ChannelDescription_StreamConfigurationList, &v.StreamConfigurationList)
+		}
+		return nil
+	})
+}
+
 // Specifies the Amazon Web Services KMS key that Amazon Kinesis Data Streams uses
 // to encrypt data delivered to the channel's destination.
 type ChannelEncryptionConfiguration struct {
@@ -96,6 +195,38 @@ type ChannelEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.ChannelEncryptionConfiguration_EncryptionType, string(v.EncryptionType))
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.ChannelEncryptionConfiguration_KeyId, *v.KeyId)
+	}
+}
+func (v *ChannelEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelEncryptionConfiguration_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.ChannelEncryptionConfiguration_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = ChannelEncryptionType(ev)
+			return nil
+		case schemas.ChannelEncryptionConfiguration_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.ChannelEncryptionConfiguration_KeyId, v.KeyId)
+		}
+		return nil
+	})
+}
+
 // The Amazon CloudWatch Logs configuration for a channel.
 type ChannelLoggingConfiguration struct {
 
@@ -107,6 +238,30 @@ type ChannelLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelLoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelLoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelLoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogs != nil {
+		s.WriteStruct(schemas.ChannelLoggingConfiguration_CloudWatchLogs)
+		v.CloudWatchLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChannelLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelLoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelLoggingConfiguration_CloudWatchLogs:
+			v.CloudWatchLogs = &CloudWatchLogs{}
+			return v.CloudWatchLogs.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The updated Amazon CloudWatch Logs configuration for a channel. Used in UpdateChannel.
 type ChannelLoggingUpdateInput struct {
 
@@ -116,6 +271,30 @@ type ChannelLoggingUpdateInput struct {
 	CloudWatchLogs *CloudWatchLogsUpdateInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelLoggingUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelLoggingUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelLoggingUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogs != nil {
+		s.WriteStruct(schemas.ChannelLoggingUpdateInput_CloudWatchLogs)
+		v.CloudWatchLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChannelLoggingUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelLoggingUpdateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelLoggingUpdateInput_CloudWatchLogs:
+			v.CloudWatchLogs = &CloudWatchLogsUpdateInput{}
+			return v.CloudWatchLogs.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the source stream and record configuration when creating a channel.
@@ -132,6 +311,36 @@ type ChannelStreamConfiguration struct {
 	StreamARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelStreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelStreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelStreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordConfiguration != nil {
+		s.WriteStruct(schemas.ChannelStreamConfiguration_RecordConfiguration)
+		v.RecordConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ChannelStreamConfiguration_StreamARN, *v.StreamARN)
+	}
+}
+func (v *ChannelStreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelStreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelStreamConfiguration_RecordConfiguration:
+			v.RecordConfiguration = &RecordConfiguration{}
+			return v.RecordConfiguration.Deserialize(d)
+		case schemas.ChannelStreamConfiguration_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.ChannelStreamConfiguration_StreamARN, v.StreamARN)
+		}
+		return nil
+	})
 }
 
 // Describes the source stream of a channel.
@@ -155,6 +364,42 @@ type ChannelStreamDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelStreamDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelStreamDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelStreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordConfiguration != nil {
+		s.WriteStruct(schemas.ChannelStreamDescription_RecordConfiguration)
+		v.RecordConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ChannelStreamDescription_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.ChannelStreamDescription_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+}
+func (v *ChannelStreamDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelStreamDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelStreamDescription_RecordConfiguration:
+			v.RecordConfiguration = &RecordConfiguration{}
+			return v.RecordConfiguration.Deserialize(d)
+		case schemas.ChannelStreamDescription_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.ChannelStreamDescription_StreamARN, v.StreamARN)
+		case schemas.ChannelStreamDescription_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ChannelStreamDescription_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		}
+		return nil
+	})
+}
+
 // Identifies a source stream associated with a channel.
 type ChannelStreamIdentifier struct {
 
@@ -169,6 +414,34 @@ type ChannelStreamIdentifier struct {
 	StreamCreationTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelStreamIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelStreamIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelStreamIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ChannelStreamIdentifier_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.ChannelStreamIdentifier_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+}
+func (v *ChannelStreamIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelStreamIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelStreamIdentifier_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.ChannelStreamIdentifier_StreamARN, v.StreamARN)
+		case schemas.ChannelStreamIdentifier_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ChannelStreamIdentifier_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		}
+		return nil
+	})
 }
 
 // A summary of a channel, returned by ListChannels.
@@ -229,6 +502,75 @@ type ChannelSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.ChannelSummary_ChannelARN, *v.ChannelARN)
+	}
+	if v.ChannelCreationTimestamp != nil {
+		s.WriteTime(schemas.ChannelSummary_ChannelCreationTimestamp, *v.ChannelCreationTimestamp)
+	}
+	if v.ChannelDestinationType != "" {
+		s.WriteString(schemas.ChannelSummary_ChannelDestinationType, string(v.ChannelDestinationType))
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.ChannelSummary_ChannelId, *v.ChannelId)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.ChannelSummary_ChannelName, *v.ChannelName)
+	}
+	if v.ChannelStatus != "" {
+		s.WriteString(schemas.ChannelSummary_ChannelStatus, string(v.ChannelStatus))
+	}
+	if v.ChannelStatusReason != nil {
+		s.WriteString(schemas.ChannelSummary_ChannelStatusReason, *v.ChannelStatusReason)
+	}
+	serializeChannelStreamIdentifierList(s, schemas.ChannelSummary_Streams, v.Streams)
+}
+func (v *ChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelSummary_ChannelARN:
+			v.ChannelARN = new(string)
+			return d.ReadString(schemas.ChannelSummary_ChannelARN, v.ChannelARN)
+		case schemas.ChannelSummary_ChannelCreationTimestamp:
+			v.ChannelCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ChannelSummary_ChannelCreationTimestamp, v.ChannelCreationTimestamp)
+		case schemas.ChannelSummary_ChannelDestinationType:
+			var ev string
+			if err := d.ReadString(schemas.ChannelSummary_ChannelDestinationType, &ev); err != nil {
+				return err
+			}
+			v.ChannelDestinationType = ChannelDestinationType(ev)
+			return nil
+		case schemas.ChannelSummary_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.ChannelSummary_ChannelId, v.ChannelId)
+		case schemas.ChannelSummary_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.ChannelSummary_ChannelName, v.ChannelName)
+		case schemas.ChannelSummary_ChannelStatus:
+			var ev string
+			if err := d.ReadString(schemas.ChannelSummary_ChannelStatus, &ev); err != nil {
+				return err
+			}
+			v.ChannelStatus = ChannelStatus(ev)
+			return nil
+		case schemas.ChannelSummary_ChannelStatusReason:
+			v.ChannelStatusReason = new(string)
+			return d.ReadString(schemas.ChannelSummary_ChannelStatusReason, v.ChannelStatusReason)
+		case schemas.ChannelSummary_Streams:
+			return deserializeChannelStreamIdentifierList(d, schemas.ChannelSummary_Streams, &v.Streams)
+		}
+		return nil
+	})
+}
+
 // Output parameter of the GetRecords API. The existing child shard of the current
 // shard.
 type ChildShard struct {
@@ -252,6 +594,39 @@ type ChildShard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChildShard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildShard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildShard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HashKeyRange != nil {
+		s.WriteStruct(schemas.ChildShard_HashKeyRange)
+		v.HashKeyRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeShardIdList(s, schemas.ChildShard_ParentShards, v.ParentShards)
+	if v.ShardId != nil {
+		s.WriteString(schemas.ChildShard_ShardId, *v.ShardId)
+	}
+}
+func (v *ChildShard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildShard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildShard_HashKeyRange:
+			v.HashKeyRange = &HashKeyRange{}
+			return v.HashKeyRange.Deserialize(d)
+		case schemas.ChildShard_ParentShards:
+			return deserializeShardIdList(d, schemas.ChildShard_ParentShards, &v.ParentShards)
+		case schemas.ChildShard_ShardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.ChildShard_ShardId, v.ShardId)
+		}
+		return nil
+	})
+}
+
 // The Amazon CloudWatch Logs settings for channel logging.
 type CloudWatchLogs struct {
 
@@ -271,6 +646,40 @@ type CloudWatchLogs struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudWatchLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CloudWatchLogs_Enabled, *v.Enabled)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.CloudWatchLogs_LogGroupName, *v.LogGroupName)
+	}
+	if v.LogStreamName != nil {
+		s.WriteString(schemas.CloudWatchLogs_LogStreamName, *v.LogStreamName)
+	}
+}
+func (v *CloudWatchLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogs_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CloudWatchLogs_Enabled, v.Enabled)
+		case schemas.CloudWatchLogs_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.CloudWatchLogs_LogGroupName, v.LogGroupName)
+		case schemas.CloudWatchLogs_LogStreamName:
+			v.LogStreamName = new(string)
+			return d.ReadString(schemas.CloudWatchLogs_LogStreamName, v.LogStreamName)
+		}
+		return nil
+	})
+}
+
 // The updated Amazon CloudWatch Logs settings for a channel.
 type CloudWatchLogsUpdateInput struct {
 
@@ -286,6 +695,40 @@ type CloudWatchLogsUpdateInput struct {
 	LogStreamName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogsUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogsUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogsUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CloudWatchLogsUpdateInput_Enabled, *v.Enabled)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.CloudWatchLogsUpdateInput_LogGroupName, *v.LogGroupName)
+	}
+	if v.LogStreamName != nil {
+		s.WriteString(schemas.CloudWatchLogsUpdateInput_LogStreamName, *v.LogStreamName)
+	}
+}
+func (v *CloudWatchLogsUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogsUpdateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogsUpdateInput_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CloudWatchLogsUpdateInput_Enabled, v.Enabled)
+		case schemas.CloudWatchLogsUpdateInput_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.CloudWatchLogsUpdateInput_LogGroupName, v.LogGroupName)
+		case schemas.CloudWatchLogsUpdateInput_LogStreamName:
+			v.LogStreamName = new(string)
+			return d.ReadString(schemas.CloudWatchLogsUpdateInput_LogStreamName, v.LogStreamName)
+		}
+		return nil
+	})
 }
 
 // An object that represents the details of the consumer you registered. This type
@@ -319,6 +762,50 @@ type Consumer struct {
 	ConsumerStatus ConsumerStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Consumer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Consumer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Consumer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerARN != nil {
+		s.WriteString(schemas.Consumer_ConsumerARN, *v.ConsumerARN)
+	}
+	if v.ConsumerCreationTimestamp != nil {
+		s.WriteTime(schemas.Consumer_ConsumerCreationTimestamp, *v.ConsumerCreationTimestamp)
+	}
+	if v.ConsumerName != nil {
+		s.WriteString(schemas.Consumer_ConsumerName, *v.ConsumerName)
+	}
+	if v.ConsumerStatus != "" {
+		s.WriteString(schemas.Consumer_ConsumerStatus, string(v.ConsumerStatus))
+	}
+}
+func (v *Consumer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Consumer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Consumer_ConsumerARN:
+			v.ConsumerARN = new(string)
+			return d.ReadString(schemas.Consumer_ConsumerARN, v.ConsumerARN)
+		case schemas.Consumer_ConsumerCreationTimestamp:
+			v.ConsumerCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Consumer_ConsumerCreationTimestamp, v.ConsumerCreationTimestamp)
+		case schemas.Consumer_ConsumerName:
+			v.ConsumerName = new(string)
+			return d.ReadString(schemas.Consumer_ConsumerName, v.ConsumerName)
+		case schemas.Consumer_ConsumerStatus:
+			var ev string
+			if err := d.ReadString(schemas.Consumer_ConsumerStatus, &ev); err != nil {
+				return err
+			}
+			v.ConsumerStatus = ConsumerStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An object that represents the details of a registered consumer. This type of
@@ -359,6 +846,56 @@ type ConsumerDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConsumerDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConsumerDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConsumerDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerARN != nil {
+		s.WriteString(schemas.ConsumerDescription_ConsumerARN, *v.ConsumerARN)
+	}
+	if v.ConsumerCreationTimestamp != nil {
+		s.WriteTime(schemas.ConsumerDescription_ConsumerCreationTimestamp, *v.ConsumerCreationTimestamp)
+	}
+	if v.ConsumerName != nil {
+		s.WriteString(schemas.ConsumerDescription_ConsumerName, *v.ConsumerName)
+	}
+	if v.ConsumerStatus != "" {
+		s.WriteString(schemas.ConsumerDescription_ConsumerStatus, string(v.ConsumerStatus))
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.ConsumerDescription_StreamARN, *v.StreamARN)
+	}
+}
+func (v *ConsumerDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConsumerDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConsumerDescription_ConsumerARN:
+			v.ConsumerARN = new(string)
+			return d.ReadString(schemas.ConsumerDescription_ConsumerARN, v.ConsumerARN)
+		case schemas.ConsumerDescription_ConsumerCreationTimestamp:
+			v.ConsumerCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ConsumerDescription_ConsumerCreationTimestamp, v.ConsumerCreationTimestamp)
+		case schemas.ConsumerDescription_ConsumerName:
+			v.ConsumerName = new(string)
+			return d.ReadString(schemas.ConsumerDescription_ConsumerName, v.ConsumerName)
+		case schemas.ConsumerDescription_ConsumerStatus:
+			var ev string
+			if err := d.ReadString(schemas.ConsumerDescription_ConsumerStatus, &ev); err != nil {
+				return err
+			}
+			v.ConsumerStatus = ConsumerStatus(ev)
+			return nil
+		case schemas.ConsumerDescription_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.ConsumerDescription_StreamARN, v.StreamARN)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 dead-letter queue configuration for records that cannot be
 // delivered.
 type DeadLetterQueueS3Configuration struct {
@@ -378,6 +915,40 @@ type DeadLetterQueueS3Configuration struct {
 	ErrorOutputPrefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeadLetterQueueS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeadLetterQueueS3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeadLetterQueueS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.DeadLetterQueueS3Configuration_BucketARN, *v.BucketARN)
+	}
+	if v.ErrorOutputPrefix != nil {
+		s.WriteString(schemas.DeadLetterQueueS3Configuration_ErrorOutputPrefix, *v.ErrorOutputPrefix)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.DeadLetterQueueS3Configuration_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+}
+func (v *DeadLetterQueueS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeadLetterQueueS3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeadLetterQueueS3Configuration_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.DeadLetterQueueS3Configuration_BucketARN, v.BucketARN)
+		case schemas.DeadLetterQueueS3Configuration_ErrorOutputPrefix:
+			v.ErrorOutputPrefix = new(string)
+			return d.ReadString(schemas.DeadLetterQueueS3Configuration_ErrorOutputPrefix, v.ErrorOutputPrefix)
+		case schemas.DeadLetterQueueS3Configuration_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.DeadLetterQueueS3Configuration_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		}
+		return nil
+	})
 }
 
 // Represents enhanced metrics types.
@@ -412,6 +983,25 @@ type EnhancedMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnhancedMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnhancedMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnhancedMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricsNameList(s, schemas.EnhancedMetrics_ShardLevelMetrics, v.ShardLevelMetrics)
+}
+func (v *EnhancedMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnhancedMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnhancedMetrics_ShardLevelMetrics:
+			return deserializeMetricsNameList(d, schemas.EnhancedMetrics_ShardLevelMetrics, &v.ShardLevelMetrics)
+		}
+		return nil
+	})
+}
+
 // The range of possible hash key values for the shard, which is a set of ordered
 // contiguous positive integers.
 type HashKeyRange struct {
@@ -427,6 +1017,34 @@ type HashKeyRange struct {
 	StartingHashKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HashKeyRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HashKeyRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HashKeyRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndingHashKey != nil {
+		s.WriteString(schemas.HashKeyRange_EndingHashKey, *v.EndingHashKey)
+	}
+	if v.StartingHashKey != nil {
+		s.WriteString(schemas.HashKeyRange_StartingHashKey, *v.StartingHashKey)
+	}
+}
+func (v *HashKeyRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HashKeyRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HashKeyRange_EndingHashKey:
+			v.EndingHashKey = new(string)
+			return d.ReadString(schemas.HashKeyRange_EndingHashKey, v.EndingHashKey)
+		case schemas.HashKeyRange_StartingHashKey:
+			v.StartingHashKey = new(string)
+			return d.ReadString(schemas.HashKeyRange_StartingHashKey, v.StartingHashKey)
+		}
+		return nil
+	})
 }
 
 // Represents the request parameters for configuring minimum throughput billing
@@ -454,6 +1072,32 @@ type MinimumThroughputBillingCommitmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MinimumThroughputBillingCommitmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MinimumThroughputBillingCommitmentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MinimumThroughputBillingCommitmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.MinimumThroughputBillingCommitmentInput_Status, string(v.Status))
+	}
+}
+func (v *MinimumThroughputBillingCommitmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MinimumThroughputBillingCommitmentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MinimumThroughputBillingCommitmentInput_Status:
+			var ev string
+			if err := d.ReadString(schemas.MinimumThroughputBillingCommitmentInput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MinimumThroughputBillingCommitmentInputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents the current status of minimum throughput billing commitment for an
 // account.
 type MinimumThroughputBillingCommitmentOutput struct {
@@ -475,6 +1119,50 @@ type MinimumThroughputBillingCommitmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MinimumThroughputBillingCommitmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MinimumThroughputBillingCommitmentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MinimumThroughputBillingCommitmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EarliestAllowedEndAt != nil {
+		s.WriteTime(schemas.MinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt, *v.EarliestAllowedEndAt)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.MinimumThroughputBillingCommitmentOutput_EndedAt, *v.EndedAt)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.MinimumThroughputBillingCommitmentOutput_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MinimumThroughputBillingCommitmentOutput_Status, string(v.Status))
+	}
+}
+func (v *MinimumThroughputBillingCommitmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MinimumThroughputBillingCommitmentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt:
+			v.EarliestAllowedEndAt = new(time.Time)
+			return d.ReadTime(schemas.MinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt, v.EarliestAllowedEndAt)
+		case schemas.MinimumThroughputBillingCommitmentOutput_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.MinimumThroughputBillingCommitmentOutput_EndedAt, v.EndedAt)
+		case schemas.MinimumThroughputBillingCommitmentOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.MinimumThroughputBillingCommitmentOutput_StartedAt, v.StartedAt)
+		case schemas.MinimumThroughputBillingCommitmentOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.MinimumThroughputBillingCommitmentOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MinimumThroughputBillingCommitmentOutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies a single partition field.
 type PartitionField struct {
 
@@ -492,6 +1180,38 @@ type PartitionField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PartitionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceName != nil {
+		s.WriteString(schemas.PartitionField_SourceName, *v.SourceName)
+	}
+	if v.Transform != "" {
+		s.WriteString(schemas.PartitionField_Transform, string(v.Transform))
+	}
+}
+func (v *PartitionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionField_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.PartitionField_SourceName, v.SourceName)
+		case schemas.PartitionField_Transform:
+			var ev string
+			if err := d.ReadString(schemas.PartitionField_Transform, &ev); err != nil {
+				return err
+			}
+			v.Transform = PartitionTransform(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies how the destination table is partitioned.
 type PartitionSpec struct {
 
@@ -501,6 +1221,25 @@ type PartitionSpec struct {
 	PartitionFields []PartitionField
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartitionSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartitionFieldList(s, schemas.PartitionSpec_PartitionFields, v.PartitionFields)
+}
+func (v *PartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionSpec_PartitionFields:
+			return deserializePartitionFieldList(d, schemas.PartitionSpec_PartitionFields, &v.PartitionFields)
+		}
+		return nil
+	})
 }
 
 // Represents the output for PutRecords .
@@ -533,6 +1272,39 @@ type PutRecordsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRecordsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.PutRecordsRequestEntry_Data, v.Data)
+	}
+	if v.ExplicitHashKey != nil {
+		s.WriteString(schemas.PutRecordsRequestEntry_ExplicitHashKey, *v.ExplicitHashKey)
+	}
+	if v.PartitionKey != nil {
+		s.WriteString(schemas.PutRecordsRequestEntry_PartitionKey, *v.PartitionKey)
+	}
+}
+func (v *PutRecordsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordsRequestEntry_Data:
+			return d.ReadBlob(schemas.PutRecordsRequestEntry_Data, &v.Data)
+		case schemas.PutRecordsRequestEntry_ExplicitHashKey:
+			v.ExplicitHashKey = new(string)
+			return d.ReadString(schemas.PutRecordsRequestEntry_ExplicitHashKey, v.ExplicitHashKey)
+		case schemas.PutRecordsRequestEntry_PartitionKey:
+			v.PartitionKey = new(string)
+			return d.ReadString(schemas.PutRecordsRequestEntry_PartitionKey, v.PartitionKey)
+		}
+		return nil
+	})
+}
+
 // Represents the result of an individual record from a PutRecords request. A
 // record that is successfully added to a stream includes SequenceNumber and
 // ShardId in the result. A record that fails to be added to the stream includes
@@ -556,6 +1328,46 @@ type PutRecordsResultEntry struct {
 	ShardId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PutRecordsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRecordsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRecordsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.PutRecordsResultEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PutRecordsResultEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.PutRecordsResultEntry_SequenceNumber, *v.SequenceNumber)
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.PutRecordsResultEntry_ShardId, *v.ShardId)
+	}
+}
+func (v *PutRecordsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRecordsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRecordsResultEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.PutRecordsResultEntry_ErrorCode, v.ErrorCode)
+		case schemas.PutRecordsResultEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PutRecordsResultEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.PutRecordsResultEntry_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.PutRecordsResultEntry_SequenceNumber, v.SequenceNumber)
+		case schemas.PutRecordsResultEntry_ShardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.PutRecordsResultEntry_ShardId, v.ShardId)
+		}
+		return nil
+	})
 }
 
 // The unit of data of the Kinesis data stream, which is composed of a sequence
@@ -596,6 +1408,55 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Record) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Record)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateArrivalTimestamp != nil {
+		s.WriteTime(schemas.Record_ApproximateArrivalTimestamp, *v.ApproximateArrivalTimestamp)
+	}
+	if v.Data != nil {
+		s.WriteBlob(schemas.Record_Data, v.Data)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.Record_EncryptionType, string(v.EncryptionType))
+	}
+	if v.PartitionKey != nil {
+		s.WriteString(schemas.Record_PartitionKey, *v.PartitionKey)
+	}
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.Record_SequenceNumber, *v.SequenceNumber)
+	}
+}
+func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Record_ApproximateArrivalTimestamp:
+			v.ApproximateArrivalTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Record_ApproximateArrivalTimestamp, v.ApproximateArrivalTimestamp)
+		case schemas.Record_Data:
+			return d.ReadBlob(schemas.Record_Data, &v.Data)
+		case schemas.Record_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.Record_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.Record_PartitionKey:
+			v.PartitionKey = new(string)
+			return d.ReadString(schemas.Record_PartitionKey, v.PartitionKey)
+		case schemas.Record_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.Record_SequenceNumber, v.SequenceNumber)
+		}
+		return nil
+	})
+}
+
 // Specifies the format of records read from the source stream.
 type RecordConfiguration struct {
 
@@ -623,6 +1484,38 @@ type RecordConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GSRSchemaARN != nil {
+		s.WriteString(schemas.RecordConfiguration_GSRSchemaARN, *v.GSRSchemaARN)
+	}
+	if v.RecordFormatType != "" {
+		s.WriteString(schemas.RecordConfiguration_RecordFormatType, string(v.RecordFormatType))
+	}
+}
+func (v *RecordConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordConfiguration_GSRSchemaARN:
+			v.GSRSchemaARN = new(string)
+			return d.ReadString(schemas.RecordConfiguration_GSRSchemaARN, v.GSRSchemaARN)
+		case schemas.RecordConfiguration_RecordFormatType:
+			var ev string
+			if err := d.ReadString(schemas.RecordConfiguration_RecordFormatType, &ev); err != nil {
+				return err
+			}
+			v.RecordFormatType = RecordFormatType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration for delivery to a general purpose Amazon S3 bucket. Used in CreateChannel.
 type S3DestinationConfiguration struct {
 
@@ -641,6 +1534,44 @@ type S3DestinationConfiguration struct {
 	DeadLetterQueueS3Configuration *DeadLetterQueueS3Configuration
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFreshnessInSeconds != nil {
+		s.WriteInt32(schemas.S3DestinationConfiguration_DataFreshnessInSeconds, *v.DataFreshnessInSeconds)
+	}
+	if v.DeadLetterQueueS3Configuration != nil {
+		s.WriteStruct(schemas.S3DestinationConfiguration_DeadLetterQueueS3Configuration)
+		v.DeadLetterQueueS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.S3DestinationConfiguration_StorageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationConfiguration_DataFreshnessInSeconds:
+			v.DataFreshnessInSeconds = new(int32)
+			return d.ReadInt32(schemas.S3DestinationConfiguration_DataFreshnessInSeconds, v.DataFreshnessInSeconds)
+		case schemas.S3DestinationConfiguration_DeadLetterQueueS3Configuration:
+			v.DeadLetterQueueS3Configuration = &DeadLetterQueueS3Configuration{}
+			return v.DeadLetterQueueS3Configuration.Deserialize(d)
+		case schemas.S3DestinationConfiguration_StorageConfiguration:
+			v.StorageConfiguration = &S3StorageConfiguration{}
+			return v.StorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration for delivery to a general purpose Amazon S3 bucket. Returned
@@ -665,6 +1596,44 @@ type S3DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFreshnessInSeconds != nil {
+		s.WriteInt32(schemas.S3DestinationDescription_DataFreshnessInSeconds, *v.DataFreshnessInSeconds)
+	}
+	if v.DeadLetterQueueS3Configuration != nil {
+		s.WriteStruct(schemas.S3DestinationDescription_DeadLetterQueueS3Configuration)
+		v.DeadLetterQueueS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.S3DestinationDescription_StorageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3DestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationDescription_DataFreshnessInSeconds:
+			v.DataFreshnessInSeconds = new(int32)
+			return d.ReadInt32(schemas.S3DestinationDescription_DataFreshnessInSeconds, v.DataFreshnessInSeconds)
+		case schemas.S3DestinationDescription_DeadLetterQueueS3Configuration:
+			v.DeadLetterQueueS3Configuration = &DeadLetterQueueS3Configuration{}
+			return v.DeadLetterQueueS3Configuration.Deserialize(d)
+		case schemas.S3DestinationDescription_StorageConfiguration:
+			v.StorageConfiguration = &S3StorageConfiguration{}
+			return v.StorageConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The updated configuration for a general purpose Amazon S3 destination. Used in UpdateChannel
 // . Only DataFreshnessInSeconds can be updated.
 type S3DestinationUpdateInput struct {
@@ -676,6 +1645,28 @@ type S3DestinationUpdateInput struct {
 	DataFreshnessInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DestinationUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFreshnessInSeconds != nil {
+		s.WriteInt32(schemas.S3DestinationUpdateInput_DataFreshnessInSeconds, *v.DataFreshnessInSeconds)
+	}
+}
+func (v *S3DestinationUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationUpdateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationUpdateInput_DataFreshnessInSeconds:
+			v.DataFreshnessInSeconds = new(int32)
+			return d.ReadInt32(schemas.S3DestinationUpdateInput_DataFreshnessInSeconds, v.DataFreshnessInSeconds)
+		}
+		return nil
+	})
 }
 
 // The Amazon S3 storage settings for a general purpose Amazon S3 destination.
@@ -722,6 +1713,60 @@ type S3StorageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3StorageConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3StorageConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3StorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3StorageConfiguration_BucketARN, *v.BucketARN)
+	}
+	if v.CompressionType != "" {
+		s.WriteString(schemas.S3StorageConfiguration_CompressionType, string(v.CompressionType))
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.S3StorageConfiguration_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.OutputKeyTemplate != nil {
+		s.WriteString(schemas.S3StorageConfiguration_OutputKeyTemplate, *v.OutputKeyTemplate)
+	}
+	if v.StorageClass != "" {
+		s.WriteString(schemas.S3StorageConfiguration_StorageClass, string(v.StorageClass))
+	}
+}
+func (v *S3StorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3StorageConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3StorageConfiguration_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3StorageConfiguration_BucketARN, v.BucketARN)
+		case schemas.S3StorageConfiguration_CompressionType:
+			var ev string
+			if err := d.ReadString(schemas.S3StorageConfiguration_CompressionType, &ev); err != nil {
+				return err
+			}
+			v.CompressionType = S3CompressionType(ev)
+			return nil
+		case schemas.S3StorageConfiguration_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.S3StorageConfiguration_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		case schemas.S3StorageConfiguration_OutputKeyTemplate:
+			v.OutputKeyTemplate = new(string)
+			return d.ReadString(schemas.S3StorageConfiguration_OutputKeyTemplate, v.OutputKeyTemplate)
+		case schemas.S3StorageConfiguration_StorageClass:
+			var ev string
+			if err := d.ReadString(schemas.S3StorageConfiguration_StorageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = S3StorageClass(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies a destination streaming table on Apache Iceberg.
 type S3TablesConfiguration struct {
 
@@ -758,6 +1803,58 @@ type S3TablesConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3TablesConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompressionType != "" {
+		s.WriteString(schemas.S3TablesConfiguration_CompressionType, string(v.CompressionType))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.S3TablesConfiguration_Namespace, *v.Namespace)
+	}
+	if v.PartitionSpec != nil {
+		s.WriteStruct(schemas.S3TablesConfiguration_PartitionSpec)
+		v.PartitionSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.S3TablesConfiguration_TableBucketARN, *v.TableBucketARN)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.S3TablesConfiguration_TableName, *v.TableName)
+	}
+}
+func (v *S3TablesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesConfiguration_CompressionType:
+			var ev string
+			if err := d.ReadString(schemas.S3TablesConfiguration_CompressionType, &ev); err != nil {
+				return err
+			}
+			v.CompressionType = S3TablesCompressionType(ev)
+			return nil
+		case schemas.S3TablesConfiguration_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.S3TablesConfiguration_Namespace, v.Namespace)
+		case schemas.S3TablesConfiguration_PartitionSpec:
+			v.PartitionSpec = &PartitionSpec{}
+			return v.PartitionSpec.Deserialize(d)
+		case schemas.S3TablesConfiguration_TableBucketARN:
+			v.TableBucketARN = new(string)
+			return d.ReadString(schemas.S3TablesConfiguration_TableBucketARN, v.TableBucketARN)
+		case schemas.S3TablesConfiguration_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.S3TablesConfiguration_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 // The configuration for delivery to streaming tables on Apache Iceberg. Used in CreateChannel.
 type S3TablesDestinationConfiguration struct {
 
@@ -778,6 +1875,39 @@ type S3TablesDestinationConfiguration struct {
 	DataFreshnessInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3TablesDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesDestinationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFreshnessInSeconds != nil {
+		s.WriteInt32(schemas.S3TablesDestinationConfiguration_DataFreshnessInSeconds, *v.DataFreshnessInSeconds)
+	}
+	if v.DeadLetterQueueS3Configuration != nil {
+		s.WriteStruct(schemas.S3TablesDestinationConfiguration_DeadLetterQueueS3Configuration)
+		v.DeadLetterQueueS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeS3TablesConfigurationList(s, schemas.S3TablesDestinationConfiguration_S3TablesConfigurationList, v.S3TablesConfigurationList)
+}
+func (v *S3TablesDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesDestinationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesDestinationConfiguration_DataFreshnessInSeconds:
+			v.DataFreshnessInSeconds = new(int32)
+			return d.ReadInt32(schemas.S3TablesDestinationConfiguration_DataFreshnessInSeconds, v.DataFreshnessInSeconds)
+		case schemas.S3TablesDestinationConfiguration_DeadLetterQueueS3Configuration:
+			v.DeadLetterQueueS3Configuration = &DeadLetterQueueS3Configuration{}
+			return v.DeadLetterQueueS3Configuration.Deserialize(d)
+		case schemas.S3TablesDestinationConfiguration_S3TablesConfigurationList:
+			return deserializeS3TablesConfigurationList(d, schemas.S3TablesDestinationConfiguration_S3TablesConfigurationList, &v.S3TablesConfigurationList)
+		}
+		return nil
+	})
 }
 
 // The configuration for delivery to streaming tables on Apache Iceberg. Returned
@@ -802,6 +1932,39 @@ type S3TablesDestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3TablesDestinationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesDestinationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesDestinationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFreshnessInSeconds != nil {
+		s.WriteInt32(schemas.S3TablesDestinationDescription_DataFreshnessInSeconds, *v.DataFreshnessInSeconds)
+	}
+	if v.DeadLetterQueueS3Configuration != nil {
+		s.WriteStruct(schemas.S3TablesDestinationDescription_DeadLetterQueueS3Configuration)
+		v.DeadLetterQueueS3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeS3TablesConfigurationList(s, schemas.S3TablesDestinationDescription_S3TablesConfigurationList, v.S3TablesConfigurationList)
+}
+func (v *S3TablesDestinationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesDestinationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesDestinationDescription_DataFreshnessInSeconds:
+			v.DataFreshnessInSeconds = new(int32)
+			return d.ReadInt32(schemas.S3TablesDestinationDescription_DataFreshnessInSeconds, v.DataFreshnessInSeconds)
+		case schemas.S3TablesDestinationDescription_DeadLetterQueueS3Configuration:
+			v.DeadLetterQueueS3Configuration = &DeadLetterQueueS3Configuration{}
+			return v.DeadLetterQueueS3Configuration.Deserialize(d)
+		case schemas.S3TablesDestinationDescription_S3TablesConfigurationList:
+			return deserializeS3TablesConfigurationList(d, schemas.S3TablesDestinationDescription_S3TablesConfigurationList, &v.S3TablesConfigurationList)
+		}
+		return nil
+	})
+}
+
 // The updated configuration for a streaming table destination. Used in UpdateChannel. Only
 // DataFreshnessInSeconds can be updated.
 type S3TablesDestinationUpdateInput struct {
@@ -813,6 +1976,28 @@ type S3TablesDestinationUpdateInput struct {
 	DataFreshnessInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3TablesDestinationUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesDestinationUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesDestinationUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataFreshnessInSeconds != nil {
+		s.WriteInt32(schemas.S3TablesDestinationUpdateInput_DataFreshnessInSeconds, *v.DataFreshnessInSeconds)
+	}
+}
+func (v *S3TablesDestinationUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesDestinationUpdateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesDestinationUpdateInput_DataFreshnessInSeconds:
+			v.DataFreshnessInSeconds = new(int32)
+			return d.ReadInt32(schemas.S3TablesDestinationUpdateInput_DataFreshnessInSeconds, v.DataFreshnessInSeconds)
+		}
+		return nil
+	})
 }
 
 // The range of possible sequence numbers for the shard.
@@ -828,6 +2013,34 @@ type SequenceNumberRange struct {
 	EndingSequenceNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SequenceNumberRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SequenceNumberRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SequenceNumberRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndingSequenceNumber != nil {
+		s.WriteString(schemas.SequenceNumberRange_EndingSequenceNumber, *v.EndingSequenceNumber)
+	}
+	if v.StartingSequenceNumber != nil {
+		s.WriteString(schemas.SequenceNumberRange_StartingSequenceNumber, *v.StartingSequenceNumber)
+	}
+}
+func (v *SequenceNumberRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SequenceNumberRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SequenceNumberRange_EndingSequenceNumber:
+			v.EndingSequenceNumber = new(string)
+			return d.ReadString(schemas.SequenceNumberRange_EndingSequenceNumber, v.EndingSequenceNumber)
+		case schemas.SequenceNumberRange_StartingSequenceNumber:
+			v.StartingSequenceNumber = new(string)
+			return d.ReadString(schemas.SequenceNumberRange_StartingSequenceNumber, v.StartingSequenceNumber)
+		}
+		return nil
+	})
 }
 
 // A uniquely identified group of data records in a Kinesis data stream.
@@ -856,6 +2069,56 @@ type Shard struct {
 	ParentShardId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Shard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Shard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjacentParentShardId != nil {
+		s.WriteString(schemas.Shard_AdjacentParentShardId, *v.AdjacentParentShardId)
+	}
+	if v.HashKeyRange != nil {
+		s.WriteStruct(schemas.Shard_HashKeyRange)
+		v.HashKeyRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentShardId != nil {
+		s.WriteString(schemas.Shard_ParentShardId, *v.ParentShardId)
+	}
+	if v.SequenceNumberRange != nil {
+		s.WriteStruct(schemas.Shard_SequenceNumberRange)
+		v.SequenceNumberRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.Shard_ShardId, *v.ShardId)
+	}
+}
+func (v *Shard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Shard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Shard_AdjacentParentShardId:
+			v.AdjacentParentShardId = new(string)
+			return d.ReadString(schemas.Shard_AdjacentParentShardId, v.AdjacentParentShardId)
+		case schemas.Shard_HashKeyRange:
+			v.HashKeyRange = &HashKeyRange{}
+			return v.HashKeyRange.Deserialize(d)
+		case schemas.Shard_ParentShardId:
+			v.ParentShardId = new(string)
+			return d.ReadString(schemas.Shard_ParentShardId, v.ParentShardId)
+		case schemas.Shard_SequenceNumberRange:
+			v.SequenceNumberRange = &SequenceNumberRange{}
+			return v.SequenceNumberRange.Deserialize(d)
+		case schemas.Shard_ShardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.Shard_ShardId, v.ShardId)
+		}
+		return nil
+	})
 }
 
 // The request parameter used to filter out the response of the ListShards API.
@@ -903,6 +2166,44 @@ type ShardFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShardFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShardFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShardFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShardId != nil {
+		s.WriteString(schemas.ShardFilter_ShardId, *v.ShardId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ShardFilter_Timestamp, *v.Timestamp)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ShardFilter_Type, string(v.Type))
+	}
+}
+func (v *ShardFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShardFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShardFilter_ShardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.ShardFilter_ShardId, v.ShardId)
+		case schemas.ShardFilter_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ShardFilter_Timestamp, v.Timestamp)
+		case schemas.ShardFilter_Type:
+			var ev string
+			if err := d.ReadString(schemas.ShardFilter_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ShardFilterType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The starting position in the data stream from which to start streaming.
 type StartingPosition struct {
 
@@ -941,6 +2242,44 @@ type StartingPosition struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartingPosition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartingPosition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartingPosition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.StartingPosition_SequenceNumber, *v.SequenceNumber)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.StartingPosition_Timestamp, *v.Timestamp)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartingPosition_Type, string(v.Type))
+	}
+}
+func (v *StartingPosition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartingPosition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartingPosition_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.StartingPosition_SequenceNumber, v.SequenceNumber)
+		case schemas.StartingPosition_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.StartingPosition_Timestamp, v.Timestamp)
+		case schemas.StartingPosition_Type:
+			var ev string
+			if err := d.ReadString(schemas.StartingPosition_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ShardIteratorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents the output for DescribeStream.
@@ -1034,6 +2373,92 @@ type StreamDescription struct {
 	StreamModeDetails *StreamModeDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.StreamDescription_EncryptionType, string(v.EncryptionType))
+	}
+	serializeEnhancedMonitoringList(s, schemas.StreamDescription_EnhancedMonitoring, v.EnhancedMonitoring)
+	if v.HasMoreShards != nil {
+		s.WriteBool(schemas.StreamDescription_HasMoreShards, *v.HasMoreShards)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.StreamDescription_KeyId, *v.KeyId)
+	}
+	if v.RetentionPeriodHours != nil {
+		s.WriteInt32(schemas.StreamDescription_RetentionPeriodHours, *v.RetentionPeriodHours)
+	}
+	serializeShardList(s, schemas.StreamDescription_Shards, v.Shards)
+	if v.StreamARN != nil {
+		s.WriteString(schemas.StreamDescription_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.StreamDescription_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+	if v.StreamModeDetails != nil {
+		s.WriteStruct(schemas.StreamDescription_StreamModeDetails)
+		v.StreamModeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.StreamDescription_StreamName, *v.StreamName)
+	}
+	if v.StreamStatus != "" {
+		s.WriteString(schemas.StreamDescription_StreamStatus, string(v.StreamStatus))
+	}
+}
+func (v *StreamDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamDescription_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescription_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.StreamDescription_EnhancedMonitoring:
+			return deserializeEnhancedMonitoringList(d, schemas.StreamDescription_EnhancedMonitoring, &v.EnhancedMonitoring)
+		case schemas.StreamDescription_HasMoreShards:
+			v.HasMoreShards = new(bool)
+			return d.ReadBool(schemas.StreamDescription_HasMoreShards, v.HasMoreShards)
+		case schemas.StreamDescription_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.StreamDescription_KeyId, v.KeyId)
+		case schemas.StreamDescription_RetentionPeriodHours:
+			v.RetentionPeriodHours = new(int32)
+			return d.ReadInt32(schemas.StreamDescription_RetentionPeriodHours, v.RetentionPeriodHours)
+		case schemas.StreamDescription_Shards:
+			return deserializeShardList(d, schemas.StreamDescription_Shards, &v.Shards)
+		case schemas.StreamDescription_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.StreamDescription_StreamARN, v.StreamARN)
+		case schemas.StreamDescription_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StreamDescription_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		case schemas.StreamDescription_StreamModeDetails:
+			v.StreamModeDetails = &StreamModeDetails{}
+			return v.StreamModeDetails.Deserialize(d)
+		case schemas.StreamDescription_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.StreamDescription_StreamName, v.StreamName)
+		case schemas.StreamDescription_StreamStatus:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescription_StreamStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamStatus = StreamStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents the output for DescribeStreamSummary
@@ -1138,6 +2563,121 @@ type StreamDescriptionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamDescriptionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamDescriptionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamDescriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelCount != nil {
+		s.WriteInt32(schemas.StreamDescriptionSummary_ChannelCount, *v.ChannelCount)
+	}
+	if v.ConsumerCount != nil {
+		s.WriteInt32(schemas.StreamDescriptionSummary_ConsumerCount, *v.ConsumerCount)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.StreamDescriptionSummary_EncryptionType, string(v.EncryptionType))
+	}
+	serializeEnhancedMonitoringList(s, schemas.StreamDescriptionSummary_EnhancedMonitoring, v.EnhancedMonitoring)
+	if v.KeyId != nil {
+		s.WriteString(schemas.StreamDescriptionSummary_KeyId, *v.KeyId)
+	}
+	if v.MaxRecordSizeInKiB != nil {
+		s.WriteInt32(schemas.StreamDescriptionSummary_MaxRecordSizeInKiB, *v.MaxRecordSizeInKiB)
+	}
+	if v.OpenShardCount != nil {
+		s.WriteInt32(schemas.StreamDescriptionSummary_OpenShardCount, *v.OpenShardCount)
+	}
+	if v.RetentionPeriodHours != nil {
+		s.WriteInt32(schemas.StreamDescriptionSummary_RetentionPeriodHours, *v.RetentionPeriodHours)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.StreamDescriptionSummary_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.StreamDescriptionSummary_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.StreamDescriptionSummary_StreamId, *v.StreamId)
+	}
+	if v.StreamModeDetails != nil {
+		s.WriteStruct(schemas.StreamDescriptionSummary_StreamModeDetails)
+		v.StreamModeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.StreamDescriptionSummary_StreamName, *v.StreamName)
+	}
+	if v.StreamStatus != "" {
+		s.WriteString(schemas.StreamDescriptionSummary_StreamStatus, string(v.StreamStatus))
+	}
+	if v.WarmThroughput != nil {
+		s.WriteStruct(schemas.StreamDescriptionSummary_WarmThroughput)
+		v.WarmThroughput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StreamDescriptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamDescriptionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamDescriptionSummary_ChannelCount:
+			v.ChannelCount = new(int32)
+			return d.ReadInt32(schemas.StreamDescriptionSummary_ChannelCount, v.ChannelCount)
+		case schemas.StreamDescriptionSummary_ConsumerCount:
+			v.ConsumerCount = new(int32)
+			return d.ReadInt32(schemas.StreamDescriptionSummary_ConsumerCount, v.ConsumerCount)
+		case schemas.StreamDescriptionSummary_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescriptionSummary_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.StreamDescriptionSummary_EnhancedMonitoring:
+			return deserializeEnhancedMonitoringList(d, schemas.StreamDescriptionSummary_EnhancedMonitoring, &v.EnhancedMonitoring)
+		case schemas.StreamDescriptionSummary_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.StreamDescriptionSummary_KeyId, v.KeyId)
+		case schemas.StreamDescriptionSummary_MaxRecordSizeInKiB:
+			v.MaxRecordSizeInKiB = new(int32)
+			return d.ReadInt32(schemas.StreamDescriptionSummary_MaxRecordSizeInKiB, v.MaxRecordSizeInKiB)
+		case schemas.StreamDescriptionSummary_OpenShardCount:
+			v.OpenShardCount = new(int32)
+			return d.ReadInt32(schemas.StreamDescriptionSummary_OpenShardCount, v.OpenShardCount)
+		case schemas.StreamDescriptionSummary_RetentionPeriodHours:
+			v.RetentionPeriodHours = new(int32)
+			return d.ReadInt32(schemas.StreamDescriptionSummary_RetentionPeriodHours, v.RetentionPeriodHours)
+		case schemas.StreamDescriptionSummary_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.StreamDescriptionSummary_StreamARN, v.StreamARN)
+		case schemas.StreamDescriptionSummary_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StreamDescriptionSummary_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		case schemas.StreamDescriptionSummary_StreamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.StreamDescriptionSummary_StreamId, v.StreamId)
+		case schemas.StreamDescriptionSummary_StreamModeDetails:
+			v.StreamModeDetails = &StreamModeDetails{}
+			return v.StreamModeDetails.Deserialize(d)
+		case schemas.StreamDescriptionSummary_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.StreamDescriptionSummary_StreamName, v.StreamName)
+		case schemas.StreamDescriptionSummary_StreamStatus:
+			var ev string
+			if err := d.ReadString(schemas.StreamDescriptionSummary_StreamStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamStatus = StreamStatus(ev)
+			return nil
+		case schemas.StreamDescriptionSummary_WarmThroughput:
+			v.WarmThroughput = &WarmThroughputObject{}
+			return v.WarmThroughput.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Filters ListChannels results by source stream.
 type StreamFilter struct {
 
@@ -1150,6 +2690,34 @@ type StreamFilter struct {
 	StreamCreationTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.StreamFilter_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.StreamFilter_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+}
+func (v *StreamFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamFilter_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.StreamFilter_StreamARN, v.StreamARN)
+		case schemas.StreamFilter_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StreamFilter_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		}
+		return nil
+	})
 }
 
 //	Specifies the capacity mode to which you want to set your data stream.
@@ -1166,6 +2734,32 @@ type StreamModeDetails struct {
 	StreamMode StreamMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamModeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamModeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamModeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamMode != "" {
+		s.WriteString(schemas.StreamModeDetails_StreamMode, string(v.StreamMode))
+	}
+}
+func (v *StreamModeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamModeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamModeDetails_StreamMode:
+			var ev string
+			if err := d.ReadString(schemas.StreamModeDetails_StreamMode, &ev); err != nil {
+				return err
+			}
+			v.StreamMode = StreamMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The summary of a stream.
@@ -1195,6 +2789,58 @@ type StreamSummary struct {
 	StreamModeDetails *StreamModeDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.StreamSummary_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.StreamSummary_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+	if v.StreamModeDetails != nil {
+		s.WriteStruct(schemas.StreamSummary_StreamModeDetails)
+		v.StreamModeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.StreamSummary_StreamName, *v.StreamName)
+	}
+	if v.StreamStatus != "" {
+		s.WriteString(schemas.StreamSummary_StreamStatus, string(v.StreamStatus))
+	}
+}
+func (v *StreamSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamSummary_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.StreamSummary_StreamARN, v.StreamARN)
+		case schemas.StreamSummary_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StreamSummary_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		case schemas.StreamSummary_StreamModeDetails:
+			v.StreamModeDetails = &StreamModeDetails{}
+			return v.StreamModeDetails.Deserialize(d)
+		case schemas.StreamSummary_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.StreamSummary_StreamName, v.StreamName)
+		case schemas.StreamSummary_StreamStatus:
+			var ev string
+			if err := d.ReadString(schemas.StreamSummary_StreamStatus, &ev); err != nil {
+				return err
+			}
+			v.StreamStatus = StreamStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // After you call SubscribeToShard, Kinesis Data Streams sends events of this type over an HTTP/2
@@ -1229,6 +2875,40 @@ type SubscribeToShardEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribeToShardEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeToShardEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribeToShardEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChildShardList(s, schemas.SubscribeToShardEvent_ChildShards, v.ChildShards)
+	if v.ContinuationSequenceNumber != nil {
+		s.WriteString(schemas.SubscribeToShardEvent_ContinuationSequenceNumber, *v.ContinuationSequenceNumber)
+	}
+	if v.MillisBehindLatest != nil {
+		s.WriteInt64(schemas.SubscribeToShardEvent_MillisBehindLatest, *v.MillisBehindLatest)
+	}
+	serializeRecordList(s, schemas.SubscribeToShardEvent_Records, v.Records)
+}
+func (v *SubscribeToShardEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscribeToShardEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscribeToShardEvent_ChildShards:
+			return deserializeChildShardList(d, schemas.SubscribeToShardEvent_ChildShards, &v.ChildShards)
+		case schemas.SubscribeToShardEvent_ContinuationSequenceNumber:
+			v.ContinuationSequenceNumber = new(string)
+			return d.ReadString(schemas.SubscribeToShardEvent_ContinuationSequenceNumber, v.ContinuationSequenceNumber)
+		case schemas.SubscribeToShardEvent_MillisBehindLatest:
+			v.MillisBehindLatest = new(int64)
+			return d.ReadInt64(schemas.SubscribeToShardEvent_MillisBehindLatest, v.MillisBehindLatest)
+		case schemas.SubscribeToShardEvent_Records:
+			return deserializeRecordList(d, schemas.SubscribeToShardEvent_Records, &v.Records)
+		}
+		return nil
+	})
+}
+
 // This is a tagged union for all of the types of events an enhanced fan-out
 // consumer can receive over HTTP/2 after a call to SubscribeToShard.
 //
@@ -1248,6 +2928,14 @@ type SubscribeToShardEventStreamMemberSubscribeToShardEvent struct {
 }
 
 func (*SubscribeToShardEventStreamMemberSubscribeToShardEvent) isSubscribeToShardEventStream() {}
+func (v *SubscribeToShardEventStreamMemberSubscribeToShardEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribeToShardEventStream_SubscribeToShardEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SubscribeToShardEventStreamMemberSubscribeToShardEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Metadata assigned to the stream or consumer, consisting of a key-value pair.
 type Tag struct {
@@ -1266,6 +2954,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents the warm throughput configuration on the stream. This is only
 // present for On-Demand Kinesis Data Streams in accounts that have
 // MinimumThroughputBillingCommitment enabled.
@@ -1280,6 +2996,34 @@ type WarmThroughputObject struct {
 	TargetMiBps *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WarmThroughputObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarmThroughputObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarmThroughputObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentMiBps != nil {
+		s.WriteInt32(schemas.WarmThroughputObject_CurrentMiBps, *v.CurrentMiBps)
+	}
+	if v.TargetMiBps != nil {
+		s.WriteInt32(schemas.WarmThroughputObject_TargetMiBps, *v.TargetMiBps)
+	}
+}
+func (v *WarmThroughputObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarmThroughputObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarmThroughputObject_CurrentMiBps:
+			v.CurrentMiBps = new(int32)
+			return d.ReadInt32(schemas.WarmThroughputObject_CurrentMiBps, v.CurrentMiBps)
+		case schemas.WarmThroughputObject_TargetMiBps:
+			v.TargetMiBps = new(int32)
+			return d.ReadInt32(schemas.WarmThroughputObject_TargetMiBps, v.TargetMiBps)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

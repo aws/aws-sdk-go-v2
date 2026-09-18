@@ -4,6 +4,8 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCisScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCisScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCisScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCisScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.DeleteCisScanConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+
 type DeleteCisScanConfigurationOutput struct {
 
 	// The ARN of the CIS scan configuration.
@@ -46,13 +60,32 @@ type DeleteCisScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCisScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCisScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCisScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.DeleteCisScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+func (v *DeleteCisScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCisScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCisScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteCisScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCisScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCisScanConfiguration, schemas.DeleteCisScanConfigurationRequest, schemas.DeleteCisScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCisScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCisScanConfiguration, schemas.DeleteCisScanConfigurationRequest, schemas.DeleteCisScanConfigurationResponse), output: &DeleteCisScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

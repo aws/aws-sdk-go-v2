@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListEventBridgeRuleTemplateGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventBridgeRuleTemplateGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventBridgeRuleTemplateGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventBridgeRuleTemplateGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventBridgeRuleTemplateGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventBridgeRuleTemplateGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.SignalMapIdentifier != nil {
+		s.WriteString(schemas.ListEventBridgeRuleTemplateGroupsRequest_SignalMapIdentifier, *v.SignalMapIdentifier)
+	}
+}
+
 // Placeholder documentation for ListEventBridgeRuleTemplateGroupsResponse
 type ListEventBridgeRuleTemplateGroupsOutput struct {
 
@@ -55,13 +75,35 @@ type ListEventBridgeRuleTemplateGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventBridgeRuleTemplateGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventBridgeRuleTemplateGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventBridgeRuleTemplateGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfEventBridgeRuleTemplateGroupSummary(s, schemas.ListEventBridgeRuleTemplateGroupsResponse_EventBridgeRuleTemplateGroups, v.EventBridgeRuleTemplateGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventBridgeRuleTemplateGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventBridgeRuleTemplateGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventBridgeRuleTemplateGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventBridgeRuleTemplateGroupsResponse_EventBridgeRuleTemplateGroups:
+			return deserialize__listOfEventBridgeRuleTemplateGroupSummary(d, schemas.ListEventBridgeRuleTemplateGroupsResponse_EventBridgeRuleTemplateGroups, &v.EventBridgeRuleTemplateGroups)
+		case schemas.ListEventBridgeRuleTemplateGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventBridgeRuleTemplateGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventBridgeRuleTemplateGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventBridgeRuleTemplateGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventBridgeRuleTemplateGroups, schemas.ListEventBridgeRuleTemplateGroupsRequest, schemas.ListEventBridgeRuleTemplateGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventBridgeRuleTemplateGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventBridgeRuleTemplateGroups, schemas.ListEventBridgeRuleTemplateGroupsRequest, schemas.ListEventBridgeRuleTemplateGroupsResponse), output: &ListEventBridgeRuleTemplateGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

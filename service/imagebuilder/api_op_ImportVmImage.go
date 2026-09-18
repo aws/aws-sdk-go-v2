@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,8 +39,10 @@ func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, 
 
 type ImportVmImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -61,9 +65,9 @@ type ImportVmImageInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -82,7 +86,7 @@ type ImportVmImageInput struct {
 	// The description for the base image that is created by the import process.
 	Description *string
 
-	// Define logging configuration for the image build process.
+	// The logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// The operating system version for the imported VM.
@@ -92,6 +96,42 @@ type ImportVmImageInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportVmImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportVmImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportVmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportVmImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ImportVmImageRequest_description, *v.Description)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.ImportVmImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportVmImageRequest_name, *v.Name)
+	}
+	if v.OsVersion != nil {
+		s.WriteString(schemas.ImportVmImageRequest_osVersion, *v.OsVersion)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.ImportVmImageRequest_platform, string(v.Platform))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ImportVmImageRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.ImportVmImageRequest_tags, v.Tags)
+	if v.VmImportTaskId != nil {
+		s.WriteString(schemas.ImportVmImageRequest_vmImportTaskId, *v.VmImportTaskId)
+	}
 }
 
 type ImportVmImageOutput struct {
@@ -112,13 +152,44 @@ type ImportVmImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportVmImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportVmImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportVmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportVmImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.ImportVmImageResponse_imageArn, *v.ImageArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ImportVmImageResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ImportVmImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportVmImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportVmImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.ImportVmImageResponse_clientToken, v.ClientToken)
+		case schemas.ImportVmImageResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.ImportVmImageResponse_imageArn, v.ImageArn)
+		case schemas.ImportVmImageResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ImportVmImageResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportVmImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportVmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportVmImage, schemas.ImportVmImageRequest, schemas.ImportVmImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportVmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportVmImage, schemas.ImportVmImageRequest, schemas.ImportVmImageResponse), output: &ImportVmImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1130,6 +1130,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAvailablePhoneNumbers struct {
+}
+
+func (*validateOpListAvailablePhoneNumbers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailablePhoneNumbers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailablePhoneNumbersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailablePhoneNumbersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPoolOriginationIdentities struct {
 }
 
@@ -2194,6 +2214,10 @@ func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
+func addOpListAvailablePhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailablePhoneNumbers{}, middleware.After)
+}
+
 func addOpListPoolOriginationIdentitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPoolOriginationIdentities{}, middleware.After)
 }
@@ -2597,6 +2621,41 @@ func validateNotifyTemplateFilterList(v []types.NotifyTemplateFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "NotifyTemplateFilterList"}
 	for i := range v {
 		if err := validateNotifyTemplateFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNumberPreferenceItem(v *types.NumberPreferenceItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NumberPreferenceItem"}
+	if v.PreferenceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreferenceType"))
+	}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNumberPreferenceList(v []types.NumberPreferenceItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NumberPreferenceList"}
+	for i := range v {
+		if err := validateNumberPreferenceItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4631,6 +4690,32 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	}
 }
 
+func validateOpListAvailablePhoneNumbersInput(v *ListAvailablePhoneNumbersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailablePhoneNumbersInput"}
+	if v.IsoCountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
+	}
+	if v.NumberCapabilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberCapabilities"))
+	}
+	if len(v.NumberType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberType"))
+	}
+	if v.NumberPreference != nil {
+		if err := validateNumberPreferenceList(v.NumberPreference); err != nil {
+			invalidParams.AddNested("NumberPreference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPoolOriginationIdentitiesInput(v *ListPoolOriginationIdentitiesInput) error {
 	if v == nil {
 		return nil
@@ -4869,6 +4954,11 @@ func validateOpRequestPhoneNumberInput(v *RequestPhoneNumberInput) error {
 	}
 	if len(v.NumberType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NumberType"))
+	}
+	if v.NumberPreference != nil {
+		if err := validateNumberPreferenceList(v.NumberPreference); err != nil {
+			invalidParams.AddNested("NumberPreference", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

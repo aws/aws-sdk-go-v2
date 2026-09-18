@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -35,6 +37,69 @@ type ApplicationComponent struct {
 	Tier Tier
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ApplicationComponent_ComponentName, *v.ComponentName)
+	}
+	if v.ComponentRemarks != nil {
+		s.WriteString(schemas.ApplicationComponent_ComponentRemarks, *v.ComponentRemarks)
+	}
+	serializeDetectedWorkload(s, schemas.ApplicationComponent_DetectedWorkload, v.DetectedWorkload)
+	if v.Monitor != nil {
+		s.WriteBool(schemas.ApplicationComponent_Monitor, *v.Monitor)
+	}
+	if v.OsType != "" {
+		s.WriteString(schemas.ApplicationComponent_OsType, string(v.OsType))
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ApplicationComponent_ResourceType, *v.ResourceType)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.ApplicationComponent_Tier, string(v.Tier))
+	}
+}
+func (v *ApplicationComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationComponent_ComponentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.ApplicationComponent_ComponentName, v.ComponentName)
+		case schemas.ApplicationComponent_ComponentRemarks:
+			v.ComponentRemarks = new(string)
+			return d.ReadString(schemas.ApplicationComponent_ComponentRemarks, v.ComponentRemarks)
+		case schemas.ApplicationComponent_DetectedWorkload:
+			return deserializeDetectedWorkload(d, schemas.ApplicationComponent_DetectedWorkload, &v.DetectedWorkload)
+		case schemas.ApplicationComponent_Monitor:
+			v.Monitor = new(bool)
+			return d.ReadBool(schemas.ApplicationComponent_Monitor, v.Monitor)
+		case schemas.ApplicationComponent_OsType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationComponent_OsType, &ev); err != nil {
+				return err
+			}
+			v.OsType = OsType(ev)
+			return nil
+		case schemas.ApplicationComponent_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ApplicationComponent_ResourceType, v.ResourceType)
+		case schemas.ApplicationComponent_Tier:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationComponent_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = Tier(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the status of the application.
@@ -87,6 +152,92 @@ type ApplicationInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ApplicationInfo_AccountId, *v.AccountId)
+	}
+	if v.AttachMissingPermission != nil {
+		s.WriteBool(schemas.ApplicationInfo_AttachMissingPermission, *v.AttachMissingPermission)
+	}
+	if v.AutoConfigEnabled != nil {
+		s.WriteBool(schemas.ApplicationInfo_AutoConfigEnabled, *v.AutoConfigEnabled)
+	}
+	if v.CWEMonitorEnabled != nil {
+		s.WriteBool(schemas.ApplicationInfo_CWEMonitorEnabled, *v.CWEMonitorEnabled)
+	}
+	if v.DiscoveryType != "" {
+		s.WriteString(schemas.ApplicationInfo_DiscoveryType, string(v.DiscoveryType))
+	}
+	if v.LifeCycle != nil {
+		s.WriteString(schemas.ApplicationInfo_LifeCycle, *v.LifeCycle)
+	}
+	if v.OpsCenterEnabled != nil {
+		s.WriteBool(schemas.ApplicationInfo_OpsCenterEnabled, *v.OpsCenterEnabled)
+	}
+	if v.OpsItemSNSTopicArn != nil {
+		s.WriteString(schemas.ApplicationInfo_OpsItemSNSTopicArn, *v.OpsItemSNSTopicArn)
+	}
+	if v.Remarks != nil {
+		s.WriteString(schemas.ApplicationInfo_Remarks, *v.Remarks)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.ApplicationInfo_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.SNSNotificationArn != nil {
+		s.WriteString(schemas.ApplicationInfo_SNSNotificationArn, *v.SNSNotificationArn)
+	}
+}
+func (v *ApplicationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationInfo_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ApplicationInfo_AccountId, v.AccountId)
+		case schemas.ApplicationInfo_AttachMissingPermission:
+			v.AttachMissingPermission = new(bool)
+			return d.ReadBool(schemas.ApplicationInfo_AttachMissingPermission, v.AttachMissingPermission)
+		case schemas.ApplicationInfo_AutoConfigEnabled:
+			v.AutoConfigEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationInfo_AutoConfigEnabled, v.AutoConfigEnabled)
+		case schemas.ApplicationInfo_CWEMonitorEnabled:
+			v.CWEMonitorEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationInfo_CWEMonitorEnabled, v.CWEMonitorEnabled)
+		case schemas.ApplicationInfo_DiscoveryType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationInfo_DiscoveryType, &ev); err != nil {
+				return err
+			}
+			v.DiscoveryType = DiscoveryType(ev)
+			return nil
+		case schemas.ApplicationInfo_LifeCycle:
+			v.LifeCycle = new(string)
+			return d.ReadString(schemas.ApplicationInfo_LifeCycle, v.LifeCycle)
+		case schemas.ApplicationInfo_OpsCenterEnabled:
+			v.OpsCenterEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationInfo_OpsCenterEnabled, v.OpsCenterEnabled)
+		case schemas.ApplicationInfo_OpsItemSNSTopicArn:
+			v.OpsItemSNSTopicArn = new(string)
+			return d.ReadString(schemas.ApplicationInfo_OpsItemSNSTopicArn, v.OpsItemSNSTopicArn)
+		case schemas.ApplicationInfo_Remarks:
+			v.Remarks = new(string)
+			return d.ReadString(schemas.ApplicationInfo_Remarks, v.Remarks)
+		case schemas.ApplicationInfo_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.ApplicationInfo_ResourceGroupName, v.ResourceGroupName)
+		case schemas.ApplicationInfo_SNSNotificationArn:
+			v.SNSNotificationArn = new(string)
+			return d.ReadString(schemas.ApplicationInfo_SNSNotificationArn, v.SNSNotificationArn)
+		}
+		return nil
+	})
+}
+
 // The event information.
 type ConfigurationEvent struct {
 
@@ -121,6 +272,78 @@ type ConfigurationEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ConfigurationEvent_AccountId, *v.AccountId)
+	}
+	if v.EventDetail != nil {
+		s.WriteString(schemas.ConfigurationEvent_EventDetail, *v.EventDetail)
+	}
+	if v.EventResourceName != nil {
+		s.WriteString(schemas.ConfigurationEvent_EventResourceName, *v.EventResourceName)
+	}
+	if v.EventResourceType != "" {
+		s.WriteString(schemas.ConfigurationEvent_EventResourceType, string(v.EventResourceType))
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ConfigurationEvent_EventStatus, string(v.EventStatus))
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.ConfigurationEvent_EventTime, *v.EventTime)
+	}
+	if v.MonitoredResourceARN != nil {
+		s.WriteString(schemas.ConfigurationEvent_MonitoredResourceARN, *v.MonitoredResourceARN)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.ConfigurationEvent_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+func (v *ConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationEvent_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_AccountId, v.AccountId)
+		case schemas.ConfigurationEvent_EventDetail:
+			v.EventDetail = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_EventDetail, v.EventDetail)
+		case schemas.ConfigurationEvent_EventResourceName:
+			v.EventResourceName = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_EventResourceName, v.EventResourceName)
+		case schemas.ConfigurationEvent_EventResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurationEvent_EventResourceType, &ev); err != nil {
+				return err
+			}
+			v.EventResourceType = ConfigurationEventResourceType(ev)
+			return nil
+		case schemas.ConfigurationEvent_EventStatus:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurationEvent_EventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = ConfigurationEventStatus(ev)
+			return nil
+		case schemas.ConfigurationEvent_EventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationEvent_EventTime, v.EventTime)
+		case schemas.ConfigurationEvent_MonitoredResourceARN:
+			v.MonitoredResourceARN = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_MonitoredResourceARN, v.MonitoredResourceARN)
+		case schemas.ConfigurationEvent_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_ResourceGroupName, v.ResourceGroupName)
+		}
+		return nil
+	})
+}
+
 // An object that defines the log patterns that belongs to a LogPatternSet .
 type LogPattern struct {
 
@@ -152,6 +375,45 @@ type LogPattern struct {
 	Rank int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogPattern) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogPattern)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogPattern) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pattern != nil {
+		s.WriteString(schemas.LogPattern_Pattern, *v.Pattern)
+	}
+	if v.PatternName != nil {
+		s.WriteString(schemas.LogPattern_PatternName, *v.PatternName)
+	}
+	if v.PatternSetName != nil {
+		s.WriteString(schemas.LogPattern_PatternSetName, *v.PatternSetName)
+	}
+	if v.Rank != 0 {
+		s.WriteInt32(schemas.LogPattern_Rank, v.Rank)
+	}
+}
+func (v *LogPattern) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogPattern, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogPattern_Pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.LogPattern_Pattern, v.Pattern)
+		case schemas.LogPattern_PatternName:
+			v.PatternName = new(string)
+			return d.ReadString(schemas.LogPattern_PatternName, v.PatternName)
+		case schemas.LogPattern_PatternSetName:
+			v.PatternSetName = new(string)
+			return d.ReadString(schemas.LogPattern_PatternSetName, v.PatternSetName)
+		case schemas.LogPattern_Rank:
+			return d.ReadInt32(schemas.LogPattern_Rank, &v.Rank)
+		}
+		return nil
+	})
 }
 
 // Describes an anomaly or error with the application.
@@ -302,6 +564,300 @@ type Observation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Observation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Observation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Observation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchEventDetailType != nil {
+		s.WriteString(schemas.Observation_CloudWatchEventDetailType, *v.CloudWatchEventDetailType)
+	}
+	if v.CloudWatchEventId != nil {
+		s.WriteString(schemas.Observation_CloudWatchEventId, *v.CloudWatchEventId)
+	}
+	if v.CloudWatchEventSource != "" {
+		s.WriteString(schemas.Observation_CloudWatchEventSource, string(v.CloudWatchEventSource))
+	}
+	if v.CodeDeployApplication != nil {
+		s.WriteString(schemas.Observation_CodeDeployApplication, *v.CodeDeployApplication)
+	}
+	if v.CodeDeployDeploymentGroup != nil {
+		s.WriteString(schemas.Observation_CodeDeployDeploymentGroup, *v.CodeDeployDeploymentGroup)
+	}
+	if v.CodeDeployDeploymentId != nil {
+		s.WriteString(schemas.Observation_CodeDeployDeploymentId, *v.CodeDeployDeploymentId)
+	}
+	if v.CodeDeployInstanceGroupId != nil {
+		s.WriteString(schemas.Observation_CodeDeployInstanceGroupId, *v.CodeDeployInstanceGroupId)
+	}
+	if v.CodeDeployState != nil {
+		s.WriteString(schemas.Observation_CodeDeployState, *v.CodeDeployState)
+	}
+	if v.EbsCause != nil {
+		s.WriteString(schemas.Observation_EbsCause, *v.EbsCause)
+	}
+	if v.EbsEvent != nil {
+		s.WriteString(schemas.Observation_EbsEvent, *v.EbsEvent)
+	}
+	if v.EbsRequestId != nil {
+		s.WriteString(schemas.Observation_EbsRequestId, *v.EbsRequestId)
+	}
+	if v.EbsResult != nil {
+		s.WriteString(schemas.Observation_EbsResult, *v.EbsResult)
+	}
+	if v.Ec2State != nil {
+		s.WriteString(schemas.Observation_Ec2State, *v.Ec2State)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Observation_EndTime, *v.EndTime)
+	}
+	if v.HealthEventArn != nil {
+		s.WriteString(schemas.Observation_HealthEventArn, *v.HealthEventArn)
+	}
+	if v.HealthEventDescription != nil {
+		s.WriteString(schemas.Observation_HealthEventDescription, *v.HealthEventDescription)
+	}
+	if v.HealthEventTypeCategory != nil {
+		s.WriteString(schemas.Observation_HealthEventTypeCategory, *v.HealthEventTypeCategory)
+	}
+	if v.HealthEventTypeCode != nil {
+		s.WriteString(schemas.Observation_HealthEventTypeCode, *v.HealthEventTypeCode)
+	}
+	if v.HealthService != nil {
+		s.WriteString(schemas.Observation_HealthService, *v.HealthService)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Observation_Id, *v.Id)
+	}
+	if v.LineTime != nil {
+		s.WriteTime(schemas.Observation_LineTime, *v.LineTime)
+	}
+	if v.LogFilter != "" {
+		s.WriteString(schemas.Observation_LogFilter, string(v.LogFilter))
+	}
+	if v.LogGroup != nil {
+		s.WriteString(schemas.Observation_LogGroup, *v.LogGroup)
+	}
+	if v.LogText != nil {
+		s.WriteString(schemas.Observation_LogText, *v.LogText)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.Observation_MetricName, *v.MetricName)
+	}
+	if v.MetricNamespace != nil {
+		s.WriteString(schemas.Observation_MetricNamespace, *v.MetricNamespace)
+	}
+	if v.RdsEventCategories != nil {
+		s.WriteString(schemas.Observation_RdsEventCategories, *v.RdsEventCategories)
+	}
+	if v.RdsEventMessage != nil {
+		s.WriteString(schemas.Observation_RdsEventMessage, *v.RdsEventMessage)
+	}
+	if v.S3EventName != nil {
+		s.WriteString(schemas.Observation_S3EventName, *v.S3EventName)
+	}
+	if v.SourceARN != nil {
+		s.WriteString(schemas.Observation_SourceARN, *v.SourceARN)
+	}
+	if v.SourceType != nil {
+		s.WriteString(schemas.Observation_SourceType, *v.SourceType)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Observation_StartTime, *v.StartTime)
+	}
+	if v.StatesArn != nil {
+		s.WriteString(schemas.Observation_StatesArn, *v.StatesArn)
+	}
+	if v.StatesExecutionArn != nil {
+		s.WriteString(schemas.Observation_StatesExecutionArn, *v.StatesExecutionArn)
+	}
+	if v.StatesInput != nil {
+		s.WriteString(schemas.Observation_StatesInput, *v.StatesInput)
+	}
+	if v.StatesStatus != nil {
+		s.WriteString(schemas.Observation_StatesStatus, *v.StatesStatus)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.Observation_Unit, *v.Unit)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.Observation_Value, *v.Value)
+	}
+	if v.XRayErrorPercent != nil {
+		s.WriteInt32(schemas.Observation_XRayErrorPercent, *v.XRayErrorPercent)
+	}
+	if v.XRayFaultPercent != nil {
+		s.WriteInt32(schemas.Observation_XRayFaultPercent, *v.XRayFaultPercent)
+	}
+	if v.XRayNodeName != nil {
+		s.WriteString(schemas.Observation_XRayNodeName, *v.XRayNodeName)
+	}
+	if v.XRayNodeType != nil {
+		s.WriteString(schemas.Observation_XRayNodeType, *v.XRayNodeType)
+	}
+	if v.XRayRequestAverageLatency != nil {
+		s.WriteInt64(schemas.Observation_XRayRequestAverageLatency, *v.XRayRequestAverageLatency)
+	}
+	if v.XRayRequestCount != nil {
+		s.WriteInt32(schemas.Observation_XRayRequestCount, *v.XRayRequestCount)
+	}
+	if v.XRayThrottlePercent != nil {
+		s.WriteInt32(schemas.Observation_XRayThrottlePercent, *v.XRayThrottlePercent)
+	}
+}
+func (v *Observation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Observation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Observation_CloudWatchEventDetailType:
+			v.CloudWatchEventDetailType = new(string)
+			return d.ReadString(schemas.Observation_CloudWatchEventDetailType, v.CloudWatchEventDetailType)
+		case schemas.Observation_CloudWatchEventId:
+			v.CloudWatchEventId = new(string)
+			return d.ReadString(schemas.Observation_CloudWatchEventId, v.CloudWatchEventId)
+		case schemas.Observation_CloudWatchEventSource:
+			var ev string
+			if err := d.ReadString(schemas.Observation_CloudWatchEventSource, &ev); err != nil {
+				return err
+			}
+			v.CloudWatchEventSource = CloudWatchEventSource(ev)
+			return nil
+		case schemas.Observation_CodeDeployApplication:
+			v.CodeDeployApplication = new(string)
+			return d.ReadString(schemas.Observation_CodeDeployApplication, v.CodeDeployApplication)
+		case schemas.Observation_CodeDeployDeploymentGroup:
+			v.CodeDeployDeploymentGroup = new(string)
+			return d.ReadString(schemas.Observation_CodeDeployDeploymentGroup, v.CodeDeployDeploymentGroup)
+		case schemas.Observation_CodeDeployDeploymentId:
+			v.CodeDeployDeploymentId = new(string)
+			return d.ReadString(schemas.Observation_CodeDeployDeploymentId, v.CodeDeployDeploymentId)
+		case schemas.Observation_CodeDeployInstanceGroupId:
+			v.CodeDeployInstanceGroupId = new(string)
+			return d.ReadString(schemas.Observation_CodeDeployInstanceGroupId, v.CodeDeployInstanceGroupId)
+		case schemas.Observation_CodeDeployState:
+			v.CodeDeployState = new(string)
+			return d.ReadString(schemas.Observation_CodeDeployState, v.CodeDeployState)
+		case schemas.Observation_EbsCause:
+			v.EbsCause = new(string)
+			return d.ReadString(schemas.Observation_EbsCause, v.EbsCause)
+		case schemas.Observation_EbsEvent:
+			v.EbsEvent = new(string)
+			return d.ReadString(schemas.Observation_EbsEvent, v.EbsEvent)
+		case schemas.Observation_EbsRequestId:
+			v.EbsRequestId = new(string)
+			return d.ReadString(schemas.Observation_EbsRequestId, v.EbsRequestId)
+		case schemas.Observation_EbsResult:
+			v.EbsResult = new(string)
+			return d.ReadString(schemas.Observation_EbsResult, v.EbsResult)
+		case schemas.Observation_Ec2State:
+			v.Ec2State = new(string)
+			return d.ReadString(schemas.Observation_Ec2State, v.Ec2State)
+		case schemas.Observation_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Observation_EndTime, v.EndTime)
+		case schemas.Observation_HealthEventArn:
+			v.HealthEventArn = new(string)
+			return d.ReadString(schemas.Observation_HealthEventArn, v.HealthEventArn)
+		case schemas.Observation_HealthEventDescription:
+			v.HealthEventDescription = new(string)
+			return d.ReadString(schemas.Observation_HealthEventDescription, v.HealthEventDescription)
+		case schemas.Observation_HealthEventTypeCategory:
+			v.HealthEventTypeCategory = new(string)
+			return d.ReadString(schemas.Observation_HealthEventTypeCategory, v.HealthEventTypeCategory)
+		case schemas.Observation_HealthEventTypeCode:
+			v.HealthEventTypeCode = new(string)
+			return d.ReadString(schemas.Observation_HealthEventTypeCode, v.HealthEventTypeCode)
+		case schemas.Observation_HealthService:
+			v.HealthService = new(string)
+			return d.ReadString(schemas.Observation_HealthService, v.HealthService)
+		case schemas.Observation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Observation_Id, v.Id)
+		case schemas.Observation_LineTime:
+			v.LineTime = new(time.Time)
+			return d.ReadTime(schemas.Observation_LineTime, v.LineTime)
+		case schemas.Observation_LogFilter:
+			var ev string
+			if err := d.ReadString(schemas.Observation_LogFilter, &ev); err != nil {
+				return err
+			}
+			v.LogFilter = LogFilter(ev)
+			return nil
+		case schemas.Observation_LogGroup:
+			v.LogGroup = new(string)
+			return d.ReadString(schemas.Observation_LogGroup, v.LogGroup)
+		case schemas.Observation_LogText:
+			v.LogText = new(string)
+			return d.ReadString(schemas.Observation_LogText, v.LogText)
+		case schemas.Observation_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.Observation_MetricName, v.MetricName)
+		case schemas.Observation_MetricNamespace:
+			v.MetricNamespace = new(string)
+			return d.ReadString(schemas.Observation_MetricNamespace, v.MetricNamespace)
+		case schemas.Observation_RdsEventCategories:
+			v.RdsEventCategories = new(string)
+			return d.ReadString(schemas.Observation_RdsEventCategories, v.RdsEventCategories)
+		case schemas.Observation_RdsEventMessage:
+			v.RdsEventMessage = new(string)
+			return d.ReadString(schemas.Observation_RdsEventMessage, v.RdsEventMessage)
+		case schemas.Observation_S3EventName:
+			v.S3EventName = new(string)
+			return d.ReadString(schemas.Observation_S3EventName, v.S3EventName)
+		case schemas.Observation_SourceARN:
+			v.SourceARN = new(string)
+			return d.ReadString(schemas.Observation_SourceARN, v.SourceARN)
+		case schemas.Observation_SourceType:
+			v.SourceType = new(string)
+			return d.ReadString(schemas.Observation_SourceType, v.SourceType)
+		case schemas.Observation_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Observation_StartTime, v.StartTime)
+		case schemas.Observation_StatesArn:
+			v.StatesArn = new(string)
+			return d.ReadString(schemas.Observation_StatesArn, v.StatesArn)
+		case schemas.Observation_StatesExecutionArn:
+			v.StatesExecutionArn = new(string)
+			return d.ReadString(schemas.Observation_StatesExecutionArn, v.StatesExecutionArn)
+		case schemas.Observation_StatesInput:
+			v.StatesInput = new(string)
+			return d.ReadString(schemas.Observation_StatesInput, v.StatesInput)
+		case schemas.Observation_StatesStatus:
+			v.StatesStatus = new(string)
+			return d.ReadString(schemas.Observation_StatesStatus, v.StatesStatus)
+		case schemas.Observation_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.Observation_Unit, v.Unit)
+		case schemas.Observation_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.Observation_Value, v.Value)
+		case schemas.Observation_XRayErrorPercent:
+			v.XRayErrorPercent = new(int32)
+			return d.ReadInt32(schemas.Observation_XRayErrorPercent, v.XRayErrorPercent)
+		case schemas.Observation_XRayFaultPercent:
+			v.XRayFaultPercent = new(int32)
+			return d.ReadInt32(schemas.Observation_XRayFaultPercent, v.XRayFaultPercent)
+		case schemas.Observation_XRayNodeName:
+			v.XRayNodeName = new(string)
+			return d.ReadString(schemas.Observation_XRayNodeName, v.XRayNodeName)
+		case schemas.Observation_XRayNodeType:
+			v.XRayNodeType = new(string)
+			return d.ReadString(schemas.Observation_XRayNodeType, v.XRayNodeType)
+		case schemas.Observation_XRayRequestAverageLatency:
+			v.XRayRequestAverageLatency = new(int64)
+			return d.ReadInt64(schemas.Observation_XRayRequestAverageLatency, v.XRayRequestAverageLatency)
+		case schemas.Observation_XRayRequestCount:
+			v.XRayRequestCount = new(int32)
+			return d.ReadInt32(schemas.Observation_XRayRequestCount, v.XRayRequestCount)
+		case schemas.Observation_XRayThrottlePercent:
+			v.XRayThrottlePercent = new(int32)
+			return d.ReadInt32(schemas.Observation_XRayThrottlePercent, v.XRayThrottlePercent)
+		}
+		return nil
+	})
+}
+
 // Describes a problem that is detected by correlating observations.
 type Problem struct {
 
@@ -361,6 +917,131 @@ type Problem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Problem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Problem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Problem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Problem_AccountId, *v.AccountId)
+	}
+	if v.AffectedResource != nil {
+		s.WriteString(schemas.Problem_AffectedResource, *v.AffectedResource)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Problem_EndTime, *v.EndTime)
+	}
+	serializeFeedback(s, schemas.Problem_Feedback, v.Feedback)
+	if v.Id != nil {
+		s.WriteString(schemas.Problem_Id, *v.Id)
+	}
+	if v.Insights != nil {
+		s.WriteString(schemas.Problem_Insights, *v.Insights)
+	}
+	if v.LastRecurrenceTime != nil {
+		s.WriteTime(schemas.Problem_LastRecurrenceTime, *v.LastRecurrenceTime)
+	}
+	if v.RecurringCount != nil {
+		s.WriteInt64(schemas.Problem_RecurringCount, *v.RecurringCount)
+	}
+	if v.ResolutionMethod != "" {
+		s.WriteString(schemas.Problem_ResolutionMethod, string(v.ResolutionMethod))
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.Problem_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.SeverityLevel != "" {
+		s.WriteString(schemas.Problem_SeverityLevel, string(v.SeverityLevel))
+	}
+	if v.ShortName != nil {
+		s.WriteString(schemas.Problem_ShortName, *v.ShortName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Problem_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Problem_Status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Problem_Title, *v.Title)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.Problem_Visibility, string(v.Visibility))
+	}
+}
+func (v *Problem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Problem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Problem_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Problem_AccountId, v.AccountId)
+		case schemas.Problem_AffectedResource:
+			v.AffectedResource = new(string)
+			return d.ReadString(schemas.Problem_AffectedResource, v.AffectedResource)
+		case schemas.Problem_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Problem_EndTime, v.EndTime)
+		case schemas.Problem_Feedback:
+			return deserializeFeedback(d, schemas.Problem_Feedback, &v.Feedback)
+		case schemas.Problem_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Problem_Id, v.Id)
+		case schemas.Problem_Insights:
+			v.Insights = new(string)
+			return d.ReadString(schemas.Problem_Insights, v.Insights)
+		case schemas.Problem_LastRecurrenceTime:
+			v.LastRecurrenceTime = new(time.Time)
+			return d.ReadTime(schemas.Problem_LastRecurrenceTime, v.LastRecurrenceTime)
+		case schemas.Problem_RecurringCount:
+			v.RecurringCount = new(int64)
+			return d.ReadInt64(schemas.Problem_RecurringCount, v.RecurringCount)
+		case schemas.Problem_ResolutionMethod:
+			var ev string
+			if err := d.ReadString(schemas.Problem_ResolutionMethod, &ev); err != nil {
+				return err
+			}
+			v.ResolutionMethod = ResolutionMethod(ev)
+			return nil
+		case schemas.Problem_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.Problem_ResourceGroupName, v.ResourceGroupName)
+		case schemas.Problem_SeverityLevel:
+			var ev string
+			if err := d.ReadString(schemas.Problem_SeverityLevel, &ev); err != nil {
+				return err
+			}
+			v.SeverityLevel = SeverityLevel(ev)
+			return nil
+		case schemas.Problem_ShortName:
+			v.ShortName = new(string)
+			return d.ReadString(schemas.Problem_ShortName, v.ShortName)
+		case schemas.Problem_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Problem_StartTime, v.StartTime)
+		case schemas.Problem_Status:
+			var ev string
+			if err := d.ReadString(schemas.Problem_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.Problem_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Problem_Title, v.Title)
+		case schemas.Problem_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.Problem_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = Visibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes observations related to the problem.
 type RelatedObservations struct {
 
@@ -368,6 +1049,25 @@ type RelatedObservations struct {
 	ObservationList []Observation
 
 	noSmithyDocumentSerde
+}
+
+func (v *RelatedObservations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedObservations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedObservations) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeObservationList(s, schemas.RelatedObservations_ObservationList, v.ObservationList)
+}
+func (v *RelatedObservations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedObservations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedObservations_ObservationList:
+			return deserializeObservationList(d, schemas.RelatedObservations_ObservationList, &v.ObservationList)
+		}
+		return nil
+	})
 }
 
 // An object that defines the tags associated with an application. A tag is a
@@ -410,6 +1110,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the workloads on a component.
 type Workload struct {
 
@@ -436,6 +1164,62 @@ type Workload struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Workload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Workload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Workload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.Workload_ComponentName, *v.ComponentName)
+	}
+	if v.MissingWorkloadConfig != nil {
+		s.WriteBool(schemas.Workload_MissingWorkloadConfig, *v.MissingWorkloadConfig)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.Workload_Tier, string(v.Tier))
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.Workload_WorkloadId, *v.WorkloadId)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.Workload_WorkloadName, *v.WorkloadName)
+	}
+	if v.WorkloadRemarks != nil {
+		s.WriteString(schemas.Workload_WorkloadRemarks, *v.WorkloadRemarks)
+	}
+}
+func (v *Workload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Workload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Workload_ComponentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.Workload_ComponentName, v.ComponentName)
+		case schemas.Workload_MissingWorkloadConfig:
+			v.MissingWorkloadConfig = new(bool)
+			return d.ReadBool(schemas.Workload_MissingWorkloadConfig, v.MissingWorkloadConfig)
+		case schemas.Workload_Tier:
+			var ev string
+			if err := d.ReadString(schemas.Workload_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = Tier(ev)
+			return nil
+		case schemas.Workload_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.Workload_WorkloadId, v.WorkloadId)
+		case schemas.Workload_WorkloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.Workload_WorkloadName, v.WorkloadName)
+		case schemas.Workload_WorkloadRemarks:
+			v.WorkloadRemarks = new(string)
+			return d.ReadString(schemas.Workload_WorkloadRemarks, v.WorkloadRemarks)
+		}
+		return nil
+	})
+}
+
 // The configuration of the workload.
 type WorkloadConfiguration struct {
 
@@ -449,6 +1233,44 @@ type WorkloadConfiguration struct {
 	WorkloadName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkloadConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteString(schemas.WorkloadConfiguration_Configuration, *v.Configuration)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.WorkloadConfiguration_Tier, string(v.Tier))
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.WorkloadConfiguration_WorkloadName, *v.WorkloadName)
+	}
+}
+func (v *WorkloadConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadConfiguration_Configuration:
+			v.Configuration = new(string)
+			return d.ReadString(schemas.WorkloadConfiguration_Configuration, v.Configuration)
+		case schemas.WorkloadConfiguration_Tier:
+			var ev string
+			if err := d.ReadString(schemas.WorkloadConfiguration_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = Tier(ev)
+			return nil
+		case schemas.WorkloadConfiguration_WorkloadName:
+			v.WorkloadName = new(string)
+			return d.ReadString(schemas.WorkloadConfiguration_WorkloadName, v.WorkloadName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

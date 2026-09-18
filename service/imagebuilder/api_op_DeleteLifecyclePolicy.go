@@ -4,10 +4,12 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Delete the specified lifecycle policy resource.
+// Deletes the specified lifecycle policy resource.
 func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecyclePolicyInput, optFns ...func(*Options)) (*DeleteLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteLifecyclePolicyInput{}
@@ -33,6 +35,18 @@ type DeleteLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyArn != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyRequest_lifecyclePolicyArn, *v.LifecyclePolicyArn)
+	}
+}
+
 type DeleteLifecyclePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lifecycle policy that was deleted.
@@ -44,13 +58,32 @@ type DeleteLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyArn != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyResponse_lifecyclePolicyArn, *v.LifecyclePolicyArn)
+	}
+}
+func (v *DeleteLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLifecyclePolicyResponse_lifecyclePolicyArn:
+			v.LifecyclePolicyArn = new(string)
+			return d.ReadString(schemas.DeleteLifecyclePolicyResponse_lifecyclePolicyArn, v.LifecyclePolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLifecyclePolicy, schemas.DeleteLifecyclePolicyRequest, schemas.DeleteLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLifecyclePolicy, schemas.DeleteLifecyclePolicyRequest, schemas.DeleteLifecyclePolicyResponse), output: &DeleteLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,43 @@ type CreateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateChannelRequest_ChannelName, *v.ChannelName)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateChannelRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IcebergDestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_IcebergDestinationConfiguration)
+		v.IcebergDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingInfo != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_LoggingInfo)
+		v.LoggingInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3DestinationConfiguration != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_S3DestinationConfiguration)
+		v.S3DestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	serialize__listOfTopicConfiguration(s, schemas.CreateChannelRequest_TopicConfigurationList, v.TopicConfigurationList)
+}
+
 // Returns the channel ARN and the cluster-operation ARN that tracks the
 // asynchronous create.
 type CreateChannelOutput struct {
@@ -83,13 +122,38 @@ type CreateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.CreateChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.CreateChannelResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.CreateChannelResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.CreateChannelResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannel, schemas.CreateChannelRequest, schemas.CreateChannelResponse), output: &CreateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

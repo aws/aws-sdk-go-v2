@@ -4,7 +4,9 @@ package billing
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type GetEnterpriseSupportChargeSummaryInput struct {
 	BillingMonth *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnterpriseSupportChargeSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnterpriseSupportChargeSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnterpriseSupportChargeSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMonth != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryRequest_billingMonth, *v.BillingMonth)
+	}
 }
 
 // The response structure for GetEnterpriseSupportChargeSummary.
@@ -129,13 +143,118 @@ type GetEnterpriseSupportChargeSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnterpriseSupportChargeSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnterpriseSupportChargeSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnterpriseSupportChargeSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillDate != nil {
+		s.WriteTime(schemas.GetEnterpriseSupportChargeSummaryResponse_billDate, *v.BillDate)
+	}
+	if v.BillingMonth != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_billingMonth, *v.BillingMonth)
+	}
+	if v.BillingPeriodEndDate != nil {
+		s.WriteTime(schemas.GetEnterpriseSupportChargeSummaryResponse_billingPeriodEndDate, *v.BillingPeriodEndDate)
+	}
+	if v.BillingPeriodStartDate != nil {
+		s.WriteTime(schemas.GetEnterpriseSupportChargeSummaryResponse_billingPeriodStartDate, *v.BillingPeriodStartDate)
+	}
+	if v.IsEstimated != nil {
+		s.WriteBool(schemas.GetEnterpriseSupportChargeSummaryResponse_isEstimated, *v.IsEstimated)
+	}
+	if v.PayerAccountId != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_payerAccountId, *v.PayerAccountId)
+	}
+	if v.SupportCharge != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_supportCharge, *v.SupportCharge)
+	}
+	if v.SupportChargePercentage != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_supportChargePercentage, *v.SupportChargePercentage)
+	}
+	if v.SupportDiscount != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_supportDiscount, *v.SupportDiscount)
+	}
+	if v.SupportEffectivePricingPlan != nil {
+		s.WriteStruct(schemas.GetEnterpriseSupportChargeSummaryResponse_supportEffectivePricingPlan)
+		v.SupportEffectivePricingPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalSupportCharge != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportCharge, *v.TotalSupportCharge)
+	}
+	if v.TotalSupportEligibleReservedInstanceSpend != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleReservedInstanceSpend, *v.TotalSupportEligibleReservedInstanceSpend)
+	}
+	if v.TotalSupportEligibleSavingsPlanSpend != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSavingsPlanSpend, *v.TotalSupportEligibleSavingsPlanSpend)
+	}
+	if v.TotalSupportEligibleSpend != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSpend, *v.TotalSupportEligibleSpend)
+	}
+	if v.TotalSupportEligibleUsageSpend != nil {
+		s.WriteString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleUsageSpend, *v.TotalSupportEligibleUsageSpend)
+	}
+}
+func (v *GetEnterpriseSupportChargeSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnterpriseSupportChargeSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_billDate:
+			v.BillDate = new(time.Time)
+			return d.ReadTime(schemas.GetEnterpriseSupportChargeSummaryResponse_billDate, v.BillDate)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_billingMonth:
+			v.BillingMonth = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_billingMonth, v.BillingMonth)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_billingPeriodEndDate:
+			v.BillingPeriodEndDate = new(time.Time)
+			return d.ReadTime(schemas.GetEnterpriseSupportChargeSummaryResponse_billingPeriodEndDate, v.BillingPeriodEndDate)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_billingPeriodStartDate:
+			v.BillingPeriodStartDate = new(time.Time)
+			return d.ReadTime(schemas.GetEnterpriseSupportChargeSummaryResponse_billingPeriodStartDate, v.BillingPeriodStartDate)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_isEstimated:
+			v.IsEstimated = new(bool)
+			return d.ReadBool(schemas.GetEnterpriseSupportChargeSummaryResponse_isEstimated, v.IsEstimated)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_payerAccountId:
+			v.PayerAccountId = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_payerAccountId, v.PayerAccountId)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_supportCharge:
+			v.SupportCharge = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_supportCharge, v.SupportCharge)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_supportChargePercentage:
+			v.SupportChargePercentage = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_supportChargePercentage, v.SupportChargePercentage)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_supportDiscount:
+			v.SupportDiscount = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_supportDiscount, v.SupportDiscount)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_supportEffectivePricingPlan:
+			v.SupportEffectivePricingPlan = &types.PricingPlan{}
+			return v.SupportEffectivePricingPlan.Deserialize(d)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportCharge:
+			v.TotalSupportCharge = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportCharge, v.TotalSupportCharge)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleReservedInstanceSpend:
+			v.TotalSupportEligibleReservedInstanceSpend = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleReservedInstanceSpend, v.TotalSupportEligibleReservedInstanceSpend)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSavingsPlanSpend:
+			v.TotalSupportEligibleSavingsPlanSpend = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSavingsPlanSpend, v.TotalSupportEligibleSavingsPlanSpend)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSpend:
+			v.TotalSupportEligibleSpend = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleSpend, v.TotalSupportEligibleSpend)
+		case schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleUsageSpend:
+			v.TotalSupportEligibleUsageSpend = new(string)
+			return d.ReadString(schemas.GetEnterpriseSupportChargeSummaryResponse_totalSupportEligibleUsageSpend, v.TotalSupportEligibleUsageSpend)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnterpriseSupportChargeSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEnterpriseSupportChargeSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnterpriseSupportChargeSummary, schemas.GetEnterpriseSupportChargeSummaryRequest, schemas.GetEnterpriseSupportChargeSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEnterpriseSupportChargeSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnterpriseSupportChargeSummary, schemas.GetEnterpriseSupportChargeSummaryRequest, schemas.GetEnterpriseSupportChargeSummaryResponse), output: &GetEnterpriseSupportChargeSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

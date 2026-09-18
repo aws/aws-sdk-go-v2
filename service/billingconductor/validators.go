@@ -711,11 +711,14 @@ func validateCreateTieringInput(v *types.CreateTieringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTieringInput"}
-	if v.FreeTier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FreeTier"))
-	} else if v.FreeTier != nil {
+	if v.FreeTier != nil {
 		if err := validateCreateFreeTierConfig(v.FreeTier); err != nil {
 			invalidParams.AddNested("FreeTier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomTiers != nil {
+		if err := validateCustomTiersList(v.CustomTiers); err != nil {
+			invalidParams.AddNested("CustomTiers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -792,6 +795,41 @@ func validateCustomLineItemPercentageChargeDetails(v *types.CustomLineItemPercen
 	invalidParams := smithy.InvalidParamsError{Context: "CustomLineItemPercentageChargeDetails"}
 	if v.PercentageValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PercentageValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomTier(v *types.CustomTier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomTier"}
+	if v.BeginRangeInclusive == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BeginRangeInclusive"))
+	}
+	if v.RateValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RateValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomTiersList(v []types.CustomTier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomTiersList"}
+	for i := range v {
+		if err := validateCustomTier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -979,11 +1017,14 @@ func validateUpdateTieringInput(v *types.UpdateTieringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTieringInput"}
-	if v.FreeTier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FreeTier"))
-	} else if v.FreeTier != nil {
+	if v.FreeTier != nil {
 		if err := validateUpdateFreeTierConfig(v.FreeTier); err != nil {
 			invalidParams.AddNested("FreeTier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomTiers != nil {
+		if err := validateCustomTiersList(v.CustomTiers); err != nil {
+			invalidParams.AddNested("CustomTiers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

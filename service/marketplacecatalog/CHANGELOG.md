@@ -1,3 +1,12 @@
+# v1.52.0 (2026-09-16)
+
+* **Feature**: This release enhances the ListEntities API to support issuerAccountId and SourceAuthorization filter for ResaleAuthorization entity.
+
+# v1.51.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

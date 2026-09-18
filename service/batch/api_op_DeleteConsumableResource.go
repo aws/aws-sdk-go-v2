@@ -4,6 +4,8 @@ package batch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteConsumableResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConsumableResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConsumableResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConsumableResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumableResource != nil {
+		s.WriteString(schemas.DeleteConsumableResourceRequest_consumableResource, *v.ConsumableResource)
+	}
+}
+
 type DeleteConsumableResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteConsumableResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConsumableResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConsumableResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConsumableResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConsumableResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConsumableResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConsumableResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConsumableResource, schemas.DeleteConsumableResourceRequest, schemas.DeleteConsumableResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConsumableResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConsumableResource, schemas.DeleteConsumableResourceRequest, schemas.DeleteConsumableResourceResponse), output: &DeleteConsumableResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

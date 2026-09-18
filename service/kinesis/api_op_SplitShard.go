@@ -4,6 +4,8 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -104,6 +106,29 @@ type SplitShardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SplitShardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplitShardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplitShardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewStartingHashKey != nil {
+		s.WriteString(schemas.SplitShardInput_NewStartingHashKey, *v.NewStartingHashKey)
+	}
+	if v.ShardToSplit != nil {
+		s.WriteString(schemas.SplitShardInput_ShardToSplit, *v.ShardToSplit)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.SplitShardInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.SplitShardInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.SplitShardInput_StreamName, *v.StreamName)
+	}
+}
 func (in *SplitShardInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -118,13 +143,26 @@ type SplitShardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SplitShardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplitShardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SplitShardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSplitShardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSplitShard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SplitShard, schemas.SplitShardInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSplitShard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SplitShard, schemas.SplitShardInput, nil), output: &SplitShardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

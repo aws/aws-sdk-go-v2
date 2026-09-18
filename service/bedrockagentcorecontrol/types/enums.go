@@ -60,6 +60,7 @@ const (
 	AgentRuntimeEndpointStatusUpdateFailed AgentRuntimeEndpointStatus = "UPDATE_FAILED"
 	AgentRuntimeEndpointStatusReady        AgentRuntimeEndpointStatus = "READY"
 	AgentRuntimeEndpointStatusDeleting     AgentRuntimeEndpointStatus = "DELETING"
+	AgentRuntimeEndpointStatusDeleteFailed AgentRuntimeEndpointStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for AgentRuntimeEndpointStatus. Note that this
@@ -74,6 +75,7 @@ func (AgentRuntimeEndpointStatus) Values() []AgentRuntimeEndpointStatus {
 		"UPDATE_FAILED",
 		"READY",
 		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 
@@ -87,6 +89,7 @@ const (
 	AgentRuntimeStatusUpdateFailed AgentRuntimeStatus = "UPDATE_FAILED"
 	AgentRuntimeStatusReady        AgentRuntimeStatus = "READY"
 	AgentRuntimeStatusDeleting     AgentRuntimeStatus = "DELETING"
+	AgentRuntimeStatusDeleteFailed AgentRuntimeStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for AgentRuntimeStatus. Note that this can be
@@ -101,6 +104,7 @@ func (AgentRuntimeStatus) Values() []AgentRuntimeStatus {
 		"UPDATE_FAILED",
 		"READY",
 		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 

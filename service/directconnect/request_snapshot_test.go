@@ -471,6 +471,38 @@ func TestCheckRequestSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateConnectionsToResiliencyGroup(t *testing.T) {
+	input := &AssociateConnectionsToResiliencyGroupInput{
+		ConnectionIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateConnectionsToResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateConnectionsToResiliencyGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AssociateConnectionWithLag(t *testing.T) {
 	input := &AssociateConnectionWithLagInput{
 		ConnectionId: ptr.String("__ConnectionId__"),
@@ -776,6 +808,7 @@ func TestCheckRequestSnapshot_CreateConnection(t *testing.T) {
 		},
 		ProviderName:  ptr.String("__ProviderName__"),
 		RequestMACSec: ptr.Bool(true),
+		BillingMode:   types.RequestBillingMode("PayAsYouGo"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -991,6 +1024,7 @@ func TestCheckRequestSnapshot_CreateLag(t *testing.T) {
 		},
 		ProviderName:  ptr.String("__ProviderName__"),
 		RequestMACSec: ptr.Bool(true),
+		BillingMode:   types.RequestBillingMode("PayAsYouGo"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1121,6 +1155,45 @@ func TestCheckRequestSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePublicVirtualInterface"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateResiliencyGroup(t *testing.T) {
+	input := &CreateResiliencyGroupInput{
+		ResiliencyGroupName:     ptr.String("__ResiliencyGroupName__"),
+		IntendedResiliencyModel: types.ResiliencyModel("maximum-resiliency"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1369,6 +1442,33 @@ func TestCheckRequestSnapshot_DeleteLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteLag"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteResiliencyGroup(t *testing.T) {
+	input := &DeleteResiliencyGroupInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1943,6 +2043,38 @@ func TestCheckRequestSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociateConnectionsFromResiliencyGroup(t *testing.T) {
+	input := &DisassociateConnectionsFromResiliencyGroupInput{
+		ConnectionIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateConnectionsFromResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateConnectionsFromResiliencyGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisassociateMacSecKey(t *testing.T) {
 	input := &DisassociateMacSecKeyInput{
 		ConnectionId: ptr.String("__ConnectionId__"),
@@ -1967,6 +2099,90 @@ func TestCheckRequestSnapshot_DisassociateMacSecKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateMacSecKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetResiliencyGroup(t *testing.T) {
+	input := &GetResiliencyGroupInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResiliencyGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResiliencyGroupAssociations(t *testing.T) {
+	input := &ListResiliencyGroupAssociationsInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResiliencyGroupAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResiliencyGroupAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResiliencyGroups(t *testing.T) {
+	input := &ListResiliencyGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResiliencyGroups(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResiliencyGroups"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2207,6 +2423,37 @@ func TestCheckRequestSnapshot_UpdateConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateConnectionsBillingMode(t *testing.T) {
+	input := &UpdateConnectionsBillingModeInput{
+		ConnectionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BillingMode: types.RequestBillingMode("PayAsYouGo"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateConnectionsBillingMode(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConnectionsBillingMode"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 	input := &UpdateDirectConnectGatewayInput{
 		DirectConnectGatewayId:      ptr.String("__DirectConnectGatewayId__"),
@@ -2304,6 +2551,35 @@ func TestCheckRequestSnapshot_UpdateLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLag"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateResiliencyGroup(t *testing.T) {
+	input := &UpdateResiliencyGroupInput{
+		ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+		ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2602,6 +2878,38 @@ func TestUpdateRequestSnapshot_AllocateTransitVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AllocateTransitVirtualInterface"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateConnectionsToResiliencyGroup(t *testing.T) {
+	input := &AssociateConnectionsToResiliencyGroupInput{
+		ConnectionIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateConnectionsToResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateConnectionsToResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2911,6 +3219,7 @@ func TestUpdateRequestSnapshot_CreateConnection(t *testing.T) {
 		},
 		ProviderName:  ptr.String("__ProviderName__"),
 		RequestMACSec: ptr.Bool(true),
+		BillingMode:   types.RequestBillingMode("PayAsYouGo"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3126,6 +3435,7 @@ func TestUpdateRequestSnapshot_CreateLag(t *testing.T) {
 		},
 		ProviderName:  ptr.String("__ProviderName__"),
 		RequestMACSec: ptr.Bool(true),
+		BillingMode:   types.RequestBillingMode("PayAsYouGo"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3256,6 +3566,45 @@ func TestUpdateRequestSnapshot_CreatePublicVirtualInterface(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePublicVirtualInterface"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateResiliencyGroup(t *testing.T) {
+	input := &CreateResiliencyGroupInput{
+		ResiliencyGroupName:     ptr.String("__ResiliencyGroupName__"),
+		IntendedResiliencyModel: types.ResiliencyModel("maximum-resiliency"),
+		ClientToken:             ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3504,6 +3853,33 @@ func TestUpdateRequestSnapshot_DeleteLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteLag"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteResiliencyGroup(t *testing.T) {
+	input := &DeleteResiliencyGroupInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4078,6 +4454,38 @@ func TestUpdateRequestSnapshot_DisassociateConnectionFromLag(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociateConnectionsFromResiliencyGroup(t *testing.T) {
+	input := &DisassociateConnectionsFromResiliencyGroupInput{
+		ConnectionIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		ClientToken:       ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateConnectionsFromResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateConnectionsFromResiliencyGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisassociateMacSecKey(t *testing.T) {
 	input := &DisassociateMacSecKeyInput{
 		ConnectionId: ptr.String("__ConnectionId__"),
@@ -4102,6 +4510,90 @@ func TestUpdateRequestSnapshot_DisassociateMacSecKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateMacSecKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetResiliencyGroup(t *testing.T) {
+	input := &GetResiliencyGroupInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResiliencyGroup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResiliencyGroupAssociations(t *testing.T) {
+	input := &ListResiliencyGroupAssociationsInput{
+		ResiliencyGroupId: ptr.String("__ResiliencyGroupId__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResiliencyGroupAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResiliencyGroupAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResiliencyGroups(t *testing.T) {
+	input := &ListResiliencyGroupsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResiliencyGroups(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResiliencyGroups"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4342,6 +4834,37 @@ func TestUpdateRequestSnapshot_UpdateConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateConnectionsBillingMode(t *testing.T) {
+	input := &UpdateConnectionsBillingModeInput{
+		ConnectionIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		BillingMode: types.RequestBillingMode("PayAsYouGo"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateConnectionsBillingMode(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateConnectionsBillingMode"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateDirectConnectGateway(t *testing.T) {
 	input := &UpdateDirectConnectGatewayInput{
 		DirectConnectGatewayId:      ptr.String("__DirectConnectGatewayId__"),
@@ -4439,6 +4962,35 @@ func TestUpdateRequestSnapshot_UpdateLag(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLag"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateResiliencyGroup(t *testing.T) {
+	input := &UpdateResiliencyGroupInput{
+		ResiliencyGroupId:   ptr.String("__ResiliencyGroupId__"),
+		ResiliencyGroupName: ptr.String("__ResiliencyGroupName__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateResiliencyGroup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateResiliencyGroup"); err != nil {
 		t.Fatal(err)
 	}
 }

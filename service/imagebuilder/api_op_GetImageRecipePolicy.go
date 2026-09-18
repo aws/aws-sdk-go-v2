@@ -4,10 +4,12 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Gets an image recipe policy.
+// Retrieves an image recipe policy.
 func (c *Client) GetImageRecipePolicy(ctx context.Context, params *GetImageRecipePolicyInput, optFns ...func(*Options)) (*GetImageRecipePolicyOutput, error) {
 	if params == nil {
 		params = &GetImageRecipePolicyInput{}
@@ -34,6 +36,18 @@ type GetImageRecipePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageRecipePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageRecipePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageRecipePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.GetImageRecipePolicyRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+}
+
 type GetImageRecipePolicyOutput struct {
 
 	// The image recipe policy object.
@@ -48,13 +62,38 @@ type GetImageRecipePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageRecipePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageRecipePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageRecipePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetImageRecipePolicyResponse_policy, *v.Policy)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetImageRecipePolicyResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetImageRecipePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImageRecipePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImageRecipePolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetImageRecipePolicyResponse_policy, v.Policy)
+		case schemas.GetImageRecipePolicyResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetImageRecipePolicyResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImageRecipePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageRecipePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageRecipePolicy, schemas.GetImageRecipePolicyRequest, schemas.GetImageRecipePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImageRecipePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageRecipePolicy, schemas.GetImageRecipePolicyRequest, schemas.GetImageRecipePolicyResponse), output: &GetImageRecipePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

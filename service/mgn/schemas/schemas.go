@@ -1787,12 +1787,16 @@ var _LaunchStatus = smithy.NewSchema(smithy.ShapeID{
 var LaunchTemplateDiskConf = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "LaunchTemplateDiskConf",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var LaunchTemplateDiskConf_volumeType *smithy.Schema
 
 var LaunchTemplateDiskConf_iops *smithy.Schema
 
 var LaunchTemplateDiskConf_throughput *smithy.Schema
+
+var LaunchTemplateDiskConf_volumeInitializationRate *smithy.Schema
+
+var LaunchTemplateDiskConf_deleteOnTermination *smithy.Schema
 
 var Licensing = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -3496,6 +3500,11 @@ var _VcenterClientList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VcenterClientList",
 }, smithy.ShapeTypeList, 1)
 var _VcenterClientList_member *smithy.Schema
+
+var _VolumeInitializationRate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "VolumeInitializationRate",
+}, smithy.ShapeTypeLong, 0)
 
 var _VolumeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -5742,6 +5751,10 @@ func init() {
 	LaunchTemplateDiskConf_iops = LaunchTemplateDiskConf.AddMember("iops", _Iops)
 
 	LaunchTemplateDiskConf_throughput = LaunchTemplateDiskConf.AddMember("throughput", _Throughput)
+
+	LaunchTemplateDiskConf_volumeInitializationRate = LaunchTemplateDiskConf.AddMember("volumeInitializationRate", _VolumeInitializationRate)
+
+	LaunchTemplateDiskConf_deleteOnTermination = LaunchTemplateDiskConf.AddMember("deleteOnTermination", smithyprelude.Boolean)
 
 	LaunchConfigurationTemplate_launchConfigurationTemplateID = LaunchConfigurationTemplate.AddMember("launchConfigurationTemplateID", _LaunchConfigurationTemplateID)
 

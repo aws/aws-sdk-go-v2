@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,50 @@ type ConfigureLogsForPlaybackConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsForPlaybackConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsForPlaybackConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdsInteractionLog != nil {
+		s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog)
+		v.AdsInteractionLog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfLoggingStrategies(s, schemas.ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	if v.ManifestServiceInteractionLog != nil {
+		s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog)
+		v.ManifestServiceInteractionLog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt32(schemas.ConfigureLogsForPlaybackConfigurationRequest_PercentEnabled, v.PercentEnabled)
+	if v.PlaybackConfigurationName != nil {
+		s.WriteString(schemas.ConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName, *v.PlaybackConfigurationName)
+	}
+}
+func (v *ConfigureLogsForPlaybackConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureLogsForPlaybackConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureLogsForPlaybackConfigurationRequest_AdsInteractionLog:
+			v.AdsInteractionLog = &types.AdsInteractionLog{}
+			return v.AdsInteractionLog.Deserialize(d)
+		case schemas.ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies:
+			return deserialize__listOfLoggingStrategies(d, schemas.ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies, &v.EnabledLoggingStrategies)
+		case schemas.ConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog:
+			v.ManifestServiceInteractionLog = &types.ManifestServiceInteractionLog{}
+			return v.ManifestServiceInteractionLog.Deserialize(d)
+		case schemas.ConfigureLogsForPlaybackConfigurationRequest_PercentEnabled:
+			return d.ReadInt32(schemas.ConfigureLogsForPlaybackConfigurationRequest_PercentEnabled, &v.PercentEnabled)
+		case schemas.ConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName:
+			v.PlaybackConfigurationName = new(string)
+			return d.ReadString(schemas.ConfigureLogsForPlaybackConfigurationRequest_PlaybackConfigurationName, v.PlaybackConfigurationName)
+		}
+		return nil
+	})
+}
+
 type ConfigureLogsForPlaybackConfigurationOutput struct {
 
 	// The percentage of session logs that MediaTailor sends to your Cloudwatch Logs
@@ -102,13 +148,54 @@ type ConfigureLogsForPlaybackConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigureLogsForPlaybackConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureLogsForPlaybackConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdsInteractionLog != nil {
+		s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog)
+		v.AdsInteractionLog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfLoggingStrategies(s, schemas.ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	if v.ManifestServiceInteractionLog != nil {
+		s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog)
+		v.ManifestServiceInteractionLog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt32(schemas.ConfigureLogsForPlaybackConfigurationResponse_PercentEnabled, v.PercentEnabled)
+	if v.PlaybackConfigurationName != nil {
+		s.WriteString(schemas.ConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName, *v.PlaybackConfigurationName)
+	}
+}
+func (v *ConfigureLogsForPlaybackConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureLogsForPlaybackConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureLogsForPlaybackConfigurationResponse_AdsInteractionLog:
+			v.AdsInteractionLog = &types.AdsInteractionLog{}
+			return v.AdsInteractionLog.Deserialize(d)
+		case schemas.ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies:
+			return deserialize__listOfLoggingStrategies(d, schemas.ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies, &v.EnabledLoggingStrategies)
+		case schemas.ConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog:
+			v.ManifestServiceInteractionLog = &types.ManifestServiceInteractionLog{}
+			return v.ManifestServiceInteractionLog.Deserialize(d)
+		case schemas.ConfigureLogsForPlaybackConfigurationResponse_PercentEnabled:
+			return d.ReadInt32(schemas.ConfigureLogsForPlaybackConfigurationResponse_PercentEnabled, &v.PercentEnabled)
+		case schemas.ConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName:
+			v.PlaybackConfigurationName = new(string)
+			return d.ReadString(schemas.ConfigureLogsForPlaybackConfigurationResponse_PlaybackConfigurationName, v.PlaybackConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfigureLogsForPlaybackConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConfigureLogsForPlaybackConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogsForPlaybackConfiguration, schemas.ConfigureLogsForPlaybackConfigurationRequest, schemas.ConfigureLogsForPlaybackConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConfigureLogsForPlaybackConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfigureLogsForPlaybackConfiguration, schemas.ConfigureLogsForPlaybackConfigurationRequest, schemas.ConfigureLogsForPlaybackConfigurationResponse), output: &ConfigureLogsForPlaybackConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

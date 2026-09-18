@@ -4,6 +4,8 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteInfrastructureConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInfrastructureConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInfrastructureConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInfrastructureConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.DeleteInfrastructureConfigurationRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+}
+
 type DeleteInfrastructureConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that was
@@ -48,13 +62,38 @@ type DeleteInfrastructureConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInfrastructureConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInfrastructureConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInfrastructureConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.DeleteInfrastructureConfigurationResponse_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteInfrastructureConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *DeleteInfrastructureConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInfrastructureConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInfrastructureConfigurationResponse_infrastructureConfigurationArn:
+			v.InfrastructureConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteInfrastructureConfigurationResponse_infrastructureConfigurationArn, v.InfrastructureConfigurationArn)
+		case schemas.DeleteInfrastructureConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteInfrastructureConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInfrastructureConfiguration, schemas.DeleteInfrastructureConfigurationRequest, schemas.DeleteInfrastructureConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInfrastructureConfiguration, schemas.DeleteInfrastructureConfigurationRequest, schemas.DeleteInfrastructureConfigurationResponse), output: &DeleteInfrastructureConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

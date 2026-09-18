@@ -87,13 +87,17 @@ type ChannelListConfiguration struct {
 	// This member is required.
 	ModifiedAt *time.Time
 
+	// The multiview channels, in the same channel group, that list this channel as an
+	// available source. This is a read-only field.
+	AttachedMultiviewChannels []string
+
 	// Any descriptive information that you want to add to the channel for future
 	// identification purposes.
 	Description *string
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -102,7 +106,15 @@ type ChannelListConfiguration struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType InputType
+
+	// The multiview configuration for the channel. This is present only when InputType
+	// is MULTIVIEW .
+	MultiviewConfiguration *MultiviewConfiguration
 
 	// The output locking mode configured for the channel.
 	//
@@ -1284,6 +1296,31 @@ type ListMssManifestConfiguration struct {
 
 	// The URL for accessing the MSS manifest.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The multiview configuration for a channel. A multiview channel composites video
+// from several source channels into a single tiled output stream. Players receive
+// one standard HLS or DASH stream instead of several separate streams. This
+// setting is required when InputType is MULTIVIEW , and can't be set for any other
+// input type.
+type MultiviewConfiguration struct {
+
+	// The tile layouts that players can request from this multiview channel's origin
+	// endpoints. Only the layouts that you list here are available. Each layout must
+	// appear at most once.
+	//
+	// This member is required.
+	AvailableLayouts []MultiviewLayoutType
+
+	// The channels that players can use as tiles in this multiview channel's output.
+	// Each source channel must be in the same channel group as the multiview channel,
+	// and must have an InputType of CMAF . Only the channels that you list here are
+	// available as tiles.
+	//
+	// This member is required.
+	AvailableSources []string
 
 	noSmithyDocumentSerde
 }

@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetCompatibleKafkaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCompatibleKafkaVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCompatibleKafkaVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCompatibleKafkaVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.GetCompatibleKafkaVersionsRequest_ClusterArn, *v.ClusterArn)
+	}
+}
+
 type GetCompatibleKafkaVersionsOutput struct {
 
 	// A list of CompatibleKafkaVersion objects.
@@ -43,13 +57,29 @@ type GetCompatibleKafkaVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCompatibleKafkaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCompatibleKafkaVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCompatibleKafkaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCompatibleKafkaVersion(s, schemas.GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions, v.CompatibleKafkaVersions)
+}
+func (v *GetCompatibleKafkaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCompatibleKafkaVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions:
+			return deserialize__listOfCompatibleKafkaVersion(d, schemas.GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions, &v.CompatibleKafkaVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCompatibleKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCompatibleKafkaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCompatibleKafkaVersions, schemas.GetCompatibleKafkaVersionsRequest, schemas.GetCompatibleKafkaVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCompatibleKafkaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCompatibleKafkaVersions, schemas.GetCompatibleKafkaVersionsRequest, schemas.GetCompatibleKafkaVersionsResponse), output: &GetCompatibleKafkaVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

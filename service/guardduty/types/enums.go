@@ -821,6 +821,28 @@ const (
 	FindingResourceTypeEc2LaunchTemplate           FindingResourceType = "EC2_LAUNCH_TEMPLATE"
 	FindingResourceTypeEc2Vpc                      FindingResourceType = "EC2_VPC"
 	FindingResourceTypeEc2Image                    FindingResourceType = "EC2_IMAGE"
+	// An Amazon Bedrock custom model fine-tuned by the customer.
+	FindingResourceTypeBedrockCustomModel FindingResourceType = "BEDROCK_CUSTOM_MODEL"
+	// An Amazon Bedrock imported model brought in from an external source.
+	FindingResourceTypeBedrockImportedModel FindingResourceType = "BEDROCK_IMPORTED_MODEL"
+	// An Amazon Bedrock model with provisioned throughput.
+	FindingResourceTypeBedrockProvisionedModel FindingResourceType = "BEDROCK_PROVISIONED_MODEL"
+	// A deployment of an Amazon Bedrock custom model.
+	FindingResourceTypeBedrockCustomModelDeployment FindingResourceType = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT"
+	// An Amazon Bedrock inference profile that routes model invocations across
+	// Regions.
+	FindingResourceTypeBedrockInferenceProfile FindingResourceType = "BEDROCK_INFERENCE_PROFILE"
+	// An application-scoped Amazon Bedrock inference profile used to track invocation
+	// usage.
+	FindingResourceTypeBedrockApplicationInferenceProfile FindingResourceType = "BEDROCK_APPLICATION_INFERENCE_PROFILE"
+	// A managed prompt stored in Amazon Bedrock Prompt Management.
+	FindingResourceTypeBedrockPrompt FindingResourceType = "BEDROCK_PROMPT"
+	// An Amazon Bedrock prompt router that selects a model per request.
+	FindingResourceTypeBedrockPromptRouter FindingResourceType = "BEDROCK_PROMPT_ROUTER"
+	// An Amazon Bedrock guardrail evaluated during a model invocation.
+	FindingResourceTypeBedrockGuardrail FindingResourceType = "BEDROCK_GUARDRAIL"
+	// An Amazon SageMaker inference endpoint.
+	FindingResourceTypeSagemakerEndpoint FindingResourceType = "SAGEMAKER_ENDPOINT"
 )
 
 // Values returns all known values for FindingResourceType. Note that this can be
@@ -845,6 +867,16 @@ func (FindingResourceType) Values() []FindingResourceType {
 		"EC2_LAUNCH_TEMPLATE",
 		"EC2_VPC",
 		"EC2_IMAGE",
+		"BEDROCK_CUSTOM_MODEL",
+		"BEDROCK_IMPORTED_MODEL",
+		"BEDROCK_PROVISIONED_MODEL",
+		"BEDROCK_CUSTOM_MODEL_DEPLOYMENT",
+		"BEDROCK_INFERENCE_PROFILE",
+		"BEDROCK_APPLICATION_INFERENCE_PROFILE",
+		"BEDROCK_PROMPT",
+		"BEDROCK_PROMPT_ROUTER",
+		"BEDROCK_GUARDRAIL",
+		"SAGEMAKER_ENDPOINT",
 	}
 }
 

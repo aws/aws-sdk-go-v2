@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,23 @@ type UpdateNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfIpPoolUpdateRequest(s, schemas.UpdateNetworkRequest_IpPools, v.IpPools)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNetworkRequest_Name, *v.Name)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateNetworkRequest_NetworkId, *v.NetworkId)
+	}
+	serialize__listOfRouteUpdateRequest(s, schemas.UpdateNetworkRequest_Routes, v.Routes)
+}
+
 // Placeholder documentation for UpdateNetworkResponse
 type UpdateNetworkOutput struct {
 
@@ -89,13 +108,63 @@ type UpdateNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNetworkResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.UpdateNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateNetworkResponse_Id, *v.Id)
+	}
+	serialize__listOfIpPool(s, schemas.UpdateNetworkResponse_IpPools, v.IpPools)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNetworkResponse_Name, *v.Name)
+	}
+	serialize__listOfRoute(s, schemas.UpdateNetworkResponse_Routes, v.Routes)
+	if v.State != "" {
+		s.WriteString(schemas.UpdateNetworkResponse_State, string(v.State))
+	}
+}
+func (v *UpdateNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNetworkResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateNetworkResponse_Arn, v.Arn)
+		case schemas.UpdateNetworkResponse_AssociatedClusterIds:
+			return deserialize__listOf__string(d, schemas.UpdateNetworkResponse_AssociatedClusterIds, &v.AssociatedClusterIds)
+		case schemas.UpdateNetworkResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateNetworkResponse_Id, v.Id)
+		case schemas.UpdateNetworkResponse_IpPools:
+			return deserialize__listOfIpPool(d, schemas.UpdateNetworkResponse_IpPools, &v.IpPools)
+		case schemas.UpdateNetworkResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateNetworkResponse_Name, v.Name)
+		case schemas.UpdateNetworkResponse_Routes:
+			return deserialize__listOfRoute(d, schemas.UpdateNetworkResponse_Routes, &v.Routes)
+		case schemas.UpdateNetworkResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNetworkResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetwork, schemas.UpdateNetworkRequest, schemas.UpdateNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetwork, schemas.UpdateNetworkRequest, schemas.UpdateNetworkResponse), output: &UpdateNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

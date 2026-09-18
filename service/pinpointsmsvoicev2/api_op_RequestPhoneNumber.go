@@ -74,6 +74,12 @@ type RequestPhoneNumberInput struct {
 	// phone number is Enabled.
 	InternationalSendingEnabled *bool
 
+	// An optional selection preference used to request a specific phone number, such
+	// as a number that starts with, ends with, or contains a particular digit pattern.
+	// You can specify at most one preference. Number preferences apply only to TEN_DLC
+	// requests in the US .
+	NumberPreference []types.NumberPreferenceItem
+
 	// The name of the OptOutList to associate with the phone number. You can use the
 	// OptOutListName or OptOutListArn.
 	//
@@ -121,6 +127,7 @@ func (v *RequestPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.RequestPhoneNumberRequest_MessageType, string(v.MessageType))
 	}
 	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberRequest_NumberCapabilities, v.NumberCapabilities)
+	serializeNumberPreferenceList(s, schemas.RequestPhoneNumberRequest_NumberPreference, v.NumberPreference)
 	if v.NumberType != "" {
 		s.WriteString(schemas.RequestPhoneNumberRequest_NumberType, string(v.NumberType))
 	}

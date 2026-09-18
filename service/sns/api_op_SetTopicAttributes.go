@@ -38,7 +38,24 @@ type SetTopicAttributesInput struct {
 	//   - DeliveryPolicy – The policy that defines how Amazon SNS retries failed
 	//   deliveries to HTTP/S endpoints.
 	//
-	//   - DisplayName – The display name to use for a topic with SMS subscriptions.
+	//   - DisplayName – The display name to use for a topic with SMS, email , and
+	//   email-json subscriptions. For email and email-json subscriptions, the display
+	//   name is used as the sender name for regular notification messages. Subscription
+	//   confirmation and unsubscribe confirmation emails always use "Amazon Web Services
+	//   Notifications" as the sender name.
+	//
+	//   - MaximumMessageSize – The maximum size, in bytes, of a message that can be
+	//   published to the topic. Valid values are 1024 to 1048576 (1 MiB). The default
+	//   is 262144 (256 KiB).
+	//
+	// A topic with a MaximumMessageSize above 256 KiB must have 100 or fewer
+	//   subscriptions, and each subscription must be an Amazon SQS, Amazon Data
+	//   Firehose, or Lambda subscription.
+	//
+	// You can increase or decrease this value at any time. If the topic doesn't meet
+	//   these requirements when you set a value above 256 KiB, Amazon SNS returns an
+	//   InvalidParameter error. For more information, see [Large message payloads]in the Amazon SNS Developer
+	//   Guide.
 	//
 	//   - Policy – The policy that defines who can access your topic. By default, only
 	//   the topic owner can publish or subscribe to the topic.
@@ -168,6 +185,7 @@ type SetTopicAttributesInput struct {
 	//
 	// [Amazon SNS service quotas]: https://docs.aws.amazon.com/general/latest/gr/sns.html
 	// [Using Amazon SNS Application Attributes for Message Delivery Status]: https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
+	// [Large message payloads]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
 	// [Key Terms]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
 	// [KeyId]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
 	// [server-side-encryption]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html

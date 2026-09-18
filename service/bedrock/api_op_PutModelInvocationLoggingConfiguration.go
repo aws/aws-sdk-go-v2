@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,20 @@ type PutModelInvocationLoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutModelInvocationLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutModelInvocationLoggingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutModelInvocationLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.PutModelInvocationLoggingConfigurationRequest_loggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutModelInvocationLoggingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +57,26 @@ type PutModelInvocationLoggingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutModelInvocationLoggingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutModelInvocationLoggingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutModelInvocationLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutModelInvocationLoggingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutModelInvocationLoggingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutModelInvocationLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutModelInvocationLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutModelInvocationLoggingConfiguration, schemas.PutModelInvocationLoggingConfigurationRequest, schemas.PutModelInvocationLoggingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutModelInvocationLoggingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutModelInvocationLoggingConfiguration, schemas.PutModelInvocationLoggingConfigurationRequest, schemas.PutModelInvocationLoggingConfigurationResponse), output: &PutModelInvocationLoggingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

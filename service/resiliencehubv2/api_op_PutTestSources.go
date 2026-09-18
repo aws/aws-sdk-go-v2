@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type PutTestSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTestSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTestSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTestSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.PutTestSourcesRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.PutTestSourcesRequest_testId, *v.TestId)
+	}
+	serializeTestSourceInputList(s, schemas.PutTestSourcesRequest_testSources, v.TestSources)
+}
+
 type PutTestSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +71,26 @@ type PutTestSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTestSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTestSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTestSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTestSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTestSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTestSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTestSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTestSources, schemas.PutTestSourcesRequest, schemas.PutTestSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTestSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTestSources, schemas.PutTestSourcesRequest, schemas.PutTestSourcesResponse), output: &PutTestSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

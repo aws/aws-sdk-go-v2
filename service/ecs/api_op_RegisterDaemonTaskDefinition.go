@@ -4,7 +4,9 @@ package ecs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -123,6 +125,39 @@ type RegisterDaemonTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDaemonTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDaemonTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDaemonTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDaemonContainerDefinitionList(s, schemas.RegisterDaemonTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	if v.Cpu != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_cpu, *v.Cpu)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_family, *v.Family)
+	}
+	if v.IpcMode != "" {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_ipcMode, string(v.IpcMode))
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_memory, *v.Memory)
+	}
+	if v.PidMode != "" {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_pidMode, string(v.PidMode))
+	}
+	serializeTags(s, schemas.RegisterDaemonTaskDefinitionRequest_tags, v.Tags)
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_taskRoleArn, *v.TaskRoleArn)
+	}
+	serializeDaemonVolumeList(s, schemas.RegisterDaemonTaskDefinitionRequest_volumes, v.Volumes)
+}
+
 type RegisterDaemonTaskDefinitionOutput struct {
 
 	// The full Amazon Resource Name (ARN) of the registered daemon task definition.
@@ -134,13 +169,32 @@ type RegisterDaemonTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDaemonTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDaemonTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDaemonTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DaemonTaskDefinitionArn != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn, *v.DaemonTaskDefinitionArn)
+	}
+}
+func (v *RegisterDaemonTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterDaemonTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn:
+			v.DaemonTaskDefinitionArn = new(string)
+			return d.ReadString(schemas.RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn, v.DaemonTaskDefinitionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDaemonTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDaemonTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDaemonTaskDefinition, schemas.RegisterDaemonTaskDefinitionRequest, schemas.RegisterDaemonTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterDaemonTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDaemonTaskDefinition, schemas.RegisterDaemonTaskDefinitionRequest, schemas.RegisterDaemonTaskDefinitionResponse), output: &RegisterDaemonTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

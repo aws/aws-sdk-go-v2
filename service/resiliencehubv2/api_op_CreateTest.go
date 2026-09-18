@@ -4,7 +4,9 @@ package resiliencehubv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,31 @@ type CreateTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.CreateTestRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTestParameters(s, schemas.CreateTestRequest_parameters, v.Parameters)
+	if v.RoleName != nil {
+		s.WriteString(schemas.CreateTestRequest_roleName, *v.RoleName)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.CreateTestRequest_serviceArn, *v.ServiceArn)
+	}
+	serializeStopConditionList(s, schemas.CreateTestRequest_stopConditions, v.StopConditions)
+	if v.TestTemplateArn != nil {
+		s.WriteString(schemas.CreateTestRequest_testTemplateArn, *v.TestTemplateArn)
+	}
+}
+
 type CreateTestOutput struct {
 
 	// The created test.
@@ -65,13 +92,34 @@ type CreateTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Test != nil {
+		s.WriteStruct(schemas.CreateTestResponse_test)
+		v.Test.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTestResponse_test:
+			v.Test = &types.Test{}
+			return v.Test.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTest, schemas.CreateTestRequest, schemas.CreateTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTest, schemas.CreateTestRequest, schemas.CreateTestResponse), output: &CreateTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -2107,6 +2107,11 @@ func awsRestjson1_deserializeOpDocumentGetLinkedWhatsAppBusinessAccountPhoneNumb
 
 	for key, value := range shape {
 		switch key {
+		case "callSettings":
+			if err := awsRestjson1_deserializeDocumentWhatsAppCallSettings(&sv.CallSettings, value); err != nil {
+				return err
+			}
+
 		case "linkedWhatsAppBusinessAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2308,6 +2313,187 @@ func awsRestjson1_deserializeOpDocumentGetWhatsAppBusinessPublicKeyOutput(v **Ge
 					return fmt.Errorf("expected BusinessPublicKeySignatureStatus to be of type string, got %T instead", value)
 				}
 				sv.BusinessPublicKeySignatureStatus = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetWhatsAppCallPermission struct {
+}
+
+func (*awsRestjson1_deserializeOpGetWhatsAppCallPermission) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetWhatsAppCallPermission) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetWhatsAppCallPermission(response, &metadata)
+	}
+	output := &GetWhatsAppCallPermissionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetWhatsAppCallPermissionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetWhatsAppCallPermission(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedByMetaException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedByMetaException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("DependencyException", errorCode):
+		return awsRestjson1_deserializeErrorDependencyException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidParametersException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParametersException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottledRequestException", errorCode):
+		return awsRestjson1_deserializeErrorThrottledRequestException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetWhatsAppCallPermissionOutput(v **GetWhatsAppCallPermissionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetWhatsAppCallPermissionOutput
+	if *v == nil {
+		sv = &GetWhatsAppCallPermissionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "actions":
+			if err := awsRestjson1_deserializeDocumentWhatsAppCallPermissionActionList(&sv.Actions, value); err != nil {
+				return err
+			}
+
+		case "permission":
+			if err := awsRestjson1_deserializeDocumentWhatsAppCallPermission(&sv.Permission, value); err != nil {
+				return err
 			}
 
 		default:
@@ -4738,6 +4924,189 @@ func awsRestjson1_deserializeOpErrorPutWhatsAppBusinessPublicKey(response *smith
 	}
 }
 
+type awsRestjson1_deserializeOpSendWhatsAppCallEvent struct {
+}
+
+func (*awsRestjson1_deserializeOpSendWhatsAppCallEvent) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpSendWhatsAppCallEvent) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorSendWhatsAppCallEvent(response, &metadata)
+	}
+	output := &SendWhatsAppCallEventOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentSendWhatsAppCallEventOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorSendWhatsAppCallEvent(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedByMetaException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedByMetaException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("DependencyException", errorCode):
+		return awsRestjson1_deserializeErrorDependencyException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidParametersException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParametersException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottledRequestException", errorCode):
+		return awsRestjson1_deserializeErrorThrottledRequestException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentSendWhatsAppCallEventOutput(v **SendWhatsAppCallEventOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *SendWhatsAppCallEventOutput
+	if *v == nil {
+		sv = &SendWhatsAppCallEventOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "callId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CallId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpSendWhatsAppConversionEvent struct {
 }
 
@@ -5445,6 +5814,186 @@ func awsRestjson1_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutp
 	return nil
 }
 
+type awsRestjson1_deserializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateLinkedWhatsAppBusinessAccountPhoneNumber(response, &metadata)
+	}
+	output := &UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateLinkedWhatsAppBusinessAccountPhoneNumber(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedByMetaException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedByMetaException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("DependencyException", errorCode):
+		return awsRestjson1_deserializeErrorDependencyException(response, errorBody)
+
+	case strings.EqualFold("InternalServiceException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+
+	case strings.EqualFold("InvalidParametersException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidParametersException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottledRequestException", errorCode):
+		return awsRestjson1_deserializeErrorThrottledRequestException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput(v **UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput
+	if *v == nil {
+		sv = &UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "phoneNumberId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppPhoneNumberId to be of type string, got %T instead", value)
+				}
+				sv.PhoneNumberId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpUpdateWhatsAppFlow struct {
 }
 
@@ -5917,6 +6466,42 @@ func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Res
 	return output
 }
 
+func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ConflictException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentConflictException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorDependencyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DependencyException{}
 	var buff [1024]byte
@@ -6225,6 +6810,46 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	var sv *types.AccessDeniedException
 	if *v == nil {
 		sv = &types.AccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConflictException
+	if *v == nil {
+		sv = &types.ConflictException{}
 	} else {
 		sv = *v
 	}
@@ -8183,6 +8808,472 @@ func awsRestjson1_deserializeDocumentWhatsAppBusinessAccountEventDestinations(v 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentWhatsAppCallHours(v **types.WhatsAppCallHours, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppCallHours
+	if *v == nil {
+		sv = &types.WhatsAppCallHours{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "holidaySchedule":
+			if err := awsRestjson1_deserializeDocumentWhatsAppHolidayScheduleList(&sv.HolidaySchedule, value); err != nil {
+				return err
+			}
+
+		case "timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IanaTimezone to be of type string, got %T instead", value)
+				}
+				sv.Timezone = ptr.String(jtv)
+			}
+
+		case "weeklyOperatingHours":
+			if err := awsRestjson1_deserializeDocumentWhatsAppWeeklyOperatingHoursList(&sv.WeeklyOperatingHours, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppCallPermission(v **types.WhatsAppCallPermission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppCallPermission
+	if *v == nil {
+		sv = &types.WhatsAppCallPermission{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expirationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ExpirationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppCallPermissionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppCallPermissionAction(v **types.WhatsAppCallPermissionAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppCallPermissionAction
+	if *v == nil {
+		sv = &types.WhatsAppCallPermissionAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "actionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppCallPermissionActionName to be of type string, got %T instead", value)
+				}
+				sv.ActionName = ptr.String(jtv)
+			}
+
+		case "canPerformAction":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CanPerformAction = ptr.Bool(jtv)
+			}
+
+		case "limits":
+			if err := awsRestjson1_deserializeDocumentWhatsAppCallPermissionLimitList(&sv.Limits, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppCallPermissionActionList(v *[]types.WhatsAppCallPermissionAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WhatsAppCallPermissionAction
+	if *v == nil {
+		cv = []types.WhatsAppCallPermissionAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WhatsAppCallPermissionAction
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentWhatsAppCallPermissionAction(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppCallPermissionLimit(v **types.WhatsAppCallPermissionLimit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppCallPermissionLimit
+	if *v == nil {
+		sv = &types.WhatsAppCallPermissionLimit{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "currentUsage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentUsage = ptr.Int32(int32(i64))
+			}
+
+		case "limitExpirationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LimitExpirationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "maxAllowed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAllowed = ptr.Int32(int32(i64))
+			}
+
+		case "timePeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Iso8601Duration to be of type string, got %T instead", value)
+				}
+				sv.TimePeriod = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppCallPermissionLimitList(v *[]types.WhatsAppCallPermissionLimit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WhatsAppCallPermissionLimit
+	if *v == nil {
+		cv = []types.WhatsAppCallPermissionLimit{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WhatsAppCallPermissionLimit
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentWhatsAppCallPermissionLimit(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppCallSettings(v **types.WhatsAppCallSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppCallSettings
+	if *v == nil {
+		sv = &types.WhatsAppCallSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "callbackPermissionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppCallbackPermissionStatus to be of type string, got %T instead", value)
+				}
+				sv.CallbackPermissionStatus = ptr.String(jtv)
+			}
+
+		case "callEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CallEnabled = ptr.Bool(jtv)
+			}
+
+		case "callHours":
+			if err := awsRestjson1_deserializeDocumentWhatsAppCallHours(&sv.CallHours, value); err != nil {
+				return err
+			}
+
+		case "callIconVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppCallIconVisibility to be of type string, got %T instead", value)
+				}
+				sv.CallIconVisibility = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppHolidayScheduleEntry(v **types.WhatsAppHolidayScheduleEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppHolidayScheduleEntry
+	if *v == nil {
+		sv = &types.WhatsAppHolidayScheduleEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "date":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppDate to be of type string, got %T instead", value)
+				}
+				sv.Date = ptr.String(jtv)
+			}
+
+		case "endTime":
+			if err := awsRestjson1_deserializeDocumentWhatsAppTimeOfDay(&sv.EndTime, value); err != nil {
+				return err
+			}
+
+		case "startTime":
+			if err := awsRestjson1_deserializeDocumentWhatsAppTimeOfDay(&sv.StartTime, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppHolidayScheduleList(v *[]types.WhatsAppHolidayScheduleEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WhatsAppHolidayScheduleEntry
+	if *v == nil {
+		cv = []types.WhatsAppHolidayScheduleEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WhatsAppHolidayScheduleEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentWhatsAppHolidayScheduleEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentWhatsAppPhoneNumberDetail(v **types.WhatsAppPhoneNumberDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8499,5 +9590,146 @@ func awsRestjson1_deserializeDocumentWhatsAppSignupCallbackResult(v **types.What
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppTimeOfDay(v **types.WhatsAppTimeOfDay, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppTimeOfDay
+	if *v == nil {
+		sv = &types.WhatsAppTimeOfDay{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hours":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Hours = ptr.Int32(int32(i64))
+			}
+
+		case "minutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Minutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppWeeklyOperatingHoursEntry(v **types.WhatsAppWeeklyOperatingHoursEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WhatsAppWeeklyOperatingHoursEntry
+	if *v == nil {
+		sv = &types.WhatsAppWeeklyOperatingHoursEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "closeTime":
+			if err := awsRestjson1_deserializeDocumentWhatsAppTimeOfDay(&sv.CloseTime, value); err != nil {
+				return err
+			}
+
+		case "dayOfWeek":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppDayOfWeek to be of type string, got %T instead", value)
+				}
+				sv.DayOfWeek = types.WhatsAppDayOfWeek(jtv)
+			}
+
+		case "openTime":
+			if err := awsRestjson1_deserializeDocumentWhatsAppTimeOfDay(&sv.OpenTime, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWhatsAppWeeklyOperatingHoursList(v *[]types.WhatsAppWeeklyOperatingHoursEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WhatsAppWeeklyOperatingHoursEntry
+	if *v == nil {
+		cv = []types.WhatsAppWeeklyOperatingHoursEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WhatsAppWeeklyOperatingHoursEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentWhatsAppWeeklyOperatingHoursEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }

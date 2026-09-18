@@ -4,6 +4,8 @@ package cloudhsm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type DeleteLunaClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLunaClientInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLunaClientRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLunaClientInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientArn != nil {
+		s.WriteString(schemas.DeleteLunaClientRequest_ClientArn, *v.ClientArn)
+	}
+}
+
 type DeleteLunaClientOutput struct {
 
 	// The status of the action.
@@ -60,13 +74,32 @@ type DeleteLunaClientOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLunaClientOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLunaClientResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLunaClientOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.DeleteLunaClientResponse_Status, *v.Status)
+	}
+}
+func (v *DeleteLunaClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLunaClientResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLunaClientResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteLunaClientResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLunaClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLunaClient, schemas.DeleteLunaClientRequest, schemas.DeleteLunaClientResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLunaClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLunaClient, schemas.DeleteLunaClientRequest, schemas.DeleteLunaClientResponse), output: &DeleteLunaClientOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

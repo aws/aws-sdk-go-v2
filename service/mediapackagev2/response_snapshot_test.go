@@ -134,6 +134,20 @@ func TestCheckResponseSnapshot_CancelHarvestJob(t *testing.T) {
 
 func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 	want := &CreateChannelOutput{
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
+		},
+		AttachedMultiviewChannels: []string{
+			"__Member__",
+			"__Member__",
+		},
 		Arn:              ptr.String("__Arn__"),
 		ChannelName:      ptr.String("__ChannelName__"),
 		ChannelGroupName: ptr.String("__ChannelGroupName__"),
@@ -184,6 +198,16 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 		},
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
+		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
 		},
 		OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
 		Tags: map[string]string{
@@ -1206,6 +1230,20 @@ func TestCheckResponseSnapshot_DeleteOriginEndpointPolicy(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetChannel(t *testing.T) {
 	want := &GetChannelOutput{
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
+		},
+		AttachedMultiviewChannels: []string{
+			"__Member__",
+			"__Member__",
+		},
 		Arn:              ptr.String("__Arn__"),
 		ChannelName:      ptr.String("__ChannelName__"),
 		ChannelGroupName: ptr.String("__ChannelGroupName__"),
@@ -1868,6 +1906,20 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 				Description:       ptr.String("__Description__"),
 				InputType:         types.InputType("HLS"),
 				OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
+				MultiviewConfiguration: &types.MultiviewConfiguration{
+					AvailableSources: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AvailableLayouts: []types.MultiviewLayoutType{
+						types.MultiviewLayoutType("LAYOUT_2EH"),
+						types.MultiviewLayoutType("LAYOUT_2EH"),
+					},
+				},
+				AttachedMultiviewChannels: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				Arn:               ptr.String("__Arn__"),
@@ -1878,6 +1930,20 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 				Description:       ptr.String("__Description__"),
 				InputType:         types.InputType("HLS"),
 				OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
+				MultiviewConfiguration: &types.MultiviewConfiguration{
+					AvailableSources: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AvailableLayouts: []types.MultiviewLayoutType{
+						types.MultiviewLayoutType("LAYOUT_2EH"),
+						types.MultiviewLayoutType("LAYOUT_2EH"),
+					},
+				},
+				AttachedMultiviewChannels: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2369,6 +2435,20 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 	want := &UpdateChannelOutput{
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
+		},
+		AttachedMultiviewChannels: []string{
+			"__Member__",
+			"__Member__",
+		},
 		Arn:              ptr.String("__Arn__"),
 		ChannelName:      ptr.String("__ChannelName__"),
 		ChannelGroupName: ptr.String("__ChannelGroupName__"),
@@ -2418,6 +2498,16 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 		},
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
+		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
 		},
 	})
 	if err != nil {
@@ -3351,6 +3441,16 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		},
 		OutputHeaderConfiguration: &types.OutputHeaderConfiguration{
 			PublishMQCS: ptr.Bool(true),
+		},
+		MultiviewConfiguration: &types.MultiviewConfiguration{
+			AvailableSources: []string{
+				"__Member__",
+				"__Member__",
+			},
+			AvailableLayouts: []types.MultiviewLayoutType{
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+				types.MultiviewLayoutType("LAYOUT_2EH"),
+			},
 		},
 		OutputLockingMode: types.OutputLockingMode("EPOCH_LOCKED"),
 		Tags: map[string]string{

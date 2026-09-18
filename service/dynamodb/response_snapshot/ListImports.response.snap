@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.ListImports
+
+{"ImportSummaryList":[{"CloudWatchLogGroupArn":"__CloudWatchLogGroupArn__","EndTime":946684800,"ImportArn":"__ImportArn__","ImportStatus":"IN_PROGRESS","InputFormat":"DYNAMODB_JSON","S3BucketSource":{"S3Bucket":"__S3Bucket__","S3BucketOwner":"__S3BucketOwner__","S3KeyPrefix":"__S3KeyPrefix__"},"StartTime":946684800,"TableArn":"__TableArn__"},{"CloudWatchLogGroupArn":"__CloudWatchLogGroupArn__","EndTime":946684800,"ImportArn":"__ImportArn__","ImportStatus":"IN_PROGRESS","InputFormat":"DYNAMODB_JSON","S3BucketSource":{"S3Bucket":"__S3Bucket__","S3BucketOwner":"__S3BucketOwner__","S3KeyPrefix":"__S3KeyPrefix__"},"StartTime":946684800,"TableArn":"__TableArn__"}],"NextToken":"__NextToken__"}

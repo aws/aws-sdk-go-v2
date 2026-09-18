@@ -5,7 +5,9 @@ package appconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListExperimentRunEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentRunEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentRunEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentRunEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.ListExperimentRunEventsRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.ExperimentDefinitionIdentifier != nil {
+		s.WriteString(schemas.ListExperimentRunEventsRequest_ExperimentDefinitionIdentifier, *v.ExperimentDefinitionIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExperimentRunEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentRunEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.Run != nil {
+		s.WriteInt32(schemas.ListExperimentRunEventsRequest_Run, *v.Run)
+	}
+}
+
 // The response for a list experiment run events request.
 type ListExperimentRunEventsOutput struct {
 
@@ -67,13 +93,35 @@ type ListExperimentRunEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentRunEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentRunEvents)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentRunEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentRunEventList(s, schemas.ExperimentRunEvents_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ExperimentRunEvents_NextToken, *v.NextToken)
+	}
+}
+func (v *ListExperimentRunEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentRunEvents, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentRunEvents_Items:
+			return deserializeExperimentRunEventList(d, schemas.ExperimentRunEvents_Items, &v.Items)
+		case schemas.ExperimentRunEvents_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ExperimentRunEvents_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExperimentRunEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExperimentRunEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperimentRunEvents, schemas.ListExperimentRunEventsRequest, schemas.ExperimentRunEvents)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExperimentRunEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperimentRunEvents, schemas.ListExperimentRunEventsRequest, schemas.ExperimentRunEvents), output: &ListExperimentRunEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

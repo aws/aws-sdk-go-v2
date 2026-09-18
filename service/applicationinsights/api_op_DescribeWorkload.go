@@ -4,7 +4,9 @@ package applicationinsights
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type DescribeWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_AccountId, *v.AccountId)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type DescribeWorkloadOutput struct {
 
 	// The configuration settings of the workload. The value is the escaped JSON of
@@ -66,13 +89,46 @@ type DescribeWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadConfiguration != nil {
+		s.WriteStruct(schemas.DescribeWorkloadResponse_WorkloadConfiguration)
+		v.WorkloadConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DescribeWorkloadResponse_WorkloadId, *v.WorkloadId)
+	}
+	if v.WorkloadRemarks != nil {
+		s.WriteString(schemas.DescribeWorkloadResponse_WorkloadRemarks, *v.WorkloadRemarks)
+	}
+}
+func (v *DescribeWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkloadResponse_WorkloadConfiguration:
+			v.WorkloadConfiguration = &types.WorkloadConfiguration{}
+			return v.WorkloadConfiguration.Deserialize(d)
+		case schemas.DescribeWorkloadResponse_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.DescribeWorkloadResponse_WorkloadId, v.WorkloadId)
+		case schemas.DescribeWorkloadResponse_WorkloadRemarks:
+			v.WorkloadRemarks = new(string)
+			return d.ReadString(schemas.DescribeWorkloadResponse_WorkloadRemarks, v.WorkloadRemarks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkload, schemas.DescribeWorkloadRequest, schemas.DescribeWorkloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkload, schemas.DescribeWorkloadRequest, schemas.DescribeWorkloadResponse), output: &DescribeWorkloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

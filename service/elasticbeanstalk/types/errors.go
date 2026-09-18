@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// AWS CodeBuild is not available in the specified region.
+// CodeBuild is not available in the specified region.
 type CodeBuildNotInServiceRegionException struct {
 	Message *string
 
@@ -61,8 +61,8 @@ func (e *ElasticBeanstalkServiceException) ErrorCode() string {
 }
 func (e *ElasticBeanstalkServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified account does not have sufficient privileges for one or more AWS
-// services.
+// The specified account does not have sufficient privileges for one or more
+// Amazon Web Services services.
 type InsufficientPrivilegesException struct {
 	Message *string
 

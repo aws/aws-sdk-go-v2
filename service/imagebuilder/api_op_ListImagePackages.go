@@ -5,11 +5,13 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// List the Packages that are associated with an Image Build Version, as
+// Lists the packages that are associated with an image build version, as
 // determined by Amazon Web Services Systems Manager Inventory at build time.
 func (c *Client) ListImagePackages(ctx context.Context, params *ListImagePackagesInput, optFns ...func(*Options)) (*ListImagePackagesOutput, error) {
 	if params == nil {
@@ -33,14 +35,32 @@ type ListImagePackagesInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListImagePackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImagePackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImagePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.ListImagePackagesRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImagePackagesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImagePackagesRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListImagePackagesOutput struct {
@@ -62,13 +82,41 @@ type ListImagePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImagePackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImagePackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImagePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImagePackageList(s, schemas.ListImagePackagesResponse_imagePackageList, v.ImagePackageList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImagePackagesResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImagePackagesResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListImagePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImagePackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImagePackagesResponse_imagePackageList:
+			return deserializeImagePackageList(d, schemas.ListImagePackagesResponse_imagePackageList, &v.ImagePackageList)
+		case schemas.ListImagePackagesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImagePackagesResponse_nextToken, v.NextToken)
+		case schemas.ListImagePackagesResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImagePackagesResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImagePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImagePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImagePackages, schemas.ListImagePackagesRequest, schemas.ListImagePackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImagePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImagePackages, schemas.ListImagePackagesRequest, schemas.ListImagePackagesResponse), output: &ListImagePackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
@@ -107,7 +155,7 @@ func (c *Client) addOperationListImagePackagesMiddlewares(stack *middleware.Stac
 
 // ListImagePackagesPaginatorOptions is the paginator options for ListImagePackages
 type ListImagePackagesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

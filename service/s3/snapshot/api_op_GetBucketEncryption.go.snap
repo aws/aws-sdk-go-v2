@@ -22,7 +22,6 @@ GetBucketEncryption
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -36,5 +35,6 @@ GetBucketEncryption
 		ResponseErrorWrapper
 		S3MetadataRetriever
 		OperationDeserializer
+		S3:ProcessResponseFor200Error
 		RecordResponseTiming
 		RequestResponseLogger

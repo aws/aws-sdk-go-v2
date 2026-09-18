@@ -10,14 +10,19 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Disables Lake query federation on the specified event data store. When you
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Disables Lake query federation on the specified event data store. When you
 // disable federation, CloudTrail disables the integration with Glue, Lake
 // Formation, and Amazon Athena. After disabling Lake query federation, you can no
 // longer query your event data in Amazon Athena.
 //
 // No CloudTrail Lake data is deleted when you disable federation and you can
 // continue to run queries in CloudTrail Lake.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) DisableFederation(ctx context.Context, params *DisableFederationInput, optFns ...func(*Options)) (*DisableFederationOutput, error) {
 	if params == nil {
 		params = &DisableFederationInput{}

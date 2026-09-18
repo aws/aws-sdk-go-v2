@@ -9,6 +9,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Disables the event data store specified by EventDataStore , which accepts an
 // event data store ARN. After you run DeleteEventDataStore , the event data store
 // enters a PENDING_DELETION state, and is automatically deleted after a wait
@@ -21,6 +25,8 @@ import (
 // ListQueries , DescribeQuery , or GetQueryResults on queries that are using an
 // event data store in a PENDING_DELETION state. An event data store in the
 // PENDING_DELETION state does not incur costs.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) DeleteEventDataStore(ctx context.Context, params *DeleteEventDataStoreInput, optFns ...func(*Options)) (*DeleteEventDataStoreOutput, error) {
 	if params == nil {
 		params = &DeleteEventDataStoreInput{}

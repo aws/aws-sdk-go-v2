@@ -4,6 +4,8 @@ package ecr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type DeleteLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DeleteLifecyclePolicyOutput struct {
 
 	// The time stamp of the last time that the lifecycle policy was run.
@@ -59,13 +76,50 @@ type DeleteLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastEvaluatedAt != nil {
+		s.WriteTime(schemas.DeleteLifecyclePolicyResponse_lastEvaluatedAt, *v.LastEvaluatedAt)
+	}
+	if v.LifecyclePolicyText != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyResponse_lifecyclePolicyText, *v.LifecyclePolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DeleteLifecyclePolicyResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *DeleteLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLifecyclePolicyResponse_lastEvaluatedAt:
+			v.LastEvaluatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteLifecyclePolicyResponse_lastEvaluatedAt, v.LastEvaluatedAt)
+		case schemas.DeleteLifecyclePolicyResponse_lifecyclePolicyText:
+			v.LifecyclePolicyText = new(string)
+			return d.ReadString(schemas.DeleteLifecyclePolicyResponse_lifecyclePolicyText, v.LifecyclePolicyText)
+		case schemas.DeleteLifecyclePolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DeleteLifecyclePolicyResponse_registryId, v.RegistryId)
+		case schemas.DeleteLifecyclePolicyResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.DeleteLifecyclePolicyResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLifecyclePolicy, schemas.DeleteLifecyclePolicyRequest, schemas.DeleteLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLifecyclePolicy, schemas.DeleteLifecyclePolicyRequest, schemas.DeleteLifecyclePolicyResponse), output: &DeleteLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

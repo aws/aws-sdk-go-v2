@@ -11842,6 +11842,17 @@
         "com.amazonaws.ec2#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.ec2#BootModeOverrideValues": {
+            "type": "enum",
+            "members": {
+                "uefi": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uefi"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#BootModeType": {
             "type": "enum",
             "members": {
@@ -18636,6 +18647,18 @@
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the \n      request. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">\n        Ensure Idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Encrypted": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to encrypt the volume copy. If the source volume is encrypted, the \n      service always encrypts the copy regardless of this value. Set to <code>true</code> to \n      encrypt a copy of an unencrypted source volume during the copy operation. If you set \n      <code>Encrypted</code> to <code>true</code> but do not specify <code>KmsKeyId</code>, the \n      service uses the default KMS key for EBS encryption in your account.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS key to use for encryption of the volume copy. Specify a \n      symmetric encryption KMS key. You can specify a KMS key using the key ID, key ARN, alias \n      name, or alias ARN. If you set <code>Encrypted</code> to <code>true</code> but do not \n      specify this parameter, the service uses the default KMS key for EBS encryption in your \n      account. For cross-account volume copies, this must be a KMS key in the calling \n      account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21012,6 +21035,12 @@
                     "target": "com.amazonaws.ec2#SnapshotLocationEnum",
                     "traits": {
                         "smithy.api#documentation": "<note>\n            <p>Only supported for instances in Local Zones and for instances on Outposts that support\n        local snapshots. If the source instance is not in one of these locations, omit this\n        parameter.</p>\n         </note>\n         <p>The Amazon S3 location where the snapshots will be stored.</p>\n         <ul>\n            <li>\n               <p>To create local snapshots in the same Local Zone or on the same Outpost as the source\n          instance, specify <code>local</code>.</p>\n            </li>\n            <li>\n               <p>To create regional snapshots in the parent Region of the Local Zone or Outpost, specify\n            <code>regional</code>.</p>\n            </li>\n         </ul>\n         <p>If the source instance is in a Local Zone and you omit this parameter, regional snapshots\n      are created in the parent Region of the Local Zone.</p>\n         <p>If the source instance is on an Outpost that supports local snapshots, this parameter is\n      required. If you omit it, the request fails with an\n      <code>InvalidParameterValue</code> error.</p>\n         <p>Default: <code>regional</code> (for instances in Local Zones only)</p>"
+                    }
+                },
+                "BootModeOverride": {
+                    "target": "com.amazonaws.ec2#BootModeOverrideValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boot mode of the new image, which overrides the default boot mode. By default, \n      if you do not specify this parameter, the new image inherits \n      the <code>boot-mode</code> from the source instance.</p>\n         <p>A value of <code>uefi</code> indicates that the image only supports UEFI boot mode. You can\n      specify this parameter only if the <code>current-instance-boot-mode</code> of the source instance is\n        <code>uefi</code>. To find the <code>boot-mode</code> or <code>current-instance-boot-mode</code> of \n        an instance, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a>.</p>\n         <note>\n            <p>The operating system contained in the AMI must be configured to support the specified\n        boot mode.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Instance launch behavior with Amazon EC2 boot modes</a> in\n      the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "DryRun": {
@@ -42548,7 +42577,7 @@
                 "target": "com.amazonaws.ec2#DescribeInstanceCreditSpecificationsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the credit option for CPU usage of the specified burstable performance\n            instances. The credit options are <code>standard</code> and\n            <code>unlimited</code>.</p>\n         <p>If you do not specify an instance ID, Amazon EC2 returns burstable performance\n            instances with the <code>unlimited</code> credit option, as well as instances that were\n            previously configured as T2, T3, and T3a with the <code>unlimited</code> credit option.\n            For example, if you resize a T2 instance, while it is configured as\n                <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4\n            instance.</p>\n         <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option\n                (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify\n            an instance ID that is not valid, such as an instance that is not a burstable\n            performance instance, an error is returned.</p>\n         <p>Recently terminated instances might appear in the returned results. This interval is\n            usually less than one hour.</p>\n         <p>If an Availability Zone is experiencing a service disruption and you specify instance\n            IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If\n            you specify only instance IDs in an unaffected zone, the call works normally.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the credit option for CPU usage of the specified burstable performance\n            instances. The credit options are <code>standard</code> and\n            <code>unlimited</code>.</p>\n         <p>If you do not specify an instance ID, Amazon EC2 returns burstable performance\n            instances with the <code>unlimited</code> credit option, as well as instances that were\n            previously configured as T2, T3, and T3a with the <code>unlimited</code> credit option.\n            For example, if you resize a T2 instance, while it is configured as\n                <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4\n            instance.</p>\n         <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option\n                (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify\n            an instance ID that is not a burstable performance instance, Amazon EC2 returns the\n            <code>standard</code> credit option.</p>\n         <p>Recently terminated instances might appear in the returned results. This interval is\n            usually less than one hour.</p>\n         <p>If an Availability Zone is experiencing a service disruption and you specify instance\n            IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If\n            you specify only instance IDs in an unaffected zone, the call works normally.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -90199,6 +90228,144 @@
                     "traits": {
                         "smithy.api#enumValue": "c9gd.metal-48xl"
                     }
+                },
+                "r9g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.medium"
+                    }
+                },
+                "r9g_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.large"
+                    }
+                },
+                "r9g_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.xlarge"
+                    }
+                },
+                "r9g_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.2xlarge"
+                    }
+                },
+                "r9g_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.4xlarge"
+                    }
+                },
+                "r9g_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.8xlarge"
+                    }
+                },
+                "r9g_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.12xlarge"
+                    }
+                },
+                "r9g_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.16xlarge"
+                    }
+                },
+                "r9g_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.24xlarge"
+                    }
+                },
+                "r9g_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.48xlarge"
+                    }
+                },
+                "r9g_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9g.metal-48xl"
+                    }
+                },
+                "r9gd_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.medium"
+                    }
+                },
+                "r9gd_large": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.large"
+                    }
+                },
+                "r9gd_xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.xlarge"
+                    }
+                },
+                "r9gd_2xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.2xlarge"
+                    }
+                },
+                "r9gd_4xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.4xlarge"
+                    }
+                },
+                "r9gd_8xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.8xlarge"
+                    }
+                },
+                "r9gd_12xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.12xlarge"
+                    }
+                },
+                "r9gd_16xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.16xlarge"
+                    }
+                },
+                "r9gd_24xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.24xlarge"
+                    }
+                },
+                "r9gd_48xlarge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.48xlarge"
+                    }
+                },
+                "r9gd_metal_48xl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "r9gd.metal-48xl"
+                    }
+                },
+                "m9g_medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "m9g.medium"
+                    }
                 }
             }
         },
@@ -110794,6 +110961,14 @@
                         "smithy.api#documentation": "<p>The maximum number of the ENA queues for each interface.</p>",
                         "smithy.api#xmlName": "maximumEnaQueueCountPerInterface"
                     }
+                },
+                "InterfaceTypes": {
+                    "target": "com.amazonaws.ec2#NetworkCardInterfaceTypeList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InterfaceTypeSet",
+                        "smithy.api#documentation": "<p>The supported interface types for the network card.</p>",
+                        "smithy.api#xmlName": "interfaceTypeSet"
+                    }
                 }
             },
             "traits": {
@@ -110804,6 +110979,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#NetworkCardInfo",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkCardInterfaceType": {
+            "type": "enum",
+            "members": {
+                "interface": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "interface"
+                    }
+                },
+                "efa": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "efa"
+                    }
+                },
+                "efa_only": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "efa-only"
+                    }
+                },
+                "secondary": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "secondary"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkCardInterfaceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#NetworkCardInterfaceType",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -113688,6 +113901,12 @@
                     "traits": {
                         "smithy.api#enumValue": "vpc-endpoint-charges"
                     }
+                },
+                "ResourceGatewayCharges": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-gateway-charges"
+                    }
                 }
             }
         },
@@ -113707,6 +113926,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "vpc-endpoint-account"
+                    }
+                },
+                "ResourceGatewayAccount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-gateway-account"
                     }
                 },
                 "VpcEndpointServiceAccount": {
@@ -139845,7 +140070,7 @@
                 "target": "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Validates whether the specified security groups can be associated with a single\n            network interface. The operation checks Amazon Virtual Private Cloud (Amazon VPC)\n            quotas for inbound or outbound rules per security group and security groups per\n            network interface. Only authorized AWS services can call this operation.</p>\n         <p>For more information about security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups\">Amazon\n            VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Validates whether the specified security groups can be associated with a single\n            network interface. The operation checks Amazon Virtual Private Cloud (Amazon VPC)\n            quotas. It checks inbound or outbound rules per security group and security groups\n            per network interface. Only authorized AWS services can call this operation.</p>\n         <p>For more information about security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups\">Amazon\n            VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ValidateSecurityGroupQuotasForInterfaceRequest": {
@@ -139878,7 +140103,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Valid",
-                        "smithy.api#documentation": "<p>The operation returns <code>true</code> if the specified security groups can be\n            associated with a single network interface without exceeding the quotas. It returns\n            an error if associating the security groups would exceed a quota.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the specified security groups can be associated with a single\n            network interface without exceeding the quotas. If associating the security groups\n            would exceed a quota, the operation returns an error.</p>",
                         "smithy.api#xmlName": "valid"
                     }
                 }
@@ -141733,6 +141958,22 @@
                         "aws.protocols#ec2QueryName": "VolumeInitializationRate",
                         "smithy.api#documentation": "<p>The Amazon EBS Provisioned Rate for Volume Initialization (volume initialization rate) specified for the volume during creation, \n      in MiB/s. If no volume initialization rate was specified, the value is <code>null</code>.</p>",
                         "smithy.api#xmlName": "volumeInitializationRate"
+                    }
+                },
+                "VolumeArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VolumeArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the volume.</p>",
+                        "smithy.api#xmlName": "volumeArn"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the volume.</p>",
+                        "smithy.api#xmlName": "ownerId"
                     }
                 },
                 "VolumeId": {
@@ -144308,6 +144549,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ServiceNetwork"
+                    }
+                },
+                "Tunnel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tunnel"
                     }
                 }
             }

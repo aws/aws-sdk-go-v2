@@ -1,3 +1,12 @@
+# v1.79.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.78.0 (2026-09-08)
+
+* **Feature**: Adds support for Amazon S3 Object Lock variable retention.  Existing S3 APIs that support S3 Object Lock parameters now support two new parameters EventHold and EventHoldDuration at the object level, and DefaultEventHoldDuration at the bucket level.
+
 # v1.77.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

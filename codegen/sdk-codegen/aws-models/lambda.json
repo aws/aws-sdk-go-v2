@@ -5383,7 +5383,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.lambda#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds, and the maximum allowed value is 900 seconds. For functions using Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -13396,21 +13396,6 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
-                        "input": {
-                            "FunctionName": "my-function",
-                            "Qualifier": "BLUE"
-                        },
-                        "output": {
-                            "AllocatedProvisionedConcurrentExecutions": 100,
-                            "AvailableProvisionedConcurrentExecutions": 100,
-                            "LastModified": "2019-12-31T20:28:49+0000",
-                            "RequestedProvisionedConcurrentExecutions": 100,
-                            "Status": "READY"
-                        },
-                        "title": "To view a provisioned concurrency configuration"
-                    },
-                    {
                         "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
@@ -13424,6 +13409,21 @@
                             "Status": "READY"
                         },
                         "title": "To get a provisioned concurrency configuration"
+                    },
+                    {
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "AllocatedProvisionedConcurrentExecutions": 100,
+                            "AvailableProvisionedConcurrentExecutions": 100,
+                            "LastModified": "2019-12-31T20:28:49+0000",
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "Status": "READY"
+                        },
+                        "title": "To view a provisioned concurrency configuration"
                     }
                 ],
                 "smithy.api#http": {
@@ -26732,7 +26732,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.lambda#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds, and the maximum allowed value is 900 seconds. For functions using Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]

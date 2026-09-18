@@ -4,6 +4,8 @@ package bcmdashboards
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdashboards/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteScheduledReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteScheduledReportRequest_arn, *v.Arn)
+	}
+}
+
 type DeleteScheduledReportOutput struct {
 
 	// The ARN of the scheduled report that was deleted.
@@ -46,13 +60,32 @@ type DeleteScheduledReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduledReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduledReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduledReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteScheduledReportResponse_arn, *v.Arn)
+	}
+}
+func (v *DeleteScheduledReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScheduledReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteScheduledReportResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteScheduledReportResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScheduledReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteScheduledReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledReport, schemas.DeleteScheduledReportRequest, schemas.DeleteScheduledReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteScheduledReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduledReport, schemas.DeleteScheduledReportRequest, schemas.DeleteScheduledReportResponse), output: &DeleteScheduledReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

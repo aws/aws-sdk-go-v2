@@ -337,6 +337,11 @@ var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetResourcePolicy",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListAvailablePhoneNumbers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbers",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListNotifyCountries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ListNotifyCountries",
@@ -636,6 +641,12 @@ var _AttachmentUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "AttachmentUrl",
 }, smithy.ShapeTypeString, 0)
+
+var _AvailablePhoneNumberList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "AvailablePhoneNumberList",
+}, smithy.ShapeTypeList, 1)
+var _AvailablePhoneNumberList_member *smithy.Schema
 
 var _CarrierLookupInputPhoneNumberType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1094,6 +1105,11 @@ var _LanguageCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "LanguageCode",
 }, smithy.ShapeTypeString, 0)
 
+var _ListAvailablePhoneNumbersMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbersMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListProtectConfigurationRuleSetNumberOverrideFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ListProtectConfigurationRuleSetNumberOverrideFilter",
@@ -1104,6 +1120,14 @@ var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "LogGroupArn",
 }, smithy.ShapeTypeString, 0)
+
+var _LongMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "LongMap",
+}, smithy.ShapeTypeMap, 2)
+var _LongMap_key *smithy.Schema
+
+var _LongMap_value *smithy.Schema
 
 var _MaxPrice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1156,6 +1180,14 @@ var _MessageTypeList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MessageTypeList",
 }, smithy.ShapeTypeList, 1)
 var _MessageTypeList_member *smithy.Schema
+
+var MessagingLimits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "MessagingLimits",
+}, smithy.ShapeTypeStructure, 2)
+var MessagingLimits_RateLimits *smithy.Schema
+
+var MessagingLimits_DailyMessageCaps *smithy.Schema
 
 var _MNCType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1422,6 +1454,31 @@ var _NumberCapabilityList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _NumberCapabilityList_member *smithy.Schema
 
+var _NumberFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberFilterList",
+}, smithy.ShapeTypeList, 1)
+var _NumberFilterList_member *smithy.Schema
+
+var _NumberFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var NumberPreferenceItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberPreferenceItem",
+}, smithy.ShapeTypeStructure, 2)
+var NumberPreferenceItem_PreferenceType *smithy.Schema
+
+var NumberPreferenceItem_Filter *smithy.Schema
+
+var _NumberPreferenceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "NumberPreferenceList",
+}, smithy.ShapeTypeList, 1)
+var _NumberPreferenceList_member *smithy.Schema
+
 var _NumberStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "NumberStatus",
@@ -1568,7 +1625,7 @@ var _PhoneNumberIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var PhoneNumberInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "PhoneNumberInformation",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var PhoneNumberInformation_PhoneNumberArn *smithy.Schema
 
 var PhoneNumberInformation_PhoneNumberId *smithy.Schema
@@ -1604,6 +1661,8 @@ var PhoneNumberInformation_DeletionProtectionEnabled *smithy.Schema
 var PhoneNumberInformation_PoolId *smithy.Schema
 
 var PhoneNumberInformation_RegistrationId *smithy.Schema
+
+var PhoneNumberInformation_MessagingLimits *smithy.Schema
 
 var PhoneNumberInformation_CreatedTimestamp *smithy.Schema
 
@@ -1715,6 +1774,17 @@ var _PoolStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "PoolStatus",
 }, smithy.ShapeTypeString, 0)
+
+var _PreferenceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "PreferenceType",
+}, smithy.ShapeTypeString, 0)
+
+var _PreferenceTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "PreferenceTypeList",
+}, smithy.ShapeTypeList, 1)
+var _PreferenceTypeList_member *smithy.Schema
 
 var _ProtectConfigurationArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -1866,7 +1936,7 @@ var _RcsAgentIdOrArn = smithy.NewSchema(smithy.ShapeID{
 var RcsAgentInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RcsAgentInformation",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var RcsAgentInformation_RcsAgentArn *smithy.Schema
 
 var RcsAgentInformation_RcsAgentId *smithy.Schema
@@ -1898,6 +1968,8 @@ var RcsAgentInformation_TwoWayMediaS3Role *smithy.Schema
 var RcsAgentInformation_TwoWayRcsEventsEnabled *smithy.Schema
 
 var RcsAgentInformation_TestingAgent *smithy.Schema
+
+var RcsAgentInformation_MessagingLimits *smithy.Schema
 
 var _RcsAgentInformationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -2662,6 +2734,11 @@ var _ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourceType",
 }, smithy.ShapeTypeString, 0)
 
+var _SearchableNumberType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "SearchableNumberType",
+}, smithy.ShapeTypeString, 0)
+
 var _SectionPath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SectionPath",
@@ -2745,7 +2822,7 @@ var _SenderIdFilterName = smithy.NewSchema(smithy.ShapeID{
 var SenderIdInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "SenderIdInformation",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var SenderIdInformation_SenderIdArn *smithy.Schema
 
 var SenderIdInformation_SenderId *smithy.Schema
@@ -2761,6 +2838,8 @@ var SenderIdInformation_DeletionProtectionEnabled *smithy.Schema
 var SenderIdInformation_Registered *smithy.Schema
 
 var SenderIdInformation_RegistrationId *smithy.Schema
+
+var SenderIdInformation_MessagingLimits *smithy.Schema
 
 var _SenderIdInformationList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -4666,6 +4745,32 @@ var GetResourcePolicyResult_Policy *smithy.Schema
 
 var GetResourcePolicyResult_CreatedTimestamp *smithy.Schema
 
+var ListAvailablePhoneNumbersRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbersRequest",
+}, smithy.ShapeTypeStructure, 7)
+var ListAvailablePhoneNumbersRequest_IsoCountryCode *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NumberCapabilities *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NumberType *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_RegistrationId *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NumberPreference *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_NextToken *smithy.Schema
+
+var ListAvailablePhoneNumbersRequest_MaxResults *smithy.Schema
+
+var ListAvailablePhoneNumbersResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ListAvailablePhoneNumbersResult",
+}, smithy.ShapeTypeStructure, 2)
+var ListAvailablePhoneNumbersResult_AvailablePhoneNumbers *smithy.Schema
+
+var ListAvailablePhoneNumbersResult_NextToken *smithy.Schema
+
 var ListNotifyCountriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ListNotifyCountriesRequest",
@@ -4993,7 +5098,7 @@ var ReleaseSenderIdResult_RegistrationId *smithy.Schema
 var RequestPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RequestPhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var RequestPhoneNumberRequest_IsoCountryCode *smithy.Schema
 
 var RequestPhoneNumberRequest_MessageType *smithy.Schema
@@ -5007,6 +5112,8 @@ var RequestPhoneNumberRequest_OptOutListName *smithy.Schema
 var RequestPhoneNumberRequest_PoolId *smithy.Schema
 
 var RequestPhoneNumberRequest_RegistrationId *smithy.Schema
+
+var RequestPhoneNumberRequest_NumberPreference *smithy.Schema
 
 var RequestPhoneNumberRequest_InternationalSendingEnabled *smithy.Schema
 
@@ -5859,6 +5966,8 @@ func init() {
 
 	_AccountLimitList_member = _AccountLimitList.AddMember("member", AccountLimit)
 
+	_AvailablePhoneNumberList_member = _AvailablePhoneNumberList.AddMember("member", _PhoneNumber)
+
 	CarrierStatusInformation_CarrierName = CarrierStatusInformation.AddMember("CarrierName", smithyprelude.String)
 
 	CarrierStatusInformation_Status = CarrierStatusInformation.AddMember("Status", _CarrierStatus)
@@ -6017,9 +6126,17 @@ func init() {
 
 	_ListProtectConfigurationRuleSetNumberOverrideFilter_member = _ListProtectConfigurationRuleSetNumberOverrideFilter.AddMember("member", ProtectConfigurationRuleSetNumberOverrideFilterItem)
 
+	_LongMap_key = _LongMap.AddMember("key", smithyprelude.String)
+
+	_LongMap_value = _LongMap.AddMember("value", smithyprelude.PrimitiveLong)
+
 	_MediaUrlList_member = _MediaUrlList.AddMember("member", _MediaUrlValue)
 
 	_MessageTypeList_member = _MessageTypeList.AddMember("member", _MessageType)
+
+	MessagingLimits_RateLimits = MessagingLimits.AddMember("RateLimits", _LongMap)
+
+	MessagingLimits_DailyMessageCaps = MessagingLimits.AddMember("DailyMessageCaps", _LongMap)
 
 	Tag_Key = Tag.AddMember("Key", _TagKey)
 
@@ -6149,6 +6266,16 @@ func init() {
 
 	_NotifyTemplateInformationList_member = _NotifyTemplateInformationList.AddMember("member", NotifyTemplateInformation)
 
+	_NumberFilterList_member = _NumberFilterList.AddMember("member", _NumberFilterValue)
+
+	_PreferenceTypeList_member = _PreferenceTypeList.AddMember("member", _PreferenceType)
+
+	NumberPreferenceItem_PreferenceType = NumberPreferenceItem.AddMember("PreferenceType", _PreferenceTypeList)
+
+	NumberPreferenceItem_Filter = NumberPreferenceItem.AddMember("Filter", _NumberFilterList)
+
+	_NumberPreferenceList_member = _NumberPreferenceList.AddMember("member", NumberPreferenceItem)
+
 	OptedOutFilter_Name = OptedOutFilter.AddMember("Name", _OptedOutFilterName)
 
 	OptedOutFilter_Values = OptedOutFilter.AddMember("Values", _FilterValueList)
@@ -6230,6 +6357,8 @@ func init() {
 	PhoneNumberInformation_PoolId = PhoneNumberInformation.AddMember("PoolId", smithyprelude.String)
 
 	PhoneNumberInformation_RegistrationId = PhoneNumberInformation.AddMember("RegistrationId", smithyprelude.String)
+
+	PhoneNumberInformation_MessagingLimits = PhoneNumberInformation.AddMember("MessagingLimits", MessagingLimits)
 
 	PhoneNumberInformation_CreatedTimestamp = PhoneNumberInformation.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
 
@@ -6360,6 +6489,8 @@ func init() {
 	RcsAgentInformation_TwoWayRcsEventsEnabled = RcsAgentInformation.AddMember("TwoWayRcsEventsEnabled", _RcsEventTypeList)
 
 	RcsAgentInformation_TestingAgent = RcsAgentInformation.AddMember("TestingAgent", TestingAgentInformation)
+
+	RcsAgentInformation_MessagingLimits = RcsAgentInformation.AddMember("MessagingLimits", MessagingLimits)
 
 	_RcsAgentInformationList_member = _RcsAgentInformationList.AddMember("member", RcsAgentInformation)
 
@@ -6770,6 +6901,8 @@ func init() {
 	SenderIdInformation_Registered = SenderIdInformation.AddMember("Registered", smithyprelude.PrimitiveBoolean)
 
 	SenderIdInformation_RegistrationId = SenderIdInformation.AddMember("RegistrationId", smithyprelude.String)
+
+	SenderIdInformation_MessagingLimits = SenderIdInformation.AddMember("MessagingLimits", MessagingLimits)
 
 	_SenderIdInformationList_member = _SenderIdInformationList.AddMember("member", SenderIdInformation)
 
@@ -7809,6 +7942,24 @@ func init() {
 
 	GetResourcePolicyResult_CreatedTimestamp = GetResourcePolicyResult.AddMember("CreatedTimestamp", smithyprelude.Timestamp)
 
+	ListAvailablePhoneNumbersRequest_IsoCountryCode = ListAvailablePhoneNumbersRequest.AddMember("IsoCountryCode", _IsoCountryCode)
+
+	ListAvailablePhoneNumbersRequest_NumberCapabilities = ListAvailablePhoneNumbersRequest.AddMember("NumberCapabilities", _NumberCapabilityList)
+
+	ListAvailablePhoneNumbersRequest_NumberType = ListAvailablePhoneNumbersRequest.AddMember("NumberType", _SearchableNumberType)
+
+	ListAvailablePhoneNumbersRequest_RegistrationId = ListAvailablePhoneNumbersRequest.AddMember("RegistrationId", _RegistrationIdOrArn)
+
+	ListAvailablePhoneNumbersRequest_NumberPreference = ListAvailablePhoneNumbersRequest.AddMember("NumberPreference", _NumberPreferenceList)
+
+	ListAvailablePhoneNumbersRequest_NextToken = ListAvailablePhoneNumbersRequest.AddMember("NextToken", _NextToken)
+
+	ListAvailablePhoneNumbersRequest_MaxResults = ListAvailablePhoneNumbersRequest.AddMember("MaxResults", _ListAvailablePhoneNumbersMaxResults)
+
+	ListAvailablePhoneNumbersResult_AvailablePhoneNumbers = ListAvailablePhoneNumbersResult.AddMember("AvailablePhoneNumbers", _AvailablePhoneNumberList)
+
+	ListAvailablePhoneNumbersResult_NextToken = ListAvailablePhoneNumbersResult.AddMember("NextToken", _NextToken)
+
 	ListNotifyCountriesRequest_Channels = ListNotifyCountriesRequest.AddMember("Channels", _NotifyEnabledChannelsList)
 
 	ListNotifyCountriesRequest_UseCases = ListNotifyCountriesRequest.AddMember("UseCases", _NotifyUseCaseList)
@@ -8042,6 +8193,8 @@ func init() {
 	RequestPhoneNumberRequest_PoolId = RequestPhoneNumberRequest.AddMember("PoolId", _PoolIdOrArn)
 
 	RequestPhoneNumberRequest_RegistrationId = RequestPhoneNumberRequest.AddMember("RegistrationId", _RegistrationIdOrArn)
+
+	RequestPhoneNumberRequest_NumberPreference = RequestPhoneNumberRequest.AddMember("NumberPreference", _NumberPreferenceList)
 
 	RequestPhoneNumberRequest_InternationalSendingEnabled = RequestPhoneNumberRequest.AddMember("InternationalSendingEnabled", smithyprelude.Boolean)
 

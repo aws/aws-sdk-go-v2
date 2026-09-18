@@ -61,16 +61,17 @@ type BatchStatus string
 
 // Enum values for BatchStatus
 const (
-	BatchStatusCreating     BatchStatus = "CREATING"
-	BatchStatusPending      BatchStatus = "PENDING"
-	BatchStatusSubmitting   BatchStatus = "SUBMITTING"
-	BatchStatusInprogress   BatchStatus = "INPROGRESS"
-	BatchStatusStopping     BatchStatus = "STOPPING"
-	BatchStatusCancelled    BatchStatus = "CANCELLED"
-	BatchStatusFailed       BatchStatus = "FAILED"
-	BatchStatusProcessed    BatchStatus = "PROCESSED"
-	BatchStatusRunsDeleting BatchStatus = "RUNS_DELETING"
-	BatchStatusRunsDeleted  BatchStatus = "RUNS_DELETED"
+	BatchStatusCreating         BatchStatus = "CREATING"
+	BatchStatusPending          BatchStatus = "PENDING"
+	BatchStatusSubmitting       BatchStatus = "SUBMITTING"
+	BatchStatusInprogress       BatchStatus = "INPROGRESS"
+	BatchStatusStopping         BatchStatus = "STOPPING"
+	BatchStatusCancelled        BatchStatus = "CANCELLED"
+	BatchStatusFailed           BatchStatus = "FAILED"
+	BatchStatusProcessed        BatchStatus = "PROCESSED"
+	BatchStatusRunsDeleting     BatchStatus = "RUNS_DELETING"
+	BatchStatusRunsDeleteFailed BatchStatus = "RUNS_DELETE_FAILED"
+	BatchStatusRunsDeleted      BatchStatus = "RUNS_DELETED"
 )
 
 // Values returns all known values for BatchStatus. Note that this can be expanded
@@ -88,6 +89,7 @@ func (BatchStatus) Values() []BatchStatus {
 		"FAILED",
 		"PROCESSED",
 		"RUNS_DELETING",
+		"RUNS_DELETE_FAILED",
 		"RUNS_DELETED",
 	}
 }

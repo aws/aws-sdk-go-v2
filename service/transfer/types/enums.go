@@ -598,6 +598,25 @@ func (Protocol) Values() []Protocol {
 	}
 }
 
+type ProxyMode string
+
+// Enum values for ProxyMode
+const (
+	ProxyModeNone                    ProxyMode = "NONE"
+	ProxyModeProxyProtocolV2Enforced ProxyMode = "PROXY_PROTOCOL_V2_ENFORCED"
+)
+
+// Values returns all known values for ProxyMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProxyMode) Values() []ProxyMode {
+	return []ProxyMode{
+		"NONE",
+		"PROXY_PROTOCOL_V2_ENFORCED",
+	}
+}
+
 type SecurityPolicyProtocol string
 
 // Enum values for SecurityPolicyProtocol

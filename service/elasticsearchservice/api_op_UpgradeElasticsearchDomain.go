@@ -4,7 +4,9 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type UpgradeElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeElasticsearchDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.PerformCheckOnly != nil {
+		s.WriteBool(schemas.UpgradeElasticsearchDomainRequest_PerformCheckOnly, *v.PerformCheckOnly)
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainRequest_TargetVersion, *v.TargetVersion)
+	}
+}
+
 // Container for response returned by UpgradeElasticsearchDomain operation.
 type UpgradeElasticsearchDomainOutput struct {
 
@@ -73,13 +93,52 @@ type UpgradeElasticsearchDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeElasticsearchDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeElasticsearchDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeProgressDetails != nil {
+		s.WriteStruct(schemas.UpgradeElasticsearchDomainResponse_ChangeProgressDetails)
+		v.ChangeProgressDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainResponse_DomainName, *v.DomainName)
+	}
+	if v.PerformCheckOnly != nil {
+		s.WriteBool(schemas.UpgradeElasticsearchDomainResponse_PerformCheckOnly, *v.PerformCheckOnly)
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.UpgradeElasticsearchDomainResponse_TargetVersion, *v.TargetVersion)
+	}
+}
+func (v *UpgradeElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpgradeElasticsearchDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpgradeElasticsearchDomainResponse_ChangeProgressDetails:
+			v.ChangeProgressDetails = &types.ChangeProgressDetails{}
+			return v.ChangeProgressDetails.Deserialize(d)
+		case schemas.UpgradeElasticsearchDomainResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.UpgradeElasticsearchDomainResponse_DomainName, v.DomainName)
+		case schemas.UpgradeElasticsearchDomainResponse_PerformCheckOnly:
+			v.PerformCheckOnly = new(bool)
+			return d.ReadBool(schemas.UpgradeElasticsearchDomainResponse_PerformCheckOnly, v.PerformCheckOnly)
+		case schemas.UpgradeElasticsearchDomainResponse_TargetVersion:
+			v.TargetVersion = new(string)
+			return d.ReadString(schemas.UpgradeElasticsearchDomainResponse_TargetVersion, v.TargetVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradeElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeElasticsearchDomain, schemas.UpgradeElasticsearchDomainRequest, schemas.UpgradeElasticsearchDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpgradeElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeElasticsearchDomain, schemas.UpgradeElasticsearchDomainRequest, schemas.UpgradeElasticsearchDomainResponse), output: &UpgradeElasticsearchDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

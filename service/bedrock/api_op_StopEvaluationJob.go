@@ -4,6 +4,8 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopEvaluationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEvaluationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEvaluationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEvaluationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.StopEvaluationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
+}
+
 type StopEvaluationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type StopEvaluationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEvaluationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEvaluationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopEvaluationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEvaluationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEvaluationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEvaluationJob, schemas.StopEvaluationJobRequest, schemas.StopEvaluationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEvaluationJob, schemas.StopEvaluationJobRequest, schemas.StopEvaluationJobResponse), output: &StopEvaluationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

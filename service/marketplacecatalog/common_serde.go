@@ -766,6 +766,17 @@ func serializeResaleAuthorizationEntityIdFilterValueList(s smithy.ShapeSerialize
 	s.CloseList()
 }
 
+func serializeResaleAuthorizationIssuerAccountIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeResaleAuthorizationManufacturerAccountIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -855,6 +866,17 @@ func serializeResaleAuthorizationResellerLegalNameFilterValueList(s smithy.Shape
 }
 
 func serializeResaleAuthorizationResellerRoleFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResaleAuthorizationResellerRoleString) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeResaleAuthorizationSourceAuthorizationFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
 	}
@@ -1584,6 +1606,20 @@ func deserializeResaleAuthorizationEntityIdFilterValueList(d smithy.ShapeDeseria
 	})
 }
 
+func deserializeResaleAuthorizationIssuerAccountIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeResaleAuthorizationManufacturerAccountIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1706,6 +1742,20 @@ func deserializeResaleAuthorizationResellerRoleFilterValueList(d smithy.ShapeDes
 		}
 
 		*v = append(*v, types.ResaleAuthorizationResellerRoleString(vv))
+		return nil
+	})
+}
+
+func deserializeResaleAuthorizationSourceAuthorizationFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

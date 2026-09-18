@@ -110,6 +110,26 @@ func (m *validateOpDeleteFeed) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFeedPolicy struct {
+}
+
+func (*validateOpDeleteFeedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFeedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFeedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateFeed struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpGetFeed) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFeedPolicy struct {
+}
+
+func (*validateOpGetFeedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFeedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFeedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetFixture struct {
 }
 
@@ -225,6 +265,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutFeedPolicy struct {
+}
+
+func (*validateOpPutFeedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFeedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFeedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFeedPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +410,10 @@ func addOpDeleteFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFeed{}, middleware.After)
 }
 
+func addOpDeleteFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFeedPolicy{}, middleware.After)
+}
+
 func addOpDisassociateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFeed{}, middleware.After)
 }
@@ -366,12 +430,20 @@ func addOpGetFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFeed{}, middleware.After)
 }
 
+func addOpGetFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFeedPolicy{}, middleware.After)
+}
+
 func addOpGetFixtureValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFixture{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFeedPolicy{}, middleware.After)
 }
 
 func addOpSearchFixturesValidationMiddleware(stack *middleware.Stack) error {
@@ -759,6 +831,21 @@ func validateOpDeleteFeedInput(v *DeleteFeedInput) error {
 	}
 }
 
+func validateOpDeleteFeedPolicyInput(v *DeleteFeedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFeedPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateFeedInput(v *DisassociateFeedInput) error {
 	if v == nil {
 		return nil
@@ -822,6 +909,21 @@ func validateOpGetFeedInput(v *GetFeedInput) error {
 	}
 }
 
+func validateOpGetFeedPolicyInput(v *GetFeedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFeedPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFixtureInput(v *GetFixtureInput) error {
 	if v == nil {
 		return nil
@@ -844,6 +946,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFeedPolicyInput(v *PutFeedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFeedPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

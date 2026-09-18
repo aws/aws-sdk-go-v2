@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,66 @@ type DeleteAppVersionResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppVersionResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppVersionResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppVersionResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_appArn, *v.AppArn)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_awsRegion, *v.AwsRegion)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_clientToken, *v.ClientToken)
+	}
+	if v.LogicalResourceId != nil {
+		s.WriteStruct(schemas.DeleteAppVersionResourceRequest_logicalResourceId)
+		v.LogicalResourceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PhysicalResourceId != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_physicalResourceId, *v.PhysicalResourceId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_resourceName, *v.ResourceName)
+	}
+}
+func (v *DeleteAppVersionResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppVersionResourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppVersionResourceRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_appArn, v.AppArn)
+		case schemas.DeleteAppVersionResourceRequest_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_awsAccountId, v.AwsAccountId)
+		case schemas.DeleteAppVersionResourceRequest_awsRegion:
+			v.AwsRegion = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_awsRegion, v.AwsRegion)
+		case schemas.DeleteAppVersionResourceRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAppVersionResourceRequest_logicalResourceId:
+			v.LogicalResourceId = &types.LogicalResourceId{}
+			return v.LogicalResourceId.Deserialize(d)
+		case schemas.DeleteAppVersionResourceRequest_physicalResourceId:
+			v.PhysicalResourceId = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_physicalResourceId, v.PhysicalResourceId)
+		case schemas.DeleteAppVersionResourceRequest_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_resourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
+
 type DeleteAppVersionResourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -97,13 +159,46 @@ type DeleteAppVersionResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppVersionResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppVersionResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppVersionResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceResponse_appVersion, *v.AppVersion)
+	}
+	if v.PhysicalResource != nil {
+		s.WriteStruct(schemas.DeleteAppVersionResourceResponse_physicalResource)
+		v.PhysicalResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAppVersionResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppVersionResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppVersionResourceResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceResponse_appArn, v.AppArn)
+		case schemas.DeleteAppVersionResourceResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceResponse_appVersion, v.AppVersion)
+		case schemas.DeleteAppVersionResourceResponse_physicalResource:
+			v.PhysicalResource = &types.PhysicalResource{}
+			return v.PhysicalResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppVersionResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppVersionResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppVersionResource, schemas.DeleteAppVersionResourceRequest, schemas.DeleteAppVersionResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppVersionResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppVersionResource, schemas.DeleteAppVersionResourceRequest, schemas.DeleteAppVersionResourceResponse), output: &DeleteAppVersionResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -953,6 +953,45 @@ func (v *KinesisFirehoseDestination) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// The messaging limits that apply to an origination identity, such as a phone
+// number, sender ID, or RCS agent. Includes the per-capability send rates and, for
+// supported origination identities, advisory per-provider daily message caps.
+type MessagingLimits struct {
+
+	// The advisory maximum number of messages that can be sent per day, keyed by
+	// provider (for example, T-MOBILE ). Applies to 10DLC phone numbers and is omitted
+	// when no daily cap applies.
+	DailyMessageCaps map[string]int64
+
+	// The maximum send rate for each supported capability, in messages per second.
+	// The map is keyed by capability, such as SMS , MMS , VOICE , or RCS .
+	RateLimits map[string]int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *MessagingLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessagingLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessagingLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLongMap(s, schemas.MessagingLimits_DailyMessageCaps, v.DailyMessageCaps)
+	serializeLongMap(s, schemas.MessagingLimits_RateLimits, v.RateLimits)
+}
+func (v *MessagingLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessagingLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessagingLimits_DailyMessageCaps:
+			return deserializeLongMap(d, schemas.MessagingLimits_DailyMessageCaps, &v.DailyMessageCaps)
+		case schemas.MessagingLimits_RateLimits:
+			return deserializeLongMap(d, schemas.MessagingLimits_RateLimits, &v.RateLimits)
+		}
+		return nil
+	})
+}
+
 // The information for notify configurations that meet a specified criteria.
 type NotifyConfigurationFilter struct {
 
@@ -1437,6 +1476,53 @@ func (v *NotifyTemplateInformation) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// A single number preference — specifies a pattern type and filter value.
+type NumberPreferenceItem struct {
+
+	// The digit pattern values to match against available phone numbers, using the
+	// specified preference type.
+	//
+	// This member is required.
+	Filter []string
+
+	// The type of match to apply to the filter values.
+	//
+	//   - StartsWith : Returns numbers that begin with the filter value.
+	//
+	//   - EndsWith : Returns numbers that end with the filter value.
+	//
+	//   - Contains : Returns numbers that contain the filter value.
+	//
+	//   - ExactMatch : Returns the number that exactly matches the filter value.
+	//
+	// This member is required.
+	PreferenceType []PreferenceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *NumberPreferenceItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NumberPreferenceItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NumberPreferenceItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNumberFilterList(s, schemas.NumberPreferenceItem_Filter, v.Filter)
+	serializePreferenceTypeList(s, schemas.NumberPreferenceItem_PreferenceType, v.PreferenceType)
+}
+func (v *NumberPreferenceItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NumberPreferenceItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NumberPreferenceItem_Filter:
+			return deserializeNumberFilterList(d, schemas.NumberPreferenceItem_Filter, &v.Filter)
+		case schemas.NumberPreferenceItem_PreferenceType:
+			return deserializePreferenceTypeList(d, schemas.NumberPreferenceItem_PreferenceType, &v.PreferenceType)
+		}
+		return nil
+	})
+}
+
 // The information for opted out numbers that meet a specified criteria.
 type OptedOutFilter struct {
 
@@ -1799,6 +1885,10 @@ type PhoneNumberInformation struct {
 	// When set to true the international sending of phone number is Enabled.
 	InternationalSendingEnabled bool
 
+	// The messaging limits that apply to the phone number, including the
+	// per-capability send rates and any advisory per-provider daily message caps.
+	MessagingLimits *MessagingLimits
+
 	// The unique identifier for the phone number.
 	PhoneNumberId *string
 
@@ -1837,6 +1927,11 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.MessageType != "" {
 		s.WriteString(schemas.PhoneNumberInformation_MessageType, string(v.MessageType))
+	}
+	if v.MessagingLimits != nil {
+		s.WriteStruct(schemas.PhoneNumberInformation_MessagingLimits)
+		v.MessagingLimits.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.PhoneNumberInformation_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
@@ -1895,6 +1990,9 @@ func (v *PhoneNumberInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.MessageType = MessageType(ev)
 			return nil
+		case schemas.PhoneNumberInformation_MessagingLimits:
+			v.MessagingLimits = &MessagingLimits{}
+			return v.MessagingLimits.Deserialize(d)
 		case schemas.PhoneNumberInformation_MonthlyLeasingPrice:
 			v.MonthlyLeasingPrice = new(string)
 			return d.ReadString(schemas.PhoneNumberInformation_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
@@ -2575,6 +2673,10 @@ type RcsAgentInformation struct {
 	// This member is required.
 	TwoWayEnabled bool
 
+	// The messaging limits that apply to the RCS agent, including the per-capability
+	// send rates.
+	MessagingLimits *MessagingLimits
+
 	// The name of the OptOutList associated with the RCS agent.
 	OptOutListName *string
 
@@ -2617,6 +2719,11 @@ func (v *RcsAgentInformation) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteTime(schemas.RcsAgentInformation_CreatedTimestamp, *v.CreatedTimestamp)
 	}
 	s.WriteBool(schemas.RcsAgentInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.MessagingLimits != nil {
+		s.WriteStruct(schemas.RcsAgentInformation_MessagingLimits)
+		v.MessagingLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.RcsAgentInformation_OptOutListName, *v.OptOutListName)
 	}
@@ -2664,6 +2771,9 @@ func (v *RcsAgentInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadTime(schemas.RcsAgentInformation_CreatedTimestamp, v.CreatedTimestamp)
 		case schemas.RcsAgentInformation_DeletionProtectionEnabled:
 			return d.ReadBool(schemas.RcsAgentInformation_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.RcsAgentInformation_MessagingLimits:
+			v.MessagingLimits = &MessagingLimits{}
+			return v.MessagingLimits.Deserialize(d)
 		case schemas.RcsAgentInformation_OptOutListName:
 			v.OptOutListName = new(string)
 			return d.ReadString(schemas.RcsAgentInformation_OptOutListName, v.OptOutListName)
@@ -5437,6 +5547,10 @@ type SenderIdInformation struct {
 	// This member is required.
 	SenderIdArn *string
 
+	// The messaging limits that apply to the sender ID, including the per-capability
+	// send rates.
+	MessagingLimits *MessagingLimits
+
 	// The unique identifier for the registration.
 	RegistrationId *string
 
@@ -5455,6 +5569,11 @@ func (v *SenderIdInformation) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.SenderIdInformation_IsoCountryCode, *v.IsoCountryCode)
 	}
 	serializeMessageTypeList(s, schemas.SenderIdInformation_MessageTypes, v.MessageTypes)
+	if v.MessagingLimits != nil {
+		s.WriteStruct(schemas.SenderIdInformation_MessagingLimits)
+		v.MessagingLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.SenderIdInformation_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}
@@ -5479,6 +5598,9 @@ func (v *SenderIdInformation) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.SenderIdInformation_IsoCountryCode, v.IsoCountryCode)
 		case schemas.SenderIdInformation_MessageTypes:
 			return deserializeMessageTypeList(d, schemas.SenderIdInformation_MessageTypes, &v.MessageTypes)
+		case schemas.SenderIdInformation_MessagingLimits:
+			v.MessagingLimits = &MessagingLimits{}
+			return v.MessagingLimits.Deserialize(d)
 		case schemas.SenderIdInformation_MonthlyLeasingPrice:
 			v.MonthlyLeasingPrice = new(string)
 			return d.ReadString(schemas.SenderIdInformation_MonthlyLeasingPrice, v.MonthlyLeasingPrice)

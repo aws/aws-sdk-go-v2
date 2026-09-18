@@ -726,6 +726,9 @@ func awsRestjson1_deserializeOpErrorCreateContainerRecipe(response *smithyhttp.R
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsRestjson1_deserializeErrorDryRunOperationException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
@@ -937,6 +940,9 @@ func awsRestjson1_deserializeOpErrorCreateDistributionConfiguration(response *sm
 
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsRestjson1_deserializeErrorDryRunOperationException(response, errorBody)
 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
@@ -1351,6 +1357,9 @@ func awsRestjson1_deserializeOpErrorCreateImagePipeline(response *smithyhttp.Res
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsRestjson1_deserializeErrorDryRunOperationException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
@@ -1554,6 +1563,9 @@ func awsRestjson1_deserializeOpErrorCreateImageRecipe(response *smithyhttp.Respo
 
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsRestjson1_deserializeErrorDryRunOperationException(response, errorBody)
 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
@@ -1767,6 +1779,9 @@ func awsRestjson1_deserializeOpErrorCreateInfrastructureConfiguration(response *
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsRestjson1_deserializeErrorDryRunOperationException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
@@ -1970,6 +1985,9 @@ func awsRestjson1_deserializeOpErrorCreateLifecyclePolicy(response *smithyhttp.R
 
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("DryRunOperationException", errorCode):
+		return awsRestjson1_deserializeErrorDryRunOperationException(response, errorBody)
 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
@@ -7301,6 +7319,19 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepExecutionOutput(v **GetWor
 				sv.Action = ptr.String(jtv)
 			}
 
+		case "attemptNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepAttemptCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AttemptNumber = ptr.Int32(int32(i64))
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7335,6 +7366,19 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepExecutionOutput(v **GetWor
 					return fmt.Errorf("expected WorkflowStepInputs to be of type string, got %T instead", value)
 				}
 				sv.Inputs = ptr.String(jtv)
+			}
+
+		case "maxAttempts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepAttemptCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAttempts = ptr.Int32(int32(i64))
 			}
 
 		case "message":
@@ -16237,6 +16281,82 @@ func awsRestjson1_deserializeDocumentComponentConfigurationList(v *[]types.Compo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentComponentFailureContext(v **types.ComponentFailureContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComponentFailureContext
+	if *v == nil {
+		sv = &types.ComponentFailureContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Action = ptr.String(jtv)
+			}
+
+		case "componentArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentBuildVersionArn to be of type string, got %T instead", value)
+				}
+				sv.ComponentArn = ptr.String(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyMaxLengthString to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "phaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PhaseName = ptr.String(jtv)
+			}
+
+		case "stepName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StepName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComponentParameter(v **types.ComponentParameter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17881,6 +18001,51 @@ func awsRestjson1_deserializeDocumentDistributionConfigurationSummaryList(v *[]t
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDistributionFailureContext(v **types.DistributionFailureContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DistributionFailureContext
+	if *v == nil {
+		sv = &types.DistributionFailureContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyMaxLengthString to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "regionFailures":
+			if err := awsRestjson1_deserializeDocumentRegionFailureList(&sv.RegionFailures, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDistributionList(v *[]types.Distribution, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18670,6 +18835,92 @@ func awsRestjson1_deserializeDocumentImageAggregation(v **types.ImageAggregation
 		case "severityCounts":
 			if err := awsRestjson1_deserializeDocumentSeverityCounts(&sv.SeverityCounts, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageFailureContext(v **types.ImageFailureContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageFailureContext
+	if *v == nil {
+		sv = &types.ImageFailureContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "componentFailure":
+			if err := awsRestjson1_deserializeDocumentComponentFailureContext(&sv.ComponentFailure, value); err != nil {
+				return err
+			}
+
+		case "distributionFailure":
+			if err := awsRestjson1_deserializeDocumentDistributionFailureContext(&sv.DistributionFailure, value); err != nil {
+				return err
+			}
+
+		case "failedStep":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepName to be of type string, got %T instead", value)
+				}
+				sv.FailedStep = ptr.String(jtv)
+			}
+
+		case "imageStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageStatus to be of type string, got %T instead", value)
+				}
+				sv.ImageStatus = types.ImageStatus(jtv)
+			}
+
+		case "stepExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepExecutionId to be of type string, got %T instead", value)
+				}
+				sv.StepExecutionId = ptr.String(jtv)
+			}
+
+		case "workflowArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowBuildVersionArn to be of type string, got %T instead", value)
+				}
+				sv.WorkflowArn = ptr.String(jtv)
+			}
+
+		case "workflowExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowExecutionId to be of type string, got %T instead", value)
+				}
+				sv.WorkflowExecutionId = ptr.String(jtv)
 			}
 
 		default:
@@ -19800,6 +20051,11 @@ func awsRestjson1_deserializeDocumentImageState(v **types.ImageState, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "failureContext":
+			if err := awsRestjson1_deserializeDocumentImageFailureContext(&sv.FailureContext, value); err != nil {
+				return err
+			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23213,6 +23469,116 @@ func awsRestjson1_deserializeDocumentProductCodeListItem(v **types.ProductCodeLi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRegionFailure(v **types.RegionFailure, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegionFailure
+	if *v == nil {
+		sv = &types.RegionFailure{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyMaxLengthString to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "imageConfigurationStep":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageConfigurationStep to be of type string, got %T instead", value)
+				}
+				sv.ImageConfigurationStep = types.ImageConfigurationStep(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionFailureStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.RegionFailureStatus(jtv)
+			}
+
+		case "targetAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.TargetAccountId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRegionFailureList(v *[]types.RegionFailure, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RegionFailure
+	if *v == nil {
+		cv = []types.RegionFailure{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RegionFailure
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRegionFailure(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRegionList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25366,6 +25732,19 @@ func awsRestjson1_deserializeDocumentWorkflowStepMetadata(v **types.WorkflowStep
 				sv.Action = ptr.String(jtv)
 			}
 
+		case "attemptNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepAttemptCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AttemptNumber = ptr.Int32(int32(i64))
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -25391,6 +25770,19 @@ func awsRestjson1_deserializeDocumentWorkflowStepMetadata(v **types.WorkflowStep
 					return fmt.Errorf("expected WorkflowStepInputs to be of type string, got %T instead", value)
 				}
 				sv.Inputs = ptr.String(jtv)
+			}
+
+		case "maxAttempts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepAttemptCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAttempts = ptr.Int32(int32(i64))
 			}
 
 		case "message":

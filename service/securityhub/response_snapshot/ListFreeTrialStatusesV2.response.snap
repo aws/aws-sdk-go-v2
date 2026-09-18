@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountFreeTrialStatuses":[{"AccountId":"__AccountId__","EvaluatedAt":"2000-01-01T00:00:00Z","FreeTrialStatuses":[{"ExpiresAt":"2000-01-01T00:00:00Z","FeatureType":"SECURITY_HUB_V2","StartedAt":"2000-01-01T00:00:00Z","Status":"ACTIVE"},{"ExpiresAt":"2000-01-01T00:00:00Z","FeatureType":"SECURITY_HUB_V2","StartedAt":"2000-01-01T00:00:00Z","Status":"ACTIVE"}]},{"AccountId":"__AccountId__","EvaluatedAt":"2000-01-01T00:00:00Z","FreeTrialStatuses":[{"ExpiresAt":"2000-01-01T00:00:00Z","FeatureType":"SECURITY_HUB_V2","StartedAt":"2000-01-01T00:00:00Z","Status":"ACTIVE"},{"ExpiresAt":"2000-01-01T00:00:00Z","FeatureType":"SECURITY_HUB_V2","StartedAt":"2000-01-01T00:00:00Z","Status":"ACTIVE"}]}],"NextToken":"__NextToken__"}

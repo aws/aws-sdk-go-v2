@@ -1,3 +1,20 @@
+# v1.12.0 (2026-09-16)
+
+* **Feature**: Next Gen Resilience Hub now supports dependency insights (LLM-based insights about customer's service dependencies) and organization-level policy sharing (provision to share policy with member accounts for an organization)
+
+# v1.11.0 (2026-09-15)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.10.0 (2026-09-10)
+
+* **Feature**: This release adds the ListTestRunSourceEvents and ListTestRunDependencies APIs, which return the alarm state changes during a test run and the dependencies the run blocked.
+
+# v1.9.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2026-09-04)
 
 * **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.

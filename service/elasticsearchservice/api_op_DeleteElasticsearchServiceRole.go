@@ -4,6 +4,8 @@ package elasticsearchservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,22 @@ type DeleteElasticsearchServiceRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteElasticsearchServiceRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteElasticsearchServiceRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteElasticsearchServiceRoleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DeleteElasticsearchServiceRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -39,13 +57,26 @@ type DeleteElasticsearchServiceRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteElasticsearchServiceRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteElasticsearchServiceRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteElasticsearchServiceRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteElasticsearchServiceRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteElasticsearchServiceRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteElasticsearchServiceRole, nil, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteElasticsearchServiceRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteElasticsearchServiceRole, nil, nil), output: &DeleteElasticsearchServiceRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

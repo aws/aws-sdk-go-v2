@@ -419,9 +419,9 @@ type ContainerRegistryMap struct {
 // — run-specific values take precedence when keys overlap.
 type DefaultRunSetting struct {
 
-	// The IAM role ARN that grants HealthOmics permissions to access required AWS
-	// resources such as Amazon S3 and CloudWatch. The role must have the same
-	// permissions required for individual StartRun calls.
+	// The IAM role ARN that grants HealthOmics permissions to access required Amazon
+	// Web Services resources such as Amazon S3 and CloudWatch. The role must have the
+	// same permissions required for individual StartRun calls.
 	//
 	// This member is required.
 	RoleArn *string
@@ -456,8 +456,8 @@ type DefaultRunSetting struct {
 	// default to RESTRICTED.
 	NetworkingMode NetworkingMode
 
-	// The expected AWS account ID of the owner of the output S3 bucket. Can be
-	// overridden per run.
+	// The expected Amazon Web Services account ID of the owner of the output S3
+	// bucket. Can be overridden per run.
 	OutputBucketOwnerId *string
 
 	// The destination S3 URI for workflow outputs. Must begin with s3:// . The roleArn
@@ -480,14 +480,18 @@ type DefaultRunSetting struct {
 	// The ID of the run group to contain all workflow runs in the batch.
 	RunGroupId *string
 
-	// AWS tags to associate with each workflow run. Merged with per-run runTags ;
-	// run-specific values take precedence when keys overlap.
+	// Amazon Web Services tags to associate with each workflow run. Merged with
+	// per-run runTags ; run-specific values take precedence when keys overlap.
 	RunTags map[string]string
 
 	// Optional configuration for enabling scratch ephemeral storage mounted at /tmp.
 	// If not specified, this will default to SHARED. This configuration is applicable
 	// only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
 	ScratchStorageMode ScratchStorageMode
+
+	// Optional inline policy json for scoping down permissions via a session policy
+	// on the IAM role provided in the roleArn parameter.
+	SessionPolicy *string
 
 	// The filesystem size in gibibytes (GiB) provisioned for each workflow run and
 	// shared by all tasks in that run. Defaults to 1200 GiB if not specified.
@@ -496,8 +500,8 @@ type DefaultRunSetting struct {
 	// The storage type for the workflow runs.
 	StorageType StorageType
 
-	// The AWS account ID of the workflow owner, used for cross-account workflow
-	// sharing.
+	// The Amazon Web Services account ID of the workflow owner, used for
+	// cross-account workflow sharing.
 	WorkflowOwnerId *string
 
 	// The type of the originating workflow. Batch runs are not supported with
@@ -951,7 +955,8 @@ type InlineSetting struct {
 	// An optional user-friendly name for this run.
 	Name *string
 
-	// The expected AWS account ID of the owner of the output S3 bucket for this run.
+	// The expected Amazon Web Services account ID of the owner of the output S3
+	// bucket for this run.
 	OutputBucketOwnerId *string
 
 	// Override the destination S3 URI for this run's outputs.
@@ -964,8 +969,8 @@ type InlineSetting struct {
 	// Override the priority for this run.
 	Priority *int32
 
-	// Per-run AWS tags. Merged with defaultRunSetting.runTags ; values in this object
-	// take precedence when keys overlap.
+	// Per-run Amazon Web Services tags. Merged with defaultRunSetting.runTags ; values
+	// in this object take precedence when keys overlap.
 	RunTags map[string]string
 
 	noSmithyDocumentSerde

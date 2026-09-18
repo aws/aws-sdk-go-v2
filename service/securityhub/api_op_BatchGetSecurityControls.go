@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type BatchGetSecurityControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecurityControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecurityControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecurityControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.BatchGetSecurityControlsRequest_SecurityControlIds, v.SecurityControlIds)
+}
+
 type BatchGetSecurityControlsOutput struct {
 
 	//  An array that returns the identifier, Amazon Resource Name (ARN), and other
@@ -57,13 +69,32 @@ type BatchGetSecurityControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecurityControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecurityControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecurityControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityControls(s, schemas.BatchGetSecurityControlsResponse_SecurityControls, v.SecurityControls)
+	serializeUnprocessedSecurityControls(s, schemas.BatchGetSecurityControlsResponse_UnprocessedIds, v.UnprocessedIds)
+}
+func (v *BatchGetSecurityControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSecurityControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSecurityControlsResponse_SecurityControls:
+			return deserializeSecurityControls(d, schemas.BatchGetSecurityControlsResponse_SecurityControls, &v.SecurityControls)
+		case schemas.BatchGetSecurityControlsResponse_UnprocessedIds:
+			return deserializeUnprocessedSecurityControls(d, schemas.BatchGetSecurityControlsResponse_UnprocessedIds, &v.UnprocessedIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSecurityControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSecurityControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecurityControls, schemas.BatchGetSecurityControlsRequest, schemas.BatchGetSecurityControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSecurityControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecurityControls, schemas.BatchGetSecurityControlsRequest, schemas.BatchGetSecurityControlsResponse), output: &BatchGetSecurityControlsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

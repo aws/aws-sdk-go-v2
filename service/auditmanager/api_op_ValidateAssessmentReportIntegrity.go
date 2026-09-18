@@ -4,6 +4,8 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ValidateAssessmentReportIntegrityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateAssessmentReportIntegrityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateAssessmentReportIntegrityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateAssessmentReportIntegrityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3RelativePath != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityRequest_s3RelativePath, *v.S3RelativePath)
+	}
+}
+
 type ValidateAssessmentReportIntegrityOutput struct {
 
 	//  The signature algorithm that's used to code sign the assessment report file.
@@ -58,13 +72,53 @@ type ValidateAssessmentReportIntegrityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateAssessmentReportIntegrityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateAssessmentReportIntegrityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateAssessmentReportIntegrityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SignatureAlgorithm != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityResponse_signatureAlgorithm, *v.SignatureAlgorithm)
+	}
+	if v.SignatureDateTime != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityResponse_signatureDateTime, *v.SignatureDateTime)
+	}
+	if v.SignatureKeyId != nil {
+		s.WriteString(schemas.ValidateAssessmentReportIntegrityResponse_signatureKeyId, *v.SignatureKeyId)
+	}
+	if v.SignatureValid != nil {
+		s.WriteBool(schemas.ValidateAssessmentReportIntegrityResponse_signatureValid, *v.SignatureValid)
+	}
+	serializeValidationErrors(s, schemas.ValidateAssessmentReportIntegrityResponse_validationErrors, v.ValidationErrors)
+}
+func (v *ValidateAssessmentReportIntegrityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateAssessmentReportIntegrityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureAlgorithm:
+			v.SignatureAlgorithm = new(string)
+			return d.ReadString(schemas.ValidateAssessmentReportIntegrityResponse_signatureAlgorithm, v.SignatureAlgorithm)
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureDateTime:
+			v.SignatureDateTime = new(string)
+			return d.ReadString(schemas.ValidateAssessmentReportIntegrityResponse_signatureDateTime, v.SignatureDateTime)
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureKeyId:
+			v.SignatureKeyId = new(string)
+			return d.ReadString(schemas.ValidateAssessmentReportIntegrityResponse_signatureKeyId, v.SignatureKeyId)
+		case schemas.ValidateAssessmentReportIntegrityResponse_signatureValid:
+			v.SignatureValid = new(bool)
+			return d.ReadBool(schemas.ValidateAssessmentReportIntegrityResponse_signatureValid, v.SignatureValid)
+		case schemas.ValidateAssessmentReportIntegrityResponse_validationErrors:
+			return deserializeValidationErrors(d, schemas.ValidateAssessmentReportIntegrityResponse_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateAssessmentReportIntegrity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateAssessmentReportIntegrity, schemas.ValidateAssessmentReportIntegrityRequest, schemas.ValidateAssessmentReportIntegrityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateAssessmentReportIntegrity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateAssessmentReportIntegrity, schemas.ValidateAssessmentReportIntegrityRequest, schemas.ValidateAssessmentReportIntegrityResponse), output: &ValidateAssessmentReportIntegrityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

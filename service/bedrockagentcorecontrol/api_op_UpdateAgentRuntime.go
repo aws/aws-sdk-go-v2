@@ -71,6 +71,9 @@ type UpdateAgentRuntimeInput struct {
 	// The updated network configuration for the AgentCore Runtime.
 	NetworkConfiguration *types.NetworkConfiguration
 
+	// The updated version of the runtime platform to use for the AgentCore Runtime.
+	PlatformVersion *string
+
 	// The protocol configuration for an agent runtime. This structure defines how the
 	// agent runtime communicates with clients.
 	ProtocolConfiguration *types.ProtocolConfiguration

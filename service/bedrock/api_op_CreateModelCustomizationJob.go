@@ -5,7 +5,9 @@ package bedrock
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,60 @@ type CreateModelCustomizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCustomizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCustomizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCustomizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelIdentifier != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_baseModelIdentifier, *v.BaseModelIdentifier)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CustomModelKmsKeyId != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_customModelKmsKeyId, *v.CustomModelKmsKeyId)
+	}
+	if v.CustomModelName != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_customModelName, *v.CustomModelName)
+	}
+	serializeTagList(s, schemas.CreateModelCustomizationJobRequest_customModelTags, v.CustomModelTags)
+	serializeCustomizationConfig(s, schemas.CreateModelCustomizationJobRequest_customizationConfig, v.CustomizationConfig)
+	if v.CustomizationType != "" {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_customizationType, string(v.CustomizationType))
+	}
+	serializeModelCustomizationHyperParameters(s, schemas.CreateModelCustomizationJobRequest_hyperParameters, v.HyperParameters)
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_jobName, *v.JobName)
+	}
+	serializeTagList(s, schemas.CreateModelCustomizationJobRequest_jobTags, v.JobTags)
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateModelCustomizationJobRequest_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobRequest_roleArn, *v.RoleArn)
+	}
+	if v.TrainingDataConfig != nil {
+		s.WriteStruct(schemas.CreateModelCustomizationJobRequest_trainingDataConfig)
+		v.TrainingDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationDataConfig != nil {
+		s.WriteStruct(schemas.CreateModelCustomizationJobRequest_validationDataConfig)
+		v.ValidationDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateModelCustomizationJobRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelCustomizationJobOutput struct {
 
 	// Amazon Resource Name (ARN) of the fine tuning job
@@ -131,13 +187,32 @@ type CreateModelCustomizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCustomizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCustomizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCustomizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateModelCustomizationJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateModelCustomizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelCustomizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelCustomizationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateModelCustomizationJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelCustomizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModelCustomizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCustomizationJob, schemas.CreateModelCustomizationJobRequest, schemas.CreateModelCustomizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModelCustomizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCustomizationJob, schemas.CreateModelCustomizationJobRequest, schemas.CreateModelCustomizationJobResponse), output: &CreateModelCustomizationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

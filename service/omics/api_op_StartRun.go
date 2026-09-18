@@ -100,8 +100,8 @@ type StartRunInput struct {
 	// A service role for the run. The roleArn requires access to Amazon Web Services
 	// HealthOmics, S3, Cloudwatch logs, and EC2. An example roleArn is
 	// arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ . In
-	// this example, the AWS account ID is 123456789012 and the role name is
-	// omics-service-role-serviceRole-W8O1XMPL7QZ .
+	// this example, the Amazon Web Services account ID is 123456789012 and the role
+	// name is omics-service-role-serviceRole-W8O1XMPL7QZ .
 	//
 	// This member is required.
 	RoleArn *string
@@ -180,6 +180,10 @@ type StartRunInput struct {
 	// If not specified, this will default to SHARED. This configuration is applicable
 	// only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
 	ScratchStorageMode types.ScratchStorageMode
+
+	// Optional inline policy json for scoping down permissions via a session policy
+	// on the IAM role provided in the roleArn parameter.
+	SessionPolicy *string
 
 	// The STATIC storage capacity (in gibibytes, GiB) for this run. The default run
 	// storage capacity is 1200 GiB. If your requested storage capacity is unavailable,

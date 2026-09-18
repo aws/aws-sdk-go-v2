@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListMapRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMapRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMapRunsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMapRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.ListMapRunsInput_executionArn, *v.ExecutionArn)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListMapRunsInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMapRunsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListMapRunsOutput struct {
 
 	// An array that lists information related to a Map Run, such as the Amazon
@@ -75,13 +95,35 @@ type ListMapRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMapRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMapRunsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMapRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapRunList(s, schemas.ListMapRunsOutput_mapRuns, v.MapRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMapRunsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMapRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMapRunsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMapRunsOutput_mapRuns:
+			return deserializeMapRunList(d, schemas.ListMapRunsOutput_mapRuns, &v.MapRuns)
+		case schemas.ListMapRunsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMapRunsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMapRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListMapRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMapRuns, schemas.ListMapRunsInput, schemas.ListMapRunsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListMapRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMapRuns, schemas.ListMapRunsInput, schemas.ListMapRunsOutput), output: &ListMapRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package securityhub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,32 @@ type GetResourcesTrendsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesTrendsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesTrendsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesTrendsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetResourcesTrendsV2Request_EndTime, *v.EndTime)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetResourcesTrendsV2Request_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourcesTrendsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcesTrendsV2Request_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetResourcesTrendsV2Request_StartTime, *v.StartTime)
+	}
+}
+
 type GetResourcesTrendsV2Output struct {
 
 	// The time interval granularity for the returned trend data (such as DAILY or
@@ -78,13 +106,45 @@ type GetResourcesTrendsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesTrendsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesTrendsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesTrendsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetResourcesTrendsV2Response_Granularity, string(v.Granularity))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourcesTrendsV2Response_NextToken, *v.NextToken)
+	}
+	serializeResourcesTrendsMetrics(s, schemas.GetResourcesTrendsV2Response_TrendsMetrics, v.TrendsMetrics)
+}
+func (v *GetResourcesTrendsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesTrendsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesTrendsV2Response_Granularity:
+			var ev string
+			if err := d.ReadString(schemas.GetResourcesTrendsV2Response_Granularity, &ev); err != nil {
+				return err
+			}
+			v.Granularity = types.GranularityField(ev)
+			return nil
+		case schemas.GetResourcesTrendsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourcesTrendsV2Response_NextToken, v.NextToken)
+		case schemas.GetResourcesTrendsV2Response_TrendsMetrics:
+			return deserializeResourcesTrendsMetrics(d, schemas.GetResourcesTrendsV2Response_TrendsMetrics, &v.TrendsMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesTrendsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcesTrendsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesTrendsV2, schemas.GetResourcesTrendsV2Request, schemas.GetResourcesTrendsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcesTrendsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesTrendsV2, schemas.GetResourcesTrendsV2Request, schemas.GetResourcesTrendsV2Response), output: &GetResourcesTrendsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

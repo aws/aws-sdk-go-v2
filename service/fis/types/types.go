@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -34,6 +36,49 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Action) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Action)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Action_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Action_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Action_id, *v.Id)
+	}
+	serializeActionParameterMap(s, schemas.Action_parameters, v.Parameters)
+	serializeTagMap(s, schemas.Action_tags, v.Tags)
+	serializeActionTargetMap(s, schemas.Action_targets, v.Targets)
+}
+func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Action_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Action_arn, v.Arn)
+		case schemas.Action_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Action_description, v.Description)
+		case schemas.Action_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Action_id, v.Id)
+		case schemas.Action_parameters:
+			return deserializeActionParameterMap(d, schemas.Action_parameters, &v.Parameters)
+		case schemas.Action_tags:
+			return deserializeTagMap(d, schemas.Action_tags, &v.Tags)
+		case schemas.Action_targets:
+			return deserializeActionTargetMap(d, schemas.Action_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Describes a parameter for an action.
 type ActionParameter struct {
 
@@ -44,6 +89,34 @@ type ActionParameter struct {
 	Required *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ActionParameter_description, *v.Description)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.ActionParameter_required, *v.Required)
+	}
+}
+func (v *ActionParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionParameter_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ActionParameter_description, v.Description)
+		case schemas.ActionParameter_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.ActionParameter_required, v.Required)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of an action.
@@ -67,6 +140,46 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ActionSummary_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ActionSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ActionSummary_id, *v.Id)
+	}
+	serializeTagMap(s, schemas.ActionSummary_tags, v.Tags)
+	serializeActionTargetMap(s, schemas.ActionSummary_targets, v.Targets)
+}
+func (v *ActionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ActionSummary_arn, v.Arn)
+		case schemas.ActionSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ActionSummary_description, v.Description)
+		case schemas.ActionSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ActionSummary_id, v.Id)
+		case schemas.ActionSummary_tags:
+			return deserializeTagMap(d, schemas.ActionSummary_tags, &v.Tags)
+		case schemas.ActionSummary_targets:
+			return deserializeActionTargetMap(d, schemas.ActionSummary_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Describes a target for an action.
 type ActionTarget struct {
 
@@ -74,6 +187,28 @@ type ActionTarget struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ActionTarget_resourceType, *v.ResourceType)
+	}
+}
+func (v *ActionTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionTarget_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ActionTarget_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Specifies an action for an experiment template.
@@ -105,6 +240,43 @@ type CreateExperimentTemplateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperimentTemplateActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateActionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.CreateExperimentTemplateActionInput_actionId, *v.ActionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateExperimentTemplateActionInput_description, *v.Description)
+	}
+	serializeExperimentTemplateActionParameterMap(s, schemas.CreateExperimentTemplateActionInput_parameters, v.Parameters)
+	serializeExperimentTemplateActionStartAfterList(s, schemas.CreateExperimentTemplateActionInput_startAfter, v.StartAfter)
+	serializeExperimentTemplateActionTargetMap(s, schemas.CreateExperimentTemplateActionInput_targets, v.Targets)
+}
+func (v *CreateExperimentTemplateActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateActionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateActionInput_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateActionInput_actionId, v.ActionId)
+		case schemas.CreateExperimentTemplateActionInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateActionInput_description, v.Description)
+		case schemas.CreateExperimentTemplateActionInput_parameters:
+			return deserializeExperimentTemplateActionParameterMap(d, schemas.CreateExperimentTemplateActionInput_parameters, &v.Parameters)
+		case schemas.CreateExperimentTemplateActionInput_startAfter:
+			return deserializeExperimentTemplateActionStartAfterList(d, schemas.CreateExperimentTemplateActionInput_startAfter, &v.StartAfter)
+		case schemas.CreateExperimentTemplateActionInput_targets:
+			return deserializeExperimentTemplateActionTargetMap(d, schemas.CreateExperimentTemplateActionInput_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Specifies experiment options for an experiment template.
 type CreateExperimentTemplateExperimentOptionsInput struct {
 
@@ -115,6 +287,42 @@ type CreateExperimentTemplateExperimentOptionsInput struct {
 	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateExperimentTemplateExperimentOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateExperimentOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateExperimentOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTargeting != "" {
+		s.WriteString(schemas.CreateExperimentTemplateExperimentOptionsInput_accountTargeting, string(v.AccountTargeting))
+	}
+	if v.EmptyTargetResolutionMode != "" {
+		s.WriteString(schemas.CreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode, string(v.EmptyTargetResolutionMode))
+	}
+}
+func (v *CreateExperimentTemplateExperimentOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateExperimentOptionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateExperimentOptionsInput_accountTargeting:
+			var ev string
+			if err := d.ReadString(schemas.CreateExperimentTemplateExperimentOptionsInput_accountTargeting, &ev); err != nil {
+				return err
+			}
+			v.AccountTargeting = AccountTargeting(ev)
+			return nil
+		case schemas.CreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode, &ev); err != nil {
+				return err
+			}
+			v.EmptyTargetResolutionMode = EmptyTargetResolutionMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for experiment logging.
@@ -132,6 +340,44 @@ type CreateExperimentTemplateLogConfigurationInput struct {
 	S3Configuration *ExperimentTemplateS3LogConfigurationInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateExperimentTemplateLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateLogConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsConfiguration != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration)
+		v.CloudWatchLogsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogSchemaVersion != nil {
+		s.WriteInt32(schemas.CreateExperimentTemplateLogConfigurationInput_logSchemaVersion, *v.LogSchemaVersion)
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateLogConfigurationInput_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExperimentTemplateLogConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateLogConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration:
+			v.CloudWatchLogsConfiguration = &ExperimentTemplateCloudWatchLogsLogConfigurationInput{}
+			return v.CloudWatchLogsConfiguration.Deserialize(d)
+		case schemas.CreateExperimentTemplateLogConfigurationInput_logSchemaVersion:
+			v.LogSchemaVersion = new(int32)
+			return d.ReadInt32(schemas.CreateExperimentTemplateLogConfigurationInput_logSchemaVersion, v.LogSchemaVersion)
+		case schemas.CreateExperimentTemplateLogConfigurationInput_s3Configuration:
+			v.S3Configuration = &ExperimentTemplateS3LogConfigurationInput{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for experiment reports.
@@ -154,6 +400,50 @@ type CreateExperimentTemplateReportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperimentTemplateReportConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateReportConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateReportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateReportConfigurationInput_dataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Outputs != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateReportConfigurationInput_outputs)
+		v.Outputs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostExperimentDuration != nil {
+		s.WriteString(schemas.CreateExperimentTemplateReportConfigurationInput_postExperimentDuration, *v.PostExperimentDuration)
+	}
+	if v.PreExperimentDuration != nil {
+		s.WriteString(schemas.CreateExperimentTemplateReportConfigurationInput_preExperimentDuration, *v.PreExperimentDuration)
+	}
+}
+func (v *CreateExperimentTemplateReportConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateReportConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateReportConfigurationInput_dataSources:
+			v.DataSources = &ExperimentTemplateReportConfigurationDataSourcesInput{}
+			return v.DataSources.Deserialize(d)
+		case schemas.CreateExperimentTemplateReportConfigurationInput_outputs:
+			v.Outputs = &ExperimentTemplateReportConfigurationOutputsInput{}
+			return v.Outputs.Deserialize(d)
+		case schemas.CreateExperimentTemplateReportConfigurationInput_postExperimentDuration:
+			v.PostExperimentDuration = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateReportConfigurationInput_postExperimentDuration, v.PostExperimentDuration)
+		case schemas.CreateExperimentTemplateReportConfigurationInput_preExperimentDuration:
+			v.PreExperimentDuration = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateReportConfigurationInput_preExperimentDuration, v.PreExperimentDuration)
+		}
+		return nil
+	})
+}
+
 // Specifies a stop condition for an experiment template.
 type CreateExperimentTemplateStopConditionInput struct {
 
@@ -169,6 +459,34 @@ type CreateExperimentTemplateStopConditionInput struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateExperimentTemplateStopConditionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateStopConditionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateStopConditionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteString(schemas.CreateExperimentTemplateStopConditionInput_source, *v.Source)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CreateExperimentTemplateStopConditionInput_value, *v.Value)
+	}
+}
+func (v *CreateExperimentTemplateStopConditionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateStopConditionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateStopConditionInput_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateStopConditionInput_source, v.Source)
+		case schemas.CreateExperimentTemplateStopConditionInput_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateStopConditionInput_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies a target for an experiment. You must specify at least one Amazon
@@ -215,6 +533,46 @@ type CreateExperimentTemplateTargetInput struct {
 	ResourceTags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateExperimentTemplateTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateTargetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentTemplateTargetFilterInputList(s, schemas.CreateExperimentTemplateTargetInput_filters, v.Filters)
+	serializeExperimentTemplateTargetParameterMap(s, schemas.CreateExperimentTemplateTargetInput_parameters, v.Parameters)
+	serializeResourceArnList(s, schemas.CreateExperimentTemplateTargetInput_resourceArns, v.ResourceArns)
+	serializeTagMap(s, schemas.CreateExperimentTemplateTargetInput_resourceTags, v.ResourceTags)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CreateExperimentTemplateTargetInput_resourceType, *v.ResourceType)
+	}
+	if v.SelectionMode != nil {
+		s.WriteString(schemas.CreateExperimentTemplateTargetInput_selectionMode, *v.SelectionMode)
+	}
+}
+func (v *CreateExperimentTemplateTargetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateTargetInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateTargetInput_filters:
+			return deserializeExperimentTemplateTargetFilterInputList(d, schemas.CreateExperimentTemplateTargetInput_filters, &v.Filters)
+		case schemas.CreateExperimentTemplateTargetInput_parameters:
+			return deserializeExperimentTemplateTargetParameterMap(d, schemas.CreateExperimentTemplateTargetInput_parameters, &v.Parameters)
+		case schemas.CreateExperimentTemplateTargetInput_resourceArns:
+			return deserializeResourceArnList(d, schemas.CreateExperimentTemplateTargetInput_resourceArns, &v.ResourceArns)
+		case schemas.CreateExperimentTemplateTargetInput_resourceTags:
+			return deserializeTagMap(d, schemas.CreateExperimentTemplateTargetInput_resourceTags, &v.ResourceTags)
+		case schemas.CreateExperimentTemplateTargetInput_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateTargetInput_resourceType, v.ResourceType)
+		case schemas.CreateExperimentTemplateTargetInput_selectionMode:
+			v.SelectionMode = new(string)
+			return d.ReadString(schemas.CreateExperimentTemplateTargetInput_selectionMode, v.SelectionMode)
+		}
+		return nil
+	})
 }
 
 // Describes an experiment.
@@ -275,6 +633,122 @@ type Experiment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Experiment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Experiment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Experiment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentActionMap(s, schemas.Experiment_actions, v.Actions)
+	if v.Arn != nil {
+		s.WriteString(schemas.Experiment_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Experiment_creationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Experiment_endTime, *v.EndTime)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.Experiment_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReport != nil {
+		s.WriteStruct(schemas.Experiment_experimentReport)
+		v.ExperimentReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReportConfiguration != nil {
+		s.WriteStruct(schemas.Experiment_experimentReportConfiguration)
+		v.ExperimentReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.Experiment_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Experiment_id, *v.Id)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.Experiment_logConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Experiment_roleArn, *v.RoleArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Experiment_startTime, *v.StartTime)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.Experiment_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExperimentStopConditionList(s, schemas.Experiment_stopConditions, v.StopConditions)
+	serializeTagMap(s, schemas.Experiment_tags, v.Tags)
+	if v.TargetAccountConfigurationsCount != nil {
+		s.WriteInt64(schemas.Experiment_targetAccountConfigurationsCount, *v.TargetAccountConfigurationsCount)
+	}
+	serializeExperimentTargetMap(s, schemas.Experiment_targets, v.Targets)
+}
+func (v *Experiment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Experiment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Experiment_actions:
+			return deserializeExperimentActionMap(d, schemas.Experiment_actions, &v.Actions)
+		case schemas.Experiment_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Experiment_arn, v.Arn)
+		case schemas.Experiment_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Experiment_creationTime, v.CreationTime)
+		case schemas.Experiment_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Experiment_endTime, v.EndTime)
+		case schemas.Experiment_experimentOptions:
+			v.ExperimentOptions = &ExperimentOptions{}
+			return v.ExperimentOptions.Deserialize(d)
+		case schemas.Experiment_experimentReport:
+			v.ExperimentReport = &ExperimentReport{}
+			return v.ExperimentReport.Deserialize(d)
+		case schemas.Experiment_experimentReportConfiguration:
+			v.ExperimentReportConfiguration = &ExperimentReportConfiguration{}
+			return v.ExperimentReportConfiguration.Deserialize(d)
+		case schemas.Experiment_experimentTemplateId:
+			v.ExperimentTemplateId = new(string)
+			return d.ReadString(schemas.Experiment_experimentTemplateId, v.ExperimentTemplateId)
+		case schemas.Experiment_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Experiment_id, v.Id)
+		case schemas.Experiment_logConfiguration:
+			v.LogConfiguration = &ExperimentLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.Experiment_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Experiment_roleArn, v.RoleArn)
+		case schemas.Experiment_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Experiment_startTime, v.StartTime)
+		case schemas.Experiment_state:
+			v.State = &ExperimentState{}
+			return v.State.Deserialize(d)
+		case schemas.Experiment_stopConditions:
+			return deserializeExperimentStopConditionList(d, schemas.Experiment_stopConditions, &v.StopConditions)
+		case schemas.Experiment_tags:
+			return deserializeTagMap(d, schemas.Experiment_tags, &v.Tags)
+		case schemas.Experiment_targetAccountConfigurationsCount:
+			v.TargetAccountConfigurationsCount = new(int64)
+			return d.ReadInt64(schemas.Experiment_targetAccountConfigurationsCount, v.TargetAccountConfigurationsCount)
+		case schemas.Experiment_targets:
+			return deserializeExperimentTargetMap(d, schemas.Experiment_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Describes the action for an experiment.
 type ExperimentAction struct {
 
@@ -305,6 +779,63 @@ type ExperimentAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.ExperimentAction_actionId, *v.ActionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentAction_description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ExperimentAction_endTime, *v.EndTime)
+	}
+	serializeExperimentActionParameterMap(s, schemas.ExperimentAction_parameters, v.Parameters)
+	serializeExperimentActionStartAfterList(s, schemas.ExperimentAction_startAfter, v.StartAfter)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ExperimentAction_startTime, *v.StartTime)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.ExperimentAction_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExperimentActionTargetMap(s, schemas.ExperimentAction_targets, v.Targets)
+}
+func (v *ExperimentAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentAction_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ExperimentAction_actionId, v.ActionId)
+		case schemas.ExperimentAction_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentAction_description, v.Description)
+		case schemas.ExperimentAction_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentAction_endTime, v.EndTime)
+		case schemas.ExperimentAction_parameters:
+			return deserializeExperimentActionParameterMap(d, schemas.ExperimentAction_parameters, &v.Parameters)
+		case schemas.ExperimentAction_startAfter:
+			return deserializeExperimentActionStartAfterList(d, schemas.ExperimentAction_startAfter, &v.StartAfter)
+		case schemas.ExperimentAction_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentAction_startTime, v.StartTime)
+		case schemas.ExperimentAction_state:
+			v.State = &ExperimentActionState{}
+			return v.State.Deserialize(d)
+		case schemas.ExperimentAction_targets:
+			return deserializeExperimentActionTargetMap(d, schemas.ExperimentAction_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Describes the state of an action.
 type ExperimentActionState struct {
 
@@ -317,6 +848,38 @@ type ExperimentActionState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentActionState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentActionState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentActionState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.ExperimentActionState_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExperimentActionState_status, string(v.Status))
+	}
+}
+func (v *ExperimentActionState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentActionState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentActionState_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ExperimentActionState_reason, v.Reason)
+		case schemas.ExperimentActionState_status:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentActionState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExperimentActionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the configuration for experiment logging to Amazon CloudWatch Logs.
 type ExperimentCloudWatchLogsLogConfiguration struct {
 
@@ -325,6 +888,28 @@ type ExperimentCloudWatchLogsLogConfiguration struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentCloudWatchLogsLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentCloudWatchLogsLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentCloudWatchLogsLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.ExperimentCloudWatchLogsLogConfiguration_logGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *ExperimentCloudWatchLogsLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentCloudWatchLogsLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentCloudWatchLogsLogConfiguration_logGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.ExperimentCloudWatchLogsLogConfiguration_logGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
 }
 
 // Describes the error when an experiment has failed .
@@ -342,6 +927,40 @@ type ExperimentError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ExperimentError_accountId, *v.AccountId)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.ExperimentError_code, *v.Code)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.ExperimentError_location, *v.Location)
+	}
+}
+func (v *ExperimentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentError_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ExperimentError_accountId, v.AccountId)
+		case schemas.ExperimentError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ExperimentError_code, v.Code)
+		case schemas.ExperimentError_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ExperimentError_location, v.Location)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration for experiment logging.
 type ExperimentLogConfiguration struct {
 
@@ -355,6 +974,44 @@ type ExperimentLogConfiguration struct {
 	S3Configuration *ExperimentS3LogConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsConfiguration != nil {
+		s.WriteStruct(schemas.ExperimentLogConfiguration_cloudWatchLogsConfiguration)
+		v.CloudWatchLogsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogSchemaVersion != nil {
+		s.WriteInt32(schemas.ExperimentLogConfiguration_logSchemaVersion, *v.LogSchemaVersion)
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ExperimentLogConfiguration_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExperimentLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentLogConfiguration_cloudWatchLogsConfiguration:
+			v.CloudWatchLogsConfiguration = &ExperimentCloudWatchLogsLogConfiguration{}
+			return v.CloudWatchLogsConfiguration.Deserialize(d)
+		case schemas.ExperimentLogConfiguration_logSchemaVersion:
+			v.LogSchemaVersion = new(int32)
+			return d.ReadInt32(schemas.ExperimentLogConfiguration_logSchemaVersion, v.LogSchemaVersion)
+		case schemas.ExperimentLogConfiguration_s3Configuration:
+			v.S3Configuration = &ExperimentS3LogConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the options for an experiment.
@@ -373,6 +1030,52 @@ type ExperimentOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTargeting != "" {
+		s.WriteString(schemas.ExperimentOptions_accountTargeting, string(v.AccountTargeting))
+	}
+	if v.ActionsMode != "" {
+		s.WriteString(schemas.ExperimentOptions_actionsMode, string(v.ActionsMode))
+	}
+	if v.EmptyTargetResolutionMode != "" {
+		s.WriteString(schemas.ExperimentOptions_emptyTargetResolutionMode, string(v.EmptyTargetResolutionMode))
+	}
+}
+func (v *ExperimentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentOptions_accountTargeting:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentOptions_accountTargeting, &ev); err != nil {
+				return err
+			}
+			v.AccountTargeting = AccountTargeting(ev)
+			return nil
+		case schemas.ExperimentOptions_actionsMode:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentOptions_actionsMode, &ev); err != nil {
+				return err
+			}
+			v.ActionsMode = ActionsMode(ev)
+			return nil
+		case schemas.ExperimentOptions_emptyTargetResolutionMode:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentOptions_emptyTargetResolutionMode, &ev); err != nil {
+				return err
+			}
+			v.EmptyTargetResolutionMode = EmptyTargetResolutionMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the experiment report.
 type ExperimentReport struct {
 
@@ -383,6 +1086,33 @@ type ExperimentReport struct {
 	State *ExperimentReportState
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReport) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentReportS3ReportList(s, schemas.ExperimentReport_s3Reports, v.S3Reports)
+	if v.State != nil {
+		s.WriteStruct(schemas.ExperimentReport_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExperimentReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReport_s3Reports:
+			return deserializeExperimentReportS3ReportList(d, schemas.ExperimentReport_s3Reports, &v.S3Reports)
+		case schemas.ExperimentReport_state:
+			v.State = &ExperimentReportState{}
+			return v.State.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the report configuration for the experiment. For more information,
@@ -408,6 +1138,50 @@ type ExperimentReportConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentReportConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.ExperimentReportConfiguration_dataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Outputs != nil {
+		s.WriteStruct(schemas.ExperimentReportConfiguration_outputs)
+		v.Outputs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostExperimentDuration != nil {
+		s.WriteString(schemas.ExperimentReportConfiguration_postExperimentDuration, *v.PostExperimentDuration)
+	}
+	if v.PreExperimentDuration != nil {
+		s.WriteString(schemas.ExperimentReportConfiguration_preExperimentDuration, *v.PreExperimentDuration)
+	}
+}
+func (v *ExperimentReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportConfiguration_dataSources:
+			v.DataSources = &ExperimentReportConfigurationDataSources{}
+			return v.DataSources.Deserialize(d)
+		case schemas.ExperimentReportConfiguration_outputs:
+			v.Outputs = &ExperimentReportConfigurationOutputs{}
+			return v.Outputs.Deserialize(d)
+		case schemas.ExperimentReportConfiguration_postExperimentDuration:
+			v.PostExperimentDuration = new(string)
+			return d.ReadString(schemas.ExperimentReportConfiguration_postExperimentDuration, v.PostExperimentDuration)
+		case schemas.ExperimentReportConfiguration_preExperimentDuration:
+			v.PreExperimentDuration = new(string)
+			return d.ReadString(schemas.ExperimentReportConfiguration_preExperimentDuration, v.PreExperimentDuration)
+		}
+		return nil
+	})
+}
+
 // Specifies the CloudWatch dashboard to include in the experiment report. The
 // dashboard widgets will be captured as snapshot graphs within the report.
 type ExperimentReportConfigurationCloudWatchDashboard struct {
@@ -419,6 +1193,28 @@ type ExperimentReportConfigurationCloudWatchDashboard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentReportConfigurationCloudWatchDashboard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportConfigurationCloudWatchDashboard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportConfigurationCloudWatchDashboard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardIdentifier != nil {
+		s.WriteString(schemas.ExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier, *v.DashboardIdentifier)
+	}
+}
+func (v *ExperimentReportConfigurationCloudWatchDashboard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportConfigurationCloudWatchDashboard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier:
+			v.DashboardIdentifier = new(string)
+			return d.ReadString(schemas.ExperimentReportConfigurationCloudWatchDashboard_dashboardIdentifier, v.DashboardIdentifier)
+		}
+		return nil
+	})
+}
+
 // Describes the data sources for the experiment report.
 type ExperimentReportConfigurationDataSources struct {
 
@@ -428,6 +1224,25 @@ type ExperimentReportConfigurationDataSources struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentReportConfigurationDataSources) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportConfigurationDataSources)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportConfigurationDataSources) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentReportConfigurationCloudWatchDashboardList(s, schemas.ExperimentReportConfigurationDataSources_cloudWatchDashboards, v.CloudWatchDashboards)
+}
+func (v *ExperimentReportConfigurationDataSources) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportConfigurationDataSources, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportConfigurationDataSources_cloudWatchDashboards:
+			return deserializeExperimentReportConfigurationCloudWatchDashboardList(d, schemas.ExperimentReportConfigurationDataSources_cloudWatchDashboards, &v.CloudWatchDashboards)
+		}
+		return nil
+	})
+}
+
 // Describes the output destinations of the experiment report.
 type ExperimentReportConfigurationOutputs struct {
 
@@ -435,6 +1250,30 @@ type ExperimentReportConfigurationOutputs struct {
 	S3Configuration *ExperimentReportConfigurationOutputsS3Configuration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentReportConfigurationOutputs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportConfigurationOutputs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportConfigurationOutputs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ExperimentReportConfigurationOutputs_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExperimentReportConfigurationOutputs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportConfigurationOutputs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportConfigurationOutputs_s3Configuration:
+			v.S3Configuration = &ExperimentReportConfigurationOutputsS3Configuration{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the S3 destination for the experiment report.
@@ -449,6 +1288,34 @@ type ExperimentReportConfigurationOutputsS3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentReportConfigurationOutputsS3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportConfigurationOutputsS3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportConfigurationOutputsS3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ExperimentReportConfigurationOutputsS3Configuration_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExperimentReportConfigurationOutputsS3Configuration_prefix, *v.Prefix)
+	}
+}
+func (v *ExperimentReportConfigurationOutputsS3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportConfigurationOutputsS3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportConfigurationOutputsS3Configuration_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ExperimentReportConfigurationOutputsS3Configuration_bucketName, v.BucketName)
+		case schemas.ExperimentReportConfigurationOutputsS3Configuration_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExperimentReportConfigurationOutputsS3Configuration_prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // Describes the error when experiment report generation has failed.
 type ExperimentReportError struct {
 
@@ -456,6 +1323,28 @@ type ExperimentReportError struct {
 	Code *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentReportError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ExperimentReportError_code, *v.Code)
+	}
+}
+func (v *ExperimentReportError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportError_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ExperimentReportError_code, v.Code)
+		}
+		return nil
+	})
 }
 
 // Describes the S3 destination for the report.
@@ -468,6 +1357,34 @@ type ExperimentReportS3Report struct {
 	ReportType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentReportS3Report) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportS3Report)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportS3Report) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ExperimentReportS3Report_arn, *v.Arn)
+	}
+	if v.ReportType != nil {
+		s.WriteString(schemas.ExperimentReportS3Report_reportType, *v.ReportType)
+	}
+}
+func (v *ExperimentReportS3Report) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportS3Report, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportS3Report_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ExperimentReportS3Report_arn, v.Arn)
+		case schemas.ExperimentReportS3Report_reportType:
+			v.ReportType = new(string)
+			return d.ReadString(schemas.ExperimentReportS3Report_reportType, v.ReportType)
+		}
+		return nil
+	})
 }
 
 // Describes the state of the experiment report generation.
@@ -486,6 +1403,46 @@ type ExperimentReportState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentReportState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentReportState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentReportState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.ExperimentReportState_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.ExperimentReportState_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExperimentReportState_status, string(v.Status))
+	}
+}
+func (v *ExperimentReportState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentReportState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentReportState_error:
+			v.Error = &ExperimentReportError{}
+			return v.Error.Deserialize(d)
+		case schemas.ExperimentReportState_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ExperimentReportState_reason, v.Reason)
+		case schemas.ExperimentReportState_status:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentReportState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExperimentReportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the configuration for experiment logging to Amazon S3.
 type ExperimentS3LogConfiguration struct {
 
@@ -496,6 +1453,34 @@ type ExperimentS3LogConfiguration struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentS3LogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentS3LogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentS3LogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ExperimentS3LogConfiguration_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExperimentS3LogConfiguration_prefix, *v.Prefix)
+	}
+}
+func (v *ExperimentS3LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentS3LogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentS3LogConfiguration_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ExperimentS3LogConfiguration_bucketName, v.BucketName)
+		case schemas.ExperimentS3LogConfiguration_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExperimentS3LogConfiguration_prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // Describes the state of an experiment.
@@ -513,6 +1498,46 @@ type ExperimentState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.ExperimentState_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.ExperimentState_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ExperimentState_status, string(v.Status))
+	}
+}
+func (v *ExperimentState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentState_error:
+			v.Error = &ExperimentError{}
+			return v.Error.Deserialize(d)
+		case schemas.ExperimentState_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ExperimentState_reason, v.Reason)
+		case schemas.ExperimentState_status:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExperimentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the stop condition for an experiment.
 type ExperimentStopCondition struct {
 
@@ -523,6 +1548,34 @@ type ExperimentStopCondition struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentStopCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentStopCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentStopCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteString(schemas.ExperimentStopCondition_source, *v.Source)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ExperimentStopCondition_value, *v.Value)
+	}
+}
+func (v *ExperimentStopCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentStopCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentStopCondition_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.ExperimentStopCondition_source, v.Source)
+		case schemas.ExperimentStopCondition_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ExperimentStopCondition_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of an experiment.
@@ -552,6 +1605,65 @@ type ExperimentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ExperimentSummary_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExperimentSummary_creationTime, *v.CreationTime)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.ExperimentSummary_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.ExperimentSummary_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExperimentSummary_id, *v.Id)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.ExperimentSummary_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.ExperimentSummary_tags, v.Tags)
+}
+func (v *ExperimentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ExperimentSummary_arn, v.Arn)
+		case schemas.ExperimentSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentSummary_creationTime, v.CreationTime)
+		case schemas.ExperimentSummary_experimentOptions:
+			v.ExperimentOptions = &ExperimentOptions{}
+			return v.ExperimentOptions.Deserialize(d)
+		case schemas.ExperimentSummary_experimentTemplateId:
+			v.ExperimentTemplateId = new(string)
+			return d.ReadString(schemas.ExperimentSummary_experimentTemplateId, v.ExperimentTemplateId)
+		case schemas.ExperimentSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExperimentSummary_id, v.Id)
+		case schemas.ExperimentSummary_state:
+			v.State = &ExperimentState{}
+			return v.State.Deserialize(d)
+		case schemas.ExperimentSummary_tags:
+			return deserializeTagMap(d, schemas.ExperimentSummary_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a target for an experiment.
 type ExperimentTarget struct {
 
@@ -576,6 +1688,46 @@ type ExperimentTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentTargetFilterList(s, schemas.ExperimentTarget_filters, v.Filters)
+	serializeExperimentTargetParameterMap(s, schemas.ExperimentTarget_parameters, v.Parameters)
+	serializeResourceArnList(s, schemas.ExperimentTarget_resourceArns, v.ResourceArns)
+	serializeTagMap(s, schemas.ExperimentTarget_resourceTags, v.ResourceTags)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ExperimentTarget_resourceType, *v.ResourceType)
+	}
+	if v.SelectionMode != nil {
+		s.WriteString(schemas.ExperimentTarget_selectionMode, *v.SelectionMode)
+	}
+}
+func (v *ExperimentTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTarget_filters:
+			return deserializeExperimentTargetFilterList(d, schemas.ExperimentTarget_filters, &v.Filters)
+		case schemas.ExperimentTarget_parameters:
+			return deserializeExperimentTargetParameterMap(d, schemas.ExperimentTarget_parameters, &v.Parameters)
+		case schemas.ExperimentTarget_resourceArns:
+			return deserializeResourceArnList(d, schemas.ExperimentTarget_resourceArns, &v.ResourceArns)
+		case schemas.ExperimentTarget_resourceTags:
+			return deserializeTagMap(d, schemas.ExperimentTarget_resourceTags, &v.ResourceTags)
+		case schemas.ExperimentTarget_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ExperimentTarget_resourceType, v.ResourceType)
+		case schemas.ExperimentTarget_selectionMode:
+			v.SelectionMode = new(string)
+			return d.ReadString(schemas.ExperimentTarget_selectionMode, v.SelectionMode)
+		}
+		return nil
+	})
+}
+
 // Describes a target account configuration for an experiment.
 type ExperimentTargetAccountConfiguration struct {
 
@@ -589,6 +1741,40 @@ type ExperimentTargetAccountConfiguration struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTargetAccountConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTargetAccountConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTargetAccountConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ExperimentTargetAccountConfiguration_accountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentTargetAccountConfiguration_description, *v.Description)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExperimentTargetAccountConfiguration_roleArn, *v.RoleArn)
+	}
+}
+func (v *ExperimentTargetAccountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTargetAccountConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTargetAccountConfiguration_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ExperimentTargetAccountConfiguration_accountId, v.AccountId)
+		case schemas.ExperimentTargetAccountConfiguration_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentTargetAccountConfiguration_description, v.Description)
+		case schemas.ExperimentTargetAccountConfiguration_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExperimentTargetAccountConfiguration_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of a target account configuration.
@@ -606,6 +1792,40 @@ type ExperimentTargetAccountConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTargetAccountConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTargetAccountConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTargetAccountConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ExperimentTargetAccountConfigurationSummary_accountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentTargetAccountConfigurationSummary_description, *v.Description)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExperimentTargetAccountConfigurationSummary_roleArn, *v.RoleArn)
+	}
+}
+func (v *ExperimentTargetAccountConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTargetAccountConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTargetAccountConfigurationSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ExperimentTargetAccountConfigurationSummary_accountId, v.AccountId)
+		case schemas.ExperimentTargetAccountConfigurationSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentTargetAccountConfigurationSummary_description, v.Description)
+		case schemas.ExperimentTargetAccountConfigurationSummary_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExperimentTargetAccountConfigurationSummary_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Describes a filter used for the target resources in an experiment.
 type ExperimentTargetFilter struct {
 
@@ -616,6 +1836,31 @@ type ExperimentTargetFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTargetFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTargetFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.ExperimentTargetFilter_path, *v.Path)
+	}
+	serializeExperimentTargetFilterValues(s, schemas.ExperimentTargetFilter_values, v.Values)
+}
+func (v *ExperimentTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTargetFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTargetFilter_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ExperimentTargetFilter_path, v.Path)
+		case schemas.ExperimentTargetFilter_values:
+			return deserializeExperimentTargetFilterValues(d, schemas.ExperimentTargetFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes an experiment template.
@@ -666,6 +1911,100 @@ type ExperimentTemplate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentTemplateActionMap(s, schemas.ExperimentTemplate_actions, v.Actions)
+	if v.Arn != nil {
+		s.WriteString(schemas.ExperimentTemplate_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExperimentTemplate_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentTemplate_description, *v.Description)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.ExperimentTemplate_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReportConfiguration != nil {
+		s.WriteStruct(schemas.ExperimentTemplate_experimentReportConfiguration)
+		v.ExperimentReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExperimentTemplate_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ExperimentTemplate_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.ExperimentTemplate_logConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ExperimentTemplate_roleArn, *v.RoleArn)
+	}
+	serializeExperimentTemplateStopConditionList(s, schemas.ExperimentTemplate_stopConditions, v.StopConditions)
+	serializeTagMap(s, schemas.ExperimentTemplate_tags, v.Tags)
+	if v.TargetAccountConfigurationsCount != nil {
+		s.WriteInt64(schemas.ExperimentTemplate_targetAccountConfigurationsCount, *v.TargetAccountConfigurationsCount)
+	}
+	serializeExperimentTemplateTargetMap(s, schemas.ExperimentTemplate_targets, v.Targets)
+}
+func (v *ExperimentTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplate_actions:
+			return deserializeExperimentTemplateActionMap(d, schemas.ExperimentTemplate_actions, &v.Actions)
+		case schemas.ExperimentTemplate_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ExperimentTemplate_arn, v.Arn)
+		case schemas.ExperimentTemplate_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentTemplate_creationTime, v.CreationTime)
+		case schemas.ExperimentTemplate_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentTemplate_description, v.Description)
+		case schemas.ExperimentTemplate_experimentOptions:
+			v.ExperimentOptions = &ExperimentTemplateExperimentOptions{}
+			return v.ExperimentOptions.Deserialize(d)
+		case schemas.ExperimentTemplate_experimentReportConfiguration:
+			v.ExperimentReportConfiguration = &ExperimentTemplateReportConfiguration{}
+			return v.ExperimentReportConfiguration.Deserialize(d)
+		case schemas.ExperimentTemplate_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExperimentTemplate_id, v.Id)
+		case schemas.ExperimentTemplate_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentTemplate_lastUpdateTime, v.LastUpdateTime)
+		case schemas.ExperimentTemplate_logConfiguration:
+			v.LogConfiguration = &ExperimentTemplateLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.ExperimentTemplate_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ExperimentTemplate_roleArn, v.RoleArn)
+		case schemas.ExperimentTemplate_stopConditions:
+			return deserializeExperimentTemplateStopConditionList(d, schemas.ExperimentTemplate_stopConditions, &v.StopConditions)
+		case schemas.ExperimentTemplate_tags:
+			return deserializeTagMap(d, schemas.ExperimentTemplate_tags, &v.Tags)
+		case schemas.ExperimentTemplate_targetAccountConfigurationsCount:
+			v.TargetAccountConfigurationsCount = new(int64)
+			return d.ReadInt64(schemas.ExperimentTemplate_targetAccountConfigurationsCount, v.TargetAccountConfigurationsCount)
+		case schemas.ExperimentTemplate_targets:
+			return deserializeExperimentTemplateTargetMap(d, schemas.ExperimentTemplate_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Describes an action for an experiment template.
 type ExperimentTemplateAction struct {
 
@@ -687,6 +2026,43 @@ type ExperimentTemplateAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.ExperimentTemplateAction_actionId, *v.ActionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentTemplateAction_description, *v.Description)
+	}
+	serializeExperimentTemplateActionParameterMap(s, schemas.ExperimentTemplateAction_parameters, v.Parameters)
+	serializeExperimentTemplateActionStartAfterList(s, schemas.ExperimentTemplateAction_startAfter, v.StartAfter)
+	serializeExperimentTemplateActionTargetMap(s, schemas.ExperimentTemplateAction_targets, v.Targets)
+}
+func (v *ExperimentTemplateAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateAction_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ExperimentTemplateAction_actionId, v.ActionId)
+		case schemas.ExperimentTemplateAction_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentTemplateAction_description, v.Description)
+		case schemas.ExperimentTemplateAction_parameters:
+			return deserializeExperimentTemplateActionParameterMap(d, schemas.ExperimentTemplateAction_parameters, &v.Parameters)
+		case schemas.ExperimentTemplateAction_startAfter:
+			return deserializeExperimentTemplateActionStartAfterList(d, schemas.ExperimentTemplateAction_startAfter, &v.StartAfter)
+		case schemas.ExperimentTemplateAction_targets:
+			return deserializeExperimentTemplateActionTargetMap(d, schemas.ExperimentTemplateAction_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration for experiment logging to Amazon CloudWatch Logs.
 type ExperimentTemplateCloudWatchLogsLogConfiguration struct {
 
@@ -695,6 +2071,28 @@ type ExperimentTemplateCloudWatchLogsLogConfiguration struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateCloudWatchLogsLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateCloudWatchLogsLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateCloudWatchLogsLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.ExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *ExperimentTemplateCloudWatchLogsLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateCloudWatchLogsLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.ExperimentTemplateCloudWatchLogsLogConfiguration_logGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for experiment logging to Amazon CloudWatch Logs.
@@ -709,6 +2107,28 @@ type ExperimentTemplateCloudWatchLogsLogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateCloudWatchLogsLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateCloudWatchLogsLogConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateCloudWatchLogsLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.ExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *ExperimentTemplateCloudWatchLogsLogConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateCloudWatchLogsLogConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.ExperimentTemplateCloudWatchLogsLogConfigurationInput_logGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
+}
+
 // Describes the experiment options for an experiment template.
 type ExperimentTemplateExperimentOptions struct {
 
@@ -719,6 +2139,42 @@ type ExperimentTemplateExperimentOptions struct {
 	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateExperimentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateExperimentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateExperimentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTargeting != "" {
+		s.WriteString(schemas.ExperimentTemplateExperimentOptions_accountTargeting, string(v.AccountTargeting))
+	}
+	if v.EmptyTargetResolutionMode != "" {
+		s.WriteString(schemas.ExperimentTemplateExperimentOptions_emptyTargetResolutionMode, string(v.EmptyTargetResolutionMode))
+	}
+}
+func (v *ExperimentTemplateExperimentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateExperimentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateExperimentOptions_accountTargeting:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentTemplateExperimentOptions_accountTargeting, &ev); err != nil {
+				return err
+			}
+			v.AccountTargeting = AccountTargeting(ev)
+			return nil
+		case schemas.ExperimentTemplateExperimentOptions_emptyTargetResolutionMode:
+			var ev string
+			if err := d.ReadString(schemas.ExperimentTemplateExperimentOptions_emptyTargetResolutionMode, &ev); err != nil {
+				return err
+			}
+			v.EmptyTargetResolutionMode = EmptyTargetResolutionMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the configuration for experiment logging.
@@ -734,6 +2190,44 @@ type ExperimentTemplateLogConfiguration struct {
 	S3Configuration *ExperimentTemplateS3LogConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsConfiguration != nil {
+		s.WriteStruct(schemas.ExperimentTemplateLogConfiguration_cloudWatchLogsConfiguration)
+		v.CloudWatchLogsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogSchemaVersion != nil {
+		s.WriteInt32(schemas.ExperimentTemplateLogConfiguration_logSchemaVersion, *v.LogSchemaVersion)
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ExperimentTemplateLogConfiguration_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExperimentTemplateLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateLogConfiguration_cloudWatchLogsConfiguration:
+			v.CloudWatchLogsConfiguration = &ExperimentTemplateCloudWatchLogsLogConfiguration{}
+			return v.CloudWatchLogsConfiguration.Deserialize(d)
+		case schemas.ExperimentTemplateLogConfiguration_logSchemaVersion:
+			v.LogSchemaVersion = new(int32)
+			return d.ReadInt32(schemas.ExperimentTemplateLogConfiguration_logSchemaVersion, v.LogSchemaVersion)
+		case schemas.ExperimentTemplateLogConfiguration_s3Configuration:
+			v.S3Configuration = &ExperimentTemplateS3LogConfiguration{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the experiment report configuration. For more information, see [Experiment report configurations for AWS FIS].
@@ -758,6 +2252,50 @@ type ExperimentTemplateReportConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateReportConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateReportConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.ExperimentTemplateReportConfiguration_dataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Outputs != nil {
+		s.WriteStruct(schemas.ExperimentTemplateReportConfiguration_outputs)
+		v.Outputs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostExperimentDuration != nil {
+		s.WriteString(schemas.ExperimentTemplateReportConfiguration_postExperimentDuration, *v.PostExperimentDuration)
+	}
+	if v.PreExperimentDuration != nil {
+		s.WriteString(schemas.ExperimentTemplateReportConfiguration_preExperimentDuration, *v.PreExperimentDuration)
+	}
+}
+func (v *ExperimentTemplateReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateReportConfiguration_dataSources:
+			v.DataSources = &ExperimentTemplateReportConfigurationDataSources{}
+			return v.DataSources.Deserialize(d)
+		case schemas.ExperimentTemplateReportConfiguration_outputs:
+			v.Outputs = &ExperimentTemplateReportConfigurationOutputs{}
+			return v.Outputs.Deserialize(d)
+		case schemas.ExperimentTemplateReportConfiguration_postExperimentDuration:
+			v.PostExperimentDuration = new(string)
+			return d.ReadString(schemas.ExperimentTemplateReportConfiguration_postExperimentDuration, v.PostExperimentDuration)
+		case schemas.ExperimentTemplateReportConfiguration_preExperimentDuration:
+			v.PreExperimentDuration = new(string)
+			return d.ReadString(schemas.ExperimentTemplateReportConfiguration_preExperimentDuration, v.PreExperimentDuration)
+		}
+		return nil
+	})
+}
+
 // The CloudWatch dashboards to include as data sources in the experiment report.
 type ExperimentTemplateReportConfigurationCloudWatchDashboard struct {
 
@@ -766,6 +2304,28 @@ type ExperimentTemplateReportConfigurationCloudWatchDashboard struct {
 	DashboardIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateReportConfigurationCloudWatchDashboard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateReportConfigurationCloudWatchDashboard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateReportConfigurationCloudWatchDashboard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardIdentifier != nil {
+		s.WriteString(schemas.ExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier, *v.DashboardIdentifier)
+	}
+}
+func (v *ExperimentTemplateReportConfigurationCloudWatchDashboard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationCloudWatchDashboard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier:
+			v.DashboardIdentifier = new(string)
+			return d.ReadString(schemas.ExperimentTemplateReportConfigurationCloudWatchDashboard_dashboardIdentifier, v.DashboardIdentifier)
+		}
+		return nil
+	})
 }
 
 // Describes the data sources for the experiment report.
@@ -777,6 +2337,25 @@ type ExperimentTemplateReportConfigurationDataSources struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateReportConfigurationDataSources) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateReportConfigurationDataSources)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateReportConfigurationDataSources) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentTemplateReportConfigurationCloudWatchDashboardList(s, schemas.ExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards, v.CloudWatchDashboards)
+}
+func (v *ExperimentTemplateReportConfigurationDataSources) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationDataSources, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards:
+			return deserializeExperimentTemplateReportConfigurationCloudWatchDashboardList(d, schemas.ExperimentTemplateReportConfigurationDataSources_cloudWatchDashboards, &v.CloudWatchDashboards)
+		}
+		return nil
+	})
+}
+
 // Specifies the data sources for the experiment report.
 type ExperimentTemplateReportConfigurationDataSourcesInput struct {
 
@@ -784,6 +2363,25 @@ type ExperimentTemplateReportConfigurationDataSourcesInput struct {
 	CloudWatchDashboards []ReportConfigurationCloudWatchDashboardInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateReportConfigurationDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateReportConfigurationDataSourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateReportConfigurationDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReportConfigurationCloudWatchDashboardInputList(s, schemas.ExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards, v.CloudWatchDashboards)
+}
+func (v *ExperimentTemplateReportConfigurationDataSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationDataSourcesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards:
+			return deserializeReportConfigurationCloudWatchDashboardInputList(d, schemas.ExperimentTemplateReportConfigurationDataSourcesInput_cloudWatchDashboards, &v.CloudWatchDashboards)
+		}
+		return nil
+	})
 }
 
 // The output destinations of the experiment report.
@@ -795,6 +2393,30 @@ type ExperimentTemplateReportConfigurationOutputs struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateReportConfigurationOutputs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateReportConfigurationOutputs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateReportConfigurationOutputs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ExperimentTemplateReportConfigurationOutputs_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExperimentTemplateReportConfigurationOutputs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationOutputs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateReportConfigurationOutputs_s3Configuration:
+			v.S3Configuration = &ReportConfigurationS3Output{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies the outputs for the experiment templates.
 type ExperimentTemplateReportConfigurationOutputsInput struct {
 
@@ -802,6 +2424,30 @@ type ExperimentTemplateReportConfigurationOutputsInput struct {
 	S3Configuration *ReportConfigurationS3OutputInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateReportConfigurationOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateReportConfigurationOutputsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateReportConfigurationOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ExperimentTemplateReportConfigurationOutputsInput_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExperimentTemplateReportConfigurationOutputsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateReportConfigurationOutputsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateReportConfigurationOutputsInput_s3Configuration:
+			v.S3Configuration = &ReportConfigurationS3OutputInput{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration for experiment logging to Amazon S3.
@@ -814,6 +2460,34 @@ type ExperimentTemplateS3LogConfiguration struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateS3LogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateS3LogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateS3LogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ExperimentTemplateS3LogConfiguration_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExperimentTemplateS3LogConfiguration_prefix, *v.Prefix)
+	}
+}
+func (v *ExperimentTemplateS3LogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateS3LogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateS3LogConfiguration_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ExperimentTemplateS3LogConfiguration_bucketName, v.BucketName)
+		case schemas.ExperimentTemplateS3LogConfiguration_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExperimentTemplateS3LogConfiguration_prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for experiment logging to Amazon S3.
@@ -830,6 +2504,34 @@ type ExperimentTemplateS3LogConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateS3LogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateS3LogConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateS3LogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ExperimentTemplateS3LogConfigurationInput_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ExperimentTemplateS3LogConfigurationInput_prefix, *v.Prefix)
+	}
+}
+func (v *ExperimentTemplateS3LogConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateS3LogConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateS3LogConfigurationInput_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ExperimentTemplateS3LogConfigurationInput_bucketName, v.BucketName)
+		case schemas.ExperimentTemplateS3LogConfigurationInput_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ExperimentTemplateS3LogConfigurationInput_prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // Describes a stop condition for an experiment template.
 type ExperimentTemplateStopCondition struct {
 
@@ -840,6 +2542,34 @@ type ExperimentTemplateStopCondition struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateStopCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateStopCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateStopCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteString(schemas.ExperimentTemplateStopCondition_source, *v.Source)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ExperimentTemplateStopCondition_value, *v.Value)
+	}
+}
+func (v *ExperimentTemplateStopCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateStopCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateStopCondition_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.ExperimentTemplateStopCondition_source, v.Source)
+		case schemas.ExperimentTemplateStopCondition_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ExperimentTemplateStopCondition_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of an experiment template.
@@ -866,6 +2596,55 @@ type ExperimentTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ExperimentTemplateSummary_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExperimentTemplateSummary_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExperimentTemplateSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExperimentTemplateSummary_id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ExperimentTemplateSummary_lastUpdateTime, *v.LastUpdateTime)
+	}
+	serializeTagMap(s, schemas.ExperimentTemplateSummary_tags, v.Tags)
+}
+func (v *ExperimentTemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ExperimentTemplateSummary_arn, v.Arn)
+		case schemas.ExperimentTemplateSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentTemplateSummary_creationTime, v.CreationTime)
+		case schemas.ExperimentTemplateSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExperimentTemplateSummary_description, v.Description)
+		case schemas.ExperimentTemplateSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExperimentTemplateSummary_id, v.Id)
+		case schemas.ExperimentTemplateSummary_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ExperimentTemplateSummary_lastUpdateTime, v.LastUpdateTime)
+		case schemas.ExperimentTemplateSummary_tags:
+			return deserializeTagMap(d, schemas.ExperimentTemplateSummary_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a target for an experiment template.
 type ExperimentTemplateTarget struct {
 
@@ -890,6 +2669,46 @@ type ExperimentTemplateTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentTemplateTargetFilterList(s, schemas.ExperimentTemplateTarget_filters, v.Filters)
+	serializeExperimentTemplateTargetParameterMap(s, schemas.ExperimentTemplateTarget_parameters, v.Parameters)
+	serializeResourceArnList(s, schemas.ExperimentTemplateTarget_resourceArns, v.ResourceArns)
+	serializeTagMap(s, schemas.ExperimentTemplateTarget_resourceTags, v.ResourceTags)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ExperimentTemplateTarget_resourceType, *v.ResourceType)
+	}
+	if v.SelectionMode != nil {
+		s.WriteString(schemas.ExperimentTemplateTarget_selectionMode, *v.SelectionMode)
+	}
+}
+func (v *ExperimentTemplateTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateTarget_filters:
+			return deserializeExperimentTemplateTargetFilterList(d, schemas.ExperimentTemplateTarget_filters, &v.Filters)
+		case schemas.ExperimentTemplateTarget_parameters:
+			return deserializeExperimentTemplateTargetParameterMap(d, schemas.ExperimentTemplateTarget_parameters, &v.Parameters)
+		case schemas.ExperimentTemplateTarget_resourceArns:
+			return deserializeResourceArnList(d, schemas.ExperimentTemplateTarget_resourceArns, &v.ResourceArns)
+		case schemas.ExperimentTemplateTarget_resourceTags:
+			return deserializeTagMap(d, schemas.ExperimentTemplateTarget_resourceTags, &v.ResourceTags)
+		case schemas.ExperimentTemplateTarget_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ExperimentTemplateTarget_resourceType, v.ResourceType)
+		case schemas.ExperimentTemplateTarget_selectionMode:
+			v.SelectionMode = new(string)
+			return d.ReadString(schemas.ExperimentTemplateTarget_selectionMode, v.SelectionMode)
+		}
+		return nil
+	})
+}
+
 // Describes a filter used for the target resources in an experiment template.
 type ExperimentTemplateTargetFilter struct {
 
@@ -900,6 +2719,31 @@ type ExperimentTemplateTargetFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExperimentTemplateTargetFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateTargetFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateTargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.ExperimentTemplateTargetFilter_path, *v.Path)
+	}
+	serializeExperimentTemplateTargetFilterValues(s, schemas.ExperimentTemplateTargetFilter_values, v.Values)
+}
+func (v *ExperimentTemplateTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateTargetFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateTargetFilter_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ExperimentTemplateTargetFilter_path, v.Path)
+		case schemas.ExperimentTemplateTargetFilter_values:
+			return deserializeExperimentTemplateTargetFilterValues(d, schemas.ExperimentTemplateTargetFilter_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Specifies a filter used for the target resource input in an experiment template.
@@ -922,6 +2766,31 @@ type ExperimentTemplateTargetInputFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExperimentTemplateTargetInputFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExperimentTemplateTargetInputFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExperimentTemplateTargetInputFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.ExperimentTemplateTargetInputFilter_path, *v.Path)
+	}
+	serializeExperimentTemplateTargetFilterValues(s, schemas.ExperimentTemplateTargetInputFilter_values, v.Values)
+}
+func (v *ExperimentTemplateTargetInputFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExperimentTemplateTargetInputFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExperimentTemplateTargetInputFilter_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ExperimentTemplateTargetInputFilter_path, v.Path)
+		case schemas.ExperimentTemplateTargetInputFilter_values:
+			return deserializeExperimentTemplateTargetFilterValues(d, schemas.ExperimentTemplateTargetInputFilter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Specifies the CloudWatch dashboard for the experiment report.
 type ReportConfigurationCloudWatchDashboardInput struct {
 
@@ -930,6 +2799,28 @@ type ReportConfigurationCloudWatchDashboardInput struct {
 	DashboardIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReportConfigurationCloudWatchDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportConfigurationCloudWatchDashboardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportConfigurationCloudWatchDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardIdentifier != nil {
+		s.WriteString(schemas.ReportConfigurationCloudWatchDashboardInput_dashboardIdentifier, *v.DashboardIdentifier)
+	}
+}
+func (v *ReportConfigurationCloudWatchDashboardInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportConfigurationCloudWatchDashboardInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportConfigurationCloudWatchDashboardInput_dashboardIdentifier:
+			v.DashboardIdentifier = new(string)
+			return d.ReadString(schemas.ReportConfigurationCloudWatchDashboardInput_dashboardIdentifier, v.DashboardIdentifier)
+		}
+		return nil
+	})
 }
 
 // Describes the S3 destination for the experiment report.
@@ -944,6 +2835,34 @@ type ReportConfigurationS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportConfigurationS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportConfigurationS3Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportConfigurationS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ReportConfigurationS3Output_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ReportConfigurationS3Output_prefix, *v.Prefix)
+	}
+}
+func (v *ReportConfigurationS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportConfigurationS3Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportConfigurationS3Output_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ReportConfigurationS3Output_bucketName, v.BucketName)
+		case schemas.ReportConfigurationS3Output_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ReportConfigurationS3Output_prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // Specifies the S3 destination for the experiment report.
 type ReportConfigurationS3OutputInput struct {
 
@@ -954,6 +2873,34 @@ type ReportConfigurationS3OutputInput struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReportConfigurationS3OutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportConfigurationS3OutputInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportConfigurationS3OutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ReportConfigurationS3OutputInput_bucketName, *v.BucketName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ReportConfigurationS3OutputInput_prefix, *v.Prefix)
+	}
+}
+func (v *ReportConfigurationS3OutputInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportConfigurationS3OutputInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportConfigurationS3OutputInput_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ReportConfigurationS3OutputInput_bucketName, v.BucketName)
+		case schemas.ReportConfigurationS3OutputInput_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ReportConfigurationS3OutputInput_prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // Describes a resolved target.
@@ -971,6 +2918,37 @@ type ResolvedTarget struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResolvedTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResolvedTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResolvedTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResolvedTarget_resourceType, *v.ResourceType)
+	}
+	serializeTargetInformationMap(s, schemas.ResolvedTarget_targetInformation, v.TargetInformation)
+	if v.TargetName != nil {
+		s.WriteString(schemas.ResolvedTarget_targetName, *v.TargetName)
+	}
+}
+func (v *ResolvedTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResolvedTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResolvedTarget_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResolvedTarget_resourceType, v.ResourceType)
+		case schemas.ResolvedTarget_targetInformation:
+			return deserializeTargetInformationMap(d, schemas.ResolvedTarget_targetInformation, &v.TargetInformation)
+		case schemas.ResolvedTarget_targetName:
+			v.TargetName = new(string)
+			return d.ReadString(schemas.ResolvedTarget_targetName, v.TargetName)
+		}
+		return nil
+	})
+}
+
 // Describes a safety lever.
 type SafetyLever struct {
 
@@ -986,6 +2964,42 @@ type SafetyLever struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SafetyLever) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SafetyLever)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SafetyLever) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SafetyLever_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SafetyLever_id, *v.Id)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.SafetyLever_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SafetyLever) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SafetyLever, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SafetyLever_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SafetyLever_arn, v.Arn)
+		case schemas.SafetyLever_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SafetyLever_id, v.Id)
+		case schemas.SafetyLever_state:
+			v.State = &SafetyLeverState{}
+			return v.State.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the state of the safety lever.
 type SafetyLeverState struct {
 
@@ -998,6 +3012,38 @@ type SafetyLeverState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SafetyLeverState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SafetyLeverState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SafetyLeverState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.SafetyLeverState_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SafetyLeverState_status, string(v.Status))
+	}
+}
+func (v *SafetyLeverState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SafetyLeverState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SafetyLeverState_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.SafetyLeverState_reason, v.Reason)
+		case schemas.SafetyLeverState_status:
+			var ev string
+			if err := d.ReadString(schemas.SafetyLeverState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SafetyLeverStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies experiment options for running an experiment.
 type StartExperimentExperimentOptionsInput struct {
 
@@ -1005,6 +3051,32 @@ type StartExperimentExperimentOptionsInput struct {
 	ActionsMode ActionsMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartExperimentExperimentOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExperimentExperimentOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExperimentExperimentOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionsMode != "" {
+		s.WriteString(schemas.StartExperimentExperimentOptionsInput_actionsMode, string(v.ActionsMode))
+	}
+}
+func (v *StartExperimentExperimentOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExperimentExperimentOptionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExperimentExperimentOptionsInput_actionsMode:
+			var ev string
+			if err := d.ReadString(schemas.StartExperimentExperimentOptionsInput_actionsMode, &ev); err != nil {
+				return err
+			}
+			v.ActionsMode = ActionsMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a target account configuration.
@@ -1022,6 +3094,40 @@ type TargetAccountConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetAccountConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetAccountConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetAccountConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.TargetAccountConfiguration_accountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TargetAccountConfiguration_description, *v.Description)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TargetAccountConfiguration_roleArn, *v.RoleArn)
+	}
+}
+func (v *TargetAccountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetAccountConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetAccountConfiguration_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.TargetAccountConfiguration_accountId, v.AccountId)
+		case schemas.TargetAccountConfiguration_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TargetAccountConfiguration_description, v.Description)
+		case schemas.TargetAccountConfiguration_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.TargetAccountConfiguration_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Provides a summary of a target account configuration.
 type TargetAccountConfigurationSummary struct {
 
@@ -1035,6 +3141,40 @@ type TargetAccountConfigurationSummary struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetAccountConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetAccountConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetAccountConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.TargetAccountConfigurationSummary_accountId, *v.AccountId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TargetAccountConfigurationSummary_description, *v.Description)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TargetAccountConfigurationSummary_roleArn, *v.RoleArn)
+	}
+}
+func (v *TargetAccountConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetAccountConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetAccountConfigurationSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.TargetAccountConfigurationSummary_accountId, v.AccountId)
+		case schemas.TargetAccountConfigurationSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TargetAccountConfigurationSummary_description, v.Description)
+		case schemas.TargetAccountConfigurationSummary_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.TargetAccountConfigurationSummary_roleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 // Describes a resource type.
@@ -1052,6 +3192,37 @@ type TargetResourceType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetResourceType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetResourceType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetResourceType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.TargetResourceType_description, *v.Description)
+	}
+	serializeTargetResourceTypeParameterMap(s, schemas.TargetResourceType_parameters, v.Parameters)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TargetResourceType_resourceType, *v.ResourceType)
+	}
+}
+func (v *TargetResourceType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetResourceType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetResourceType_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TargetResourceType_description, v.Description)
+		case schemas.TargetResourceType_parameters:
+			return deserializeTargetResourceTypeParameterMap(d, schemas.TargetResourceType_parameters, &v.Parameters)
+		case schemas.TargetResourceType_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TargetResourceType_resourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Describes the parameters for a resource type. Use parameters to determine which
 // tasks are identified during target resolution.
 type TargetResourceTypeParameter struct {
@@ -1065,6 +3236,34 @@ type TargetResourceTypeParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetResourceTypeParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetResourceTypeParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetResourceTypeParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.TargetResourceTypeParameter_description, *v.Description)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.TargetResourceTypeParameter_required, *v.Required)
+	}
+}
+func (v *TargetResourceTypeParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetResourceTypeParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetResourceTypeParameter_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TargetResourceTypeParameter_description, v.Description)
+		case schemas.TargetResourceTypeParameter_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.TargetResourceTypeParameter_required, v.Required)
+		}
+		return nil
+	})
+}
+
 // Describes a resource type.
 type TargetResourceTypeSummary struct {
 
@@ -1075,6 +3274,34 @@ type TargetResourceTypeSummary struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetResourceTypeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetResourceTypeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetResourceTypeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.TargetResourceTypeSummary_description, *v.Description)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.TargetResourceTypeSummary_resourceType, *v.ResourceType)
+	}
+}
+func (v *TargetResourceTypeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetResourceTypeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetResourceTypeSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TargetResourceTypeSummary_description, v.Description)
+		case schemas.TargetResourceTypeSummary_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.TargetResourceTypeSummary_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Specifies an action for an experiment template.
@@ -1099,6 +3326,43 @@ type UpdateExperimentTemplateActionInputItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateActionInputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateActionInputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateActionInputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionId != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateActionInputItem_actionId, *v.ActionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateActionInputItem_description, *v.Description)
+	}
+	serializeExperimentTemplateActionParameterMap(s, schemas.UpdateExperimentTemplateActionInputItem_parameters, v.Parameters)
+	serializeExperimentTemplateActionStartAfterList(s, schemas.UpdateExperimentTemplateActionInputItem_startAfter, v.StartAfter)
+	serializeExperimentTemplateActionTargetMap(s, schemas.UpdateExperimentTemplateActionInputItem_targets, v.Targets)
+}
+func (v *UpdateExperimentTemplateActionInputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateActionInputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateActionInputItem_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateActionInputItem_actionId, v.ActionId)
+		case schemas.UpdateExperimentTemplateActionInputItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateActionInputItem_description, v.Description)
+		case schemas.UpdateExperimentTemplateActionInputItem_parameters:
+			return deserializeExperimentTemplateActionParameterMap(d, schemas.UpdateExperimentTemplateActionInputItem_parameters, &v.Parameters)
+		case schemas.UpdateExperimentTemplateActionInputItem_startAfter:
+			return deserializeExperimentTemplateActionStartAfterList(d, schemas.UpdateExperimentTemplateActionInputItem_startAfter, &v.StartAfter)
+		case schemas.UpdateExperimentTemplateActionInputItem_targets:
+			return deserializeExperimentTemplateActionTargetMap(d, schemas.UpdateExperimentTemplateActionInputItem_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 // Specifies an experiment option for an experiment template.
 type UpdateExperimentTemplateExperimentOptionsInput struct {
 
@@ -1106,6 +3370,32 @@ type UpdateExperimentTemplateExperimentOptionsInput struct {
 	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateExperimentTemplateExperimentOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateExperimentOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateExperimentOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmptyTargetResolutionMode != "" {
+		s.WriteString(schemas.UpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode, string(v.EmptyTargetResolutionMode))
+	}
+}
+func (v *UpdateExperimentTemplateExperimentOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateExperimentOptionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateExperimentTemplateExperimentOptionsInput_emptyTargetResolutionMode, &ev); err != nil {
+				return err
+			}
+			v.EmptyTargetResolutionMode = EmptyTargetResolutionMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the configuration for experiment logging.
@@ -1121,6 +3411,44 @@ type UpdateExperimentTemplateLogConfigurationInput struct {
 	S3Configuration *ExperimentTemplateS3LogConfigurationInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateExperimentTemplateLogConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateLogConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateLogConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration)
+		v.CloudWatchLogsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogSchemaVersion != nil {
+		s.WriteInt32(schemas.UpdateExperimentTemplateLogConfigurationInput_logSchemaVersion, *v.LogSchemaVersion)
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateLogConfigurationInput_s3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExperimentTemplateLogConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateLogConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateLogConfigurationInput_cloudWatchLogsConfiguration:
+			v.CloudWatchLogsConfiguration = &ExperimentTemplateCloudWatchLogsLogConfigurationInput{}
+			return v.CloudWatchLogsConfiguration.Deserialize(d)
+		case schemas.UpdateExperimentTemplateLogConfigurationInput_logSchemaVersion:
+			v.LogSchemaVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateExperimentTemplateLogConfigurationInput_logSchemaVersion, v.LogSchemaVersion)
+		case schemas.UpdateExperimentTemplateLogConfigurationInput_s3Configuration:
+			v.S3Configuration = &ExperimentTemplateS3LogConfigurationInput{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the input for the experiment report configuration.
@@ -1143,6 +3471,50 @@ type UpdateExperimentTemplateReportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateReportConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateReportConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateReportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSources != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateReportConfigurationInput_dataSources)
+		v.DataSources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Outputs != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateReportConfigurationInput_outputs)
+		v.Outputs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostExperimentDuration != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateReportConfigurationInput_postExperimentDuration, *v.PostExperimentDuration)
+	}
+	if v.PreExperimentDuration != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateReportConfigurationInput_preExperimentDuration, *v.PreExperimentDuration)
+	}
+}
+func (v *UpdateExperimentTemplateReportConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateReportConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateReportConfigurationInput_dataSources:
+			v.DataSources = &ExperimentTemplateReportConfigurationDataSourcesInput{}
+			return v.DataSources.Deserialize(d)
+		case schemas.UpdateExperimentTemplateReportConfigurationInput_outputs:
+			v.Outputs = &ExperimentTemplateReportConfigurationOutputsInput{}
+			return v.Outputs.Deserialize(d)
+		case schemas.UpdateExperimentTemplateReportConfigurationInput_postExperimentDuration:
+			v.PostExperimentDuration = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateReportConfigurationInput_postExperimentDuration, v.PostExperimentDuration)
+		case schemas.UpdateExperimentTemplateReportConfigurationInput_preExperimentDuration:
+			v.PreExperimentDuration = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateReportConfigurationInput_preExperimentDuration, v.PreExperimentDuration)
+		}
+		return nil
+	})
+}
+
 // Specifies a stop condition for an experiment. You can define a stop condition
 // as a CloudWatch alarm.
 type UpdateExperimentTemplateStopConditionInput struct {
@@ -1158,6 +3530,34 @@ type UpdateExperimentTemplateStopConditionInput struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateExperimentTemplateStopConditionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateStopConditionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateStopConditionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateStopConditionInput_source, *v.Source)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateStopConditionInput_value, *v.Value)
+	}
+}
+func (v *UpdateExperimentTemplateStopConditionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateStopConditionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateStopConditionInput_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateStopConditionInput_source, v.Source)
+		case schemas.UpdateExperimentTemplateStopConditionInput_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateStopConditionInput_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies a target for an experiment. You must specify at least one Amazon
@@ -1189,6 +3589,46 @@ type UpdateExperimentTemplateTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateTargetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentTemplateTargetFilterInputList(s, schemas.UpdateExperimentTemplateTargetInput_filters, v.Filters)
+	serializeExperimentTemplateTargetParameterMap(s, schemas.UpdateExperimentTemplateTargetInput_parameters, v.Parameters)
+	serializeResourceArnList(s, schemas.UpdateExperimentTemplateTargetInput_resourceArns, v.ResourceArns)
+	serializeTagMap(s, schemas.UpdateExperimentTemplateTargetInput_resourceTags, v.ResourceTags)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateTargetInput_resourceType, *v.ResourceType)
+	}
+	if v.SelectionMode != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateTargetInput_selectionMode, *v.SelectionMode)
+	}
+}
+func (v *UpdateExperimentTemplateTargetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateTargetInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateTargetInput_filters:
+			return deserializeExperimentTemplateTargetFilterInputList(d, schemas.UpdateExperimentTemplateTargetInput_filters, &v.Filters)
+		case schemas.UpdateExperimentTemplateTargetInput_parameters:
+			return deserializeExperimentTemplateTargetParameterMap(d, schemas.UpdateExperimentTemplateTargetInput_parameters, &v.Parameters)
+		case schemas.UpdateExperimentTemplateTargetInput_resourceArns:
+			return deserializeResourceArnList(d, schemas.UpdateExperimentTemplateTargetInput_resourceArns, &v.ResourceArns)
+		case schemas.UpdateExperimentTemplateTargetInput_resourceTags:
+			return deserializeTagMap(d, schemas.UpdateExperimentTemplateTargetInput_resourceTags, &v.ResourceTags)
+		case schemas.UpdateExperimentTemplateTargetInput_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateTargetInput_resourceType, v.ResourceType)
+		case schemas.UpdateExperimentTemplateTargetInput_selectionMode:
+			v.SelectionMode = new(string)
+			return d.ReadString(schemas.UpdateExperimentTemplateTargetInput_selectionMode, v.SelectionMode)
+		}
+		return nil
+	})
+}
+
 // Specifies a state for a safety lever.
 type UpdateSafetyLeverStateInput struct {
 
@@ -1203,6 +3643,38 @@ type UpdateSafetyLeverStateInput struct {
 	Status SafetyLeverStatusInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSafetyLeverStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSafetyLeverStateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSafetyLeverStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.UpdateSafetyLeverStateInput_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSafetyLeverStateInput_status, string(v.Status))
+	}
+}
+func (v *UpdateSafetyLeverStateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSafetyLeverStateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSafetyLeverStateInput_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.UpdateSafetyLeverStateInput_reason, v.Reason)
+		case schemas.UpdateSafetyLeverStateInput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSafetyLeverStateInput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = SafetyLeverStatusInput(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

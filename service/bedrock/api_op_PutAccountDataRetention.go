@@ -4,7 +4,9 @@ package bedrock
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type PutAccountDataRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDataRetentionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDataRetentionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDataRetentionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.PutAccountDataRetentionRequest_mode, string(v.Mode))
+	}
+}
+
 type PutAccountDataRetentionOutput struct {
 
 	// The data retention mode set for the account.
@@ -51,13 +65,42 @@ type PutAccountDataRetentionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDataRetentionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDataRetentionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDataRetentionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.PutAccountDataRetentionResponse_mode, string(v.Mode))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.PutAccountDataRetentionResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *PutAccountDataRetentionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountDataRetentionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAccountDataRetentionResponse_mode:
+			var ev string
+			if err := d.ReadString(schemas.PutAccountDataRetentionResponse_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.DataRetentionMode(ev)
+			return nil
+		case schemas.PutAccountDataRetentionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PutAccountDataRetentionResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountDataRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountDataRetention{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDataRetention, schemas.PutAccountDataRetentionRequest, schemas.PutAccountDataRetentionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountDataRetention{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDataRetention, schemas.PutAccountDataRetentionRequest, schemas.PutAccountDataRetentionResponse), output: &PutAccountDataRetentionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

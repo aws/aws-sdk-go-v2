@@ -56,8 +56,9 @@ type StartRunBatchInput struct {
 	// An optional user-friendly name for the run batch.
 	BatchName *string
 
-	// AWS tags to associate with the batch resource. These tags are not inherited by
-	// individual runs. To tag individual runs, use defaultRunSetting.runTags .
+	// Amazon Web Services tags to associate with the batch resource. These tags are
+	// not inherited by individual runs. To tag individual runs, use
+	// defaultRunSetting.runTags .
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -75,7 +76,7 @@ type StartRunBatchOutput struct {
 	// initialized.
 	Status types.BatchStatus
 
-	// AWS tags associated with the run batch.
+	// Amazon Web Services tags associated with the run batch.
 	Tags map[string]string
 
 	// The universally unique identifier (UUID) for the run batch.

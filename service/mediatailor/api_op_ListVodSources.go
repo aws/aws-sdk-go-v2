@@ -5,7 +5,9 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,40 @@ type ListVodSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVodSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVodSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVodSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVodSourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVodSourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.ListVodSourcesRequest_SourceLocationName, *v.SourceLocationName)
+	}
+}
+func (v *ListVodSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVodSourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVodSourcesRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListVodSourcesRequest_MaxResults, v.MaxResults)
+		case schemas.ListVodSourcesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVodSourcesRequest_NextToken, v.NextToken)
+		case schemas.ListVodSourcesRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.ListVodSourcesRequest_SourceLocationName, v.SourceLocationName)
+		}
+		return nil
+	})
+}
+
 type ListVodSourcesOutput struct {
 
 	// Lists the VOD sources.
@@ -72,13 +108,35 @@ type ListVodSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVodSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVodSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVodSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfVodSource(s, schemas.ListVodSourcesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVodSourcesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListVodSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVodSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVodSourcesResponse_Items:
+			return deserialize__listOfVodSource(d, schemas.ListVodSourcesResponse_Items, &v.Items)
+		case schemas.ListVodSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVodSourcesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVodSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVodSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVodSources, schemas.ListVodSourcesRequest, schemas.ListVodSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVodSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVodSources, schemas.ListVodSourcesRequest, schemas.ListVodSourcesResponse), output: &ListVodSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

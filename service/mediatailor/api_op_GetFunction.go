@@ -4,7 +4,9 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type GetFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionId != nil {
+		s.WriteString(schemas.GetFunctionRequest_FunctionId, *v.FunctionId)
+	}
+}
+
 // -- Define Mixin --
 type GetFunctionOutput struct {
 
@@ -53,6 +67,10 @@ type GetFunctionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the function.
 	Arn *string
+
+	// The configuration for an AWS_SERVICE_REQUEST function. Specifies the target
+	// service, target Region, and request parameters.
+	AwsServiceRequestConfiguration *types.AwsServiceRequestConfiguration
 
 	// The configuration for a CONCURRENT_EXECUTOR function.
 	ConcurrentExecutorConfiguration *types.ConcurrentExecutorConfiguration
@@ -85,13 +103,105 @@ type GetFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFunctionResponse_Arn, *v.Arn)
+	}
+	if v.AwsServiceRequestConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_AwsServiceRequestConfiguration)
+		v.AwsServiceRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConcurrentExecutorConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_ConcurrentExecutorConfiguration)
+		v.ConcurrentExecutorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomOutputConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_CustomOutputConfiguration)
+		v.CustomOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFunctionResponse_Description, *v.Description)
+	}
+	if v.FunctionId != nil {
+		s.WriteString(schemas.GetFunctionResponse_FunctionId, *v.FunctionId)
+	}
+	if v.FunctionType != "" {
+		s.WriteString(schemas.GetFunctionResponse_FunctionType, string(v.FunctionType))
+	}
+	if v.HttpRequestConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_HttpRequestConfiguration)
+		v.HttpRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SequentialExecutorConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_SequentialExecutorConfiguration)
+		v.SequentialExecutorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	if v.VastRequestConfiguration != nil {
+		s.WriteStruct(schemas.GetFunctionResponse_VastRequestConfiguration)
+		v.VastRequestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFunctionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFunctionResponse_Arn, v.Arn)
+		case schemas.GetFunctionResponse_AwsServiceRequestConfiguration:
+			v.AwsServiceRequestConfiguration = &types.AwsServiceRequestConfiguration{}
+			return v.AwsServiceRequestConfiguration.Deserialize(d)
+		case schemas.GetFunctionResponse_ConcurrentExecutorConfiguration:
+			v.ConcurrentExecutorConfiguration = &types.ConcurrentExecutorConfiguration{}
+			return v.ConcurrentExecutorConfiguration.Deserialize(d)
+		case schemas.GetFunctionResponse_CustomOutputConfiguration:
+			v.CustomOutputConfiguration = &types.CustomOutputConfiguration{}
+			return v.CustomOutputConfiguration.Deserialize(d)
+		case schemas.GetFunctionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFunctionResponse_Description, v.Description)
+		case schemas.GetFunctionResponse_FunctionId:
+			v.FunctionId = new(string)
+			return d.ReadString(schemas.GetFunctionResponse_FunctionId, v.FunctionId)
+		case schemas.GetFunctionResponse_FunctionType:
+			var ev string
+			if err := d.ReadString(schemas.GetFunctionResponse_FunctionType, &ev); err != nil {
+				return err
+			}
+			v.FunctionType = types.FunctionType(ev)
+			return nil
+		case schemas.GetFunctionResponse_HttpRequestConfiguration:
+			v.HttpRequestConfiguration = &types.HttpRequestConfiguration{}
+			return v.HttpRequestConfiguration.Deserialize(d)
+		case schemas.GetFunctionResponse_SequentialExecutorConfiguration:
+			v.SequentialExecutorConfiguration = &types.SequentialExecutorConfiguration{}
+			return v.SequentialExecutorConfiguration.Deserialize(d)
+		case schemas.GetFunctionResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.GetFunctionResponse_Tags, &v.Tags)
+		case schemas.GetFunctionResponse_VastRequestConfiguration:
+			v.VastRequestConfiguration = &types.VastRequestConfiguration{}
+			return v.VastRequestConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunction, schemas.GetFunctionRequest, schemas.GetFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunction, schemas.GetFunctionRequest, schemas.GetFunctionResponse), output: &GetFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

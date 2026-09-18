@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeregisterGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterGatewayInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterGatewayInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterGatewayInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != nil {
+		s.WriteBool(schemas.DeregisterGatewayInstanceRequest_Force, *v.Force)
+	}
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.DeregisterGatewayInstanceRequest_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+
 type DeregisterGatewayInstanceOutput struct {
 
 	//  The ARN of the instance.
@@ -56,13 +73,42 @@ type DeregisterGatewayInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterGatewayInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterGatewayInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterGatewayInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.DeregisterGatewayInstanceResponse_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+	if v.InstanceState != "" {
+		s.WriteString(schemas.DeregisterGatewayInstanceResponse_InstanceState, string(v.InstanceState))
+	}
+}
+func (v *DeregisterGatewayInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterGatewayInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterGatewayInstanceResponse_GatewayInstanceArn:
+			v.GatewayInstanceArn = new(string)
+			return d.ReadString(schemas.DeregisterGatewayInstanceResponse_GatewayInstanceArn, v.GatewayInstanceArn)
+		case schemas.DeregisterGatewayInstanceResponse_InstanceState:
+			var ev string
+			if err := d.ReadString(schemas.DeregisterGatewayInstanceResponse_InstanceState, &ev); err != nil {
+				return err
+			}
+			v.InstanceState = types.InstanceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterGatewayInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterGatewayInstance, schemas.DeregisterGatewayInstanceRequest, schemas.DeregisterGatewayInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterGatewayInstance, schemas.DeregisterGatewayInstanceRequest, schemas.DeregisterGatewayInstanceResponse), output: &DeregisterGatewayInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,27 @@ type GetFindingRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.GetFindingRecommendationRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFindingRecommendationRequest_id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetFindingRecommendationRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingRecommendationRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetFindingRecommendationOutput struct {
 
 	// The type of recommendation for the finding.
@@ -90,13 +113,81 @@ type GetFindingRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.GetFindingRecommendationResponse_completedAt, *v.CompletedAt)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetFindingRecommendationResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFindingRecommendationResponse_nextToken, *v.NextToken)
+	}
+	if v.RecommendationType != "" {
+		s.WriteString(schemas.GetFindingRecommendationResponse_recommendationType, string(v.RecommendationType))
+	}
+	serializeRecommendedStepList(s, schemas.GetFindingRecommendationResponse_recommendedSteps, v.RecommendedSteps)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetFindingRecommendationResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetFindingRecommendationResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetFindingRecommendationResponse_status, string(v.Status))
+	}
+}
+func (v *GetFindingRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingRecommendationResponse_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingRecommendationResponse_completedAt, v.CompletedAt)
+		case schemas.GetFindingRecommendationResponse_error:
+			v.Error = &types.RecommendationError{}
+			return v.Error.Deserialize(d)
+		case schemas.GetFindingRecommendationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFindingRecommendationResponse_nextToken, v.NextToken)
+		case schemas.GetFindingRecommendationResponse_recommendationType:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingRecommendationResponse_recommendationType, &ev); err != nil {
+				return err
+			}
+			v.RecommendationType = types.RecommendationType(ev)
+			return nil
+		case schemas.GetFindingRecommendationResponse_recommendedSteps:
+			return deserializeRecommendedStepList(d, schemas.GetFindingRecommendationResponse_recommendedSteps, &v.RecommendedSteps)
+		case schemas.GetFindingRecommendationResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetFindingRecommendationResponse_resourceArn, v.ResourceArn)
+		case schemas.GetFindingRecommendationResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingRecommendationResponse_startedAt, v.StartedAt)
+		case schemas.GetFindingRecommendationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingRecommendationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingRecommendation, schemas.GetFindingRecommendationRequest, schemas.GetFindingRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingRecommendation, schemas.GetFindingRecommendationRequest, schemas.GetFindingRecommendationResponse), output: &GetFindingRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

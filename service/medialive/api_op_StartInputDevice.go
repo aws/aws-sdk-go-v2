@@ -4,6 +4,8 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StartInputDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInputDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInputDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInputDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputDeviceId != nil {
+		s.WriteString(schemas.StartInputDeviceRequest_InputDeviceId, *v.InputDeviceId)
+	}
+}
+
 // Placeholder documentation for StartInputDeviceResponse
 type StartInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -44,13 +58,26 @@ type StartInputDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInputDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInputDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInputDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartInputDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInputDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInputDevice, schemas.StartInputDeviceRequest, schemas.StartInputDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartInputDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInputDevice, schemas.StartInputDeviceRequest, schemas.StartInputDeviceResponse), output: &StartInputDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

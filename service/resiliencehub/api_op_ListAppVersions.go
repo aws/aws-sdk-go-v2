@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,52 @@ type ListAppVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListAppVersionsRequest_appArn, *v.AppArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListAppVersionsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListAppVersionsRequest_startTime, *v.StartTime)
+	}
+}
+func (v *ListAppVersionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppVersionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppVersionsRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListAppVersionsRequest_appArn, v.AppArn)
+		case schemas.ListAppVersionsRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListAppVersionsRequest_endTime, v.EndTime)
+		case schemas.ListAppVersionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppVersionsRequest_maxResults, v.MaxResults)
+		case schemas.ListAppVersionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppVersionsRequest_nextToken, v.NextToken)
+		case schemas.ListAppVersionsRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListAppVersionsRequest_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 type ListAppVersionsOutput struct {
 
 	// The version of the application.
@@ -71,13 +119,35 @@ type ListAppVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppVersionList(s, schemas.ListAppVersionsResponse_appVersions, v.AppVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppVersionsResponse_appVersions:
+			return deserializeAppVersionList(d, schemas.ListAppVersionsResponse_appVersions, &v.AppVersions)
+		case schemas.ListAppVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppVersions, schemas.ListAppVersionsRequest, schemas.ListAppVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppVersions, schemas.ListAppVersionsRequest, schemas.ListAppVersionsResponse), output: &ListAppVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

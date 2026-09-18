@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ReservationName":"__ReservationName__","ReservedElasticsearchInstanceId":"__ReservedElasticsearchInstanceId__"}

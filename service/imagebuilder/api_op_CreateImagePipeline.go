@@ -5,12 +5,14 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new image pipeline. Image pipelines enable you to automate the
-// creation and distribution of images.
+// Creates a new image pipeline. Use image pipelines to automate the creation and
+// distribution of images.
 func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePipelineInput, optFns ...func(*Options)) (*CreateImagePipelineOutput, error) {
 	if params == nil {
 		params = &CreateImagePipelineInput{}
@@ -28,16 +30,18 @@ func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePip
 
 type CreateImagePipelineInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
-	// used to build images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the infrastructure configuration that builds
+	// images created by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
@@ -54,21 +58,26 @@ type CreateImagePipelineInput struct {
 	// The description of the image pipeline.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the distribution configuration that will be
-	// used to configure and distribute images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the distribution configuration that
+	// configures and distributes images created by this image pipeline.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
 	// Image Builder access to perform workflow actions.
 	ExecutionRole *string
 
-	// The Amazon Resource Name (ARN) of the image recipe that will be used to
-	// configure images created by this image pipeline.
+	// The Amazon Resource Name (ARN) of the image recipe that configures images
+	// created by this image pipeline.
 	ImageRecipeArn *string
 
 	// Contains settings for vulnerability scans.
@@ -102,6 +111,71 @@ type CreateImagePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImagePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImagePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_description, *v.Description)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateImagePipelineRequest_dryRun, v.DryRun)
+	}
+	if v.EnhancedImageMetadataEnabled != nil {
+		s.WriteBool(schemas.CreateImagePipelineRequest_enhancedImageMetadataEnabled, *v.EnhancedImageMetadataEnabled)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.ImageScanningConfiguration != nil {
+		s.WriteStruct(schemas.CreateImagePipelineRequest_imageScanningConfiguration)
+		v.ImageScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateImagePipelineRequest_imageTags, v.ImageTags)
+	if v.ImageTestsConfiguration != nil {
+		s.WriteStruct(schemas.CreateImagePipelineRequest_imageTestsConfiguration)
+		v.ImageTestsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.CreateImagePipelineRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateImagePipelineRequest_name, *v.Name)
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.CreateImagePipelineRequest_schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateImagePipelineRequest_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateImagePipelineRequest_tags, v.Tags)
+	serializeWorkflowConfigurationList(s, schemas.CreateImagePipelineRequest_workflows, v.Workflows)
+}
+
 type CreateImagePipelineOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -120,13 +194,44 @@ type CreateImagePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImagePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImagePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImagePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImagePipelineResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImagePipelineArn != nil {
+		s.WriteString(schemas.CreateImagePipelineResponse_imagePipelineArn, *v.ImagePipelineArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateImagePipelineResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateImagePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImagePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImagePipelineResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateImagePipelineResponse_clientToken, v.ClientToken)
+		case schemas.CreateImagePipelineResponse_imagePipelineArn:
+			v.ImagePipelineArn = new(string)
+			return d.ReadString(schemas.CreateImagePipelineResponse_imagePipelineArn, v.ImagePipelineArn)
+		case schemas.CreateImagePipelineResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateImagePipelineResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImagePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImagePipeline, schemas.CreateImagePipelineRequest, schemas.CreateImagePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImagePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImagePipeline, schemas.CreateImagePipelineRequest, schemas.CreateImagePipelineResponse), output: &CreateImagePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -9,10 +9,16 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Stops the ingestion of live events on an event data store specified as either
 // an ARN or the ID portion of the ARN. To stop ingestion, the event data store
 // Status must be ENABLED and the eventCategory must be Management , Data ,
 // NetworkActivity , or ConfigurationItem .
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) StopEventDataStoreIngestion(ctx context.Context, params *StopEventDataStoreIngestionInput, optFns ...func(*Options)) (*StopEventDataStoreIngestionOutput, error) {
 	if params == nil {
 		params = &StopEventDataStoreIngestionInput{}

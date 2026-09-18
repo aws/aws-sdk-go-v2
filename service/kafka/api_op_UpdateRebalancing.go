@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,26 @@ type UpdateRebalancingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRebalancingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRebalancingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRebalancingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateRebalancingRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateRebalancingRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.Rebalancing != nil {
+		s.WriteStruct(schemas.UpdateRebalancingRequest_Rebalancing)
+		v.Rebalancing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRebalancingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster whose intelligent rebalancing
@@ -62,13 +84,38 @@ type UpdateRebalancingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRebalancingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRebalancingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRebalancingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateRebalancingResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateRebalancingResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateRebalancingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRebalancingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRebalancingResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateRebalancingResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateRebalancingResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateRebalancingResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRebalancingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRebalancing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRebalancing, schemas.UpdateRebalancingRequest, schemas.UpdateRebalancingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRebalancing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRebalancing, schemas.UpdateRebalancingRequest, schemas.UpdateRebalancingResponse), output: &UpdateRebalancingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidNextTokenException","message":"__Message__"}

@@ -4,7 +4,9 @@ package appconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetConfigurationProfileInput struct {
 	ConfigurationProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigurationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetConfigurationProfileRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.GetConfigurationProfileRequest_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
 }
 
 type GetConfigurationProfileOutput struct {
@@ -92,13 +109,83 @@ type GetConfigurationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ConfigurationProfile_ApplicationId, *v.ApplicationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConfigurationProfile_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurationProfile_Id, *v.Id)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.ConfigurationProfile_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.ConfigurationProfile_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.ConfigurationProfile_LocationUri, *v.LocationUri)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConfigurationProfile_Name, *v.Name)
+	}
+	if v.RetrievalRoleArn != nil {
+		s.WriteString(schemas.ConfigurationProfile_RetrievalRoleArn, *v.RetrievalRoleArn)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ConfigurationProfile_Type, *v.Type)
+	}
+	serializeValidatorList(s, schemas.ConfigurationProfile_Validators, v.Validators)
+}
+func (v *GetConfigurationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationProfile_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_ApplicationId, v.ApplicationId)
+		case schemas.ConfigurationProfile_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_Description, v.Description)
+		case schemas.ConfigurationProfile_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_Id, v.Id)
+		case schemas.ConfigurationProfile_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_KmsKeyArn, v.KmsKeyArn)
+		case schemas.ConfigurationProfile_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.ConfigurationProfile_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_LocationUri, v.LocationUri)
+		case schemas.ConfigurationProfile_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_Name, v.Name)
+		case schemas.ConfigurationProfile_RetrievalRoleArn:
+			v.RetrievalRoleArn = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_RetrievalRoleArn, v.RetrievalRoleArn)
+		case schemas.ConfigurationProfile_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ConfigurationProfile_Type, v.Type)
+		case schemas.ConfigurationProfile_Validators:
+			return deserializeValidatorList(d, schemas.ConfigurationProfile_Validators, &v.Validators)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationProfile, schemas.GetConfigurationProfileRequest, schemas.ConfigurationProfile)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationProfile, schemas.GetConfigurationProfileRequest, schemas.ConfigurationProfile), output: &GetConfigurationProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

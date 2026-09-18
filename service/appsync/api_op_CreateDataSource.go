@@ -4,7 +4,9 @@ package appsync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,68 @@ type CreateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_apiId, *v.ApiId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_description, *v.Description)
+	}
+	if v.DynamodbConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_dynamodbConfig)
+		v.DynamodbConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElasticsearchConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_elasticsearchConfig)
+		v.ElasticsearchConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventBridgeConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_eventBridgeConfig)
+		v.EventBridgeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_httpConfig)
+		v.HttpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_lambdaConfig)
+		v.LambdaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricsConfig != "" {
+		s.WriteString(schemas.CreateDataSourceRequest_metricsConfig, string(v.MetricsConfig))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_name, *v.Name)
+	}
+	if v.OpenSearchServiceConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_openSearchServiceConfig)
+		v.OpenSearchServiceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelationalDatabaseConfig != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_relationalDatabaseConfig)
+		v.RelationalDatabaseConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRoleArn != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_serviceRoleArn, *v.ServiceRoleArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateDataSourceRequest_type, string(v.Type))
+	}
+}
+
 type CreateDataSourceOutput struct {
 
 	// The DataSource object.
@@ -97,13 +161,34 @@ type CreateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.CreateDataSourceResponse_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceResponse_dataSource:
+			v.DataSource = &types.DataSource{}
+			return v.DataSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse), output: &CreateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

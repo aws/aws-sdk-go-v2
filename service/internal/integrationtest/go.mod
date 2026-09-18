@@ -1,36 +1,36 @@
 module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.46.0
-	github.com/aws/aws-sdk-go-v2/config v1.33.3
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.23.3
-	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.61.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.67.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.329.0
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.107.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.111.0
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.77.0
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.51.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.49.0
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.43.0
+	github.com/aws/aws-sdk-go-v2 v1.47.0
+	github.com/aws/aws-sdk-go-v2/config v1.33.5
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.23.7
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.63.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.69.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.334.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.108.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.113.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.79.0
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.52.0
+	github.com/aws/aws-sdk-go-v2/service/sts v1.51.0
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.44.1
 	github.com/aws/smithy-go v1.28.1
 )
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.20 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.20.3 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.19.2 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.2 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.2 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.2 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.20.5 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.20.0 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.3 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.3 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.19 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.11.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.13.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.20.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/signin v1.9.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.37.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.42.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.11.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.13.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.20.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/signin v1.10.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.38.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.43.0 // indirect
 )
 
 go 1.24

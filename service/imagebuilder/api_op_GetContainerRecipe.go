@@ -4,7 +4,9 @@ package imagebuilder
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.GetContainerRecipeRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+}
+
 type GetContainerRecipeOutput struct {
 
 	// The container recipe object that is returned.
@@ -51,13 +65,48 @@ type GetContainerRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipe != nil {
+		s.WriteStruct(schemas.GetContainerRecipeResponse_containerRecipe)
+		v.ContainerRecipe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.GetContainerRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetContainerRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetContainerRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContainerRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContainerRecipeResponse_containerRecipe:
+			v.ContainerRecipe = &types.ContainerRecipe{}
+			return v.ContainerRecipe.Deserialize(d)
+		case schemas.GetContainerRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.GetContainerRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetContainerRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerRecipe, schemas.GetContainerRecipeRequest, schemas.GetContainerRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerRecipe, schemas.GetContainerRecipeRequest, schemas.GetContainerRecipeResponse), output: &GetContainerRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

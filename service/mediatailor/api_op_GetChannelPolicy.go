@@ -4,6 +4,8 @@ package mediatailor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetChannelPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.GetChannelPolicyRequest_ChannelName, *v.ChannelName)
+	}
+}
+func (v *GetChannelPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelPolicyRequest_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.GetChannelPolicyRequest_ChannelName, v.ChannelName)
+		}
+		return nil
+	})
+}
+
 type GetChannelPolicyOutput struct {
 
 	// The IAM policy for the channel. IAM policies are used to control access to your
@@ -46,13 +70,32 @@ type GetChannelPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetChannelPolicyResponse_Policy, *v.Policy)
+	}
+}
+func (v *GetChannelPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelPolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetChannelPolicyResponse_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChannelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelPolicy, schemas.GetChannelPolicyRequest, schemas.GetChannelPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChannelPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannelPolicy, schemas.GetChannelPolicyRequest, schemas.GetChannelPolicyResponse), output: &GetChannelPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

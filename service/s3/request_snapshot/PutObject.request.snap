@@ -26,6 +26,9 @@ X-Amz-Grant-Read: __GrantRead__
 X-Amz-Grant-Read-Acp: __GrantReadACP__
 X-Amz-Grant-Write-Acp: __GrantWriteACP__
 X-Amz-Meta-Key0: __Value__
+X-Amz-Object-Lock-Event-Hold: ON
+X-Amz-Object-Lock-Event-Hold-Duration-Days: 1
+X-Amz-Object-Lock-Event-Hold-Duration-Years: 1
 X-Amz-Object-Lock-Legal-Hold: ON
 X-Amz-Object-Lock-Mode: GOVERNANCE
 X-Amz-Object-Lock-Retain-Until-Date: 2000-01-01T00:00:00Z

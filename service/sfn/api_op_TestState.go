@@ -5,7 +5,9 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -150,6 +152,49 @@ type TestStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestStateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteString(schemas.TestStateInput_context, *v.Context)
+	}
+	if v.Definition != nil {
+		s.WriteString(schemas.TestStateInput_definition, *v.Definition)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.TestStateInput_input, *v.Input)
+	}
+	if v.InspectionLevel != "" {
+		s.WriteString(schemas.TestStateInput_inspectionLevel, string(v.InspectionLevel))
+	}
+	if v.Mock != nil {
+		s.WriteStruct(schemas.TestStateInput_mock)
+		v.Mock.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RevealSecrets != false {
+		s.WriteBool(schemas.TestStateInput_revealSecrets, v.RevealSecrets)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TestStateInput_roleArn, *v.RoleArn)
+	}
+	if v.StateConfiguration != nil {
+		s.WriteStruct(schemas.TestStateInput_stateConfiguration)
+		v.StateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateName != nil {
+		s.WriteString(schemas.TestStateInput_stateName, *v.StateName)
+	}
+	if v.Variables != nil {
+		s.WriteString(schemas.TestStateInput_variables, *v.Variables)
+	}
+}
+
 type TestStateOutput struct {
 
 	// A detailed explanation of the cause for the error when the execution of a state
@@ -182,13 +227,68 @@ type TestStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestStateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.TestStateOutput_cause, *v.Cause)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.TestStateOutput_error, *v.Error)
+	}
+	if v.InspectionData != nil {
+		s.WriteStruct(schemas.TestStateOutput_inspectionData)
+		v.InspectionData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextState != nil {
+		s.WriteString(schemas.TestStateOutput_nextState, *v.NextState)
+	}
+	if v.Output != nil {
+		s.WriteString(schemas.TestStateOutput_output, *v.Output)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TestStateOutput_status, string(v.Status))
+	}
+}
+func (v *TestStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestStateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestStateOutput_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.TestStateOutput_cause, v.Cause)
+		case schemas.TestStateOutput_error:
+			v.Error = new(string)
+			return d.ReadString(schemas.TestStateOutput_error, v.Error)
+		case schemas.TestStateOutput_inspectionData:
+			v.InspectionData = &types.InspectionData{}
+			return v.InspectionData.Deserialize(d)
+		case schemas.TestStateOutput_nextState:
+			v.NextState = new(string)
+			return d.ReadString(schemas.TestStateOutput_nextState, v.NextState)
+		case schemas.TestStateOutput_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.TestStateOutput_output, v.Output)
+		case schemas.TestStateOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.TestStateOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestState, schemas.TestStateInput, schemas.TestStateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestState, schemas.TestStateInput, schemas.TestStateOutput), output: &TestStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

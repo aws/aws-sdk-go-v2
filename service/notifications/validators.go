@@ -609,6 +609,26 @@ func (m *validateOpUpdateEventRule) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateManagedNotificationChannelAssociation struct {
+}
+
+func (*validateOpUpdateManagedNotificationChannelAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateManagedNotificationChannelAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateManagedNotificationChannelAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateManagedNotificationChannelAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNotificationConfiguration struct {
 }
 
@@ -747,6 +767,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateEventRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEventRule{}, middleware.After)
+}
+
+func addOpUpdateManagedNotificationChannelAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateManagedNotificationChannelAssociation{}, middleware.After)
 }
 
 func addOpUpdateNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1237,6 +1261,24 @@ func validateOpUpdateEventRuleInput(v *UpdateEventRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventRuleInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateManagedNotificationChannelAssociationInput(v *UpdateManagedNotificationChannelAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateManagedNotificationChannelAssociationInput"}
+	if v.ManagedNotificationConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedNotificationConfigurationArn"))
+	}
+	if v.ChannelIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

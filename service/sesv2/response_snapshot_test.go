@@ -806,6 +806,10 @@ func TestCheckResponseSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					TenantName: []string{
+						"__Member__",
+						"__Member__",
+					},
 					LastDeliveryEvent: []types.DeliveryEventType{
 						types.DeliveryEventType("SEND"),
 						types.DeliveryEventType("SEND"),
@@ -829,6 +833,10 @@ func TestCheckResponseSnapshot_CreateExportJob(t *testing.T) {
 						"__Member__",
 					},
 					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TenantName: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -2349,6 +2357,10 @@ func TestCheckResponseSnapshot_GetExportJob(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					TenantName: []string{
+						"__Member__",
+						"__Member__",
+					},
 					LastDeliveryEvent: []types.DeliveryEventType{
 						types.DeliveryEventType("SEND"),
 						types.DeliveryEventType("SEND"),
@@ -2372,6 +2384,10 @@ func TestCheckResponseSnapshot_GetExportJob(t *testing.T) {
 						"__Member__",
 					},
 					Isp: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TenantName: []string{
 						"__Member__",
 						"__Member__",
 					},

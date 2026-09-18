@@ -9751,6 +9751,12 @@
                         "smithy.api#documentation": "<p>The recipient's ISP (e.g., <code>Gmail</code>, <code>Yahoo</code>,\n            etc.).</p>"
                     }
                 },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantNameFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant used when sending the message.</p>"
+                    }
+                },
                 "LastDeliveryEvent": {
                     "target": "com.amazonaws.sesv2#LastDeliveryEventList",
                     "traits": {
@@ -10010,10 +10016,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ISP"
                     }
+                },
+                "TENANT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANT_NAME"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>BatchGetMetricDataQuery</code> dimension name. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EMAIL_IDENTITY</code> – The email identity used when sending messages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET</code> – The configuration set used when sending messages\n                    (if one was used).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ISP</code> – The recipient ISP (e.g. <code>Gmail</code>, <code>Yahoo</code>,\n                    etc.).</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The <code>BatchGetMetricDataQuery</code> dimension name. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EMAIL_IDENTITY</code> – The email identity used when sending messages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET</code> – The configuration set used when sending messages\n                    (if one was used).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ISP</code> – The recipient ISP (e.g. <code>Gmail</code>, <code>Yahoo</code>,\n                    etc.).</p>\n            </li>\n            <li>\n               <p>\n                  <code>TENANT_NAME</code> – The name of the tenant used when sending messages\n                    (if one was used).</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#MetricDimensionValue": {
@@ -15983,6 +15995,18 @@
                 "smithy.api#documentation": "<p>The name of a tenant. The name can contain up to 64 alphanumeric characters, including\n            letters, numbers, hyphens (-) and underscores (_) only.</p>",
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sesv2#TenantNameFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#TenantName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
                 }
             }
         },

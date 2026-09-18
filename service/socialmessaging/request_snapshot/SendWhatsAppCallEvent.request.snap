@@ -1,0 +1,5 @@
+POST /v1/whatsapp/call/event
+
+Content-Type: application/json
+
+{"callEvent":"YmxvYg==","metaApiVersion":"__MetaApiVersion__","originationPhoneNumberId":"__OriginationPhoneNumberId__"}

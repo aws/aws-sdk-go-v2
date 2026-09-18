@@ -1551,6 +1551,7 @@ func TestCheckResponseSnapshot_GetBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
+			SessionPolicy:       ptr.String("__SessionPolicy__"),
 			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},
@@ -2124,6 +2125,7 @@ func TestCheckResponseSnapshot_GetRun(t *testing.T) {
 			VpcId: ptr.String("__VpcId__"),
 		},
 		EngineSettings: document.NewLazyDocument("__Document__"),
+		SessionPolicy:  ptr.String("__SessionPolicy__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRun.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4396,6 +4398,7 @@ func TestCheckResponseSnapshot_StartRun(t *testing.T) {
 		NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 		ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		ConfigurationName:   ptr.String("__ConfigurationName__"),
+		SessionPolicy:       ptr.String("__SessionPolicy__"),
 		EngineSettings:      document.NewLazyDocument("__Document__"),
 	})
 	if err != nil {
@@ -4453,6 +4456,7 @@ func TestCheckResponseSnapshot_StartRunBatch(t *testing.T) {
 			WorkflowVersionName: ptr.String("__WorkflowVersionName__"),
 			NetworkingMode:      types.NetworkingMode("RESTRICTED"),
 			ConfigurationName:   ptr.String("__ConfigurationName__"),
+			SessionPolicy:       ptr.String("__SessionPolicy__"),
 			EngineSettings:      document.NewLazyDocument("__Document__"),
 			ScratchStorageMode:  types.ScratchStorageMode("LOCAL"),
 		},

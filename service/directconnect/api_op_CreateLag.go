@@ -73,6 +73,9 @@ type CreateLagInput struct {
 	// This member is required.
 	NumberOfConnections int32
 
+	// The billing mode for the LAG.
+	BillingMode types.RequestBillingMode
+
 	// The tags to associate with the automtically created LAGs.
 	ChildConnectionTags []types.Tag
 
@@ -114,6 +117,9 @@ type CreateLagOutput struct {
 	// The Direct Connect endpoint that terminates the logical connection. This device
 	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
+
+	// The billing mode of the LAG.
+	BillingMode types.BillingMode
 
 	// The connections bundled by the LAG.
 	Connections []types.Connection

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.CancelImportTask
+
+{"creationTime":1,"importId":"__ImportId__","importStatistics":{"bytesImported":1},"importStatus":"IN_PROGRESS","lastUpdatedTime":1}

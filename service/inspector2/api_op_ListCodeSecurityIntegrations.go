@@ -4,7 +4,9 @@ package inspector2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListCodeSecurityIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSecurityIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSecurityIntegrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSecurityIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodeSecurityIntegrationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeSecurityIntegrationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCodeSecurityIntegrationsOutput struct {
 
 	// A list of code security integration summaries.
@@ -55,13 +72,35 @@ type ListCodeSecurityIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSecurityIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSecurityIntegrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSecurityIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationSummaries(s, schemas.ListCodeSecurityIntegrationsResponse_integrations, v.Integrations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeSecurityIntegrationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCodeSecurityIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeSecurityIntegrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeSecurityIntegrationsResponse_integrations:
+			return deserializeIntegrationSummaries(d, schemas.ListCodeSecurityIntegrationsResponse_integrations, &v.Integrations)
+		case schemas.ListCodeSecurityIntegrationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodeSecurityIntegrationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeSecurityIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeSecurityIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSecurityIntegrations, schemas.ListCodeSecurityIntegrationsRequest, schemas.ListCodeSecurityIntegrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeSecurityIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSecurityIntegrations, schemas.ListCodeSecurityIntegrationsRequest, schemas.ListCodeSecurityIntegrationsResponse), output: &ListCodeSecurityIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

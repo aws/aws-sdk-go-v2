@@ -14,9 +14,9 @@ import (
 // before calling DeleteBatch .
 //
 // DeleteBatch requires the batch to be in a terminal state: PROCESSED , FAILED ,
-// CANCELLED , or RUNS_DELETED . After DeleteBatch completes, the batch metadata
-// is no longer accessible. You cannot call GetBatch , ListRunsInBatch ,
-// DeleteRunBatch , or CancelRunBatch on a deleted batch.
+// CANCELLED , RUNS_DELETE_FAILED , or RUNS_DELETED . After DeleteBatch completes,
+// the batch metadata is no longer accessible. You cannot call GetBatch ,
+// ListRunsInBatch , DeleteRunBatch , or CancelRunBatch on a deleted batch.
 func (c *Client) DeleteBatch(ctx context.Context, params *DeleteBatchInput, optFns ...func(*Options)) (*DeleteBatchOutput, error) {
 	if params == nil {
 		params = &DeleteBatchInput{}

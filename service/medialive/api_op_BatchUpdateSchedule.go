@@ -4,7 +4,9 @@ package medialive
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,28 @@ type BatchUpdateScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.BatchUpdateScheduleRequest_ChannelId, *v.ChannelId)
+	}
+	if v.Creates != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleRequest_Creates)
+		v.Creates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Deletes != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleRequest_Deletes)
+		v.Deletes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Placeholder documentation for BatchUpdateScheduleResponse
 type BatchUpdateScheduleOutput struct {
 
@@ -56,13 +80,42 @@ type BatchUpdateScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Creates != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleResponse_Creates)
+		v.Creates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Deletes != nil {
+		s.WriteStruct(schemas.BatchUpdateScheduleResponse_Deletes)
+		v.Deletes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchUpdateScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateScheduleResponse_Creates:
+			v.Creates = &types.BatchScheduleActionCreateResult{}
+			return v.Creates.Deserialize(d)
+		case schemas.BatchUpdateScheduleResponse_Deletes:
+			v.Deletes = &types.BatchScheduleActionDeleteResult{}
+			return v.Deletes.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateSchedule, schemas.BatchUpdateScheduleRequest, schemas.BatchUpdateScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateSchedule, schemas.BatchUpdateScheduleRequest, schemas.BatchUpdateScheduleResponse), output: &BatchUpdateScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

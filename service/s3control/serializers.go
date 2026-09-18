@@ -11537,6 +11537,17 @@ func awsRestxml_serializeDocumentS3CopyObjectOperation(v *types.S3CopyObjectOper
 			return err
 		}
 	}
+	if len(v.AnnotationDirective) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AnnotationDirective",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.AnnotationDirective))
+	}
 	if v.BucketKeyEnabled {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -11615,6 +11626,30 @@ func awsRestxml_serializeDocumentS3CopyObjectOperation(v *types.S3CopyObjectOper
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentS3TagSet(v.NewObjectTagging, el); err != nil {
+			return err
+		}
+	}
+	if len(v.ObjectLockEventHold) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectLockEventHold",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ObjectLockEventHold))
+	}
+	if v.ObjectLockEventHoldDuration != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectLockEventHoldDuration",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3ObjectLockEventHoldDuration(v.ObjectLockEventHoldDuration, el); err != nil {
 			return err
 		}
 	}
@@ -11971,6 +12006,33 @@ func awsRestxml_serializeDocumentS3ManifestOutputLocation(v *types.S3ManifestOut
 	return nil
 }
 
+func awsRestxml_serializeDocumentS3ObjectLockEventHoldDuration(v *types.S3ObjectLockEventHoldDuration, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Days != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Days",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Days)
+	}
+	if v.Years != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Years",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Years)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentS3ObjectLockLegalHold(v *types.S3ObjectLockLegalHold, value smithyxml.Value) error {
 	defer value.Close()
 	if len(v.Status) > 0 {
@@ -11983,6 +12045,33 @@ func awsRestxml_serializeDocumentS3ObjectLockLegalHold(v *types.S3ObjectLockLega
 		}
 		el := value.MemberElement(root)
 		el.String(string(v.Status))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentS3ObjectLockRetentionEventHoldDuration(v *types.S3ObjectLockRetentionEventHoldDuration, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Days != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Days",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Days)
+	}
+	if v.Years != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Years",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Years)
 	}
 	return nil
 }
@@ -12149,6 +12238,30 @@ func awsRestxml_serializeDocumentS3ReplicateObjectOperation(v *types.S3Replicate
 
 func awsRestxml_serializeDocumentS3Retention(v *types.S3Retention, value smithyxml.Value) error {
 	defer value.Close()
+	if len(v.EventHold) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EventHold",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.EventHold))
+	}
+	if v.EventHoldDuration != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EventHoldDuration",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentS3ObjectLockRetentionEventHoldDuration(v.EventHoldDuration, el); err != nil {
+			return err
+		}
+	}
 	if len(v.Mode) > 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

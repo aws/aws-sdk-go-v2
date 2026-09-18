@@ -60,9 +60,9 @@ type CreateChannelInput struct {
 	// only when InputType is CMAF .
 	InputSwitchConfiguration *types.InputSwitchConfiguration
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -71,7 +71,15 @@ type CreateChannelInput struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType types.InputType
+
+	// The multiview configuration for the channel. This setting is required when
+	// InputType is MULTIVIEW , and can't be set for any other input type.
+	MultiviewConfiguration *types.MultiviewConfiguration
 
 	// The settings for what common media server data (CMSD) headers AWS Elemental
 	// MediaPackage includes in responses to the CDN. This setting is valid only when
@@ -134,6 +142,12 @@ type CreateChannelOutput struct {
 	// This member is required.
 	ModifiedAt *time.Time
 
+	// The multiview channels, in the same channel group, that list this channel as an
+	// available source. This is a read-only field. You can't delete a channel while
+	// any multiview channel still lists it as a source. Use this field to find the
+	// multiview channels that you need to update first.
+	AttachedMultiviewChannels []string
+
 	// The description for your channel.
 	Description *string
 
@@ -149,9 +163,9 @@ type CreateChannelOutput struct {
 	// only when InputType is CMAF .
 	InputSwitchConfiguration *types.InputSwitchConfiguration
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -160,7 +174,15 @@ type CreateChannelOutput struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType types.InputType
+
+	// The multiview configuration for the channel. This is present only when InputType
+	// is MULTIVIEW .
+	MultiviewConfiguration *types.MultiviewConfiguration
 
 	// The settings for what common media server data (CMSD) headers AWS Elemental
 	// MediaPackage includes in responses to the CDN. This setting is valid only when

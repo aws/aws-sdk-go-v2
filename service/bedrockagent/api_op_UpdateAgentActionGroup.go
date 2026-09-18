@@ -4,7 +4,9 @@ package bedrockagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,40 @@ type UpdateAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentActionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionGroupExecutor(s, schemas.UpdateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	if v.ActionGroupId != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupId, *v.ActionGroupId)
+	}
+	if v.ActionGroupName != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupName, *v.ActionGroupName)
+	}
+	if v.ActionGroupState != "" {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupState, string(v.ActionGroupState))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_agentVersion, *v.AgentVersion)
+	}
+	serializeAPISchema(s, schemas.UpdateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_description, *v.Description)
+	}
+	serializeFunctionSchema(s, schemas.UpdateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	if v.ParentActionGroupSignature != "" {
+		s.WriteString(schemas.UpdateAgentActionGroupRequest_parentActionGroupSignature, string(v.ParentActionGroupSignature))
+	}
+	serializeActionGroupSignatureParams(s, schemas.UpdateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+}
+
 type UpdateAgentActionGroupOutput struct {
 
 	// Contains details about the action group that was updated.
@@ -131,13 +167,34 @@ type UpdateAgentActionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentActionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentActionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentActionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentActionGroup != nil {
+		s.WriteStruct(schemas.UpdateAgentActionGroupResponse_agentActionGroup)
+		v.AgentActionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAgentActionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentActionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentActionGroupResponse_agentActionGroup:
+			v.AgentActionGroup = &types.AgentActionGroup{}
+			return v.AgentActionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentActionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentActionGroup, schemas.UpdateAgentActionGroupRequest, schemas.UpdateAgentActionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentActionGroup, schemas.UpdateAgentActionGroupRequest, schemas.UpdateAgentActionGroupResponse), output: &UpdateAgentActionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

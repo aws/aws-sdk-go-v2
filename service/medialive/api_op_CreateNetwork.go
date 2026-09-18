@@ -5,7 +5,9 @@ package medialive
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type CreateNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfIpPoolCreateRequest(s, schemas.CreateNetworkRequest_IpPools, v.IpPools)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateNetworkRequest_RequestId, *v.RequestId)
+	}
+	serialize__listOfRouteCreateRequest(s, schemas.CreateNetworkRequest_Routes, v.Routes)
+	serializeTags(s, schemas.CreateNetworkRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreateNetworkResponse
 type CreateNetworkOutput struct {
 
@@ -94,13 +114,63 @@ type CreateNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateNetworkResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.CreateNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateNetworkResponse_Id, *v.Id)
+	}
+	serialize__listOfIpPool(s, schemas.CreateNetworkResponse_IpPools, v.IpPools)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNetworkResponse_Name, *v.Name)
+	}
+	serialize__listOfRoute(s, schemas.CreateNetworkResponse_Routes, v.Routes)
+	if v.State != "" {
+		s.WriteString(schemas.CreateNetworkResponse_State, string(v.State))
+	}
+}
+func (v *CreateNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateNetworkResponse_Arn, v.Arn)
+		case schemas.CreateNetworkResponse_AssociatedClusterIds:
+			return deserialize__listOf__string(d, schemas.CreateNetworkResponse_AssociatedClusterIds, &v.AssociatedClusterIds)
+		case schemas.CreateNetworkResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateNetworkResponse_Id, v.Id)
+		case schemas.CreateNetworkResponse_IpPools:
+			return deserialize__listOfIpPool(d, schemas.CreateNetworkResponse_IpPools, &v.IpPools)
+		case schemas.CreateNetworkResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateNetworkResponse_Name, v.Name)
+		case schemas.CreateNetworkResponse_Routes:
+			return deserialize__listOfRoute(d, schemas.CreateNetworkResponse_Routes, &v.Routes)
+		case schemas.CreateNetworkResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateNetworkResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetwork, schemas.CreateNetworkRequest, schemas.CreateNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNetwork, schemas.CreateNetworkRequest, schemas.CreateNetworkResponse), output: &CreateNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

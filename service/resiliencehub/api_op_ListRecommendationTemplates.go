@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,61 @@ type ListRecommendationTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListRecommendationTemplatesRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListRecommendationTemplatesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationTemplatesRequest_nextToken, *v.NextToken)
+	}
+	if v.RecommendationTemplateArn != nil {
+		s.WriteString(schemas.ListRecommendationTemplatesRequest_recommendationTemplateArn, *v.RecommendationTemplateArn)
+	}
+	if v.ReverseOrder != nil {
+		s.WriteBool(schemas.ListRecommendationTemplatesRequest_reverseOrder, *v.ReverseOrder)
+	}
+	serializeRecommendationTemplateStatusList(s, schemas.ListRecommendationTemplatesRequest_status, v.Status)
+}
+func (v *ListRecommendationTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationTemplatesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationTemplatesRequest_assessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.ListRecommendationTemplatesRequest_assessmentArn, v.AssessmentArn)
+		case schemas.ListRecommendationTemplatesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListRecommendationTemplatesRequest_maxResults, v.MaxResults)
+		case schemas.ListRecommendationTemplatesRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListRecommendationTemplatesRequest_name, v.Name)
+		case schemas.ListRecommendationTemplatesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationTemplatesRequest_nextToken, v.NextToken)
+		case schemas.ListRecommendationTemplatesRequest_recommendationTemplateArn:
+			v.RecommendationTemplateArn = new(string)
+			return d.ReadString(schemas.ListRecommendationTemplatesRequest_recommendationTemplateArn, v.RecommendationTemplateArn)
+		case schemas.ListRecommendationTemplatesRequest_reverseOrder:
+			v.ReverseOrder = new(bool)
+			return d.ReadBool(schemas.ListRecommendationTemplatesRequest_reverseOrder, v.ReverseOrder)
+		case schemas.ListRecommendationTemplatesRequest_status:
+			return deserializeRecommendationTemplateStatusList(d, schemas.ListRecommendationTemplatesRequest_status, &v.Status)
+		}
+		return nil
+	})
+}
+
 type ListRecommendationTemplatesOutput struct {
 
 	// Token for the next set of results, or null if there are no more results.
@@ -72,13 +129,35 @@ type ListRecommendationTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationTemplatesResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendationTemplateList(s, schemas.ListRecommendationTemplatesResponse_recommendationTemplates, v.RecommendationTemplates)
+}
+func (v *ListRecommendationTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationTemplatesResponse_nextToken, v.NextToken)
+		case schemas.ListRecommendationTemplatesResponse_recommendationTemplates:
+			return deserializeRecommendationTemplateList(d, schemas.ListRecommendationTemplatesResponse_recommendationTemplates, &v.RecommendationTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationTemplates, schemas.ListRecommendationTemplatesRequest, schemas.ListRecommendationTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommendationTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationTemplates, schemas.ListRecommendationTemplatesRequest, schemas.ListRecommendationTemplatesResponse), output: &ListRecommendationTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

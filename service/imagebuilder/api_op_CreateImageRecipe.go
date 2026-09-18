@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,8 +30,10 @@ func (c *Client) CreateImageRecipe(ctx context.Context, params *CreateImageRecip
 
 type CreateImageRecipeInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -65,9 +69,9 @@ type CreateImageRecipeInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Assignment: For the first three nodes, you can assign any positive integer
+	// value, including zero. The upper limit is 2^30-1, or 1073741823, for each node.
+	// Image Builder automatically assigns the build number to the fourth node.
 	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
@@ -76,7 +80,7 @@ type CreateImageRecipeInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// Specify additional settings and launch scripts for your build instances.
+	// The additional settings and launch scripts for your build instances.
 	AdditionalInstanceConfiguration *types.AdditionalInstanceConfiguration
 
 	// Tags that are applied to the AMI that Image Builder creates during the Build
@@ -100,6 +104,11 @@ type CreateImageRecipeInput struct {
 	// The description of the image recipe.
 	Description *string
 
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
 	// The tags of the image recipe.
 	Tags map[string]string
 
@@ -107,6 +116,46 @@ type CreateImageRecipeInput struct {
 	WorkingDirectory *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateImageRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalInstanceConfiguration != nil {
+		s.WriteStruct(schemas.CreateImageRecipeRequest_additionalInstanceConfiguration)
+		v.AdditionalInstanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateImageRecipeRequest_amiTags, v.AmiTags)
+	serializeAmiWatermarksList(s, schemas.CreateImageRecipeRequest_amiWatermarks, v.AmiWatermarks)
+	serializeInstanceBlockDeviceMappings(s, schemas.CreateImageRecipeRequest_blockDeviceMappings, v.BlockDeviceMappings)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageRecipeRequest_clientToken, *v.ClientToken)
+	}
+	serializeComponentConfigurationList(s, schemas.CreateImageRecipeRequest_components, v.Components)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateImageRecipeRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateImageRecipeRequest_dryRun, v.DryRun)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateImageRecipeRequest_name, *v.Name)
+	}
+	if v.ParentImage != nil {
+		s.WriteString(schemas.CreateImageRecipeRequest_parentImage, *v.ParentImage)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateImageRecipeRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.CreateImageRecipeRequest_tags, v.Tags)
+	if v.WorkingDirectory != nil {
+		s.WriteString(schemas.CreateImageRecipeRequest_workingDirectory, *v.WorkingDirectory)
+	}
 }
 
 type CreateImageRecipeOutput struct {
@@ -130,13 +179,52 @@ type CreateImageRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageRecipeResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.CreateImageRecipeResponse_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.CreateImageRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateImageRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateImageRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageRecipeResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateImageRecipeResponse_clientToken, v.ClientToken)
+		case schemas.CreateImageRecipeResponse_imageRecipeArn:
+			v.ImageRecipeArn = new(string)
+			return d.ReadString(schemas.CreateImageRecipeResponse_imageRecipeArn, v.ImageRecipeArn)
+		case schemas.CreateImageRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.CreateImageRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateImageRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateImageRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageRecipe, schemas.CreateImageRecipeRequest, schemas.CreateImageRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateImageRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageRecipe, schemas.CreateImageRecipeRequest, schemas.CreateImageRecipeResponse), output: &CreateImageRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package dynamodb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -108,6 +110,35 @@ type SearchVectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVectorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpressionAttributeNameMap(s, schemas.SearchVectorsInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	serializeExpressionAttributeValueMap(s, schemas.SearchVectorsInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	if v.IndexName != nil {
+		s.WriteString(schemas.SearchVectorsInput_IndexName, *v.IndexName)
+	}
+	if v.ProjectionExpression != nil {
+		s.WriteString(schemas.SearchVectorsInput_ProjectionExpression, *v.ProjectionExpression)
+	}
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.SearchVectorsInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.SearchConditionExpression != nil {
+		s.WriteString(schemas.SearchVectorsInput_SearchConditionExpression, *v.SearchConditionExpression)
+	}
+	serializeSearchVectorList(s, schemas.SearchVectorsInput_SearchVector, v.SearchVector)
+	if v.TableName != nil {
+		s.WriteString(schemas.SearchVectorsInput_TableName, *v.TableName)
+	}
+	if v.TopK != nil {
+		s.WriteInt32(schemas.SearchVectorsInput_TopK, *v.TopK)
+	}
+}
 func (in *SearchVectorsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -131,13 +162,37 @@ type SearchVectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVectorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumedCapacity != nil {
+		s.WriteStruct(schemas.SearchVectorsOutput_ConsumedCapacity)
+		v.ConsumedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSearchResultList(s, schemas.SearchVectorsOutput_SearchResults, v.SearchResults)
+}
+func (v *SearchVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchVectorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchVectorsOutput_ConsumedCapacity:
+			v.ConsumedCapacity = &types.VectorCapacity{}
+			return v.ConsumedCapacity.Deserialize(d)
+		case schemas.SearchVectorsOutput_SearchResults:
+			return deserializeSearchResultList(d, schemas.SearchVectorsOutput_SearchResults, &v.SearchResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSearchVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVectors, schemas.SearchVectorsInput, schemas.SearchVectorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSearchVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVectors, schemas.SearchVectorsInput, schemas.SearchVectorsOutput), output: &SearchVectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

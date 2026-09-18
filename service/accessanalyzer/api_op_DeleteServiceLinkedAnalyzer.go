@@ -5,6 +5,8 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeleteServiceLinkedAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceLinkedAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceLinkedAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceLinkedAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.DeleteServiceLinkedAnalyzerRequest_analyzerName, *v.AnalyzerName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteServiceLinkedAnalyzerRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type DeleteServiceLinkedAnalyzerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type DeleteServiceLinkedAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceLinkedAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceLinkedAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteServiceLinkedAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceLinkedAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteServiceLinkedAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceLinkedAnalyzer, schemas.DeleteServiceLinkedAnalyzerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteServiceLinkedAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceLinkedAnalyzer, schemas.DeleteServiceLinkedAnalyzerRequest, nil), output: &DeleteServiceLinkedAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

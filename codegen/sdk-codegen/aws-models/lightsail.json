@@ -4525,6 +4525,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum TLS protocol version for the SSL/TLS certificate.</p>"
                     }
+                },
+                "enablePrivateOriginAccess": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable private origin access for the distribution. With private\n      origin access, the distribution can serve objects that aren't publicly accessible from a\n      Lightsail bucket.</p>\n         <p>Lightsail grants the distribution permission to read the bucket's objects. Enabling\n      private origin access doesn't change the bucket's access settings, and you can still\n      retrieve publicly accessible objects directly from the bucket's endpoint.</p>\n         <note>\n            <p>You can enable private origin access only when the distribution's origin is a\n        Lightsail bucket. If the origin is another resource type, the request fails.</p>\n         </note>"
+                    }
+                },
+                "defaultRootObject": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object (for example, <code>index.html</code>) that the distribution returns when a\n      viewer requests the root URL of the distribution (<code>/</code>) instead of a specific\n      object. The object that you specify must be available from the origin.</p>"
+                    }
+                },
+                "customErrorResponses": {
+                    "target": "com.amazonaws.lightsail#DistributionCustomErrorResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the custom error responses for the distribution. With a\n      custom error response, you can specify the page to return when the origin responds with a\n      given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8157,6 +8175,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lightsail#DistributionBundle"
+            }
+        },
+        "com.amazonaws.lightsail#DistributionCustomErrorResponse": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP error code from the origin that triggers the custom error response (for example,\n      <code>403</code> or <code>404</code>).</p>"
+                    }
+                },
+                "responseCode": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code that the distribution returns to the viewer for the custom error\n      response.</p>"
+                    }
+                },
+                "responsePagePath": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the custom error page that the distribution returns to the viewer (for\n      example, <code>/404.html</code>). The path must begin with a forward slash (<code>/</code>)\n      and reference an object that is available from the origin.</p>"
+                    }
+                },
+                "errorCachingMinTTL": {
+                    "target": "com.amazonaws.lightsail#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum time, in seconds, that the distribution caches the custom error response\n      before requesting the object again from the origin. If you don't specify a value, the default\n      is <code>10</code> seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a custom error response for a Lightsail distribution. A custom error response\n      specifies the page that the distribution returns to the viewer. It also specifies the HTTP\n      status code that the distribution sends when the origin responds with a given HTTP error code.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#DistributionCustomErrorResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#DistributionCustomErrorResponse"
             }
         },
         "com.amazonaws.lightsail#DistributionList": {
@@ -15815,6 +15871,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum TLS protocol version that the distribution can use to communicate with\n      viewers.</p>"
                     }
+                },
+                "defaultRootObject": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object (for example, <code>index.html</code>) that the distribution returns when a\n      viewer requests the root URL of the distribution (<code>/</code>) instead of a specific\n      object.</p>"
+                    }
+                },
+                "customErrorResponses": {
+                    "target": "com.amazonaws.lightsail#DistributionCustomErrorResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the custom error responses configured for the\n      distribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19540,6 +19608,12 @@
                     "target": "com.amazonaws.lightsail#OriginIpAddressTypeEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type that the distribution uses when connecting to the origin.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
+                    }
+                },
+                "isPrivateOriginAccessEnabled": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether private origin access is enabled for the distribution's origin. With\n      private origin access, the distribution can serve objects that aren't publicly accessible\n      from a Lightsail bucket.</p>\n         <p>This applies when you set the bucket's <code>getObject</code> access rule to\n      <code>private</code>. It also applies when you set <code>getObject</code> to <code>public</code>\n      but set individual objects to private.</p>"
                     }
                 }
             },
@@ -24002,6 +24076,24 @@
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the default SSL/TLS certificate is attached to the distribution. The\n      default value is <code>true</code>. When <code>true</code>, the distribution uses the default\n      domain name such as <code>d111111abcdef8.cloudfront.net</code>.</p>\n         <p> Set this value to <code>false</code> to attach a new certificate to the\n      distribution.</p>"
+                    }
+                },
+                "enablePrivateOriginAccess": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable private origin access for the distribution. With private\n      origin access, the distribution can serve objects that aren't publicly accessible from a\n      Lightsail bucket.</p>\n         <p>Lightsail grants the distribution permission to read the bucket's objects. Enabling\n      private origin access doesn't change the bucket's access settings, and you can still\n      retrieve publicly accessible objects directly from the bucket's endpoint.</p>\n         <note>\n            <p>When you include this parameter, you must also include the <code>origin</code> parameter\n        with the resource name, even if the origin is not changing.</p>\n            <p>You can enable private origin access only when the distribution's origin is a\n        Lightsail bucket. If the origin is another resource type, the request fails.</p>\n         </note>"
+                    }
+                },
+                "defaultRootObject": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object (for example, <code>index.html</code>) that the distribution returns when a\n      viewer requests the root URL of the distribution (<code>/</code>) instead of a specific\n      object. The object that you specify must be available from the origin.</p>"
+                    }
+                },
+                "customErrorResponses": {
+                    "target": "com.amazonaws.lightsail#DistributionCustomErrorResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the custom error responses for the distribution. With a\n      custom error response, you can specify the page to return when the origin responds with a\n      given HTTP error code. You can also specify the HTTP status code to send to the viewer.</p>"
                     }
                 }
             },

@@ -141,12 +141,12 @@
                 "WiFiCellular": {
                     "target": "com.amazonaws.iotwireless#WiFiCellular",
                     "traits": {
-                        "smithy.api#documentation": "Configuration for WiFi and cellular-based payloads for location estimates."
+                        "smithy.api#documentation": "<p>Configuration for WiFi and cellular-based location estimate payloads resolved\n            by HERE's solvers.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Optional configuration to customize location estimates."
+                "smithy.api#documentation": "<p>Optional configuration for customizing position estimates, including parameters\n            that affect the accuracy and uncertainty of WiFi and cellular-based location\n            estimates.</p>"
             }
         },
         "com.amazonaws.iotwireless#AggregationPeriod": {
@@ -5823,7 +5823,13 @@
                 "Gnss": {
                     "target": "com.amazonaws.iotwireless#Gnss",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves an estimated device position by resolving the global navigation satellite\n            system (GNSS) scan data. The position is resolved using the GNSS solver powered by LoRa\n            Cloud.</p>"
+                        "smithy.api#documentation": "<p>Retrieves an estimated device position by resolving the global navigation satellite\n            system (GNSS) scan data. The position is resolved using the GNSS solver powered by LoRa\n            Cloud. This field is mutually exclusive with the GnssMultiFrame field.</p>"
+                    }
+                },
+                "GnssMultiFrame": {
+                    "target": "com.amazonaws.iotwireless#GnssMultiFrame",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves an estimated device position by resolving multiple global navigation\n            satellite system (GNSS) scan captures. The position is resolved using the multi-frame\n            GNSS solver powered by LoRa Cloud. This field is mutually exclusive with the Gnss\n            field.</p>"
                     }
                 },
                 "Timestamp": {
@@ -5835,7 +5841,7 @@
                 "AdvancedConfiguration": {
                     "target": "com.amazonaws.iotwireless#AdvancedConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "Optional configuration to customize position estimates.\n        If not provided, defaults are applied."
+                        "smithy.api#documentation": "<p>Optional configuration for customizing position measurement data.</p>"
                     }
                 }
             },
@@ -7232,6 +7238,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Global navigation satellite system (GNSS) object used for positioning.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#GnssCapture": {
+            "type": "structure",
+            "members": {
+                "Payload": {
+                    "target": "com.amazonaws.iotwireless#GnssNav",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Payload that contains the GNSS scan result, or NAV message, in hexadecimal\n            notation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaptureTime": {
+                    "target": "com.amazonaws.iotwireless#GPST",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional parameter that gives an estimate of the time when the GNSS scan information\n            is taken, in seconds GPS time (GPST). If capture time is not specified, the local server\n            time is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single GNSS scan capture containing the scan payload and optional capture time.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#GnssCaptures": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#GnssCapture"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GnssMultiFrame": {
+            "type": "structure",
+            "members": {
+                "Captures": {
+                    "target": "com.amazonaws.iotwireless#GnssCaptures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of GNSS scan captures. Each capture contains a payload from a single GNSS scan.\n            The number of captures must be 2, 4, 8, 16, or 32.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CaptureTimeAccuracy": {
+                    "target": "com.amazonaws.iotwireless#CaptureTimeAccuracy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional value that gives the capture time estimate accuracy, in seconds. If capture\n            time accuracy is not specified, default value of 300 is used.</p>"
+                    }
+                },
+                "AssistPosition": {
+                    "target": "com.amazonaws.iotwireless#AssistPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional assistance position information, specified using latitude and longitude\n            values in degrees. The coordinates are inside the WGS84 reference frame.</p>"
+                    }
+                },
+                "AssistAltitude": {
+                    "target": "com.amazonaws.iotwireless#Coordinate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional assistance altitude, which is the altitude of the device at capture time,\n            specified in meters above the WGS84 reference ellipsoid. This parameter is required\n            when Use2DSolver is enabled.</p>"
+                    }
+                },
+                "Use2DSolver": {
+                    "target": "com.amazonaws.iotwireless#Use2DSolver",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Optional parameter that forces 2D solve, which modifies the positioning algorithm to a\n            2D solution problem. When this parameter is specified, the assistance altitude should\n            have an accuracy of at least 10 meters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Global navigation satellite system (GNSS) multi-frame object used for positioning.\n            Contains multiple GNSS scan captures that are combined by the solver.</p>"
             }
         },
         "com.amazonaws.iotwireless#GnssNav": {
@@ -15643,12 +15722,12 @@
                     "target": "com.amazonaws.iotwireless#ConfidencePercent",
                     "traits": {
                         "smithy.api#default": 68,
-                        "smithy.api#documentation": "Confidence level for WiFi and cellular position estimates, expressed as a\n        percentage. Valid range: 50–99 inclusive. Defaults to 68 if not specified."
+                        "smithy.api#documentation": "<p>The confidence level for WiFi and cellular position estimates, expressed as a\n            percentage. This value determines the size of the confidence area or uncertainty\n            radius for the estimated position. A higher confidence level produces a larger uncertainty radius, while a lower\n            confidence level produces a smaller, more precise radius.</p>\n         <p>Valid range: 50 to 99 inclusive. If not specified, the default value of 68 is\n            used, which corresponds to approximately one standard deviation of the normal\n            distribution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration for WiFi and cellular location payloads."
+                "smithy.api#documentation": "<p>Configuration for WiFi and cellular location payloads. Contains the confidence\n            level that determines the size of the uncertainty radius in the position estimate.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessDeviceArn": {

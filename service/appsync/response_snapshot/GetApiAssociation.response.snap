@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiAssociation":{"apiId":"__ApiId__","associationStatus":"PROCESSING","deploymentDetail":"__DeploymentDetail__","domainName":"__DomainName__"}}

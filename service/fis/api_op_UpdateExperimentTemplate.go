@@ -4,7 +4,9 @@ package fis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,42 @@ type UpdateExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateExperimentTemplateActionInputMap(s, schemas.UpdateExperimentTemplateRequest_actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateRequest_description, *v.Description)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateRequest_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReportConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateRequest_experimentReportConfiguration)
+		v.ExperimentReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateRequest_id, *v.Id)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateRequest_logConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateRequest_roleArn, *v.RoleArn)
+	}
+	serializeUpdateExperimentTemplateStopConditionInputList(s, schemas.UpdateExperimentTemplateRequest_stopConditions, v.StopConditions)
+	serializeUpdateExperimentTemplateTargetInputMap(s, schemas.UpdateExperimentTemplateRequest_targets, v.Targets)
+}
+
 type UpdateExperimentTemplateOutput struct {
 
 	// Information about the experiment template.
@@ -70,13 +108,34 @@ type UpdateExperimentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplate != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateResponse_experimentTemplate)
+		v.ExperimentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExperimentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateResponse_experimentTemplate:
+			v.ExperimentTemplate = &types.ExperimentTemplate{}
+			return v.ExperimentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperimentTemplate, schemas.UpdateExperimentTemplateRequest, schemas.UpdateExperimentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperimentTemplate, schemas.UpdateExperimentTemplateRequest, schemas.UpdateExperimentTemplateResponse), output: &UpdateExperimentTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,76 @@ type CreateAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentSchedule != "" {
+		s.WriteString(schemas.CreateAppRequest_assessmentSchedule, string(v.AssessmentSchedule))
+	}
+	if v.AwsApplicationArn != nil {
+		s.WriteString(schemas.CreateAppRequest_awsApplicationArn, *v.AwsApplicationArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAppRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAppRequest_description, *v.Description)
+	}
+	serializeEventSubscriptionList(s, schemas.CreateAppRequest_eventSubscriptions, v.EventSubscriptions)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAppRequest_name, *v.Name)
+	}
+	if v.PermissionModel != nil {
+		s.WriteStruct(schemas.CreateAppRequest_permissionModel)
+		v.PermissionModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateAppRequest_policyArn, *v.PolicyArn)
+	}
+	serializeTagMap(s, schemas.CreateAppRequest_tags, v.Tags)
+}
+func (v *CreateAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppRequest_assessmentSchedule:
+			var ev string
+			if err := d.ReadString(schemas.CreateAppRequest_assessmentSchedule, &ev); err != nil {
+				return err
+			}
+			v.AssessmentSchedule = types.AppAssessmentScheduleType(ev)
+			return nil
+		case schemas.CreateAppRequest_awsApplicationArn:
+			v.AwsApplicationArn = new(string)
+			return d.ReadString(schemas.CreateAppRequest_awsApplicationArn, v.AwsApplicationArn)
+		case schemas.CreateAppRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAppRequest_clientToken, v.ClientToken)
+		case schemas.CreateAppRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAppRequest_description, v.Description)
+		case schemas.CreateAppRequest_eventSubscriptions:
+			return deserializeEventSubscriptionList(d, schemas.CreateAppRequest_eventSubscriptions, &v.EventSubscriptions)
+		case schemas.CreateAppRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAppRequest_name, v.Name)
+		case schemas.CreateAppRequest_permissionModel:
+			v.PermissionModel = &types.PermissionModel{}
+			return v.PermissionModel.Deserialize(d)
+		case schemas.CreateAppRequest_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.CreateAppRequest_policyArn, v.PolicyArn)
+		case schemas.CreateAppRequest_tags:
+			return deserializeTagMap(d, schemas.CreateAppRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateAppOutput struct {
 
 	// The created application returned as an object with details including compliance
@@ -104,13 +176,34 @@ type CreateAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteStruct(schemas.CreateAppResponse_app)
+		v.App.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppResponse_app:
+			v.App = &types.App{}
+			return v.App.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApp, schemas.CreateAppRequest, schemas.CreateAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApp, schemas.CreateAppRequest, schemas.CreateAppResponse), output: &CreateAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

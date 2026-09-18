@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetConnectorInput struct {
 	ConnectorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.GetConnectorRequest_ConnectorId, *v.ConnectorId)
+	}
 }
 
 type GetConnectorOutput struct {
@@ -86,13 +100,89 @@ type GetConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.GetConnectorResponse_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.GetConnectorResponse_ConnectorId, *v.ConnectorId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetConnectorResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetConnectorResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetConnectorResponse_Description, *v.Description)
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.GetConnectorResponse_EnablementStatus, string(v.EnablementStatus))
+	}
+	if v.Health != nil {
+		s.WriteStruct(schemas.GetConnectorResponse_Health)
+		v.Health.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetConnectorResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConnectorResponse_Name, *v.Name)
+	}
+	serializeCspmProviderDetail(s, schemas.GetConnectorResponse_ProviderDetail, v.ProviderDetail)
+}
+func (v *GetConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectorResponse_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.GetConnectorResponse_ConnectorArn, v.ConnectorArn)
+		case schemas.GetConnectorResponse_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.GetConnectorResponse_ConnectorId, v.ConnectorId)
+		case schemas.GetConnectorResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConnectorResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetConnectorResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetConnectorResponse_CreatedBy, v.CreatedBy)
+		case schemas.GetConnectorResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConnectorResponse_Description, v.Description)
+		case schemas.GetConnectorResponse_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetConnectorResponse_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.CspmEnablementStatus(ev)
+			return nil
+		case schemas.GetConnectorResponse_Health:
+			v.Health = &types.CspmHealthCheck{}
+			return v.Health.Deserialize(d)
+		case schemas.GetConnectorResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConnectorResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetConnectorResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConnectorResponse_Name, v.Name)
+		case schemas.GetConnectorResponse_ProviderDetail:
+			return deserializeCspmProviderDetail(d, schemas.GetConnectorResponse_ProviderDetail, &v.ProviderDetail)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnector, schemas.GetConnectorRequest, schemas.GetConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnector, schemas.GetConnectorRequest, schemas.GetConnectorResponse), output: &GetConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

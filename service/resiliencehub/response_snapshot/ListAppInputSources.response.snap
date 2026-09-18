@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appInputSources":[{"eksSourceClusterNamespace":{"eksClusterArn":"__EksClusterArn__","namespace":"__Namespace__"},"importType":"CfnStack","resourceCount":1,"sourceArn":"__SourceArn__","sourceName":"__SourceName__","terraformSource":{"s3StateFileUrl":"__S3StateFileUrl__"}},{"eksSourceClusterNamespace":{"eksClusterArn":"__EksClusterArn__","namespace":"__Namespace__"},"importType":"CfnStack","resourceCount":1,"sourceArn":"__SourceArn__","sourceName":"__SourceName__","terraformSource":{"s3StateFileUrl":"__S3StateFileUrl__"}}],"nextToken":"__NextToken__"}

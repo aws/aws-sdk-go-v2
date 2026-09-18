@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mediaconvert/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -110,6 +112,136 @@ type AacSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AacSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AacSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AacSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDescriptionBroadcasterMix != "" {
+		s.WriteString(schemas.AacSettings_AudioDescriptionBroadcasterMix, string(v.AudioDescriptionBroadcasterMix))
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.AacSettings_Bitrate, *v.Bitrate)
+	}
+	if v.CodecProfile != "" {
+		s.WriteString(schemas.AacSettings_CodecProfile, string(v.CodecProfile))
+	}
+	if v.CodingMode != "" {
+		s.WriteString(schemas.AacSettings_CodingMode, string(v.CodingMode))
+	}
+	if v.LoudnessMeasurementMode != "" {
+		s.WriteString(schemas.AacSettings_LoudnessMeasurementMode, string(v.LoudnessMeasurementMode))
+	}
+	if v.PassthroughControl != "" {
+		s.WriteString(schemas.AacSettings_PassthroughControl, string(v.PassthroughControl))
+	}
+	if v.RapInterval != nil {
+		s.WriteInt32(schemas.AacSettings_RapInterval, *v.RapInterval)
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.AacSettings_RateControlMode, string(v.RateControlMode))
+	}
+	if v.RawFormat != "" {
+		s.WriteString(schemas.AacSettings_RawFormat, string(v.RawFormat))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.AacSettings_SampleRate, *v.SampleRate)
+	}
+	if v.Specification != "" {
+		s.WriteString(schemas.AacSettings_Specification, string(v.Specification))
+	}
+	if v.TargetLoudnessRange != nil {
+		s.WriteInt32(schemas.AacSettings_TargetLoudnessRange, *v.TargetLoudnessRange)
+	}
+	if v.VbrQuality != "" {
+		s.WriteString(schemas.AacSettings_VbrQuality, string(v.VbrQuality))
+	}
+}
+func (v *AacSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AacSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AacSettings_AudioDescriptionBroadcasterMix:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_AudioDescriptionBroadcasterMix, &ev); err != nil {
+				return err
+			}
+			v.AudioDescriptionBroadcasterMix = AacAudioDescriptionBroadcasterMix(ev)
+			return nil
+		case schemas.AacSettings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.AacSettings_Bitrate, v.Bitrate)
+		case schemas.AacSettings_CodecProfile:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_CodecProfile, &ev); err != nil {
+				return err
+			}
+			v.CodecProfile = AacCodecProfile(ev)
+			return nil
+		case schemas.AacSettings_CodingMode:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_CodingMode, &ev); err != nil {
+				return err
+			}
+			v.CodingMode = AacCodingMode(ev)
+			return nil
+		case schemas.AacSettings_LoudnessMeasurementMode:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_LoudnessMeasurementMode, &ev); err != nil {
+				return err
+			}
+			v.LoudnessMeasurementMode = AacLoudnessMeasurementMode(ev)
+			return nil
+		case schemas.AacSettings_PassthroughControl:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_PassthroughControl, &ev); err != nil {
+				return err
+			}
+			v.PassthroughControl = AacPassthroughControl(ev)
+			return nil
+		case schemas.AacSettings_RapInterval:
+			v.RapInterval = new(int32)
+			return d.ReadInt32(schemas.AacSettings_RapInterval, v.RapInterval)
+		case schemas.AacSettings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = AacRateControlMode(ev)
+			return nil
+		case schemas.AacSettings_RawFormat:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_RawFormat, &ev); err != nil {
+				return err
+			}
+			v.RawFormat = AacRawFormat(ev)
+			return nil
+		case schemas.AacSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.AacSettings_SampleRate, v.SampleRate)
+		case schemas.AacSettings_Specification:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_Specification, &ev); err != nil {
+				return err
+			}
+			v.Specification = AacSpecification(ev)
+			return nil
+		case schemas.AacSettings_TargetLoudnessRange:
+			v.TargetLoudnessRange = new(int32)
+			return d.ReadInt32(schemas.AacSettings_TargetLoudnessRange, v.TargetLoudnessRange)
+		case schemas.AacSettings_VbrQuality:
+			var ev string
+			if err := d.ReadString(schemas.AacSettings_VbrQuality, &ev); err != nil {
+				return err
+			}
+			v.VbrQuality = AacVbrQuality(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec to the value AC3.
 type Ac3Settings struct {
 
@@ -176,6 +308,110 @@ type Ac3Settings struct {
 	SampleRate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Ac3Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ac3Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ac3Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Ac3Settings_Bitrate, *v.Bitrate)
+	}
+	if v.BitstreamMode != "" {
+		s.WriteString(schemas.Ac3Settings_BitstreamMode, string(v.BitstreamMode))
+	}
+	if v.CodingMode != "" {
+		s.WriteString(schemas.Ac3Settings_CodingMode, string(v.CodingMode))
+	}
+	if v.Dialnorm != nil {
+		s.WriteInt32(schemas.Ac3Settings_Dialnorm, *v.Dialnorm)
+	}
+	if v.DynamicRangeCompressionLine != "" {
+		s.WriteString(schemas.Ac3Settings_DynamicRangeCompressionLine, string(v.DynamicRangeCompressionLine))
+	}
+	if v.DynamicRangeCompressionProfile != "" {
+		s.WriteString(schemas.Ac3Settings_DynamicRangeCompressionProfile, string(v.DynamicRangeCompressionProfile))
+	}
+	if v.DynamicRangeCompressionRf != "" {
+		s.WriteString(schemas.Ac3Settings_DynamicRangeCompressionRf, string(v.DynamicRangeCompressionRf))
+	}
+	if v.LfeFilter != "" {
+		s.WriteString(schemas.Ac3Settings_LfeFilter, string(v.LfeFilter))
+	}
+	if v.MetadataControl != "" {
+		s.WriteString(schemas.Ac3Settings_MetadataControl, string(v.MetadataControl))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.Ac3Settings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *Ac3Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ac3Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ac3Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Ac3Settings_Bitrate, v.Bitrate)
+		case schemas.Ac3Settings_BitstreamMode:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_BitstreamMode, &ev); err != nil {
+				return err
+			}
+			v.BitstreamMode = Ac3BitstreamMode(ev)
+			return nil
+		case schemas.Ac3Settings_CodingMode:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_CodingMode, &ev); err != nil {
+				return err
+			}
+			v.CodingMode = Ac3CodingMode(ev)
+			return nil
+		case schemas.Ac3Settings_Dialnorm:
+			v.Dialnorm = new(int32)
+			return d.ReadInt32(schemas.Ac3Settings_Dialnorm, v.Dialnorm)
+		case schemas.Ac3Settings_DynamicRangeCompressionLine:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_DynamicRangeCompressionLine, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionLine = Ac3DynamicRangeCompressionLine(ev)
+			return nil
+		case schemas.Ac3Settings_DynamicRangeCompressionProfile:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_DynamicRangeCompressionProfile, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionProfile = Ac3DynamicRangeCompressionProfile(ev)
+			return nil
+		case schemas.Ac3Settings_DynamicRangeCompressionRf:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_DynamicRangeCompressionRf, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionRf = Ac3DynamicRangeCompressionRf(ev)
+			return nil
+		case schemas.Ac3Settings_LfeFilter:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_LfeFilter, &ev); err != nil {
+				return err
+			}
+			v.LfeFilter = Ac3LfeFilter(ev)
+			return nil
+		case schemas.Ac3Settings_MetadataControl:
+			var ev string
+			if err := d.ReadString(schemas.Ac3Settings_MetadataControl, &ev); err != nil {
+				return err
+			}
+			v.MetadataControl = Ac3MetadataControl(ev)
+			return nil
+		case schemas.Ac3Settings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.Ac3Settings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value AC4.
@@ -276,6 +512,128 @@ type Ac4Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ac4Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ac4Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ac4Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Ac4Settings_Bitrate, *v.Bitrate)
+	}
+	if v.BitstreamMode != "" {
+		s.WriteString(schemas.Ac4Settings_BitstreamMode, string(v.BitstreamMode))
+	}
+	if v.CodingMode != "" {
+		s.WriteString(schemas.Ac4Settings_CodingMode, string(v.CodingMode))
+	}
+	if v.DynamicRangeCompressionFlatPanelTv != "" {
+		s.WriteString(schemas.Ac4Settings_DynamicRangeCompressionFlatPanelTv, string(v.DynamicRangeCompressionFlatPanelTv))
+	}
+	if v.DynamicRangeCompressionHomeTheater != "" {
+		s.WriteString(schemas.Ac4Settings_DynamicRangeCompressionHomeTheater, string(v.DynamicRangeCompressionHomeTheater))
+	}
+	if v.DynamicRangeCompressionPortableHeadphones != "" {
+		s.WriteString(schemas.Ac4Settings_DynamicRangeCompressionPortableHeadphones, string(v.DynamicRangeCompressionPortableHeadphones))
+	}
+	if v.DynamicRangeCompressionPortableSpeakers != "" {
+		s.WriteString(schemas.Ac4Settings_DynamicRangeCompressionPortableSpeakers, string(v.DynamicRangeCompressionPortableSpeakers))
+	}
+	if v.LoRoCenterMixLevel != nil {
+		s.WriteFloat64(schemas.Ac4Settings_LoRoCenterMixLevel, *v.LoRoCenterMixLevel)
+	}
+	if v.LoRoSurroundMixLevel != nil {
+		s.WriteFloat64(schemas.Ac4Settings_LoRoSurroundMixLevel, *v.LoRoSurroundMixLevel)
+	}
+	if v.LtRtCenterMixLevel != nil {
+		s.WriteFloat64(schemas.Ac4Settings_LtRtCenterMixLevel, *v.LtRtCenterMixLevel)
+	}
+	if v.LtRtSurroundMixLevel != nil {
+		s.WriteFloat64(schemas.Ac4Settings_LtRtSurroundMixLevel, *v.LtRtSurroundMixLevel)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.Ac4Settings_SampleRate, *v.SampleRate)
+	}
+	if v.StereoDownmix != "" {
+		s.WriteString(schemas.Ac4Settings_StereoDownmix, string(v.StereoDownmix))
+	}
+}
+func (v *Ac4Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ac4Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ac4Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Ac4Settings_Bitrate, v.Bitrate)
+		case schemas.Ac4Settings_BitstreamMode:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_BitstreamMode, &ev); err != nil {
+				return err
+			}
+			v.BitstreamMode = Ac4BitstreamMode(ev)
+			return nil
+		case schemas.Ac4Settings_CodingMode:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_CodingMode, &ev); err != nil {
+				return err
+			}
+			v.CodingMode = Ac4CodingMode(ev)
+			return nil
+		case schemas.Ac4Settings_DynamicRangeCompressionFlatPanelTv:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_DynamicRangeCompressionFlatPanelTv, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionFlatPanelTv = Ac4DynamicRangeCompressionDrcProfile(ev)
+			return nil
+		case schemas.Ac4Settings_DynamicRangeCompressionHomeTheater:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_DynamicRangeCompressionHomeTheater, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionHomeTheater = Ac4DynamicRangeCompressionDrcProfile(ev)
+			return nil
+		case schemas.Ac4Settings_DynamicRangeCompressionPortableHeadphones:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_DynamicRangeCompressionPortableHeadphones, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionPortableHeadphones = Ac4DynamicRangeCompressionDrcProfile(ev)
+			return nil
+		case schemas.Ac4Settings_DynamicRangeCompressionPortableSpeakers:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_DynamicRangeCompressionPortableSpeakers, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionPortableSpeakers = Ac4DynamicRangeCompressionDrcProfile(ev)
+			return nil
+		case schemas.Ac4Settings_LoRoCenterMixLevel:
+			v.LoRoCenterMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Ac4Settings_LoRoCenterMixLevel, v.LoRoCenterMixLevel)
+		case schemas.Ac4Settings_LoRoSurroundMixLevel:
+			v.LoRoSurroundMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Ac4Settings_LoRoSurroundMixLevel, v.LoRoSurroundMixLevel)
+		case schemas.Ac4Settings_LtRtCenterMixLevel:
+			v.LtRtCenterMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Ac4Settings_LtRtCenterMixLevel, v.LtRtCenterMixLevel)
+		case schemas.Ac4Settings_LtRtSurroundMixLevel:
+			v.LtRtSurroundMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Ac4Settings_LtRtSurroundMixLevel, v.LtRtSurroundMixLevel)
+		case schemas.Ac4Settings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.Ac4Settings_SampleRate, v.SampleRate)
+		case schemas.Ac4Settings_StereoDownmix:
+			var ev string
+			if err := d.ReadString(schemas.Ac4Settings_StereoDownmix, &ev); err != nil {
+				return err
+			}
+			v.StereoDownmix = Ac4StereoDownmix(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Accelerated transcoding can significantly speed up jobs with long, visually
 // complex content.
 type AccelerationSettings struct {
@@ -287,6 +645,32 @@ type AccelerationSettings struct {
 	Mode AccelerationMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccelerationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccelerationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccelerationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.AccelerationSettings_Mode, string(v.Mode))
+	}
+}
+func (v *AccelerationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccelerationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccelerationSettings_Mode:
+			var ev string
+			if err := d.ReadString(schemas.AccelerationSettings_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AccelerationMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Optional settings for Advanced input filter when you set Advanced input filter
@@ -310,6 +694,42 @@ type AdvancedInputFilterSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdvancedInputFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedInputFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedInputFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddTexture != "" {
+		s.WriteString(schemas.AdvancedInputFilterSettings_AddTexture, string(v.AddTexture))
+	}
+	if v.Sharpening != "" {
+		s.WriteString(schemas.AdvancedInputFilterSettings_Sharpening, string(v.Sharpening))
+	}
+}
+func (v *AdvancedInputFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedInputFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedInputFilterSettings_AddTexture:
+			var ev string
+			if err := d.ReadString(schemas.AdvancedInputFilterSettings_AddTexture, &ev); err != nil {
+				return err
+			}
+			v.AddTexture = AdvancedInputFilterAddTexture(ev)
+			return nil
+		case schemas.AdvancedInputFilterSettings_Sharpening:
+			var ev string
+			if err := d.ReadString(schemas.AdvancedInputFilterSettings_Sharpening, &ev); err != nil {
+				return err
+			}
+			v.Sharpening = AdvancedInputFilterSharpen(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec to the value AIFF.
 type AiffSettings struct {
 
@@ -327,6 +747,40 @@ type AiffSettings struct {
 	SampleRate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AiffSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AiffSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AiffSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitDepth != nil {
+		s.WriteInt32(schemas.AiffSettings_BitDepth, *v.BitDepth)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.AiffSettings_Channels, *v.Channels)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.AiffSettings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *AiffSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AiffSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AiffSettings_BitDepth:
+			v.BitDepth = new(int32)
+			return d.ReadInt32(schemas.AiffSettings_BitDepth, v.BitDepth)
+		case schemas.AiffSettings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.AiffSettings_Channels, v.Channels)
+		case schemas.AiffSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.AiffSettings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // Use Allowed renditions to specify a list of possible resolutions in your ABR
@@ -351,6 +805,44 @@ type AllowedRenditionSize struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllowedRenditionSize) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllowedRenditionSize)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllowedRenditionSize) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.AllowedRenditionSize_Height, *v.Height)
+	}
+	if v.Required != "" {
+		s.WriteString(schemas.AllowedRenditionSize_Required, string(v.Required))
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.AllowedRenditionSize_Width, *v.Width)
+	}
+}
+func (v *AllowedRenditionSize) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllowedRenditionSize, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AllowedRenditionSize_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.AllowedRenditionSize_Height, v.Height)
+		case schemas.AllowedRenditionSize_Required:
+			var ev string
+			if err := d.ReadString(schemas.AllowedRenditionSize_Required, &ev); err != nil {
+				return err
+			}
+			v.Required = RequiredFlag(ev)
+			return nil
+		case schemas.AllowedRenditionSize_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.AllowedRenditionSize_Width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Settings for ancillary captions source.
 type AncillarySourceSettings struct {
 
@@ -372,10 +864,59 @@ type AncillarySourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AncillarySourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AncillarySourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AncillarySourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Convert608To708 != "" {
+		s.WriteString(schemas.AncillarySourceSettings_Convert608To708, string(v.Convert608To708))
+	}
+	if v.SourceAncillaryChannelNumber != nil {
+		s.WriteInt32(schemas.AncillarySourceSettings_SourceAncillaryChannelNumber, *v.SourceAncillaryChannelNumber)
+	}
+	if v.TerminateCaptions != "" {
+		s.WriteString(schemas.AncillarySourceSettings_TerminateCaptions, string(v.TerminateCaptions))
+	}
+}
+func (v *AncillarySourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AncillarySourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AncillarySourceSettings_Convert608To708:
+			var ev string
+			if err := d.ReadString(schemas.AncillarySourceSettings_Convert608To708, &ev); err != nil {
+				return err
+			}
+			v.Convert608To708 = AncillaryConvert608To708(ev)
+			return nil
+		case schemas.AncillarySourceSettings_SourceAncillaryChannelNumber:
+			v.SourceAncillaryChannelNumber = new(int32)
+			return d.ReadInt32(schemas.AncillarySourceSettings_SourceAncillaryChannelNumber, v.SourceAncillaryChannelNumber)
+		case schemas.AncillarySourceSettings_TerminateCaptions:
+			var ev string
+			if err := d.ReadString(schemas.AncillarySourceSettings_TerminateCaptions, &ev); err != nil {
+				return err
+			}
+			v.TerminateCaptions = AncillaryTerminateCaptions(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An aspect ratio expressed as a fraction with numerator and denominator values,
 // reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
 // display aspect ratio of a video track. For example, a 720x576 anamorphic track
-// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+// video track can declare an aspect ratio in two independent places, and
+// MediaConvert reports each one where it was found rather than choosing between
+// them. The ratio declared by the container appears on the video track itself, and
+// the ratio declared by the video essence appears under codecMetadata. When a file
+// declares an aspect ratio in only one of the two places, the other is null; when
+// it declares both and they disagree, you can compare them and decide which to
+// use.
 type AspectRatio struct {
 
 	// The denominator, or bottom number, in the fractional aspect ratio. For example,
@@ -387,6 +928,34 @@ type AspectRatio struct {
 	Numerator *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AspectRatio) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AspectRatio)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AspectRatio) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Denominator != nil {
+		s.WriteInt32(schemas.AspectRatio_Denominator, *v.Denominator)
+	}
+	if v.Numerator != nil {
+		s.WriteInt32(schemas.AspectRatio_Numerator, *v.Numerator)
+	}
+}
+func (v *AspectRatio) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AspectRatio, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AspectRatio_Denominator:
+			v.Denominator = new(int32)
+			return d.ReadInt32(schemas.AspectRatio_Denominator, v.Denominator)
+		case schemas.AspectRatio_Numerator:
+			v.Numerator = new(int32)
+			return d.ReadInt32(schemas.AspectRatio_Numerator, v.Numerator)
+		}
+		return nil
+	})
 }
 
 // Specify the QuickTime audio channel layout tags for the audio channels in this
@@ -412,6 +981,35 @@ type AudioChannelTaggingSettings struct {
 	ChannelTags []AudioChannelTag
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioChannelTaggingSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioChannelTaggingSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioChannelTaggingSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelTag != "" {
+		s.WriteString(schemas.AudioChannelTaggingSettings_ChannelTag, string(v.ChannelTag))
+	}
+	serialize__listOfAudioChannelTag(s, schemas.AudioChannelTaggingSettings_ChannelTags, v.ChannelTags)
+}
+func (v *AudioChannelTaggingSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioChannelTaggingSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioChannelTaggingSettings_ChannelTag:
+			var ev string
+			if err := d.ReadString(schemas.AudioChannelTaggingSettings_ChannelTag, &ev); err != nil {
+				return err
+			}
+			v.ChannelTag = AudioChannelTag(ev)
+			return nil
+		case schemas.AudioChannelTaggingSettings_ChannelTags:
+			return deserialize__listOfAudioChannelTag(d, schemas.AudioChannelTaggingSettings_ChannelTags, &v.ChannelTags)
+		}
+		return nil
+	})
 }
 
 // Settings related to audio encoding. The settings in this group vary depending
@@ -476,6 +1074,128 @@ type AudioCodecSettings struct {
 	WavSettings *WavSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioCodecSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioCodecSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioCodecSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AacSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_AacSettings)
+		v.AacSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ac3Settings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_Ac3Settings)
+		v.Ac3Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ac4Settings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_Ac4Settings)
+		v.Ac4Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AiffSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_AiffSettings)
+		v.AiffSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Codec != "" {
+		s.WriteString(schemas.AudioCodecSettings_Codec, string(v.Codec))
+	}
+	if v.Eac3AtmosSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_Eac3AtmosSettings)
+		v.Eac3AtmosSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Eac3Settings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_Eac3Settings)
+		v.Eac3Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlacSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_FlacSettings)
+		v.FlacSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mp2Settings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_Mp2Settings)
+		v.Mp2Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mp3Settings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_Mp3Settings)
+		v.Mp3Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpusSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_OpusSettings)
+		v.OpusSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VorbisSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_VorbisSettings)
+		v.VorbisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WavSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_WavSettings)
+		v.WavSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AudioCodecSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioCodecSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioCodecSettings_AacSettings:
+			v.AacSettings = &AacSettings{}
+			return v.AacSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_Ac3Settings:
+			v.Ac3Settings = &Ac3Settings{}
+			return v.Ac3Settings.Deserialize(d)
+		case schemas.AudioCodecSettings_Ac4Settings:
+			v.Ac4Settings = &Ac4Settings{}
+			return v.Ac4Settings.Deserialize(d)
+		case schemas.AudioCodecSettings_AiffSettings:
+			v.AiffSettings = &AiffSettings{}
+			return v.AiffSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_Codec:
+			var ev string
+			if err := d.ReadString(schemas.AudioCodecSettings_Codec, &ev); err != nil {
+				return err
+			}
+			v.Codec = AudioCodec(ev)
+			return nil
+		case schemas.AudioCodecSettings_Eac3AtmosSettings:
+			v.Eac3AtmosSettings = &Eac3AtmosSettings{}
+			return v.Eac3AtmosSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_Eac3Settings:
+			v.Eac3Settings = &Eac3Settings{}
+			return v.Eac3Settings.Deserialize(d)
+		case schemas.AudioCodecSettings_FlacSettings:
+			v.FlacSettings = &FlacSettings{}
+			return v.FlacSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_Mp2Settings:
+			v.Mp2Settings = &Mp2Settings{}
+			return v.Mp2Settings.Deserialize(d)
+		case schemas.AudioCodecSettings_Mp3Settings:
+			v.Mp3Settings = &Mp3Settings{}
+			return v.Mp3Settings.Deserialize(d)
+		case schemas.AudioCodecSettings_OpusSettings:
+			v.OpusSettings = &OpusSettings{}
+			return v.OpusSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_VorbisSettings:
+			v.VorbisSettings = &VorbisSettings{}
+			return v.VorbisSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_WavSettings:
+			v.WavSettings = &WavSettings{}
+			return v.WavSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Settings related to one audio tab on the MediaConvert console. In your job
@@ -569,6 +1289,116 @@ type AudioDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChannelTaggingSettings != nil {
+		s.WriteStruct(schemas.AudioDescription_AudioChannelTaggingSettings)
+		v.AudioChannelTaggingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AudioNormalizationSettings != nil {
+		s.WriteStruct(schemas.AudioDescription_AudioNormalizationSettings)
+		v.AudioNormalizationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AudioPitchCorrectionSettings != nil {
+		s.WriteStruct(schemas.AudioDescription_AudioPitchCorrectionSettings)
+		v.AudioPitchCorrectionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AudioSourceName != nil {
+		s.WriteString(schemas.AudioDescription_AudioSourceName, *v.AudioSourceName)
+	}
+	if v.AudioType != nil {
+		s.WriteInt32(schemas.AudioDescription_AudioType, *v.AudioType)
+	}
+	if v.AudioTypeControl != "" {
+		s.WriteString(schemas.AudioDescription_AudioTypeControl, string(v.AudioTypeControl))
+	}
+	if v.CodecSettings != nil {
+		s.WriteStruct(schemas.AudioDescription_CodecSettings)
+		v.CodecSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomLanguageCode != nil {
+		s.WriteString(schemas.AudioDescription_CustomLanguageCode, *v.CustomLanguageCode)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.AudioDescription_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageCodeControl != "" {
+		s.WriteString(schemas.AudioDescription_LanguageCodeControl, string(v.LanguageCodeControl))
+	}
+	if v.RemixSettings != nil {
+		s.WriteStruct(schemas.AudioDescription_RemixSettings)
+		v.RemixSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.AudioDescription_StreamName, *v.StreamName)
+	}
+}
+func (v *AudioDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioDescription_AudioChannelTaggingSettings:
+			v.AudioChannelTaggingSettings = &AudioChannelTaggingSettings{}
+			return v.AudioChannelTaggingSettings.Deserialize(d)
+		case schemas.AudioDescription_AudioNormalizationSettings:
+			v.AudioNormalizationSettings = &AudioNormalizationSettings{}
+			return v.AudioNormalizationSettings.Deserialize(d)
+		case schemas.AudioDescription_AudioPitchCorrectionSettings:
+			v.AudioPitchCorrectionSettings = &AudioPitchCorrectionSettings{}
+			return v.AudioPitchCorrectionSettings.Deserialize(d)
+		case schemas.AudioDescription_AudioSourceName:
+			v.AudioSourceName = new(string)
+			return d.ReadString(schemas.AudioDescription_AudioSourceName, v.AudioSourceName)
+		case schemas.AudioDescription_AudioType:
+			v.AudioType = new(int32)
+			return d.ReadInt32(schemas.AudioDescription_AudioType, v.AudioType)
+		case schemas.AudioDescription_AudioTypeControl:
+			var ev string
+			if err := d.ReadString(schemas.AudioDescription_AudioTypeControl, &ev); err != nil {
+				return err
+			}
+			v.AudioTypeControl = AudioTypeControl(ev)
+			return nil
+		case schemas.AudioDescription_CodecSettings:
+			v.CodecSettings = &AudioCodecSettings{}
+			return v.CodecSettings.Deserialize(d)
+		case schemas.AudioDescription_CustomLanguageCode:
+			v.CustomLanguageCode = new(string)
+			return d.ReadString(schemas.AudioDescription_CustomLanguageCode, v.CustomLanguageCode)
+		case schemas.AudioDescription_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.AudioDescription_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.AudioDescription_LanguageCodeControl:
+			var ev string
+			if err := d.ReadString(schemas.AudioDescription_LanguageCodeControl, &ev); err != nil {
+				return err
+			}
+			v.LanguageCodeControl = AudioLanguageCodeControl(ev)
+			return nil
+		case schemas.AudioDescription_RemixSettings:
+			v.RemixSettings = &RemixSettings{}
+			return v.RemixSettings.Deserialize(d)
+		case schemas.AudioDescription_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.AudioDescription_StreamName, v.StreamName)
+		}
+		return nil
+	})
+}
+
 // Advanced audio normalization settings. Ignore these settings unless you need to
 // comply with a loudness standard.
 type AudioNormalizationSettings struct {
@@ -616,6 +1446,80 @@ type AudioNormalizationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioNormalizationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioNormalizationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioNormalizationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != "" {
+		s.WriteString(schemas.AudioNormalizationSettings_Algorithm, string(v.Algorithm))
+	}
+	if v.AlgorithmControl != "" {
+		s.WriteString(schemas.AudioNormalizationSettings_AlgorithmControl, string(v.AlgorithmControl))
+	}
+	if v.CorrectionGateLevel != nil {
+		s.WriteInt32(schemas.AudioNormalizationSettings_CorrectionGateLevel, *v.CorrectionGateLevel)
+	}
+	if v.LoudnessLogging != "" {
+		s.WriteString(schemas.AudioNormalizationSettings_LoudnessLogging, string(v.LoudnessLogging))
+	}
+	if v.PeakCalculation != "" {
+		s.WriteString(schemas.AudioNormalizationSettings_PeakCalculation, string(v.PeakCalculation))
+	}
+	if v.TargetLkfs != nil {
+		s.WriteFloat64(schemas.AudioNormalizationSettings_TargetLkfs, *v.TargetLkfs)
+	}
+	if v.TruePeakLimiterThreshold != nil {
+		s.WriteFloat64(schemas.AudioNormalizationSettings_TruePeakLimiterThreshold, *v.TruePeakLimiterThreshold)
+	}
+}
+func (v *AudioNormalizationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioNormalizationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioNormalizationSettings_Algorithm:
+			var ev string
+			if err := d.ReadString(schemas.AudioNormalizationSettings_Algorithm, &ev); err != nil {
+				return err
+			}
+			v.Algorithm = AudioNormalizationAlgorithm(ev)
+			return nil
+		case schemas.AudioNormalizationSettings_AlgorithmControl:
+			var ev string
+			if err := d.ReadString(schemas.AudioNormalizationSettings_AlgorithmControl, &ev); err != nil {
+				return err
+			}
+			v.AlgorithmControl = AudioNormalizationAlgorithmControl(ev)
+			return nil
+		case schemas.AudioNormalizationSettings_CorrectionGateLevel:
+			v.CorrectionGateLevel = new(int32)
+			return d.ReadInt32(schemas.AudioNormalizationSettings_CorrectionGateLevel, v.CorrectionGateLevel)
+		case schemas.AudioNormalizationSettings_LoudnessLogging:
+			var ev string
+			if err := d.ReadString(schemas.AudioNormalizationSettings_LoudnessLogging, &ev); err != nil {
+				return err
+			}
+			v.LoudnessLogging = AudioNormalizationLoudnessLogging(ev)
+			return nil
+		case schemas.AudioNormalizationSettings_PeakCalculation:
+			var ev string
+			if err := d.ReadString(schemas.AudioNormalizationSettings_PeakCalculation, &ev); err != nil {
+				return err
+			}
+			v.PeakCalculation = AudioNormalizationPeakCalculation(ev)
+			return nil
+		case schemas.AudioNormalizationSettings_TargetLkfs:
+			v.TargetLkfs = new(float64)
+			return d.ReadFloat64(schemas.AudioNormalizationSettings_TargetLkfs, v.TargetLkfs)
+		case schemas.AudioNormalizationSettings_TruePeakLimiterThreshold:
+			v.TruePeakLimiterThreshold = new(float64)
+			return d.ReadFloat64(schemas.AudioNormalizationSettings_TruePeakLimiterThreshold, v.TruePeakLimiterThreshold)
+		}
+		return nil
+	})
+}
+
 // Settings for audio pitch correction during framerate conversion.
 type AudioPitchCorrectionSettings struct {
 
@@ -628,6 +1532,32 @@ type AudioPitchCorrectionSettings struct {
 	SlowPalPitchCorrection SlowPalPitchCorrection
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioPitchCorrectionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioPitchCorrectionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioPitchCorrectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SlowPalPitchCorrection != "" {
+		s.WriteString(schemas.AudioPitchCorrectionSettings_SlowPalPitchCorrection, string(v.SlowPalPitchCorrection))
+	}
+}
+func (v *AudioPitchCorrectionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioPitchCorrectionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioPitchCorrectionSettings_SlowPalPitchCorrection:
+			var ev string
+			if err := d.ReadString(schemas.AudioPitchCorrectionSettings_SlowPalPitchCorrection, &ev); err != nil {
+				return err
+			}
+			v.SlowPalPitchCorrection = SlowPalPitchCorrection(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about the media file's audio track.
@@ -663,6 +1593,72 @@ type AudioProperties struct {
 	SampleRate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitDepth != nil {
+		s.WriteInt32(schemas.AudioProperties_BitDepth, *v.BitDepth)
+	}
+	if v.BitRate != nil {
+		s.WriteInt64(schemas.AudioProperties_BitRate, *v.BitRate)
+	}
+	if v.ChannelLayout != nil {
+		s.WriteString(schemas.AudioProperties_ChannelLayout, *v.ChannelLayout)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.AudioProperties_Channels, *v.Channels)
+	}
+	if v.FrameRate != nil {
+		s.WriteStruct(schemas.AudioProperties_FrameRate)
+		v.FrameRate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.AudioProperties_LanguageCode, *v.LanguageCode)
+	}
+	if v.ObjectCount != nil {
+		s.WriteInt32(schemas.AudioProperties_ObjectCount, *v.ObjectCount)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.AudioProperties_SampleRate, *v.SampleRate)
+	}
+}
+func (v *AudioProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioProperties_BitDepth:
+			v.BitDepth = new(int32)
+			return d.ReadInt32(schemas.AudioProperties_BitDepth, v.BitDepth)
+		case schemas.AudioProperties_BitRate:
+			v.BitRate = new(int64)
+			return d.ReadInt64(schemas.AudioProperties_BitRate, v.BitRate)
+		case schemas.AudioProperties_ChannelLayout:
+			v.ChannelLayout = new(string)
+			return d.ReadString(schemas.AudioProperties_ChannelLayout, v.ChannelLayout)
+		case schemas.AudioProperties_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.AudioProperties_Channels, v.Channels)
+		case schemas.AudioProperties_FrameRate:
+			v.FrameRate = &FrameRate{}
+			return v.FrameRate.Deserialize(d)
+		case schemas.AudioProperties_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.AudioProperties_LanguageCode, v.LanguageCode)
+		case schemas.AudioProperties_ObjectCount:
+			v.ObjectCount = new(int32)
+			return d.ReadInt32(schemas.AudioProperties_ObjectCount, v.ObjectCount)
+		case schemas.AudioProperties_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.AudioProperties_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // Use Audio selectors to specify a track or set of tracks from the input that you
@@ -786,6 +1782,111 @@ type AudioSelector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDurationCorrection != "" {
+		s.WriteString(schemas.AudioSelector_AudioDurationCorrection, string(v.AudioDurationCorrection))
+	}
+	if v.CustomLanguageCode != nil {
+		s.WriteString(schemas.AudioSelector_CustomLanguageCode, *v.CustomLanguageCode)
+	}
+	if v.DefaultSelection != "" {
+		s.WriteString(schemas.AudioSelector_DefaultSelection, string(v.DefaultSelection))
+	}
+	if v.ExternalAudioFileInput != nil {
+		s.WriteString(schemas.AudioSelector_ExternalAudioFileInput, *v.ExternalAudioFileInput)
+	}
+	if v.HlsRenditionGroupSettings != nil {
+		s.WriteStruct(schemas.AudioSelector_HlsRenditionGroupSettings)
+		v.HlsRenditionGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.AudioSelector_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Offset != nil {
+		s.WriteInt32(schemas.AudioSelector_Offset, *v.Offset)
+	}
+	serialize__listOf__integerMin1Max2147483647(s, schemas.AudioSelector_Pids, v.Pids)
+	if v.ProgramSelection != nil {
+		s.WriteInt32(schemas.AudioSelector_ProgramSelection, *v.ProgramSelection)
+	}
+	if v.RemixSettings != nil {
+		s.WriteStruct(schemas.AudioSelector_RemixSettings)
+		v.RemixSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelectorType != "" {
+		s.WriteString(schemas.AudioSelector_SelectorType, string(v.SelectorType))
+	}
+	serialize__listOf__integerMin1Max2147483647(s, schemas.AudioSelector_Streams, v.Streams)
+	serialize__listOf__integerMin1Max2147483647(s, schemas.AudioSelector_Tracks, v.Tracks)
+}
+func (v *AudioSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioSelector_AudioDurationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.AudioSelector_AudioDurationCorrection, &ev); err != nil {
+				return err
+			}
+			v.AudioDurationCorrection = AudioDurationCorrection(ev)
+			return nil
+		case schemas.AudioSelector_CustomLanguageCode:
+			v.CustomLanguageCode = new(string)
+			return d.ReadString(schemas.AudioSelector_CustomLanguageCode, v.CustomLanguageCode)
+		case schemas.AudioSelector_DefaultSelection:
+			var ev string
+			if err := d.ReadString(schemas.AudioSelector_DefaultSelection, &ev); err != nil {
+				return err
+			}
+			v.DefaultSelection = AudioDefaultSelection(ev)
+			return nil
+		case schemas.AudioSelector_ExternalAudioFileInput:
+			v.ExternalAudioFileInput = new(string)
+			return d.ReadString(schemas.AudioSelector_ExternalAudioFileInput, v.ExternalAudioFileInput)
+		case schemas.AudioSelector_HlsRenditionGroupSettings:
+			v.HlsRenditionGroupSettings = &HlsRenditionGroupSettings{}
+			return v.HlsRenditionGroupSettings.Deserialize(d)
+		case schemas.AudioSelector_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.AudioSelector_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.AudioSelector_Offset:
+			v.Offset = new(int32)
+			return d.ReadInt32(schemas.AudioSelector_Offset, v.Offset)
+		case schemas.AudioSelector_Pids:
+			return deserialize__listOf__integerMin1Max2147483647(d, schemas.AudioSelector_Pids, &v.Pids)
+		case schemas.AudioSelector_ProgramSelection:
+			v.ProgramSelection = new(int32)
+			return d.ReadInt32(schemas.AudioSelector_ProgramSelection, v.ProgramSelection)
+		case schemas.AudioSelector_RemixSettings:
+			v.RemixSettings = &RemixSettings{}
+			return v.RemixSettings.Deserialize(d)
+		case schemas.AudioSelector_SelectorType:
+			var ev string
+			if err := d.ReadString(schemas.AudioSelector_SelectorType, &ev); err != nil {
+				return err
+			}
+			v.SelectorType = AudioSelectorType(ev)
+			return nil
+		case schemas.AudioSelector_Streams:
+			return deserialize__listOf__integerMin1Max2147483647(d, schemas.AudioSelector_Streams, &v.Streams)
+		case schemas.AudioSelector_Tracks:
+			return deserialize__listOf__integerMin1Max2147483647(d, schemas.AudioSelector_Tracks, &v.Tracks)
+		}
+		return nil
+	})
+}
+
 // Use audio selector groups to combine multiple sidecar audio inputs so that you
 // can assign them to a single output audio tab. Note that, if you're working with
 // embedded audio, it's simpler to assign multiple input tracks into a single audio
@@ -799,6 +1900,25 @@ type AudioSelectorGroup struct {
 	AudioSelectorNames []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AudioSelectorGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioSelectorGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioSelectorGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__stringMin1(s, schemas.AudioSelectorGroup_AudioSelectorNames, v.AudioSelectorNames)
+}
+func (v *AudioSelectorGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioSelectorGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioSelectorGroup_AudioSelectorNames:
+			return deserialize__listOf__stringMin1(d, schemas.AudioSelectorGroup_AudioSelectorNames, &v.AudioSelectorNames)
+		}
+		return nil
+	})
 }
 
 // Specify one or more Automated ABR rule types. Note: Force include and Allowed
@@ -868,6 +1988,54 @@ type AutomatedAbrRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedAbrRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedAbrRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedAbrRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAllowedRenditionSize(s, schemas.AutomatedAbrRule_AllowedRenditions, v.AllowedRenditions)
+	serialize__listOfForceIncludeRenditionSize(s, schemas.AutomatedAbrRule_ForceIncludeRenditions, v.ForceIncludeRenditions)
+	if v.MinBottomRenditionSize != nil {
+		s.WriteStruct(schemas.AutomatedAbrRule_MinBottomRenditionSize)
+		v.MinBottomRenditionSize.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinTopRenditionSize != nil {
+		s.WriteStruct(schemas.AutomatedAbrRule_MinTopRenditionSize)
+		v.MinTopRenditionSize.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AutomatedAbrRule_Type, string(v.Type))
+	}
+}
+func (v *AutomatedAbrRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedAbrRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedAbrRule_AllowedRenditions:
+			return deserialize__listOfAllowedRenditionSize(d, schemas.AutomatedAbrRule_AllowedRenditions, &v.AllowedRenditions)
+		case schemas.AutomatedAbrRule_ForceIncludeRenditions:
+			return deserialize__listOfForceIncludeRenditionSize(d, schemas.AutomatedAbrRule_ForceIncludeRenditions, &v.ForceIncludeRenditions)
+		case schemas.AutomatedAbrRule_MinBottomRenditionSize:
+			v.MinBottomRenditionSize = &MinBottomRenditionSize{}
+			return v.MinBottomRenditionSize.Deserialize(d)
+		case schemas.AutomatedAbrRule_MinTopRenditionSize:
+			v.MinTopRenditionSize = &MinTopRenditionSize{}
+			return v.MinTopRenditionSize.Deserialize(d)
+		case schemas.AutomatedAbrRule_Type:
+			var ev string
+			if err := d.ReadString(schemas.AutomatedAbrRule_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RuleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Use automated ABR to have MediaConvert set up the renditions in your ABR
 // package for you automatically, based on characteristics of your input video.
 // This feature optimizes video quality while minimizing the overall size of your
@@ -913,6 +2081,49 @@ type AutomatedAbrSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutomatedAbrSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedAbrSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedAbrSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxAbrBitrate != nil {
+		s.WriteInt32(schemas.AutomatedAbrSettings_MaxAbrBitrate, *v.MaxAbrBitrate)
+	}
+	if v.MaxQualityLevel != nil {
+		s.WriteFloat64(schemas.AutomatedAbrSettings_MaxQualityLevel, *v.MaxQualityLevel)
+	}
+	if v.MaxRenditions != nil {
+		s.WriteInt32(schemas.AutomatedAbrSettings_MaxRenditions, *v.MaxRenditions)
+	}
+	if v.MinAbrBitrate != nil {
+		s.WriteInt32(schemas.AutomatedAbrSettings_MinAbrBitrate, *v.MinAbrBitrate)
+	}
+	serialize__listOfAutomatedAbrRule(s, schemas.AutomatedAbrSettings_Rules, v.Rules)
+}
+func (v *AutomatedAbrSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedAbrSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedAbrSettings_MaxAbrBitrate:
+			v.MaxAbrBitrate = new(int32)
+			return d.ReadInt32(schemas.AutomatedAbrSettings_MaxAbrBitrate, v.MaxAbrBitrate)
+		case schemas.AutomatedAbrSettings_MaxQualityLevel:
+			v.MaxQualityLevel = new(float64)
+			return d.ReadFloat64(schemas.AutomatedAbrSettings_MaxQualityLevel, v.MaxQualityLevel)
+		case schemas.AutomatedAbrSettings_MaxRenditions:
+			v.MaxRenditions = new(int32)
+			return d.ReadInt32(schemas.AutomatedAbrSettings_MaxRenditions, v.MaxRenditions)
+		case schemas.AutomatedAbrSettings_MinAbrBitrate:
+			v.MinAbrBitrate = new(int32)
+			return d.ReadInt32(schemas.AutomatedAbrSettings_MinAbrBitrate, v.MinAbrBitrate)
+		case schemas.AutomatedAbrSettings_Rules:
+			return deserialize__listOfAutomatedAbrRule(d, schemas.AutomatedAbrSettings_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
+
 // Use automated encoding to have MediaConvert choose your encoding settings for
 // you, based on characteristics of your input video.
 type AutomatedEncodingSettings struct {
@@ -924,6 +2135,30 @@ type AutomatedEncodingSettings struct {
 	AbrSettings *AutomatedAbrSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomatedEncodingSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomatedEncodingSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomatedEncodingSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbrSettings != nil {
+		s.WriteStruct(schemas.AutomatedEncodingSettings_AbrSettings)
+		v.AbrSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutomatedEncodingSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomatedEncodingSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomatedEncodingSettings_AbrSettings:
+			v.AbrSettings = &AutomatedAbrSettings{}
+			return v.AbrSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Settings for quality-defined variable bitrate encoding with the AV1 codec. Use
@@ -953,6 +2188,34 @@ type Av1QvbrSettings struct {
 	QvbrQualityLevelFineTune *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Av1QvbrSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Av1QvbrSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Av1QvbrSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QvbrQualityLevel != nil {
+		s.WriteInt32(schemas.Av1QvbrSettings_QvbrQualityLevel, *v.QvbrQualityLevel)
+	}
+	if v.QvbrQualityLevelFineTune != nil {
+		s.WriteFloat64(schemas.Av1QvbrSettings_QvbrQualityLevelFineTune, *v.QvbrQualityLevelFineTune)
+	}
+}
+func (v *Av1QvbrSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Av1QvbrSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Av1QvbrSettings_QvbrQualityLevel:
+			v.QvbrQualityLevel = new(int32)
+			return d.ReadInt32(schemas.Av1QvbrSettings_QvbrQualityLevel, v.QvbrQualityLevel)
+		case schemas.Av1QvbrSettings_QvbrQualityLevelFineTune:
+			v.QvbrQualityLevelFineTune = new(float64)
+			return d.ReadFloat64(schemas.Av1QvbrSettings_QvbrQualityLevelFineTune, v.QvbrQualityLevelFineTune)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec, under VideoDescription>CodecSettings to the value
@@ -1082,6 +2345,139 @@ type Av1Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Av1Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Av1Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveQuantization != "" {
+		s.WriteString(schemas.Av1Settings_AdaptiveQuantization, string(v.AdaptiveQuantization))
+	}
+	if v.BitDepth != "" {
+		s.WriteString(schemas.Av1Settings_BitDepth, string(v.BitDepth))
+	}
+	if v.FilmGrainSynthesis != "" {
+		s.WriteString(schemas.Av1Settings_FilmGrainSynthesis, string(v.FilmGrainSynthesis))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.Av1Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.Av1Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.Av1Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.Av1Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.GopSize != nil {
+		s.WriteFloat64(schemas.Av1Settings_GopSize, *v.GopSize)
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.Av1Settings_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.NumberBFramesBetweenReferenceFrames != nil {
+		s.WriteInt32(schemas.Av1Settings_NumberBFramesBetweenReferenceFrames, *v.NumberBFramesBetweenReferenceFrames)
+	}
+	serialize__listOfFrameMetricType(s, schemas.Av1Settings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.QvbrSettings != nil {
+		s.WriteStruct(schemas.Av1Settings_QvbrSettings)
+		v.QvbrSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.Av1Settings_RateControlMode, string(v.RateControlMode))
+	}
+	if v.Slices != nil {
+		s.WriteInt32(schemas.Av1Settings_Slices, *v.Slices)
+	}
+	if v.SpatialAdaptiveQuantization != "" {
+		s.WriteString(schemas.Av1Settings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
+	}
+}
+func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Av1Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Av1Settings_AdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_AdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.AdaptiveQuantization = Av1AdaptiveQuantization(ev)
+			return nil
+		case schemas.Av1Settings_BitDepth:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_BitDepth, &ev); err != nil {
+				return err
+			}
+			v.BitDepth = Av1BitDepth(ev)
+			return nil
+		case schemas.Av1Settings_FilmGrainSynthesis:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_FilmGrainSynthesis, &ev); err != nil {
+				return err
+			}
+			v.FilmGrainSynthesis = Av1FilmGrainSynthesis(ev)
+			return nil
+		case schemas.Av1Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = Av1FramerateControl(ev)
+			return nil
+		case schemas.Av1Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = Av1FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.Av1Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.Av1Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.Av1Settings_GopSize:
+			v.GopSize = new(float64)
+			return d.ReadFloat64(schemas.Av1Settings_GopSize, v.GopSize)
+		case schemas.Av1Settings_MaxBitrate:
+			v.MaxBitrate = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_MaxBitrate, v.MaxBitrate)
+		case schemas.Av1Settings_NumberBFramesBetweenReferenceFrames:
+			v.NumberBFramesBetweenReferenceFrames = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_NumberBFramesBetweenReferenceFrames, v.NumberBFramesBetweenReferenceFrames)
+		case schemas.Av1Settings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.Av1Settings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.Av1Settings_QvbrSettings:
+			v.QvbrSettings = &Av1QvbrSettings{}
+			return v.QvbrSettings.Deserialize(d)
+		case schemas.Av1Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = Av1RateControlMode(ev)
+			return nil
+		case schemas.Av1Settings_Slices:
+			v.Slices = new(int32)
+			return d.ReadInt32(schemas.Av1Settings_Slices, v.Slices)
+		case schemas.Av1Settings_SpatialAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_SpatialAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.SpatialAdaptiveQuantization = Av1SpatialAdaptiveQuantization(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Use ad avail blanking settings to specify your output content during SCTE-35
 // triggered ad avails. You can blank your video or overlay it with an image.
 // MediaConvert also removes any audio and embedded captions during the ad avail.
@@ -1094,6 +2490,28 @@ type AvailBlanking struct {
 	AvailBlankingImage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AvailBlanking) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailBlanking)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailBlanking) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailBlankingImage != nil {
+		s.WriteString(schemas.AvailBlanking_AvailBlankingImage, *v.AvailBlankingImage)
+	}
+}
+func (v *AvailBlanking) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailBlanking, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailBlanking_AvailBlankingImage:
+			v.AvailBlankingImage = new(string)
+			return d.ReadString(schemas.AvailBlanking_AvailBlankingImage, v.AvailBlankingImage)
+		}
+		return nil
+	})
 }
 
 // Required when you choose AVC-Intra for your output video codec. For more
@@ -1219,6 +2637,115 @@ type AvcIntraSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AvcIntraSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvcIntraSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvcIntraSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvcIntraClass != "" {
+		s.WriteString(schemas.AvcIntraSettings_AvcIntraClass, string(v.AvcIntraClass))
+	}
+	if v.AvcIntraUhdSettings != nil {
+		s.WriteStruct(schemas.AvcIntraSettings_AvcIntraUhdSettings)
+		v.AvcIntraUhdSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.AvcIntraSettings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.AvcIntraSettings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.AvcIntraSettings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.AvcIntraSettings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.AvcIntraSettings_InterlaceMode, string(v.InterlaceMode))
+	}
+	serialize__listOfFrameMetricType(s, schemas.AvcIntraSettings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.AvcIntraSettings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.AvcIntraSettings_SlowPal, string(v.SlowPal))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.AvcIntraSettings_Telecine, string(v.Telecine))
+	}
+}
+func (v *AvcIntraSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvcIntraSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvcIntraSettings_AvcIntraClass:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_AvcIntraClass, &ev); err != nil {
+				return err
+			}
+			v.AvcIntraClass = AvcIntraClass(ev)
+			return nil
+		case schemas.AvcIntraSettings_AvcIntraUhdSettings:
+			v.AvcIntraUhdSettings = &AvcIntraUhdSettings{}
+			return v.AvcIntraUhdSettings.Deserialize(d)
+		case schemas.AvcIntraSettings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = AvcIntraFramerateControl(ev)
+			return nil
+		case schemas.AvcIntraSettings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = AvcIntraFramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.AvcIntraSettings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.AvcIntraSettings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.AvcIntraSettings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.AvcIntraSettings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.AvcIntraSettings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = AvcIntraInterlaceMode(ev)
+			return nil
+		case schemas.AvcIntraSettings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.AvcIntraSettings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.AvcIntraSettings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = AvcIntraScanTypeConversionMode(ev)
+			return nil
+		case schemas.AvcIntraSettings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = AvcIntraSlowPal(ev)
+			return nil
+		case schemas.AvcIntraSettings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraSettings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = AvcIntraTelecine(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Optional when you set AVC-Intra class to Class 4K/2K. When you set AVC-Intra
 // class to a different value, this object isn't allowed.
 type AvcIntraUhdSettings struct {
@@ -1232,6 +2759,32 @@ type AvcIntraUhdSettings struct {
 	QualityTuningLevel AvcIntraUhdQualityTuningLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *AvcIntraUhdSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvcIntraUhdSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvcIntraUhdSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.AvcIntraUhdSettings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+}
+func (v *AvcIntraUhdSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvcIntraUhdSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvcIntraUhdSettings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.AvcIntraUhdSettings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = AvcIntraUhdQualityTuningLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Bandwidth reduction filter increases the video quality of your output
@@ -1260,6 +2813,42 @@ type BandwidthReductionFilter struct {
 	Strength BandwidthReductionFilterStrength
 
 	noSmithyDocumentSerde
+}
+
+func (v *BandwidthReductionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BandwidthReductionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BandwidthReductionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sharpening != "" {
+		s.WriteString(schemas.BandwidthReductionFilter_Sharpening, string(v.Sharpening))
+	}
+	if v.Strength != "" {
+		s.WriteString(schemas.BandwidthReductionFilter_Strength, string(v.Strength))
+	}
+}
+func (v *BandwidthReductionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BandwidthReductionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BandwidthReductionFilter_Sharpening:
+			var ev string
+			if err := d.ReadString(schemas.BandwidthReductionFilter_Sharpening, &ev); err != nil {
+				return err
+			}
+			v.Sharpening = BandwidthReductionFilterSharpening(ev)
+			return nil
+		case schemas.BandwidthReductionFilter_Strength:
+			var ev string
+			if err := d.ReadString(schemas.BandwidthReductionFilter_Strength, &ev); err != nil {
+				return err
+			}
+			v.Strength = BandwidthReductionFilterStrength(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Burn-in is a captions delivery method, rather than a captions format. Burn-in
@@ -1429,6 +3018,222 @@ type BurninDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BurninDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BurninDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BurninDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alignment != "" {
+		s.WriteString(schemas.BurninDestinationSettings_Alignment, string(v.Alignment))
+	}
+	if v.ApplyFontColor != "" {
+		s.WriteString(schemas.BurninDestinationSettings_ApplyFontColor, string(v.ApplyFontColor))
+	}
+	if v.BackgroundColor != "" {
+		s.WriteString(schemas.BurninDestinationSettings_BackgroundColor, string(v.BackgroundColor))
+	}
+	if v.BackgroundOpacity != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_BackgroundOpacity, *v.BackgroundOpacity)
+	}
+	if v.FallbackFont != "" {
+		s.WriteString(schemas.BurninDestinationSettings_FallbackFont, string(v.FallbackFont))
+	}
+	if v.FontColor != "" {
+		s.WriteString(schemas.BurninDestinationSettings_FontColor, string(v.FontColor))
+	}
+	if v.FontFileBold != nil {
+		s.WriteString(schemas.BurninDestinationSettings_FontFileBold, *v.FontFileBold)
+	}
+	if v.FontFileBoldItalic != nil {
+		s.WriteString(schemas.BurninDestinationSettings_FontFileBoldItalic, *v.FontFileBoldItalic)
+	}
+	if v.FontFileItalic != nil {
+		s.WriteString(schemas.BurninDestinationSettings_FontFileItalic, *v.FontFileItalic)
+	}
+	if v.FontFileRegular != nil {
+		s.WriteString(schemas.BurninDestinationSettings_FontFileRegular, *v.FontFileRegular)
+	}
+	if v.FontOpacity != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_FontOpacity, *v.FontOpacity)
+	}
+	if v.FontResolution != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_FontResolution, *v.FontResolution)
+	}
+	if v.FontScript != "" {
+		s.WriteString(schemas.BurninDestinationSettings_FontScript, string(v.FontScript))
+	}
+	if v.FontSize != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_FontSize, *v.FontSize)
+	}
+	if v.HexFontColor != nil {
+		s.WriteString(schemas.BurninDestinationSettings_HexFontColor, *v.HexFontColor)
+	}
+	if v.OutlineColor != "" {
+		s.WriteString(schemas.BurninDestinationSettings_OutlineColor, string(v.OutlineColor))
+	}
+	if v.OutlineSize != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_OutlineSize, *v.OutlineSize)
+	}
+	if v.RemoveRubyReserveAttributes != "" {
+		s.WriteString(schemas.BurninDestinationSettings_RemoveRubyReserveAttributes, string(v.RemoveRubyReserveAttributes))
+	}
+	if v.ShadowColor != "" {
+		s.WriteString(schemas.BurninDestinationSettings_ShadowColor, string(v.ShadowColor))
+	}
+	if v.ShadowOpacity != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_ShadowOpacity, *v.ShadowOpacity)
+	}
+	if v.ShadowXOffset != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_ShadowXOffset, *v.ShadowXOffset)
+	}
+	if v.ShadowYOffset != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_ShadowYOffset, *v.ShadowYOffset)
+	}
+	if v.StylePassthrough != "" {
+		s.WriteString(schemas.BurninDestinationSettings_StylePassthrough, string(v.StylePassthrough))
+	}
+	if v.TeletextSpacing != "" {
+		s.WriteString(schemas.BurninDestinationSettings_TeletextSpacing, string(v.TeletextSpacing))
+	}
+	if v.XPosition != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_XPosition, *v.XPosition)
+	}
+	if v.YPosition != nil {
+		s.WriteInt32(schemas.BurninDestinationSettings_YPosition, *v.YPosition)
+	}
+}
+func (v *BurninDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BurninDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BurninDestinationSettings_Alignment:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_Alignment, &ev); err != nil {
+				return err
+			}
+			v.Alignment = BurninSubtitleAlignment(ev)
+			return nil
+		case schemas.BurninDestinationSettings_ApplyFontColor:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_ApplyFontColor, &ev); err != nil {
+				return err
+			}
+			v.ApplyFontColor = BurninSubtitleApplyFontColor(ev)
+			return nil
+		case schemas.BurninDestinationSettings_BackgroundColor:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_BackgroundColor, &ev); err != nil {
+				return err
+			}
+			v.BackgroundColor = BurninSubtitleBackgroundColor(ev)
+			return nil
+		case schemas.BurninDestinationSettings_BackgroundOpacity:
+			v.BackgroundOpacity = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_BackgroundOpacity, v.BackgroundOpacity)
+		case schemas.BurninDestinationSettings_FallbackFont:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_FallbackFont, &ev); err != nil {
+				return err
+			}
+			v.FallbackFont = BurninSubtitleFallbackFont(ev)
+			return nil
+		case schemas.BurninDestinationSettings_FontColor:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_FontColor, &ev); err != nil {
+				return err
+			}
+			v.FontColor = BurninSubtitleFontColor(ev)
+			return nil
+		case schemas.BurninDestinationSettings_FontFileBold:
+			v.FontFileBold = new(string)
+			return d.ReadString(schemas.BurninDestinationSettings_FontFileBold, v.FontFileBold)
+		case schemas.BurninDestinationSettings_FontFileBoldItalic:
+			v.FontFileBoldItalic = new(string)
+			return d.ReadString(schemas.BurninDestinationSettings_FontFileBoldItalic, v.FontFileBoldItalic)
+		case schemas.BurninDestinationSettings_FontFileItalic:
+			v.FontFileItalic = new(string)
+			return d.ReadString(schemas.BurninDestinationSettings_FontFileItalic, v.FontFileItalic)
+		case schemas.BurninDestinationSettings_FontFileRegular:
+			v.FontFileRegular = new(string)
+			return d.ReadString(schemas.BurninDestinationSettings_FontFileRegular, v.FontFileRegular)
+		case schemas.BurninDestinationSettings_FontOpacity:
+			v.FontOpacity = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_FontOpacity, v.FontOpacity)
+		case schemas.BurninDestinationSettings_FontResolution:
+			v.FontResolution = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_FontResolution, v.FontResolution)
+		case schemas.BurninDestinationSettings_FontScript:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_FontScript, &ev); err != nil {
+				return err
+			}
+			v.FontScript = FontScript(ev)
+			return nil
+		case schemas.BurninDestinationSettings_FontSize:
+			v.FontSize = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_FontSize, v.FontSize)
+		case schemas.BurninDestinationSettings_HexFontColor:
+			v.HexFontColor = new(string)
+			return d.ReadString(schemas.BurninDestinationSettings_HexFontColor, v.HexFontColor)
+		case schemas.BurninDestinationSettings_OutlineColor:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_OutlineColor, &ev); err != nil {
+				return err
+			}
+			v.OutlineColor = BurninSubtitleOutlineColor(ev)
+			return nil
+		case schemas.BurninDestinationSettings_OutlineSize:
+			v.OutlineSize = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_OutlineSize, v.OutlineSize)
+		case schemas.BurninDestinationSettings_RemoveRubyReserveAttributes:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_RemoveRubyReserveAttributes, &ev); err != nil {
+				return err
+			}
+			v.RemoveRubyReserveAttributes = RemoveRubyReserveAttributes(ev)
+			return nil
+		case schemas.BurninDestinationSettings_ShadowColor:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_ShadowColor, &ev); err != nil {
+				return err
+			}
+			v.ShadowColor = BurninSubtitleShadowColor(ev)
+			return nil
+		case schemas.BurninDestinationSettings_ShadowOpacity:
+			v.ShadowOpacity = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_ShadowOpacity, v.ShadowOpacity)
+		case schemas.BurninDestinationSettings_ShadowXOffset:
+			v.ShadowXOffset = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_ShadowXOffset, v.ShadowXOffset)
+		case schemas.BurninDestinationSettings_ShadowYOffset:
+			v.ShadowYOffset = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_ShadowYOffset, v.ShadowYOffset)
+		case schemas.BurninDestinationSettings_StylePassthrough:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_StylePassthrough, &ev); err != nil {
+				return err
+			}
+			v.StylePassthrough = BurnInSubtitleStylePassthrough(ev)
+			return nil
+		case schemas.BurninDestinationSettings_TeletextSpacing:
+			var ev string
+			if err := d.ReadString(schemas.BurninDestinationSettings_TeletextSpacing, &ev); err != nil {
+				return err
+			}
+			v.TeletextSpacing = BurninSubtitleTeletextSpacing(ev)
+			return nil
+		case schemas.BurninDestinationSettings_XPosition:
+			v.XPosition = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_XPosition, v.XPosition)
+		case schemas.BurninDestinationSettings_YPosition:
+			v.YPosition = new(int32)
+			return d.ReadInt32(schemas.BurninDestinationSettings_YPosition, v.YPosition)
+		}
+		return nil
+	})
+}
+
 // This object holds groups of settings related to captions for one output. For
 // each output that has captions, include one instance of CaptionDescriptions.
 type CaptionDescription struct {
@@ -1474,6 +3279,58 @@ type CaptionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CaptionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaptionSelectorName != nil {
+		s.WriteString(schemas.CaptionDescription_CaptionSelectorName, *v.CaptionSelectorName)
+	}
+	if v.CustomLanguageCode != nil {
+		s.WriteString(schemas.CaptionDescription_CustomLanguageCode, *v.CustomLanguageCode)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDescription_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CaptionDescription_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageDescription != nil {
+		s.WriteString(schemas.CaptionDescription_LanguageDescription, *v.LanguageDescription)
+	}
+}
+func (v *CaptionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptionDescription_CaptionSelectorName:
+			v.CaptionSelectorName = new(string)
+			return d.ReadString(schemas.CaptionDescription_CaptionSelectorName, v.CaptionSelectorName)
+		case schemas.CaptionDescription_CustomLanguageCode:
+			v.CustomLanguageCode = new(string)
+			return d.ReadString(schemas.CaptionDescription_CustomLanguageCode, v.CustomLanguageCode)
+		case schemas.CaptionDescription_DestinationSettings:
+			v.DestinationSettings = &CaptionDestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		case schemas.CaptionDescription_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CaptionDescription_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.CaptionDescription_LanguageDescription:
+			v.LanguageDescription = new(string)
+			return d.ReadString(schemas.CaptionDescription_LanguageDescription, v.LanguageDescription)
+		}
+		return nil
+	})
+}
+
 // Caption Description for preset
 type CaptionDescriptionPreset struct {
 
@@ -1510,6 +3367,52 @@ type CaptionDescriptionPreset struct {
 	LanguageDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CaptionDescriptionPreset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptionDescriptionPreset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptionDescriptionPreset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomLanguageCode != nil {
+		s.WriteString(schemas.CaptionDescriptionPreset_CustomLanguageCode, *v.CustomLanguageCode)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDescriptionPreset_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CaptionDescriptionPreset_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageDescription != nil {
+		s.WriteString(schemas.CaptionDescriptionPreset_LanguageDescription, *v.LanguageDescription)
+	}
+}
+func (v *CaptionDescriptionPreset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptionDescriptionPreset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptionDescriptionPreset_CustomLanguageCode:
+			v.CustomLanguageCode = new(string)
+			return d.ReadString(schemas.CaptionDescriptionPreset_CustomLanguageCode, v.CustomLanguageCode)
+		case schemas.CaptionDescriptionPreset_DestinationSettings:
+			v.DestinationSettings = &CaptionDestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		case schemas.CaptionDescriptionPreset_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CaptionDescriptionPreset_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.CaptionDescriptionPreset_LanguageDescription:
+			v.LanguageDescription = new(string)
+			return d.ReadString(schemas.CaptionDescriptionPreset_LanguageDescription, v.LanguageDescription)
+		}
+		return nil
+	})
 }
 
 // Settings related to one captions tab on the MediaConvert console. Usually, one
@@ -1587,6 +3490,104 @@ type CaptionDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CaptionDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptionDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptionDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BurninDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_BurninDestinationSettings)
+		v.BurninDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.CaptionDestinationSettings_DestinationType, string(v.DestinationType))
+	}
+	if v.DvbSubDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_DvbSubDestinationSettings)
+		v.DvbSubDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmbeddedDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_EmbeddedDestinationSettings)
+		v.EmbeddedDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImscDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_ImscDestinationSettings)
+		v.ImscDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SccDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_SccDestinationSettings)
+		v.SccDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SrtDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_SrtDestinationSettings)
+		v.SrtDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TeletextDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_TeletextDestinationSettings)
+		v.TeletextDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TtmlDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_TtmlDestinationSettings)
+		v.TtmlDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebvttDestinationSettings != nil {
+		s.WriteStruct(schemas.CaptionDestinationSettings_WebvttDestinationSettings)
+		v.WebvttDestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CaptionDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptionDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptionDestinationSettings_BurninDestinationSettings:
+			v.BurninDestinationSettings = &BurninDestinationSettings{}
+			return v.BurninDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_DestinationType:
+			var ev string
+			if err := d.ReadString(schemas.CaptionDestinationSettings_DestinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = CaptionDestinationType(ev)
+			return nil
+		case schemas.CaptionDestinationSettings_DvbSubDestinationSettings:
+			v.DvbSubDestinationSettings = &DvbSubDestinationSettings{}
+			return v.DvbSubDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_EmbeddedDestinationSettings:
+			v.EmbeddedDestinationSettings = &EmbeddedDestinationSettings{}
+			return v.EmbeddedDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_ImscDestinationSettings:
+			v.ImscDestinationSettings = &ImscDestinationSettings{}
+			return v.ImscDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_SccDestinationSettings:
+			v.SccDestinationSettings = &SccDestinationSettings{}
+			return v.SccDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_SrtDestinationSettings:
+			v.SrtDestinationSettings = &SrtDestinationSettings{}
+			return v.SrtDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_TeletextDestinationSettings:
+			v.TeletextDestinationSettings = &TeletextDestinationSettings{}
+			return v.TeletextDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_TtmlDestinationSettings:
+			v.TtmlDestinationSettings = &TtmlDestinationSettings{}
+			return v.TtmlDestinationSettings.Deserialize(d)
+		case schemas.CaptionDestinationSettings_WebvttDestinationSettings:
+			v.WebvttDestinationSettings = &WebvttDestinationSettings{}
+			return v.WebvttDestinationSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Use captions selectors to specify the captions data from your input that you
 // use in your outputs. You can use up to 100 captions selectors per input.
 type CaptionSelector struct {
@@ -1616,6 +3617,46 @@ type CaptionSelector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CaptionSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptionSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptionSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomLanguageCode != nil {
+		s.WriteString(schemas.CaptionSelector_CustomLanguageCode, *v.CustomLanguageCode)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CaptionSelector_LanguageCode, string(v.LanguageCode))
+	}
+	if v.SourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSelector_SourceSettings)
+		v.SourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CaptionSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptionSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptionSelector_CustomLanguageCode:
+			v.CustomLanguageCode = new(string)
+			return d.ReadString(schemas.CaptionSelector_CustomLanguageCode, v.CustomLanguageCode)
+		case schemas.CaptionSelector_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CaptionSelector_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.CaptionSelector_SourceSettings:
+			v.SourceSettings = &CaptionSourceSettings{}
+			return v.SourceSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Ignore this setting unless your input captions format is SCC. To have the
 // service compensate for differing frame rates between your input captions and
 // input video, specify the frame rate of the captions file. Specify this value as
@@ -1634,6 +3675,34 @@ type CaptionSourceFramerate struct {
 	FramerateNumerator *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CaptionSourceFramerate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptionSourceFramerate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptionSourceFramerate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.CaptionSourceFramerate_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.CaptionSourceFramerate_FramerateNumerator, *v.FramerateNumerator)
+	}
+}
+func (v *CaptionSourceFramerate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptionSourceFramerate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptionSourceFramerate_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.CaptionSourceFramerate_FramerateDenominator, v.FramerateDenominator)
+		case schemas.CaptionSourceFramerate_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.CaptionSourceFramerate_FramerateNumerator, v.FramerateNumerator)
+		}
+		return nil
+	})
 }
 
 // If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file,
@@ -1682,6 +3751,88 @@ type CaptionSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CaptionSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptionSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptionSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AncillarySourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_AncillarySourceSettings)
+		v.AncillarySourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DvbSubSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_DvbSubSourceSettings)
+		v.DvbSubSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmbeddedSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_EmbeddedSourceSettings)
+		v.EmbeddedSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_FileSourceSettings)
+		v.FileSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.CaptionSourceSettings_SourceType, string(v.SourceType))
+	}
+	if v.TeletextSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_TeletextSourceSettings)
+		v.TeletextSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrackSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_TrackSourceSettings)
+		v.TrackSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebvttHlsSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSourceSettings_WebvttHlsSourceSettings)
+		v.WebvttHlsSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CaptionSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptionSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptionSourceSettings_AncillarySourceSettings:
+			v.AncillarySourceSettings = &AncillarySourceSettings{}
+			return v.AncillarySourceSettings.Deserialize(d)
+		case schemas.CaptionSourceSettings_DvbSubSourceSettings:
+			v.DvbSubSourceSettings = &DvbSubSourceSettings{}
+			return v.DvbSubSourceSettings.Deserialize(d)
+		case schemas.CaptionSourceSettings_EmbeddedSourceSettings:
+			v.EmbeddedSourceSettings = &EmbeddedSourceSettings{}
+			return v.EmbeddedSourceSettings.Deserialize(d)
+		case schemas.CaptionSourceSettings_FileSourceSettings:
+			v.FileSourceSettings = &FileSourceSettings{}
+			return v.FileSourceSettings.Deserialize(d)
+		case schemas.CaptionSourceSettings_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.CaptionSourceSettings_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = CaptionSourceType(ev)
+			return nil
+		case schemas.CaptionSourceSettings_TeletextSourceSettings:
+			v.TeletextSourceSettings = &TeletextSourceSettings{}
+			return v.TeletextSourceSettings.Deserialize(d)
+		case schemas.CaptionSourceSettings_TrackSourceSettings:
+			v.TrackSourceSettings = &TrackSourceSettings{}
+			return v.TrackSourceSettings.Deserialize(d)
+		case schemas.CaptionSourceSettings_WebvttHlsSourceSettings:
+			v.WebvttHlsSourceSettings = &WebvttHlsSourceSettings{}
+			return v.WebvttHlsSourceSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Channel mapping contains the group of fields that hold the remixing value for
 // each channel, in dB. Specify remix values to indicate how much of the content
 // from your input audio channel you want in your output audio channels. Each
@@ -1701,6 +3852,25 @@ type ChannelMapping struct {
 	OutputChannels []OutputChannelMapping
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfOutputChannelMapping(s, schemas.ChannelMapping_OutputChannels, v.OutputChannels)
+}
+func (v *ChannelMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelMapping_OutputChannels:
+			return deserialize__listOfOutputChannelMapping(d, schemas.ChannelMapping_OutputChannels, &v.OutputChannels)
+		}
+		return nil
+	})
 }
 
 // Specify YUV limits and RGB tolerances when you set Sample range conversion to
@@ -1742,6 +3912,46 @@ type ClipLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClipLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClipLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClipLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumRGBTolerance != nil {
+		s.WriteInt32(schemas.ClipLimits_MaximumRGBTolerance, *v.MaximumRGBTolerance)
+	}
+	if v.MaximumYUV != nil {
+		s.WriteInt32(schemas.ClipLimits_MaximumYUV, *v.MaximumYUV)
+	}
+	if v.MinimumRGBTolerance != nil {
+		s.WriteInt32(schemas.ClipLimits_MinimumRGBTolerance, *v.MinimumRGBTolerance)
+	}
+	if v.MinimumYUV != nil {
+		s.WriteInt32(schemas.ClipLimits_MinimumYUV, *v.MinimumYUV)
+	}
+}
+func (v *ClipLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClipLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClipLimits_MaximumRGBTolerance:
+			v.MaximumRGBTolerance = new(int32)
+			return d.ReadInt32(schemas.ClipLimits_MaximumRGBTolerance, v.MaximumRGBTolerance)
+		case schemas.ClipLimits_MaximumYUV:
+			v.MaximumYUV = new(int32)
+			return d.ReadInt32(schemas.ClipLimits_MaximumYUV, v.MaximumYUV)
+		case schemas.ClipLimits_MinimumRGBTolerance:
+			v.MinimumRGBTolerance = new(int32)
+			return d.ReadInt32(schemas.ClipLimits_MinimumRGBTolerance, v.MinimumRGBTolerance)
+		case schemas.ClipLimits_MinimumYUV:
+			v.MinimumYUV = new(int32)
+			return d.ReadInt32(schemas.ClipLimits_MinimumYUV, v.MinimumYUV)
+		}
+		return nil
+	})
+}
+
 // Specify the details for each pair of HLS and DASH additional manifests that you
 // want the service to generate for this CMAF output group. Each pair of manifests
 // can reference a different subset of outputs in the group.
@@ -1762,6 +3972,31 @@ type CmafAdditionalManifest struct {
 	SelectedOutputs []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CmafAdditionalManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafAdditionalManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafAdditionalManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestNameModifier != nil {
+		s.WriteString(schemas.CmafAdditionalManifest_ManifestNameModifier, *v.ManifestNameModifier)
+	}
+	serialize__listOf__stringMin1(s, schemas.CmafAdditionalManifest_SelectedOutputs, v.SelectedOutputs)
+}
+func (v *CmafAdditionalManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafAdditionalManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafAdditionalManifest_ManifestNameModifier:
+			v.ManifestNameModifier = new(string)
+			return d.ReadString(schemas.CmafAdditionalManifest_ManifestNameModifier, v.ManifestNameModifier)
+		case schemas.CmafAdditionalManifest_SelectedOutputs:
+			return deserialize__listOf__stringMin1(d, schemas.CmafAdditionalManifest_SelectedOutputs, &v.SelectedOutputs)
+		}
+		return nil
+	})
 }
 
 // Settings for CMAF encryption
@@ -1811,6 +4046,80 @@ type CmafEncryptionSettings struct {
 	Type CmafKeyProviderType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CmafEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafEncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClearLeadSegments != nil {
+		s.WriteInt32(schemas.CmafEncryptionSettings_ClearLeadSegments, *v.ClearLeadSegments)
+	}
+	if v.ConstantInitializationVector != nil {
+		s.WriteString(schemas.CmafEncryptionSettings_ConstantInitializationVector, *v.ConstantInitializationVector)
+	}
+	if v.EncryptionMethod != "" {
+		s.WriteString(schemas.CmafEncryptionSettings_EncryptionMethod, string(v.EncryptionMethod))
+	}
+	if v.InitializationVectorInManifest != "" {
+		s.WriteString(schemas.CmafEncryptionSettings_InitializationVectorInManifest, string(v.InitializationVectorInManifest))
+	}
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.CmafEncryptionSettings_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StaticKeyProvider != nil {
+		s.WriteStruct(schemas.CmafEncryptionSettings_StaticKeyProvider)
+		v.StaticKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CmafEncryptionSettings_Type, string(v.Type))
+	}
+}
+func (v *CmafEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafEncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafEncryptionSettings_ClearLeadSegments:
+			v.ClearLeadSegments = new(int32)
+			return d.ReadInt32(schemas.CmafEncryptionSettings_ClearLeadSegments, v.ClearLeadSegments)
+		case schemas.CmafEncryptionSettings_ConstantInitializationVector:
+			v.ConstantInitializationVector = new(string)
+			return d.ReadString(schemas.CmafEncryptionSettings_ConstantInitializationVector, v.ConstantInitializationVector)
+		case schemas.CmafEncryptionSettings_EncryptionMethod:
+			var ev string
+			if err := d.ReadString(schemas.CmafEncryptionSettings_EncryptionMethod, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMethod = CmafEncryptionType(ev)
+			return nil
+		case schemas.CmafEncryptionSettings_InitializationVectorInManifest:
+			var ev string
+			if err := d.ReadString(schemas.CmafEncryptionSettings_InitializationVectorInManifest, &ev); err != nil {
+				return err
+			}
+			v.InitializationVectorInManifest = CmafInitializationVectorInManifest(ev)
+			return nil
+		case schemas.CmafEncryptionSettings_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProviderCmaf{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		case schemas.CmafEncryptionSettings_StaticKeyProvider:
+			v.StaticKeyProvider = &StaticKeyProvider{}
+			return v.StaticKeyProvider.Deserialize(d)
+		case schemas.CmafEncryptionSettings_Type:
+			var ev string
+			if err := d.ReadString(schemas.CmafEncryptionSettings_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CmafKeyProviderType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings related to your CMAF output package. For more information, see
@@ -2026,6 +4335,264 @@ type CmafGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CmafGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCmafAdditionalManifest(s, schemas.CmafGroupSettings_AdditionalManifests, v.AdditionalManifests)
+	if v.BaseUrl != nil {
+		s.WriteString(schemas.CmafGroupSettings_BaseUrl, *v.BaseUrl)
+	}
+	if v.ClientCache != "" {
+		s.WriteString(schemas.CmafGroupSettings_ClientCache, string(v.ClientCache))
+	}
+	if v.CodecSpecification != "" {
+		s.WriteString(schemas.CmafGroupSettings_CodecSpecification, string(v.CodecSpecification))
+	}
+	if v.DashIFrameTrickPlayNameModifier != nil {
+		s.WriteString(schemas.CmafGroupSettings_DashIFrameTrickPlayNameModifier, *v.DashIFrameTrickPlayNameModifier)
+	}
+	if v.DashManifestStyle != "" {
+		s.WriteString(schemas.CmafGroupSettings_DashManifestStyle, string(v.DashManifestStyle))
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.CmafGroupSettings_Destination, *v.Destination)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.CmafGroupSettings_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.CmafGroupSettings_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FragmentLength != nil {
+		s.WriteInt32(schemas.CmafGroupSettings_FragmentLength, *v.FragmentLength)
+	}
+	if v.ImageBasedTrickPlay != "" {
+		s.WriteString(schemas.CmafGroupSettings_ImageBasedTrickPlay, string(v.ImageBasedTrickPlay))
+	}
+	if v.ImageBasedTrickPlaySettings != nil {
+		s.WriteStruct(schemas.CmafGroupSettings_ImageBasedTrickPlaySettings)
+		v.ImageBasedTrickPlaySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfCmafImageBasedTrickPlayVariant(s, schemas.CmafGroupSettings_ImageBasedTrickPlayVariants, v.ImageBasedTrickPlayVariants)
+	if v.ManifestCompression != "" {
+		s.WriteString(schemas.CmafGroupSettings_ManifestCompression, string(v.ManifestCompression))
+	}
+	if v.ManifestDurationFormat != "" {
+		s.WriteString(schemas.CmafGroupSettings_ManifestDurationFormat, string(v.ManifestDurationFormat))
+	}
+	if v.MinBufferTime != nil {
+		s.WriteInt32(schemas.CmafGroupSettings_MinBufferTime, *v.MinBufferTime)
+	}
+	if v.MinFinalSegmentLength != nil {
+		s.WriteFloat64(schemas.CmafGroupSettings_MinFinalSegmentLength, *v.MinFinalSegmentLength)
+	}
+	if v.MpdManifestBandwidthType != "" {
+		s.WriteString(schemas.CmafGroupSettings_MpdManifestBandwidthType, string(v.MpdManifestBandwidthType))
+	}
+	if v.MpdProfile != "" {
+		s.WriteString(schemas.CmafGroupSettings_MpdProfile, string(v.MpdProfile))
+	}
+	if v.PtsOffsetHandlingForBFrames != "" {
+		s.WriteString(schemas.CmafGroupSettings_PtsOffsetHandlingForBFrames, string(v.PtsOffsetHandlingForBFrames))
+	}
+	if v.SegmentControl != "" {
+		s.WriteString(schemas.CmafGroupSettings_SegmentControl, string(v.SegmentControl))
+	}
+	if v.SegmentLength != nil {
+		s.WriteInt32(schemas.CmafGroupSettings_SegmentLength, *v.SegmentLength)
+	}
+	if v.SegmentLengthControl != "" {
+		s.WriteString(schemas.CmafGroupSettings_SegmentLengthControl, string(v.SegmentLengthControl))
+	}
+	if v.StreamInfResolution != "" {
+		s.WriteString(schemas.CmafGroupSettings_StreamInfResolution, string(v.StreamInfResolution))
+	}
+	if v.TargetDurationCompatibilityMode != "" {
+		s.WriteString(schemas.CmafGroupSettings_TargetDurationCompatibilityMode, string(v.TargetDurationCompatibilityMode))
+	}
+	if v.VideoCompositionOffsets != "" {
+		s.WriteString(schemas.CmafGroupSettings_VideoCompositionOffsets, string(v.VideoCompositionOffsets))
+	}
+	if v.WriteDashManifest != "" {
+		s.WriteString(schemas.CmafGroupSettings_WriteDashManifest, string(v.WriteDashManifest))
+	}
+	if v.WriteHlsManifest != "" {
+		s.WriteString(schemas.CmafGroupSettings_WriteHlsManifest, string(v.WriteHlsManifest))
+	}
+	if v.WriteSegmentTimelineInRepresentation != "" {
+		s.WriteString(schemas.CmafGroupSettings_WriteSegmentTimelineInRepresentation, string(v.WriteSegmentTimelineInRepresentation))
+	}
+}
+func (v *CmafGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafGroupSettings_AdditionalManifests:
+			return deserialize__listOfCmafAdditionalManifest(d, schemas.CmafGroupSettings_AdditionalManifests, &v.AdditionalManifests)
+		case schemas.CmafGroupSettings_BaseUrl:
+			v.BaseUrl = new(string)
+			return d.ReadString(schemas.CmafGroupSettings_BaseUrl, v.BaseUrl)
+		case schemas.CmafGroupSettings_ClientCache:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_ClientCache, &ev); err != nil {
+				return err
+			}
+			v.ClientCache = CmafClientCache(ev)
+			return nil
+		case schemas.CmafGroupSettings_CodecSpecification:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_CodecSpecification, &ev); err != nil {
+				return err
+			}
+			v.CodecSpecification = CmafCodecSpecification(ev)
+			return nil
+		case schemas.CmafGroupSettings_DashIFrameTrickPlayNameModifier:
+			v.DashIFrameTrickPlayNameModifier = new(string)
+			return d.ReadString(schemas.CmafGroupSettings_DashIFrameTrickPlayNameModifier, v.DashIFrameTrickPlayNameModifier)
+		case schemas.CmafGroupSettings_DashManifestStyle:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_DashManifestStyle, &ev); err != nil {
+				return err
+			}
+			v.DashManifestStyle = DashManifestStyle(ev)
+			return nil
+		case schemas.CmafGroupSettings_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.CmafGroupSettings_Destination, v.Destination)
+		case schemas.CmafGroupSettings_DestinationSettings:
+			v.DestinationSettings = &DestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		case schemas.CmafGroupSettings_Encryption:
+			v.Encryption = &CmafEncryptionSettings{}
+			return v.Encryption.Deserialize(d)
+		case schemas.CmafGroupSettings_FragmentLength:
+			v.FragmentLength = new(int32)
+			return d.ReadInt32(schemas.CmafGroupSettings_FragmentLength, v.FragmentLength)
+		case schemas.CmafGroupSettings_ImageBasedTrickPlay:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_ImageBasedTrickPlay, &ev); err != nil {
+				return err
+			}
+			v.ImageBasedTrickPlay = CmafImageBasedTrickPlay(ev)
+			return nil
+		case schemas.CmafGroupSettings_ImageBasedTrickPlaySettings:
+			v.ImageBasedTrickPlaySettings = &CmafImageBasedTrickPlaySettings{}
+			return v.ImageBasedTrickPlaySettings.Deserialize(d)
+		case schemas.CmafGroupSettings_ImageBasedTrickPlayVariants:
+			return deserialize__listOfCmafImageBasedTrickPlayVariant(d, schemas.CmafGroupSettings_ImageBasedTrickPlayVariants, &v.ImageBasedTrickPlayVariants)
+		case schemas.CmafGroupSettings_ManifestCompression:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_ManifestCompression, &ev); err != nil {
+				return err
+			}
+			v.ManifestCompression = CmafManifestCompression(ev)
+			return nil
+		case schemas.CmafGroupSettings_ManifestDurationFormat:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_ManifestDurationFormat, &ev); err != nil {
+				return err
+			}
+			v.ManifestDurationFormat = CmafManifestDurationFormat(ev)
+			return nil
+		case schemas.CmafGroupSettings_MinBufferTime:
+			v.MinBufferTime = new(int32)
+			return d.ReadInt32(schemas.CmafGroupSettings_MinBufferTime, v.MinBufferTime)
+		case schemas.CmafGroupSettings_MinFinalSegmentLength:
+			v.MinFinalSegmentLength = new(float64)
+			return d.ReadFloat64(schemas.CmafGroupSettings_MinFinalSegmentLength, v.MinFinalSegmentLength)
+		case schemas.CmafGroupSettings_MpdManifestBandwidthType:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_MpdManifestBandwidthType, &ev); err != nil {
+				return err
+			}
+			v.MpdManifestBandwidthType = CmafMpdManifestBandwidthType(ev)
+			return nil
+		case schemas.CmafGroupSettings_MpdProfile:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_MpdProfile, &ev); err != nil {
+				return err
+			}
+			v.MpdProfile = CmafMpdProfile(ev)
+			return nil
+		case schemas.CmafGroupSettings_PtsOffsetHandlingForBFrames:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_PtsOffsetHandlingForBFrames, &ev); err != nil {
+				return err
+			}
+			v.PtsOffsetHandlingForBFrames = CmafPtsOffsetHandlingForBFrames(ev)
+			return nil
+		case schemas.CmafGroupSettings_SegmentControl:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_SegmentControl, &ev); err != nil {
+				return err
+			}
+			v.SegmentControl = CmafSegmentControl(ev)
+			return nil
+		case schemas.CmafGroupSettings_SegmentLength:
+			v.SegmentLength = new(int32)
+			return d.ReadInt32(schemas.CmafGroupSettings_SegmentLength, v.SegmentLength)
+		case schemas.CmafGroupSettings_SegmentLengthControl:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_SegmentLengthControl, &ev); err != nil {
+				return err
+			}
+			v.SegmentLengthControl = CmafSegmentLengthControl(ev)
+			return nil
+		case schemas.CmafGroupSettings_StreamInfResolution:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_StreamInfResolution, &ev); err != nil {
+				return err
+			}
+			v.StreamInfResolution = CmafStreamInfResolution(ev)
+			return nil
+		case schemas.CmafGroupSettings_TargetDurationCompatibilityMode:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_TargetDurationCompatibilityMode, &ev); err != nil {
+				return err
+			}
+			v.TargetDurationCompatibilityMode = CmafTargetDurationCompatibilityMode(ev)
+			return nil
+		case schemas.CmafGroupSettings_VideoCompositionOffsets:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_VideoCompositionOffsets, &ev); err != nil {
+				return err
+			}
+			v.VideoCompositionOffsets = CmafVideoCompositionOffsets(ev)
+			return nil
+		case schemas.CmafGroupSettings_WriteDashManifest:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_WriteDashManifest, &ev); err != nil {
+				return err
+			}
+			v.WriteDashManifest = CmafWriteDASHManifest(ev)
+			return nil
+		case schemas.CmafGroupSettings_WriteHlsManifest:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_WriteHlsManifest, &ev); err != nil {
+				return err
+			}
+			v.WriteHlsManifest = CmafWriteHLSManifest(ev)
+			return nil
+		case schemas.CmafGroupSettings_WriteSegmentTimelineInRepresentation:
+			var ev string
+			if err := d.ReadString(schemas.CmafGroupSettings_WriteSegmentTimelineInRepresentation, &ev); err != nil {
+				return err
+			}
+			v.WriteSegmentTimelineInRepresentation = CmafWriteSegmentTimelineInRepresentation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
 type CmafImageBasedTrickPlaySettings struct {
 
@@ -2063,6 +4630,62 @@ type CmafImageBasedTrickPlaySettings struct {
 	TileWidth *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CmafImageBasedTrickPlaySettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafImageBasedTrickPlaySettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafImageBasedTrickPlaySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalCadence != "" {
+		s.WriteString(schemas.CmafImageBasedTrickPlaySettings_IntervalCadence, string(v.IntervalCadence))
+	}
+	if v.ThumbnailHeight != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlaySettings_ThumbnailHeight, *v.ThumbnailHeight)
+	}
+	if v.ThumbnailInterval != nil {
+		s.WriteFloat64(schemas.CmafImageBasedTrickPlaySettings_ThumbnailInterval, *v.ThumbnailInterval)
+	}
+	if v.ThumbnailWidth != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlaySettings_ThumbnailWidth, *v.ThumbnailWidth)
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlaySettings_TileHeight, *v.TileHeight)
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlaySettings_TileWidth, *v.TileWidth)
+	}
+}
+func (v *CmafImageBasedTrickPlaySettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafImageBasedTrickPlaySettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafImageBasedTrickPlaySettings_IntervalCadence:
+			var ev string
+			if err := d.ReadString(schemas.CmafImageBasedTrickPlaySettings_IntervalCadence, &ev); err != nil {
+				return err
+			}
+			v.IntervalCadence = CmafIntervalCadence(ev)
+			return nil
+		case schemas.CmafImageBasedTrickPlaySettings_ThumbnailHeight:
+			v.ThumbnailHeight = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlaySettings_ThumbnailHeight, v.ThumbnailHeight)
+		case schemas.CmafImageBasedTrickPlaySettings_ThumbnailInterval:
+			v.ThumbnailInterval = new(float64)
+			return d.ReadFloat64(schemas.CmafImageBasedTrickPlaySettings_ThumbnailInterval, v.ThumbnailInterval)
+		case schemas.CmafImageBasedTrickPlaySettings_ThumbnailWidth:
+			v.ThumbnailWidth = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlaySettings_ThumbnailWidth, v.ThumbnailWidth)
+		case schemas.CmafImageBasedTrickPlaySettings_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlaySettings_TileHeight, v.TileHeight)
+		case schemas.CmafImageBasedTrickPlaySettings_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlaySettings_TileWidth, v.TileWidth)
+		}
+		return nil
+	})
 }
 
 // Settings for one image-based trick play variant. Each variant produces its own
@@ -2103,6 +4726,62 @@ type CmafImageBasedTrickPlayVariant struct {
 	TileWidth *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CmafImageBasedTrickPlayVariant) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmafImageBasedTrickPlayVariant)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmafImageBasedTrickPlayVariant) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalCadence != "" {
+		s.WriteString(schemas.CmafImageBasedTrickPlayVariant_IntervalCadence, string(v.IntervalCadence))
+	}
+	if v.ThumbnailHeight != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlayVariant_ThumbnailHeight, *v.ThumbnailHeight)
+	}
+	if v.ThumbnailInterval != nil {
+		s.WriteFloat64(schemas.CmafImageBasedTrickPlayVariant_ThumbnailInterval, *v.ThumbnailInterval)
+	}
+	if v.ThumbnailWidth != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlayVariant_ThumbnailWidth, *v.ThumbnailWidth)
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlayVariant_TileHeight, *v.TileHeight)
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.CmafImageBasedTrickPlayVariant_TileWidth, *v.TileWidth)
+	}
+}
+func (v *CmafImageBasedTrickPlayVariant) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmafImageBasedTrickPlayVariant, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmafImageBasedTrickPlayVariant_IntervalCadence:
+			var ev string
+			if err := d.ReadString(schemas.CmafImageBasedTrickPlayVariant_IntervalCadence, &ev); err != nil {
+				return err
+			}
+			v.IntervalCadence = CmafIntervalCadence(ev)
+			return nil
+		case schemas.CmafImageBasedTrickPlayVariant_ThumbnailHeight:
+			v.ThumbnailHeight = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlayVariant_ThumbnailHeight, v.ThumbnailHeight)
+		case schemas.CmafImageBasedTrickPlayVariant_ThumbnailInterval:
+			v.ThumbnailInterval = new(float64)
+			return d.ReadFloat64(schemas.CmafImageBasedTrickPlayVariant_ThumbnailInterval, v.ThumbnailInterval)
+		case schemas.CmafImageBasedTrickPlayVariant_ThumbnailWidth:
+			v.ThumbnailWidth = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlayVariant_ThumbnailWidth, v.ThumbnailWidth)
+		case schemas.CmafImageBasedTrickPlayVariant_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlayVariant_TileHeight, v.TileHeight)
+		case schemas.CmafImageBasedTrickPlayVariant_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.CmafImageBasedTrickPlayVariant_TileWidth, v.TileWidth)
+		}
+		return nil
+	})
 }
 
 // These settings relate to the fragmented MP4 container for the segments in your
@@ -2266,6 +4945,168 @@ type CmfcSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CmfcSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CmfcSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CmfcSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDuration != "" {
+		s.WriteString(schemas.CmfcSettings_AudioDuration, string(v.AudioDuration))
+	}
+	if v.AudioGroupId != nil {
+		s.WriteString(schemas.CmfcSettings_AudioGroupId, *v.AudioGroupId)
+	}
+	if v.AudioRenditionSets != nil {
+		s.WriteString(schemas.CmfcSettings_AudioRenditionSets, *v.AudioRenditionSets)
+	}
+	if v.AudioTrackType != "" {
+		s.WriteString(schemas.CmfcSettings_AudioTrackType, string(v.AudioTrackType))
+	}
+	if v.C2paManifest != "" {
+		s.WriteString(schemas.CmfcSettings_C2paManifest, string(v.C2paManifest))
+	}
+	if v.CertificateSecret != nil {
+		s.WriteString(schemas.CmfcSettings_CertificateSecret, *v.CertificateSecret)
+	}
+	if v.DescriptiveVideoServiceFlag != "" {
+		s.WriteString(schemas.CmfcSettings_DescriptiveVideoServiceFlag, string(v.DescriptiveVideoServiceFlag))
+	}
+	if v.IFrameOnlyManifest != "" {
+		s.WriteString(schemas.CmfcSettings_IFrameOnlyManifest, string(v.IFrameOnlyManifest))
+	}
+	if v.KlvMetadata != "" {
+		s.WriteString(schemas.CmfcSettings_KlvMetadata, string(v.KlvMetadata))
+	}
+	if v.ManifestMetadataSignaling != "" {
+		s.WriteString(schemas.CmfcSettings_ManifestMetadataSignaling, string(v.ManifestMetadataSignaling))
+	}
+	if v.Scte35Esam != "" {
+		s.WriteString(schemas.CmfcSettings_Scte35Esam, string(v.Scte35Esam))
+	}
+	if v.Scte35Source != "" {
+		s.WriteString(schemas.CmfcSettings_Scte35Source, string(v.Scte35Source))
+	}
+	if v.SigningKmsKey != nil {
+		s.WriteString(schemas.CmfcSettings_SigningKmsKey, *v.SigningKmsKey)
+	}
+	if v.TimedMetadata != "" {
+		s.WriteString(schemas.CmfcSettings_TimedMetadata, string(v.TimedMetadata))
+	}
+	if v.TimedMetadataBoxVersion != "" {
+		s.WriteString(schemas.CmfcSettings_TimedMetadataBoxVersion, string(v.TimedMetadataBoxVersion))
+	}
+	if v.TimedMetadataSchemeIdUri != nil {
+		s.WriteString(schemas.CmfcSettings_TimedMetadataSchemeIdUri, *v.TimedMetadataSchemeIdUri)
+	}
+	if v.TimedMetadataValue != nil {
+		s.WriteString(schemas.CmfcSettings_TimedMetadataValue, *v.TimedMetadataValue)
+	}
+}
+func (v *CmfcSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CmfcSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CmfcSettings_AudioDuration:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_AudioDuration, &ev); err != nil {
+				return err
+			}
+			v.AudioDuration = CmfcAudioDuration(ev)
+			return nil
+		case schemas.CmfcSettings_AudioGroupId:
+			v.AudioGroupId = new(string)
+			return d.ReadString(schemas.CmfcSettings_AudioGroupId, v.AudioGroupId)
+		case schemas.CmfcSettings_AudioRenditionSets:
+			v.AudioRenditionSets = new(string)
+			return d.ReadString(schemas.CmfcSettings_AudioRenditionSets, v.AudioRenditionSets)
+		case schemas.CmfcSettings_AudioTrackType:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_AudioTrackType, &ev); err != nil {
+				return err
+			}
+			v.AudioTrackType = CmfcAudioTrackType(ev)
+			return nil
+		case schemas.CmfcSettings_C2paManifest:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_C2paManifest, &ev); err != nil {
+				return err
+			}
+			v.C2paManifest = CmfcC2paManifest(ev)
+			return nil
+		case schemas.CmfcSettings_CertificateSecret:
+			v.CertificateSecret = new(string)
+			return d.ReadString(schemas.CmfcSettings_CertificateSecret, v.CertificateSecret)
+		case schemas.CmfcSettings_DescriptiveVideoServiceFlag:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_DescriptiveVideoServiceFlag, &ev); err != nil {
+				return err
+			}
+			v.DescriptiveVideoServiceFlag = CmfcDescriptiveVideoServiceFlag(ev)
+			return nil
+		case schemas.CmfcSettings_IFrameOnlyManifest:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_IFrameOnlyManifest, &ev); err != nil {
+				return err
+			}
+			v.IFrameOnlyManifest = CmfcIFrameOnlyManifest(ev)
+			return nil
+		case schemas.CmfcSettings_KlvMetadata:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_KlvMetadata, &ev); err != nil {
+				return err
+			}
+			v.KlvMetadata = CmfcKlvMetadata(ev)
+			return nil
+		case schemas.CmfcSettings_ManifestMetadataSignaling:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_ManifestMetadataSignaling, &ev); err != nil {
+				return err
+			}
+			v.ManifestMetadataSignaling = CmfcManifestMetadataSignaling(ev)
+			return nil
+		case schemas.CmfcSettings_Scte35Esam:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_Scte35Esam, &ev); err != nil {
+				return err
+			}
+			v.Scte35Esam = CmfcScte35Esam(ev)
+			return nil
+		case schemas.CmfcSettings_Scte35Source:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_Scte35Source, &ev); err != nil {
+				return err
+			}
+			v.Scte35Source = CmfcScte35Source(ev)
+			return nil
+		case schemas.CmfcSettings_SigningKmsKey:
+			v.SigningKmsKey = new(string)
+			return d.ReadString(schemas.CmfcSettings_SigningKmsKey, v.SigningKmsKey)
+		case schemas.CmfcSettings_TimedMetadata:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_TimedMetadata, &ev); err != nil {
+				return err
+			}
+			v.TimedMetadata = CmfcTimedMetadata(ev)
+			return nil
+		case schemas.CmfcSettings_TimedMetadataBoxVersion:
+			var ev string
+			if err := d.ReadString(schemas.CmfcSettings_TimedMetadataBoxVersion, &ev); err != nil {
+				return err
+			}
+			v.TimedMetadataBoxVersion = CmfcTimedMetadataBoxVersion(ev)
+			return nil
+		case schemas.CmfcSettings_TimedMetadataSchemeIdUri:
+			v.TimedMetadataSchemeIdUri = new(string)
+			return d.ReadString(schemas.CmfcSettings_TimedMetadataSchemeIdUri, v.TimedMetadataSchemeIdUri)
+		case schemas.CmfcSettings_TimedMetadataValue:
+			v.TimedMetadataValue = new(string)
+			return d.ReadString(schemas.CmfcSettings_TimedMetadataValue, v.TimedMetadataValue)
+		}
+		return nil
+	})
+}
+
 // Codec-specific parameters parsed from the video essence headers. This
 // information provides detailed technical specifications about how the video was
 // encoded, including profile settings, resolution details, and color space
@@ -2297,6 +5138,26 @@ type CodecMetadata struct {
 	// Content light level information (CTA-861.3). Describes the light level
 	// characteristics of the content.
 	ContentLightLevel *ContentLightLevel
+
+	// An aspect ratio expressed as a fraction with numerator and denominator values,
+	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
+	DisplayAspectRatio *AspectRatio
+
+	// Dolby Vision characteristics of the video track: the profile and level, and
+	// whether the RPU (dynamic metadata), base layer, and enhancement layer are
+	// present. Use this to distinguish Dolby Vision content from standard HEVC and to
+	// choose your encoding or passthrough settings. Omitted when the content is not
+	// Dolby Vision.
+	DolbyVision *DolbyVisionMetadata
 
 	// The field order of interlaced video, which indicates whether the top or bottom
 	// field is displayed first. Use this to select the correct deinterlacing behavior.
@@ -2335,6 +5196,19 @@ type CodecMetadata struct {
 	// Display Orientation SEI message or when the rotation is 0 degrees.
 	Rotation *int32
 
+	// An aspect ratio expressed as a fraction with numerator and denominator values,
+	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
+	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
+	SampleAspectRatio *AspectRatio
+
 	// The scanning method specified in the video essence, indicating whether the
 	// video uses progressive or interlaced scanning.
 	ScanType *string
@@ -2349,6 +5223,156 @@ type CodecMetadata struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CodecMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodecMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodecMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitDepth != nil {
+		s.WriteInt32(schemas.CodecMetadata_BitDepth, *v.BitDepth)
+	}
+	if v.ChromaSubsampling != nil {
+		s.WriteString(schemas.CodecMetadata_ChromaSubsampling, *v.ChromaSubsampling)
+	}
+	if v.CodedFrameRate != nil {
+		s.WriteStruct(schemas.CodecMetadata_CodedFrameRate)
+		v.CodedFrameRate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ColorPrimaries != "" {
+		s.WriteString(schemas.CodecMetadata_ColorPrimaries, string(v.ColorPrimaries))
+	}
+	if v.ContentLightLevel != nil {
+		s.WriteStruct(schemas.CodecMetadata_ContentLightLevel)
+		v.ContentLightLevel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayAspectRatio != nil {
+		s.WriteStruct(schemas.CodecMetadata_DisplayAspectRatio)
+		v.DisplayAspectRatio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DolbyVision != nil {
+		s.WriteStruct(schemas.CodecMetadata_DolbyVision)
+		v.DolbyVision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FieldOrder != nil {
+		s.WriteString(schemas.CodecMetadata_FieldOrder, *v.FieldOrder)
+	}
+	if v.Hdr10PlusPresence != "" {
+		s.WriteString(schemas.CodecMetadata_Hdr10PlusPresence, string(v.Hdr10PlusPresence))
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.CodecMetadata_Height, *v.Height)
+	}
+	if v.Level != nil {
+		s.WriteString(schemas.CodecMetadata_Level, *v.Level)
+	}
+	if v.MatrixCoefficients != "" {
+		s.WriteString(schemas.CodecMetadata_MatrixCoefficients, string(v.MatrixCoefficients))
+	}
+	if v.Profile != nil {
+		s.WriteString(schemas.CodecMetadata_Profile, *v.Profile)
+	}
+	if v.Rotation != nil {
+		s.WriteInt32(schemas.CodecMetadata_Rotation, *v.Rotation)
+	}
+	if v.SampleAspectRatio != nil {
+		s.WriteStruct(schemas.CodecMetadata_SampleAspectRatio)
+		v.SampleAspectRatio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScanType != nil {
+		s.WriteString(schemas.CodecMetadata_ScanType, *v.ScanType)
+	}
+	if v.TransferCharacteristics != "" {
+		s.WriteString(schemas.CodecMetadata_TransferCharacteristics, string(v.TransferCharacteristics))
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.CodecMetadata_Width, *v.Width)
+	}
+}
+func (v *CodecMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodecMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodecMetadata_BitDepth:
+			v.BitDepth = new(int32)
+			return d.ReadInt32(schemas.CodecMetadata_BitDepth, v.BitDepth)
+		case schemas.CodecMetadata_ChromaSubsampling:
+			v.ChromaSubsampling = new(string)
+			return d.ReadString(schemas.CodecMetadata_ChromaSubsampling, v.ChromaSubsampling)
+		case schemas.CodecMetadata_CodedFrameRate:
+			v.CodedFrameRate = &FrameRate{}
+			return v.CodedFrameRate.Deserialize(d)
+		case schemas.CodecMetadata_ColorPrimaries:
+			var ev string
+			if err := d.ReadString(schemas.CodecMetadata_ColorPrimaries, &ev); err != nil {
+				return err
+			}
+			v.ColorPrimaries = ColorPrimaries(ev)
+			return nil
+		case schemas.CodecMetadata_ContentLightLevel:
+			v.ContentLightLevel = &ContentLightLevel{}
+			return v.ContentLightLevel.Deserialize(d)
+		case schemas.CodecMetadata_DisplayAspectRatio:
+			v.DisplayAspectRatio = &AspectRatio{}
+			return v.DisplayAspectRatio.Deserialize(d)
+		case schemas.CodecMetadata_DolbyVision:
+			v.DolbyVision = &DolbyVisionMetadata{}
+			return v.DolbyVision.Deserialize(d)
+		case schemas.CodecMetadata_FieldOrder:
+			v.FieldOrder = new(string)
+			return d.ReadString(schemas.CodecMetadata_FieldOrder, v.FieldOrder)
+		case schemas.CodecMetadata_Hdr10PlusPresence:
+			var ev string
+			if err := d.ReadString(schemas.CodecMetadata_Hdr10PlusPresence, &ev); err != nil {
+				return err
+			}
+			v.Hdr10PlusPresence = Hdr10PlusPresence(ev)
+			return nil
+		case schemas.CodecMetadata_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.CodecMetadata_Height, v.Height)
+		case schemas.CodecMetadata_Level:
+			v.Level = new(string)
+			return d.ReadString(schemas.CodecMetadata_Level, v.Level)
+		case schemas.CodecMetadata_MatrixCoefficients:
+			var ev string
+			if err := d.ReadString(schemas.CodecMetadata_MatrixCoefficients, &ev); err != nil {
+				return err
+			}
+			v.MatrixCoefficients = MatrixCoefficients(ev)
+			return nil
+		case schemas.CodecMetadata_Profile:
+			v.Profile = new(string)
+			return d.ReadString(schemas.CodecMetadata_Profile, v.Profile)
+		case schemas.CodecMetadata_Rotation:
+			v.Rotation = new(int32)
+			return d.ReadInt32(schemas.CodecMetadata_Rotation, v.Rotation)
+		case schemas.CodecMetadata_SampleAspectRatio:
+			v.SampleAspectRatio = &AspectRatio{}
+			return v.SampleAspectRatio.Deserialize(d)
+		case schemas.CodecMetadata_ScanType:
+			v.ScanType = new(string)
+			return d.ReadString(schemas.CodecMetadata_ScanType, v.ScanType)
+		case schemas.CodecMetadata_TransferCharacteristics:
+			var ev string
+			if err := d.ReadString(schemas.CodecMetadata_TransferCharacteristics, &ev); err != nil {
+				return err
+			}
+			v.TransferCharacteristics = TransferCharacteristics(ev)
+			return nil
+		case schemas.CodecMetadata_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.CodecMetadata_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // Custom 3D lut settings
@@ -2378,6 +5402,60 @@ type ColorConversion3DLUTSetting struct {
 	OutputMasteringLuminance *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ColorConversion3DLUTSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColorConversion3DLUTSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColorConversion3DLUTSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileInput != nil {
+		s.WriteString(schemas.ColorConversion3DLUTSetting_FileInput, *v.FileInput)
+	}
+	if v.InputColorSpace != "" {
+		s.WriteString(schemas.ColorConversion3DLUTSetting_InputColorSpace, string(v.InputColorSpace))
+	}
+	if v.InputMasteringLuminance != nil {
+		s.WriteInt32(schemas.ColorConversion3DLUTSetting_InputMasteringLuminance, *v.InputMasteringLuminance)
+	}
+	if v.OutputColorSpace != "" {
+		s.WriteString(schemas.ColorConversion3DLUTSetting_OutputColorSpace, string(v.OutputColorSpace))
+	}
+	if v.OutputMasteringLuminance != nil {
+		s.WriteInt32(schemas.ColorConversion3DLUTSetting_OutputMasteringLuminance, *v.OutputMasteringLuminance)
+	}
+}
+func (v *ColorConversion3DLUTSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColorConversion3DLUTSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColorConversion3DLUTSetting_FileInput:
+			v.FileInput = new(string)
+			return d.ReadString(schemas.ColorConversion3DLUTSetting_FileInput, v.FileInput)
+		case schemas.ColorConversion3DLUTSetting_InputColorSpace:
+			var ev string
+			if err := d.ReadString(schemas.ColorConversion3DLUTSetting_InputColorSpace, &ev); err != nil {
+				return err
+			}
+			v.InputColorSpace = ColorSpace(ev)
+			return nil
+		case schemas.ColorConversion3DLUTSetting_InputMasteringLuminance:
+			v.InputMasteringLuminance = new(int32)
+			return d.ReadInt32(schemas.ColorConversion3DLUTSetting_InputMasteringLuminance, v.InputMasteringLuminance)
+		case schemas.ColorConversion3DLUTSetting_OutputColorSpace:
+			var ev string
+			if err := d.ReadString(schemas.ColorConversion3DLUTSetting_OutputColorSpace, &ev); err != nil {
+				return err
+			}
+			v.OutputColorSpace = ColorSpace(ev)
+			return nil
+		case schemas.ColorConversion3DLUTSetting_OutputMasteringLuminance:
+			v.OutputMasteringLuminance = new(int32)
+			return d.ReadInt32(schemas.ColorConversion3DLUTSetting_OutputMasteringLuminance, v.OutputMasteringLuminance)
+		}
+		return nil
+	})
 }
 
 // Settings for color correction.
@@ -2474,6 +5552,104 @@ type ColorCorrector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ColorCorrector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColorCorrector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColorCorrector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Brightness != nil {
+		s.WriteInt32(schemas.ColorCorrector_Brightness, *v.Brightness)
+	}
+	if v.ClipLimits != nil {
+		s.WriteStruct(schemas.ColorCorrector_ClipLimits)
+		v.ClipLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ColorSpaceConversion != "" {
+		s.WriteString(schemas.ColorCorrector_ColorSpaceConversion, string(v.ColorSpaceConversion))
+	}
+	if v.Contrast != nil {
+		s.WriteInt32(schemas.ColorCorrector_Contrast, *v.Contrast)
+	}
+	if v.Hdr10Metadata != nil {
+		s.WriteStruct(schemas.ColorCorrector_Hdr10Metadata)
+		v.Hdr10Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HdrToSdrToneMapper != "" {
+		s.WriteString(schemas.ColorCorrector_HdrToSdrToneMapper, string(v.HdrToSdrToneMapper))
+	}
+	if v.Hue != nil {
+		s.WriteInt32(schemas.ColorCorrector_Hue, *v.Hue)
+	}
+	if v.MaxLuminance != nil {
+		s.WriteInt32(schemas.ColorCorrector_MaxLuminance, *v.MaxLuminance)
+	}
+	if v.SampleRangeConversion != "" {
+		s.WriteString(schemas.ColorCorrector_SampleRangeConversion, string(v.SampleRangeConversion))
+	}
+	if v.Saturation != nil {
+		s.WriteInt32(schemas.ColorCorrector_Saturation, *v.Saturation)
+	}
+	if v.SdrReferenceWhiteLevel != nil {
+		s.WriteInt32(schemas.ColorCorrector_SdrReferenceWhiteLevel, *v.SdrReferenceWhiteLevel)
+	}
+}
+func (v *ColorCorrector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColorCorrector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColorCorrector_Brightness:
+			v.Brightness = new(int32)
+			return d.ReadInt32(schemas.ColorCorrector_Brightness, v.Brightness)
+		case schemas.ColorCorrector_ClipLimits:
+			v.ClipLimits = &ClipLimits{}
+			return v.ClipLimits.Deserialize(d)
+		case schemas.ColorCorrector_ColorSpaceConversion:
+			var ev string
+			if err := d.ReadString(schemas.ColorCorrector_ColorSpaceConversion, &ev); err != nil {
+				return err
+			}
+			v.ColorSpaceConversion = ColorSpaceConversion(ev)
+			return nil
+		case schemas.ColorCorrector_Contrast:
+			v.Contrast = new(int32)
+			return d.ReadInt32(schemas.ColorCorrector_Contrast, v.Contrast)
+		case schemas.ColorCorrector_Hdr10Metadata:
+			v.Hdr10Metadata = &Hdr10Metadata{}
+			return v.Hdr10Metadata.Deserialize(d)
+		case schemas.ColorCorrector_HdrToSdrToneMapper:
+			var ev string
+			if err := d.ReadString(schemas.ColorCorrector_HdrToSdrToneMapper, &ev); err != nil {
+				return err
+			}
+			v.HdrToSdrToneMapper = HDRToSDRToneMapper(ev)
+			return nil
+		case schemas.ColorCorrector_Hue:
+			v.Hue = new(int32)
+			return d.ReadInt32(schemas.ColorCorrector_Hue, v.Hue)
+		case schemas.ColorCorrector_MaxLuminance:
+			v.MaxLuminance = new(int32)
+			return d.ReadInt32(schemas.ColorCorrector_MaxLuminance, v.MaxLuminance)
+		case schemas.ColorCorrector_SampleRangeConversion:
+			var ev string
+			if err := d.ReadString(schemas.ColorCorrector_SampleRangeConversion, &ev); err != nil {
+				return err
+			}
+			v.SampleRangeConversion = SampleRangeConversion(ev)
+			return nil
+		case schemas.ColorCorrector_Saturation:
+			v.Saturation = new(int32)
+			return d.ReadInt32(schemas.ColorCorrector_Saturation, v.Saturation)
+		case schemas.ColorCorrector_SdrReferenceWhiteLevel:
+			v.SdrReferenceWhiteLevel = new(int32)
+			return d.ReadInt32(schemas.ColorCorrector_SdrReferenceWhiteLevel, v.SdrReferenceWhiteLevel)
+		}
+		return nil
+	})
+}
+
 // The container of your media file. This information helps you understand the
 // overall structure and details of your media, including format, duration, and
 // track layout.
@@ -2489,8 +5665,8 @@ type Container struct {
 
 	// The format of your media file. For example: MP4, QuickTime (MOV), Matroska
 	// (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media /
-	// WMA), OGG. Note that this will be blank if your media file has a format that the
-	// MediaConvert Probe operation does not recognize.
+	// WMA), or OGG. Note that this will be blank if your media file has a format that
+	// the MediaConvert Probe operation does not recognize.
 	Format Format
 
 	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
@@ -2502,6 +5678,53 @@ type Container struct {
 	Tracks []Track
 
 	noSmithyDocumentSerde
+}
+
+func (v *Container) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Container)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Container) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitRate != nil {
+		s.WriteInt64(schemas.Container_BitRate, *v.BitRate)
+	}
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.Container_Duration, *v.Duration)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.Container_Format, string(v.Format))
+	}
+	if v.StartTimecode != nil {
+		s.WriteString(schemas.Container_StartTimecode, *v.StartTimecode)
+	}
+	serialize__listOfTrack(s, schemas.Container_Tracks, v.Tracks)
+}
+func (v *Container) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Container, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Container_BitRate:
+			v.BitRate = new(int64)
+			return d.ReadInt64(schemas.Container_BitRate, v.BitRate)
+		case schemas.Container_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.Container_Duration, v.Duration)
+		case schemas.Container_Format:
+			var ev string
+			if err := d.ReadString(schemas.Container_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = Format(ev)
+			return nil
+		case schemas.Container_StartTimecode:
+			v.StartTimecode = new(string)
+			return d.ReadString(schemas.Container_StartTimecode, v.StartTimecode)
+		case schemas.Container_Tracks:
+			return deserialize__listOfTrack(d, schemas.Container_Tracks, &v.Tracks)
+		}
+		return nil
+	})
 }
 
 // Container specific settings.
@@ -2551,6 +5774,96 @@ type ContainerSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmfcSettings != nil {
+		s.WriteStruct(schemas.ContainerSettings_CmfcSettings)
+		v.CmfcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Container != "" {
+		s.WriteString(schemas.ContainerSettings_Container, string(v.Container))
+	}
+	if v.F4vSettings != nil {
+		s.WriteStruct(schemas.ContainerSettings_F4vSettings)
+		v.F4vSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.M2tsSettings != nil {
+		s.WriteStruct(schemas.ContainerSettings_M2tsSettings)
+		v.M2tsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.M3u8Settings != nil {
+		s.WriteStruct(schemas.ContainerSettings_M3u8Settings)
+		v.M3u8Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MovSettings != nil {
+		s.WriteStruct(schemas.ContainerSettings_MovSettings)
+		v.MovSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mp4Settings != nil {
+		s.WriteStruct(schemas.ContainerSettings_Mp4Settings)
+		v.Mp4Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MpdSettings != nil {
+		s.WriteStruct(schemas.ContainerSettings_MpdSettings)
+		v.MpdSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MxfSettings != nil {
+		s.WriteStruct(schemas.ContainerSettings_MxfSettings)
+		v.MxfSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ContainerSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerSettings_CmfcSettings:
+			v.CmfcSettings = &CmfcSettings{}
+			return v.CmfcSettings.Deserialize(d)
+		case schemas.ContainerSettings_Container:
+			var ev string
+			if err := d.ReadString(schemas.ContainerSettings_Container, &ev); err != nil {
+				return err
+			}
+			v.Container = ContainerType(ev)
+			return nil
+		case schemas.ContainerSettings_F4vSettings:
+			v.F4vSettings = &F4vSettings{}
+			return v.F4vSettings.Deserialize(d)
+		case schemas.ContainerSettings_M2tsSettings:
+			v.M2tsSettings = &M2tsSettings{}
+			return v.M2tsSettings.Deserialize(d)
+		case schemas.ContainerSettings_M3u8Settings:
+			v.M3u8Settings = &M3u8Settings{}
+			return v.M3u8Settings.Deserialize(d)
+		case schemas.ContainerSettings_MovSettings:
+			v.MovSettings = &MovSettings{}
+			return v.MovSettings.Deserialize(d)
+		case schemas.ContainerSettings_Mp4Settings:
+			v.Mp4Settings = &Mp4Settings{}
+			return v.Mp4Settings.Deserialize(d)
+		case schemas.ContainerSettings_MpdSettings:
+			v.MpdSettings = &MpdSettings{}
+			return v.MpdSettings.Deserialize(d)
+		case schemas.ContainerSettings_MxfSettings:
+			v.MxfSettings = &MxfSettings{}
+			return v.MxfSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Content light level information (CTA-861.3). Describes the light level
 // characteristics of the content.
 type ContentLightLevel struct {
@@ -2562,6 +5875,34 @@ type ContentLightLevel struct {
 	MaxFrameAverageLightLevel *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContentLightLevel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentLightLevel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentLightLevel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxContentLightLevel != nil {
+		s.WriteInt32(schemas.ContentLightLevel_MaxContentLightLevel, *v.MaxContentLightLevel)
+	}
+	if v.MaxFrameAverageLightLevel != nil {
+		s.WriteInt32(schemas.ContentLightLevel_MaxFrameAverageLightLevel, *v.MaxFrameAverageLightLevel)
+	}
+}
+func (v *ContentLightLevel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentLightLevel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentLightLevel_MaxContentLightLevel:
+			v.MaxContentLightLevel = new(int32)
+			return d.ReadInt32(schemas.ContentLightLevel_MaxContentLightLevel, v.MaxContentLightLevel)
+		case schemas.ContentLightLevel_MaxFrameAverageLightLevel:
+			v.MaxFrameAverageLightLevel = new(int32)
+			return d.ReadInt32(schemas.ContentLightLevel_MaxFrameAverageLightLevel, v.MaxFrameAverageLightLevel)
+		}
+		return nil
+	})
 }
 
 // Specify the details for each additional DASH manifest that you want the service
@@ -2583,6 +5924,31 @@ type DashAdditionalManifest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DashAdditionalManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashAdditionalManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashAdditionalManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestNameModifier != nil {
+		s.WriteString(schemas.DashAdditionalManifest_ManifestNameModifier, *v.ManifestNameModifier)
+	}
+	serialize__listOf__stringMin1(s, schemas.DashAdditionalManifest_SelectedOutputs, v.SelectedOutputs)
+}
+func (v *DashAdditionalManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashAdditionalManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashAdditionalManifest_ManifestNameModifier:
+			v.ManifestNameModifier = new(string)
+			return d.ReadString(schemas.DashAdditionalManifest_ManifestNameModifier, v.ManifestNameModifier)
+		case schemas.DashAdditionalManifest_SelectedOutputs:
+			return deserialize__listOf__stringMin1(d, schemas.DashAdditionalManifest_SelectedOutputs, &v.SelectedOutputs)
+		}
+		return nil
+	})
+}
+
 // Specifies DRM settings for DASH outputs.
 type DashIsoEncryptionSettings struct {
 
@@ -2600,6 +5966,40 @@ type DashIsoEncryptionSettings struct {
 	SpekeKeyProvider *SpekeKeyProvider
 
 	noSmithyDocumentSerde
+}
+
+func (v *DashIsoEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashIsoEncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashIsoEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlaybackDeviceCompatibility != "" {
+		s.WriteString(schemas.DashIsoEncryptionSettings_PlaybackDeviceCompatibility, string(v.PlaybackDeviceCompatibility))
+	}
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.DashIsoEncryptionSettings_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DashIsoEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashIsoEncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashIsoEncryptionSettings_PlaybackDeviceCompatibility:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoEncryptionSettings_PlaybackDeviceCompatibility, &ev); err != nil {
+				return err
+			}
+			v.PlaybackDeviceCompatibility = DashIsoPlaybackDeviceCompatibility(ev)
+			return nil
+		case schemas.DashIsoEncryptionSettings_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Settings related to your DASH output package. For more information, see
@@ -2790,6 +6190,204 @@ type DashIsoGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DashIsoGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashIsoGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashIsoGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDashAdditionalManifest(s, schemas.DashIsoGroupSettings_AdditionalManifests, v.AdditionalManifests)
+	if v.AudioChannelConfigSchemeIdUri != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_AudioChannelConfigSchemeIdUri, string(v.AudioChannelConfigSchemeIdUri))
+	}
+	if v.BaseUrl != nil {
+		s.WriteString(schemas.DashIsoGroupSettings_BaseUrl, *v.BaseUrl)
+	}
+	if v.DashIFrameTrickPlayNameModifier != nil {
+		s.WriteString(schemas.DashIsoGroupSettings_DashIFrameTrickPlayNameModifier, *v.DashIFrameTrickPlayNameModifier)
+	}
+	if v.DashManifestStyle != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_DashManifestStyle, string(v.DashManifestStyle))
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.DashIsoGroupSettings_Destination, *v.Destination)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.DashIsoGroupSettings_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.DashIsoGroupSettings_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FragmentLength != nil {
+		s.WriteInt32(schemas.DashIsoGroupSettings_FragmentLength, *v.FragmentLength)
+	}
+	if v.HbbtvCompliance != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_HbbtvCompliance, string(v.HbbtvCompliance))
+	}
+	if v.ImageBasedTrickPlay != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_ImageBasedTrickPlay, string(v.ImageBasedTrickPlay))
+	}
+	if v.ImageBasedTrickPlaySettings != nil {
+		s.WriteStruct(schemas.DashIsoGroupSettings_ImageBasedTrickPlaySettings)
+		v.ImageBasedTrickPlaySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfDashIsoImageBasedTrickPlayVariant(s, schemas.DashIsoGroupSettings_ImageBasedTrickPlayVariants, v.ImageBasedTrickPlayVariants)
+	if v.MinBufferTime != nil {
+		s.WriteInt32(schemas.DashIsoGroupSettings_MinBufferTime, *v.MinBufferTime)
+	}
+	if v.MinFinalSegmentLength != nil {
+		s.WriteFloat64(schemas.DashIsoGroupSettings_MinFinalSegmentLength, *v.MinFinalSegmentLength)
+	}
+	if v.MpdManifestBandwidthType != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_MpdManifestBandwidthType, string(v.MpdManifestBandwidthType))
+	}
+	if v.MpdProfile != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_MpdProfile, string(v.MpdProfile))
+	}
+	if v.PtsOffsetHandlingForBFrames != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_PtsOffsetHandlingForBFrames, string(v.PtsOffsetHandlingForBFrames))
+	}
+	if v.SegmentControl != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_SegmentControl, string(v.SegmentControl))
+	}
+	if v.SegmentLength != nil {
+		s.WriteInt32(schemas.DashIsoGroupSettings_SegmentLength, *v.SegmentLength)
+	}
+	if v.SegmentLengthControl != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_SegmentLengthControl, string(v.SegmentLengthControl))
+	}
+	if v.VideoCompositionOffsets != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_VideoCompositionOffsets, string(v.VideoCompositionOffsets))
+	}
+	if v.WriteSegmentTimelineInRepresentation != "" {
+		s.WriteString(schemas.DashIsoGroupSettings_WriteSegmentTimelineInRepresentation, string(v.WriteSegmentTimelineInRepresentation))
+	}
+}
+func (v *DashIsoGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashIsoGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashIsoGroupSettings_AdditionalManifests:
+			return deserialize__listOfDashAdditionalManifest(d, schemas.DashIsoGroupSettings_AdditionalManifests, &v.AdditionalManifests)
+		case schemas.DashIsoGroupSettings_AudioChannelConfigSchemeIdUri:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_AudioChannelConfigSchemeIdUri, &ev); err != nil {
+				return err
+			}
+			v.AudioChannelConfigSchemeIdUri = DashIsoGroupAudioChannelConfigSchemeIdUri(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_BaseUrl:
+			v.BaseUrl = new(string)
+			return d.ReadString(schemas.DashIsoGroupSettings_BaseUrl, v.BaseUrl)
+		case schemas.DashIsoGroupSettings_DashIFrameTrickPlayNameModifier:
+			v.DashIFrameTrickPlayNameModifier = new(string)
+			return d.ReadString(schemas.DashIsoGroupSettings_DashIFrameTrickPlayNameModifier, v.DashIFrameTrickPlayNameModifier)
+		case schemas.DashIsoGroupSettings_DashManifestStyle:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_DashManifestStyle, &ev); err != nil {
+				return err
+			}
+			v.DashManifestStyle = DashManifestStyle(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.DashIsoGroupSettings_Destination, v.Destination)
+		case schemas.DashIsoGroupSettings_DestinationSettings:
+			v.DestinationSettings = &DestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		case schemas.DashIsoGroupSettings_Encryption:
+			v.Encryption = &DashIsoEncryptionSettings{}
+			return v.Encryption.Deserialize(d)
+		case schemas.DashIsoGroupSettings_FragmentLength:
+			v.FragmentLength = new(int32)
+			return d.ReadInt32(schemas.DashIsoGroupSettings_FragmentLength, v.FragmentLength)
+		case schemas.DashIsoGroupSettings_HbbtvCompliance:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_HbbtvCompliance, &ev); err != nil {
+				return err
+			}
+			v.HbbtvCompliance = DashIsoHbbtvCompliance(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_ImageBasedTrickPlay:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_ImageBasedTrickPlay, &ev); err != nil {
+				return err
+			}
+			v.ImageBasedTrickPlay = DashIsoImageBasedTrickPlay(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_ImageBasedTrickPlaySettings:
+			v.ImageBasedTrickPlaySettings = &DashIsoImageBasedTrickPlaySettings{}
+			return v.ImageBasedTrickPlaySettings.Deserialize(d)
+		case schemas.DashIsoGroupSettings_ImageBasedTrickPlayVariants:
+			return deserialize__listOfDashIsoImageBasedTrickPlayVariant(d, schemas.DashIsoGroupSettings_ImageBasedTrickPlayVariants, &v.ImageBasedTrickPlayVariants)
+		case schemas.DashIsoGroupSettings_MinBufferTime:
+			v.MinBufferTime = new(int32)
+			return d.ReadInt32(schemas.DashIsoGroupSettings_MinBufferTime, v.MinBufferTime)
+		case schemas.DashIsoGroupSettings_MinFinalSegmentLength:
+			v.MinFinalSegmentLength = new(float64)
+			return d.ReadFloat64(schemas.DashIsoGroupSettings_MinFinalSegmentLength, v.MinFinalSegmentLength)
+		case schemas.DashIsoGroupSettings_MpdManifestBandwidthType:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_MpdManifestBandwidthType, &ev); err != nil {
+				return err
+			}
+			v.MpdManifestBandwidthType = DashIsoMpdManifestBandwidthType(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_MpdProfile:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_MpdProfile, &ev); err != nil {
+				return err
+			}
+			v.MpdProfile = DashIsoMpdProfile(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_PtsOffsetHandlingForBFrames:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_PtsOffsetHandlingForBFrames, &ev); err != nil {
+				return err
+			}
+			v.PtsOffsetHandlingForBFrames = DashIsoPtsOffsetHandlingForBFrames(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_SegmentControl:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_SegmentControl, &ev); err != nil {
+				return err
+			}
+			v.SegmentControl = DashIsoSegmentControl(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_SegmentLength:
+			v.SegmentLength = new(int32)
+			return d.ReadInt32(schemas.DashIsoGroupSettings_SegmentLength, v.SegmentLength)
+		case schemas.DashIsoGroupSettings_SegmentLengthControl:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_SegmentLengthControl, &ev); err != nil {
+				return err
+			}
+			v.SegmentLengthControl = DashIsoSegmentLengthControl(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_VideoCompositionOffsets:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_VideoCompositionOffsets, &ev); err != nil {
+				return err
+			}
+			v.VideoCompositionOffsets = DashIsoVideoCompositionOffsets(ev)
+			return nil
+		case schemas.DashIsoGroupSettings_WriteSegmentTimelineInRepresentation:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoGroupSettings_WriteSegmentTimelineInRepresentation, &ev); err != nil {
+				return err
+			}
+			v.WriteSegmentTimelineInRepresentation = DashIsoWriteSegmentTimelineInRepresentation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
 type DashIsoImageBasedTrickPlaySettings struct {
 
@@ -2827,6 +6425,62 @@ type DashIsoImageBasedTrickPlaySettings struct {
 	TileWidth *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DashIsoImageBasedTrickPlaySettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashIsoImageBasedTrickPlaySettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashIsoImageBasedTrickPlaySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalCadence != "" {
+		s.WriteString(schemas.DashIsoImageBasedTrickPlaySettings_IntervalCadence, string(v.IntervalCadence))
+	}
+	if v.ThumbnailHeight != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailHeight, *v.ThumbnailHeight)
+	}
+	if v.ThumbnailInterval != nil {
+		s.WriteFloat64(schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailInterval, *v.ThumbnailInterval)
+	}
+	if v.ThumbnailWidth != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailWidth, *v.ThumbnailWidth)
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlaySettings_TileHeight, *v.TileHeight)
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlaySettings_TileWidth, *v.TileWidth)
+	}
+}
+func (v *DashIsoImageBasedTrickPlaySettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashIsoImageBasedTrickPlaySettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashIsoImageBasedTrickPlaySettings_IntervalCadence:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoImageBasedTrickPlaySettings_IntervalCadence, &ev); err != nil {
+				return err
+			}
+			v.IntervalCadence = DashIsoIntervalCadence(ev)
+			return nil
+		case schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailHeight:
+			v.ThumbnailHeight = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailHeight, v.ThumbnailHeight)
+		case schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailInterval:
+			v.ThumbnailInterval = new(float64)
+			return d.ReadFloat64(schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailInterval, v.ThumbnailInterval)
+		case schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailWidth:
+			v.ThumbnailWidth = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlaySettings_ThumbnailWidth, v.ThumbnailWidth)
+		case schemas.DashIsoImageBasedTrickPlaySettings_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlaySettings_TileHeight, v.TileHeight)
+		case schemas.DashIsoImageBasedTrickPlaySettings_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlaySettings_TileWidth, v.TileWidth)
+		}
+		return nil
+	})
 }
 
 // Settings for one image-based trick play variant. Each variant produces its own
@@ -2869,6 +6523,62 @@ type DashIsoImageBasedTrickPlayVariant struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DashIsoImageBasedTrickPlayVariant) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DashIsoImageBasedTrickPlayVariant)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DashIsoImageBasedTrickPlayVariant) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalCadence != "" {
+		s.WriteString(schemas.DashIsoImageBasedTrickPlayVariant_IntervalCadence, string(v.IntervalCadence))
+	}
+	if v.ThumbnailHeight != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailHeight, *v.ThumbnailHeight)
+	}
+	if v.ThumbnailInterval != nil {
+		s.WriteFloat64(schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailInterval, *v.ThumbnailInterval)
+	}
+	if v.ThumbnailWidth != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailWidth, *v.ThumbnailWidth)
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlayVariant_TileHeight, *v.TileHeight)
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.DashIsoImageBasedTrickPlayVariant_TileWidth, *v.TileWidth)
+	}
+}
+func (v *DashIsoImageBasedTrickPlayVariant) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DashIsoImageBasedTrickPlayVariant, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DashIsoImageBasedTrickPlayVariant_IntervalCadence:
+			var ev string
+			if err := d.ReadString(schemas.DashIsoImageBasedTrickPlayVariant_IntervalCadence, &ev); err != nil {
+				return err
+			}
+			v.IntervalCadence = DashIsoIntervalCadence(ev)
+			return nil
+		case schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailHeight:
+			v.ThumbnailHeight = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailHeight, v.ThumbnailHeight)
+		case schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailInterval:
+			v.ThumbnailInterval = new(float64)
+			return d.ReadFloat64(schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailInterval, v.ThumbnailInterval)
+		case schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailWidth:
+			v.ThumbnailWidth = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlayVariant_ThumbnailWidth, v.ThumbnailWidth)
+		case schemas.DashIsoImageBasedTrickPlayVariant_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlayVariant_TileHeight, v.TileHeight)
+		case schemas.DashIsoImageBasedTrickPlayVariant_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.DashIsoImageBasedTrickPlayVariant_TileWidth, v.TileWidth)
+		}
+		return nil
+	})
+}
+
 // Details about the media file's data track.
 type DataProperties struct {
 
@@ -2876,6 +6586,28 @@ type DataProperties struct {
 	LanguageCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.DataProperties_LanguageCode, *v.LanguageCode)
+	}
+}
+func (v *DataProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataProperties_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.DataProperties_LanguageCode, v.LanguageCode)
+		}
+		return nil
+	})
 }
 
 // Settings for deinterlacer
@@ -2910,6 +6642,52 @@ type Deinterlacer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Deinterlacer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Deinterlacer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Deinterlacer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != "" {
+		s.WriteString(schemas.Deinterlacer_Algorithm, string(v.Algorithm))
+	}
+	if v.Control != "" {
+		s.WriteString(schemas.Deinterlacer_Control, string(v.Control))
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.Deinterlacer_Mode, string(v.Mode))
+	}
+}
+func (v *Deinterlacer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Deinterlacer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Deinterlacer_Algorithm:
+			var ev string
+			if err := d.ReadString(schemas.Deinterlacer_Algorithm, &ev); err != nil {
+				return err
+			}
+			v.Algorithm = DeinterlaceAlgorithm(ev)
+			return nil
+		case schemas.Deinterlacer_Control:
+			var ev string
+			if err := d.ReadString(schemas.Deinterlacer_Control, &ev); err != nil {
+				return err
+			}
+			v.Control = DeinterlacerControl(ev)
+			return nil
+		case schemas.Deinterlacer_Mode:
+			var ev string
+			if err := d.ReadString(schemas.Deinterlacer_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = DeinterlacerMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Settings associated with the destination. Will vary based on the type of
 // destination
 type DestinationSettings struct {
@@ -2918,6 +6696,30 @@ type DestinationSettings struct {
 	S3Settings *S3DestinationSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *DestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Settings != nil {
+		s.WriteStruct(schemas.DestinationSettings_S3Settings)
+		v.S3Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationSettings_S3Settings:
+			v.S3Settings = &S3DestinationSettings{}
+			return v.S3Settings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Create Dolby Vision Profile 5 or Profile 8.1 compatible video output.
@@ -2960,6 +6762,70 @@ type DolbyVision struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DolbyVision) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DolbyVision)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DolbyVision) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compatibility != "" {
+		s.WriteString(schemas.DolbyVision_Compatibility, string(v.Compatibility))
+	}
+	if v.L6Metadata != nil {
+		s.WriteStruct(schemas.DolbyVision_L6Metadata)
+		v.L6Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.L6Mode != "" {
+		s.WriteString(schemas.DolbyVision_L6Mode, string(v.L6Mode))
+	}
+	if v.Mapping != "" {
+		s.WriteString(schemas.DolbyVision_Mapping, string(v.Mapping))
+	}
+	if v.Profile != "" {
+		s.WriteString(schemas.DolbyVision_Profile, string(v.Profile))
+	}
+}
+func (v *DolbyVision) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DolbyVision, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DolbyVision_Compatibility:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVision_Compatibility, &ev); err != nil {
+				return err
+			}
+			v.Compatibility = DolbyVisionCompatibility(ev)
+			return nil
+		case schemas.DolbyVision_L6Metadata:
+			v.L6Metadata = &DolbyVisionLevel6Metadata{}
+			return v.L6Metadata.Deserialize(d)
+		case schemas.DolbyVision_L6Mode:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVision_L6Mode, &ev); err != nil {
+				return err
+			}
+			v.L6Mode = DolbyVisionLevel6Mode(ev)
+			return nil
+		case schemas.DolbyVision_Mapping:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVision_Mapping, &ev); err != nil {
+				return err
+			}
+			v.Mapping = DolbyVisionMapping(ev)
+			return nil
+		case schemas.DolbyVision_Profile:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVision_Profile, &ev); err != nil {
+				return err
+			}
+			v.Profile = DolbyVisionProfile(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override
 // the MaxCLL and MaxFALL values in your input with new values.
 type DolbyVisionLevel6Metadata struct {
@@ -2973,6 +6839,118 @@ type DolbyVisionLevel6Metadata struct {
 	MaxFall *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DolbyVisionLevel6Metadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DolbyVisionLevel6Metadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DolbyVisionLevel6Metadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCll != nil {
+		s.WriteInt32(schemas.DolbyVisionLevel6Metadata_MaxCll, *v.MaxCll)
+	}
+	if v.MaxFall != nil {
+		s.WriteInt32(schemas.DolbyVisionLevel6Metadata_MaxFall, *v.MaxFall)
+	}
+}
+func (v *DolbyVisionLevel6Metadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DolbyVisionLevel6Metadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DolbyVisionLevel6Metadata_MaxCll:
+			v.MaxCll = new(int32)
+			return d.ReadInt32(schemas.DolbyVisionLevel6Metadata_MaxCll, v.MaxCll)
+		case schemas.DolbyVisionLevel6Metadata_MaxFall:
+			v.MaxFall = new(int32)
+			return d.ReadInt32(schemas.DolbyVisionLevel6Metadata_MaxFall, v.MaxFall)
+		}
+		return nil
+	})
+}
+
+// Dolby Vision characteristics of the video track: the profile and level, and
+// whether the RPU (dynamic metadata), base layer, and enhancement layer are
+// present. Use this to distinguish Dolby Vision content from standard HEVC and to
+// choose your encoding or passthrough settings. Omitted when the content is not
+// Dolby Vision.
+type DolbyVisionMetadata struct {
+
+	// Whether a Dolby Vision component is present in the track.
+	BaseLayer DolbyVisionPresence
+
+	// Whether a Dolby Vision component is present in the track.
+	EnhancementLayer DolbyVisionPresence
+
+	// The Dolby Vision level, which indicates the maximum resolution and frame rate.
+	Level *int32
+
+	// The Dolby Vision profile, for example 5, 7, or 8. The profile determines the
+	// layer structure and playback compatibility of the content.
+	Profile *int32
+
+	// Whether a Dolby Vision component is present in the track.
+	Rpu DolbyVisionPresence
+
+	noSmithyDocumentSerde
+}
+
+func (v *DolbyVisionMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DolbyVisionMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DolbyVisionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseLayer != "" {
+		s.WriteString(schemas.DolbyVisionMetadata_BaseLayer, string(v.BaseLayer))
+	}
+	if v.EnhancementLayer != "" {
+		s.WriteString(schemas.DolbyVisionMetadata_EnhancementLayer, string(v.EnhancementLayer))
+	}
+	if v.Level != nil {
+		s.WriteInt32(schemas.DolbyVisionMetadata_Level, *v.Level)
+	}
+	if v.Profile != nil {
+		s.WriteInt32(schemas.DolbyVisionMetadata_Profile, *v.Profile)
+	}
+	if v.Rpu != "" {
+		s.WriteString(schemas.DolbyVisionMetadata_Rpu, string(v.Rpu))
+	}
+}
+func (v *DolbyVisionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DolbyVisionMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DolbyVisionMetadata_BaseLayer:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVisionMetadata_BaseLayer, &ev); err != nil {
+				return err
+			}
+			v.BaseLayer = DolbyVisionPresence(ev)
+			return nil
+		case schemas.DolbyVisionMetadata_EnhancementLayer:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVisionMetadata_EnhancementLayer, &ev); err != nil {
+				return err
+			}
+			v.EnhancementLayer = DolbyVisionPresence(ev)
+			return nil
+		case schemas.DolbyVisionMetadata_Level:
+			v.Level = new(int32)
+			return d.ReadInt32(schemas.DolbyVisionMetadata_Level, v.Level)
+		case schemas.DolbyVisionMetadata_Profile:
+			v.Profile = new(int32)
+			return d.ReadInt32(schemas.DolbyVisionMetadata_Profile, v.Profile)
+		case schemas.DolbyVisionMetadata_Rpu:
+			var ev string
+			if err := d.ReadString(schemas.DolbyVisionMetadata_Rpu, &ev); err != nil {
+				return err
+			}
+			v.Rpu = DolbyVisionPresence(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings for integer-second duration normalization. When this preprocessor is
@@ -2999,6 +6977,40 @@ type DurationControl struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DurationControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DurationControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DurationControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegerDurationMaximumCompressionDenominator != nil {
+		s.WriteInt32(schemas.DurationControl_IntegerDurationMaximumCompressionDenominator, *v.IntegerDurationMaximumCompressionDenominator)
+	}
+	if v.IntegerDurationMaximumCompressionNumerator != nil {
+		s.WriteInt32(schemas.DurationControl_IntegerDurationMaximumCompressionNumerator, *v.IntegerDurationMaximumCompressionNumerator)
+	}
+	if v.IntegerDurationTrimThresholdMilliseconds != nil {
+		s.WriteInt32(schemas.DurationControl_IntegerDurationTrimThresholdMilliseconds, *v.IntegerDurationTrimThresholdMilliseconds)
+	}
+}
+func (v *DurationControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DurationControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DurationControl_IntegerDurationMaximumCompressionDenominator:
+			v.IntegerDurationMaximumCompressionDenominator = new(int32)
+			return d.ReadInt32(schemas.DurationControl_IntegerDurationMaximumCompressionDenominator, v.IntegerDurationMaximumCompressionDenominator)
+		case schemas.DurationControl_IntegerDurationMaximumCompressionNumerator:
+			v.IntegerDurationMaximumCompressionNumerator = new(int32)
+			return d.ReadInt32(schemas.DurationControl_IntegerDurationMaximumCompressionNumerator, v.IntegerDurationMaximumCompressionNumerator)
+		case schemas.DurationControl_IntegerDurationTrimThresholdMilliseconds:
+			v.IntegerDurationTrimThresholdMilliseconds = new(int32)
+			return d.ReadInt32(schemas.DurationControl_IntegerDurationTrimThresholdMilliseconds, v.IntegerDurationTrimThresholdMilliseconds)
+		}
+		return nil
+	})
+}
+
 // Use these settings to insert a DVB Network Information Table (NIT) in the
 // transport stream of this output.
 type DvbNitSettings struct {
@@ -3015,6 +7027,40 @@ type DvbNitSettings struct {
 	NitInterval *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DvbNitSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DvbNitSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DvbNitSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteInt32(schemas.DvbNitSettings_NetworkId, *v.NetworkId)
+	}
+	if v.NetworkName != nil {
+		s.WriteString(schemas.DvbNitSettings_NetworkName, *v.NetworkName)
+	}
+	if v.NitInterval != nil {
+		s.WriteInt32(schemas.DvbNitSettings_NitInterval, *v.NitInterval)
+	}
+}
+func (v *DvbNitSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DvbNitSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DvbNitSettings_NetworkId:
+			v.NetworkId = new(int32)
+			return d.ReadInt32(schemas.DvbNitSettings_NetworkId, v.NetworkId)
+		case schemas.DvbNitSettings_NetworkName:
+			v.NetworkName = new(string)
+			return d.ReadString(schemas.DvbNitSettings_NetworkName, v.NetworkName)
+		case schemas.DvbNitSettings_NitInterval:
+			v.NitInterval = new(int32)
+			return d.ReadInt32(schemas.DvbNitSettings_NitInterval, v.NitInterval)
+		}
+		return nil
+	})
 }
 
 // Use these settings to insert a DVB Service Description Table (SDT) in the
@@ -3042,6 +7088,50 @@ type DvbSdtSettings struct {
 	ServiceProviderName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DvbSdtSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DvbSdtSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DvbSdtSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputSdt != "" {
+		s.WriteString(schemas.DvbSdtSettings_OutputSdt, string(v.OutputSdt))
+	}
+	if v.SdtInterval != nil {
+		s.WriteInt32(schemas.DvbSdtSettings_SdtInterval, *v.SdtInterval)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.DvbSdtSettings_ServiceName, *v.ServiceName)
+	}
+	if v.ServiceProviderName != nil {
+		s.WriteString(schemas.DvbSdtSettings_ServiceProviderName, *v.ServiceProviderName)
+	}
+}
+func (v *DvbSdtSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DvbSdtSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DvbSdtSettings_OutputSdt:
+			var ev string
+			if err := d.ReadString(schemas.DvbSdtSettings_OutputSdt, &ev); err != nil {
+				return err
+			}
+			v.OutputSdt = OutputSdt(ev)
+			return nil
+		case schemas.DvbSdtSettings_SdtInterval:
+			v.SdtInterval = new(int32)
+			return d.ReadInt32(schemas.DvbSdtSettings_SdtInterval, v.SdtInterval)
+		case schemas.DvbSdtSettings_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.DvbSdtSettings_ServiceName, v.ServiceName)
+		case schemas.DvbSdtSettings_ServiceProviderName:
+			v.ServiceProviderName = new(string)
+			return d.ReadString(schemas.DvbSdtSettings_ServiceProviderName, v.ServiceProviderName)
+		}
+		return nil
+	})
 }
 
 // Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same
@@ -3273,6 +7363,256 @@ type DvbSubDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DvbSubDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DvbSubDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DvbSubDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alignment != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_Alignment, string(v.Alignment))
+	}
+	if v.ApplyFontColor != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_ApplyFontColor, string(v.ApplyFontColor))
+	}
+	if v.BackgroundColor != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_BackgroundColor, string(v.BackgroundColor))
+	}
+	if v.BackgroundOpacity != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_BackgroundOpacity, *v.BackgroundOpacity)
+	}
+	if v.DdsHandling != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_DdsHandling, string(v.DdsHandling))
+	}
+	if v.DdsXCoordinate != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_DdsXCoordinate, *v.DdsXCoordinate)
+	}
+	if v.DdsYCoordinate != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_DdsYCoordinate, *v.DdsYCoordinate)
+	}
+	if v.FallbackFont != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_FallbackFont, string(v.FallbackFont))
+	}
+	if v.FontColor != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_FontColor, string(v.FontColor))
+	}
+	if v.FontFileBold != nil {
+		s.WriteString(schemas.DvbSubDestinationSettings_FontFileBold, *v.FontFileBold)
+	}
+	if v.FontFileBoldItalic != nil {
+		s.WriteString(schemas.DvbSubDestinationSettings_FontFileBoldItalic, *v.FontFileBoldItalic)
+	}
+	if v.FontFileItalic != nil {
+		s.WriteString(schemas.DvbSubDestinationSettings_FontFileItalic, *v.FontFileItalic)
+	}
+	if v.FontFileRegular != nil {
+		s.WriteString(schemas.DvbSubDestinationSettings_FontFileRegular, *v.FontFileRegular)
+	}
+	if v.FontOpacity != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_FontOpacity, *v.FontOpacity)
+	}
+	if v.FontResolution != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_FontResolution, *v.FontResolution)
+	}
+	if v.FontScript != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_FontScript, string(v.FontScript))
+	}
+	if v.FontSize != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_FontSize, *v.FontSize)
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_Height, *v.Height)
+	}
+	if v.HexFontColor != nil {
+		s.WriteString(schemas.DvbSubDestinationSettings_HexFontColor, *v.HexFontColor)
+	}
+	if v.OutlineColor != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_OutlineColor, string(v.OutlineColor))
+	}
+	if v.OutlineSize != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_OutlineSize, *v.OutlineSize)
+	}
+	if v.ShadowColor != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_ShadowColor, string(v.ShadowColor))
+	}
+	if v.ShadowOpacity != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_ShadowOpacity, *v.ShadowOpacity)
+	}
+	if v.ShadowXOffset != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_ShadowXOffset, *v.ShadowXOffset)
+	}
+	if v.ShadowYOffset != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_ShadowYOffset, *v.ShadowYOffset)
+	}
+	if v.StylePassthrough != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_StylePassthrough, string(v.StylePassthrough))
+	}
+	if v.SubtitlingType != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_SubtitlingType, string(v.SubtitlingType))
+	}
+	if v.TeletextSpacing != "" {
+		s.WriteString(schemas.DvbSubDestinationSettings_TeletextSpacing, string(v.TeletextSpacing))
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_Width, *v.Width)
+	}
+	if v.XPosition != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_XPosition, *v.XPosition)
+	}
+	if v.YPosition != nil {
+		s.WriteInt32(schemas.DvbSubDestinationSettings_YPosition, *v.YPosition)
+	}
+}
+func (v *DvbSubDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DvbSubDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DvbSubDestinationSettings_Alignment:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_Alignment, &ev); err != nil {
+				return err
+			}
+			v.Alignment = DvbSubtitleAlignment(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_ApplyFontColor:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_ApplyFontColor, &ev); err != nil {
+				return err
+			}
+			v.ApplyFontColor = DvbSubtitleApplyFontColor(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_BackgroundColor:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_BackgroundColor, &ev); err != nil {
+				return err
+			}
+			v.BackgroundColor = DvbSubtitleBackgroundColor(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_BackgroundOpacity:
+			v.BackgroundOpacity = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_BackgroundOpacity, v.BackgroundOpacity)
+		case schemas.DvbSubDestinationSettings_DdsHandling:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_DdsHandling, &ev); err != nil {
+				return err
+			}
+			v.DdsHandling = DvbddsHandling(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_DdsXCoordinate:
+			v.DdsXCoordinate = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_DdsXCoordinate, v.DdsXCoordinate)
+		case schemas.DvbSubDestinationSettings_DdsYCoordinate:
+			v.DdsYCoordinate = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_DdsYCoordinate, v.DdsYCoordinate)
+		case schemas.DvbSubDestinationSettings_FallbackFont:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_FallbackFont, &ev); err != nil {
+				return err
+			}
+			v.FallbackFont = DvbSubSubtitleFallbackFont(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_FontColor:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_FontColor, &ev); err != nil {
+				return err
+			}
+			v.FontColor = DvbSubtitleFontColor(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_FontFileBold:
+			v.FontFileBold = new(string)
+			return d.ReadString(schemas.DvbSubDestinationSettings_FontFileBold, v.FontFileBold)
+		case schemas.DvbSubDestinationSettings_FontFileBoldItalic:
+			v.FontFileBoldItalic = new(string)
+			return d.ReadString(schemas.DvbSubDestinationSettings_FontFileBoldItalic, v.FontFileBoldItalic)
+		case schemas.DvbSubDestinationSettings_FontFileItalic:
+			v.FontFileItalic = new(string)
+			return d.ReadString(schemas.DvbSubDestinationSettings_FontFileItalic, v.FontFileItalic)
+		case schemas.DvbSubDestinationSettings_FontFileRegular:
+			v.FontFileRegular = new(string)
+			return d.ReadString(schemas.DvbSubDestinationSettings_FontFileRegular, v.FontFileRegular)
+		case schemas.DvbSubDestinationSettings_FontOpacity:
+			v.FontOpacity = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_FontOpacity, v.FontOpacity)
+		case schemas.DvbSubDestinationSettings_FontResolution:
+			v.FontResolution = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_FontResolution, v.FontResolution)
+		case schemas.DvbSubDestinationSettings_FontScript:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_FontScript, &ev); err != nil {
+				return err
+			}
+			v.FontScript = FontScript(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_FontSize:
+			v.FontSize = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_FontSize, v.FontSize)
+		case schemas.DvbSubDestinationSettings_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_Height, v.Height)
+		case schemas.DvbSubDestinationSettings_HexFontColor:
+			v.HexFontColor = new(string)
+			return d.ReadString(schemas.DvbSubDestinationSettings_HexFontColor, v.HexFontColor)
+		case schemas.DvbSubDestinationSettings_OutlineColor:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_OutlineColor, &ev); err != nil {
+				return err
+			}
+			v.OutlineColor = DvbSubtitleOutlineColor(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_OutlineSize:
+			v.OutlineSize = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_OutlineSize, v.OutlineSize)
+		case schemas.DvbSubDestinationSettings_ShadowColor:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_ShadowColor, &ev); err != nil {
+				return err
+			}
+			v.ShadowColor = DvbSubtitleShadowColor(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_ShadowOpacity:
+			v.ShadowOpacity = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_ShadowOpacity, v.ShadowOpacity)
+		case schemas.DvbSubDestinationSettings_ShadowXOffset:
+			v.ShadowXOffset = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_ShadowXOffset, v.ShadowXOffset)
+		case schemas.DvbSubDestinationSettings_ShadowYOffset:
+			v.ShadowYOffset = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_ShadowYOffset, v.ShadowYOffset)
+		case schemas.DvbSubDestinationSettings_StylePassthrough:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_StylePassthrough, &ev); err != nil {
+				return err
+			}
+			v.StylePassthrough = DvbSubtitleStylePassthrough(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_SubtitlingType:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_SubtitlingType, &ev); err != nil {
+				return err
+			}
+			v.SubtitlingType = DvbSubtitlingType(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_TeletextSpacing:
+			var ev string
+			if err := d.ReadString(schemas.DvbSubDestinationSettings_TeletextSpacing, &ev); err != nil {
+				return err
+			}
+			v.TeletextSpacing = DvbSubtitleTeletextSpacing(ev)
+			return nil
+		case schemas.DvbSubDestinationSettings_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_Width, v.Width)
+		case schemas.DvbSubDestinationSettings_XPosition:
+			v.XPosition = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_XPosition, v.XPosition)
+		case schemas.DvbSubDestinationSettings_YPosition:
+			v.YPosition = new(int32)
+			return d.ReadInt32(schemas.DvbSubDestinationSettings_YPosition, v.YPosition)
+		}
+		return nil
+	})
+}
+
 // DVB Sub Source Settings
 type DvbSubSourceSettings struct {
 
@@ -3284,6 +7624,28 @@ type DvbSubSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DvbSubSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DvbSubSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DvbSubSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pid != nil {
+		s.WriteInt32(schemas.DvbSubSourceSettings_Pid, *v.Pid)
+	}
+}
+func (v *DvbSubSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DvbSubSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DvbSubSourceSettings_Pid:
+			v.Pid = new(int32)
+			return d.ReadInt32(schemas.DvbSubSourceSettings_Pid, v.Pid)
+		}
+		return nil
+	})
+}
+
 // Use these settings to insert a DVB Time and Date Table (TDT) in the transport
 // stream of this output.
 type DvbTdtSettings struct {
@@ -3293,6 +7655,28 @@ type DvbTdtSettings struct {
 	TdtInterval *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DvbTdtSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DvbTdtSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DvbTdtSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TdtInterval != nil {
+		s.WriteInt32(schemas.DvbTdtSettings_TdtInterval, *v.TdtInterval)
+	}
+}
+func (v *DvbTdtSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DvbTdtSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DvbTdtSettings_TdtInterval:
+			v.TdtInterval = new(int32)
+			return d.ReadInt32(schemas.DvbTdtSettings_TdtInterval, v.TdtInterval)
+		}
+		return nil
+	})
 }
 
 // Use Dynamic audio selectors when you do not know the track layout of your
@@ -3344,6 +7728,64 @@ type DynamicAudioSelector struct {
 	SelectorType DynamicAudioSelectorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DynamicAudioSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynamicAudioSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynamicAudioSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDurationCorrection != "" {
+		s.WriteString(schemas.DynamicAudioSelector_AudioDurationCorrection, string(v.AudioDurationCorrection))
+	}
+	if v.ExternalAudioFileInput != nil {
+		s.WriteString(schemas.DynamicAudioSelector_ExternalAudioFileInput, *v.ExternalAudioFileInput)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DynamicAudioSelector_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Offset != nil {
+		s.WriteInt32(schemas.DynamicAudioSelector_Offset, *v.Offset)
+	}
+	if v.SelectorType != "" {
+		s.WriteString(schemas.DynamicAudioSelector_SelectorType, string(v.SelectorType))
+	}
+}
+func (v *DynamicAudioSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynamicAudioSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynamicAudioSelector_AudioDurationCorrection:
+			var ev string
+			if err := d.ReadString(schemas.DynamicAudioSelector_AudioDurationCorrection, &ev); err != nil {
+				return err
+			}
+			v.AudioDurationCorrection = AudioDurationCorrection(ev)
+			return nil
+		case schemas.DynamicAudioSelector_ExternalAudioFileInput:
+			v.ExternalAudioFileInput = new(string)
+			return d.ReadString(schemas.DynamicAudioSelector_ExternalAudioFileInput, v.ExternalAudioFileInput)
+		case schemas.DynamicAudioSelector_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.DynamicAudioSelector_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.DynamicAudioSelector_Offset:
+			v.Offset = new(int32)
+			return d.ReadInt32(schemas.DynamicAudioSelector_Offset, v.Offset)
+		case schemas.DynamicAudioSelector_SelectorType:
+			var ev string
+			if err := d.ReadString(schemas.DynamicAudioSelector_SelectorType, &ev); err != nil {
+				return err
+			}
+			v.SelectorType = DynamicAudioSelectorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value EAC3_ATMOS.
@@ -3465,6 +7907,164 @@ type Eac3AtmosSettings struct {
 	SurroundExMode Eac3AtmosSurroundExMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *Eac3AtmosSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Eac3AtmosSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Eac3AtmosSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Eac3AtmosSettings_Bitrate, *v.Bitrate)
+	}
+	if v.BitstreamMode != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_BitstreamMode, string(v.BitstreamMode))
+	}
+	if v.CodingMode != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_CodingMode, string(v.CodingMode))
+	}
+	if v.DialogueIntelligence != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_DialogueIntelligence, string(v.DialogueIntelligence))
+	}
+	if v.DownmixControl != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_DownmixControl, string(v.DownmixControl))
+	}
+	if v.DynamicRangeCompressionLine != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_DynamicRangeCompressionLine, string(v.DynamicRangeCompressionLine))
+	}
+	if v.DynamicRangeCompressionRf != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_DynamicRangeCompressionRf, string(v.DynamicRangeCompressionRf))
+	}
+	if v.DynamicRangeControl != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_DynamicRangeControl, string(v.DynamicRangeControl))
+	}
+	if v.LoRoCenterMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3AtmosSettings_LoRoCenterMixLevel, *v.LoRoCenterMixLevel)
+	}
+	if v.LoRoSurroundMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3AtmosSettings_LoRoSurroundMixLevel, *v.LoRoSurroundMixLevel)
+	}
+	if v.LtRtCenterMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3AtmosSettings_LtRtCenterMixLevel, *v.LtRtCenterMixLevel)
+	}
+	if v.LtRtSurroundMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3AtmosSettings_LtRtSurroundMixLevel, *v.LtRtSurroundMixLevel)
+	}
+	if v.MeteringMode != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_MeteringMode, string(v.MeteringMode))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.Eac3AtmosSettings_SampleRate, *v.SampleRate)
+	}
+	if v.SpeechThreshold != nil {
+		s.WriteInt32(schemas.Eac3AtmosSettings_SpeechThreshold, *v.SpeechThreshold)
+	}
+	if v.StereoDownmix != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_StereoDownmix, string(v.StereoDownmix))
+	}
+	if v.SurroundExMode != "" {
+		s.WriteString(schemas.Eac3AtmosSettings_SurroundExMode, string(v.SurroundExMode))
+	}
+}
+func (v *Eac3AtmosSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Eac3AtmosSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Eac3AtmosSettings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Eac3AtmosSettings_Bitrate, v.Bitrate)
+		case schemas.Eac3AtmosSettings_BitstreamMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_BitstreamMode, &ev); err != nil {
+				return err
+			}
+			v.BitstreamMode = Eac3AtmosBitstreamMode(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_CodingMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_CodingMode, &ev); err != nil {
+				return err
+			}
+			v.CodingMode = Eac3AtmosCodingMode(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_DialogueIntelligence:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_DialogueIntelligence, &ev); err != nil {
+				return err
+			}
+			v.DialogueIntelligence = Eac3AtmosDialogueIntelligence(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_DownmixControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_DownmixControl, &ev); err != nil {
+				return err
+			}
+			v.DownmixControl = Eac3AtmosDownmixControl(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_DynamicRangeCompressionLine:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_DynamicRangeCompressionLine, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionLine = Eac3AtmosDynamicRangeCompressionLine(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_DynamicRangeCompressionRf:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_DynamicRangeCompressionRf, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionRf = Eac3AtmosDynamicRangeCompressionRf(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_DynamicRangeControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_DynamicRangeControl, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeControl = Eac3AtmosDynamicRangeControl(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_LoRoCenterMixLevel:
+			v.LoRoCenterMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3AtmosSettings_LoRoCenterMixLevel, v.LoRoCenterMixLevel)
+		case schemas.Eac3AtmosSettings_LoRoSurroundMixLevel:
+			v.LoRoSurroundMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3AtmosSettings_LoRoSurroundMixLevel, v.LoRoSurroundMixLevel)
+		case schemas.Eac3AtmosSettings_LtRtCenterMixLevel:
+			v.LtRtCenterMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3AtmosSettings_LtRtCenterMixLevel, v.LtRtCenterMixLevel)
+		case schemas.Eac3AtmosSettings_LtRtSurroundMixLevel:
+			v.LtRtSurroundMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3AtmosSettings_LtRtSurroundMixLevel, v.LtRtSurroundMixLevel)
+		case schemas.Eac3AtmosSettings_MeteringMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_MeteringMode, &ev); err != nil {
+				return err
+			}
+			v.MeteringMode = Eac3AtmosMeteringMode(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.Eac3AtmosSettings_SampleRate, v.SampleRate)
+		case schemas.Eac3AtmosSettings_SpeechThreshold:
+			v.SpeechThreshold = new(int32)
+			return d.ReadInt32(schemas.Eac3AtmosSettings_SpeechThreshold, v.SpeechThreshold)
+		case schemas.Eac3AtmosSettings_StereoDownmix:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_StereoDownmix, &ev); err != nil {
+				return err
+			}
+			v.StereoDownmix = Eac3AtmosStereoDownmix(ev)
+			return nil
+		case schemas.Eac3AtmosSettings_SurroundExMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3AtmosSettings_SurroundExMode, &ev); err != nil {
+				return err
+			}
+			v.SurroundExMode = Eac3AtmosSurroundExMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value EAC3.
@@ -3593,6 +8193,204 @@ type Eac3Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Eac3Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Eac3Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Eac3Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttenuationControl != "" {
+		s.WriteString(schemas.Eac3Settings_AttenuationControl, string(v.AttenuationControl))
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Eac3Settings_Bitrate, *v.Bitrate)
+	}
+	if v.BitstreamMode != "" {
+		s.WriteString(schemas.Eac3Settings_BitstreamMode, string(v.BitstreamMode))
+	}
+	if v.CodingMode != "" {
+		s.WriteString(schemas.Eac3Settings_CodingMode, string(v.CodingMode))
+	}
+	if v.DcFilter != "" {
+		s.WriteString(schemas.Eac3Settings_DcFilter, string(v.DcFilter))
+	}
+	if v.Dialnorm != nil {
+		s.WriteInt32(schemas.Eac3Settings_Dialnorm, *v.Dialnorm)
+	}
+	if v.DynamicRangeCompressionLine != "" {
+		s.WriteString(schemas.Eac3Settings_DynamicRangeCompressionLine, string(v.DynamicRangeCompressionLine))
+	}
+	if v.DynamicRangeCompressionRf != "" {
+		s.WriteString(schemas.Eac3Settings_DynamicRangeCompressionRf, string(v.DynamicRangeCompressionRf))
+	}
+	if v.LfeControl != "" {
+		s.WriteString(schemas.Eac3Settings_LfeControl, string(v.LfeControl))
+	}
+	if v.LfeFilter != "" {
+		s.WriteString(schemas.Eac3Settings_LfeFilter, string(v.LfeFilter))
+	}
+	if v.LoRoCenterMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3Settings_LoRoCenterMixLevel, *v.LoRoCenterMixLevel)
+	}
+	if v.LoRoSurroundMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3Settings_LoRoSurroundMixLevel, *v.LoRoSurroundMixLevel)
+	}
+	if v.LtRtCenterMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3Settings_LtRtCenterMixLevel, *v.LtRtCenterMixLevel)
+	}
+	if v.LtRtSurroundMixLevel != nil {
+		s.WriteFloat64(schemas.Eac3Settings_LtRtSurroundMixLevel, *v.LtRtSurroundMixLevel)
+	}
+	if v.MetadataControl != "" {
+		s.WriteString(schemas.Eac3Settings_MetadataControl, string(v.MetadataControl))
+	}
+	if v.PassthroughControl != "" {
+		s.WriteString(schemas.Eac3Settings_PassthroughControl, string(v.PassthroughControl))
+	}
+	if v.PhaseControl != "" {
+		s.WriteString(schemas.Eac3Settings_PhaseControl, string(v.PhaseControl))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.Eac3Settings_SampleRate, *v.SampleRate)
+	}
+	if v.StereoDownmix != "" {
+		s.WriteString(schemas.Eac3Settings_StereoDownmix, string(v.StereoDownmix))
+	}
+	if v.SurroundExMode != "" {
+		s.WriteString(schemas.Eac3Settings_SurroundExMode, string(v.SurroundExMode))
+	}
+	if v.SurroundMode != "" {
+		s.WriteString(schemas.Eac3Settings_SurroundMode, string(v.SurroundMode))
+	}
+}
+func (v *Eac3Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Eac3Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Eac3Settings_AttenuationControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_AttenuationControl, &ev); err != nil {
+				return err
+			}
+			v.AttenuationControl = Eac3AttenuationControl(ev)
+			return nil
+		case schemas.Eac3Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Eac3Settings_Bitrate, v.Bitrate)
+		case schemas.Eac3Settings_BitstreamMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_BitstreamMode, &ev); err != nil {
+				return err
+			}
+			v.BitstreamMode = Eac3BitstreamMode(ev)
+			return nil
+		case schemas.Eac3Settings_CodingMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_CodingMode, &ev); err != nil {
+				return err
+			}
+			v.CodingMode = Eac3CodingMode(ev)
+			return nil
+		case schemas.Eac3Settings_DcFilter:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_DcFilter, &ev); err != nil {
+				return err
+			}
+			v.DcFilter = Eac3DcFilter(ev)
+			return nil
+		case schemas.Eac3Settings_Dialnorm:
+			v.Dialnorm = new(int32)
+			return d.ReadInt32(schemas.Eac3Settings_Dialnorm, v.Dialnorm)
+		case schemas.Eac3Settings_DynamicRangeCompressionLine:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_DynamicRangeCompressionLine, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionLine = Eac3DynamicRangeCompressionLine(ev)
+			return nil
+		case schemas.Eac3Settings_DynamicRangeCompressionRf:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_DynamicRangeCompressionRf, &ev); err != nil {
+				return err
+			}
+			v.DynamicRangeCompressionRf = Eac3DynamicRangeCompressionRf(ev)
+			return nil
+		case schemas.Eac3Settings_LfeControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_LfeControl, &ev); err != nil {
+				return err
+			}
+			v.LfeControl = Eac3LfeControl(ev)
+			return nil
+		case schemas.Eac3Settings_LfeFilter:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_LfeFilter, &ev); err != nil {
+				return err
+			}
+			v.LfeFilter = Eac3LfeFilter(ev)
+			return nil
+		case schemas.Eac3Settings_LoRoCenterMixLevel:
+			v.LoRoCenterMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3Settings_LoRoCenterMixLevel, v.LoRoCenterMixLevel)
+		case schemas.Eac3Settings_LoRoSurroundMixLevel:
+			v.LoRoSurroundMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3Settings_LoRoSurroundMixLevel, v.LoRoSurroundMixLevel)
+		case schemas.Eac3Settings_LtRtCenterMixLevel:
+			v.LtRtCenterMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3Settings_LtRtCenterMixLevel, v.LtRtCenterMixLevel)
+		case schemas.Eac3Settings_LtRtSurroundMixLevel:
+			v.LtRtSurroundMixLevel = new(float64)
+			return d.ReadFloat64(schemas.Eac3Settings_LtRtSurroundMixLevel, v.LtRtSurroundMixLevel)
+		case schemas.Eac3Settings_MetadataControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_MetadataControl, &ev); err != nil {
+				return err
+			}
+			v.MetadataControl = Eac3MetadataControl(ev)
+			return nil
+		case schemas.Eac3Settings_PassthroughControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_PassthroughControl, &ev); err != nil {
+				return err
+			}
+			v.PassthroughControl = Eac3PassthroughControl(ev)
+			return nil
+		case schemas.Eac3Settings_PhaseControl:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_PhaseControl, &ev); err != nil {
+				return err
+			}
+			v.PhaseControl = Eac3PhaseControl(ev)
+			return nil
+		case schemas.Eac3Settings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.Eac3Settings_SampleRate, v.SampleRate)
+		case schemas.Eac3Settings_StereoDownmix:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_StereoDownmix, &ev); err != nil {
+				return err
+			}
+			v.StereoDownmix = Eac3StereoDownmix(ev)
+			return nil
+		case schemas.Eac3Settings_SurroundExMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_SurroundExMode, &ev); err != nil {
+				return err
+			}
+			v.SurroundExMode = Eac3SurroundExMode(ev)
+			return nil
+		case schemas.Eac3Settings_SurroundMode:
+			var ev string
+			if err := d.ReadString(schemas.Eac3Settings_SurroundMode, &ev); err != nil {
+				return err
+			}
+			v.SurroundMode = Eac3SurroundMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Elemental Inference configuration used in this job.
 type ElementalInferenceConfiguration struct {
 
@@ -3605,6 +8403,28 @@ type ElementalInferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ElementalInferenceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElementalInferenceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElementalInferenceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfElementalInferenceFeature(s, schemas.ElementalInferenceConfiguration_Features, v.Features)
+	serialize__listOfElementalInferenceFeed(s, schemas.ElementalInferenceConfiguration_Feeds, v.Feeds)
+}
+func (v *ElementalInferenceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElementalInferenceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElementalInferenceConfiguration_Features:
+			return deserialize__listOfElementalInferenceFeature(d, schemas.ElementalInferenceConfiguration_Features, &v.Features)
+		case schemas.ElementalInferenceConfiguration_Feeds:
+			return deserialize__listOfElementalInferenceFeed(d, schemas.ElementalInferenceConfiguration_Feeds, &v.Feeds)
+		}
+		return nil
+	})
+}
+
 // Elemental Inference Feed.
 type ElementalInferenceFeed struct {
 
@@ -3615,6 +8435,38 @@ type ElementalInferenceFeed struct {
 	FeedManagementState ElementalInferenceFeedManagementState
 
 	noSmithyDocumentSerde
+}
+
+func (v *ElementalInferenceFeed) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElementalInferenceFeed)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElementalInferenceFeed) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ElementalInferenceFeed_Arn, *v.Arn)
+	}
+	if v.FeedManagementState != "" {
+		s.WriteString(schemas.ElementalInferenceFeed_FeedManagementState, string(v.FeedManagementState))
+	}
+}
+func (v *ElementalInferenceFeed) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElementalInferenceFeed, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElementalInferenceFeed_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ElementalInferenceFeed_Arn, v.Arn)
+		case schemas.ElementalInferenceFeed_FeedManagementState:
+			var ev string
+			if err := d.ReadString(schemas.ElementalInferenceFeed_FeedManagementState, &ev); err != nil {
+				return err
+			}
+			v.FeedManagementState = ElementalInferenceFeedManagementState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or
@@ -3643,6 +8495,34 @@ type EmbeddedDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmbeddedDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmbeddedDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmbeddedDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination608ChannelNumber != nil {
+		s.WriteInt32(schemas.EmbeddedDestinationSettings_Destination608ChannelNumber, *v.Destination608ChannelNumber)
+	}
+	if v.Destination708ServiceNumber != nil {
+		s.WriteInt32(schemas.EmbeddedDestinationSettings_Destination708ServiceNumber, *v.Destination708ServiceNumber)
+	}
+}
+func (v *EmbeddedDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmbeddedDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmbeddedDestinationSettings_Destination608ChannelNumber:
+			v.Destination608ChannelNumber = new(int32)
+			return d.ReadInt32(schemas.EmbeddedDestinationSettings_Destination608ChannelNumber, v.Destination608ChannelNumber)
+		case schemas.EmbeddedDestinationSettings_Destination708ServiceNumber:
+			v.Destination708ServiceNumber = new(int32)
+			return d.ReadInt32(schemas.EmbeddedDestinationSettings_Destination708ServiceNumber, v.Destination708ServiceNumber)
+		}
+		return nil
+	})
+}
+
 // Settings for embedded captions Source
 type EmbeddedSourceSettings struct {
 
@@ -3666,6 +8546,54 @@ type EmbeddedSourceSettings struct {
 	TerminateCaptions EmbeddedTerminateCaptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *EmbeddedSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmbeddedSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmbeddedSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Convert608To708 != "" {
+		s.WriteString(schemas.EmbeddedSourceSettings_Convert608To708, string(v.Convert608To708))
+	}
+	if v.Source608ChannelNumber != nil {
+		s.WriteInt32(schemas.EmbeddedSourceSettings_Source608ChannelNumber, *v.Source608ChannelNumber)
+	}
+	if v.Source608TrackNumber != nil {
+		s.WriteInt32(schemas.EmbeddedSourceSettings_Source608TrackNumber, *v.Source608TrackNumber)
+	}
+	if v.TerminateCaptions != "" {
+		s.WriteString(schemas.EmbeddedSourceSettings_TerminateCaptions, string(v.TerminateCaptions))
+	}
+}
+func (v *EmbeddedSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmbeddedSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmbeddedSourceSettings_Convert608To708:
+			var ev string
+			if err := d.ReadString(schemas.EmbeddedSourceSettings_Convert608To708, &ev); err != nil {
+				return err
+			}
+			v.Convert608To708 = EmbeddedConvert608To708(ev)
+			return nil
+		case schemas.EmbeddedSourceSettings_Source608ChannelNumber:
+			v.Source608ChannelNumber = new(int32)
+			return d.ReadInt32(schemas.EmbeddedSourceSettings_Source608ChannelNumber, v.Source608ChannelNumber)
+		case schemas.EmbeddedSourceSettings_Source608TrackNumber:
+			v.Source608TrackNumber = new(int32)
+			return d.ReadInt32(schemas.EmbeddedSourceSettings_Source608TrackNumber, v.Source608TrackNumber)
+		case schemas.EmbeddedSourceSettings_TerminateCaptions:
+			var ev string
+			if err := d.ReadString(schemas.EmbeddedSourceSettings_TerminateCaptions, &ev); err != nil {
+				return err
+			}
+			v.TerminateCaptions = EmbeddedTerminateCaptions(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specify the SPEKE version, either v1.0 or v2.0, that MediaConvert uses when
@@ -3701,6 +8629,42 @@ type EncryptionContractConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionContractConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionContractConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionContractConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpekeAudioPreset != "" {
+		s.WriteString(schemas.EncryptionContractConfiguration_SpekeAudioPreset, string(v.SpekeAudioPreset))
+	}
+	if v.SpekeVideoPreset != "" {
+		s.WriteString(schemas.EncryptionContractConfiguration_SpekeVideoPreset, string(v.SpekeVideoPreset))
+	}
+}
+func (v *EncryptionContractConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionContractConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionContractConfiguration_SpekeAudioPreset:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionContractConfiguration_SpekeAudioPreset, &ev); err != nil {
+				return err
+			}
+			v.SpekeAudioPreset = PresetSpeke20Audio(ev)
+			return nil
+		case schemas.EncryptionContractConfiguration_SpekeVideoPreset:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionContractConfiguration_SpekeVideoPreset, &ev); err != nil {
+				return err
+			}
+			v.SpekeVideoPreset = PresetSpeke20Video(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes an account-specific API endpoint.
 type Endpoint struct {
 
@@ -3708,6 +8672,28 @@ type Endpoint struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Url != nil {
+		s.WriteString(schemas.Endpoint_Url, *v.Url)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.Endpoint_Url, v.Url)
+		}
+		return nil
+	})
 }
 
 // ESAM ManifestConfirmConditionNotification defined by OC-SP-ESAM-API-I03-131025.
@@ -3720,6 +8706,28 @@ type EsamManifestConfirmConditionNotification struct {
 	MccXml *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EsamManifestConfirmConditionNotification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EsamManifestConfirmConditionNotification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EsamManifestConfirmConditionNotification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MccXml != nil {
+		s.WriteString(schemas.EsamManifestConfirmConditionNotification_MccXml, *v.MccXml)
+	}
+}
+func (v *EsamManifestConfirmConditionNotification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EsamManifestConfirmConditionNotification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EsamManifestConfirmConditionNotification_MccXml:
+			v.MccXml = new(string)
+			return d.ReadString(schemas.EsamManifestConfirmConditionNotification_MccXml, v.MccXml)
+		}
+		return nil
+	})
 }
 
 // Settings for Event Signaling And Messaging (ESAM). If you don't do ad
@@ -3745,6 +8753,44 @@ type EsamSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EsamSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EsamSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EsamSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestConfirmConditionNotification != nil {
+		s.WriteStruct(schemas.EsamSettings_ManifestConfirmConditionNotification)
+		v.ManifestConfirmConditionNotification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResponseSignalPreroll != nil {
+		s.WriteInt32(schemas.EsamSettings_ResponseSignalPreroll, *v.ResponseSignalPreroll)
+	}
+	if v.SignalProcessingNotification != nil {
+		s.WriteStruct(schemas.EsamSettings_SignalProcessingNotification)
+		v.SignalProcessingNotification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EsamSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EsamSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EsamSettings_ManifestConfirmConditionNotification:
+			v.ManifestConfirmConditionNotification = &EsamManifestConfirmConditionNotification{}
+			return v.ManifestConfirmConditionNotification.Deserialize(d)
+		case schemas.EsamSettings_ResponseSignalPreroll:
+			v.ResponseSignalPreroll = new(int32)
+			return d.ReadInt32(schemas.EsamSettings_ResponseSignalPreroll, v.ResponseSignalPreroll)
+		case schemas.EsamSettings_SignalProcessingNotification:
+			v.SignalProcessingNotification = &EsamSignalProcessingNotification{}
+			return v.SignalProcessingNotification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
 type EsamSignalProcessingNotification struct {
 
@@ -3758,6 +8804,28 @@ type EsamSignalProcessingNotification struct {
 	SccXml *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EsamSignalProcessingNotification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EsamSignalProcessingNotification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EsamSignalProcessingNotification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SccXml != nil {
+		s.WriteString(schemas.EsamSignalProcessingNotification_SccXml, *v.SccXml)
+	}
+}
+func (v *EsamSignalProcessingNotification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EsamSignalProcessingNotification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EsamSignalProcessingNotification_SccXml:
+			v.SccXml = new(string)
+			return d.ReadString(schemas.EsamSignalProcessingNotification_SccXml, v.SccXml)
+		}
+		return nil
+	})
 }
 
 // If your source content has EIA-608 Line 21 Data Services, enable this feature
@@ -3780,6 +8848,42 @@ type ExtendedDataServices struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtendedDataServices) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtendedDataServices)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtendedDataServices) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyProtectionAction != "" {
+		s.WriteString(schemas.ExtendedDataServices_CopyProtectionAction, string(v.CopyProtectionAction))
+	}
+	if v.VchipAction != "" {
+		s.WriteString(schemas.ExtendedDataServices_VchipAction, string(v.VchipAction))
+	}
+}
+func (v *ExtendedDataServices) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtendedDataServices, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtendedDataServices_CopyProtectionAction:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedDataServices_CopyProtectionAction, &ev); err != nil {
+				return err
+			}
+			v.CopyProtectionAction = CopyProtectionAction(ev)
+			return nil
+		case schemas.ExtendedDataServices_VchipAction:
+			var ev string
+			if err := d.ReadString(schemas.ExtendedDataServices_VchipAction, &ev); err != nil {
+				return err
+			}
+			v.VchipAction = VchipAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Settings for F4v container
 type F4vSettings struct {
 
@@ -3789,6 +8893,32 @@ type F4vSettings struct {
 	MoovPlacement F4vMoovPlacement
 
 	noSmithyDocumentSerde
+}
+
+func (v *F4vSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.F4vSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *F4vSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MoovPlacement != "" {
+		s.WriteString(schemas.F4vSettings_MoovPlacement, string(v.MoovPlacement))
+	}
+}
+func (v *F4vSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.F4vSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.F4vSettings_MoovPlacement:
+			var ev string
+			if err := d.ReadString(schemas.F4vSettings_MoovPlacement, &ev); err != nil {
+				return err
+			}
+			v.MoovPlacement = F4vMoovPlacement(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings related to your File output group. MediaConvert uses this group of
@@ -3806,6 +8936,36 @@ type FileGroupSettings struct {
 	DestinationSettings *DestinationSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.FileGroupSettings_Destination, *v.Destination)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.FileGroupSettings_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FileGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileGroupSettings_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.FileGroupSettings_Destination, v.Destination)
+		case schemas.FileGroupSettings_DestinationSettings:
+			v.DestinationSettings = &DestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an
@@ -3878,6 +9038,92 @@ type FileSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteRateLimit != "" {
+		s.WriteString(schemas.FileSourceSettings_ByteRateLimit, string(v.ByteRateLimit))
+	}
+	if v.Convert608To708 != "" {
+		s.WriteString(schemas.FileSourceSettings_Convert608To708, string(v.Convert608To708))
+	}
+	if v.ConvertPaintToPop != "" {
+		s.WriteString(schemas.FileSourceSettings_ConvertPaintToPop, string(v.ConvertPaintToPop))
+	}
+	if v.Framerate != nil {
+		s.WriteStruct(schemas.FileSourceSettings_Framerate)
+		v.Framerate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceFile != nil {
+		s.WriteString(schemas.FileSourceSettings_SourceFile, *v.SourceFile)
+	}
+	if v.TimeDelta != nil {
+		s.WriteInt32(schemas.FileSourceSettings_TimeDelta, *v.TimeDelta)
+	}
+	if v.TimeDeltaUnits != "" {
+		s.WriteString(schemas.FileSourceSettings_TimeDeltaUnits, string(v.TimeDeltaUnits))
+	}
+	if v.UpconvertSTLToTeletext != "" {
+		s.WriteString(schemas.FileSourceSettings_UpconvertSTLToTeletext, string(v.UpconvertSTLToTeletext))
+	}
+}
+func (v *FileSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSourceSettings_ByteRateLimit:
+			var ev string
+			if err := d.ReadString(schemas.FileSourceSettings_ByteRateLimit, &ev); err != nil {
+				return err
+			}
+			v.ByteRateLimit = CaptionSourceByteRateLimit(ev)
+			return nil
+		case schemas.FileSourceSettings_Convert608To708:
+			var ev string
+			if err := d.ReadString(schemas.FileSourceSettings_Convert608To708, &ev); err != nil {
+				return err
+			}
+			v.Convert608To708 = FileSourceConvert608To708(ev)
+			return nil
+		case schemas.FileSourceSettings_ConvertPaintToPop:
+			var ev string
+			if err := d.ReadString(schemas.FileSourceSettings_ConvertPaintToPop, &ev); err != nil {
+				return err
+			}
+			v.ConvertPaintToPop = CaptionSourceConvertPaintOnToPopOn(ev)
+			return nil
+		case schemas.FileSourceSettings_Framerate:
+			v.Framerate = &CaptionSourceFramerate{}
+			return v.Framerate.Deserialize(d)
+		case schemas.FileSourceSettings_SourceFile:
+			v.SourceFile = new(string)
+			return d.ReadString(schemas.FileSourceSettings_SourceFile, v.SourceFile)
+		case schemas.FileSourceSettings_TimeDelta:
+			v.TimeDelta = new(int32)
+			return d.ReadInt32(schemas.FileSourceSettings_TimeDelta, v.TimeDelta)
+		case schemas.FileSourceSettings_TimeDeltaUnits:
+			var ev string
+			if err := d.ReadString(schemas.FileSourceSettings_TimeDeltaUnits, &ev); err != nil {
+				return err
+			}
+			v.TimeDeltaUnits = FileSourceTimeDeltaUnits(ev)
+			return nil
+		case schemas.FileSourceSettings_UpconvertSTLToTeletext:
+			var ev string
+			if err := d.ReadString(schemas.FileSourceSettings_UpconvertSTLToTeletext, &ev); err != nil {
+				return err
+			}
+			v.UpconvertSTLToTeletext = CaptionSourceUpconvertSTLToTeletext(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the
 // value FLAC.
 type FlacSettings struct {
@@ -3895,6 +9141,40 @@ type FlacSettings struct {
 	SampleRate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlacSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlacSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlacSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitDepth != nil {
+		s.WriteInt32(schemas.FlacSettings_BitDepth, *v.BitDepth)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.FlacSettings_Channels, *v.Channels)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.FlacSettings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *FlacSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlacSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlacSettings_BitDepth:
+			v.BitDepth = new(int32)
+			return d.ReadInt32(schemas.FlacSettings_BitDepth, v.BitDepth)
+		case schemas.FlacSettings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.FlacSettings_Channels, v.Channels)
+		case schemas.FlacSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.FlacSettings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // Use Force include renditions to specify one or more resolutions to include your
@@ -3917,6 +9197,34 @@ type ForceIncludeRenditionSize struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ForceIncludeRenditionSize) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForceIncludeRenditionSize)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForceIncludeRenditionSize) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.ForceIncludeRenditionSize_Height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.ForceIncludeRenditionSize_Width, *v.Width)
+	}
+}
+func (v *ForceIncludeRenditionSize) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForceIncludeRenditionSize, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForceIncludeRenditionSize_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.ForceIncludeRenditionSize_Height, v.Height)
+		case schemas.ForceIncludeRenditionSize_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.ForceIncludeRenditionSize_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value FRAME_CAPTURE.
@@ -3946,6 +9254,46 @@ type FrameCaptureSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FrameCaptureSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameCaptureSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameCaptureSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.FrameCaptureSettings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.FrameCaptureSettings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.MaxCaptures != nil {
+		s.WriteInt32(schemas.FrameCaptureSettings_MaxCaptures, *v.MaxCaptures)
+	}
+	if v.Quality != nil {
+		s.WriteInt32(schemas.FrameCaptureSettings_Quality, *v.Quality)
+	}
+}
+func (v *FrameCaptureSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameCaptureSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameCaptureSettings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.FrameCaptureSettings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.FrameCaptureSettings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.FrameCaptureSettings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.FrameCaptureSettings_MaxCaptures:
+			v.MaxCaptures = new(int32)
+			return d.ReadInt32(schemas.FrameCaptureSettings_MaxCaptures, v.MaxCaptures)
+		case schemas.FrameCaptureSettings_Quality:
+			v.Quality = new(int32)
+			return d.ReadInt32(schemas.FrameCaptureSettings_Quality, v.Quality)
+		}
+		return nil
+	})
+}
+
 // The frame rate of the video or audio track, expressed as a fraction with
 // numerator and denominator values.
 type FrameRate struct {
@@ -3961,6 +9309,34 @@ type FrameRate struct {
 	Numerator *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FrameRate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameRate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameRate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Denominator != nil {
+		s.WriteInt32(schemas.FrameRate_Denominator, *v.Denominator)
+	}
+	if v.Numerator != nil {
+		s.WriteInt32(schemas.FrameRate_Numerator, *v.Numerator)
+	}
+}
+func (v *FrameRate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameRate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameRate_Denominator:
+			v.Denominator = new(int32)
+			return d.ReadInt32(schemas.FrameRate_Denominator, v.Denominator)
+		case schemas.FrameRate_Numerator:
+			v.Numerator = new(int32)
+			return d.ReadInt32(schemas.FrameRate_Numerator, v.Numerator)
+		}
+		return nil
+	})
 }
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the
@@ -4004,6 +9380,54 @@ type GifSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GifSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GifSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GifSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.GifSettings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.GifSettings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.GifSettings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.GifSettings_FramerateNumerator, *v.FramerateNumerator)
+	}
+}
+func (v *GifSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GifSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GifSettings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.GifSettings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = GifFramerateControl(ev)
+			return nil
+		case schemas.GifSettings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.GifSettings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = GifFramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.GifSettings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.GifSettings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.GifSettings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.GifSettings_FramerateNumerator, v.FramerateNumerator)
+		}
+		return nil
+	})
+}
+
 // Settings for quality-defined variable bitrate encoding with the H.264 codec.
 // Use these settings only when you set QVBR for Rate control mode.
 type H264QvbrSettings struct {
@@ -4039,6 +9463,40 @@ type H264QvbrSettings struct {
 	QvbrQualityLevelFineTune *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *H264QvbrSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.H264QvbrSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *H264QvbrSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxAverageBitrate != nil {
+		s.WriteInt32(schemas.H264QvbrSettings_MaxAverageBitrate, *v.MaxAverageBitrate)
+	}
+	if v.QvbrQualityLevel != nil {
+		s.WriteInt32(schemas.H264QvbrSettings_QvbrQualityLevel, *v.QvbrQualityLevel)
+	}
+	if v.QvbrQualityLevelFineTune != nil {
+		s.WriteFloat64(schemas.H264QvbrSettings_QvbrQualityLevelFineTune, *v.QvbrQualityLevelFineTune)
+	}
+}
+func (v *H264QvbrSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.H264QvbrSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.H264QvbrSettings_MaxAverageBitrate:
+			v.MaxAverageBitrate = new(int32)
+			return d.ReadInt32(schemas.H264QvbrSettings_MaxAverageBitrate, v.MaxAverageBitrate)
+		case schemas.H264QvbrSettings_QvbrQualityLevel:
+			v.QvbrQualityLevel = new(int32)
+			return d.ReadInt32(schemas.H264QvbrSettings_QvbrQualityLevel, v.QvbrQualityLevel)
+		case schemas.H264QvbrSettings_QvbrQualityLevelFineTune:
+			v.QvbrQualityLevelFineTune = new(float64)
+			return d.ReadFloat64(schemas.H264QvbrSettings_QvbrQualityLevelFineTune, v.QvbrQualityLevelFineTune)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value H_264.
@@ -4450,6 +9908,417 @@ type H264Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *H264Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.H264Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *H264Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveQuantization != "" {
+		s.WriteString(schemas.H264Settings_AdaptiveQuantization, string(v.AdaptiveQuantization))
+	}
+	if v.BandwidthReductionFilter != nil {
+		s.WriteStruct(schemas.H264Settings_BandwidthReductionFilter)
+		v.BandwidthReductionFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.H264Settings_Bitrate, *v.Bitrate)
+	}
+	if v.CodecLevel != "" {
+		s.WriteString(schemas.H264Settings_CodecLevel, string(v.CodecLevel))
+	}
+	if v.CodecProfile != "" {
+		s.WriteString(schemas.H264Settings_CodecProfile, string(v.CodecProfile))
+	}
+	if v.DynamicSubGop != "" {
+		s.WriteString(schemas.H264Settings_DynamicSubGop, string(v.DynamicSubGop))
+	}
+	if v.EndOfStreamMarkers != "" {
+		s.WriteString(schemas.H264Settings_EndOfStreamMarkers, string(v.EndOfStreamMarkers))
+	}
+	if v.EntropyEncoding != "" {
+		s.WriteString(schemas.H264Settings_EntropyEncoding, string(v.EntropyEncoding))
+	}
+	if v.ExplicitWeightedPrediction != "" {
+		s.WriteString(schemas.H264Settings_ExplicitWeightedPrediction, string(v.ExplicitWeightedPrediction))
+	}
+	if v.FieldEncoding != "" {
+		s.WriteString(schemas.H264Settings_FieldEncoding, string(v.FieldEncoding))
+	}
+	if v.FlickerAdaptiveQuantization != "" {
+		s.WriteString(schemas.H264Settings_FlickerAdaptiveQuantization, string(v.FlickerAdaptiveQuantization))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.H264Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.H264Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.H264Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.H264Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.GopBReference != "" {
+		s.WriteString(schemas.H264Settings_GopBReference, string(v.GopBReference))
+	}
+	if v.GopClosedCadence != nil {
+		s.WriteInt32(schemas.H264Settings_GopClosedCadence, *v.GopClosedCadence)
+	}
+	if v.GopSize != nil {
+		s.WriteFloat64(schemas.H264Settings_GopSize, *v.GopSize)
+	}
+	if v.GopSizeUnits != "" {
+		s.WriteString(schemas.H264Settings_GopSizeUnits, string(v.GopSizeUnits))
+	}
+	if v.HrdBufferFinalFillPercentage != nil {
+		s.WriteInt32(schemas.H264Settings_HrdBufferFinalFillPercentage, *v.HrdBufferFinalFillPercentage)
+	}
+	if v.HrdBufferInitialFillPercentage != nil {
+		s.WriteInt32(schemas.H264Settings_HrdBufferInitialFillPercentage, *v.HrdBufferInitialFillPercentage)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.H264Settings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.H264Settings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.H264Settings_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.MinIInterval != nil {
+		s.WriteInt32(schemas.H264Settings_MinIInterval, *v.MinIInterval)
+	}
+	if v.NumberBFramesBetweenReferenceFrames != nil {
+		s.WriteInt32(schemas.H264Settings_NumberBFramesBetweenReferenceFrames, *v.NumberBFramesBetweenReferenceFrames)
+	}
+	if v.NumberReferenceFrames != nil {
+		s.WriteInt32(schemas.H264Settings_NumberReferenceFrames, *v.NumberReferenceFrames)
+	}
+	if v.ParControl != "" {
+		s.WriteString(schemas.H264Settings_ParControl, string(v.ParControl))
+	}
+	if v.ParDenominator != nil {
+		s.WriteInt32(schemas.H264Settings_ParDenominator, *v.ParDenominator)
+	}
+	if v.ParNumerator != nil {
+		s.WriteInt32(schemas.H264Settings_ParNumerator, *v.ParNumerator)
+	}
+	serialize__listOfFrameMetricType(s, schemas.H264Settings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.H264Settings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.QvbrSettings != nil {
+		s.WriteStruct(schemas.H264Settings_QvbrSettings)
+		v.QvbrSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.H264Settings_RateControlMode, string(v.RateControlMode))
+	}
+	if v.RepeatPps != "" {
+		s.WriteString(schemas.H264Settings_RepeatPps, string(v.RepeatPps))
+	}
+	if v.SaliencyAwareEncoding != "" {
+		s.WriteString(schemas.H264Settings_SaliencyAwareEncoding, string(v.SaliencyAwareEncoding))
+	}
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.H264Settings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SceneChangeDetect != "" {
+		s.WriteString(schemas.H264Settings_SceneChangeDetect, string(v.SceneChangeDetect))
+	}
+	if v.Slices != nil {
+		s.WriteInt32(schemas.H264Settings_Slices, *v.Slices)
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.H264Settings_SlowPal, string(v.SlowPal))
+	}
+	if v.Softness != nil {
+		s.WriteInt32(schemas.H264Settings_Softness, *v.Softness)
+	}
+	if v.SpatialAdaptiveQuantization != "" {
+		s.WriteString(schemas.H264Settings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
+	}
+	if v.Syntax != "" {
+		s.WriteString(schemas.H264Settings_Syntax, string(v.Syntax))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.H264Settings_Telecine, string(v.Telecine))
+	}
+	if v.TemporalAdaptiveQuantization != "" {
+		s.WriteString(schemas.H264Settings_TemporalAdaptiveQuantization, string(v.TemporalAdaptiveQuantization))
+	}
+	if v.UnregisteredSeiTimecode != "" {
+		s.WriteString(schemas.H264Settings_UnregisteredSeiTimecode, string(v.UnregisteredSeiTimecode))
+	}
+	if v.WriteMp4PackagingType != "" {
+		s.WriteString(schemas.H264Settings_WriteMp4PackagingType, string(v.WriteMp4PackagingType))
+	}
+}
+func (v *H264Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.H264Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.H264Settings_AdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_AdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.AdaptiveQuantization = H264AdaptiveQuantization(ev)
+			return nil
+		case schemas.H264Settings_BandwidthReductionFilter:
+			v.BandwidthReductionFilter = &BandwidthReductionFilter{}
+			return v.BandwidthReductionFilter.Deserialize(d)
+		case schemas.H264Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.H264Settings_Bitrate, v.Bitrate)
+		case schemas.H264Settings_CodecLevel:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_CodecLevel, &ev); err != nil {
+				return err
+			}
+			v.CodecLevel = H264CodecLevel(ev)
+			return nil
+		case schemas.H264Settings_CodecProfile:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_CodecProfile, &ev); err != nil {
+				return err
+			}
+			v.CodecProfile = H264CodecProfile(ev)
+			return nil
+		case schemas.H264Settings_DynamicSubGop:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_DynamicSubGop, &ev); err != nil {
+				return err
+			}
+			v.DynamicSubGop = H264DynamicSubGop(ev)
+			return nil
+		case schemas.H264Settings_EndOfStreamMarkers:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_EndOfStreamMarkers, &ev); err != nil {
+				return err
+			}
+			v.EndOfStreamMarkers = H264EndOfStreamMarkers(ev)
+			return nil
+		case schemas.H264Settings_EntropyEncoding:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_EntropyEncoding, &ev); err != nil {
+				return err
+			}
+			v.EntropyEncoding = H264EntropyEncoding(ev)
+			return nil
+		case schemas.H264Settings_ExplicitWeightedPrediction:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_ExplicitWeightedPrediction, &ev); err != nil {
+				return err
+			}
+			v.ExplicitWeightedPrediction = H264ExplicitWeightedPrediction(ev)
+			return nil
+		case schemas.H264Settings_FieldEncoding:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_FieldEncoding, &ev); err != nil {
+				return err
+			}
+			v.FieldEncoding = H264FieldEncoding(ev)
+			return nil
+		case schemas.H264Settings_FlickerAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_FlickerAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.FlickerAdaptiveQuantization = H264FlickerAdaptiveQuantization(ev)
+			return nil
+		case schemas.H264Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = H264FramerateControl(ev)
+			return nil
+		case schemas.H264Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = H264FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.H264Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.H264Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.H264Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.H264Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.H264Settings_GopBReference:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_GopBReference, &ev); err != nil {
+				return err
+			}
+			v.GopBReference = H264GopBReference(ev)
+			return nil
+		case schemas.H264Settings_GopClosedCadence:
+			v.GopClosedCadence = new(int32)
+			return d.ReadInt32(schemas.H264Settings_GopClosedCadence, v.GopClosedCadence)
+		case schemas.H264Settings_GopSize:
+			v.GopSize = new(float64)
+			return d.ReadFloat64(schemas.H264Settings_GopSize, v.GopSize)
+		case schemas.H264Settings_GopSizeUnits:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_GopSizeUnits, &ev); err != nil {
+				return err
+			}
+			v.GopSizeUnits = H264GopSizeUnits(ev)
+			return nil
+		case schemas.H264Settings_HrdBufferFinalFillPercentage:
+			v.HrdBufferFinalFillPercentage = new(int32)
+			return d.ReadInt32(schemas.H264Settings_HrdBufferFinalFillPercentage, v.HrdBufferFinalFillPercentage)
+		case schemas.H264Settings_HrdBufferInitialFillPercentage:
+			v.HrdBufferInitialFillPercentage = new(int32)
+			return d.ReadInt32(schemas.H264Settings_HrdBufferInitialFillPercentage, v.HrdBufferInitialFillPercentage)
+		case schemas.H264Settings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.H264Settings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.H264Settings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = H264InterlaceMode(ev)
+			return nil
+		case schemas.H264Settings_MaxBitrate:
+			v.MaxBitrate = new(int32)
+			return d.ReadInt32(schemas.H264Settings_MaxBitrate, v.MaxBitrate)
+		case schemas.H264Settings_MinIInterval:
+			v.MinIInterval = new(int32)
+			return d.ReadInt32(schemas.H264Settings_MinIInterval, v.MinIInterval)
+		case schemas.H264Settings_NumberBFramesBetweenReferenceFrames:
+			v.NumberBFramesBetweenReferenceFrames = new(int32)
+			return d.ReadInt32(schemas.H264Settings_NumberBFramesBetweenReferenceFrames, v.NumberBFramesBetweenReferenceFrames)
+		case schemas.H264Settings_NumberReferenceFrames:
+			v.NumberReferenceFrames = new(int32)
+			return d.ReadInt32(schemas.H264Settings_NumberReferenceFrames, v.NumberReferenceFrames)
+		case schemas.H264Settings_ParControl:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_ParControl, &ev); err != nil {
+				return err
+			}
+			v.ParControl = H264ParControl(ev)
+			return nil
+		case schemas.H264Settings_ParDenominator:
+			v.ParDenominator = new(int32)
+			return d.ReadInt32(schemas.H264Settings_ParDenominator, v.ParDenominator)
+		case schemas.H264Settings_ParNumerator:
+			v.ParNumerator = new(int32)
+			return d.ReadInt32(schemas.H264Settings_ParNumerator, v.ParNumerator)
+		case schemas.H264Settings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.H264Settings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.H264Settings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = H264QualityTuningLevel(ev)
+			return nil
+		case schemas.H264Settings_QvbrSettings:
+			v.QvbrSettings = &H264QvbrSettings{}
+			return v.QvbrSettings.Deserialize(d)
+		case schemas.H264Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = H264RateControlMode(ev)
+			return nil
+		case schemas.H264Settings_RepeatPps:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_RepeatPps, &ev); err != nil {
+				return err
+			}
+			v.RepeatPps = H264RepeatPps(ev)
+			return nil
+		case schemas.H264Settings_SaliencyAwareEncoding:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_SaliencyAwareEncoding, &ev); err != nil {
+				return err
+			}
+			v.SaliencyAwareEncoding = H264SaliencyAwareEncoding(ev)
+			return nil
+		case schemas.H264Settings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = H264ScanTypeConversionMode(ev)
+			return nil
+		case schemas.H264Settings_SceneChangeDetect:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_SceneChangeDetect, &ev); err != nil {
+				return err
+			}
+			v.SceneChangeDetect = H264SceneChangeDetect(ev)
+			return nil
+		case schemas.H264Settings_Slices:
+			v.Slices = new(int32)
+			return d.ReadInt32(schemas.H264Settings_Slices, v.Slices)
+		case schemas.H264Settings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = H264SlowPal(ev)
+			return nil
+		case schemas.H264Settings_Softness:
+			v.Softness = new(int32)
+			return d.ReadInt32(schemas.H264Settings_Softness, v.Softness)
+		case schemas.H264Settings_SpatialAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_SpatialAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.SpatialAdaptiveQuantization = H264SpatialAdaptiveQuantization(ev)
+			return nil
+		case schemas.H264Settings_Syntax:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_Syntax, &ev); err != nil {
+				return err
+			}
+			v.Syntax = H264Syntax(ev)
+			return nil
+		case schemas.H264Settings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = H264Telecine(ev)
+			return nil
+		case schemas.H264Settings_TemporalAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_TemporalAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.TemporalAdaptiveQuantization = H264TemporalAdaptiveQuantization(ev)
+			return nil
+		case schemas.H264Settings_UnregisteredSeiTimecode:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_UnregisteredSeiTimecode, &ev); err != nil {
+				return err
+			}
+			v.UnregisteredSeiTimecode = H264UnregisteredSeiTimecode(ev)
+			return nil
+		case schemas.H264Settings_WriteMp4PackagingType:
+			var ev string
+			if err := d.ReadString(schemas.H264Settings_WriteMp4PackagingType, &ev); err != nil {
+				return err
+			}
+			v.WriteMp4PackagingType = H264WriteMp4PackagingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Settings for quality-defined variable bitrate encoding with the H.265 codec.
 // Use these settings only when you set QVBR for Rate control mode.
 type H265QvbrSettings struct {
@@ -4485,6 +10354,40 @@ type H265QvbrSettings struct {
 	QvbrQualityLevelFineTune *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *H265QvbrSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.H265QvbrSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *H265QvbrSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxAverageBitrate != nil {
+		s.WriteInt32(schemas.H265QvbrSettings_MaxAverageBitrate, *v.MaxAverageBitrate)
+	}
+	if v.QvbrQualityLevel != nil {
+		s.WriteInt32(schemas.H265QvbrSettings_QvbrQualityLevel, *v.QvbrQualityLevel)
+	}
+	if v.QvbrQualityLevelFineTune != nil {
+		s.WriteFloat64(schemas.H265QvbrSettings_QvbrQualityLevelFineTune, *v.QvbrQualityLevelFineTune)
+	}
+}
+func (v *H265QvbrSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.H265QvbrSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.H265QvbrSettings_MaxAverageBitrate:
+			v.MaxAverageBitrate = new(int32)
+			return d.ReadInt32(schemas.H265QvbrSettings_MaxAverageBitrate, v.MaxAverageBitrate)
+		case schemas.H265QvbrSettings_QvbrQualityLevel:
+			v.QvbrQualityLevel = new(int32)
+			return d.ReadInt32(schemas.H265QvbrSettings_QvbrQualityLevel, v.QvbrQualityLevel)
+		case schemas.H265QvbrSettings_QvbrQualityLevelFineTune:
+			v.QvbrQualityLevelFineTune = new(float64)
+			return d.ReadFloat64(schemas.H265QvbrSettings_QvbrQualityLevelFineTune, v.QvbrQualityLevelFineTune)
+		}
+		return nil
+	})
 }
 
 // Settings for H265 codec
@@ -4887,6 +10790,453 @@ type H265Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *H265Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.H265Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *H265Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveQuantization != "" {
+		s.WriteString(schemas.H265Settings_AdaptiveQuantization, string(v.AdaptiveQuantization))
+	}
+	if v.AlternateTransferFunctionSei != "" {
+		s.WriteString(schemas.H265Settings_AlternateTransferFunctionSei, string(v.AlternateTransferFunctionSei))
+	}
+	if v.BandwidthReductionFilter != nil {
+		s.WriteStruct(schemas.H265Settings_BandwidthReductionFilter)
+		v.BandwidthReductionFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.H265Settings_Bitrate, *v.Bitrate)
+	}
+	if v.CodecLevel != "" {
+		s.WriteString(schemas.H265Settings_CodecLevel, string(v.CodecLevel))
+	}
+	if v.CodecProfile != "" {
+		s.WriteString(schemas.H265Settings_CodecProfile, string(v.CodecProfile))
+	}
+	if v.Deblocking != "" {
+		s.WriteString(schemas.H265Settings_Deblocking, string(v.Deblocking))
+	}
+	if v.DynamicSubGop != "" {
+		s.WriteString(schemas.H265Settings_DynamicSubGop, string(v.DynamicSubGop))
+	}
+	if v.EndOfStreamMarkers != "" {
+		s.WriteString(schemas.H265Settings_EndOfStreamMarkers, string(v.EndOfStreamMarkers))
+	}
+	if v.FlickerAdaptiveQuantization != "" {
+		s.WriteString(schemas.H265Settings_FlickerAdaptiveQuantization, string(v.FlickerAdaptiveQuantization))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.H265Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.H265Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.H265Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.H265Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.GopBReference != "" {
+		s.WriteString(schemas.H265Settings_GopBReference, string(v.GopBReference))
+	}
+	if v.GopClosedCadence != nil {
+		s.WriteInt32(schemas.H265Settings_GopClosedCadence, *v.GopClosedCadence)
+	}
+	if v.GopSize != nil {
+		s.WriteFloat64(schemas.H265Settings_GopSize, *v.GopSize)
+	}
+	if v.GopSizeUnits != "" {
+		s.WriteString(schemas.H265Settings_GopSizeUnits, string(v.GopSizeUnits))
+	}
+	if v.HrdBufferFinalFillPercentage != nil {
+		s.WriteInt32(schemas.H265Settings_HrdBufferFinalFillPercentage, *v.HrdBufferFinalFillPercentage)
+	}
+	if v.HrdBufferInitialFillPercentage != nil {
+		s.WriteInt32(schemas.H265Settings_HrdBufferInitialFillPercentage, *v.HrdBufferInitialFillPercentage)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.H265Settings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.H265Settings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.H265Settings_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.MinIInterval != nil {
+		s.WriteInt32(schemas.H265Settings_MinIInterval, *v.MinIInterval)
+	}
+	if v.MvOverPictureBoundaries != "" {
+		s.WriteString(schemas.H265Settings_MvOverPictureBoundaries, string(v.MvOverPictureBoundaries))
+	}
+	if v.MvTemporalPredictor != "" {
+		s.WriteString(schemas.H265Settings_MvTemporalPredictor, string(v.MvTemporalPredictor))
+	}
+	if v.NumberBFramesBetweenReferenceFrames != nil {
+		s.WriteInt32(schemas.H265Settings_NumberBFramesBetweenReferenceFrames, *v.NumberBFramesBetweenReferenceFrames)
+	}
+	if v.NumberReferenceFrames != nil {
+		s.WriteInt32(schemas.H265Settings_NumberReferenceFrames, *v.NumberReferenceFrames)
+	}
+	if v.ParControl != "" {
+		s.WriteString(schemas.H265Settings_ParControl, string(v.ParControl))
+	}
+	if v.ParDenominator != nil {
+		s.WriteInt32(schemas.H265Settings_ParDenominator, *v.ParDenominator)
+	}
+	if v.ParNumerator != nil {
+		s.WriteInt32(schemas.H265Settings_ParNumerator, *v.ParNumerator)
+	}
+	serialize__listOfFrameMetricType(s, schemas.H265Settings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.H265Settings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.QvbrSettings != nil {
+		s.WriteStruct(schemas.H265Settings_QvbrSettings)
+		v.QvbrSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.H265Settings_RateControlMode, string(v.RateControlMode))
+	}
+	if v.SampleAdaptiveOffsetFilterMode != "" {
+		s.WriteString(schemas.H265Settings_SampleAdaptiveOffsetFilterMode, string(v.SampleAdaptiveOffsetFilterMode))
+	}
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.H265Settings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SceneChangeDetect != "" {
+		s.WriteString(schemas.H265Settings_SceneChangeDetect, string(v.SceneChangeDetect))
+	}
+	if v.Slices != nil {
+		s.WriteInt32(schemas.H265Settings_Slices, *v.Slices)
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.H265Settings_SlowPal, string(v.SlowPal))
+	}
+	if v.SpatialAdaptiveQuantization != "" {
+		s.WriteString(schemas.H265Settings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.H265Settings_Telecine, string(v.Telecine))
+	}
+	if v.TemporalAdaptiveQuantization != "" {
+		s.WriteString(schemas.H265Settings_TemporalAdaptiveQuantization, string(v.TemporalAdaptiveQuantization))
+	}
+	if v.TemporalIds != "" {
+		s.WriteString(schemas.H265Settings_TemporalIds, string(v.TemporalIds))
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.H265Settings_TileHeight, *v.TileHeight)
+	}
+	if v.TilePadding != "" {
+		s.WriteString(schemas.H265Settings_TilePadding, string(v.TilePadding))
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.H265Settings_TileWidth, *v.TileWidth)
+	}
+	if v.Tiles != "" {
+		s.WriteString(schemas.H265Settings_Tiles, string(v.Tiles))
+	}
+	if v.TreeBlockSize != "" {
+		s.WriteString(schemas.H265Settings_TreeBlockSize, string(v.TreeBlockSize))
+	}
+	if v.UnregisteredSeiTimecode != "" {
+		s.WriteString(schemas.H265Settings_UnregisteredSeiTimecode, string(v.UnregisteredSeiTimecode))
+	}
+	if v.WriteMp4PackagingType != "" {
+		s.WriteString(schemas.H265Settings_WriteMp4PackagingType, string(v.WriteMp4PackagingType))
+	}
+}
+func (v *H265Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.H265Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.H265Settings_AdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_AdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.AdaptiveQuantization = H265AdaptiveQuantization(ev)
+			return nil
+		case schemas.H265Settings_AlternateTransferFunctionSei:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_AlternateTransferFunctionSei, &ev); err != nil {
+				return err
+			}
+			v.AlternateTransferFunctionSei = H265AlternateTransferFunctionSei(ev)
+			return nil
+		case schemas.H265Settings_BandwidthReductionFilter:
+			v.BandwidthReductionFilter = &BandwidthReductionFilter{}
+			return v.BandwidthReductionFilter.Deserialize(d)
+		case schemas.H265Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.H265Settings_Bitrate, v.Bitrate)
+		case schemas.H265Settings_CodecLevel:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_CodecLevel, &ev); err != nil {
+				return err
+			}
+			v.CodecLevel = H265CodecLevel(ev)
+			return nil
+		case schemas.H265Settings_CodecProfile:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_CodecProfile, &ev); err != nil {
+				return err
+			}
+			v.CodecProfile = H265CodecProfile(ev)
+			return nil
+		case schemas.H265Settings_Deblocking:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_Deblocking, &ev); err != nil {
+				return err
+			}
+			v.Deblocking = H265Deblocking(ev)
+			return nil
+		case schemas.H265Settings_DynamicSubGop:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_DynamicSubGop, &ev); err != nil {
+				return err
+			}
+			v.DynamicSubGop = H265DynamicSubGop(ev)
+			return nil
+		case schemas.H265Settings_EndOfStreamMarkers:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_EndOfStreamMarkers, &ev); err != nil {
+				return err
+			}
+			v.EndOfStreamMarkers = H265EndOfStreamMarkers(ev)
+			return nil
+		case schemas.H265Settings_FlickerAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_FlickerAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.FlickerAdaptiveQuantization = H265FlickerAdaptiveQuantization(ev)
+			return nil
+		case schemas.H265Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = H265FramerateControl(ev)
+			return nil
+		case schemas.H265Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = H265FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.H265Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.H265Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.H265Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.H265Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.H265Settings_GopBReference:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_GopBReference, &ev); err != nil {
+				return err
+			}
+			v.GopBReference = H265GopBReference(ev)
+			return nil
+		case schemas.H265Settings_GopClosedCadence:
+			v.GopClosedCadence = new(int32)
+			return d.ReadInt32(schemas.H265Settings_GopClosedCadence, v.GopClosedCadence)
+		case schemas.H265Settings_GopSize:
+			v.GopSize = new(float64)
+			return d.ReadFloat64(schemas.H265Settings_GopSize, v.GopSize)
+		case schemas.H265Settings_GopSizeUnits:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_GopSizeUnits, &ev); err != nil {
+				return err
+			}
+			v.GopSizeUnits = H265GopSizeUnits(ev)
+			return nil
+		case schemas.H265Settings_HrdBufferFinalFillPercentage:
+			v.HrdBufferFinalFillPercentage = new(int32)
+			return d.ReadInt32(schemas.H265Settings_HrdBufferFinalFillPercentage, v.HrdBufferFinalFillPercentage)
+		case schemas.H265Settings_HrdBufferInitialFillPercentage:
+			v.HrdBufferInitialFillPercentage = new(int32)
+			return d.ReadInt32(schemas.H265Settings_HrdBufferInitialFillPercentage, v.HrdBufferInitialFillPercentage)
+		case schemas.H265Settings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.H265Settings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.H265Settings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = H265InterlaceMode(ev)
+			return nil
+		case schemas.H265Settings_MaxBitrate:
+			v.MaxBitrate = new(int32)
+			return d.ReadInt32(schemas.H265Settings_MaxBitrate, v.MaxBitrate)
+		case schemas.H265Settings_MinIInterval:
+			v.MinIInterval = new(int32)
+			return d.ReadInt32(schemas.H265Settings_MinIInterval, v.MinIInterval)
+		case schemas.H265Settings_MvOverPictureBoundaries:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_MvOverPictureBoundaries, &ev); err != nil {
+				return err
+			}
+			v.MvOverPictureBoundaries = H265MvOverPictureBoundaries(ev)
+			return nil
+		case schemas.H265Settings_MvTemporalPredictor:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_MvTemporalPredictor, &ev); err != nil {
+				return err
+			}
+			v.MvTemporalPredictor = H265MvTemporalPredictor(ev)
+			return nil
+		case schemas.H265Settings_NumberBFramesBetweenReferenceFrames:
+			v.NumberBFramesBetweenReferenceFrames = new(int32)
+			return d.ReadInt32(schemas.H265Settings_NumberBFramesBetweenReferenceFrames, v.NumberBFramesBetweenReferenceFrames)
+		case schemas.H265Settings_NumberReferenceFrames:
+			v.NumberReferenceFrames = new(int32)
+			return d.ReadInt32(schemas.H265Settings_NumberReferenceFrames, v.NumberReferenceFrames)
+		case schemas.H265Settings_ParControl:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_ParControl, &ev); err != nil {
+				return err
+			}
+			v.ParControl = H265ParControl(ev)
+			return nil
+		case schemas.H265Settings_ParDenominator:
+			v.ParDenominator = new(int32)
+			return d.ReadInt32(schemas.H265Settings_ParDenominator, v.ParDenominator)
+		case schemas.H265Settings_ParNumerator:
+			v.ParNumerator = new(int32)
+			return d.ReadInt32(schemas.H265Settings_ParNumerator, v.ParNumerator)
+		case schemas.H265Settings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.H265Settings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.H265Settings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = H265QualityTuningLevel(ev)
+			return nil
+		case schemas.H265Settings_QvbrSettings:
+			v.QvbrSettings = &H265QvbrSettings{}
+			return v.QvbrSettings.Deserialize(d)
+		case schemas.H265Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = H265RateControlMode(ev)
+			return nil
+		case schemas.H265Settings_SampleAdaptiveOffsetFilterMode:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_SampleAdaptiveOffsetFilterMode, &ev); err != nil {
+				return err
+			}
+			v.SampleAdaptiveOffsetFilterMode = H265SampleAdaptiveOffsetFilterMode(ev)
+			return nil
+		case schemas.H265Settings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = H265ScanTypeConversionMode(ev)
+			return nil
+		case schemas.H265Settings_SceneChangeDetect:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_SceneChangeDetect, &ev); err != nil {
+				return err
+			}
+			v.SceneChangeDetect = H265SceneChangeDetect(ev)
+			return nil
+		case schemas.H265Settings_Slices:
+			v.Slices = new(int32)
+			return d.ReadInt32(schemas.H265Settings_Slices, v.Slices)
+		case schemas.H265Settings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = H265SlowPal(ev)
+			return nil
+		case schemas.H265Settings_SpatialAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_SpatialAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.SpatialAdaptiveQuantization = H265SpatialAdaptiveQuantization(ev)
+			return nil
+		case schemas.H265Settings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = H265Telecine(ev)
+			return nil
+		case schemas.H265Settings_TemporalAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_TemporalAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.TemporalAdaptiveQuantization = H265TemporalAdaptiveQuantization(ev)
+			return nil
+		case schemas.H265Settings_TemporalIds:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_TemporalIds, &ev); err != nil {
+				return err
+			}
+			v.TemporalIds = H265TemporalIds(ev)
+			return nil
+		case schemas.H265Settings_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.H265Settings_TileHeight, v.TileHeight)
+		case schemas.H265Settings_TilePadding:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_TilePadding, &ev); err != nil {
+				return err
+			}
+			v.TilePadding = H265TilePadding(ev)
+			return nil
+		case schemas.H265Settings_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.H265Settings_TileWidth, v.TileWidth)
+		case schemas.H265Settings_Tiles:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_Tiles, &ev); err != nil {
+				return err
+			}
+			v.Tiles = H265Tiles(ev)
+			return nil
+		case schemas.H265Settings_TreeBlockSize:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_TreeBlockSize, &ev); err != nil {
+				return err
+			}
+			v.TreeBlockSize = H265TreeBlockSize(ev)
+			return nil
+		case schemas.H265Settings_UnregisteredSeiTimecode:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_UnregisteredSeiTimecode, &ev); err != nil {
+				return err
+			}
+			v.UnregisteredSeiTimecode = H265UnregisteredSeiTimecode(ev)
+			return nil
+		case schemas.H265Settings_WriteMp4PackagingType:
+			var ev string
+			if err := d.ReadString(schemas.H265Settings_WriteMp4PackagingType, &ev); err != nil {
+				return err
+			}
+			v.WriteMp4PackagingType = H265WriteMp4PackagingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Use these settings to specify static color calibration metadata, as defined by
 // SMPTE ST 2086. These values don't affect the pixel values that are encoded in
 // the video stream. They are intended to help the downstream video player display
@@ -4954,6 +11304,94 @@ type Hdr10Metadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Hdr10Metadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hdr10Metadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hdr10Metadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BluePrimaryX != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_BluePrimaryX, *v.BluePrimaryX)
+	}
+	if v.BluePrimaryY != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_BluePrimaryY, *v.BluePrimaryY)
+	}
+	if v.GreenPrimaryX != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_GreenPrimaryX, *v.GreenPrimaryX)
+	}
+	if v.GreenPrimaryY != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_GreenPrimaryY, *v.GreenPrimaryY)
+	}
+	if v.MaxContentLightLevel != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_MaxContentLightLevel, *v.MaxContentLightLevel)
+	}
+	if v.MaxFrameAverageLightLevel != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_MaxFrameAverageLightLevel, *v.MaxFrameAverageLightLevel)
+	}
+	if v.MaxLuminance != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_MaxLuminance, *v.MaxLuminance)
+	}
+	if v.MinLuminance != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_MinLuminance, *v.MinLuminance)
+	}
+	if v.RedPrimaryX != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_RedPrimaryX, *v.RedPrimaryX)
+	}
+	if v.RedPrimaryY != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_RedPrimaryY, *v.RedPrimaryY)
+	}
+	if v.WhitePointX != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_WhitePointX, *v.WhitePointX)
+	}
+	if v.WhitePointY != nil {
+		s.WriteInt32(schemas.Hdr10Metadata_WhitePointY, *v.WhitePointY)
+	}
+}
+func (v *Hdr10Metadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hdr10Metadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hdr10Metadata_BluePrimaryX:
+			v.BluePrimaryX = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_BluePrimaryX, v.BluePrimaryX)
+		case schemas.Hdr10Metadata_BluePrimaryY:
+			v.BluePrimaryY = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_BluePrimaryY, v.BluePrimaryY)
+		case schemas.Hdr10Metadata_GreenPrimaryX:
+			v.GreenPrimaryX = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_GreenPrimaryX, v.GreenPrimaryX)
+		case schemas.Hdr10Metadata_GreenPrimaryY:
+			v.GreenPrimaryY = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_GreenPrimaryY, v.GreenPrimaryY)
+		case schemas.Hdr10Metadata_MaxContentLightLevel:
+			v.MaxContentLightLevel = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_MaxContentLightLevel, v.MaxContentLightLevel)
+		case schemas.Hdr10Metadata_MaxFrameAverageLightLevel:
+			v.MaxFrameAverageLightLevel = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_MaxFrameAverageLightLevel, v.MaxFrameAverageLightLevel)
+		case schemas.Hdr10Metadata_MaxLuminance:
+			v.MaxLuminance = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_MaxLuminance, v.MaxLuminance)
+		case schemas.Hdr10Metadata_MinLuminance:
+			v.MinLuminance = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_MinLuminance, v.MinLuminance)
+		case schemas.Hdr10Metadata_RedPrimaryX:
+			v.RedPrimaryX = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_RedPrimaryX, v.RedPrimaryX)
+		case schemas.Hdr10Metadata_RedPrimaryY:
+			v.RedPrimaryY = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_RedPrimaryY, v.RedPrimaryY)
+		case schemas.Hdr10Metadata_WhitePointX:
+			v.WhitePointX = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_WhitePointX, v.WhitePointX)
+		case schemas.Hdr10Metadata_WhitePointY:
+			v.WhitePointY = new(int32)
+			return d.ReadInt32(schemas.Hdr10Metadata_WhitePointY, v.WhitePointY)
+		}
+		return nil
+	})
+}
+
 // Setting for HDR10+ metadata insertion
 type Hdr10Plus struct {
 
@@ -4967,6 +11405,34 @@ type Hdr10Plus struct {
 	TargetMonitorNits *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Hdr10Plus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hdr10Plus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hdr10Plus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MasteringMonitorNits != nil {
+		s.WriteInt32(schemas.Hdr10Plus_MasteringMonitorNits, *v.MasteringMonitorNits)
+	}
+	if v.TargetMonitorNits != nil {
+		s.WriteInt32(schemas.Hdr10Plus_TargetMonitorNits, *v.TargetMonitorNits)
+	}
+}
+func (v *Hdr10Plus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hdr10Plus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hdr10Plus_MasteringMonitorNits:
+			v.MasteringMonitorNits = new(int32)
+			return d.ReadInt32(schemas.Hdr10Plus_MasteringMonitorNits, v.MasteringMonitorNits)
+		case schemas.Hdr10Plus_TargetMonitorNits:
+			v.TargetMonitorNits = new(int32)
+			return d.ReadInt32(schemas.Hdr10Plus_TargetMonitorNits, v.TargetMonitorNits)
+		}
+		return nil
+	})
 }
 
 // HDR (High Dynamic Range) metadata extracted from the container, including
@@ -4984,6 +11450,38 @@ type HdrMetadata struct {
 	MasteringDisplayColorVolume *MasteringDisplayColorVolume
 
 	noSmithyDocumentSerde
+}
+
+func (v *HdrMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HdrMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HdrMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentLightLevel != nil {
+		s.WriteStruct(schemas.HdrMetadata_ContentLightLevel)
+		v.ContentLightLevel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MasteringDisplayColorVolume != nil {
+		s.WriteStruct(schemas.HdrMetadata_MasteringDisplayColorVolume)
+		v.MasteringDisplayColorVolume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HdrMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HdrMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HdrMetadata_ContentLightLevel:
+			v.ContentLightLevel = &ContentLightLevel{}
+			return v.ContentLightLevel.Deserialize(d)
+		case schemas.HdrMetadata_MasteringDisplayColorVolume:
+			v.MasteringDisplayColorVolume = &MasteringDisplayColorVolume{}
+			return v.MasteringDisplayColorVolume.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specify the details for each additional HLS manifest that you want the service
@@ -5008,6 +11506,31 @@ type HlsAdditionalManifest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HlsAdditionalManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsAdditionalManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsAdditionalManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestNameModifier != nil {
+		s.WriteString(schemas.HlsAdditionalManifest_ManifestNameModifier, *v.ManifestNameModifier)
+	}
+	serialize__listOf__stringMin1(s, schemas.HlsAdditionalManifest_SelectedOutputs, v.SelectedOutputs)
+}
+func (v *HlsAdditionalManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsAdditionalManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsAdditionalManifest_ManifestNameModifier:
+			v.ManifestNameModifier = new(string)
+			return d.ReadString(schemas.HlsAdditionalManifest_ManifestNameModifier, v.ManifestNameModifier)
+		case schemas.HlsAdditionalManifest_SelectedOutputs:
+			return deserialize__listOf__stringMin1(d, schemas.HlsAdditionalManifest_SelectedOutputs, &v.SelectedOutputs)
+		}
+		return nil
+	})
+}
+
 // Caption Language Mapping
 type HlsCaptionLanguageMapping struct {
 
@@ -5028,6 +11551,50 @@ type HlsCaptionLanguageMapping struct {
 	LanguageDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HlsCaptionLanguageMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsCaptionLanguageMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsCaptionLanguageMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaptionChannel != nil {
+		s.WriteInt32(schemas.HlsCaptionLanguageMapping_CaptionChannel, *v.CaptionChannel)
+	}
+	if v.CustomLanguageCode != nil {
+		s.WriteString(schemas.HlsCaptionLanguageMapping_CustomLanguageCode, *v.CustomLanguageCode)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.HlsCaptionLanguageMapping_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageDescription != nil {
+		s.WriteString(schemas.HlsCaptionLanguageMapping_LanguageDescription, *v.LanguageDescription)
+	}
+}
+func (v *HlsCaptionLanguageMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsCaptionLanguageMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsCaptionLanguageMapping_CaptionChannel:
+			v.CaptionChannel = new(int32)
+			return d.ReadInt32(schemas.HlsCaptionLanguageMapping_CaptionChannel, v.CaptionChannel)
+		case schemas.HlsCaptionLanguageMapping_CustomLanguageCode:
+			v.CustomLanguageCode = new(string)
+			return d.ReadString(schemas.HlsCaptionLanguageMapping_CustomLanguageCode, v.CustomLanguageCode)
+		case schemas.HlsCaptionLanguageMapping_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.HlsCaptionLanguageMapping_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.HlsCaptionLanguageMapping_LanguageDescription:
+			v.LanguageDescription = new(string)
+			return d.ReadString(schemas.HlsCaptionLanguageMapping_LanguageDescription, v.LanguageDescription)
+		}
+		return nil
+	})
 }
 
 // Settings for HLS encryption
@@ -5065,6 +11632,84 @@ type HlsEncryptionSettings struct {
 	Type HlsKeyProviderType
 
 	noSmithyDocumentSerde
+}
+
+func (v *HlsEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsEncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConstantInitializationVector != nil {
+		s.WriteString(schemas.HlsEncryptionSettings_ConstantInitializationVector, *v.ConstantInitializationVector)
+	}
+	if v.EncryptionMethod != "" {
+		s.WriteString(schemas.HlsEncryptionSettings_EncryptionMethod, string(v.EncryptionMethod))
+	}
+	if v.InitializationVectorInManifest != "" {
+		s.WriteString(schemas.HlsEncryptionSettings_InitializationVectorInManifest, string(v.InitializationVectorInManifest))
+	}
+	if v.OfflineEncrypted != "" {
+		s.WriteString(schemas.HlsEncryptionSettings_OfflineEncrypted, string(v.OfflineEncrypted))
+	}
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.HlsEncryptionSettings_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StaticKeyProvider != nil {
+		s.WriteStruct(schemas.HlsEncryptionSettings_StaticKeyProvider)
+		v.StaticKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.HlsEncryptionSettings_Type, string(v.Type))
+	}
+}
+func (v *HlsEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsEncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsEncryptionSettings_ConstantInitializationVector:
+			v.ConstantInitializationVector = new(string)
+			return d.ReadString(schemas.HlsEncryptionSettings_ConstantInitializationVector, v.ConstantInitializationVector)
+		case schemas.HlsEncryptionSettings_EncryptionMethod:
+			var ev string
+			if err := d.ReadString(schemas.HlsEncryptionSettings_EncryptionMethod, &ev); err != nil {
+				return err
+			}
+			v.EncryptionMethod = HlsEncryptionType(ev)
+			return nil
+		case schemas.HlsEncryptionSettings_InitializationVectorInManifest:
+			var ev string
+			if err := d.ReadString(schemas.HlsEncryptionSettings_InitializationVectorInManifest, &ev); err != nil {
+				return err
+			}
+			v.InitializationVectorInManifest = HlsInitializationVectorInManifest(ev)
+			return nil
+		case schemas.HlsEncryptionSettings_OfflineEncrypted:
+			var ev string
+			if err := d.ReadString(schemas.HlsEncryptionSettings_OfflineEncrypted, &ev); err != nil {
+				return err
+			}
+			v.OfflineEncrypted = HlsOfflineEncrypted(ev)
+			return nil
+		case schemas.HlsEncryptionSettings_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		case schemas.HlsEncryptionSettings_StaticKeyProvider:
+			v.StaticKeyProvider = &StaticKeyProvider{}
+			return v.StaticKeyProvider.Deserialize(d)
+		case schemas.HlsEncryptionSettings_Type:
+			var ev string
+			if err := d.ReadString(schemas.HlsEncryptionSettings_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = HlsKeyProviderType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings related to your HLS output package. For more information, see
@@ -5277,6 +11922,282 @@ type HlsGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HlsGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfHlsAdMarkers(s, schemas.HlsGroupSettings_AdMarkers, v.AdMarkers)
+	serialize__listOfHlsAdditionalManifest(s, schemas.HlsGroupSettings_AdditionalManifests, v.AdditionalManifests)
+	if v.AudioOnlyHeader != "" {
+		s.WriteString(schemas.HlsGroupSettings_AudioOnlyHeader, string(v.AudioOnlyHeader))
+	}
+	if v.BaseUrl != nil {
+		s.WriteString(schemas.HlsGroupSettings_BaseUrl, *v.BaseUrl)
+	}
+	serialize__listOfHlsCaptionLanguageMapping(s, schemas.HlsGroupSettings_CaptionLanguageMappings, v.CaptionLanguageMappings)
+	if v.CaptionLanguageSetting != "" {
+		s.WriteString(schemas.HlsGroupSettings_CaptionLanguageSetting, string(v.CaptionLanguageSetting))
+	}
+	if v.CaptionSegmentLengthControl != "" {
+		s.WriteString(schemas.HlsGroupSettings_CaptionSegmentLengthControl, string(v.CaptionSegmentLengthControl))
+	}
+	if v.ClientCache != "" {
+		s.WriteString(schemas.HlsGroupSettings_ClientCache, string(v.ClientCache))
+	}
+	if v.CodecSpecification != "" {
+		s.WriteString(schemas.HlsGroupSettings_CodecSpecification, string(v.CodecSpecification))
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.HlsGroupSettings_Destination, *v.Destination)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.HlsGroupSettings_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectoryStructure != "" {
+		s.WriteString(schemas.HlsGroupSettings_DirectoryStructure, string(v.DirectoryStructure))
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.HlsGroupSettings_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageBasedTrickPlay != "" {
+		s.WriteString(schemas.HlsGroupSettings_ImageBasedTrickPlay, string(v.ImageBasedTrickPlay))
+	}
+	if v.ImageBasedTrickPlaySettings != nil {
+		s.WriteStruct(schemas.HlsGroupSettings_ImageBasedTrickPlaySettings)
+		v.ImageBasedTrickPlaySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfHlsImageBasedTrickPlayVariant(s, schemas.HlsGroupSettings_ImageBasedTrickPlayVariants, v.ImageBasedTrickPlayVariants)
+	if v.ManifestCompression != "" {
+		s.WriteString(schemas.HlsGroupSettings_ManifestCompression, string(v.ManifestCompression))
+	}
+	if v.ManifestDurationFormat != "" {
+		s.WriteString(schemas.HlsGroupSettings_ManifestDurationFormat, string(v.ManifestDurationFormat))
+	}
+	if v.MinFinalSegmentLength != nil {
+		s.WriteFloat64(schemas.HlsGroupSettings_MinFinalSegmentLength, *v.MinFinalSegmentLength)
+	}
+	if v.MinSegmentLength != nil {
+		s.WriteInt32(schemas.HlsGroupSettings_MinSegmentLength, *v.MinSegmentLength)
+	}
+	if v.OutputSelection != "" {
+		s.WriteString(schemas.HlsGroupSettings_OutputSelection, string(v.OutputSelection))
+	}
+	if v.ProgramDateTime != "" {
+		s.WriteString(schemas.HlsGroupSettings_ProgramDateTime, string(v.ProgramDateTime))
+	}
+	if v.ProgramDateTimePeriod != nil {
+		s.WriteInt32(schemas.HlsGroupSettings_ProgramDateTimePeriod, *v.ProgramDateTimePeriod)
+	}
+	if v.ProgressiveWriteHlsManifest != "" {
+		s.WriteString(schemas.HlsGroupSettings_ProgressiveWriteHlsManifest, string(v.ProgressiveWriteHlsManifest))
+	}
+	if v.SegmentControl != "" {
+		s.WriteString(schemas.HlsGroupSettings_SegmentControl, string(v.SegmentControl))
+	}
+	if v.SegmentLength != nil {
+		s.WriteInt32(schemas.HlsGroupSettings_SegmentLength, *v.SegmentLength)
+	}
+	if v.SegmentLengthControl != "" {
+		s.WriteString(schemas.HlsGroupSettings_SegmentLengthControl, string(v.SegmentLengthControl))
+	}
+	if v.SegmentsPerSubdirectory != nil {
+		s.WriteInt32(schemas.HlsGroupSettings_SegmentsPerSubdirectory, *v.SegmentsPerSubdirectory)
+	}
+	if v.StreamInfResolution != "" {
+		s.WriteString(schemas.HlsGroupSettings_StreamInfResolution, string(v.StreamInfResolution))
+	}
+	if v.TargetDurationCompatibilityMode != "" {
+		s.WriteString(schemas.HlsGroupSettings_TargetDurationCompatibilityMode, string(v.TargetDurationCompatibilityMode))
+	}
+	if v.TimedMetadataId3Frame != "" {
+		s.WriteString(schemas.HlsGroupSettings_TimedMetadataId3Frame, string(v.TimedMetadataId3Frame))
+	}
+	if v.TimedMetadataId3Period != nil {
+		s.WriteInt32(schemas.HlsGroupSettings_TimedMetadataId3Period, *v.TimedMetadataId3Period)
+	}
+	if v.TimestampDeltaMilliseconds != nil {
+		s.WriteInt32(schemas.HlsGroupSettings_TimestampDeltaMilliseconds, *v.TimestampDeltaMilliseconds)
+	}
+}
+func (v *HlsGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsGroupSettings_AdMarkers:
+			return deserialize__listOfHlsAdMarkers(d, schemas.HlsGroupSettings_AdMarkers, &v.AdMarkers)
+		case schemas.HlsGroupSettings_AdditionalManifests:
+			return deserialize__listOfHlsAdditionalManifest(d, schemas.HlsGroupSettings_AdditionalManifests, &v.AdditionalManifests)
+		case schemas.HlsGroupSettings_AudioOnlyHeader:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_AudioOnlyHeader, &ev); err != nil {
+				return err
+			}
+			v.AudioOnlyHeader = HlsAudioOnlyHeader(ev)
+			return nil
+		case schemas.HlsGroupSettings_BaseUrl:
+			v.BaseUrl = new(string)
+			return d.ReadString(schemas.HlsGroupSettings_BaseUrl, v.BaseUrl)
+		case schemas.HlsGroupSettings_CaptionLanguageMappings:
+			return deserialize__listOfHlsCaptionLanguageMapping(d, schemas.HlsGroupSettings_CaptionLanguageMappings, &v.CaptionLanguageMappings)
+		case schemas.HlsGroupSettings_CaptionLanguageSetting:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_CaptionLanguageSetting, &ev); err != nil {
+				return err
+			}
+			v.CaptionLanguageSetting = HlsCaptionLanguageSetting(ev)
+			return nil
+		case schemas.HlsGroupSettings_CaptionSegmentLengthControl:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_CaptionSegmentLengthControl, &ev); err != nil {
+				return err
+			}
+			v.CaptionSegmentLengthControl = HlsCaptionSegmentLengthControl(ev)
+			return nil
+		case schemas.HlsGroupSettings_ClientCache:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_ClientCache, &ev); err != nil {
+				return err
+			}
+			v.ClientCache = HlsClientCache(ev)
+			return nil
+		case schemas.HlsGroupSettings_CodecSpecification:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_CodecSpecification, &ev); err != nil {
+				return err
+			}
+			v.CodecSpecification = HlsCodecSpecification(ev)
+			return nil
+		case schemas.HlsGroupSettings_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.HlsGroupSettings_Destination, v.Destination)
+		case schemas.HlsGroupSettings_DestinationSettings:
+			v.DestinationSettings = &DestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		case schemas.HlsGroupSettings_DirectoryStructure:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_DirectoryStructure, &ev); err != nil {
+				return err
+			}
+			v.DirectoryStructure = HlsDirectoryStructure(ev)
+			return nil
+		case schemas.HlsGroupSettings_Encryption:
+			v.Encryption = &HlsEncryptionSettings{}
+			return v.Encryption.Deserialize(d)
+		case schemas.HlsGroupSettings_ImageBasedTrickPlay:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_ImageBasedTrickPlay, &ev); err != nil {
+				return err
+			}
+			v.ImageBasedTrickPlay = HlsImageBasedTrickPlay(ev)
+			return nil
+		case schemas.HlsGroupSettings_ImageBasedTrickPlaySettings:
+			v.ImageBasedTrickPlaySettings = &HlsImageBasedTrickPlaySettings{}
+			return v.ImageBasedTrickPlaySettings.Deserialize(d)
+		case schemas.HlsGroupSettings_ImageBasedTrickPlayVariants:
+			return deserialize__listOfHlsImageBasedTrickPlayVariant(d, schemas.HlsGroupSettings_ImageBasedTrickPlayVariants, &v.ImageBasedTrickPlayVariants)
+		case schemas.HlsGroupSettings_ManifestCompression:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_ManifestCompression, &ev); err != nil {
+				return err
+			}
+			v.ManifestCompression = HlsManifestCompression(ev)
+			return nil
+		case schemas.HlsGroupSettings_ManifestDurationFormat:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_ManifestDurationFormat, &ev); err != nil {
+				return err
+			}
+			v.ManifestDurationFormat = HlsManifestDurationFormat(ev)
+			return nil
+		case schemas.HlsGroupSettings_MinFinalSegmentLength:
+			v.MinFinalSegmentLength = new(float64)
+			return d.ReadFloat64(schemas.HlsGroupSettings_MinFinalSegmentLength, v.MinFinalSegmentLength)
+		case schemas.HlsGroupSettings_MinSegmentLength:
+			v.MinSegmentLength = new(int32)
+			return d.ReadInt32(schemas.HlsGroupSettings_MinSegmentLength, v.MinSegmentLength)
+		case schemas.HlsGroupSettings_OutputSelection:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_OutputSelection, &ev); err != nil {
+				return err
+			}
+			v.OutputSelection = HlsOutputSelection(ev)
+			return nil
+		case schemas.HlsGroupSettings_ProgramDateTime:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_ProgramDateTime, &ev); err != nil {
+				return err
+			}
+			v.ProgramDateTime = HlsProgramDateTime(ev)
+			return nil
+		case schemas.HlsGroupSettings_ProgramDateTimePeriod:
+			v.ProgramDateTimePeriod = new(int32)
+			return d.ReadInt32(schemas.HlsGroupSettings_ProgramDateTimePeriod, v.ProgramDateTimePeriod)
+		case schemas.HlsGroupSettings_ProgressiveWriteHlsManifest:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_ProgressiveWriteHlsManifest, &ev); err != nil {
+				return err
+			}
+			v.ProgressiveWriteHlsManifest = HlsProgressiveWriteHlsManifest(ev)
+			return nil
+		case schemas.HlsGroupSettings_SegmentControl:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_SegmentControl, &ev); err != nil {
+				return err
+			}
+			v.SegmentControl = HlsSegmentControl(ev)
+			return nil
+		case schemas.HlsGroupSettings_SegmentLength:
+			v.SegmentLength = new(int32)
+			return d.ReadInt32(schemas.HlsGroupSettings_SegmentLength, v.SegmentLength)
+		case schemas.HlsGroupSettings_SegmentLengthControl:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_SegmentLengthControl, &ev); err != nil {
+				return err
+			}
+			v.SegmentLengthControl = HlsSegmentLengthControl(ev)
+			return nil
+		case schemas.HlsGroupSettings_SegmentsPerSubdirectory:
+			v.SegmentsPerSubdirectory = new(int32)
+			return d.ReadInt32(schemas.HlsGroupSettings_SegmentsPerSubdirectory, v.SegmentsPerSubdirectory)
+		case schemas.HlsGroupSettings_StreamInfResolution:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_StreamInfResolution, &ev); err != nil {
+				return err
+			}
+			v.StreamInfResolution = HlsStreamInfResolution(ev)
+			return nil
+		case schemas.HlsGroupSettings_TargetDurationCompatibilityMode:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_TargetDurationCompatibilityMode, &ev); err != nil {
+				return err
+			}
+			v.TargetDurationCompatibilityMode = HlsTargetDurationCompatibilityMode(ev)
+			return nil
+		case schemas.HlsGroupSettings_TimedMetadataId3Frame:
+			var ev string
+			if err := d.ReadString(schemas.HlsGroupSettings_TimedMetadataId3Frame, &ev); err != nil {
+				return err
+			}
+			v.TimedMetadataId3Frame = HlsTimedMetadataId3Frame(ev)
+			return nil
+		case schemas.HlsGroupSettings_TimedMetadataId3Period:
+			v.TimedMetadataId3Period = new(int32)
+			return d.ReadInt32(schemas.HlsGroupSettings_TimedMetadataId3Period, v.TimedMetadataId3Period)
+		case schemas.HlsGroupSettings_TimestampDeltaMilliseconds:
+			v.TimestampDeltaMilliseconds = new(int32)
+			return d.ReadInt32(schemas.HlsGroupSettings_TimestampDeltaMilliseconds, v.TimestampDeltaMilliseconds)
+		}
+		return nil
+	})
+}
+
 // Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
 type HlsImageBasedTrickPlaySettings struct {
 
@@ -5314,6 +12235,62 @@ type HlsImageBasedTrickPlaySettings struct {
 	TileWidth *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *HlsImageBasedTrickPlaySettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsImageBasedTrickPlaySettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsImageBasedTrickPlaySettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalCadence != "" {
+		s.WriteString(schemas.HlsImageBasedTrickPlaySettings_IntervalCadence, string(v.IntervalCadence))
+	}
+	if v.ThumbnailHeight != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlaySettings_ThumbnailHeight, *v.ThumbnailHeight)
+	}
+	if v.ThumbnailInterval != nil {
+		s.WriteFloat64(schemas.HlsImageBasedTrickPlaySettings_ThumbnailInterval, *v.ThumbnailInterval)
+	}
+	if v.ThumbnailWidth != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlaySettings_ThumbnailWidth, *v.ThumbnailWidth)
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlaySettings_TileHeight, *v.TileHeight)
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlaySettings_TileWidth, *v.TileWidth)
+	}
+}
+func (v *HlsImageBasedTrickPlaySettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsImageBasedTrickPlaySettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsImageBasedTrickPlaySettings_IntervalCadence:
+			var ev string
+			if err := d.ReadString(schemas.HlsImageBasedTrickPlaySettings_IntervalCadence, &ev); err != nil {
+				return err
+			}
+			v.IntervalCadence = HlsIntervalCadence(ev)
+			return nil
+		case schemas.HlsImageBasedTrickPlaySettings_ThumbnailHeight:
+			v.ThumbnailHeight = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlaySettings_ThumbnailHeight, v.ThumbnailHeight)
+		case schemas.HlsImageBasedTrickPlaySettings_ThumbnailInterval:
+			v.ThumbnailInterval = new(float64)
+			return d.ReadFloat64(schemas.HlsImageBasedTrickPlaySettings_ThumbnailInterval, v.ThumbnailInterval)
+		case schemas.HlsImageBasedTrickPlaySettings_ThumbnailWidth:
+			v.ThumbnailWidth = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlaySettings_ThumbnailWidth, v.ThumbnailWidth)
+		case schemas.HlsImageBasedTrickPlaySettings_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlaySettings_TileHeight, v.TileHeight)
+		case schemas.HlsImageBasedTrickPlaySettings_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlaySettings_TileWidth, v.TileWidth)
+		}
+		return nil
+	})
 }
 
 // Settings for one image-based trick play variant. Each variant produces its own
@@ -5356,6 +12333,62 @@ type HlsImageBasedTrickPlayVariant struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HlsImageBasedTrickPlayVariant) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsImageBasedTrickPlayVariant)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsImageBasedTrickPlayVariant) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalCadence != "" {
+		s.WriteString(schemas.HlsImageBasedTrickPlayVariant_IntervalCadence, string(v.IntervalCadence))
+	}
+	if v.ThumbnailHeight != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlayVariant_ThumbnailHeight, *v.ThumbnailHeight)
+	}
+	if v.ThumbnailInterval != nil {
+		s.WriteFloat64(schemas.HlsImageBasedTrickPlayVariant_ThumbnailInterval, *v.ThumbnailInterval)
+	}
+	if v.ThumbnailWidth != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlayVariant_ThumbnailWidth, *v.ThumbnailWidth)
+	}
+	if v.TileHeight != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlayVariant_TileHeight, *v.TileHeight)
+	}
+	if v.TileWidth != nil {
+		s.WriteInt32(schemas.HlsImageBasedTrickPlayVariant_TileWidth, *v.TileWidth)
+	}
+}
+func (v *HlsImageBasedTrickPlayVariant) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsImageBasedTrickPlayVariant, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsImageBasedTrickPlayVariant_IntervalCadence:
+			var ev string
+			if err := d.ReadString(schemas.HlsImageBasedTrickPlayVariant_IntervalCadence, &ev); err != nil {
+				return err
+			}
+			v.IntervalCadence = HlsIntervalCadence(ev)
+			return nil
+		case schemas.HlsImageBasedTrickPlayVariant_ThumbnailHeight:
+			v.ThumbnailHeight = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlayVariant_ThumbnailHeight, v.ThumbnailHeight)
+		case schemas.HlsImageBasedTrickPlayVariant_ThumbnailInterval:
+			v.ThumbnailInterval = new(float64)
+			return d.ReadFloat64(schemas.HlsImageBasedTrickPlayVariant_ThumbnailInterval, v.ThumbnailInterval)
+		case schemas.HlsImageBasedTrickPlayVariant_ThumbnailWidth:
+			v.ThumbnailWidth = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlayVariant_ThumbnailWidth, v.ThumbnailWidth)
+		case schemas.HlsImageBasedTrickPlayVariant_TileHeight:
+			v.TileHeight = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlayVariant_TileHeight, v.TileHeight)
+		case schemas.HlsImageBasedTrickPlayVariant_TileWidth:
+			v.TileWidth = new(int32)
+			return d.ReadInt32(schemas.HlsImageBasedTrickPlayVariant_TileWidth, v.TileWidth)
+		}
+		return nil
+	})
+}
+
 // Settings specific to audio sources in an HLS alternate rendition group. Specify
 // the properties (renditionGroupId, renditionName or renditionLanguageCode) to
 // identify the unique audio track among the alternative rendition groups present
@@ -5378,6 +12411,44 @@ type HlsRenditionGroupSettings struct {
 	RenditionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HlsRenditionGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsRenditionGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsRenditionGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RenditionGroupId != nil {
+		s.WriteString(schemas.HlsRenditionGroupSettings_RenditionGroupId, *v.RenditionGroupId)
+	}
+	if v.RenditionLanguageCode != "" {
+		s.WriteString(schemas.HlsRenditionGroupSettings_RenditionLanguageCode, string(v.RenditionLanguageCode))
+	}
+	if v.RenditionName != nil {
+		s.WriteString(schemas.HlsRenditionGroupSettings_RenditionName, *v.RenditionName)
+	}
+}
+func (v *HlsRenditionGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsRenditionGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsRenditionGroupSettings_RenditionGroupId:
+			v.RenditionGroupId = new(string)
+			return d.ReadString(schemas.HlsRenditionGroupSettings_RenditionGroupId, v.RenditionGroupId)
+		case schemas.HlsRenditionGroupSettings_RenditionLanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.HlsRenditionGroupSettings_RenditionLanguageCode, &ev); err != nil {
+				return err
+			}
+			v.RenditionLanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.HlsRenditionGroupSettings_RenditionName:
+			v.RenditionName = new(string)
+			return d.ReadString(schemas.HlsRenditionGroupSettings_RenditionName, v.RenditionName)
+		}
+		return nil
+	})
 }
 
 // Settings for HLS output groups
@@ -5438,6 +12509,80 @@ type HlsSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HlsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HlsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HlsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioGroupId != nil {
+		s.WriteString(schemas.HlsSettings_AudioGroupId, *v.AudioGroupId)
+	}
+	if v.AudioOnlyContainer != "" {
+		s.WriteString(schemas.HlsSettings_AudioOnlyContainer, string(v.AudioOnlyContainer))
+	}
+	if v.AudioRenditionSets != nil {
+		s.WriteString(schemas.HlsSettings_AudioRenditionSets, *v.AudioRenditionSets)
+	}
+	if v.AudioTrackType != "" {
+		s.WriteString(schemas.HlsSettings_AudioTrackType, string(v.AudioTrackType))
+	}
+	if v.DescriptiveVideoServiceFlag != "" {
+		s.WriteString(schemas.HlsSettings_DescriptiveVideoServiceFlag, string(v.DescriptiveVideoServiceFlag))
+	}
+	if v.IFrameOnlyManifest != "" {
+		s.WriteString(schemas.HlsSettings_IFrameOnlyManifest, string(v.IFrameOnlyManifest))
+	}
+	if v.SegmentModifier != nil {
+		s.WriteString(schemas.HlsSettings_SegmentModifier, *v.SegmentModifier)
+	}
+}
+func (v *HlsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HlsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HlsSettings_AudioGroupId:
+			v.AudioGroupId = new(string)
+			return d.ReadString(schemas.HlsSettings_AudioGroupId, v.AudioGroupId)
+		case schemas.HlsSettings_AudioOnlyContainer:
+			var ev string
+			if err := d.ReadString(schemas.HlsSettings_AudioOnlyContainer, &ev); err != nil {
+				return err
+			}
+			v.AudioOnlyContainer = HlsAudioOnlyContainer(ev)
+			return nil
+		case schemas.HlsSettings_AudioRenditionSets:
+			v.AudioRenditionSets = new(string)
+			return d.ReadString(schemas.HlsSettings_AudioRenditionSets, v.AudioRenditionSets)
+		case schemas.HlsSettings_AudioTrackType:
+			var ev string
+			if err := d.ReadString(schemas.HlsSettings_AudioTrackType, &ev); err != nil {
+				return err
+			}
+			v.AudioTrackType = HlsAudioTrackType(ev)
+			return nil
+		case schemas.HlsSettings_DescriptiveVideoServiceFlag:
+			var ev string
+			if err := d.ReadString(schemas.HlsSettings_DescriptiveVideoServiceFlag, &ev); err != nil {
+				return err
+			}
+			v.DescriptiveVideoServiceFlag = HlsDescriptiveVideoServiceFlag(ev)
+			return nil
+		case schemas.HlsSettings_IFrameOnlyManifest:
+			var ev string
+			if err := d.ReadString(schemas.HlsSettings_IFrameOnlyManifest, &ev); err != nil {
+				return err
+			}
+			v.IFrameOnlyManifest = HlsIFrameOnlyManifest(ev)
+			return nil
+		case schemas.HlsSettings_SegmentModifier:
+			v.SegmentModifier = new(string)
+			return d.ReadString(schemas.HlsSettings_SegmentModifier, v.SegmentModifier)
+		}
+		return nil
+	})
+}
+
 // Optional. Configuration for a destination queue to which the job can hop once a
 // customer-defined minimum wait time has passed.
 type HopDestination struct {
@@ -5462,6 +12607,40 @@ type HopDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HopDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HopDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HopDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Priority != nil {
+		s.WriteInt32(schemas.HopDestination_Priority, *v.Priority)
+	}
+	if v.Queue != nil {
+		s.WriteString(schemas.HopDestination_Queue, *v.Queue)
+	}
+	if v.WaitMinutes != nil {
+		s.WriteInt32(schemas.HopDestination_WaitMinutes, *v.WaitMinutes)
+	}
+}
+func (v *HopDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HopDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HopDestination_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.HopDestination_Priority, v.Priority)
+		case schemas.HopDestination_Queue:
+			v.Queue = new(string)
+			return d.ReadString(schemas.HopDestination_Queue, v.Queue)
+		case schemas.HopDestination_WaitMinutes:
+			v.WaitMinutes = new(int32)
+			return d.ReadInt32(schemas.HopDestination_WaitMinutes, v.WaitMinutes)
+		}
+		return nil
+	})
+}
+
 // To insert ID3 tags in your output, specify two values. Use ID3 tag to specify
 // the base 64 encoded string and use Timecode to specify the time when the tag
 // should be inserted. To insert multiple ID3 tags in your output, create multiple
@@ -5475,6 +12654,34 @@ type Id3Insertion struct {
 	Timecode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Id3Insertion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Id3Insertion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Id3Insertion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id3 != nil {
+		s.WriteString(schemas.Id3Insertion_Id3, *v.Id3)
+	}
+	if v.Timecode != nil {
+		s.WriteString(schemas.Id3Insertion_Timecode, *v.Timecode)
+	}
+}
+func (v *Id3Insertion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Id3Insertion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Id3Insertion_Id3:
+			v.Id3 = new(string)
+			return d.ReadString(schemas.Id3Insertion_Id3, v.Id3)
+		case schemas.Id3Insertion_Timecode:
+			v.Timecode = new(string)
+			return d.ReadString(schemas.Id3Insertion_Timecode, v.Timecode)
+		}
+		return nil
+	})
 }
 
 // Use the image inserter feature to include a graphic overlay on your video.
@@ -5496,6 +12703,31 @@ type ImageInserter struct {
 	SdrReferenceWhiteLevel *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImageInserter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageInserter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageInserter) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfInsertableImage(s, schemas.ImageInserter_InsertableImages, v.InsertableImages)
+	if v.SdrReferenceWhiteLevel != nil {
+		s.WriteInt32(schemas.ImageInserter_SdrReferenceWhiteLevel, *v.SdrReferenceWhiteLevel)
+	}
+}
+func (v *ImageInserter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageInserter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageInserter_InsertableImages:
+			return deserialize__listOfInsertableImage(d, schemas.ImageInserter_InsertableImages, &v.InsertableImages)
+		case schemas.ImageInserter_SdrReferenceWhiteLevel:
+			v.SdrReferenceWhiteLevel = new(int32)
+			return d.ReadInt32(schemas.ImageInserter_SdrReferenceWhiteLevel, v.SdrReferenceWhiteLevel)
+		}
+		return nil
+	})
 }
 
 // Settings related to IMSC captions. IMSC is a sidecar format that holds captions
@@ -5525,6 +12757,42 @@ type ImscDestinationSettings struct {
 	StylePassthrough ImscStylePassthrough
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImscDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImscDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImscDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accessibility != "" {
+		s.WriteString(schemas.ImscDestinationSettings_Accessibility, string(v.Accessibility))
+	}
+	if v.StylePassthrough != "" {
+		s.WriteString(schemas.ImscDestinationSettings_StylePassthrough, string(v.StylePassthrough))
+	}
+}
+func (v *ImscDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImscDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImscDestinationSettings_Accessibility:
+			var ev string
+			if err := d.ReadString(schemas.ImscDestinationSettings_Accessibility, &ev); err != nil {
+				return err
+			}
+			v.Accessibility = ImscAccessibilitySubs(ev)
+			return nil
+		case schemas.ImscDestinationSettings_StylePassthrough:
+			var ev string
+			if err := d.ReadString(schemas.ImscDestinationSettings_StylePassthrough, &ev); err != nil {
+				return err
+			}
+			v.StylePassthrough = ImscStylePassthrough(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Use inputs to define the source files used in your transcoding job. For more
@@ -5742,6 +13010,210 @@ type Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Input)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedInputFilter != "" {
+		s.WriteString(schemas.Input_AdvancedInputFilter, string(v.AdvancedInputFilter))
+	}
+	if v.AdvancedInputFilterSettings != nil {
+		s.WriteStruct(schemas.Input_AdvancedInputFilterSettings)
+		v.AdvancedInputFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOfAudioSelectorGroup(s, schemas.Input_AudioSelectorGroups, v.AudioSelectorGroups)
+	serialize__mapOfAudioSelector(s, schemas.Input_AudioSelectors, v.AudioSelectors)
+	serialize__mapOfCaptionSelector(s, schemas.Input_CaptionSelectors, v.CaptionSelectors)
+	if v.Crop != nil {
+		s.WriteStruct(schemas.Input_Crop)
+		v.Crop.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeblockFilter != "" {
+		s.WriteString(schemas.Input_DeblockFilter, string(v.DeblockFilter))
+	}
+	if v.DecryptionSettings != nil {
+		s.WriteStruct(schemas.Input_DecryptionSettings)
+		v.DecryptionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DenoiseFilter != "" {
+		s.WriteString(schemas.Input_DenoiseFilter, string(v.DenoiseFilter))
+	}
+	if v.DolbyVisionMetadataXml != nil {
+		s.WriteString(schemas.Input_DolbyVisionMetadataXml, *v.DolbyVisionMetadataXml)
+	}
+	serialize__mapOfDynamicAudioSelector(s, schemas.Input_DynamicAudioSelectors, v.DynamicAudioSelectors)
+	if v.FileInput != nil {
+		s.WriteString(schemas.Input_FileInput, *v.FileInput)
+	}
+	if v.FilterEnable != "" {
+		s.WriteString(schemas.Input_FilterEnable, string(v.FilterEnable))
+	}
+	if v.FilterStrength != nil {
+		s.WriteInt32(schemas.Input_FilterStrength, *v.FilterStrength)
+	}
+	if v.ImageInserter != nil {
+		s.WriteStruct(schemas.Input_ImageInserter)
+		v.ImageInserter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputClipping(s, schemas.Input_InputClippings, v.InputClippings)
+	if v.InputScanType != "" {
+		s.WriteString(schemas.Input_InputScanType, string(v.InputScanType))
+	}
+	serialize__listOfMultiViewSettings(s, schemas.Input_MultiViewSettings, v.MultiViewSettings)
+	if v.Position != nil {
+		s.WriteStruct(schemas.Input_Position)
+		v.Position.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProgramNumber != nil {
+		s.WriteInt32(schemas.Input_ProgramNumber, *v.ProgramNumber)
+	}
+	if v.PsiControl != "" {
+		s.WriteString(schemas.Input_PsiControl, string(v.PsiControl))
+	}
+	serialize__listOf__stringPatternS3ASSETMAPXml(s, schemas.Input_SupplementalImps, v.SupplementalImps)
+	if v.TamsSettings != nil {
+		s.WriteStruct(schemas.Input_TamsSettings)
+		v.TamsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimecodeSource != "" {
+		s.WriteString(schemas.Input_TimecodeSource, string(v.TimecodeSource))
+	}
+	if v.TimecodeStart != nil {
+		s.WriteString(schemas.Input_TimecodeStart, *v.TimecodeStart)
+	}
+	if v.VideoGenerator != nil {
+		s.WriteStruct(schemas.Input_VideoGenerator)
+		v.VideoGenerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfVideoOverlay(s, schemas.Input_VideoOverlays, v.VideoOverlays)
+	if v.VideoSelector != nil {
+		s.WriteStruct(schemas.Input_VideoSelector)
+		v.VideoSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Input) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Input, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Input_AdvancedInputFilter:
+			var ev string
+			if err := d.ReadString(schemas.Input_AdvancedInputFilter, &ev); err != nil {
+				return err
+			}
+			v.AdvancedInputFilter = AdvancedInputFilter(ev)
+			return nil
+		case schemas.Input_AdvancedInputFilterSettings:
+			v.AdvancedInputFilterSettings = &AdvancedInputFilterSettings{}
+			return v.AdvancedInputFilterSettings.Deserialize(d)
+		case schemas.Input_AudioSelectorGroups:
+			return deserialize__mapOfAudioSelectorGroup(d, schemas.Input_AudioSelectorGroups, &v.AudioSelectorGroups)
+		case schemas.Input_AudioSelectors:
+			return deserialize__mapOfAudioSelector(d, schemas.Input_AudioSelectors, &v.AudioSelectors)
+		case schemas.Input_CaptionSelectors:
+			return deserialize__mapOfCaptionSelector(d, schemas.Input_CaptionSelectors, &v.CaptionSelectors)
+		case schemas.Input_Crop:
+			v.Crop = &Rectangle{}
+			return v.Crop.Deserialize(d)
+		case schemas.Input_DeblockFilter:
+			var ev string
+			if err := d.ReadString(schemas.Input_DeblockFilter, &ev); err != nil {
+				return err
+			}
+			v.DeblockFilter = InputDeblockFilter(ev)
+			return nil
+		case schemas.Input_DecryptionSettings:
+			v.DecryptionSettings = &InputDecryptionSettings{}
+			return v.DecryptionSettings.Deserialize(d)
+		case schemas.Input_DenoiseFilter:
+			var ev string
+			if err := d.ReadString(schemas.Input_DenoiseFilter, &ev); err != nil {
+				return err
+			}
+			v.DenoiseFilter = InputDenoiseFilter(ev)
+			return nil
+		case schemas.Input_DolbyVisionMetadataXml:
+			v.DolbyVisionMetadataXml = new(string)
+			return d.ReadString(schemas.Input_DolbyVisionMetadataXml, v.DolbyVisionMetadataXml)
+		case schemas.Input_DynamicAudioSelectors:
+			return deserialize__mapOfDynamicAudioSelector(d, schemas.Input_DynamicAudioSelectors, &v.DynamicAudioSelectors)
+		case schemas.Input_FileInput:
+			v.FileInput = new(string)
+			return d.ReadString(schemas.Input_FileInput, v.FileInput)
+		case schemas.Input_FilterEnable:
+			var ev string
+			if err := d.ReadString(schemas.Input_FilterEnable, &ev); err != nil {
+				return err
+			}
+			v.FilterEnable = InputFilterEnable(ev)
+			return nil
+		case schemas.Input_FilterStrength:
+			v.FilterStrength = new(int32)
+			return d.ReadInt32(schemas.Input_FilterStrength, v.FilterStrength)
+		case schemas.Input_ImageInserter:
+			v.ImageInserter = &ImageInserter{}
+			return v.ImageInserter.Deserialize(d)
+		case schemas.Input_InputClippings:
+			return deserialize__listOfInputClipping(d, schemas.Input_InputClippings, &v.InputClippings)
+		case schemas.Input_InputScanType:
+			var ev string
+			if err := d.ReadString(schemas.Input_InputScanType, &ev); err != nil {
+				return err
+			}
+			v.InputScanType = InputScanType(ev)
+			return nil
+		case schemas.Input_MultiViewSettings:
+			return deserialize__listOfMultiViewSettings(d, schemas.Input_MultiViewSettings, &v.MultiViewSettings)
+		case schemas.Input_Position:
+			v.Position = &Rectangle{}
+			return v.Position.Deserialize(d)
+		case schemas.Input_ProgramNumber:
+			v.ProgramNumber = new(int32)
+			return d.ReadInt32(schemas.Input_ProgramNumber, v.ProgramNumber)
+		case schemas.Input_PsiControl:
+			var ev string
+			if err := d.ReadString(schemas.Input_PsiControl, &ev); err != nil {
+				return err
+			}
+			v.PsiControl = InputPsiControl(ev)
+			return nil
+		case schemas.Input_SupplementalImps:
+			return deserialize__listOf__stringPatternS3ASSETMAPXml(d, schemas.Input_SupplementalImps, &v.SupplementalImps)
+		case schemas.Input_TamsSettings:
+			v.TamsSettings = &InputTamsSettings{}
+			return v.TamsSettings.Deserialize(d)
+		case schemas.Input_TimecodeSource:
+			var ev string
+			if err := d.ReadString(schemas.Input_TimecodeSource, &ev); err != nil {
+				return err
+			}
+			v.TimecodeSource = InputTimecodeSource(ev)
+			return nil
+		case schemas.Input_TimecodeStart:
+			v.TimecodeStart = new(string)
+			return d.ReadString(schemas.Input_TimecodeStart, v.TimecodeStart)
+		case schemas.Input_VideoGenerator:
+			v.VideoGenerator = &InputVideoGenerator{}
+			return v.VideoGenerator.Deserialize(d)
+		case schemas.Input_VideoOverlays:
+			return deserialize__listOfVideoOverlay(d, schemas.Input_VideoOverlays, &v.VideoOverlays)
+		case schemas.Input_VideoSelector:
+			v.VideoSelector = &VideoSelector{}
+			return v.VideoSelector.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // To transcode only portions of your input, include one input clip for each part
 // of your input that you want in your output. All input clips that you specify
 // will be included in every output of the job. For more information, see
@@ -5769,6 +13241,34 @@ type InputClipping struct {
 	StartTimecode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputClipping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputClipping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputClipping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTimecode != nil {
+		s.WriteString(schemas.InputClipping_EndTimecode, *v.EndTimecode)
+	}
+	if v.StartTimecode != nil {
+		s.WriteString(schemas.InputClipping_StartTimecode, *v.StartTimecode)
+	}
+}
+func (v *InputClipping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputClipping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputClipping_EndTimecode:
+			v.EndTimecode = new(string)
+			return d.ReadString(schemas.InputClipping_EndTimecode, v.EndTimecode)
+		case schemas.InputClipping_StartTimecode:
+			v.StartTimecode = new(string)
+			return d.ReadString(schemas.InputClipping_StartTimecode, v.StartTimecode)
+		}
+		return nil
+	})
 }
 
 // Settings for decrypting any input files that you encrypt before you upload them
@@ -5800,6 +13300,50 @@ type InputDecryptionSettings struct {
 	KmsKeyRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputDecryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDecryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDecryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecryptionMode != "" {
+		s.WriteString(schemas.InputDecryptionSettings_DecryptionMode, string(v.DecryptionMode))
+	}
+	if v.EncryptedDecryptionKey != nil {
+		s.WriteString(schemas.InputDecryptionSettings_EncryptedDecryptionKey, *v.EncryptedDecryptionKey)
+	}
+	if v.InitializationVector != nil {
+		s.WriteString(schemas.InputDecryptionSettings_InitializationVector, *v.InitializationVector)
+	}
+	if v.KmsKeyRegion != nil {
+		s.WriteString(schemas.InputDecryptionSettings_KmsKeyRegion, *v.KmsKeyRegion)
+	}
+}
+func (v *InputDecryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDecryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDecryptionSettings_DecryptionMode:
+			var ev string
+			if err := d.ReadString(schemas.InputDecryptionSettings_DecryptionMode, &ev); err != nil {
+				return err
+			}
+			v.DecryptionMode = DecryptionMode(ev)
+			return nil
+		case schemas.InputDecryptionSettings_EncryptedDecryptionKey:
+			v.EncryptedDecryptionKey = new(string)
+			return d.ReadString(schemas.InputDecryptionSettings_EncryptedDecryptionKey, v.EncryptedDecryptionKey)
+		case schemas.InputDecryptionSettings_InitializationVector:
+			v.InitializationVector = new(string)
+			return d.ReadString(schemas.InputDecryptionSettings_InitializationVector, v.InitializationVector)
+		case schemas.InputDecryptionSettings_KmsKeyRegion:
+			v.KmsKeyRegion = new(string)
+			return d.ReadString(schemas.InputDecryptionSettings_KmsKeyRegion, v.KmsKeyRegion)
+		}
+		return nil
+	})
 }
 
 // Specify a Time Addressable Media Store (TAMS) server as an input source. TAMS
@@ -5854,6 +13398,50 @@ type InputTamsSettings struct {
 	Timerange *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputTamsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputTamsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputTamsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthConnectionArn != nil {
+		s.WriteString(schemas.InputTamsSettings_AuthConnectionArn, *v.AuthConnectionArn)
+	}
+	if v.GapHandling != "" {
+		s.WriteString(schemas.InputTamsSettings_GapHandling, string(v.GapHandling))
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.InputTamsSettings_SourceId, *v.SourceId)
+	}
+	if v.Timerange != nil {
+		s.WriteString(schemas.InputTamsSettings_Timerange, *v.Timerange)
+	}
+}
+func (v *InputTamsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputTamsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputTamsSettings_AuthConnectionArn:
+			v.AuthConnectionArn = new(string)
+			return d.ReadString(schemas.InputTamsSettings_AuthConnectionArn, v.AuthConnectionArn)
+		case schemas.InputTamsSettings_GapHandling:
+			var ev string
+			if err := d.ReadString(schemas.InputTamsSettings_GapHandling, &ev); err != nil {
+				return err
+			}
+			v.GapHandling = TamsGapHandling(ev)
+			return nil
+		case schemas.InputTamsSettings_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.InputTamsSettings_SourceId, v.SourceId)
+		case schemas.InputTamsSettings_Timerange:
+			v.Timerange = new(string)
+			return d.ReadString(schemas.InputTamsSettings_Timerange, v.Timerange)
+		}
+		return nil
+	})
 }
 
 // Specified video input in a template.
@@ -6017,6 +13605,177 @@ type InputTemplate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedInputFilter != "" {
+		s.WriteString(schemas.InputTemplate_AdvancedInputFilter, string(v.AdvancedInputFilter))
+	}
+	if v.AdvancedInputFilterSettings != nil {
+		s.WriteStruct(schemas.InputTemplate_AdvancedInputFilterSettings)
+		v.AdvancedInputFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOfAudioSelectorGroup(s, schemas.InputTemplate_AudioSelectorGroups, v.AudioSelectorGroups)
+	serialize__mapOfAudioSelector(s, schemas.InputTemplate_AudioSelectors, v.AudioSelectors)
+	serialize__mapOfCaptionSelector(s, schemas.InputTemplate_CaptionSelectors, v.CaptionSelectors)
+	if v.Crop != nil {
+		s.WriteStruct(schemas.InputTemplate_Crop)
+		v.Crop.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeblockFilter != "" {
+		s.WriteString(schemas.InputTemplate_DeblockFilter, string(v.DeblockFilter))
+	}
+	if v.DenoiseFilter != "" {
+		s.WriteString(schemas.InputTemplate_DenoiseFilter, string(v.DenoiseFilter))
+	}
+	if v.DolbyVisionMetadataXml != nil {
+		s.WriteString(schemas.InputTemplate_DolbyVisionMetadataXml, *v.DolbyVisionMetadataXml)
+	}
+	serialize__mapOfDynamicAudioSelector(s, schemas.InputTemplate_DynamicAudioSelectors, v.DynamicAudioSelectors)
+	if v.FilterEnable != "" {
+		s.WriteString(schemas.InputTemplate_FilterEnable, string(v.FilterEnable))
+	}
+	if v.FilterStrength != nil {
+		s.WriteInt32(schemas.InputTemplate_FilterStrength, *v.FilterStrength)
+	}
+	if v.ImageInserter != nil {
+		s.WriteStruct(schemas.InputTemplate_ImageInserter)
+		v.ImageInserter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputClipping(s, schemas.InputTemplate_InputClippings, v.InputClippings)
+	if v.InputScanType != "" {
+		s.WriteString(schemas.InputTemplate_InputScanType, string(v.InputScanType))
+	}
+	serialize__listOfMultiViewSettings(s, schemas.InputTemplate_MultiViewSettings, v.MultiViewSettings)
+	if v.Position != nil {
+		s.WriteStruct(schemas.InputTemplate_Position)
+		v.Position.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProgramNumber != nil {
+		s.WriteInt32(schemas.InputTemplate_ProgramNumber, *v.ProgramNumber)
+	}
+	if v.PsiControl != "" {
+		s.WriteString(schemas.InputTemplate_PsiControl, string(v.PsiControl))
+	}
+	if v.TimecodeSource != "" {
+		s.WriteString(schemas.InputTemplate_TimecodeSource, string(v.TimecodeSource))
+	}
+	if v.TimecodeStart != nil {
+		s.WriteString(schemas.InputTemplate_TimecodeStart, *v.TimecodeStart)
+	}
+	serialize__listOfVideoOverlay(s, schemas.InputTemplate_VideoOverlays, v.VideoOverlays)
+	if v.VideoSelector != nil {
+		s.WriteStruct(schemas.InputTemplate_VideoSelector)
+		v.VideoSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputTemplate_AdvancedInputFilter:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_AdvancedInputFilter, &ev); err != nil {
+				return err
+			}
+			v.AdvancedInputFilter = AdvancedInputFilter(ev)
+			return nil
+		case schemas.InputTemplate_AdvancedInputFilterSettings:
+			v.AdvancedInputFilterSettings = &AdvancedInputFilterSettings{}
+			return v.AdvancedInputFilterSettings.Deserialize(d)
+		case schemas.InputTemplate_AudioSelectorGroups:
+			return deserialize__mapOfAudioSelectorGroup(d, schemas.InputTemplate_AudioSelectorGroups, &v.AudioSelectorGroups)
+		case schemas.InputTemplate_AudioSelectors:
+			return deserialize__mapOfAudioSelector(d, schemas.InputTemplate_AudioSelectors, &v.AudioSelectors)
+		case schemas.InputTemplate_CaptionSelectors:
+			return deserialize__mapOfCaptionSelector(d, schemas.InputTemplate_CaptionSelectors, &v.CaptionSelectors)
+		case schemas.InputTemplate_Crop:
+			v.Crop = &Rectangle{}
+			return v.Crop.Deserialize(d)
+		case schemas.InputTemplate_DeblockFilter:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_DeblockFilter, &ev); err != nil {
+				return err
+			}
+			v.DeblockFilter = InputDeblockFilter(ev)
+			return nil
+		case schemas.InputTemplate_DenoiseFilter:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_DenoiseFilter, &ev); err != nil {
+				return err
+			}
+			v.DenoiseFilter = InputDenoiseFilter(ev)
+			return nil
+		case schemas.InputTemplate_DolbyVisionMetadataXml:
+			v.DolbyVisionMetadataXml = new(string)
+			return d.ReadString(schemas.InputTemplate_DolbyVisionMetadataXml, v.DolbyVisionMetadataXml)
+		case schemas.InputTemplate_DynamicAudioSelectors:
+			return deserialize__mapOfDynamicAudioSelector(d, schemas.InputTemplate_DynamicAudioSelectors, &v.DynamicAudioSelectors)
+		case schemas.InputTemplate_FilterEnable:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_FilterEnable, &ev); err != nil {
+				return err
+			}
+			v.FilterEnable = InputFilterEnable(ev)
+			return nil
+		case schemas.InputTemplate_FilterStrength:
+			v.FilterStrength = new(int32)
+			return d.ReadInt32(schemas.InputTemplate_FilterStrength, v.FilterStrength)
+		case schemas.InputTemplate_ImageInserter:
+			v.ImageInserter = &ImageInserter{}
+			return v.ImageInserter.Deserialize(d)
+		case schemas.InputTemplate_InputClippings:
+			return deserialize__listOfInputClipping(d, schemas.InputTemplate_InputClippings, &v.InputClippings)
+		case schemas.InputTemplate_InputScanType:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_InputScanType, &ev); err != nil {
+				return err
+			}
+			v.InputScanType = InputScanType(ev)
+			return nil
+		case schemas.InputTemplate_MultiViewSettings:
+			return deserialize__listOfMultiViewSettings(d, schemas.InputTemplate_MultiViewSettings, &v.MultiViewSettings)
+		case schemas.InputTemplate_Position:
+			v.Position = &Rectangle{}
+			return v.Position.Deserialize(d)
+		case schemas.InputTemplate_ProgramNumber:
+			v.ProgramNumber = new(int32)
+			return d.ReadInt32(schemas.InputTemplate_ProgramNumber, v.ProgramNumber)
+		case schemas.InputTemplate_PsiControl:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_PsiControl, &ev); err != nil {
+				return err
+			}
+			v.PsiControl = InputPsiControl(ev)
+			return nil
+		case schemas.InputTemplate_TimecodeSource:
+			var ev string
+			if err := d.ReadString(schemas.InputTemplate_TimecodeSource, &ev); err != nil {
+				return err
+			}
+			v.TimecodeSource = InputTimecodeSource(ev)
+			return nil
+		case schemas.InputTemplate_TimecodeStart:
+			v.TimecodeStart = new(string)
+			return d.ReadString(schemas.InputTemplate_TimecodeStart, v.TimecodeStart)
+		case schemas.InputTemplate_VideoOverlays:
+			return deserialize__listOfVideoOverlay(d, schemas.InputTemplate_VideoOverlays, &v.VideoOverlays)
+		case schemas.InputTemplate_VideoSelector:
+			v.VideoSelector = &VideoSelector{}
+			return v.VideoSelector.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // When you include Video generator, MediaConvert creates a video input with black
 // frames. Use this setting if you do not have a video input or if you want to add
 // black video frames before, or after, other inputs. You can specify Video
@@ -6069,6 +13828,70 @@ type InputVideoGenerator struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputVideoGenerator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputVideoGenerator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputVideoGenerator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channels != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_Channels, *v.Channels)
+	}
+	if v.Duration != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_Duration, *v.Duration)
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_Height, *v.Height)
+	}
+	if v.ImageInput != nil {
+		s.WriteString(schemas.InputVideoGenerator_ImageInput, *v.ImageInput)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_SampleRate, *v.SampleRate)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.InputVideoGenerator_Width, *v.Width)
+	}
+}
+func (v *InputVideoGenerator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputVideoGenerator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputVideoGenerator_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_Channels, v.Channels)
+		case schemas.InputVideoGenerator_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_Duration, v.Duration)
+		case schemas.InputVideoGenerator_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_FramerateDenominator, v.FramerateDenominator)
+		case schemas.InputVideoGenerator_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_FramerateNumerator, v.FramerateNumerator)
+		case schemas.InputVideoGenerator_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_Height, v.Height)
+		case schemas.InputVideoGenerator_ImageInput:
+			v.ImageInput = new(string)
+			return d.ReadString(schemas.InputVideoGenerator_ImageInput, v.ImageInput)
+		case schemas.InputVideoGenerator_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_SampleRate, v.SampleRate)
+		case schemas.InputVideoGenerator_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.InputVideoGenerator_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // These settings apply to a specific graphic overlay. You can include multiple
@@ -6130,6 +13953,88 @@ type InsertableImage struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InsertableImage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsertableImage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsertableImage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteInt32(schemas.InsertableImage_Duration, *v.Duration)
+	}
+	if v.FadeIn != nil {
+		s.WriteInt32(schemas.InsertableImage_FadeIn, *v.FadeIn)
+	}
+	if v.FadeOut != nil {
+		s.WriteInt32(schemas.InsertableImage_FadeOut, *v.FadeOut)
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.InsertableImage_Height, *v.Height)
+	}
+	if v.ImageInserterInput != nil {
+		s.WriteString(schemas.InsertableImage_ImageInserterInput, *v.ImageInserterInput)
+	}
+	if v.ImageX != nil {
+		s.WriteInt32(schemas.InsertableImage_ImageX, *v.ImageX)
+	}
+	if v.ImageY != nil {
+		s.WriteInt32(schemas.InsertableImage_ImageY, *v.ImageY)
+	}
+	if v.Layer != nil {
+		s.WriteInt32(schemas.InsertableImage_Layer, *v.Layer)
+	}
+	if v.Opacity != nil {
+		s.WriteInt32(schemas.InsertableImage_Opacity, *v.Opacity)
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.InsertableImage_StartTime, *v.StartTime)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.InsertableImage_Width, *v.Width)
+	}
+}
+func (v *InsertableImage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsertableImage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsertableImage_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_Duration, v.Duration)
+		case schemas.InsertableImage_FadeIn:
+			v.FadeIn = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_FadeIn, v.FadeIn)
+		case schemas.InsertableImage_FadeOut:
+			v.FadeOut = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_FadeOut, v.FadeOut)
+		case schemas.InsertableImage_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_Height, v.Height)
+		case schemas.InsertableImage_ImageInserterInput:
+			v.ImageInserterInput = new(string)
+			return d.ReadString(schemas.InsertableImage_ImageInserterInput, v.ImageInserterInput)
+		case schemas.InsertableImage_ImageX:
+			v.ImageX = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_ImageX, v.ImageX)
+		case schemas.InsertableImage_ImageY:
+			v.ImageY = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_ImageY, v.ImageY)
+		case schemas.InsertableImage_Layer:
+			v.Layer = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_Layer, v.Layer)
+		case schemas.InsertableImage_Opacity:
+			v.Opacity = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_Opacity, v.Opacity)
+		case schemas.InsertableImage_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.InsertableImage_StartTime, v.StartTime)
+		case schemas.InsertableImage_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.InsertableImage_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // Each job converts an input file into an output file or files. For more
@@ -6292,6 +14197,237 @@ type Job struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Job) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Job)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccelerationSettings != nil {
+		s.WriteStruct(schemas.Job_AccelerationSettings)
+		v.AccelerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccelerationStatus != "" {
+		s.WriteString(schemas.Job_AccelerationStatus, string(v.AccelerationStatus))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Job_Arn, *v.Arn)
+	}
+	if v.BillingTagsSource != "" {
+		s.WriteString(schemas.Job_BillingTagsSource, string(v.BillingTagsSource))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.Job_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Job_CreatedAt, *v.CreatedAt)
+	}
+	if v.CurrentPhase != "" {
+		s.WriteString(schemas.Job_CurrentPhase, string(v.CurrentPhase))
+	}
+	if v.ElementalInferenceConfiguration != nil {
+		s.WriteStruct(schemas.Job_ElementalInferenceConfiguration)
+		v.ElementalInferenceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteInt32(schemas.Job_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.Job_ErrorMessage, *v.ErrorMessage)
+	}
+	serialize__listOfHopDestination(s, schemas.Job_HopDestinations, v.HopDestinations)
+	if v.Id != nil {
+		s.WriteString(schemas.Job_Id, *v.Id)
+	}
+	if v.JobEngineVersionRequested != nil {
+		s.WriteString(schemas.Job_JobEngineVersionRequested, *v.JobEngineVersionRequested)
+	}
+	if v.JobEngineVersionUsed != nil {
+		s.WriteString(schemas.Job_JobEngineVersionUsed, *v.JobEngineVersionUsed)
+	}
+	if v.JobPercentComplete != nil {
+		s.WriteInt32(schemas.Job_JobPercentComplete, *v.JobPercentComplete)
+	}
+	if v.JobTemplate != nil {
+		s.WriteString(schemas.Job_JobTemplate, *v.JobTemplate)
+	}
+	if v.LastShareDetails != nil {
+		s.WriteString(schemas.Job_LastShareDetails, *v.LastShareDetails)
+	}
+	if v.Messages != nil {
+		s.WriteStruct(schemas.Job_Messages)
+		v.Messages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfOutputGroupDetail(s, schemas.Job_OutputGroupDetails, v.OutputGroupDetails)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.Job_Priority, *v.Priority)
+	}
+	if v.Queue != nil {
+		s.WriteString(schemas.Job_Queue, *v.Queue)
+	}
+	serialize__listOfQueueTransition(s, schemas.Job_QueueTransitions, v.QueueTransitions)
+	if v.RetryCount != nil {
+		s.WriteInt32(schemas.Job_RetryCount, *v.RetryCount)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.Job_Role, *v.Role)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.Job_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.Job_ShareStatus, string(v.ShareStatus))
+	}
+	if v.SimulateReservedQueue != "" {
+		s.WriteString(schemas.Job_SimulateReservedQueue, string(v.SimulateReservedQueue))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Job_Status, string(v.Status))
+	}
+	if v.StatusUpdateInterval != "" {
+		s.WriteString(schemas.Job_StatusUpdateInterval, string(v.StatusUpdateInterval))
+	}
+	if v.Timing != nil {
+		s.WriteStruct(schemas.Job_Timing)
+		v.Timing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.Job_UserMetadata, v.UserMetadata)
+	serialize__listOfWarningGroup(s, schemas.Job_Warnings, v.Warnings)
+}
+func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Job, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Job_AccelerationSettings:
+			v.AccelerationSettings = &AccelerationSettings{}
+			return v.AccelerationSettings.Deserialize(d)
+		case schemas.Job_AccelerationStatus:
+			var ev string
+			if err := d.ReadString(schemas.Job_AccelerationStatus, &ev); err != nil {
+				return err
+			}
+			v.AccelerationStatus = AccelerationStatus(ev)
+			return nil
+		case schemas.Job_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Job_Arn, v.Arn)
+		case schemas.Job_BillingTagsSource:
+			var ev string
+			if err := d.ReadString(schemas.Job_BillingTagsSource, &ev); err != nil {
+				return err
+			}
+			v.BillingTagsSource = BillingTagsSource(ev)
+			return nil
+		case schemas.Job_ClientRequestToken:
+			v.ClientRequestToken = new(string)
+			return d.ReadString(schemas.Job_ClientRequestToken, v.ClientRequestToken)
+		case schemas.Job_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Job_CreatedAt, v.CreatedAt)
+		case schemas.Job_CurrentPhase:
+			var ev string
+			if err := d.ReadString(schemas.Job_CurrentPhase, &ev); err != nil {
+				return err
+			}
+			v.CurrentPhase = JobPhase(ev)
+			return nil
+		case schemas.Job_ElementalInferenceConfiguration:
+			v.ElementalInferenceConfiguration = &ElementalInferenceConfiguration{}
+			return v.ElementalInferenceConfiguration.Deserialize(d)
+		case schemas.Job_ErrorCode:
+			v.ErrorCode = new(int32)
+			return d.ReadInt32(schemas.Job_ErrorCode, v.ErrorCode)
+		case schemas.Job_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.Job_ErrorMessage, v.ErrorMessage)
+		case schemas.Job_HopDestinations:
+			return deserialize__listOfHopDestination(d, schemas.Job_HopDestinations, &v.HopDestinations)
+		case schemas.Job_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Job_Id, v.Id)
+		case schemas.Job_JobEngineVersionRequested:
+			v.JobEngineVersionRequested = new(string)
+			return d.ReadString(schemas.Job_JobEngineVersionRequested, v.JobEngineVersionRequested)
+		case schemas.Job_JobEngineVersionUsed:
+			v.JobEngineVersionUsed = new(string)
+			return d.ReadString(schemas.Job_JobEngineVersionUsed, v.JobEngineVersionUsed)
+		case schemas.Job_JobPercentComplete:
+			v.JobPercentComplete = new(int32)
+			return d.ReadInt32(schemas.Job_JobPercentComplete, v.JobPercentComplete)
+		case schemas.Job_JobTemplate:
+			v.JobTemplate = new(string)
+			return d.ReadString(schemas.Job_JobTemplate, v.JobTemplate)
+		case schemas.Job_LastShareDetails:
+			v.LastShareDetails = new(string)
+			return d.ReadString(schemas.Job_LastShareDetails, v.LastShareDetails)
+		case schemas.Job_Messages:
+			v.Messages = &JobMessages{}
+			return v.Messages.Deserialize(d)
+		case schemas.Job_OutputGroupDetails:
+			return deserialize__listOfOutputGroupDetail(d, schemas.Job_OutputGroupDetails, &v.OutputGroupDetails)
+		case schemas.Job_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.Job_Priority, v.Priority)
+		case schemas.Job_Queue:
+			v.Queue = new(string)
+			return d.ReadString(schemas.Job_Queue, v.Queue)
+		case schemas.Job_QueueTransitions:
+			return deserialize__listOfQueueTransition(d, schemas.Job_QueueTransitions, &v.QueueTransitions)
+		case schemas.Job_RetryCount:
+			v.RetryCount = new(int32)
+			return d.ReadInt32(schemas.Job_RetryCount, v.RetryCount)
+		case schemas.Job_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.Job_Role, v.Role)
+		case schemas.Job_Settings:
+			v.Settings = &JobSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.Job_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.Job_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.Job_SimulateReservedQueue:
+			var ev string
+			if err := d.ReadString(schemas.Job_SimulateReservedQueue, &ev); err != nil {
+				return err
+			}
+			v.SimulateReservedQueue = SimulateReservedQueue(ev)
+			return nil
+		case schemas.Job_Status:
+			var ev string
+			if err := d.ReadString(schemas.Job_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatus(ev)
+			return nil
+		case schemas.Job_StatusUpdateInterval:
+			var ev string
+			if err := d.ReadString(schemas.Job_StatusUpdateInterval, &ev); err != nil {
+				return err
+			}
+			v.StatusUpdateInterval = StatusUpdateInterval(ev)
+			return nil
+		case schemas.Job_Timing:
+			v.Timing = &Timing{}
+			return v.Timing.Deserialize(d)
+		case schemas.Job_UserMetadata:
+			return deserialize__mapOf__string(d, schemas.Job_UserMetadata, &v.UserMetadata)
+		case schemas.Job_Warnings:
+			return deserialize__listOfWarningGroup(d, schemas.Job_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
+
 // Use Job engine versions to run jobs for your production workflow on one
 // version, while you test and validate the latest version. Job engine versions are
 // in a YYYY-MM-DD format.
@@ -6313,6 +14449,34 @@ type JobEngineVersion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobEngineVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobEngineVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobEngineVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.JobEngineVersion_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.JobEngineVersion_Version, *v.Version)
+	}
+}
+func (v *JobEngineVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobEngineVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobEngineVersion_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.JobEngineVersion_ExpirationDate, v.ExpirationDate)
+		case schemas.JobEngineVersion_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.JobEngineVersion_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Provides messages from the service about jobs that you have already
 // successfully submitted.
 type JobMessages struct {
@@ -6326,6 +14490,28 @@ type JobMessages struct {
 	Warning []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobMessages) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobMessages)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobMessages) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.JobMessages_Info, v.Info)
+	serialize__listOf__string(s, schemas.JobMessages_Warning, v.Warning)
+}
+func (v *JobMessages) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobMessages, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobMessages_Info:
+			return deserialize__listOf__string(d, schemas.JobMessages_Info, &v.Info)
+		case schemas.JobMessages_Warning:
+			return deserialize__listOf__string(d, schemas.JobMessages_Warning, &v.Warning)
+		}
+		return nil
+	})
 }
 
 // JobSettings contains all the transcode settings for a job.
@@ -6421,6 +14607,115 @@ type JobSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdAvailOffset != nil {
+		s.WriteInt32(schemas.JobSettings_AdAvailOffset, *v.AdAvailOffset)
+	}
+	if v.AvailBlanking != nil {
+		s.WriteStruct(schemas.JobSettings_AvailBlanking)
+		v.AvailBlanking.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfColorConversion3DLUTSetting(s, schemas.JobSettings_ColorConversion3DLUTSettings, v.ColorConversion3DLUTSettings)
+	if v.Esam != nil {
+		s.WriteStruct(schemas.JobSettings_Esam)
+		v.Esam.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendedDataServices != nil {
+		s.WriteStruct(schemas.JobSettings_ExtendedDataServices)
+		v.ExtendedDataServices.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FollowSource != nil {
+		s.WriteInt32(schemas.JobSettings_FollowSource, *v.FollowSource)
+	}
+	serialize__listOfInput(s, schemas.JobSettings_Inputs, v.Inputs)
+	if v.KantarWatermark != nil {
+		s.WriteStruct(schemas.JobSettings_KantarWatermark)
+		v.KantarWatermark.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MotionImageInserter != nil {
+		s.WriteStruct(schemas.JobSettings_MotionImageInserter)
+		v.MotionImageInserter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NielsenConfiguration != nil {
+		s.WriteStruct(schemas.JobSettings_NielsenConfiguration)
+		v.NielsenConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NielsenNonLinearWatermark != nil {
+		s.WriteStruct(schemas.JobSettings_NielsenNonLinearWatermark)
+		v.NielsenNonLinearWatermark.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfOutputGroup(s, schemas.JobSettings_OutputGroups, v.OutputGroups)
+	if v.TimecodeConfig != nil {
+		s.WriteStruct(schemas.JobSettings_TimecodeConfig)
+		v.TimecodeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimedMetadataInsertion != nil {
+		s.WriteStruct(schemas.JobSettings_TimedMetadataInsertion)
+		v.TimedMetadataInsertion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JobSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobSettings_AdAvailOffset:
+			v.AdAvailOffset = new(int32)
+			return d.ReadInt32(schemas.JobSettings_AdAvailOffset, v.AdAvailOffset)
+		case schemas.JobSettings_AvailBlanking:
+			v.AvailBlanking = &AvailBlanking{}
+			return v.AvailBlanking.Deserialize(d)
+		case schemas.JobSettings_ColorConversion3DLUTSettings:
+			return deserialize__listOfColorConversion3DLUTSetting(d, schemas.JobSettings_ColorConversion3DLUTSettings, &v.ColorConversion3DLUTSettings)
+		case schemas.JobSettings_Esam:
+			v.Esam = &EsamSettings{}
+			return v.Esam.Deserialize(d)
+		case schemas.JobSettings_ExtendedDataServices:
+			v.ExtendedDataServices = &ExtendedDataServices{}
+			return v.ExtendedDataServices.Deserialize(d)
+		case schemas.JobSettings_FollowSource:
+			v.FollowSource = new(int32)
+			return d.ReadInt32(schemas.JobSettings_FollowSource, v.FollowSource)
+		case schemas.JobSettings_Inputs:
+			return deserialize__listOfInput(d, schemas.JobSettings_Inputs, &v.Inputs)
+		case schemas.JobSettings_KantarWatermark:
+			v.KantarWatermark = &KantarWatermarkSettings{}
+			return v.KantarWatermark.Deserialize(d)
+		case schemas.JobSettings_MotionImageInserter:
+			v.MotionImageInserter = &MotionImageInserter{}
+			return v.MotionImageInserter.Deserialize(d)
+		case schemas.JobSettings_NielsenConfiguration:
+			v.NielsenConfiguration = &NielsenConfiguration{}
+			return v.NielsenConfiguration.Deserialize(d)
+		case schemas.JobSettings_NielsenNonLinearWatermark:
+			v.NielsenNonLinearWatermark = &NielsenNonLinearWatermarkSettings{}
+			return v.NielsenNonLinearWatermark.Deserialize(d)
+		case schemas.JobSettings_OutputGroups:
+			return deserialize__listOfOutputGroup(d, schemas.JobSettings_OutputGroups, &v.OutputGroups)
+		case schemas.JobSettings_TimecodeConfig:
+			v.TimecodeConfig = &TimecodeConfig{}
+			return v.TimecodeConfig.Deserialize(d)
+		case schemas.JobSettings_TimedMetadataInsertion:
+			v.TimedMetadataInsertion = &TimedMetadataInsertion{}
+			return v.TimedMetadataInsertion.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provide one or more JobsQueryFilter objects, each containing a Key with an
 // associated Values array. Note that MediaConvert queries jobs using OR logic.
 type JobsQueryFilter struct {
@@ -6447,6 +14742,35 @@ type JobsQueryFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobsQueryFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobsQueryFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobsQueryFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.JobsQueryFilter_Key, string(v.Key))
+	}
+	serialize__listOf__stringMax100(s, schemas.JobsQueryFilter_Values, v.Values)
+}
+func (v *JobsQueryFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobsQueryFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobsQueryFilter_Key:
+			var ev string
+			if err := d.ReadString(schemas.JobsQueryFilter_Key, &ev); err != nil {
+				return err
+			}
+			v.Key = JobsQueryFilterKey(ev)
+			return nil
+		case schemas.JobsQueryFilter_Values:
+			return deserialize__listOf__stringMax100(d, schemas.JobsQueryFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // A job template is a pre-made set of encoding instructions that you can use to
@@ -6505,6 +14829,109 @@ type JobTemplate struct {
 	Type Type
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccelerationSettings != nil {
+		s.WriteStruct(schemas.JobTemplate_AccelerationSettings)
+		v.AccelerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.JobTemplate_Arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.JobTemplate_Category, *v.Category)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.JobTemplate_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.JobTemplate_Description, *v.Description)
+	}
+	serialize__listOfHopDestination(s, schemas.JobTemplate_HopDestinations, v.HopDestinations)
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.JobTemplate_LastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.JobTemplate_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.JobTemplate_Priority, *v.Priority)
+	}
+	if v.Queue != nil {
+		s.WriteString(schemas.JobTemplate_Queue, *v.Queue)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.JobTemplate_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusUpdateInterval != "" {
+		s.WriteString(schemas.JobTemplate_StatusUpdateInterval, string(v.StatusUpdateInterval))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.JobTemplate_Type, string(v.Type))
+	}
+}
+func (v *JobTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobTemplate_AccelerationSettings:
+			v.AccelerationSettings = &AccelerationSettings{}
+			return v.AccelerationSettings.Deserialize(d)
+		case schemas.JobTemplate_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.JobTemplate_Arn, v.Arn)
+		case schemas.JobTemplate_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.JobTemplate_Category, v.Category)
+		case schemas.JobTemplate_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.JobTemplate_CreatedAt, v.CreatedAt)
+		case schemas.JobTemplate_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.JobTemplate_Description, v.Description)
+		case schemas.JobTemplate_HopDestinations:
+			return deserialize__listOfHopDestination(d, schemas.JobTemplate_HopDestinations, &v.HopDestinations)
+		case schemas.JobTemplate_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.JobTemplate_LastUpdated, v.LastUpdated)
+		case schemas.JobTemplate_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.JobTemplate_Name, v.Name)
+		case schemas.JobTemplate_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.JobTemplate_Priority, v.Priority)
+		case schemas.JobTemplate_Queue:
+			v.Queue = new(string)
+			return d.ReadString(schemas.JobTemplate_Queue, v.Queue)
+		case schemas.JobTemplate_Settings:
+			v.Settings = &JobTemplateSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.JobTemplate_StatusUpdateInterval:
+			var ev string
+			if err := d.ReadString(schemas.JobTemplate_StatusUpdateInterval, &ev); err != nil {
+				return err
+			}
+			v.StatusUpdateInterval = StatusUpdateInterval(ev)
+			return nil
+		case schemas.JobTemplate_Type:
+			var ev string
+			if err := d.ReadString(schemas.JobTemplate_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // JobTemplateSettings contains all the transcode settings saved in the template
@@ -6601,6 +15028,115 @@ type JobTemplateSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobTemplateSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobTemplateSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobTemplateSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdAvailOffset != nil {
+		s.WriteInt32(schemas.JobTemplateSettings_AdAvailOffset, *v.AdAvailOffset)
+	}
+	if v.AvailBlanking != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_AvailBlanking)
+		v.AvailBlanking.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfColorConversion3DLUTSetting(s, schemas.JobTemplateSettings_ColorConversion3DLUTSettings, v.ColorConversion3DLUTSettings)
+	if v.Esam != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_Esam)
+		v.Esam.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendedDataServices != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_ExtendedDataServices)
+		v.ExtendedDataServices.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FollowSource != nil {
+		s.WriteInt32(schemas.JobTemplateSettings_FollowSource, *v.FollowSource)
+	}
+	serialize__listOfInputTemplate(s, schemas.JobTemplateSettings_Inputs, v.Inputs)
+	if v.KantarWatermark != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_KantarWatermark)
+		v.KantarWatermark.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MotionImageInserter != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_MotionImageInserter)
+		v.MotionImageInserter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NielsenConfiguration != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_NielsenConfiguration)
+		v.NielsenConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NielsenNonLinearWatermark != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_NielsenNonLinearWatermark)
+		v.NielsenNonLinearWatermark.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfOutputGroup(s, schemas.JobTemplateSettings_OutputGroups, v.OutputGroups)
+	if v.TimecodeConfig != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_TimecodeConfig)
+		v.TimecodeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimedMetadataInsertion != nil {
+		s.WriteStruct(schemas.JobTemplateSettings_TimedMetadataInsertion)
+		v.TimedMetadataInsertion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JobTemplateSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobTemplateSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobTemplateSettings_AdAvailOffset:
+			v.AdAvailOffset = new(int32)
+			return d.ReadInt32(schemas.JobTemplateSettings_AdAvailOffset, v.AdAvailOffset)
+		case schemas.JobTemplateSettings_AvailBlanking:
+			v.AvailBlanking = &AvailBlanking{}
+			return v.AvailBlanking.Deserialize(d)
+		case schemas.JobTemplateSettings_ColorConversion3DLUTSettings:
+			return deserialize__listOfColorConversion3DLUTSetting(d, schemas.JobTemplateSettings_ColorConversion3DLUTSettings, &v.ColorConversion3DLUTSettings)
+		case schemas.JobTemplateSettings_Esam:
+			v.Esam = &EsamSettings{}
+			return v.Esam.Deserialize(d)
+		case schemas.JobTemplateSettings_ExtendedDataServices:
+			v.ExtendedDataServices = &ExtendedDataServices{}
+			return v.ExtendedDataServices.Deserialize(d)
+		case schemas.JobTemplateSettings_FollowSource:
+			v.FollowSource = new(int32)
+			return d.ReadInt32(schemas.JobTemplateSettings_FollowSource, v.FollowSource)
+		case schemas.JobTemplateSettings_Inputs:
+			return deserialize__listOfInputTemplate(d, schemas.JobTemplateSettings_Inputs, &v.Inputs)
+		case schemas.JobTemplateSettings_KantarWatermark:
+			v.KantarWatermark = &KantarWatermarkSettings{}
+			return v.KantarWatermark.Deserialize(d)
+		case schemas.JobTemplateSettings_MotionImageInserter:
+			v.MotionImageInserter = &MotionImageInserter{}
+			return v.MotionImageInserter.Deserialize(d)
+		case schemas.JobTemplateSettings_NielsenConfiguration:
+			v.NielsenConfiguration = &NielsenConfiguration{}
+			return v.NielsenConfiguration.Deserialize(d)
+		case schemas.JobTemplateSettings_NielsenNonLinearWatermark:
+			v.NielsenNonLinearWatermark = &NielsenNonLinearWatermarkSettings{}
+			return v.NielsenNonLinearWatermark.Deserialize(d)
+		case schemas.JobTemplateSettings_OutputGroups:
+			return deserialize__listOfOutputGroup(d, schemas.JobTemplateSettings_OutputGroups, &v.OutputGroups)
+		case schemas.JobTemplateSettings_TimecodeConfig:
+			v.TimecodeConfig = &TimecodeConfig{}
+			return v.TimecodeConfig.Deserialize(d)
+		case schemas.JobTemplateSettings_TimedMetadataInsertion:
+			v.TimedMetadataInsertion = &TimedMetadataInsertion{}
+			return v.TimedMetadataInsertion.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Use these settings only when you use Kantar watermarking. Specify the values
 // that MediaConvert uses to generate and place Kantar watermarks in your output
 // audio. These settings apply to every output in your job. In addition to
@@ -6673,6 +15209,100 @@ type KantarWatermarkSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KantarWatermarkSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KantarWatermarkSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KantarWatermarkSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelName != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_ChannelName, *v.ChannelName)
+	}
+	if v.ContentReference != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_ContentReference, *v.ContentReference)
+	}
+	if v.CredentialsSecretName != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_CredentialsSecretName, *v.CredentialsSecretName)
+	}
+	if v.FileOffset != nil {
+		s.WriteFloat64(schemas.KantarWatermarkSettings_FileOffset, *v.FileOffset)
+	}
+	if v.KantarLicenseId != nil {
+		s.WriteInt32(schemas.KantarWatermarkSettings_KantarLicenseId, *v.KantarLicenseId)
+	}
+	if v.KantarServerUrl != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_KantarServerUrl, *v.KantarServerUrl)
+	}
+	if v.LogDestination != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_LogDestination, *v.LogDestination)
+	}
+	if v.Metadata3 != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_Metadata3, *v.Metadata3)
+	}
+	if v.Metadata4 != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_Metadata4, *v.Metadata4)
+	}
+	if v.Metadata5 != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_Metadata5, *v.Metadata5)
+	}
+	if v.Metadata6 != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_Metadata6, *v.Metadata6)
+	}
+	if v.Metadata7 != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_Metadata7, *v.Metadata7)
+	}
+	if v.Metadata8 != nil {
+		s.WriteString(schemas.KantarWatermarkSettings_Metadata8, *v.Metadata8)
+	}
+}
+func (v *KantarWatermarkSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KantarWatermarkSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KantarWatermarkSettings_ChannelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_ChannelName, v.ChannelName)
+		case schemas.KantarWatermarkSettings_ContentReference:
+			v.ContentReference = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_ContentReference, v.ContentReference)
+		case schemas.KantarWatermarkSettings_CredentialsSecretName:
+			v.CredentialsSecretName = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_CredentialsSecretName, v.CredentialsSecretName)
+		case schemas.KantarWatermarkSettings_FileOffset:
+			v.FileOffset = new(float64)
+			return d.ReadFloat64(schemas.KantarWatermarkSettings_FileOffset, v.FileOffset)
+		case schemas.KantarWatermarkSettings_KantarLicenseId:
+			v.KantarLicenseId = new(int32)
+			return d.ReadInt32(schemas.KantarWatermarkSettings_KantarLicenseId, v.KantarLicenseId)
+		case schemas.KantarWatermarkSettings_KantarServerUrl:
+			v.KantarServerUrl = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_KantarServerUrl, v.KantarServerUrl)
+		case schemas.KantarWatermarkSettings_LogDestination:
+			v.LogDestination = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_LogDestination, v.LogDestination)
+		case schemas.KantarWatermarkSettings_Metadata3:
+			v.Metadata3 = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_Metadata3, v.Metadata3)
+		case schemas.KantarWatermarkSettings_Metadata4:
+			v.Metadata4 = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_Metadata4, v.Metadata4)
+		case schemas.KantarWatermarkSettings_Metadata5:
+			v.Metadata5 = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_Metadata5, v.Metadata5)
+		case schemas.KantarWatermarkSettings_Metadata6:
+			v.Metadata6 = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_Metadata6, v.Metadata6)
+		case schemas.KantarWatermarkSettings_Metadata7:
+			v.Metadata7 = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_Metadata7, v.Metadata7)
+		case schemas.KantarWatermarkSettings_Metadata8:
+			v.Metadata8 = new(string)
+			return d.ReadString(schemas.KantarWatermarkSettings_Metadata8, v.Metadata8)
+		}
+		return nil
+	})
+}
+
 // Settings for SCTE-35 signals from ESAM. Include this in your job settings to
 // put SCTE-35 markers in your HLS and transport stream outputs at the insertion
 // points that you specify in an ESAM XML document. Provide the document in the
@@ -6684,6 +15314,28 @@ type M2tsScte35Esam struct {
 	Scte35EsamPid *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *M2tsScte35Esam) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.M2tsScte35Esam)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *M2tsScte35Esam) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scte35EsamPid != nil {
+		s.WriteInt32(schemas.M2tsScte35Esam_Scte35EsamPid, *v.Scte35EsamPid)
+	}
+}
+func (v *M2tsScte35Esam) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.M2tsScte35Esam, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.M2tsScte35Esam_Scte35EsamPid:
+			v.Scte35EsamPid = new(int32)
+			return d.ReadInt32(schemas.M2tsScte35Esam_Scte35EsamPid, v.Scte35EsamPid)
+		}
+		return nil
+	})
 }
 
 // MPEG-2 TS container settings. These apply to outputs in a File output group
@@ -6940,6 +15592,350 @@ type M2tsSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *M2tsSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.M2tsSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *M2tsSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioBufferModel != "" {
+		s.WriteString(schemas.M2tsSettings_AudioBufferModel, string(v.AudioBufferModel))
+	}
+	if v.AudioDuration != "" {
+		s.WriteString(schemas.M2tsSettings_AudioDuration, string(v.AudioDuration))
+	}
+	if v.AudioFramesPerPes != nil {
+		s.WriteInt32(schemas.M2tsSettings_AudioFramesPerPes, *v.AudioFramesPerPes)
+	}
+	serialize__listOf__integerMin32Max8182(s, schemas.M2tsSettings_AudioPids, v.AudioPids)
+	if v.AudioPtsOffsetDelta != nil {
+		s.WriteInt32(schemas.M2tsSettings_AudioPtsOffsetDelta, *v.AudioPtsOffsetDelta)
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.M2tsSettings_Bitrate, *v.Bitrate)
+	}
+	if v.BufferModel != "" {
+		s.WriteString(schemas.M2tsSettings_BufferModel, string(v.BufferModel))
+	}
+	if v.DataPTSControl != "" {
+		s.WriteString(schemas.M2tsSettings_DataPTSControl, string(v.DataPTSControl))
+	}
+	if v.DvbNitSettings != nil {
+		s.WriteStruct(schemas.M2tsSettings_DvbNitSettings)
+		v.DvbNitSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DvbSdtSettings != nil {
+		s.WriteStruct(schemas.M2tsSettings_DvbSdtSettings)
+		v.DvbSdtSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__integerMin32Max8182(s, schemas.M2tsSettings_DvbSubPids, v.DvbSubPids)
+	if v.DvbTdtSettings != nil {
+		s.WriteStruct(schemas.M2tsSettings_DvbTdtSettings)
+		v.DvbTdtSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DvbTeletextPid != nil {
+		s.WriteInt32(schemas.M2tsSettings_DvbTeletextPid, *v.DvbTeletextPid)
+	}
+	if v.EbpAudioInterval != "" {
+		s.WriteString(schemas.M2tsSettings_EbpAudioInterval, string(v.EbpAudioInterval))
+	}
+	if v.EbpPlacement != "" {
+		s.WriteString(schemas.M2tsSettings_EbpPlacement, string(v.EbpPlacement))
+	}
+	if v.EsRateInPes != "" {
+		s.WriteString(schemas.M2tsSettings_EsRateInPes, string(v.EsRateInPes))
+	}
+	if v.ForceTsVideoEbpOrder != "" {
+		s.WriteString(schemas.M2tsSettings_ForceTsVideoEbpOrder, string(v.ForceTsVideoEbpOrder))
+	}
+	if v.FragmentTime != nil {
+		s.WriteFloat64(schemas.M2tsSettings_FragmentTime, *v.FragmentTime)
+	}
+	if v.KlvMetadata != "" {
+		s.WriteString(schemas.M2tsSettings_KlvMetadata, string(v.KlvMetadata))
+	}
+	if v.MaxPcrInterval != nil {
+		s.WriteInt32(schemas.M2tsSettings_MaxPcrInterval, *v.MaxPcrInterval)
+	}
+	if v.MinEbpInterval != nil {
+		s.WriteInt32(schemas.M2tsSettings_MinEbpInterval, *v.MinEbpInterval)
+	}
+	if v.NielsenId3 != "" {
+		s.WriteString(schemas.M2tsSettings_NielsenId3, string(v.NielsenId3))
+	}
+	if v.NullPacketBitrate != nil {
+		s.WriteFloat64(schemas.M2tsSettings_NullPacketBitrate, *v.NullPacketBitrate)
+	}
+	if v.PatInterval != nil {
+		s.WriteInt32(schemas.M2tsSettings_PatInterval, *v.PatInterval)
+	}
+	if v.PcrControl != "" {
+		s.WriteString(schemas.M2tsSettings_PcrControl, string(v.PcrControl))
+	}
+	if v.PcrPid != nil {
+		s.WriteInt32(schemas.M2tsSettings_PcrPid, *v.PcrPid)
+	}
+	if v.PmtInterval != nil {
+		s.WriteInt32(schemas.M2tsSettings_PmtInterval, *v.PmtInterval)
+	}
+	if v.PmtPid != nil {
+		s.WriteInt32(schemas.M2tsSettings_PmtPid, *v.PmtPid)
+	}
+	if v.PreventBufferUnderflow != "" {
+		s.WriteString(schemas.M2tsSettings_PreventBufferUnderflow, string(v.PreventBufferUnderflow))
+	}
+	if v.PrivateMetadataPid != nil {
+		s.WriteInt32(schemas.M2tsSettings_PrivateMetadataPid, *v.PrivateMetadataPid)
+	}
+	if v.ProgramNumber != nil {
+		s.WriteInt32(schemas.M2tsSettings_ProgramNumber, *v.ProgramNumber)
+	}
+	if v.PtsOffset != nil {
+		s.WriteInt32(schemas.M2tsSettings_PtsOffset, *v.PtsOffset)
+	}
+	if v.PtsOffsetMode != "" {
+		s.WriteString(schemas.M2tsSettings_PtsOffsetMode, string(v.PtsOffsetMode))
+	}
+	if v.RateMode != "" {
+		s.WriteString(schemas.M2tsSettings_RateMode, string(v.RateMode))
+	}
+	if v.Scte35Esam != nil {
+		s.WriteStruct(schemas.M2tsSettings_Scte35Esam)
+		v.Scte35Esam.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Scte35Pid != nil {
+		s.WriteInt32(schemas.M2tsSettings_Scte35Pid, *v.Scte35Pid)
+	}
+	if v.Scte35Source != "" {
+		s.WriteString(schemas.M2tsSettings_Scte35Source, string(v.Scte35Source))
+	}
+	if v.SegmentationMarkers != "" {
+		s.WriteString(schemas.M2tsSettings_SegmentationMarkers, string(v.SegmentationMarkers))
+	}
+	if v.SegmentationStyle != "" {
+		s.WriteString(schemas.M2tsSettings_SegmentationStyle, string(v.SegmentationStyle))
+	}
+	if v.SegmentationTime != nil {
+		s.WriteFloat64(schemas.M2tsSettings_SegmentationTime, *v.SegmentationTime)
+	}
+	if v.TimedMetadataPid != nil {
+		s.WriteInt32(schemas.M2tsSettings_TimedMetadataPid, *v.TimedMetadataPid)
+	}
+	if v.TransportStreamId != nil {
+		s.WriteInt32(schemas.M2tsSettings_TransportStreamId, *v.TransportStreamId)
+	}
+	if v.VideoPid != nil {
+		s.WriteInt32(schemas.M2tsSettings_VideoPid, *v.VideoPid)
+	}
+}
+func (v *M2tsSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.M2tsSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.M2tsSettings_AudioBufferModel:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_AudioBufferModel, &ev); err != nil {
+				return err
+			}
+			v.AudioBufferModel = M2tsAudioBufferModel(ev)
+			return nil
+		case schemas.M2tsSettings_AudioDuration:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_AudioDuration, &ev); err != nil {
+				return err
+			}
+			v.AudioDuration = M2tsAudioDuration(ev)
+			return nil
+		case schemas.M2tsSettings_AudioFramesPerPes:
+			v.AudioFramesPerPes = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_AudioFramesPerPes, v.AudioFramesPerPes)
+		case schemas.M2tsSettings_AudioPids:
+			return deserialize__listOf__integerMin32Max8182(d, schemas.M2tsSettings_AudioPids, &v.AudioPids)
+		case schemas.M2tsSettings_AudioPtsOffsetDelta:
+			v.AudioPtsOffsetDelta = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_AudioPtsOffsetDelta, v.AudioPtsOffsetDelta)
+		case schemas.M2tsSettings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_Bitrate, v.Bitrate)
+		case schemas.M2tsSettings_BufferModel:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_BufferModel, &ev); err != nil {
+				return err
+			}
+			v.BufferModel = M2tsBufferModel(ev)
+			return nil
+		case schemas.M2tsSettings_DataPTSControl:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_DataPTSControl, &ev); err != nil {
+				return err
+			}
+			v.DataPTSControl = M2tsDataPtsControl(ev)
+			return nil
+		case schemas.M2tsSettings_DvbNitSettings:
+			v.DvbNitSettings = &DvbNitSettings{}
+			return v.DvbNitSettings.Deserialize(d)
+		case schemas.M2tsSettings_DvbSdtSettings:
+			v.DvbSdtSettings = &DvbSdtSettings{}
+			return v.DvbSdtSettings.Deserialize(d)
+		case schemas.M2tsSettings_DvbSubPids:
+			return deserialize__listOf__integerMin32Max8182(d, schemas.M2tsSettings_DvbSubPids, &v.DvbSubPids)
+		case schemas.M2tsSettings_DvbTdtSettings:
+			v.DvbTdtSettings = &DvbTdtSettings{}
+			return v.DvbTdtSettings.Deserialize(d)
+		case schemas.M2tsSettings_DvbTeletextPid:
+			v.DvbTeletextPid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_DvbTeletextPid, v.DvbTeletextPid)
+		case schemas.M2tsSettings_EbpAudioInterval:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_EbpAudioInterval, &ev); err != nil {
+				return err
+			}
+			v.EbpAudioInterval = M2tsEbpAudioInterval(ev)
+			return nil
+		case schemas.M2tsSettings_EbpPlacement:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_EbpPlacement, &ev); err != nil {
+				return err
+			}
+			v.EbpPlacement = M2tsEbpPlacement(ev)
+			return nil
+		case schemas.M2tsSettings_EsRateInPes:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_EsRateInPes, &ev); err != nil {
+				return err
+			}
+			v.EsRateInPes = M2tsEsRateInPes(ev)
+			return nil
+		case schemas.M2tsSettings_ForceTsVideoEbpOrder:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_ForceTsVideoEbpOrder, &ev); err != nil {
+				return err
+			}
+			v.ForceTsVideoEbpOrder = M2tsForceTsVideoEbpOrder(ev)
+			return nil
+		case schemas.M2tsSettings_FragmentTime:
+			v.FragmentTime = new(float64)
+			return d.ReadFloat64(schemas.M2tsSettings_FragmentTime, v.FragmentTime)
+		case schemas.M2tsSettings_KlvMetadata:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_KlvMetadata, &ev); err != nil {
+				return err
+			}
+			v.KlvMetadata = M2tsKlvMetadata(ev)
+			return nil
+		case schemas.M2tsSettings_MaxPcrInterval:
+			v.MaxPcrInterval = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_MaxPcrInterval, v.MaxPcrInterval)
+		case schemas.M2tsSettings_MinEbpInterval:
+			v.MinEbpInterval = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_MinEbpInterval, v.MinEbpInterval)
+		case schemas.M2tsSettings_NielsenId3:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_NielsenId3, &ev); err != nil {
+				return err
+			}
+			v.NielsenId3 = M2tsNielsenId3(ev)
+			return nil
+		case schemas.M2tsSettings_NullPacketBitrate:
+			v.NullPacketBitrate = new(float64)
+			return d.ReadFloat64(schemas.M2tsSettings_NullPacketBitrate, v.NullPacketBitrate)
+		case schemas.M2tsSettings_PatInterval:
+			v.PatInterval = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_PatInterval, v.PatInterval)
+		case schemas.M2tsSettings_PcrControl:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_PcrControl, &ev); err != nil {
+				return err
+			}
+			v.PcrControl = M2tsPcrControl(ev)
+			return nil
+		case schemas.M2tsSettings_PcrPid:
+			v.PcrPid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_PcrPid, v.PcrPid)
+		case schemas.M2tsSettings_PmtInterval:
+			v.PmtInterval = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_PmtInterval, v.PmtInterval)
+		case schemas.M2tsSettings_PmtPid:
+			v.PmtPid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_PmtPid, v.PmtPid)
+		case schemas.M2tsSettings_PreventBufferUnderflow:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_PreventBufferUnderflow, &ev); err != nil {
+				return err
+			}
+			v.PreventBufferUnderflow = M2tsPreventBufferUnderflow(ev)
+			return nil
+		case schemas.M2tsSettings_PrivateMetadataPid:
+			v.PrivateMetadataPid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_PrivateMetadataPid, v.PrivateMetadataPid)
+		case schemas.M2tsSettings_ProgramNumber:
+			v.ProgramNumber = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_ProgramNumber, v.ProgramNumber)
+		case schemas.M2tsSettings_PtsOffset:
+			v.PtsOffset = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_PtsOffset, v.PtsOffset)
+		case schemas.M2tsSettings_PtsOffsetMode:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_PtsOffsetMode, &ev); err != nil {
+				return err
+			}
+			v.PtsOffsetMode = TsPtsOffset(ev)
+			return nil
+		case schemas.M2tsSettings_RateMode:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_RateMode, &ev); err != nil {
+				return err
+			}
+			v.RateMode = M2tsRateMode(ev)
+			return nil
+		case schemas.M2tsSettings_Scte35Esam:
+			v.Scte35Esam = &M2tsScte35Esam{}
+			return v.Scte35Esam.Deserialize(d)
+		case schemas.M2tsSettings_Scte35Pid:
+			v.Scte35Pid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_Scte35Pid, v.Scte35Pid)
+		case schemas.M2tsSettings_Scte35Source:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_Scte35Source, &ev); err != nil {
+				return err
+			}
+			v.Scte35Source = M2tsScte35Source(ev)
+			return nil
+		case schemas.M2tsSettings_SegmentationMarkers:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_SegmentationMarkers, &ev); err != nil {
+				return err
+			}
+			v.SegmentationMarkers = M2tsSegmentationMarkers(ev)
+			return nil
+		case schemas.M2tsSettings_SegmentationStyle:
+			var ev string
+			if err := d.ReadString(schemas.M2tsSettings_SegmentationStyle, &ev); err != nil {
+				return err
+			}
+			v.SegmentationStyle = M2tsSegmentationStyle(ev)
+			return nil
+		case schemas.M2tsSettings_SegmentationTime:
+			v.SegmentationTime = new(float64)
+			return d.ReadFloat64(schemas.M2tsSettings_SegmentationTime, v.SegmentationTime)
+		case schemas.M2tsSettings_TimedMetadataPid:
+			v.TimedMetadataPid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_TimedMetadataPid, v.TimedMetadataPid)
+		case schemas.M2tsSettings_TransportStreamId:
+			v.TransportStreamId = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_TransportStreamId, v.TransportStreamId)
+		case schemas.M2tsSettings_VideoPid:
+			v.VideoPid = new(int32)
+			return d.ReadInt32(schemas.M2tsSettings_VideoPid, v.VideoPid)
+		}
+		return nil
+	})
+}
+
 // These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for
 // the MPEG2-TS segments in your HLS outputs.
 type M3u8Settings struct {
@@ -7061,6 +16057,179 @@ type M3u8Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *M3u8Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.M3u8Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *M3u8Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDuration != "" {
+		s.WriteString(schemas.M3u8Settings_AudioDuration, string(v.AudioDuration))
+	}
+	if v.AudioFramesPerPes != nil {
+		s.WriteInt32(schemas.M3u8Settings_AudioFramesPerPes, *v.AudioFramesPerPes)
+	}
+	serialize__listOf__integerMin32Max8182(s, schemas.M3u8Settings_AudioPids, v.AudioPids)
+	if v.AudioPtsOffsetDelta != nil {
+		s.WriteInt32(schemas.M3u8Settings_AudioPtsOffsetDelta, *v.AudioPtsOffsetDelta)
+	}
+	if v.DataPTSControl != "" {
+		s.WriteString(schemas.M3u8Settings_DataPTSControl, string(v.DataPTSControl))
+	}
+	if v.MaxPcrInterval != nil {
+		s.WriteInt32(schemas.M3u8Settings_MaxPcrInterval, *v.MaxPcrInterval)
+	}
+	if v.NielsenId3 != "" {
+		s.WriteString(schemas.M3u8Settings_NielsenId3, string(v.NielsenId3))
+	}
+	if v.PatInterval != nil {
+		s.WriteInt32(schemas.M3u8Settings_PatInterval, *v.PatInterval)
+	}
+	if v.PcrControl != "" {
+		s.WriteString(schemas.M3u8Settings_PcrControl, string(v.PcrControl))
+	}
+	if v.PcrPid != nil {
+		s.WriteInt32(schemas.M3u8Settings_PcrPid, *v.PcrPid)
+	}
+	if v.PmtInterval != nil {
+		s.WriteInt32(schemas.M3u8Settings_PmtInterval, *v.PmtInterval)
+	}
+	if v.PmtPid != nil {
+		s.WriteInt32(schemas.M3u8Settings_PmtPid, *v.PmtPid)
+	}
+	if v.PrivateMetadataPid != nil {
+		s.WriteInt32(schemas.M3u8Settings_PrivateMetadataPid, *v.PrivateMetadataPid)
+	}
+	if v.ProgramNumber != nil {
+		s.WriteInt32(schemas.M3u8Settings_ProgramNumber, *v.ProgramNumber)
+	}
+	if v.PtsOffset != nil {
+		s.WriteInt32(schemas.M3u8Settings_PtsOffset, *v.PtsOffset)
+	}
+	if v.PtsOffsetMode != "" {
+		s.WriteString(schemas.M3u8Settings_PtsOffsetMode, string(v.PtsOffsetMode))
+	}
+	if v.Scte35Pid != nil {
+		s.WriteInt32(schemas.M3u8Settings_Scte35Pid, *v.Scte35Pid)
+	}
+	if v.Scte35Source != "" {
+		s.WriteString(schemas.M3u8Settings_Scte35Source, string(v.Scte35Source))
+	}
+	if v.TimedMetadata != "" {
+		s.WriteString(schemas.M3u8Settings_TimedMetadata, string(v.TimedMetadata))
+	}
+	if v.TimedMetadataPid != nil {
+		s.WriteInt32(schemas.M3u8Settings_TimedMetadataPid, *v.TimedMetadataPid)
+	}
+	if v.TransportStreamId != nil {
+		s.WriteInt32(schemas.M3u8Settings_TransportStreamId, *v.TransportStreamId)
+	}
+	if v.VideoPid != nil {
+		s.WriteInt32(schemas.M3u8Settings_VideoPid, *v.VideoPid)
+	}
+}
+func (v *M3u8Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.M3u8Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.M3u8Settings_AudioDuration:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_AudioDuration, &ev); err != nil {
+				return err
+			}
+			v.AudioDuration = M3u8AudioDuration(ev)
+			return nil
+		case schemas.M3u8Settings_AudioFramesPerPes:
+			v.AudioFramesPerPes = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_AudioFramesPerPes, v.AudioFramesPerPes)
+		case schemas.M3u8Settings_AudioPids:
+			return deserialize__listOf__integerMin32Max8182(d, schemas.M3u8Settings_AudioPids, &v.AudioPids)
+		case schemas.M3u8Settings_AudioPtsOffsetDelta:
+			v.AudioPtsOffsetDelta = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_AudioPtsOffsetDelta, v.AudioPtsOffsetDelta)
+		case schemas.M3u8Settings_DataPTSControl:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_DataPTSControl, &ev); err != nil {
+				return err
+			}
+			v.DataPTSControl = M3u8DataPtsControl(ev)
+			return nil
+		case schemas.M3u8Settings_MaxPcrInterval:
+			v.MaxPcrInterval = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_MaxPcrInterval, v.MaxPcrInterval)
+		case schemas.M3u8Settings_NielsenId3:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_NielsenId3, &ev); err != nil {
+				return err
+			}
+			v.NielsenId3 = M3u8NielsenId3(ev)
+			return nil
+		case schemas.M3u8Settings_PatInterval:
+			v.PatInterval = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_PatInterval, v.PatInterval)
+		case schemas.M3u8Settings_PcrControl:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_PcrControl, &ev); err != nil {
+				return err
+			}
+			v.PcrControl = M3u8PcrControl(ev)
+			return nil
+		case schemas.M3u8Settings_PcrPid:
+			v.PcrPid = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_PcrPid, v.PcrPid)
+		case schemas.M3u8Settings_PmtInterval:
+			v.PmtInterval = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_PmtInterval, v.PmtInterval)
+		case schemas.M3u8Settings_PmtPid:
+			v.PmtPid = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_PmtPid, v.PmtPid)
+		case schemas.M3u8Settings_PrivateMetadataPid:
+			v.PrivateMetadataPid = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_PrivateMetadataPid, v.PrivateMetadataPid)
+		case schemas.M3u8Settings_ProgramNumber:
+			v.ProgramNumber = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_ProgramNumber, v.ProgramNumber)
+		case schemas.M3u8Settings_PtsOffset:
+			v.PtsOffset = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_PtsOffset, v.PtsOffset)
+		case schemas.M3u8Settings_PtsOffsetMode:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_PtsOffsetMode, &ev); err != nil {
+				return err
+			}
+			v.PtsOffsetMode = TsPtsOffset(ev)
+			return nil
+		case schemas.M3u8Settings_Scte35Pid:
+			v.Scte35Pid = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_Scte35Pid, v.Scte35Pid)
+		case schemas.M3u8Settings_Scte35Source:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_Scte35Source, &ev); err != nil {
+				return err
+			}
+			v.Scte35Source = M3u8Scte35Source(ev)
+			return nil
+		case schemas.M3u8Settings_TimedMetadata:
+			var ev string
+			if err := d.ReadString(schemas.M3u8Settings_TimedMetadata, &ev); err != nil {
+				return err
+			}
+			v.TimedMetadata = TimedMetadata(ev)
+			return nil
+		case schemas.M3u8Settings_TimedMetadataPid:
+			v.TimedMetadataPid = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_TimedMetadataPid, v.TimedMetadataPid)
+		case schemas.M3u8Settings_TransportStreamId:
+			v.TransportStreamId = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_TransportStreamId, v.TransportStreamId)
+		case schemas.M3u8Settings_VideoPid:
+			v.VideoPid = new(int32)
+			return d.ReadInt32(schemas.M3u8Settings_VideoPid, v.VideoPid)
+		}
+		return nil
+	})
+}
+
 // Mastering display color volume metadata (SMPTE ST 2086). Describes the color
 // volume of the display used to master the content. Chromaticity coordinates are
 // in units of 0.00002. Luminance values are in units of 0.0001 cd/m².
@@ -7099,6 +16268,82 @@ type MasteringDisplayColorVolume struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MasteringDisplayColorVolume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MasteringDisplayColorVolume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MasteringDisplayColorVolume) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BluePrimaryX != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_BluePrimaryX, *v.BluePrimaryX)
+	}
+	if v.BluePrimaryY != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_BluePrimaryY, *v.BluePrimaryY)
+	}
+	if v.GreenPrimaryX != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_GreenPrimaryX, *v.GreenPrimaryX)
+	}
+	if v.GreenPrimaryY != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_GreenPrimaryY, *v.GreenPrimaryY)
+	}
+	if v.MaxLuminance != nil {
+		s.WriteInt64(schemas.MasteringDisplayColorVolume_MaxLuminance, *v.MaxLuminance)
+	}
+	if v.MinLuminance != nil {
+		s.WriteInt64(schemas.MasteringDisplayColorVolume_MinLuminance, *v.MinLuminance)
+	}
+	if v.RedPrimaryX != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_RedPrimaryX, *v.RedPrimaryX)
+	}
+	if v.RedPrimaryY != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_RedPrimaryY, *v.RedPrimaryY)
+	}
+	if v.WhitePointX != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_WhitePointX, *v.WhitePointX)
+	}
+	if v.WhitePointY != nil {
+		s.WriteInt32(schemas.MasteringDisplayColorVolume_WhitePointY, *v.WhitePointY)
+	}
+}
+func (v *MasteringDisplayColorVolume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MasteringDisplayColorVolume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MasteringDisplayColorVolume_BluePrimaryX:
+			v.BluePrimaryX = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_BluePrimaryX, v.BluePrimaryX)
+		case schemas.MasteringDisplayColorVolume_BluePrimaryY:
+			v.BluePrimaryY = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_BluePrimaryY, v.BluePrimaryY)
+		case schemas.MasteringDisplayColorVolume_GreenPrimaryX:
+			v.GreenPrimaryX = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_GreenPrimaryX, v.GreenPrimaryX)
+		case schemas.MasteringDisplayColorVolume_GreenPrimaryY:
+			v.GreenPrimaryY = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_GreenPrimaryY, v.GreenPrimaryY)
+		case schemas.MasteringDisplayColorVolume_MaxLuminance:
+			v.MaxLuminance = new(int64)
+			return d.ReadInt64(schemas.MasteringDisplayColorVolume_MaxLuminance, v.MaxLuminance)
+		case schemas.MasteringDisplayColorVolume_MinLuminance:
+			v.MinLuminance = new(int64)
+			return d.ReadInt64(schemas.MasteringDisplayColorVolume_MinLuminance, v.MinLuminance)
+		case schemas.MasteringDisplayColorVolume_RedPrimaryX:
+			v.RedPrimaryX = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_RedPrimaryX, v.RedPrimaryX)
+		case schemas.MasteringDisplayColorVolume_RedPrimaryY:
+			v.RedPrimaryY = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_RedPrimaryY, v.RedPrimaryY)
+		case schemas.MasteringDisplayColorVolume_WhitePointX:
+			v.WhitePointX = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_WhitePointX, v.WhitePointX)
+		case schemas.MasteringDisplayColorVolume_WhitePointY:
+			v.WhitePointY = new(int32)
+			return d.ReadInt32(schemas.MasteringDisplayColorVolume_WhitePointY, v.WhitePointY)
+		}
+		return nil
+	})
+}
+
 // Metadata and other file information.
 type Metadata struct {
 
@@ -7115,6 +16360,46 @@ type Metadata struct {
 	MimeType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Metadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.Metadata_ETag, *v.ETag)
+	}
+	if v.FileSize != nil {
+		s.WriteInt64(schemas.Metadata_FileSize, *v.FileSize)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.Metadata_LastModified, *v.LastModified)
+	}
+	if v.MimeType != nil {
+		s.WriteString(schemas.Metadata_MimeType, *v.MimeType)
+	}
+}
+func (v *Metadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metadata_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.Metadata_ETag, v.ETag)
+		case schemas.Metadata_FileSize:
+			v.FileSize = new(int64)
+			return d.ReadInt64(schemas.Metadata_FileSize, v.FileSize)
+		case schemas.Metadata_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.Metadata_LastModified, v.LastModified)
+		case schemas.Metadata_MimeType:
+			v.MimeType = new(string)
+			return d.ReadString(schemas.Metadata_MimeType, v.MimeType)
+		}
+		return nil
+	})
 }
 
 // Use Min bottom rendition size to specify a minimum size for the lowest
@@ -7135,6 +16420,34 @@ type MinBottomRenditionSize struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MinBottomRenditionSize) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MinBottomRenditionSize)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MinBottomRenditionSize) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.MinBottomRenditionSize_Height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.MinBottomRenditionSize_Width, *v.Width)
+	}
+}
+func (v *MinBottomRenditionSize) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MinBottomRenditionSize, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MinBottomRenditionSize_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.MinBottomRenditionSize_Height, v.Height)
+		case schemas.MinBottomRenditionSize_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.MinBottomRenditionSize_Width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Use Min top rendition size to specify a minimum size for the highest resolution
 // in your ABR stack. * The highest resolution in your ABR stack will be equal to
 // or greater than the value that you enter. For example: If you specify 1280x720
@@ -7151,6 +16464,34 @@ type MinTopRenditionSize struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MinTopRenditionSize) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MinTopRenditionSize)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MinTopRenditionSize) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.MinTopRenditionSize_Height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.MinTopRenditionSize_Width, *v.Width)
+	}
+}
+func (v *MinTopRenditionSize) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MinTopRenditionSize, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MinTopRenditionSize_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.MinTopRenditionSize_Height, v.Height)
+		case schemas.MinTopRenditionSize_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.MinTopRenditionSize_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // Overlay motion graphics on top of your video. The motion graphics that you
@@ -7208,6 +16549,70 @@ type MotionImageInserter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MotionImageInserter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MotionImageInserter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MotionImageInserter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Framerate != nil {
+		s.WriteStruct(schemas.MotionImageInserter_Framerate)
+		v.Framerate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.MotionImageInserter_Input, *v.Input)
+	}
+	if v.InsertionMode != "" {
+		s.WriteString(schemas.MotionImageInserter_InsertionMode, string(v.InsertionMode))
+	}
+	if v.Offset != nil {
+		s.WriteStruct(schemas.MotionImageInserter_Offset)
+		v.Offset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Playback != "" {
+		s.WriteString(schemas.MotionImageInserter_Playback, string(v.Playback))
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.MotionImageInserter_StartTime, *v.StartTime)
+	}
+}
+func (v *MotionImageInserter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MotionImageInserter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MotionImageInserter_Framerate:
+			v.Framerate = &MotionImageInsertionFramerate{}
+			return v.Framerate.Deserialize(d)
+		case schemas.MotionImageInserter_Input:
+			v.Input = new(string)
+			return d.ReadString(schemas.MotionImageInserter_Input, v.Input)
+		case schemas.MotionImageInserter_InsertionMode:
+			var ev string
+			if err := d.ReadString(schemas.MotionImageInserter_InsertionMode, &ev); err != nil {
+				return err
+			}
+			v.InsertionMode = MotionImageInsertionMode(ev)
+			return nil
+		case schemas.MotionImageInserter_Offset:
+			v.Offset = &MotionImageInsertionOffset{}
+			return v.Offset.Deserialize(d)
+		case schemas.MotionImageInserter_Playback:
+			var ev string
+			if err := d.ReadString(schemas.MotionImageInserter_Playback, &ev); err != nil {
+				return err
+			}
+			v.Playback = MotionImagePlayback(ev)
+			return nil
+		case schemas.MotionImageInserter_StartTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.MotionImageInserter_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // For motion overlays that don't have a built-in frame rate, specify the frame
 // rate of the overlay in frames per second, as a fraction. For example, specify 24
 // fps as 24/1. The overlay frame rate doesn't need to match the frame rate of the
@@ -7225,6 +16630,34 @@ type MotionImageInsertionFramerate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MotionImageInsertionFramerate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MotionImageInsertionFramerate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MotionImageInsertionFramerate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.MotionImageInsertionFramerate_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.MotionImageInsertionFramerate_FramerateNumerator, *v.FramerateNumerator)
+	}
+}
+func (v *MotionImageInsertionFramerate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MotionImageInsertionFramerate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MotionImageInsertionFramerate_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.MotionImageInsertionFramerate_FramerateDenominator, v.FramerateDenominator)
+		case schemas.MotionImageInsertionFramerate_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.MotionImageInsertionFramerate_FramerateNumerator, v.FramerateNumerator)
+		}
+		return nil
+	})
+}
+
 // Specify the offset between the upper-left corner of the video frame and the top
 // left corner of the overlay.
 type MotionImageInsertionOffset struct {
@@ -7238,6 +16671,34 @@ type MotionImageInsertionOffset struct {
 	ImageY *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MotionImageInsertionOffset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MotionImageInsertionOffset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MotionImageInsertionOffset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageX != nil {
+		s.WriteInt32(schemas.MotionImageInsertionOffset_ImageX, *v.ImageX)
+	}
+	if v.ImageY != nil {
+		s.WriteInt32(schemas.MotionImageInsertionOffset_ImageY, *v.ImageY)
+	}
+}
+func (v *MotionImageInsertionOffset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MotionImageInsertionOffset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MotionImageInsertionOffset_ImageX:
+			v.ImageX = new(int32)
+			return d.ReadInt32(schemas.MotionImageInsertionOffset_ImageX, v.ImageX)
+		case schemas.MotionImageInsertionOffset_ImageY:
+			v.ImageY = new(int32)
+			return d.ReadInt32(schemas.MotionImageInsertionOffset_ImageY, v.ImageY)
+		}
+		return nil
+	})
 }
 
 // These settings relate to your QuickTime MOV output container.
@@ -7285,6 +16746,82 @@ type MovSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MovSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MovSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MovSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDuration != "" {
+		s.WriteString(schemas.MovSettings_AudioDuration, string(v.AudioDuration))
+	}
+	if v.ClapAtom != "" {
+		s.WriteString(schemas.MovSettings_ClapAtom, string(v.ClapAtom))
+	}
+	if v.CslgAtom != "" {
+		s.WriteString(schemas.MovSettings_CslgAtom, string(v.CslgAtom))
+	}
+	if v.Mpeg2FourCCControl != "" {
+		s.WriteString(schemas.MovSettings_Mpeg2FourCCControl, string(v.Mpeg2FourCCControl))
+	}
+	if v.PaddingControl != "" {
+		s.WriteString(schemas.MovSettings_PaddingControl, string(v.PaddingControl))
+	}
+	if v.Reference != "" {
+		s.WriteString(schemas.MovSettings_Reference, string(v.Reference))
+	}
+}
+func (v *MovSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MovSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MovSettings_AudioDuration:
+			var ev string
+			if err := d.ReadString(schemas.MovSettings_AudioDuration, &ev); err != nil {
+				return err
+			}
+			v.AudioDuration = CmfcAudioDuration(ev)
+			return nil
+		case schemas.MovSettings_ClapAtom:
+			var ev string
+			if err := d.ReadString(schemas.MovSettings_ClapAtom, &ev); err != nil {
+				return err
+			}
+			v.ClapAtom = MovClapAtom(ev)
+			return nil
+		case schemas.MovSettings_CslgAtom:
+			var ev string
+			if err := d.ReadString(schemas.MovSettings_CslgAtom, &ev); err != nil {
+				return err
+			}
+			v.CslgAtom = MovCslgAtom(ev)
+			return nil
+		case schemas.MovSettings_Mpeg2FourCCControl:
+			var ev string
+			if err := d.ReadString(schemas.MovSettings_Mpeg2FourCCControl, &ev); err != nil {
+				return err
+			}
+			v.Mpeg2FourCCControl = MovMpeg2FourCCControl(ev)
+			return nil
+		case schemas.MovSettings_PaddingControl:
+			var ev string
+			if err := d.ReadString(schemas.MovSettings_PaddingControl, &ev); err != nil {
+				return err
+			}
+			v.PaddingControl = MovPaddingControl(ev)
+			return nil
+		case schemas.MovSettings_Reference:
+			var ev string
+			if err := d.ReadString(schemas.MovSettings_Reference, &ev); err != nil {
+				return err
+			}
+			v.Reference = MovReference(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec to the value MP2.
 type Mp2Settings struct {
 
@@ -7314,6 +16851,50 @@ type Mp2Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Mp2Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mp2Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mp2Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDescriptionMix != "" {
+		s.WriteString(schemas.Mp2Settings_AudioDescriptionMix, string(v.AudioDescriptionMix))
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Mp2Settings_Bitrate, *v.Bitrate)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.Mp2Settings_Channels, *v.Channels)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.Mp2Settings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *Mp2Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mp2Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mp2Settings_AudioDescriptionMix:
+			var ev string
+			if err := d.ReadString(schemas.Mp2Settings_AudioDescriptionMix, &ev); err != nil {
+				return err
+			}
+			v.AudioDescriptionMix = Mp2AudioDescriptionMix(ev)
+			return nil
+		case schemas.Mp2Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Mp2Settings_Bitrate, v.Bitrate)
+		case schemas.Mp2Settings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.Mp2Settings_Channels, v.Channels)
+		case schemas.Mp2Settings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.Mp2Settings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the
 // value MP3.
 type Mp3Settings struct {
@@ -7339,6 +16920,56 @@ type Mp3Settings struct {
 	VbrQuality *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Mp3Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mp3Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mp3Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Mp3Settings_Bitrate, *v.Bitrate)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.Mp3Settings_Channels, *v.Channels)
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.Mp3Settings_RateControlMode, string(v.RateControlMode))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.Mp3Settings_SampleRate, *v.SampleRate)
+	}
+	if v.VbrQuality != nil {
+		s.WriteInt32(schemas.Mp3Settings_VbrQuality, *v.VbrQuality)
+	}
+}
+func (v *Mp3Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mp3Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mp3Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Mp3Settings_Bitrate, v.Bitrate)
+		case schemas.Mp3Settings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.Mp3Settings_Channels, v.Channels)
+		case schemas.Mp3Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.Mp3Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = Mp3RateControlMode(ev)
+			return nil
+		case schemas.Mp3Settings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.Mp3Settings_SampleRate, v.SampleRate)
+		case schemas.Mp3Settings_VbrQuality:
+			v.VbrQuality = new(int32)
+			return d.ReadInt32(schemas.Mp3Settings_VbrQuality, v.VbrQuality)
+		}
+		return nil
+	})
 }
 
 // These settings relate to your MP4 output container. You can create audio only
@@ -7406,6 +17037,96 @@ type Mp4Settings struct {
 	SigningKmsKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Mp4Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mp4Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mp4Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDuration != "" {
+		s.WriteString(schemas.Mp4Settings_AudioDuration, string(v.AudioDuration))
+	}
+	if v.C2paManifest != "" {
+		s.WriteString(schemas.Mp4Settings_C2paManifest, string(v.C2paManifest))
+	}
+	if v.CertificateSecret != nil {
+		s.WriteString(schemas.Mp4Settings_CertificateSecret, *v.CertificateSecret)
+	}
+	if v.CslgAtom != "" {
+		s.WriteString(schemas.Mp4Settings_CslgAtom, string(v.CslgAtom))
+	}
+	if v.CttsVersion != nil {
+		s.WriteInt32(schemas.Mp4Settings_CttsVersion, *v.CttsVersion)
+	}
+	if v.FreeSpaceBox != "" {
+		s.WriteString(schemas.Mp4Settings_FreeSpaceBox, string(v.FreeSpaceBox))
+	}
+	if v.MoovPlacement != "" {
+		s.WriteString(schemas.Mp4Settings_MoovPlacement, string(v.MoovPlacement))
+	}
+	if v.Mp4MajorBrand != nil {
+		s.WriteString(schemas.Mp4Settings_Mp4MajorBrand, *v.Mp4MajorBrand)
+	}
+	if v.SigningKmsKey != nil {
+		s.WriteString(schemas.Mp4Settings_SigningKmsKey, *v.SigningKmsKey)
+	}
+}
+func (v *Mp4Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mp4Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mp4Settings_AudioDuration:
+			var ev string
+			if err := d.ReadString(schemas.Mp4Settings_AudioDuration, &ev); err != nil {
+				return err
+			}
+			v.AudioDuration = CmfcAudioDuration(ev)
+			return nil
+		case schemas.Mp4Settings_C2paManifest:
+			var ev string
+			if err := d.ReadString(schemas.Mp4Settings_C2paManifest, &ev); err != nil {
+				return err
+			}
+			v.C2paManifest = Mp4C2paManifest(ev)
+			return nil
+		case schemas.Mp4Settings_CertificateSecret:
+			v.CertificateSecret = new(string)
+			return d.ReadString(schemas.Mp4Settings_CertificateSecret, v.CertificateSecret)
+		case schemas.Mp4Settings_CslgAtom:
+			var ev string
+			if err := d.ReadString(schemas.Mp4Settings_CslgAtom, &ev); err != nil {
+				return err
+			}
+			v.CslgAtom = Mp4CslgAtom(ev)
+			return nil
+		case schemas.Mp4Settings_CttsVersion:
+			v.CttsVersion = new(int32)
+			return d.ReadInt32(schemas.Mp4Settings_CttsVersion, v.CttsVersion)
+		case schemas.Mp4Settings_FreeSpaceBox:
+			var ev string
+			if err := d.ReadString(schemas.Mp4Settings_FreeSpaceBox, &ev); err != nil {
+				return err
+			}
+			v.FreeSpaceBox = Mp4FreeSpaceBox(ev)
+			return nil
+		case schemas.Mp4Settings_MoovPlacement:
+			var ev string
+			if err := d.ReadString(schemas.Mp4Settings_MoovPlacement, &ev); err != nil {
+				return err
+			}
+			v.MoovPlacement = Mp4MoovPlacement(ev)
+			return nil
+		case schemas.Mp4Settings_Mp4MajorBrand:
+			v.Mp4MajorBrand = new(string)
+			return d.ReadString(schemas.Mp4Settings_Mp4MajorBrand, v.Mp4MajorBrand)
+		case schemas.Mp4Settings_SigningKmsKey:
+			v.SigningKmsKey = new(string)
+			return d.ReadString(schemas.Mp4Settings_SigningKmsKey, v.SigningKmsKey)
+		}
+		return nil
+	})
 }
 
 // These settings relate to the fragmented MP4 container for the segments in your
@@ -7517,6 +17238,146 @@ type MpdSettings struct {
 	TimedMetadataValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MpdSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MpdSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MpdSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessibilityCaptionHints != "" {
+		s.WriteString(schemas.MpdSettings_AccessibilityCaptionHints, string(v.AccessibilityCaptionHints))
+	}
+	if v.AudioDuration != "" {
+		s.WriteString(schemas.MpdSettings_AudioDuration, string(v.AudioDuration))
+	}
+	if v.C2paManifest != "" {
+		s.WriteString(schemas.MpdSettings_C2paManifest, string(v.C2paManifest))
+	}
+	if v.CaptionContainerType != "" {
+		s.WriteString(schemas.MpdSettings_CaptionContainerType, string(v.CaptionContainerType))
+	}
+	if v.CertificateSecret != nil {
+		s.WriteString(schemas.MpdSettings_CertificateSecret, *v.CertificateSecret)
+	}
+	if v.KlvMetadata != "" {
+		s.WriteString(schemas.MpdSettings_KlvMetadata, string(v.KlvMetadata))
+	}
+	if v.ManifestMetadataSignaling != "" {
+		s.WriteString(schemas.MpdSettings_ManifestMetadataSignaling, string(v.ManifestMetadataSignaling))
+	}
+	if v.Scte35Esam != "" {
+		s.WriteString(schemas.MpdSettings_Scte35Esam, string(v.Scte35Esam))
+	}
+	if v.Scte35Source != "" {
+		s.WriteString(schemas.MpdSettings_Scte35Source, string(v.Scte35Source))
+	}
+	if v.SigningKmsKey != nil {
+		s.WriteString(schemas.MpdSettings_SigningKmsKey, *v.SigningKmsKey)
+	}
+	if v.TimedMetadata != "" {
+		s.WriteString(schemas.MpdSettings_TimedMetadata, string(v.TimedMetadata))
+	}
+	if v.TimedMetadataBoxVersion != "" {
+		s.WriteString(schemas.MpdSettings_TimedMetadataBoxVersion, string(v.TimedMetadataBoxVersion))
+	}
+	if v.TimedMetadataSchemeIdUri != nil {
+		s.WriteString(schemas.MpdSettings_TimedMetadataSchemeIdUri, *v.TimedMetadataSchemeIdUri)
+	}
+	if v.TimedMetadataValue != nil {
+		s.WriteString(schemas.MpdSettings_TimedMetadataValue, *v.TimedMetadataValue)
+	}
+}
+func (v *MpdSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MpdSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MpdSettings_AccessibilityCaptionHints:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_AccessibilityCaptionHints, &ev); err != nil {
+				return err
+			}
+			v.AccessibilityCaptionHints = MpdAccessibilityCaptionHints(ev)
+			return nil
+		case schemas.MpdSettings_AudioDuration:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_AudioDuration, &ev); err != nil {
+				return err
+			}
+			v.AudioDuration = MpdAudioDuration(ev)
+			return nil
+		case schemas.MpdSettings_C2paManifest:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_C2paManifest, &ev); err != nil {
+				return err
+			}
+			v.C2paManifest = MpdC2paManifest(ev)
+			return nil
+		case schemas.MpdSettings_CaptionContainerType:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_CaptionContainerType, &ev); err != nil {
+				return err
+			}
+			v.CaptionContainerType = MpdCaptionContainerType(ev)
+			return nil
+		case schemas.MpdSettings_CertificateSecret:
+			v.CertificateSecret = new(string)
+			return d.ReadString(schemas.MpdSettings_CertificateSecret, v.CertificateSecret)
+		case schemas.MpdSettings_KlvMetadata:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_KlvMetadata, &ev); err != nil {
+				return err
+			}
+			v.KlvMetadata = MpdKlvMetadata(ev)
+			return nil
+		case schemas.MpdSettings_ManifestMetadataSignaling:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_ManifestMetadataSignaling, &ev); err != nil {
+				return err
+			}
+			v.ManifestMetadataSignaling = MpdManifestMetadataSignaling(ev)
+			return nil
+		case schemas.MpdSettings_Scte35Esam:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_Scte35Esam, &ev); err != nil {
+				return err
+			}
+			v.Scte35Esam = MpdScte35Esam(ev)
+			return nil
+		case schemas.MpdSettings_Scte35Source:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_Scte35Source, &ev); err != nil {
+				return err
+			}
+			v.Scte35Source = MpdScte35Source(ev)
+			return nil
+		case schemas.MpdSettings_SigningKmsKey:
+			v.SigningKmsKey = new(string)
+			return d.ReadString(schemas.MpdSettings_SigningKmsKey, v.SigningKmsKey)
+		case schemas.MpdSettings_TimedMetadata:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_TimedMetadata, &ev); err != nil {
+				return err
+			}
+			v.TimedMetadata = MpdTimedMetadata(ev)
+			return nil
+		case schemas.MpdSettings_TimedMetadataBoxVersion:
+			var ev string
+			if err := d.ReadString(schemas.MpdSettings_TimedMetadataBoxVersion, &ev); err != nil {
+				return err
+			}
+			v.TimedMetadataBoxVersion = MpdTimedMetadataBoxVersion(ev)
+			return nil
+		case schemas.MpdSettings_TimedMetadataSchemeIdUri:
+			v.TimedMetadataSchemeIdUri = new(string)
+			return d.ReadString(schemas.MpdSettings_TimedMetadataSchemeIdUri, v.TimedMetadataSchemeIdUri)
+		case schemas.MpdSettings_TimedMetadataValue:
+			v.TimedMetadataValue = new(string)
+			return d.ReadString(schemas.MpdSettings_TimedMetadataValue, v.TimedMetadataValue)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value MPEG2.
@@ -7792,6 +17653,299 @@ type Mpeg2Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Mpeg2Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mpeg2Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mpeg2Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveQuantization != "" {
+		s.WriteString(schemas.Mpeg2Settings_AdaptiveQuantization, string(v.AdaptiveQuantization))
+	}
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_Bitrate, *v.Bitrate)
+	}
+	if v.CodecLevel != "" {
+		s.WriteString(schemas.Mpeg2Settings_CodecLevel, string(v.CodecLevel))
+	}
+	if v.CodecProfile != "" {
+		s.WriteString(schemas.Mpeg2Settings_CodecProfile, string(v.CodecProfile))
+	}
+	if v.DynamicSubGop != "" {
+		s.WriteString(schemas.Mpeg2Settings_DynamicSubGop, string(v.DynamicSubGop))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.Mpeg2Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.Mpeg2Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.GopClosedCadence != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_GopClosedCadence, *v.GopClosedCadence)
+	}
+	if v.GopSize != nil {
+		s.WriteFloat64(schemas.Mpeg2Settings_GopSize, *v.GopSize)
+	}
+	if v.GopSizeUnits != "" {
+		s.WriteString(schemas.Mpeg2Settings_GopSizeUnits, string(v.GopSizeUnits))
+	}
+	if v.HrdBufferFinalFillPercentage != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_HrdBufferFinalFillPercentage, *v.HrdBufferFinalFillPercentage)
+	}
+	if v.HrdBufferInitialFillPercentage != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_HrdBufferInitialFillPercentage, *v.HrdBufferInitialFillPercentage)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.Mpeg2Settings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.IntraDcPrecision != "" {
+		s.WriteString(schemas.Mpeg2Settings_IntraDcPrecision, string(v.IntraDcPrecision))
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.MinIInterval != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_MinIInterval, *v.MinIInterval)
+	}
+	if v.NumberBFramesBetweenReferenceFrames != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_NumberBFramesBetweenReferenceFrames, *v.NumberBFramesBetweenReferenceFrames)
+	}
+	if v.ParControl != "" {
+		s.WriteString(schemas.Mpeg2Settings_ParControl, string(v.ParControl))
+	}
+	if v.ParDenominator != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_ParDenominator, *v.ParDenominator)
+	}
+	if v.ParNumerator != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_ParNumerator, *v.ParNumerator)
+	}
+	serialize__listOfFrameMetricType(s, schemas.Mpeg2Settings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.Mpeg2Settings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.Mpeg2Settings_RateControlMode, string(v.RateControlMode))
+	}
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.Mpeg2Settings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SceneChangeDetect != "" {
+		s.WriteString(schemas.Mpeg2Settings_SceneChangeDetect, string(v.SceneChangeDetect))
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.Mpeg2Settings_SlowPal, string(v.SlowPal))
+	}
+	if v.Softness != nil {
+		s.WriteInt32(schemas.Mpeg2Settings_Softness, *v.Softness)
+	}
+	if v.SpatialAdaptiveQuantization != "" {
+		s.WriteString(schemas.Mpeg2Settings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
+	}
+	if v.Syntax != "" {
+		s.WriteString(schemas.Mpeg2Settings_Syntax, string(v.Syntax))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.Mpeg2Settings_Telecine, string(v.Telecine))
+	}
+	if v.TemporalAdaptiveQuantization != "" {
+		s.WriteString(schemas.Mpeg2Settings_TemporalAdaptiveQuantization, string(v.TemporalAdaptiveQuantization))
+	}
+}
+func (v *Mpeg2Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mpeg2Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mpeg2Settings_AdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_AdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.AdaptiveQuantization = Mpeg2AdaptiveQuantization(ev)
+			return nil
+		case schemas.Mpeg2Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_Bitrate, v.Bitrate)
+		case schemas.Mpeg2Settings_CodecLevel:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_CodecLevel, &ev); err != nil {
+				return err
+			}
+			v.CodecLevel = Mpeg2CodecLevel(ev)
+			return nil
+		case schemas.Mpeg2Settings_CodecProfile:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_CodecProfile, &ev); err != nil {
+				return err
+			}
+			v.CodecProfile = Mpeg2CodecProfile(ev)
+			return nil
+		case schemas.Mpeg2Settings_DynamicSubGop:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_DynamicSubGop, &ev); err != nil {
+				return err
+			}
+			v.DynamicSubGop = Mpeg2DynamicSubGop(ev)
+			return nil
+		case schemas.Mpeg2Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = Mpeg2FramerateControl(ev)
+			return nil
+		case schemas.Mpeg2Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = Mpeg2FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.Mpeg2Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.Mpeg2Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.Mpeg2Settings_GopClosedCadence:
+			v.GopClosedCadence = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_GopClosedCadence, v.GopClosedCadence)
+		case schemas.Mpeg2Settings_GopSize:
+			v.GopSize = new(float64)
+			return d.ReadFloat64(schemas.Mpeg2Settings_GopSize, v.GopSize)
+		case schemas.Mpeg2Settings_GopSizeUnits:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_GopSizeUnits, &ev); err != nil {
+				return err
+			}
+			v.GopSizeUnits = Mpeg2GopSizeUnits(ev)
+			return nil
+		case schemas.Mpeg2Settings_HrdBufferFinalFillPercentage:
+			v.HrdBufferFinalFillPercentage = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_HrdBufferFinalFillPercentage, v.HrdBufferFinalFillPercentage)
+		case schemas.Mpeg2Settings_HrdBufferInitialFillPercentage:
+			v.HrdBufferInitialFillPercentage = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_HrdBufferInitialFillPercentage, v.HrdBufferInitialFillPercentage)
+		case schemas.Mpeg2Settings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.Mpeg2Settings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = Mpeg2InterlaceMode(ev)
+			return nil
+		case schemas.Mpeg2Settings_IntraDcPrecision:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_IntraDcPrecision, &ev); err != nil {
+				return err
+			}
+			v.IntraDcPrecision = Mpeg2IntraDcPrecision(ev)
+			return nil
+		case schemas.Mpeg2Settings_MaxBitrate:
+			v.MaxBitrate = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_MaxBitrate, v.MaxBitrate)
+		case schemas.Mpeg2Settings_MinIInterval:
+			v.MinIInterval = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_MinIInterval, v.MinIInterval)
+		case schemas.Mpeg2Settings_NumberBFramesBetweenReferenceFrames:
+			v.NumberBFramesBetweenReferenceFrames = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_NumberBFramesBetweenReferenceFrames, v.NumberBFramesBetweenReferenceFrames)
+		case schemas.Mpeg2Settings_ParControl:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_ParControl, &ev); err != nil {
+				return err
+			}
+			v.ParControl = Mpeg2ParControl(ev)
+			return nil
+		case schemas.Mpeg2Settings_ParDenominator:
+			v.ParDenominator = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_ParDenominator, v.ParDenominator)
+		case schemas.Mpeg2Settings_ParNumerator:
+			v.ParNumerator = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_ParNumerator, v.ParNumerator)
+		case schemas.Mpeg2Settings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.Mpeg2Settings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.Mpeg2Settings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = Mpeg2QualityTuningLevel(ev)
+			return nil
+		case schemas.Mpeg2Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = Mpeg2RateControlMode(ev)
+			return nil
+		case schemas.Mpeg2Settings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = Mpeg2ScanTypeConversionMode(ev)
+			return nil
+		case schemas.Mpeg2Settings_SceneChangeDetect:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_SceneChangeDetect, &ev); err != nil {
+				return err
+			}
+			v.SceneChangeDetect = Mpeg2SceneChangeDetect(ev)
+			return nil
+		case schemas.Mpeg2Settings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = Mpeg2SlowPal(ev)
+			return nil
+		case schemas.Mpeg2Settings_Softness:
+			v.Softness = new(int32)
+			return d.ReadInt32(schemas.Mpeg2Settings_Softness, v.Softness)
+		case schemas.Mpeg2Settings_SpatialAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_SpatialAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.SpatialAdaptiveQuantization = Mpeg2SpatialAdaptiveQuantization(ev)
+			return nil
+		case schemas.Mpeg2Settings_Syntax:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_Syntax, &ev); err != nil {
+				return err
+			}
+			v.Syntax = Mpeg2Syntax(ev)
+			return nil
+		case schemas.Mpeg2Settings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = Mpeg2Telecine(ev)
+			return nil
+		case schemas.Mpeg2Settings_TemporalAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Mpeg2Settings_TemporalAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.TemporalAdaptiveQuantization = Mpeg2TemporalAdaptiveQuantization(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specify the details for each additional Microsoft Smooth Streaming manifest
 // that you want the service to generate for this output group. Each manifest can
 // reference a different subset of outputs in the group.
@@ -7812,6 +17966,31 @@ type MsSmoothAdditionalManifest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MsSmoothAdditionalManifest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MsSmoothAdditionalManifest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MsSmoothAdditionalManifest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestNameModifier != nil {
+		s.WriteString(schemas.MsSmoothAdditionalManifest_ManifestNameModifier, *v.ManifestNameModifier)
+	}
+	serialize__listOf__stringMin1(s, schemas.MsSmoothAdditionalManifest_SelectedOutputs, v.SelectedOutputs)
+}
+func (v *MsSmoothAdditionalManifest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MsSmoothAdditionalManifest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MsSmoothAdditionalManifest_ManifestNameModifier:
+			v.ManifestNameModifier = new(string)
+			return d.ReadString(schemas.MsSmoothAdditionalManifest_ManifestNameModifier, v.ManifestNameModifier)
+		case schemas.MsSmoothAdditionalManifest_SelectedOutputs:
+			return deserialize__listOf__stringMin1(d, schemas.MsSmoothAdditionalManifest_SelectedOutputs, &v.SelectedOutputs)
+		}
+		return nil
+	})
+}
+
 // If you are using DRM, set DRM System to specify the value SpekeKeyProvider.
 type MsSmoothEncryptionSettings struct {
 
@@ -7821,6 +18000,30 @@ type MsSmoothEncryptionSettings struct {
 	SpekeKeyProvider *SpekeKeyProvider
 
 	noSmithyDocumentSerde
+}
+
+func (v *MsSmoothEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MsSmoothEncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MsSmoothEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpekeKeyProvider != nil {
+		s.WriteStruct(schemas.MsSmoothEncryptionSettings_SpekeKeyProvider)
+		v.SpekeKeyProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MsSmoothEncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MsSmoothEncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MsSmoothEncryptionSettings_SpekeKeyProvider:
+			v.SpekeKeyProvider = &SpekeKeyProvider{}
+			return v.SpekeKeyProvider.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Settings related to your Microsoft Smooth Streaming output package. For more
@@ -7871,6 +18074,83 @@ type MsSmoothGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MsSmoothGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MsSmoothGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MsSmoothGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfMsSmoothAdditionalManifest(s, schemas.MsSmoothGroupSettings_AdditionalManifests, v.AdditionalManifests)
+	if v.AudioDeduplication != "" {
+		s.WriteString(schemas.MsSmoothGroupSettings_AudioDeduplication, string(v.AudioDeduplication))
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.MsSmoothGroupSettings_Destination, *v.Destination)
+	}
+	if v.DestinationSettings != nil {
+		s.WriteStruct(schemas.MsSmoothGroupSettings_DestinationSettings)
+		v.DestinationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.MsSmoothGroupSettings_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FragmentLength != nil {
+		s.WriteInt32(schemas.MsSmoothGroupSettings_FragmentLength, *v.FragmentLength)
+	}
+	if v.FragmentLengthControl != "" {
+		s.WriteString(schemas.MsSmoothGroupSettings_FragmentLengthControl, string(v.FragmentLengthControl))
+	}
+	if v.ManifestEncoding != "" {
+		s.WriteString(schemas.MsSmoothGroupSettings_ManifestEncoding, string(v.ManifestEncoding))
+	}
+}
+func (v *MsSmoothGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MsSmoothGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MsSmoothGroupSettings_AdditionalManifests:
+			return deserialize__listOfMsSmoothAdditionalManifest(d, schemas.MsSmoothGroupSettings_AdditionalManifests, &v.AdditionalManifests)
+		case schemas.MsSmoothGroupSettings_AudioDeduplication:
+			var ev string
+			if err := d.ReadString(schemas.MsSmoothGroupSettings_AudioDeduplication, &ev); err != nil {
+				return err
+			}
+			v.AudioDeduplication = MsSmoothAudioDeduplication(ev)
+			return nil
+		case schemas.MsSmoothGroupSettings_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.MsSmoothGroupSettings_Destination, v.Destination)
+		case schemas.MsSmoothGroupSettings_DestinationSettings:
+			v.DestinationSettings = &DestinationSettings{}
+			return v.DestinationSettings.Deserialize(d)
+		case schemas.MsSmoothGroupSettings_Encryption:
+			v.Encryption = &MsSmoothEncryptionSettings{}
+			return v.Encryption.Deserialize(d)
+		case schemas.MsSmoothGroupSettings_FragmentLength:
+			v.FragmentLength = new(int32)
+			return d.ReadInt32(schemas.MsSmoothGroupSettings_FragmentLength, v.FragmentLength)
+		case schemas.MsSmoothGroupSettings_FragmentLengthControl:
+			var ev string
+			if err := d.ReadString(schemas.MsSmoothGroupSettings_FragmentLengthControl, &ev); err != nil {
+				return err
+			}
+			v.FragmentLengthControl = MsSmoothFragmentLengthControl(ev)
+			return nil
+		case schemas.MsSmoothGroupSettings_ManifestEncoding:
+			var ev string
+			if err := d.ReadString(schemas.MsSmoothGroupSettings_ManifestEncoding, &ev); err != nil {
+				return err
+			}
+			v.ManifestEncoding = MsSmoothManifestEncoding(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Input settings for MultiView Settings. You can include exactly one input as
 // enhancement layer.
 type MultiViewInput struct {
@@ -7879,6 +18159,28 @@ type MultiViewInput struct {
 	FileInput *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileInput != nil {
+		s.WriteString(schemas.MultiViewInput_FileInput, *v.FileInput)
+	}
+}
+func (v *MultiViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiViewInput_FileInput:
+			v.FileInput = new(string)
+			return d.ReadString(schemas.MultiViewInput_FileInput, v.FileInput)
+		}
+		return nil
+	})
 }
 
 // Specify the enhancement layer input video file path for Multi View outputs. The
@@ -7894,6 +18196,30 @@ type MultiViewSettings struct {
 	Input *MultiViewInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiViewSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiViewSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiViewSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.MultiViewSettings_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MultiViewSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiViewSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiViewSettings_Input:
+			v.Input = &MultiViewInput{}
+			return v.Input.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // These settings relate to your MXF output container.
@@ -7930,6 +18256,60 @@ type MxfSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MxfSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MxfSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MxfSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfdSignaling != "" {
+		s.WriteString(schemas.MxfSettings_AfdSignaling, string(v.AfdSignaling))
+	}
+	if v.Profile != "" {
+		s.WriteString(schemas.MxfSettings_Profile, string(v.Profile))
+	}
+	if v.UncompressedAudioWrapping != "" {
+		s.WriteString(schemas.MxfSettings_UncompressedAudioWrapping, string(v.UncompressedAudioWrapping))
+	}
+	if v.XavcProfileSettings != nil {
+		s.WriteStruct(schemas.MxfSettings_XavcProfileSettings)
+		v.XavcProfileSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MxfSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MxfSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MxfSettings_AfdSignaling:
+			var ev string
+			if err := d.ReadString(schemas.MxfSettings_AfdSignaling, &ev); err != nil {
+				return err
+			}
+			v.AfdSignaling = MxfAfdSignaling(ev)
+			return nil
+		case schemas.MxfSettings_Profile:
+			var ev string
+			if err := d.ReadString(schemas.MxfSettings_Profile, &ev); err != nil {
+				return err
+			}
+			v.Profile = MxfProfile(ev)
+			return nil
+		case schemas.MxfSettings_UncompressedAudioWrapping:
+			var ev string
+			if err := d.ReadString(schemas.MxfSettings_UncompressedAudioWrapping, &ev); err != nil {
+				return err
+			}
+			v.UncompressedAudioWrapping = MxfUncompressedAudioWrapping(ev)
+			return nil
+		case schemas.MxfSettings_XavcProfileSettings:
+			v.XavcProfileSettings = &MxfXavcProfileSettings{}
+			return v.XavcProfileSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specify the XAVC profile settings for MXF outputs when you set your MXF profile
 // to XAVC.
 type MxfXavcProfileSettings struct {
@@ -7951,6 +18331,38 @@ type MxfXavcProfileSettings struct {
 	MaxAncDataSize *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *MxfXavcProfileSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MxfXavcProfileSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MxfXavcProfileSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationMode != "" {
+		s.WriteString(schemas.MxfXavcProfileSettings_DurationMode, string(v.DurationMode))
+	}
+	if v.MaxAncDataSize != nil {
+		s.WriteInt32(schemas.MxfXavcProfileSettings_MaxAncDataSize, *v.MaxAncDataSize)
+	}
+}
+func (v *MxfXavcProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MxfXavcProfileSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MxfXavcProfileSettings_DurationMode:
+			var ev string
+			if err := d.ReadString(schemas.MxfXavcProfileSettings_DurationMode, &ev); err != nil {
+				return err
+			}
+			v.DurationMode = MxfXavcDurationMode(ev)
+			return nil
+		case schemas.MxfXavcProfileSettings_MaxAncDataSize:
+			v.MaxAncDataSize = new(int32)
+			return d.ReadInt32(schemas.MxfXavcProfileSettings_MaxAncDataSize, v.MaxAncDataSize)
+		}
+		return nil
+	})
 }
 
 // For forensic video watermarking, MediaConvert supports Nagra NexGuard File
@@ -7987,6 +18399,50 @@ type NexGuardFileMarkerSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NexGuardFileMarkerSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NexGuardFileMarkerSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NexGuardFileMarkerSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.License != nil {
+		s.WriteString(schemas.NexGuardFileMarkerSettings_License, *v.License)
+	}
+	if v.Payload != nil {
+		s.WriteInt32(schemas.NexGuardFileMarkerSettings_Payload, *v.Payload)
+	}
+	if v.Preset != nil {
+		s.WriteString(schemas.NexGuardFileMarkerSettings_Preset, *v.Preset)
+	}
+	if v.Strength != "" {
+		s.WriteString(schemas.NexGuardFileMarkerSettings_Strength, string(v.Strength))
+	}
+}
+func (v *NexGuardFileMarkerSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NexGuardFileMarkerSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NexGuardFileMarkerSettings_License:
+			v.License = new(string)
+			return d.ReadString(schemas.NexGuardFileMarkerSettings_License, v.License)
+		case schemas.NexGuardFileMarkerSettings_Payload:
+			v.Payload = new(int32)
+			return d.ReadInt32(schemas.NexGuardFileMarkerSettings_Payload, v.Payload)
+		case schemas.NexGuardFileMarkerSettings_Preset:
+			v.Preset = new(string)
+			return d.ReadString(schemas.NexGuardFileMarkerSettings_Preset, v.Preset)
+		case schemas.NexGuardFileMarkerSettings_Strength:
+			var ev string
+			if err := d.ReadString(schemas.NexGuardFileMarkerSettings_Strength, &ev); err != nil {
+				return err
+			}
+			v.Strength = WatermarkingStrength(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Settings for your Nielsen configuration. If you don't do Nielsen measurement
 // and analytics, ignore these settings. When you enable Nielsen configuration,
 // MediaConvert enables PCM to ID3 tagging for all outputs in the job.
@@ -8001,6 +18457,34 @@ type NielsenConfiguration struct {
 	DistributorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NielsenConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NielsenConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NielsenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BreakoutCode != nil {
+		s.WriteInt32(schemas.NielsenConfiguration_BreakoutCode, *v.BreakoutCode)
+	}
+	if v.DistributorId != nil {
+		s.WriteString(schemas.NielsenConfiguration_DistributorId, *v.DistributorId)
+	}
+}
+func (v *NielsenConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NielsenConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NielsenConfiguration_BreakoutCode:
+			v.BreakoutCode = new(int32)
+			return d.ReadInt32(schemas.NielsenConfiguration_BreakoutCode, v.BreakoutCode)
+		case schemas.NielsenConfiguration_DistributorId:
+			v.DistributorId = new(string)
+			return d.ReadString(schemas.NielsenConfiguration_DistributorId, v.DistributorId)
+		}
+		return nil
+	})
 }
 
 // Ignore these settings unless you are using Nielsen non-linear watermarking.
@@ -8080,6 +18564,100 @@ type NielsenNonLinearWatermarkSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NielsenNonLinearWatermarkSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NielsenNonLinearWatermarkSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NielsenNonLinearWatermarkSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveWatermarkProcess != "" {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_ActiveWatermarkProcess, string(v.ActiveWatermarkProcess))
+	}
+	if v.AdiFilename != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_AdiFilename, *v.AdiFilename)
+	}
+	if v.AssetId != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_AssetId, *v.AssetId)
+	}
+	if v.AssetName != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_AssetName, *v.AssetName)
+	}
+	if v.CbetSourceId != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_CbetSourceId, *v.CbetSourceId)
+	}
+	if v.EpisodeId != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_EpisodeId, *v.EpisodeId)
+	}
+	if v.MetadataDestination != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_MetadataDestination, *v.MetadataDestination)
+	}
+	if v.SourceId != nil {
+		s.WriteInt32(schemas.NielsenNonLinearWatermarkSettings_SourceId, *v.SourceId)
+	}
+	if v.SourceWatermarkStatus != "" {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_SourceWatermarkStatus, string(v.SourceWatermarkStatus))
+	}
+	if v.TicServerUrl != nil {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_TicServerUrl, *v.TicServerUrl)
+	}
+	if v.UniqueTicPerAudioTrack != "" {
+		s.WriteString(schemas.NielsenNonLinearWatermarkSettings_UniqueTicPerAudioTrack, string(v.UniqueTicPerAudioTrack))
+	}
+}
+func (v *NielsenNonLinearWatermarkSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NielsenNonLinearWatermarkSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NielsenNonLinearWatermarkSettings_ActiveWatermarkProcess:
+			var ev string
+			if err := d.ReadString(schemas.NielsenNonLinearWatermarkSettings_ActiveWatermarkProcess, &ev); err != nil {
+				return err
+			}
+			v.ActiveWatermarkProcess = NielsenActiveWatermarkProcessType(ev)
+			return nil
+		case schemas.NielsenNonLinearWatermarkSettings_AdiFilename:
+			v.AdiFilename = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_AdiFilename, v.AdiFilename)
+		case schemas.NielsenNonLinearWatermarkSettings_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_AssetId, v.AssetId)
+		case schemas.NielsenNonLinearWatermarkSettings_AssetName:
+			v.AssetName = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_AssetName, v.AssetName)
+		case schemas.NielsenNonLinearWatermarkSettings_CbetSourceId:
+			v.CbetSourceId = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_CbetSourceId, v.CbetSourceId)
+		case schemas.NielsenNonLinearWatermarkSettings_EpisodeId:
+			v.EpisodeId = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_EpisodeId, v.EpisodeId)
+		case schemas.NielsenNonLinearWatermarkSettings_MetadataDestination:
+			v.MetadataDestination = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_MetadataDestination, v.MetadataDestination)
+		case schemas.NielsenNonLinearWatermarkSettings_SourceId:
+			v.SourceId = new(int32)
+			return d.ReadInt32(schemas.NielsenNonLinearWatermarkSettings_SourceId, v.SourceId)
+		case schemas.NielsenNonLinearWatermarkSettings_SourceWatermarkStatus:
+			var ev string
+			if err := d.ReadString(schemas.NielsenNonLinearWatermarkSettings_SourceWatermarkStatus, &ev); err != nil {
+				return err
+			}
+			v.SourceWatermarkStatus = NielsenSourceWatermarkStatusType(ev)
+			return nil
+		case schemas.NielsenNonLinearWatermarkSettings_TicServerUrl:
+			v.TicServerUrl = new(string)
+			return d.ReadString(schemas.NielsenNonLinearWatermarkSettings_TicServerUrl, v.TicServerUrl)
+		case schemas.NielsenNonLinearWatermarkSettings_UniqueTicPerAudioTrack:
+			var ev string
+			if err := d.ReadString(schemas.NielsenNonLinearWatermarkSettings_UniqueTicPerAudioTrack, &ev); err != nil {
+				return err
+			}
+			v.UniqueTicPerAudioTrack = NielsenUniqueTicPerAudioTrackType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Enable the Noise reducer feature to remove noise from your video output if
 // necessary. Enable or disable this feature for each output individually. This
 // setting is disabled by default. When you enable Noise reducer, you must also
@@ -8107,6 +18685,56 @@ type NoiseReducer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NoiseReducer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoiseReducer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoiseReducer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != "" {
+		s.WriteString(schemas.NoiseReducer_Filter, string(v.Filter))
+	}
+	if v.FilterSettings != nil {
+		s.WriteStruct(schemas.NoiseReducer_FilterSettings)
+		v.FilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpatialFilterSettings != nil {
+		s.WriteStruct(schemas.NoiseReducer_SpatialFilterSettings)
+		v.SpatialFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemporalFilterSettings != nil {
+		s.WriteStruct(schemas.NoiseReducer_TemporalFilterSettings)
+		v.TemporalFilterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NoiseReducer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoiseReducer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoiseReducer_Filter:
+			var ev string
+			if err := d.ReadString(schemas.NoiseReducer_Filter, &ev); err != nil {
+				return err
+			}
+			v.Filter = NoiseReducerFilter(ev)
+			return nil
+		case schemas.NoiseReducer_FilterSettings:
+			v.FilterSettings = &NoiseReducerFilterSettings{}
+			return v.FilterSettings.Deserialize(d)
+		case schemas.NoiseReducer_SpatialFilterSettings:
+			v.SpatialFilterSettings = &NoiseReducerSpatialFilterSettings{}
+			return v.SpatialFilterSettings.Deserialize(d)
+		case schemas.NoiseReducer_TemporalFilterSettings:
+			v.TemporalFilterSettings = &NoiseReducerTemporalFilterSettings{}
+			return v.TemporalFilterSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Settings for a noise reducer filter
 type NoiseReducerFilterSettings struct {
 
@@ -8115,6 +18743,28 @@ type NoiseReducerFilterSettings struct {
 	Strength *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *NoiseReducerFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoiseReducerFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoiseReducerFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Strength != nil {
+		s.WriteInt32(schemas.NoiseReducerFilterSettings_Strength, *v.Strength)
+	}
+}
+func (v *NoiseReducerFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoiseReducerFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoiseReducerFilterSettings_Strength:
+			v.Strength = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerFilterSettings_Strength, v.Strength)
+		}
+		return nil
+	})
 }
 
 // Noise reducer filter settings for spatial filter.
@@ -8133,6 +18783,40 @@ type NoiseReducerSpatialFilterSettings struct {
 	Strength *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *NoiseReducerSpatialFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoiseReducerSpatialFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoiseReducerSpatialFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PostFilterSharpenStrength != nil {
+		s.WriteInt32(schemas.NoiseReducerSpatialFilterSettings_PostFilterSharpenStrength, *v.PostFilterSharpenStrength)
+	}
+	if v.Speed != nil {
+		s.WriteInt32(schemas.NoiseReducerSpatialFilterSettings_Speed, *v.Speed)
+	}
+	if v.Strength != nil {
+		s.WriteInt32(schemas.NoiseReducerSpatialFilterSettings_Strength, *v.Strength)
+	}
+}
+func (v *NoiseReducerSpatialFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoiseReducerSpatialFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoiseReducerSpatialFilterSettings_PostFilterSharpenStrength:
+			v.PostFilterSharpenStrength = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerSpatialFilterSettings_PostFilterSharpenStrength, v.PostFilterSharpenStrength)
+		case schemas.NoiseReducerSpatialFilterSettings_Speed:
+			v.Speed = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerSpatialFilterSettings_Speed, v.Speed)
+		case schemas.NoiseReducerSpatialFilterSettings_Strength:
+			v.Strength = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerSpatialFilterSettings_Strength, v.Strength)
+		}
+		return nil
+	})
 }
 
 // Noise reducer filter settings for temporal filter.
@@ -8174,6 +18858,60 @@ type NoiseReducerTemporalFilterSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NoiseReducerTemporalFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoiseReducerTemporalFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoiseReducerTemporalFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggressiveMode != nil {
+		s.WriteInt32(schemas.NoiseReducerTemporalFilterSettings_AggressiveMode, *v.AggressiveMode)
+	}
+	if v.PostTemporalSharpening != "" {
+		s.WriteString(schemas.NoiseReducerTemporalFilterSettings_PostTemporalSharpening, string(v.PostTemporalSharpening))
+	}
+	if v.PostTemporalSharpeningStrength != "" {
+		s.WriteString(schemas.NoiseReducerTemporalFilterSettings_PostTemporalSharpeningStrength, string(v.PostTemporalSharpeningStrength))
+	}
+	if v.Speed != nil {
+		s.WriteInt32(schemas.NoiseReducerTemporalFilterSettings_Speed, *v.Speed)
+	}
+	if v.Strength != nil {
+		s.WriteInt32(schemas.NoiseReducerTemporalFilterSettings_Strength, *v.Strength)
+	}
+}
+func (v *NoiseReducerTemporalFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoiseReducerTemporalFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoiseReducerTemporalFilterSettings_AggressiveMode:
+			v.AggressiveMode = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerTemporalFilterSettings_AggressiveMode, v.AggressiveMode)
+		case schemas.NoiseReducerTemporalFilterSettings_PostTemporalSharpening:
+			var ev string
+			if err := d.ReadString(schemas.NoiseReducerTemporalFilterSettings_PostTemporalSharpening, &ev); err != nil {
+				return err
+			}
+			v.PostTemporalSharpening = NoiseFilterPostTemporalSharpening(ev)
+			return nil
+		case schemas.NoiseReducerTemporalFilterSettings_PostTemporalSharpeningStrength:
+			var ev string
+			if err := d.ReadString(schemas.NoiseReducerTemporalFilterSettings_PostTemporalSharpeningStrength, &ev); err != nil {
+				return err
+			}
+			v.PostTemporalSharpeningStrength = NoiseFilterPostTemporalSharpeningStrength(ev)
+			return nil
+		case schemas.NoiseReducerTemporalFilterSettings_Speed:
+			v.Speed = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerTemporalFilterSettings_Speed, v.Speed)
+		case schemas.NoiseReducerTemporalFilterSettings_Strength:
+			v.Strength = new(int32)
+			return d.ReadInt32(schemas.NoiseReducerTemporalFilterSettings_Strength, v.Strength)
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the
 // value OPUS.
 type OpusSettings struct {
@@ -8194,6 +18932,40 @@ type OpusSettings struct {
 	SampleRate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpusSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpusSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpusSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.OpusSettings_Bitrate, *v.Bitrate)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.OpusSettings_Channels, *v.Channels)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.OpusSettings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *OpusSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpusSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpusSettings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.OpusSettings_Bitrate, v.Bitrate)
+		case schemas.OpusSettings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.OpusSettings_Channels, v.Channels)
+		case schemas.OpusSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.OpusSettings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // Each output in your job is a collection of settings that describes how you want
@@ -8245,6 +19017,70 @@ type Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAudioDescription(s, schemas.Output_AudioDescriptions, v.AudioDescriptions)
+	serialize__listOfCaptionDescription(s, schemas.Output_CaptionDescriptions, v.CaptionDescriptions)
+	if v.ContainerSettings != nil {
+		s.WriteStruct(schemas.Output_ContainerSettings)
+		v.ContainerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Extension != nil {
+		s.WriteString(schemas.Output_Extension, *v.Extension)
+	}
+	if v.NameModifier != nil {
+		s.WriteString(schemas.Output_NameModifier, *v.NameModifier)
+	}
+	if v.OutputSettings != nil {
+		s.WriteStruct(schemas.Output_OutputSettings)
+		v.OutputSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Preset != nil {
+		s.WriteString(schemas.Output_Preset, *v.Preset)
+	}
+	if v.VideoDescription != nil {
+		s.WriteStruct(schemas.Output_VideoDescription)
+		v.VideoDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Output_AudioDescriptions:
+			return deserialize__listOfAudioDescription(d, schemas.Output_AudioDescriptions, &v.AudioDescriptions)
+		case schemas.Output_CaptionDescriptions:
+			return deserialize__listOfCaptionDescription(d, schemas.Output_CaptionDescriptions, &v.CaptionDescriptions)
+		case schemas.Output_ContainerSettings:
+			v.ContainerSettings = &ContainerSettings{}
+			return v.ContainerSettings.Deserialize(d)
+		case schemas.Output_Extension:
+			v.Extension = new(string)
+			return d.ReadString(schemas.Output_Extension, v.Extension)
+		case schemas.Output_NameModifier:
+			v.NameModifier = new(string)
+			return d.ReadString(schemas.Output_NameModifier, v.NameModifier)
+		case schemas.Output_OutputSettings:
+			v.OutputSettings = &OutputSettings{}
+			return v.OutputSettings.Deserialize(d)
+		case schemas.Output_Preset:
+			v.Preset = new(string)
+			return d.ReadString(schemas.Output_Preset, v.Preset)
+		case schemas.Output_VideoDescription:
+			v.VideoDescription = &VideoDescription{}
+			return v.VideoDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // OutputChannel mapping settings.
 type OutputChannelMapping struct {
 
@@ -8260,6 +19096,28 @@ type OutputChannelMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputChannelMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputChannelMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputChannelMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__integerMinNegative60Max6(s, schemas.OutputChannelMapping_InputChannels, v.InputChannels)
+	serialize__listOf__doubleMinNegative60Max6(s, schemas.OutputChannelMapping_InputChannelsFineTune, v.InputChannelsFineTune)
+}
+func (v *OutputChannelMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputChannelMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputChannelMapping_InputChannels:
+			return deserialize__listOf__integerMinNegative60Max6(d, schemas.OutputChannelMapping_InputChannels, &v.InputChannels)
+		case schemas.OutputChannelMapping_InputChannelsFineTune:
+			return deserialize__listOf__doubleMinNegative60Max6(d, schemas.OutputChannelMapping_InputChannelsFineTune, &v.InputChannelsFineTune)
+		}
+		return nil
+	})
+}
+
 // Details regarding output
 type OutputDetail struct {
 
@@ -8270,6 +19128,36 @@ type OutputDetail struct {
 	VideoDetails *VideoDetail
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInMs != nil {
+		s.WriteInt32(schemas.OutputDetail_DurationInMs, *v.DurationInMs)
+	}
+	if v.VideoDetails != nil {
+		s.WriteStruct(schemas.OutputDetail_VideoDetails)
+		v.VideoDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDetail_DurationInMs:
+			v.DurationInMs = new(int32)
+			return d.ReadInt32(schemas.OutputDetail_DurationInMs, v.DurationInMs)
+		case schemas.OutputDetail_VideoDetails:
+			v.VideoDetails = &VideoDetail{}
+			return v.VideoDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Group of outputs
@@ -8297,6 +19185,53 @@ type OutputGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomatedEncodingSettings != nil {
+		s.WriteStruct(schemas.OutputGroup_AutomatedEncodingSettings)
+		v.AutomatedEncodingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomName != nil {
+		s.WriteString(schemas.OutputGroup_CustomName, *v.CustomName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OutputGroup_Name, *v.Name)
+	}
+	if v.OutputGroupSettings != nil {
+		s.WriteStruct(schemas.OutputGroup_OutputGroupSettings)
+		v.OutputGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfOutput(s, schemas.OutputGroup_Outputs, v.Outputs)
+}
+func (v *OutputGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputGroup_AutomatedEncodingSettings:
+			v.AutomatedEncodingSettings = &AutomatedEncodingSettings{}
+			return v.AutomatedEncodingSettings.Deserialize(d)
+		case schemas.OutputGroup_CustomName:
+			v.CustomName = new(string)
+			return d.ReadString(schemas.OutputGroup_CustomName, v.CustomName)
+		case schemas.OutputGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OutputGroup_Name, v.Name)
+		case schemas.OutputGroup_OutputGroupSettings:
+			v.OutputGroupSettings = &OutputGroupSettings{}
+			return v.OutputGroupSettings.Deserialize(d)
+		case schemas.OutputGroup_Outputs:
+			return deserialize__listOfOutput(d, schemas.OutputGroup_Outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
+
 // Contains details about the output groups specified in the job settings.
 type OutputGroupDetail struct {
 
@@ -8304,6 +19239,25 @@ type OutputGroupDetail struct {
 	OutputDetails []OutputDetail
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfOutputDetail(s, schemas.OutputGroupDetail_OutputDetails, v.OutputDetails)
+}
+func (v *OutputGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputGroupDetail_OutputDetails:
+			return deserialize__listOfOutputDetail(d, schemas.OutputGroupDetail_OutputDetails, &v.OutputDetails)
+		}
+		return nil
+	})
 }
 
 // Output Group settings, including type
@@ -8356,6 +19310,75 @@ type OutputGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputGroupSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputGroupSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputGroupSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CmafGroupSettings != nil {
+		s.WriteStruct(schemas.OutputGroupSettings_CmafGroupSettings)
+		v.CmafGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DashIsoGroupSettings != nil {
+		s.WriteStruct(schemas.OutputGroupSettings_DashIsoGroupSettings)
+		v.DashIsoGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileGroupSettings != nil {
+		s.WriteStruct(schemas.OutputGroupSettings_FileGroupSettings)
+		v.FileGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsGroupSettings != nil {
+		s.WriteStruct(schemas.OutputGroupSettings_HlsGroupSettings)
+		v.HlsGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MsSmoothGroupSettings != nil {
+		s.WriteStruct(schemas.OutputGroupSettings_MsSmoothGroupSettings)
+		v.MsSmoothGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfFrameMetricType(s, schemas.OutputGroupSettings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.Type != "" {
+		s.WriteString(schemas.OutputGroupSettings_Type, string(v.Type))
+	}
+}
+func (v *OutputGroupSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputGroupSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputGroupSettings_CmafGroupSettings:
+			v.CmafGroupSettings = &CmafGroupSettings{}
+			return v.CmafGroupSettings.Deserialize(d)
+		case schemas.OutputGroupSettings_DashIsoGroupSettings:
+			v.DashIsoGroupSettings = &DashIsoGroupSettings{}
+			return v.DashIsoGroupSettings.Deserialize(d)
+		case schemas.OutputGroupSettings_FileGroupSettings:
+			v.FileGroupSettings = &FileGroupSettings{}
+			return v.FileGroupSettings.Deserialize(d)
+		case schemas.OutputGroupSettings_HlsGroupSettings:
+			v.HlsGroupSettings = &HlsGroupSettings{}
+			return v.HlsGroupSettings.Deserialize(d)
+		case schemas.OutputGroupSettings_MsSmoothGroupSettings:
+			v.MsSmoothGroupSettings = &MsSmoothGroupSettings{}
+			return v.MsSmoothGroupSettings.Deserialize(d)
+		case schemas.OutputGroupSettings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.OutputGroupSettings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.OutputGroupSettings_Type:
+			var ev string
+			if err := d.ReadString(schemas.OutputGroupSettings_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OutputGroupType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specific settings for this type of output.
 type OutputSettings struct {
 
@@ -8363,6 +19386,30 @@ type OutputSettings struct {
 	HlsSettings *HlsSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HlsSettings != nil {
+		s.WriteStruct(schemas.OutputSettings_HlsSettings)
+		v.HlsSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputSettings_HlsSettings:
+			v.HlsSettings = &HlsSettings{}
+			return v.HlsSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // If you work with a third party video watermarking partner, use the group of
@@ -8376,6 +19423,30 @@ type PartnerWatermarking struct {
 	NexguardFileMarkerSettings *NexGuardFileMarkerSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartnerWatermarking) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnerWatermarking)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartnerWatermarking) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NexguardFileMarkerSettings != nil {
+		s.WriteStruct(schemas.PartnerWatermarking_NexguardFileMarkerSettings)
+		v.NexguardFileMarkerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PartnerWatermarking) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnerWatermarking, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnerWatermarking_NexguardFileMarkerSettings:
+			v.NexguardFileMarkerSettings = &NexGuardFileMarkerSettings{}
+			return v.NexguardFileMarkerSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Optional settings when you set Codec to the value Passthrough.
@@ -8403,6 +19474,42 @@ type PassthroughSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PassthroughSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PassthroughSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PassthroughSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameControl != "" {
+		s.WriteString(schemas.PassthroughSettings_FrameControl, string(v.FrameControl))
+	}
+	if v.VideoSelectorMode != "" {
+		s.WriteString(schemas.PassthroughSettings_VideoSelectorMode, string(v.VideoSelectorMode))
+	}
+}
+func (v *PassthroughSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PassthroughSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PassthroughSettings_FrameControl:
+			var ev string
+			if err := d.ReadString(schemas.PassthroughSettings_FrameControl, &ev); err != nil {
+				return err
+			}
+			v.FrameControl = FrameControl(ev)
+			return nil
+		case schemas.PassthroughSettings_VideoSelectorMode:
+			var ev string
+			if err := d.ReadString(schemas.PassthroughSettings_VideoSelectorMode, &ev); err != nil {
+				return err
+			}
+			v.VideoSelectorMode = VideoSelectorMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A policy configures behavior that you allow or disallow for your account. For
 // information about MediaConvert policies, see the user guide at
 // http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
@@ -8418,6 +19525,52 @@ type Policy struct {
 	S3Inputs InputPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *Policy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Policy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Policy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpInputs != "" {
+		s.WriteString(schemas.Policy_HttpInputs, string(v.HttpInputs))
+	}
+	if v.HttpsInputs != "" {
+		s.WriteString(schemas.Policy_HttpsInputs, string(v.HttpsInputs))
+	}
+	if v.S3Inputs != "" {
+		s.WriteString(schemas.Policy_S3Inputs, string(v.S3Inputs))
+	}
+}
+func (v *Policy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Policy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Policy_HttpInputs:
+			var ev string
+			if err := d.ReadString(schemas.Policy_HttpInputs, &ev); err != nil {
+				return err
+			}
+			v.HttpInputs = InputPolicy(ev)
+			return nil
+		case schemas.Policy_HttpsInputs:
+			var ev string
+			if err := d.ReadString(schemas.Policy_HttpsInputs, &ev); err != nil {
+				return err
+			}
+			v.HttpsInputs = InputPolicy(ev)
+			return nil
+		case schemas.Policy_S3Inputs:
+			var ev string
+			if err := d.ReadString(schemas.Policy_S3Inputs, &ev); err != nil {
+				return err
+			}
+			v.S3Inputs = InputPolicy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A preset is a collection of preconfigured media conversion settings that you
@@ -8456,6 +19609,76 @@ type Preset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Preset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Preset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Preset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Preset_Arn, *v.Arn)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.Preset_Category, *v.Category)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Preset_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Preset_Description, *v.Description)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Preset_LastUpdated, *v.LastUpdated)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Preset_Name, *v.Name)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.Preset_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Preset_Type, string(v.Type))
+	}
+}
+func (v *Preset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Preset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Preset_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Preset_Arn, v.Arn)
+		case schemas.Preset_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.Preset_Category, v.Category)
+		case schemas.Preset_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Preset_CreatedAt, v.CreatedAt)
+		case schemas.Preset_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Preset_Description, v.Description)
+		case schemas.Preset_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Preset_LastUpdated, v.LastUpdated)
+		case schemas.Preset_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Preset_Name, v.Name)
+		case schemas.Preset_Settings:
+			v.Settings = &PresetSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.Preset_Type:
+			var ev string
+			if err := d.ReadString(schemas.Preset_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Settings for preset
 type PresetSettings struct {
 
@@ -8478,6 +19701,44 @@ type PresetSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PresetSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PresetSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PresetSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAudioDescription(s, schemas.PresetSettings_AudioDescriptions, v.AudioDescriptions)
+	serialize__listOfCaptionDescriptionPreset(s, schemas.PresetSettings_CaptionDescriptions, v.CaptionDescriptions)
+	if v.ContainerSettings != nil {
+		s.WriteStruct(schemas.PresetSettings_ContainerSettings)
+		v.ContainerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VideoDescription != nil {
+		s.WriteStruct(schemas.PresetSettings_VideoDescription)
+		v.VideoDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PresetSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PresetSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PresetSettings_AudioDescriptions:
+			return deserialize__listOfAudioDescription(d, schemas.PresetSettings_AudioDescriptions, &v.AudioDescriptions)
+		case schemas.PresetSettings_CaptionDescriptions:
+			return deserialize__listOfCaptionDescriptionPreset(d, schemas.PresetSettings_CaptionDescriptions, &v.CaptionDescriptions)
+		case schemas.PresetSettings_ContainerSettings:
+			v.ContainerSettings = &ContainerSettings{}
+			return v.ContainerSettings.Deserialize(d)
+		case schemas.PresetSettings_VideoDescription:
+			v.VideoDescription = &VideoDescription{}
+			return v.VideoDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The input file that needs to be analyzed.
 type ProbeInputFile struct {
 
@@ -8485,6 +19746,28 @@ type ProbeInputFile struct {
 	FileUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProbeInputFile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProbeInputFile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProbeInputFile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileUrl != nil {
+		s.WriteString(schemas.ProbeInputFile_FileUrl, *v.FileUrl)
+	}
+}
+func (v *ProbeInputFile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProbeInputFile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProbeInputFile_FileUrl:
+			v.FileUrl = new(string)
+			return d.ReadString(schemas.ProbeInputFile_FileUrl, v.FileUrl)
+		}
+		return nil
+	})
 }
 
 // Probe results for your media file.
@@ -8502,6 +19785,41 @@ type ProbeResult struct {
 	TrackMappings []TrackMapping
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProbeResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProbeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProbeResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Container != nil {
+		s.WriteStruct(schemas.ProbeResult_Container)
+		v.Container.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ProbeResult_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfTrackMapping(s, schemas.ProbeResult_TrackMappings, v.TrackMappings)
+}
+func (v *ProbeResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProbeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProbeResult_Container:
+			v.Container = &Container{}
+			return v.Container.Deserialize(d)
+		case schemas.ProbeResult_Metadata:
+			v.Metadata = &Metadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ProbeResult_TrackMappings:
+			return deserialize__listOfTrackMapping(d, schemas.ProbeResult_TrackMappings, &v.TrackMappings)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value PRORES.
@@ -8647,6 +19965,139 @@ type ProresSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProresSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProresSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProresSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChromaSampling != "" {
+		s.WriteString(schemas.ProresSettings_ChromaSampling, string(v.ChromaSampling))
+	}
+	if v.CodecProfile != "" {
+		s.WriteString(schemas.ProresSettings_CodecProfile, string(v.CodecProfile))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.ProresSettings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.ProresSettings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.ProresSettings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.ProresSettings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.ProresSettings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.ParControl != "" {
+		s.WriteString(schemas.ProresSettings_ParControl, string(v.ParControl))
+	}
+	if v.ParDenominator != nil {
+		s.WriteInt32(schemas.ProresSettings_ParDenominator, *v.ParDenominator)
+	}
+	if v.ParNumerator != nil {
+		s.WriteInt32(schemas.ProresSettings_ParNumerator, *v.ParNumerator)
+	}
+	serialize__listOfFrameMetricType(s, schemas.ProresSettings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.ProresSettings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.ProresSettings_SlowPal, string(v.SlowPal))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.ProresSettings_Telecine, string(v.Telecine))
+	}
+}
+func (v *ProresSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProresSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProresSettings_ChromaSampling:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_ChromaSampling, &ev); err != nil {
+				return err
+			}
+			v.ChromaSampling = ProresChromaSampling(ev)
+			return nil
+		case schemas.ProresSettings_CodecProfile:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_CodecProfile, &ev); err != nil {
+				return err
+			}
+			v.CodecProfile = ProresCodecProfile(ev)
+			return nil
+		case schemas.ProresSettings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = ProresFramerateControl(ev)
+			return nil
+		case schemas.ProresSettings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = ProresFramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.ProresSettings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.ProresSettings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.ProresSettings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.ProresSettings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.ProresSettings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = ProresInterlaceMode(ev)
+			return nil
+		case schemas.ProresSettings_ParControl:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_ParControl, &ev); err != nil {
+				return err
+			}
+			v.ParControl = ProresParControl(ev)
+			return nil
+		case schemas.ProresSettings_ParDenominator:
+			v.ParDenominator = new(int32)
+			return d.ReadInt32(schemas.ProresSettings_ParDenominator, v.ParDenominator)
+		case schemas.ProresSettings_ParNumerator:
+			v.ParNumerator = new(int32)
+			return d.ReadInt32(schemas.ProresSettings_ParNumerator, v.ParNumerator)
+		case schemas.ProresSettings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.ProresSettings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.ProresSettings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = ProresScanTypeConversionMode(ev)
+			return nil
+		case schemas.ProresSettings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = ProresSlowPal(ev)
+			return nil
+		case schemas.ProresSettings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.ProresSettings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = ProresTelecine(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // You can use queues to manage the resources that are available to your AWS
 // account for running multiple transcoding jobs at the same time. If you don't
 // specify a queue, the service sends all jobs through the default queue. For more
@@ -8713,6 +20164,117 @@ type Queue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Queue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Queue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Queue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Queue_Arn, *v.Arn)
+	}
+	if v.ConcurrentJobs != nil {
+		s.WriteInt32(schemas.Queue_ConcurrentJobs, *v.ConcurrentJobs)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Queue_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Queue_Description, *v.Description)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Queue_LastUpdated, *v.LastUpdated)
+	}
+	if v.MaximumConcurrentFeeds != nil {
+		s.WriteInt32(schemas.Queue_MaximumConcurrentFeeds, *v.MaximumConcurrentFeeds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Queue_Name, *v.Name)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.Queue_PricingPlan, string(v.PricingPlan))
+	}
+	if v.ProgressingJobsCount != nil {
+		s.WriteInt32(schemas.Queue_ProgressingJobsCount, *v.ProgressingJobsCount)
+	}
+	if v.ReservationPlan != nil {
+		s.WriteStruct(schemas.Queue_ReservationPlan)
+		v.ReservationPlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfServiceOverride(s, schemas.Queue_ServiceOverrides, v.ServiceOverrides)
+	if v.Status != "" {
+		s.WriteString(schemas.Queue_Status, string(v.Status))
+	}
+	if v.SubmittedJobsCount != nil {
+		s.WriteInt32(schemas.Queue_SubmittedJobsCount, *v.SubmittedJobsCount)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Queue_Type, string(v.Type))
+	}
+}
+func (v *Queue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Queue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Queue_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Queue_Arn, v.Arn)
+		case schemas.Queue_ConcurrentJobs:
+			v.ConcurrentJobs = new(int32)
+			return d.ReadInt32(schemas.Queue_ConcurrentJobs, v.ConcurrentJobs)
+		case schemas.Queue_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Queue_CreatedAt, v.CreatedAt)
+		case schemas.Queue_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Queue_Description, v.Description)
+		case schemas.Queue_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Queue_LastUpdated, v.LastUpdated)
+		case schemas.Queue_MaximumConcurrentFeeds:
+			v.MaximumConcurrentFeeds = new(int32)
+			return d.ReadInt32(schemas.Queue_MaximumConcurrentFeeds, v.MaximumConcurrentFeeds)
+		case schemas.Queue_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Queue_Name, v.Name)
+		case schemas.Queue_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.Queue_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = PricingPlan(ev)
+			return nil
+		case schemas.Queue_ProgressingJobsCount:
+			v.ProgressingJobsCount = new(int32)
+			return d.ReadInt32(schemas.Queue_ProgressingJobsCount, v.ProgressingJobsCount)
+		case schemas.Queue_ReservationPlan:
+			v.ReservationPlan = &ReservationPlan{}
+			return v.ReservationPlan.Deserialize(d)
+		case schemas.Queue_ServiceOverrides:
+			return deserialize__listOfServiceOverride(d, schemas.Queue_ServiceOverrides, &v.ServiceOverrides)
+		case schemas.Queue_Status:
+			var ev string
+			if err := d.ReadString(schemas.Queue_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = QueueStatus(ev)
+			return nil
+		case schemas.Queue_SubmittedJobsCount:
+			v.SubmittedJobsCount = new(int32)
+			return d.ReadInt32(schemas.Queue_SubmittedJobsCount, v.SubmittedJobsCount)
+		case schemas.Queue_Type:
+			var ev string
+			if err := d.ReadString(schemas.Queue_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Description of the source and destination queues between which the job has
 // moved, along with the timestamp of the move
 type QueueTransition struct {
@@ -8728,6 +20290,40 @@ type QueueTransition struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueueTransition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueTransition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueTransition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationQueue != nil {
+		s.WriteString(schemas.QueueTransition_DestinationQueue, *v.DestinationQueue)
+	}
+	if v.SourceQueue != nil {
+		s.WriteString(schemas.QueueTransition_SourceQueue, *v.SourceQueue)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.QueueTransition_Timestamp, *v.Timestamp)
+	}
+}
+func (v *QueueTransition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueTransition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueTransition_DestinationQueue:
+			v.DestinationQueue = new(string)
+			return d.ReadString(schemas.QueueTransition_DestinationQueue, v.DestinationQueue)
+		case schemas.QueueTransition_SourceQueue:
+			v.SourceQueue = new(string)
+			return d.ReadString(schemas.QueueTransition_SourceQueue, v.SourceQueue)
+		case schemas.QueueTransition_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueTransition_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // Use Rectangle to identify a specific area of the video frame.
@@ -8748,6 +20344,46 @@ type Rectangle struct {
 	Y *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Rectangle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rectangle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Rectangle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.Rectangle_Height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.Rectangle_Width, *v.Width)
+	}
+	if v.X != nil {
+		s.WriteInt32(schemas.Rectangle_X, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteInt32(schemas.Rectangle_Y, *v.Y)
+	}
+}
+func (v *Rectangle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Rectangle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Rectangle_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.Rectangle_Height, v.Height)
+		case schemas.Rectangle_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.Rectangle_Width, v.Width)
+		case schemas.Rectangle_X:
+			v.X = new(int32)
+			return d.ReadInt32(schemas.Rectangle_X, v.X)
+		case schemas.Rectangle_Y:
+			v.Y = new(int32)
+			return d.ReadInt32(schemas.Rectangle_Y, v.Y)
+		}
+		return nil
+	})
 }
 
 // Use Manual audio remixing to adjust audio levels for each audio channel in each
@@ -8802,6 +20438,54 @@ type RemixSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemixSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemixSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemixSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioDescriptionAudioChannel != nil {
+		s.WriteInt32(schemas.RemixSettings_AudioDescriptionAudioChannel, *v.AudioDescriptionAudioChannel)
+	}
+	if v.AudioDescriptionDataChannel != nil {
+		s.WriteInt32(schemas.RemixSettings_AudioDescriptionDataChannel, *v.AudioDescriptionDataChannel)
+	}
+	if v.ChannelMapping != nil {
+		s.WriteStruct(schemas.RemixSettings_ChannelMapping)
+		v.ChannelMapping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelsIn != nil {
+		s.WriteInt32(schemas.RemixSettings_ChannelsIn, *v.ChannelsIn)
+	}
+	if v.ChannelsOut != nil {
+		s.WriteInt32(schemas.RemixSettings_ChannelsOut, *v.ChannelsOut)
+	}
+}
+func (v *RemixSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemixSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemixSettings_AudioDescriptionAudioChannel:
+			v.AudioDescriptionAudioChannel = new(int32)
+			return d.ReadInt32(schemas.RemixSettings_AudioDescriptionAudioChannel, v.AudioDescriptionAudioChannel)
+		case schemas.RemixSettings_AudioDescriptionDataChannel:
+			v.AudioDescriptionDataChannel = new(int32)
+			return d.ReadInt32(schemas.RemixSettings_AudioDescriptionDataChannel, v.AudioDescriptionDataChannel)
+		case schemas.RemixSettings_ChannelMapping:
+			v.ChannelMapping = &ChannelMapping{}
+			return v.ChannelMapping.Deserialize(d)
+		case schemas.RemixSettings_ChannelsIn:
+			v.ChannelsIn = new(int32)
+			return d.ReadInt32(schemas.RemixSettings_ChannelsIn, v.ChannelsIn)
+		case schemas.RemixSettings_ChannelsOut:
+			v.ChannelsOut = new(int32)
+			return d.ReadInt32(schemas.RemixSettings_ChannelsOut, v.ChannelsOut)
+		}
+		return nil
+	})
+}
+
 // Details about the pricing plan for your reserved queue. Required for reserved
 // queues and not applicable to on-demand queues.
 type ReservationPlan struct {
@@ -8833,6 +20517,70 @@ type ReservationPlan struct {
 	Status ReservationPlanStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReservationPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationPlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationPlan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Commitment != "" {
+		s.WriteString(schemas.ReservationPlan_Commitment, string(v.Commitment))
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.ReservationPlan_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.PurchasedAt != nil {
+		s.WriteTime(schemas.ReservationPlan_PurchasedAt, *v.PurchasedAt)
+	}
+	if v.RenewalType != "" {
+		s.WriteString(schemas.ReservationPlan_RenewalType, string(v.RenewalType))
+	}
+	if v.ReservedSlots != nil {
+		s.WriteInt32(schemas.ReservationPlan_ReservedSlots, *v.ReservedSlots)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReservationPlan_Status, string(v.Status))
+	}
+}
+func (v *ReservationPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationPlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationPlan_Commitment:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPlan_Commitment, &ev); err != nil {
+				return err
+			}
+			v.Commitment = Commitment(ev)
+			return nil
+		case schemas.ReservationPlan_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.ReservationPlan_ExpiresAt, v.ExpiresAt)
+		case schemas.ReservationPlan_PurchasedAt:
+			v.PurchasedAt = new(time.Time)
+			return d.ReadTime(schemas.ReservationPlan_PurchasedAt, v.PurchasedAt)
+		case schemas.ReservationPlan_RenewalType:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPlan_RenewalType, &ev); err != nil {
+				return err
+			}
+			v.RenewalType = RenewalType(ev)
+			return nil
+		case schemas.ReservationPlan_ReservedSlots:
+			v.ReservedSlots = new(int32)
+			return d.ReadInt32(schemas.ReservationPlan_ReservedSlots, v.ReservedSlots)
+		case schemas.ReservationPlan_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPlan_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReservationPlanStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about the pricing plan for your reserved queue. Required for reserved
@@ -8867,6 +20615,48 @@ type ReservationPlanSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReservationPlanSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReservationPlanSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReservationPlanSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Commitment != "" {
+		s.WriteString(schemas.ReservationPlanSettings_Commitment, string(v.Commitment))
+	}
+	if v.RenewalType != "" {
+		s.WriteString(schemas.ReservationPlanSettings_RenewalType, string(v.RenewalType))
+	}
+	if v.ReservedSlots != nil {
+		s.WriteInt32(schemas.ReservationPlanSettings_ReservedSlots, *v.ReservedSlots)
+	}
+}
+func (v *ReservationPlanSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReservationPlanSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReservationPlanSettings_Commitment:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPlanSettings_Commitment, &ev); err != nil {
+				return err
+			}
+			v.Commitment = Commitment(ev)
+			return nil
+		case schemas.ReservationPlanSettings_RenewalType:
+			var ev string
+			if err := d.ReadString(schemas.ReservationPlanSettings_RenewalType, &ev); err != nil {
+				return err
+			}
+			v.RenewalType = RenewalType(ev)
+			return nil
+		case schemas.ReservationPlanSettings_ReservedSlots:
+			v.ReservedSlots = new(int32)
+			return d.ReadInt32(schemas.ReservationPlanSettings_ReservedSlots, v.ReservedSlots)
+		}
+		return nil
+	})
+}
+
 // The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
 // resource.
 type ResourceTags struct {
@@ -8880,6 +20670,31 @@ type ResourceTags struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceTags) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTags)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTags) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ResourceTags_Arn, *v.Arn)
+	}
+	serialize__mapOf__string(s, schemas.ResourceTags_Tags, v.Tags)
+}
+func (v *ResourceTags) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTags, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTags_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ResourceTags_Arn, v.Arn)
+		case schemas.ResourceTags_Tags:
+			return deserialize__mapOf__string(d, schemas.ResourceTags_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Optional. Have MediaConvert automatically apply Amazon S3 access control for
 // the outputs in this output group. When you don't use this setting, S3
 // automatically applies the default access control list PRIVATE.
@@ -8889,6 +20704,32 @@ type S3DestinationAccessControl struct {
 	CannedAcl S3ObjectCannedAcl
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DestinationAccessControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationAccessControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationAccessControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CannedAcl != "" {
+		s.WriteString(schemas.S3DestinationAccessControl_CannedAcl, string(v.CannedAcl))
+	}
+}
+func (v *S3DestinationAccessControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationAccessControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationAccessControl_CannedAcl:
+			var ev string
+			if err := d.ReadString(schemas.S3DestinationAccessControl_CannedAcl, &ev); err != nil {
+				return err
+			}
+			v.CannedAcl = S3ObjectCannedAcl(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings associated with S3 destination
@@ -8910,6 +20751,48 @@ type S3DestinationSettings struct {
 	StorageClass S3StorageClass
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3DestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControl != nil {
+		s.WriteStruct(schemas.S3DestinationSettings_AccessControl)
+		v.AccessControl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.S3DestinationSettings_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageClass != "" {
+		s.WriteString(schemas.S3DestinationSettings_StorageClass, string(v.StorageClass))
+	}
+}
+func (v *S3DestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationSettings_AccessControl:
+			v.AccessControl = &S3DestinationAccessControl{}
+			return v.AccessControl.Deserialize(d)
+		case schemas.S3DestinationSettings_Encryption:
+			v.Encryption = &S3EncryptionSettings{}
+			return v.Encryption.Deserialize(d)
+		case schemas.S3DestinationSettings_StorageClass:
+			var ev string
+			if err := d.ReadString(schemas.S3DestinationSettings_StorageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = S3StorageClass(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings for how your job outputs are encrypted as they are uploaded to Amazon
@@ -8948,6 +20831,44 @@ type S3EncryptionSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3EncryptionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3EncryptionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3EncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.S3EncryptionSettings_EncryptionType, string(v.EncryptionType))
+	}
+	if v.KmsEncryptionContext != nil {
+		s.WriteString(schemas.S3EncryptionSettings_KmsEncryptionContext, *v.KmsEncryptionContext)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.S3EncryptionSettings_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *S3EncryptionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3EncryptionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3EncryptionSettings_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.S3EncryptionSettings_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = S3ServerSideEncryptionType(ev)
+			return nil
+		case schemas.S3EncryptionSettings_KmsEncryptionContext:
+			v.KmsEncryptionContext = new(string)
+			return d.ReadString(schemas.S3EncryptionSettings_KmsEncryptionContext, v.KmsEncryptionContext)
+		case schemas.S3EncryptionSettings_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.S3EncryptionSettings_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
 // Settings related to SCC captions. SCC is a sidecar format that holds captions
 // in a file that is separate from the video container. Set up sidecar captions in
 // the same output group, but different output from your video. For more
@@ -8963,6 +20884,32 @@ type SccDestinationSettings struct {
 	Framerate SccDestinationFramerate
 
 	noSmithyDocumentSerde
+}
+
+func (v *SccDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SccDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SccDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Framerate != "" {
+		s.WriteString(schemas.SccDestinationSettings_Framerate, string(v.Framerate))
+	}
+}
+func (v *SccDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SccDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SccDestinationSettings_Framerate:
+			var ev string
+			if err := d.ReadString(schemas.SccDestinationSettings_Framerate, &ev); err != nil {
+				return err
+			}
+			v.Framerate = SccDestinationFramerate(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A service override applied by MediaConvert to the settings that you have
@@ -8983,6 +20930,46 @@ type ServiceOverride struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceOverride_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceOverride_Name, *v.Name)
+	}
+	if v.OverrideValue != nil {
+		s.WriteString(schemas.ServiceOverride_OverrideValue, *v.OverrideValue)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ServiceOverride_Value, *v.Value)
+	}
+}
+func (v *ServiceOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceOverride_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceOverride_Message, v.Message)
+		case schemas.ServiceOverride_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceOverride_Name, v.Name)
+		case schemas.ServiceOverride_OverrideValue:
+			v.OverrideValue = new(string)
+			return d.ReadString(schemas.ServiceOverride_OverrideValue, v.OverrideValue)
+		case schemas.ServiceOverride_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ServiceOverride_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
@@ -9017,6 +21004,51 @@ type SpekeKeyProvider struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SpekeKeyProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpekeKeyProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpekeKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.SpekeKeyProvider_CertificateArn, *v.CertificateArn)
+	}
+	if v.EncryptionContractConfiguration != nil {
+		s.WriteStruct(schemas.SpekeKeyProvider_EncryptionContractConfiguration)
+		v.EncryptionContractConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.SpekeKeyProvider_ResourceId, *v.ResourceId)
+	}
+	serialize__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12(s, schemas.SpekeKeyProvider_SystemIds, v.SystemIds)
+	if v.Url != nil {
+		s.WriteString(schemas.SpekeKeyProvider_Url, *v.Url)
+	}
+}
+func (v *SpekeKeyProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpekeKeyProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpekeKeyProvider_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.SpekeKeyProvider_CertificateArn, v.CertificateArn)
+		case schemas.SpekeKeyProvider_EncryptionContractConfiguration:
+			v.EncryptionContractConfiguration = &EncryptionContractConfiguration{}
+			return v.EncryptionContractConfiguration.Deserialize(d)
+		case schemas.SpekeKeyProvider_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.SpekeKeyProvider_ResourceId, v.ResourceId)
+		case schemas.SpekeKeyProvider_SystemIds:
+			return deserialize__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12(d, schemas.SpekeKeyProvider_SystemIds, &v.SystemIds)
+		case schemas.SpekeKeyProvider_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.SpekeKeyProvider_Url, v.Url)
+		}
+		return nil
+	})
 }
 
 // If your output group type is CMAF, use these settings when doing DRM encryption
@@ -9058,6 +21090,54 @@ type SpekeKeyProviderCmaf struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpekeKeyProviderCmaf) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpekeKeyProviderCmaf)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpekeKeyProviderCmaf) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.SpekeKeyProviderCmaf_CertificateArn, *v.CertificateArn)
+	}
+	serialize__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(s, schemas.SpekeKeyProviderCmaf_DashSignaledSystemIds, v.DashSignaledSystemIds)
+	if v.EncryptionContractConfiguration != nil {
+		s.WriteStruct(schemas.SpekeKeyProviderCmaf_EncryptionContractConfiguration)
+		v.EncryptionContractConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(s, schemas.SpekeKeyProviderCmaf_HlsSignaledSystemIds, v.HlsSignaledSystemIds)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.SpekeKeyProviderCmaf_ResourceId, *v.ResourceId)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.SpekeKeyProviderCmaf_Url, *v.Url)
+	}
+}
+func (v *SpekeKeyProviderCmaf) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpekeKeyProviderCmaf, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpekeKeyProviderCmaf_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.SpekeKeyProviderCmaf_CertificateArn, v.CertificateArn)
+		case schemas.SpekeKeyProviderCmaf_DashSignaledSystemIds:
+			return deserialize__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(d, schemas.SpekeKeyProviderCmaf_DashSignaledSystemIds, &v.DashSignaledSystemIds)
+		case schemas.SpekeKeyProviderCmaf_EncryptionContractConfiguration:
+			v.EncryptionContractConfiguration = &EncryptionContractConfiguration{}
+			return v.EncryptionContractConfiguration.Deserialize(d)
+		case schemas.SpekeKeyProviderCmaf_HlsSignaledSystemIds:
+			return deserialize__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(d, schemas.SpekeKeyProviderCmaf_HlsSignaledSystemIds, &v.HlsSignaledSystemIds)
+		case schemas.SpekeKeyProviderCmaf_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.SpekeKeyProviderCmaf_ResourceId, v.ResourceId)
+		case schemas.SpekeKeyProviderCmaf_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.SpekeKeyProviderCmaf_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Settings related to SRT captions. SRT is a sidecar format that holds captions
 // in a file that is separate from the video container. Set up sidecar captions in
 // the same output group, but different output from your video.
@@ -9072,6 +21152,32 @@ type SrtDestinationSettings struct {
 	StylePassthrough SrtStylePassthrough
 
 	noSmithyDocumentSerde
+}
+
+func (v *SrtDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SrtDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SrtDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StylePassthrough != "" {
+		s.WriteString(schemas.SrtDestinationSettings_StylePassthrough, string(v.StylePassthrough))
+	}
+}
+func (v *SrtDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SrtDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SrtDestinationSettings_StylePassthrough:
+			var ev string
+			if err := d.ReadString(schemas.SrtDestinationSettings_StylePassthrough, &ev); err != nil {
+				return err
+			}
+			v.StylePassthrough = SrtStylePassthrough(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Use these settings to set up encryption with a static key provider.
@@ -9097,6 +21203,46 @@ type StaticKeyProvider struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StaticKeyProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StaticKeyProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StaticKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyFormat != nil {
+		s.WriteString(schemas.StaticKeyProvider_KeyFormat, *v.KeyFormat)
+	}
+	if v.KeyFormatVersions != nil {
+		s.WriteString(schemas.StaticKeyProvider_KeyFormatVersions, *v.KeyFormatVersions)
+	}
+	if v.StaticKeyValue != nil {
+		s.WriteString(schemas.StaticKeyProvider_StaticKeyValue, *v.StaticKeyValue)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.StaticKeyProvider_Url, *v.Url)
+	}
+}
+func (v *StaticKeyProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StaticKeyProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StaticKeyProvider_KeyFormat:
+			v.KeyFormat = new(string)
+			return d.ReadString(schemas.StaticKeyProvider_KeyFormat, v.KeyFormat)
+		case schemas.StaticKeyProvider_KeyFormatVersions:
+			v.KeyFormatVersions = new(string)
+			return d.ReadString(schemas.StaticKeyProvider_KeyFormatVersions, v.KeyFormatVersions)
+		case schemas.StaticKeyProvider_StaticKeyValue:
+			v.StaticKeyValue = new(string)
+			return d.ReadString(schemas.StaticKeyProvider_StaticKeyValue, v.StaticKeyValue)
+		case schemas.StaticKeyProvider_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.StaticKeyProvider_Url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Settings related to teletext captions. Set up teletext captions in the same
 // output as your video. For more information, see
 // https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html.
@@ -9118,6 +21264,31 @@ type TeletextDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TeletextDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TeletextDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TeletextDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageNumber != nil {
+		s.WriteString(schemas.TeletextDestinationSettings_PageNumber, *v.PageNumber)
+	}
+	serialize__listOfTeletextPageType(s, schemas.TeletextDestinationSettings_PageTypes, v.PageTypes)
+}
+func (v *TeletextDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TeletextDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TeletextDestinationSettings_PageNumber:
+			v.PageNumber = new(string)
+			return d.ReadString(schemas.TeletextDestinationSettings_PageNumber, v.PageNumber)
+		case schemas.TeletextDestinationSettings_PageTypes:
+			return deserialize__listOfTeletextPageType(d, schemas.TeletextDestinationSettings_PageTypes, &v.PageTypes)
+		}
+		return nil
+	})
+}
+
 // Settings specific to Teletext caption sources, including Page number.
 type TeletextSourceSettings struct {
 
@@ -9127,6 +21298,28 @@ type TeletextSourceSettings struct {
 	PageNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TeletextSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TeletextSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TeletextSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageNumber != nil {
+		s.WriteString(schemas.TeletextSourceSettings_PageNumber, *v.PageNumber)
+	}
+}
+func (v *TeletextSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TeletextSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TeletextSourceSettings_PageNumber:
+			v.PageNumber = new(string)
+			return d.ReadString(schemas.TeletextSourceSettings_PageNumber, v.PageNumber)
+		}
+		return nil
+	})
 }
 
 // Settings for burning the output timecode and specified prefix into the output.
@@ -9148,6 +21341,44 @@ type TimecodeBurnin struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimecodeBurnin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimecodeBurnin)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimecodeBurnin) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FontSize != nil {
+		s.WriteInt32(schemas.TimecodeBurnin_FontSize, *v.FontSize)
+	}
+	if v.Position != "" {
+		s.WriteString(schemas.TimecodeBurnin_Position, string(v.Position))
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.TimecodeBurnin_Prefix, *v.Prefix)
+	}
+}
+func (v *TimecodeBurnin) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimecodeBurnin, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimecodeBurnin_FontSize:
+			v.FontSize = new(int32)
+			return d.ReadInt32(schemas.TimecodeBurnin_FontSize, v.FontSize)
+		case schemas.TimecodeBurnin_Position:
+			var ev string
+			if err := d.ReadString(schemas.TimecodeBurnin_Position, &ev); err != nil {
+				return err
+			}
+			v.Position = TimecodeBurninPosition(ev)
+			return nil
+		case schemas.TimecodeBurnin_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.TimecodeBurnin_Prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // These settings control how the service handles timecodes throughout the job.
@@ -9193,6 +21424,50 @@ type TimecodeConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimecodeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimecodeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimecodeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Anchor != nil {
+		s.WriteString(schemas.TimecodeConfig_Anchor, *v.Anchor)
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.TimecodeConfig_Source, string(v.Source))
+	}
+	if v.Start != nil {
+		s.WriteString(schemas.TimecodeConfig_Start, *v.Start)
+	}
+	if v.TimestampOffset != nil {
+		s.WriteString(schemas.TimecodeConfig_TimestampOffset, *v.TimestampOffset)
+	}
+}
+func (v *TimecodeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimecodeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimecodeConfig_Anchor:
+			v.Anchor = new(string)
+			return d.ReadString(schemas.TimecodeConfig_Anchor, v.Anchor)
+		case schemas.TimecodeConfig_Source:
+			var ev string
+			if err := d.ReadString(schemas.TimecodeConfig_Source, &ev); err != nil {
+				return err
+			}
+			v.Source = TimecodeSource(ev)
+			return nil
+		case schemas.TimecodeConfig_Start:
+			v.Start = new(string)
+			return d.ReadString(schemas.TimecodeConfig_Start, v.Start)
+		case schemas.TimecodeConfig_TimestampOffset:
+			v.TimestampOffset = new(string)
+			return d.ReadString(schemas.TimecodeConfig_TimestampOffset, v.TimestampOffset)
+		}
+		return nil
+	})
+}
+
 // Insert user-defined custom ID3 metadata at timecodes that you specify. In each
 // output that you want to include this metadata, you must set ID3 metadata to
 // Passthrough.
@@ -9202,6 +21477,25 @@ type TimedMetadataInsertion struct {
 	Id3Insertions []Id3Insertion
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimedMetadataInsertion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimedMetadataInsertion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimedMetadataInsertion) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfId3Insertion(s, schemas.TimedMetadataInsertion_Id3Insertions, v.Id3Insertions)
+}
+func (v *TimedMetadataInsertion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimedMetadataInsertion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimedMetadataInsertion_Id3Insertions:
+			return deserialize__listOfId3Insertion(d, schemas.TimedMetadataInsertion_Id3Insertions, &v.Id3Insertions)
+		}
+		return nil
+	})
 }
 
 // Information about when jobs are submitted, started, and finished is specified
@@ -9218,6 +21512,40 @@ type Timing struct {
 	SubmitTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *Timing) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Timing)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Timing) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinishTime != nil {
+		s.WriteTime(schemas.Timing_FinishTime, *v.FinishTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Timing_StartTime, *v.StartTime)
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.Timing_SubmitTime, *v.SubmitTime)
+	}
+}
+func (v *Timing) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Timing, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Timing_FinishTime:
+			v.FinishTime = new(time.Time)
+			return d.ReadTime(schemas.Timing_FinishTime, v.FinishTime)
+		case schemas.Timing_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Timing_StartTime, v.StartTime)
+		case schemas.Timing_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.Timing_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
 }
 
 // Details about each track (video, audio, or data) in the media file.
@@ -9247,6 +21575,78 @@ type Track struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Track) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Track)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Track) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioProperties != nil {
+		s.WriteStruct(schemas.Track_AudioProperties)
+		v.AudioProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Codec != "" {
+		s.WriteString(schemas.Track_Codec, string(v.Codec))
+	}
+	if v.DataProperties != nil {
+		s.WriteStruct(schemas.Track_DataProperties)
+		v.DataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.Track_Duration, *v.Duration)
+	}
+	if v.Index != nil {
+		s.WriteInt32(schemas.Track_Index, *v.Index)
+	}
+	if v.TrackType != "" {
+		s.WriteString(schemas.Track_TrackType, string(v.TrackType))
+	}
+	if v.VideoProperties != nil {
+		s.WriteStruct(schemas.Track_VideoProperties)
+		v.VideoProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Track) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Track, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Track_AudioProperties:
+			v.AudioProperties = &AudioProperties{}
+			return v.AudioProperties.Deserialize(d)
+		case schemas.Track_Codec:
+			var ev string
+			if err := d.ReadString(schemas.Track_Codec, &ev); err != nil {
+				return err
+			}
+			v.Codec = Codec(ev)
+			return nil
+		case schemas.Track_DataProperties:
+			v.DataProperties = &DataProperties{}
+			return v.DataProperties.Deserialize(d)
+		case schemas.Track_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.Track_Duration, v.Duration)
+		case schemas.Track_Index:
+			v.Index = new(int32)
+			return d.ReadInt32(schemas.Track_Index, v.Index)
+		case schemas.Track_TrackType:
+			var ev string
+			if err := d.ReadString(schemas.Track_TrackType, &ev); err != nil {
+				return err
+			}
+			v.TrackType = TrackType(ev)
+			return nil
+		case schemas.Track_VideoProperties:
+			v.VideoProperties = &VideoProperties{}
+			return v.VideoProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An array containing track mapping information.
 type TrackMapping struct {
 
@@ -9260,6 +21660,31 @@ type TrackMapping struct {
 	VideoTrackIndexes []int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrackMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrackMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrackMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__integer(s, schemas.TrackMapping_AudioTrackIndexes, v.AudioTrackIndexes)
+	serialize__listOf__integer(s, schemas.TrackMapping_DataTrackIndexes, v.DataTrackIndexes)
+	serialize__listOf__integer(s, schemas.TrackMapping_VideoTrackIndexes, v.VideoTrackIndexes)
+}
+func (v *TrackMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrackMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrackMapping_AudioTrackIndexes:
+			return deserialize__listOf__integer(d, schemas.TrackMapping_AudioTrackIndexes, &v.AudioTrackIndexes)
+		case schemas.TrackMapping_DataTrackIndexes:
+			return deserialize__listOf__integer(d, schemas.TrackMapping_DataTrackIndexes, &v.DataTrackIndexes)
+		case schemas.TrackMapping_VideoTrackIndexes:
+			return deserialize__listOf__integer(d, schemas.TrackMapping_VideoTrackIndexes, &v.VideoTrackIndexes)
+		}
+		return nil
+	})
 }
 
 // Settings specific to caption sources that are specified by track number.
@@ -9292,6 +21717,34 @@ type TrackSourceSettings struct {
 	TrackNumber *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrackSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrackSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrackSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamNumber != nil {
+		s.WriteInt32(schemas.TrackSourceSettings_StreamNumber, *v.StreamNumber)
+	}
+	if v.TrackNumber != nil {
+		s.WriteInt32(schemas.TrackSourceSettings_TrackNumber, *v.TrackNumber)
+	}
+}
+func (v *TrackSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrackSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrackSourceSettings_StreamNumber:
+			v.StreamNumber = new(int32)
+			return d.ReadInt32(schemas.TrackSourceSettings_StreamNumber, v.StreamNumber)
+		case schemas.TrackSourceSettings_TrackNumber:
+			v.TrackNumber = new(int32)
+			return d.ReadInt32(schemas.TrackSourceSettings_TrackNumber, v.TrackNumber)
+		}
+		return nil
+	})
 }
 
 // Settings related to TTML captions. TTML is a sidecar format that holds captions
@@ -9354,6 +21807,100 @@ type TtmlDestinationSettings struct {
 	TextDecoration TtmlTextDecoration
 
 	noSmithyDocumentSerde
+}
+
+func (v *TtmlDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TtmlDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TtmlDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackgroundColor != "" {
+		s.WriteString(schemas.TtmlDestinationSettings_BackgroundColor, string(v.BackgroundColor))
+	}
+	if v.BackgroundOpacity != nil {
+		s.WriteInt32(schemas.TtmlDestinationSettings_BackgroundOpacity, *v.BackgroundOpacity)
+	}
+	if v.FontColor != "" {
+		s.WriteString(schemas.TtmlDestinationSettings_FontColor, string(v.FontColor))
+	}
+	if v.FontOpacity != nil {
+		s.WriteInt32(schemas.TtmlDestinationSettings_FontOpacity, *v.FontOpacity)
+	}
+	if v.FontSize != nil {
+		s.WriteInt32(schemas.TtmlDestinationSettings_FontSize, *v.FontSize)
+	}
+	if v.FontStyle != "" {
+		s.WriteString(schemas.TtmlDestinationSettings_FontStyle, string(v.FontStyle))
+	}
+	if v.FontWeight != "" {
+		s.WriteString(schemas.TtmlDestinationSettings_FontWeight, string(v.FontWeight))
+	}
+	if v.StylePassthrough != "" {
+		s.WriteString(schemas.TtmlDestinationSettings_StylePassthrough, string(v.StylePassthrough))
+	}
+	if v.TextDecoration != "" {
+		s.WriteString(schemas.TtmlDestinationSettings_TextDecoration, string(v.TextDecoration))
+	}
+}
+func (v *TtmlDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TtmlDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TtmlDestinationSettings_BackgroundColor:
+			var ev string
+			if err := d.ReadString(schemas.TtmlDestinationSettings_BackgroundColor, &ev); err != nil {
+				return err
+			}
+			v.BackgroundColor = TtmlBackgroundColor(ev)
+			return nil
+		case schemas.TtmlDestinationSettings_BackgroundOpacity:
+			v.BackgroundOpacity = new(int32)
+			return d.ReadInt32(schemas.TtmlDestinationSettings_BackgroundOpacity, v.BackgroundOpacity)
+		case schemas.TtmlDestinationSettings_FontColor:
+			var ev string
+			if err := d.ReadString(schemas.TtmlDestinationSettings_FontColor, &ev); err != nil {
+				return err
+			}
+			v.FontColor = TtmlFontColor(ev)
+			return nil
+		case schemas.TtmlDestinationSettings_FontOpacity:
+			v.FontOpacity = new(int32)
+			return d.ReadInt32(schemas.TtmlDestinationSettings_FontOpacity, v.FontOpacity)
+		case schemas.TtmlDestinationSettings_FontSize:
+			v.FontSize = new(int32)
+			return d.ReadInt32(schemas.TtmlDestinationSettings_FontSize, v.FontSize)
+		case schemas.TtmlDestinationSettings_FontStyle:
+			var ev string
+			if err := d.ReadString(schemas.TtmlDestinationSettings_FontStyle, &ev); err != nil {
+				return err
+			}
+			v.FontStyle = TtmlFontStyle(ev)
+			return nil
+		case schemas.TtmlDestinationSettings_FontWeight:
+			var ev string
+			if err := d.ReadString(schemas.TtmlDestinationSettings_FontWeight, &ev); err != nil {
+				return err
+			}
+			v.FontWeight = TtmlFontWeight(ev)
+			return nil
+		case schemas.TtmlDestinationSettings_StylePassthrough:
+			var ev string
+			if err := d.ReadString(schemas.TtmlDestinationSettings_StylePassthrough, &ev); err != nil {
+				return err
+			}
+			v.StylePassthrough = TtmlStylePassthrough(ev)
+			return nil
+		case schemas.TtmlDestinationSettings_TextDecoration:
+			var ev string
+			if err := d.ReadString(schemas.TtmlDestinationSettings_TextDecoration, &ev); err != nil {
+				return err
+			}
+			v.TextDecoration = TtmlTextDecoration(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec, under VideoDescription>CodecSettings to the value
@@ -9438,6 +21985,104 @@ type UncompressedSettings struct {
 	Telecine UncompressedTelecine
 
 	noSmithyDocumentSerde
+}
+
+func (v *UncompressedSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UncompressedSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UncompressedSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fourcc != "" {
+		s.WriteString(schemas.UncompressedSettings_Fourcc, string(v.Fourcc))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.UncompressedSettings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.UncompressedSettings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.UncompressedSettings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.UncompressedSettings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.UncompressedSettings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.UncompressedSettings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.UncompressedSettings_SlowPal, string(v.SlowPal))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.UncompressedSettings_Telecine, string(v.Telecine))
+	}
+}
+func (v *UncompressedSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UncompressedSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UncompressedSettings_Fourcc:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_Fourcc, &ev); err != nil {
+				return err
+			}
+			v.Fourcc = UncompressedFourcc(ev)
+			return nil
+		case schemas.UncompressedSettings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = UncompressedFramerateControl(ev)
+			return nil
+		case schemas.UncompressedSettings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = UncompressedFramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.UncompressedSettings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.UncompressedSettings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.UncompressedSettings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.UncompressedSettings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.UncompressedSettings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = UncompressedInterlaceMode(ev)
+			return nil
+		case schemas.UncompressedSettings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = UncompressedScanTypeConversionMode(ev)
+			return nil
+		case schemas.UncompressedSettings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = UncompressedSlowPal(ev)
+			return nil
+		case schemas.UncompressedSettings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.UncompressedSettings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = UncompressedTelecine(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value VC3
@@ -9530,6 +22175,104 @@ type Vc3Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Vc3Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Vc3Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Vc3Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.Vc3Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.Vc3Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.Vc3Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.Vc3Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.Vc3Settings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.ScanTypeConversionMode != "" {
+		s.WriteString(schemas.Vc3Settings_ScanTypeConversionMode, string(v.ScanTypeConversionMode))
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.Vc3Settings_SlowPal, string(v.SlowPal))
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.Vc3Settings_Telecine, string(v.Telecine))
+	}
+	if v.Vc3Class != "" {
+		s.WriteString(schemas.Vc3Settings_Vc3Class, string(v.Vc3Class))
+	}
+}
+func (v *Vc3Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Vc3Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Vc3Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = Vc3FramerateControl(ev)
+			return nil
+		case schemas.Vc3Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = Vc3FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.Vc3Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.Vc3Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.Vc3Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.Vc3Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.Vc3Settings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = Vc3InterlaceMode(ev)
+			return nil
+		case schemas.Vc3Settings_ScanTypeConversionMode:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_ScanTypeConversionMode, &ev); err != nil {
+				return err
+			}
+			v.ScanTypeConversionMode = Vc3ScanTypeConversionMode(ev)
+			return nil
+		case schemas.Vc3Settings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = Vc3SlowPal(ev)
+			return nil
+		case schemas.Vc3Settings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = Vc3Telecine(ev)
+			return nil
+		case schemas.Vc3Settings_Vc3Class:
+			var ev string
+			if err := d.ReadString(schemas.Vc3Settings_Vc3Class, &ev); err != nil {
+				return err
+			}
+			v.Vc3Class = Vc3Class(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Video codec settings contains the group of settings related to video encoding.
 // The settings in this group vary depending on the value that you choose for Video
 // codec. For each codec enum that you choose, define the corresponding settings
@@ -9597,6 +22340,144 @@ type VideoCodecSettings struct {
 	XavcSettings *XavcSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoCodecSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoCodecSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoCodecSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Av1Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_Av1Settings)
+		v.Av1Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvcIntraSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_AvcIntraSettings)
+		v.AvcIntraSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Codec != "" {
+		s.WriteString(schemas.VideoCodecSettings_Codec, string(v.Codec))
+	}
+	if v.FrameCaptureSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_FrameCaptureSettings)
+		v.FrameCaptureSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GifSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_GifSettings)
+		v.GifSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.H264Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_H264Settings)
+		v.H264Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.H265Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_H265Settings)
+		v.H265Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mpeg2Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_Mpeg2Settings)
+		v.Mpeg2Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PassthroughSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_PassthroughSettings)
+		v.PassthroughSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProresSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_ProresSettings)
+		v.ProresSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UncompressedSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_UncompressedSettings)
+		v.UncompressedSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Vc3Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_Vc3Settings)
+		v.Vc3Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Vp8Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_Vp8Settings)
+		v.Vp8Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Vp9Settings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_Vp9Settings)
+		v.Vp9Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XavcSettings != nil {
+		s.WriteStruct(schemas.VideoCodecSettings_XavcSettings)
+		v.XavcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VideoCodecSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoCodecSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoCodecSettings_Av1Settings:
+			v.Av1Settings = &Av1Settings{}
+			return v.Av1Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_AvcIntraSettings:
+			v.AvcIntraSettings = &AvcIntraSettings{}
+			return v.AvcIntraSettings.Deserialize(d)
+		case schemas.VideoCodecSettings_Codec:
+			var ev string
+			if err := d.ReadString(schemas.VideoCodecSettings_Codec, &ev); err != nil {
+				return err
+			}
+			v.Codec = VideoCodec(ev)
+			return nil
+		case schemas.VideoCodecSettings_FrameCaptureSettings:
+			v.FrameCaptureSettings = &FrameCaptureSettings{}
+			return v.FrameCaptureSettings.Deserialize(d)
+		case schemas.VideoCodecSettings_GifSettings:
+			v.GifSettings = &GifSettings{}
+			return v.GifSettings.Deserialize(d)
+		case schemas.VideoCodecSettings_H264Settings:
+			v.H264Settings = &H264Settings{}
+			return v.H264Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_H265Settings:
+			v.H265Settings = &H265Settings{}
+			return v.H265Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_Mpeg2Settings:
+			v.Mpeg2Settings = &Mpeg2Settings{}
+			return v.Mpeg2Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_PassthroughSettings:
+			v.PassthroughSettings = &PassthroughSettings{}
+			return v.PassthroughSettings.Deserialize(d)
+		case schemas.VideoCodecSettings_ProresSettings:
+			v.ProresSettings = &ProresSettings{}
+			return v.ProresSettings.Deserialize(d)
+		case schemas.VideoCodecSettings_UncompressedSettings:
+			v.UncompressedSettings = &UncompressedSettings{}
+			return v.UncompressedSettings.Deserialize(d)
+		case schemas.VideoCodecSettings_Vc3Settings:
+			v.Vc3Settings = &Vc3Settings{}
+			return v.Vc3Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_Vp8Settings:
+			v.Vp8Settings = &Vp8Settings{}
+			return v.Vp8Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_Vp9Settings:
+			v.Vp9Settings = &Vp9Settings{}
+			return v.Vp9Settings.Deserialize(d)
+		case schemas.VideoCodecSettings_XavcSettings:
+			v.XavcSettings = &XavcSettings{}
+			return v.XavcSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Settings related to video encoding of your output. The specific video settings
@@ -9719,6 +22600,168 @@ type VideoDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfdSignaling != "" {
+		s.WriteString(schemas.VideoDescription_AfdSignaling, string(v.AfdSignaling))
+	}
+	if v.AntiAlias != "" {
+		s.WriteString(schemas.VideoDescription_AntiAlias, string(v.AntiAlias))
+	}
+	if v.ChromaPositionMode != "" {
+		s.WriteString(schemas.VideoDescription_ChromaPositionMode, string(v.ChromaPositionMode))
+	}
+	if v.CodecSettings != nil {
+		s.WriteStruct(schemas.VideoDescription_CodecSettings)
+		v.CodecSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ColorMetadata != "" {
+		s.WriteString(schemas.VideoDescription_ColorMetadata, string(v.ColorMetadata))
+	}
+	if v.Crop != nil {
+		s.WriteStruct(schemas.VideoDescription_Crop)
+		v.Crop.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DropFrameTimecode != "" {
+		s.WriteString(schemas.VideoDescription_DropFrameTimecode, string(v.DropFrameTimecode))
+	}
+	if v.FixedAfd != nil {
+		s.WriteInt32(schemas.VideoDescription_FixedAfd, *v.FixedAfd)
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.VideoDescription_Height, *v.Height)
+	}
+	if v.Position != nil {
+		s.WriteStruct(schemas.VideoDescription_Position)
+		v.Position.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RespondToAfd != "" {
+		s.WriteString(schemas.VideoDescription_RespondToAfd, string(v.RespondToAfd))
+	}
+	if v.ScalingBehavior != "" {
+		s.WriteString(schemas.VideoDescription_ScalingBehavior, string(v.ScalingBehavior))
+	}
+	if v.Sharpness != nil {
+		s.WriteInt32(schemas.VideoDescription_Sharpness, *v.Sharpness)
+	}
+	if v.TimecodeInsertion != "" {
+		s.WriteString(schemas.VideoDescription_TimecodeInsertion, string(v.TimecodeInsertion))
+	}
+	if v.TimecodeTrack != "" {
+		s.WriteString(schemas.VideoDescription_TimecodeTrack, string(v.TimecodeTrack))
+	}
+	if v.VideoPreprocessors != nil {
+		s.WriteStruct(schemas.VideoDescription_VideoPreprocessors)
+		v.VideoPreprocessors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.VideoDescription_Width, *v.Width)
+	}
+}
+func (v *VideoDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoDescription_AfdSignaling:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_AfdSignaling, &ev); err != nil {
+				return err
+			}
+			v.AfdSignaling = AfdSignaling(ev)
+			return nil
+		case schemas.VideoDescription_AntiAlias:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_AntiAlias, &ev); err != nil {
+				return err
+			}
+			v.AntiAlias = AntiAlias(ev)
+			return nil
+		case schemas.VideoDescription_ChromaPositionMode:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_ChromaPositionMode, &ev); err != nil {
+				return err
+			}
+			v.ChromaPositionMode = ChromaPositionMode(ev)
+			return nil
+		case schemas.VideoDescription_CodecSettings:
+			v.CodecSettings = &VideoCodecSettings{}
+			return v.CodecSettings.Deserialize(d)
+		case schemas.VideoDescription_ColorMetadata:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_ColorMetadata, &ev); err != nil {
+				return err
+			}
+			v.ColorMetadata = ColorMetadata(ev)
+			return nil
+		case schemas.VideoDescription_Crop:
+			v.Crop = &Rectangle{}
+			return v.Crop.Deserialize(d)
+		case schemas.VideoDescription_DropFrameTimecode:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_DropFrameTimecode, &ev); err != nil {
+				return err
+			}
+			v.DropFrameTimecode = DropFrameTimecode(ev)
+			return nil
+		case schemas.VideoDescription_FixedAfd:
+			v.FixedAfd = new(int32)
+			return d.ReadInt32(schemas.VideoDescription_FixedAfd, v.FixedAfd)
+		case schemas.VideoDescription_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.VideoDescription_Height, v.Height)
+		case schemas.VideoDescription_Position:
+			v.Position = &Rectangle{}
+			return v.Position.Deserialize(d)
+		case schemas.VideoDescription_RespondToAfd:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_RespondToAfd, &ev); err != nil {
+				return err
+			}
+			v.RespondToAfd = RespondToAfd(ev)
+			return nil
+		case schemas.VideoDescription_ScalingBehavior:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_ScalingBehavior, &ev); err != nil {
+				return err
+			}
+			v.ScalingBehavior = ScalingBehavior(ev)
+			return nil
+		case schemas.VideoDescription_Sharpness:
+			v.Sharpness = new(int32)
+			return d.ReadInt32(schemas.VideoDescription_Sharpness, v.Sharpness)
+		case schemas.VideoDescription_TimecodeInsertion:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_TimecodeInsertion, &ev); err != nil {
+				return err
+			}
+			v.TimecodeInsertion = VideoTimecodeInsertion(ev)
+			return nil
+		case schemas.VideoDescription_TimecodeTrack:
+			var ev string
+			if err := d.ReadString(schemas.VideoDescription_TimecodeTrack, &ev); err != nil {
+				return err
+			}
+			v.TimecodeTrack = TimecodeTrack(ev)
+			return nil
+		case schemas.VideoDescription_VideoPreprocessors:
+			v.VideoPreprocessors = &VideoPreprocessor{}
+			return v.VideoPreprocessors.Deserialize(d)
+		case schemas.VideoDescription_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.VideoDescription_Width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Contains details about the output's video stream
 type VideoDetail struct {
 
@@ -9729,6 +22772,34 @@ type VideoDetail struct {
 	WidthInPx *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeightInPx != nil {
+		s.WriteInt32(schemas.VideoDetail_HeightInPx, *v.HeightInPx)
+	}
+	if v.WidthInPx != nil {
+		s.WriteInt32(schemas.VideoDetail_WidthInPx, *v.WidthInPx)
+	}
+}
+func (v *VideoDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoDetail_HeightInPx:
+			v.HeightInPx = new(int32)
+			return d.ReadInt32(schemas.VideoDetail_HeightInPx, v.HeightInPx)
+		case schemas.VideoDetail_WidthInPx:
+			v.WidthInPx = new(int32)
+			return d.ReadInt32(schemas.VideoDetail_WidthInPx, v.WidthInPx)
+		}
+		return nil
+	})
 }
 
 // Overlay one or more videos on top of your input video. For more information,
@@ -9787,6 +22858,71 @@ type VideoOverlay struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoOverlay) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoOverlay)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoOverlay) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Crop != nil {
+		s.WriteStruct(schemas.VideoOverlay_Crop)
+		v.Crop.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTimecode != nil {
+		s.WriteString(schemas.VideoOverlay_EndTimecode, *v.EndTimecode)
+	}
+	if v.InitialPosition != nil {
+		s.WriteStruct(schemas.VideoOverlay_InitialPosition)
+		v.InitialPosition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteStruct(schemas.VideoOverlay_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Playback != "" {
+		s.WriteString(schemas.VideoOverlay_Playback, string(v.Playback))
+	}
+	if v.StartTimecode != nil {
+		s.WriteString(schemas.VideoOverlay_StartTimecode, *v.StartTimecode)
+	}
+	serialize__listOfVideoOverlayTransition(s, schemas.VideoOverlay_Transitions, v.Transitions)
+}
+func (v *VideoOverlay) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoOverlay, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoOverlay_Crop:
+			v.Crop = &VideoOverlayCrop{}
+			return v.Crop.Deserialize(d)
+		case schemas.VideoOverlay_EndTimecode:
+			v.EndTimecode = new(string)
+			return d.ReadString(schemas.VideoOverlay_EndTimecode, v.EndTimecode)
+		case schemas.VideoOverlay_InitialPosition:
+			v.InitialPosition = &VideoOverlayPosition{}
+			return v.InitialPosition.Deserialize(d)
+		case schemas.VideoOverlay_Input:
+			v.Input = &VideoOverlayInput{}
+			return v.Input.Deserialize(d)
+		case schemas.VideoOverlay_Playback:
+			var ev string
+			if err := d.ReadString(schemas.VideoOverlay_Playback, &ev); err != nil {
+				return err
+			}
+			v.Playback = VideoOverlayPlayBackMode(ev)
+			return nil
+		case schemas.VideoOverlay_StartTimecode:
+			v.StartTimecode = new(string)
+			return d.ReadString(schemas.VideoOverlay_StartTimecode, v.StartTimecode)
+		case schemas.VideoOverlay_Transitions:
+			return deserialize__listOfVideoOverlayTransition(d, schemas.VideoOverlay_Transitions, &v.Transitions)
+		}
+		return nil
+	})
+}
+
 // Specify a rectangle of content to crop and use from your video overlay's input
 // video. When you do, MediaConvert uses the cropped dimensions that you specify
 // under X offset, Y offset, Width, and Height.
@@ -9841,6 +22977,56 @@ type VideoOverlayCrop struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoOverlayCrop) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoOverlayCrop)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoOverlayCrop) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.VideoOverlayCrop_Height, *v.Height)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.VideoOverlayCrop_Unit, string(v.Unit))
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.VideoOverlayCrop_Width, *v.Width)
+	}
+	if v.X != nil {
+		s.WriteInt32(schemas.VideoOverlayCrop_X, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteInt32(schemas.VideoOverlayCrop_Y, *v.Y)
+	}
+}
+func (v *VideoOverlayCrop) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoOverlayCrop, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoOverlayCrop_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayCrop_Height, v.Height)
+		case schemas.VideoOverlayCrop_Unit:
+			var ev string
+			if err := d.ReadString(schemas.VideoOverlayCrop_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = VideoOverlayUnit(ev)
+			return nil
+		case schemas.VideoOverlayCrop_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayCrop_Width, v.Width)
+		case schemas.VideoOverlayCrop_X:
+			v.X = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayCrop_X, v.X)
+		case schemas.VideoOverlayCrop_Y:
+			v.Y = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayCrop_Y, v.Y)
+		}
+		return nil
+	})
+}
+
 // Input settings for Video overlay. You can include one or more video overlays in
 // sequence at different times that you specify.
 type VideoOverlayInput struct {
@@ -9879,6 +23065,50 @@ type VideoOverlayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoOverlayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoOverlayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoOverlayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__mapOfAudioSelector(s, schemas.VideoOverlayInput_AudioSelectors, v.AudioSelectors)
+	if v.FileInput != nil {
+		s.WriteString(schemas.VideoOverlayInput_FileInput, *v.FileInput)
+	}
+	serialize__listOfVideoOverlayInputClipping(s, schemas.VideoOverlayInput_InputClippings, v.InputClippings)
+	if v.TimecodeSource != "" {
+		s.WriteString(schemas.VideoOverlayInput_TimecodeSource, string(v.TimecodeSource))
+	}
+	if v.TimecodeStart != nil {
+		s.WriteString(schemas.VideoOverlayInput_TimecodeStart, *v.TimecodeStart)
+	}
+}
+func (v *VideoOverlayInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoOverlayInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoOverlayInput_AudioSelectors:
+			return deserialize__mapOfAudioSelector(d, schemas.VideoOverlayInput_AudioSelectors, &v.AudioSelectors)
+		case schemas.VideoOverlayInput_FileInput:
+			v.FileInput = new(string)
+			return d.ReadString(schemas.VideoOverlayInput_FileInput, v.FileInput)
+		case schemas.VideoOverlayInput_InputClippings:
+			return deserialize__listOfVideoOverlayInputClipping(d, schemas.VideoOverlayInput_InputClippings, &v.InputClippings)
+		case schemas.VideoOverlayInput_TimecodeSource:
+			var ev string
+			if err := d.ReadString(schemas.VideoOverlayInput_TimecodeSource, &ev); err != nil {
+				return err
+			}
+			v.TimecodeSource = InputTimecodeSource(ev)
+			return nil
+		case schemas.VideoOverlayInput_TimecodeStart:
+			v.TimecodeStart = new(string)
+			return d.ReadString(schemas.VideoOverlayInput_TimecodeStart, v.TimecodeStart)
+		}
+		return nil
+	})
+}
+
 // To transcode only portions of your video overlay, include one input clip for
 // each part of your video overlay that you want in your output.
 type VideoOverlayInputClipping struct {
@@ -9896,6 +23126,34 @@ type VideoOverlayInputClipping struct {
 	StartTimecode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoOverlayInputClipping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoOverlayInputClipping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoOverlayInputClipping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTimecode != nil {
+		s.WriteString(schemas.VideoOverlayInputClipping_EndTimecode, *v.EndTimecode)
+	}
+	if v.StartTimecode != nil {
+		s.WriteString(schemas.VideoOverlayInputClipping_StartTimecode, *v.StartTimecode)
+	}
+}
+func (v *VideoOverlayInputClipping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoOverlayInputClipping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoOverlayInputClipping_EndTimecode:
+			v.EndTimecode = new(string)
+			return d.ReadString(schemas.VideoOverlayInputClipping_EndTimecode, v.EndTimecode)
+		case schemas.VideoOverlayInputClipping_StartTimecode:
+			v.StartTimecode = new(string)
+			return d.ReadString(schemas.VideoOverlayInputClipping_StartTimecode, v.StartTimecode)
+		}
+		return nil
+	})
 }
 
 // position of video overlay
@@ -9957,6 +23215,62 @@ type VideoOverlayPosition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoOverlayPosition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoOverlayPosition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoOverlayPosition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.VideoOverlayPosition_Height, *v.Height)
+	}
+	if v.Opacity != nil {
+		s.WriteInt32(schemas.VideoOverlayPosition_Opacity, *v.Opacity)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.VideoOverlayPosition_Unit, string(v.Unit))
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.VideoOverlayPosition_Width, *v.Width)
+	}
+	if v.XPosition != nil {
+		s.WriteInt32(schemas.VideoOverlayPosition_XPosition, *v.XPosition)
+	}
+	if v.YPosition != nil {
+		s.WriteInt32(schemas.VideoOverlayPosition_YPosition, *v.YPosition)
+	}
+}
+func (v *VideoOverlayPosition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoOverlayPosition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoOverlayPosition_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayPosition_Height, v.Height)
+		case schemas.VideoOverlayPosition_Opacity:
+			v.Opacity = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayPosition_Opacity, v.Opacity)
+		case schemas.VideoOverlayPosition_Unit:
+			var ev string
+			if err := d.ReadString(schemas.VideoOverlayPosition_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = VideoOverlayUnit(ev)
+			return nil
+		case schemas.VideoOverlayPosition_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayPosition_Width, v.Width)
+		case schemas.VideoOverlayPosition_XPosition:
+			v.XPosition = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayPosition_XPosition, v.XPosition)
+		case schemas.VideoOverlayPosition_YPosition:
+			v.YPosition = new(int32)
+			return d.ReadInt32(schemas.VideoOverlayPosition_YPosition, v.YPosition)
+		}
+		return nil
+	})
+}
+
 // Specify one or more Transitions for your video overlay. Use Transitions to
 // reposition or resize your overlay over time. To use the same position and size
 // for the duration of your video overlay: Leave blank. To specify a Transition:
@@ -9983,6 +23297,42 @@ type VideoOverlayTransition struct {
 	StartTimecode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoOverlayTransition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoOverlayTransition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoOverlayTransition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndPosition != nil {
+		s.WriteStruct(schemas.VideoOverlayTransition_EndPosition)
+		v.EndPosition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTimecode != nil {
+		s.WriteString(schemas.VideoOverlayTransition_EndTimecode, *v.EndTimecode)
+	}
+	if v.StartTimecode != nil {
+		s.WriteString(schemas.VideoOverlayTransition_StartTimecode, *v.StartTimecode)
+	}
+}
+func (v *VideoOverlayTransition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoOverlayTransition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoOverlayTransition_EndPosition:
+			v.EndPosition = &VideoOverlayPosition{}
+			return v.EndPosition.Deserialize(d)
+		case schemas.VideoOverlayTransition_EndTimecode:
+			v.EndTimecode = new(string)
+			return d.ReadString(schemas.VideoOverlayTransition_EndTimecode, v.EndTimecode)
+		case schemas.VideoOverlayTransition_StartTimecode:
+			v.StartTimecode = new(string)
+			return d.ReadString(schemas.VideoOverlayTransition_StartTimecode, v.StartTimecode)
+		}
+		return nil
+	})
 }
 
 // Find additional transcoding features under Preprocessors. Enable the features
@@ -10034,6 +23384,94 @@ type VideoPreprocessor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoPreprocessor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoPreprocessor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoPreprocessor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColorCorrector != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_ColorCorrector)
+		v.ColorCorrector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Deinterlacer != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_Deinterlacer)
+		v.Deinterlacer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DolbyVision != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_DolbyVision)
+		v.DolbyVision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DurationControl != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_DurationControl)
+		v.DurationControl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Hdr10Plus != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_Hdr10Plus)
+		v.Hdr10Plus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageInserter != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_ImageInserter)
+		v.ImageInserter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoiseReducer != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_NoiseReducer)
+		v.NoiseReducer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PartnerWatermarking != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_PartnerWatermarking)
+		v.PartnerWatermarking.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimecodeBurnin != nil {
+		s.WriteStruct(schemas.VideoPreprocessor_TimecodeBurnin)
+		v.TimecodeBurnin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VideoPreprocessor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoPreprocessor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoPreprocessor_ColorCorrector:
+			v.ColorCorrector = &ColorCorrector{}
+			return v.ColorCorrector.Deserialize(d)
+		case schemas.VideoPreprocessor_Deinterlacer:
+			v.Deinterlacer = &Deinterlacer{}
+			return v.Deinterlacer.Deserialize(d)
+		case schemas.VideoPreprocessor_DolbyVision:
+			v.DolbyVision = &DolbyVision{}
+			return v.DolbyVision.Deserialize(d)
+		case schemas.VideoPreprocessor_DurationControl:
+			v.DurationControl = &DurationControl{}
+			return v.DurationControl.Deserialize(d)
+		case schemas.VideoPreprocessor_Hdr10Plus:
+			v.Hdr10Plus = &Hdr10Plus{}
+			return v.Hdr10Plus.Deserialize(d)
+		case schemas.VideoPreprocessor_ImageInserter:
+			v.ImageInserter = &ImageInserter{}
+			return v.ImageInserter.Deserialize(d)
+		case schemas.VideoPreprocessor_NoiseReducer:
+			v.NoiseReducer = &NoiseReducer{}
+			return v.NoiseReducer.Deserialize(d)
+		case schemas.VideoPreprocessor_PartnerWatermarking:
+			v.PartnerWatermarking = &PartnerWatermarking{}
+			return v.PartnerWatermarking.Deserialize(d)
+		case schemas.VideoPreprocessor_TimecodeBurnin:
+			v.TimecodeBurnin = &TimecodeBurnin{}
+			return v.TimecodeBurnin.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details about the media file's video track.
 type VideoProperties struct {
 
@@ -10060,7 +23498,14 @@ type VideoProperties struct {
 	// An aspect ratio expressed as a fraction with numerator and denominator values,
 	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
 	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
-	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
 	DisplayAspectRatio *AspectRatio
 
 	// The frame rate of the video or audio track, expressed as a fraction with
@@ -10090,7 +23535,14 @@ type VideoProperties struct {
 	// An aspect ratio expressed as a fraction with numerator and denominator values,
 	// reduced to lowest terms. Used for the sample (pixel) aspect ratio and the
 	// display aspect ratio of a video track. For example, a 720x576 anamorphic track
-	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9.
+	// has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A
+	// video track can declare an aspect ratio in two independent places, and
+	// MediaConvert reports each one where it was found rather than choosing between
+	// them. The ratio declared by the container appears on the video track itself, and
+	// the ratio declared by the video essence appears under codecMetadata. When a file
+	// declares an aspect ratio in only one of the two places, the other is null; when
+	// it declares both and they disagree, you can compare them and decide which to
+	// use.
 	SampleAspectRatio *AspectRatio
 
 	// The color space transfer characteristics of the video track, defining the
@@ -10102,6 +23554,122 @@ type VideoProperties struct {
 	Width *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VideoProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitDepth != nil {
+		s.WriteInt32(schemas.VideoProperties_BitDepth, *v.BitDepth)
+	}
+	if v.BitRate != nil {
+		s.WriteInt64(schemas.VideoProperties_BitRate, *v.BitRate)
+	}
+	if v.CodecMetadata != nil {
+		s.WriteStruct(schemas.VideoProperties_CodecMetadata)
+		v.CodecMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ColorPrimaries != "" {
+		s.WriteString(schemas.VideoProperties_ColorPrimaries, string(v.ColorPrimaries))
+	}
+	if v.DisplayAspectRatio != nil {
+		s.WriteStruct(schemas.VideoProperties_DisplayAspectRatio)
+		v.DisplayAspectRatio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrameRate != nil {
+		s.WriteStruct(schemas.VideoProperties_FrameRate)
+		v.FrameRate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HdrMetadata != nil {
+		s.WriteStruct(schemas.VideoProperties_HdrMetadata)
+		v.HdrMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Height != nil {
+		s.WriteInt32(schemas.VideoProperties_Height, *v.Height)
+	}
+	if v.MatrixCoefficients != "" {
+		s.WriteString(schemas.VideoProperties_MatrixCoefficients, string(v.MatrixCoefficients))
+	}
+	if v.Rotation != nil {
+		s.WriteInt32(schemas.VideoProperties_Rotation, *v.Rotation)
+	}
+	if v.SampleAspectRatio != nil {
+		s.WriteStruct(schemas.VideoProperties_SampleAspectRatio)
+		v.SampleAspectRatio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransferCharacteristics != "" {
+		s.WriteString(schemas.VideoProperties_TransferCharacteristics, string(v.TransferCharacteristics))
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.VideoProperties_Width, *v.Width)
+	}
+}
+func (v *VideoProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoProperties_BitDepth:
+			v.BitDepth = new(int32)
+			return d.ReadInt32(schemas.VideoProperties_BitDepth, v.BitDepth)
+		case schemas.VideoProperties_BitRate:
+			v.BitRate = new(int64)
+			return d.ReadInt64(schemas.VideoProperties_BitRate, v.BitRate)
+		case schemas.VideoProperties_CodecMetadata:
+			v.CodecMetadata = &CodecMetadata{}
+			return v.CodecMetadata.Deserialize(d)
+		case schemas.VideoProperties_ColorPrimaries:
+			var ev string
+			if err := d.ReadString(schemas.VideoProperties_ColorPrimaries, &ev); err != nil {
+				return err
+			}
+			v.ColorPrimaries = ColorPrimaries(ev)
+			return nil
+		case schemas.VideoProperties_DisplayAspectRatio:
+			v.DisplayAspectRatio = &AspectRatio{}
+			return v.DisplayAspectRatio.Deserialize(d)
+		case schemas.VideoProperties_FrameRate:
+			v.FrameRate = &FrameRate{}
+			return v.FrameRate.Deserialize(d)
+		case schemas.VideoProperties_HdrMetadata:
+			v.HdrMetadata = &HdrMetadata{}
+			return v.HdrMetadata.Deserialize(d)
+		case schemas.VideoProperties_Height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.VideoProperties_Height, v.Height)
+		case schemas.VideoProperties_MatrixCoefficients:
+			var ev string
+			if err := d.ReadString(schemas.VideoProperties_MatrixCoefficients, &ev); err != nil {
+				return err
+			}
+			v.MatrixCoefficients = MatrixCoefficients(ev)
+			return nil
+		case schemas.VideoProperties_Rotation:
+			v.Rotation = new(int32)
+			return d.ReadInt32(schemas.VideoProperties_Rotation, v.Rotation)
+		case schemas.VideoProperties_SampleAspectRatio:
+			v.SampleAspectRatio = &AspectRatio{}
+			return v.SampleAspectRatio.Deserialize(d)
+		case schemas.VideoProperties_TransferCharacteristics:
+			var ev string
+			if err := d.ReadString(schemas.VideoProperties_TransferCharacteristics, &ev); err != nil {
+				return err
+			}
+			v.TransferCharacteristics = TransferCharacteristics(ev)
+			return nil
+		case schemas.VideoProperties_Width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.VideoProperties_Width, v.Width)
+		}
+		return nil
+	})
 }
 
 // Input video selectors contain the video settings for the input. Each of your
@@ -10229,6 +23797,131 @@ type VideoSelector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VideoSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VideoSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VideoSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlphaBehavior != "" {
+		s.WriteString(schemas.VideoSelector_AlphaBehavior, string(v.AlphaBehavior))
+	}
+	if v.ColorSpace != "" {
+		s.WriteString(schemas.VideoSelector_ColorSpace, string(v.ColorSpace))
+	}
+	if v.ColorSpaceUsage != "" {
+		s.WriteString(schemas.VideoSelector_ColorSpaceUsage, string(v.ColorSpaceUsage))
+	}
+	if v.EmbeddedTimecodeOverride != "" {
+		s.WriteString(schemas.VideoSelector_EmbeddedTimecodeOverride, string(v.EmbeddedTimecodeOverride))
+	}
+	if v.Hdr10Metadata != nil {
+		s.WriteStruct(schemas.VideoSelector_Hdr10Metadata)
+		v.Hdr10Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxLuminance != nil {
+		s.WriteInt32(schemas.VideoSelector_MaxLuminance, *v.MaxLuminance)
+	}
+	if v.PadVideo != "" {
+		s.WriteString(schemas.VideoSelector_PadVideo, string(v.PadVideo))
+	}
+	if v.Pid != nil {
+		s.WriteInt32(schemas.VideoSelector_Pid, *v.Pid)
+	}
+	if v.ProgramNumber != nil {
+		s.WriteInt32(schemas.VideoSelector_ProgramNumber, *v.ProgramNumber)
+	}
+	if v.Rotate != "" {
+		s.WriteString(schemas.VideoSelector_Rotate, string(v.Rotate))
+	}
+	if v.SampleRange != "" {
+		s.WriteString(schemas.VideoSelector_SampleRange, string(v.SampleRange))
+	}
+	if v.SelectorType != "" {
+		s.WriteString(schemas.VideoSelector_SelectorType, string(v.SelectorType))
+	}
+	serialize__listOf__integerMin1Max2147483647(s, schemas.VideoSelector_Streams, v.Streams)
+}
+func (v *VideoSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VideoSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VideoSelector_AlphaBehavior:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_AlphaBehavior, &ev); err != nil {
+				return err
+			}
+			v.AlphaBehavior = AlphaBehavior(ev)
+			return nil
+		case schemas.VideoSelector_ColorSpace:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_ColorSpace, &ev); err != nil {
+				return err
+			}
+			v.ColorSpace = ColorSpace(ev)
+			return nil
+		case schemas.VideoSelector_ColorSpaceUsage:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_ColorSpaceUsage, &ev); err != nil {
+				return err
+			}
+			v.ColorSpaceUsage = ColorSpaceUsage(ev)
+			return nil
+		case schemas.VideoSelector_EmbeddedTimecodeOverride:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_EmbeddedTimecodeOverride, &ev); err != nil {
+				return err
+			}
+			v.EmbeddedTimecodeOverride = EmbeddedTimecodeOverride(ev)
+			return nil
+		case schemas.VideoSelector_Hdr10Metadata:
+			v.Hdr10Metadata = &Hdr10Metadata{}
+			return v.Hdr10Metadata.Deserialize(d)
+		case schemas.VideoSelector_MaxLuminance:
+			v.MaxLuminance = new(int32)
+			return d.ReadInt32(schemas.VideoSelector_MaxLuminance, v.MaxLuminance)
+		case schemas.VideoSelector_PadVideo:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_PadVideo, &ev); err != nil {
+				return err
+			}
+			v.PadVideo = PadVideo(ev)
+			return nil
+		case schemas.VideoSelector_Pid:
+			v.Pid = new(int32)
+			return d.ReadInt32(schemas.VideoSelector_Pid, v.Pid)
+		case schemas.VideoSelector_ProgramNumber:
+			v.ProgramNumber = new(int32)
+			return d.ReadInt32(schemas.VideoSelector_ProgramNumber, v.ProgramNumber)
+		case schemas.VideoSelector_Rotate:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_Rotate, &ev); err != nil {
+				return err
+			}
+			v.Rotate = InputRotate(ev)
+			return nil
+		case schemas.VideoSelector_SampleRange:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_SampleRange, &ev); err != nil {
+				return err
+			}
+			v.SampleRange = InputSampleRange(ev)
+			return nil
+		case schemas.VideoSelector_SelectorType:
+			var ev string
+			if err := d.ReadString(schemas.VideoSelector_SelectorType, &ev); err != nil {
+				return err
+			}
+			v.SelectorType = VideoSelectorType(ev)
+			return nil
+		case schemas.VideoSelector_Streams:
+			return deserialize__listOf__integerMin1Max2147483647(d, schemas.VideoSelector_Streams, &v.Streams)
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the
 // value Vorbis.
 type VorbisSettings struct {
@@ -10250,6 +23943,40 @@ type VorbisSettings struct {
 	VbrQuality *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VorbisSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VorbisSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VorbisSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channels != nil {
+		s.WriteInt32(schemas.VorbisSettings_Channels, *v.Channels)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.VorbisSettings_SampleRate, *v.SampleRate)
+	}
+	if v.VbrQuality != nil {
+		s.WriteInt32(schemas.VorbisSettings_VbrQuality, *v.VbrQuality)
+	}
+}
+func (v *VorbisSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VorbisSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VorbisSettings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.VorbisSettings_Channels, v.Channels)
+		case schemas.VorbisSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.VorbisSettings_SampleRate, v.SampleRate)
+		case schemas.VorbisSettings_VbrQuality:
+			v.VbrQuality = new(int32)
+			return d.ReadInt32(schemas.VorbisSettings_VbrQuality, v.VbrQuality)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value VP8.
@@ -10347,6 +24074,120 @@ type Vp8Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Vp8Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Vp8Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Vp8Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Vp8Settings_Bitrate, *v.Bitrate)
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.Vp8Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.Vp8Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.Vp8Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.Vp8Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.GopSize != nil {
+		s.WriteFloat64(schemas.Vp8Settings_GopSize, *v.GopSize)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.Vp8Settings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.Vp8Settings_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.ParControl != "" {
+		s.WriteString(schemas.Vp8Settings_ParControl, string(v.ParControl))
+	}
+	if v.ParDenominator != nil {
+		s.WriteInt32(schemas.Vp8Settings_ParDenominator, *v.ParDenominator)
+	}
+	if v.ParNumerator != nil {
+		s.WriteInt32(schemas.Vp8Settings_ParNumerator, *v.ParNumerator)
+	}
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.Vp8Settings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.Vp8Settings_RateControlMode, string(v.RateControlMode))
+	}
+}
+func (v *Vp8Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Vp8Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Vp8Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_Bitrate, v.Bitrate)
+		case schemas.Vp8Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.Vp8Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = Vp8FramerateControl(ev)
+			return nil
+		case schemas.Vp8Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.Vp8Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = Vp8FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.Vp8Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.Vp8Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.Vp8Settings_GopSize:
+			v.GopSize = new(float64)
+			return d.ReadFloat64(schemas.Vp8Settings_GopSize, v.GopSize)
+		case schemas.Vp8Settings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.Vp8Settings_MaxBitrate:
+			v.MaxBitrate = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_MaxBitrate, v.MaxBitrate)
+		case schemas.Vp8Settings_ParControl:
+			var ev string
+			if err := d.ReadString(schemas.Vp8Settings_ParControl, &ev); err != nil {
+				return err
+			}
+			v.ParControl = Vp8ParControl(ev)
+			return nil
+		case schemas.Vp8Settings_ParDenominator:
+			v.ParDenominator = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_ParDenominator, v.ParDenominator)
+		case schemas.Vp8Settings_ParNumerator:
+			v.ParNumerator = new(int32)
+			return d.ReadInt32(schemas.Vp8Settings_ParNumerator, v.ParNumerator)
+		case schemas.Vp8Settings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.Vp8Settings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = Vp8QualityTuningLevel(ev)
+			return nil
+		case schemas.Vp8Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.Vp8Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = Vp8RateControlMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Required when you set Codec to the value VP9.
 type Vp9Settings struct {
 
@@ -10440,6 +24281,120 @@ type Vp9Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Vp9Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Vp9Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Vp9Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.Vp9Settings_Bitrate, *v.Bitrate)
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.Vp9Settings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.Vp9Settings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.Vp9Settings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.Vp9Settings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	if v.GopSize != nil {
+		s.WriteFloat64(schemas.Vp9Settings_GopSize, *v.GopSize)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.Vp9Settings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.MaxBitrate != nil {
+		s.WriteInt32(schemas.Vp9Settings_MaxBitrate, *v.MaxBitrate)
+	}
+	if v.ParControl != "" {
+		s.WriteString(schemas.Vp9Settings_ParControl, string(v.ParControl))
+	}
+	if v.ParDenominator != nil {
+		s.WriteInt32(schemas.Vp9Settings_ParDenominator, *v.ParDenominator)
+	}
+	if v.ParNumerator != nil {
+		s.WriteInt32(schemas.Vp9Settings_ParNumerator, *v.ParNumerator)
+	}
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.Vp9Settings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.RateControlMode != "" {
+		s.WriteString(schemas.Vp9Settings_RateControlMode, string(v.RateControlMode))
+	}
+}
+func (v *Vp9Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Vp9Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Vp9Settings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_Bitrate, v.Bitrate)
+		case schemas.Vp9Settings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.Vp9Settings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = Vp9FramerateControl(ev)
+			return nil
+		case schemas.Vp9Settings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.Vp9Settings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = Vp9FramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.Vp9Settings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.Vp9Settings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.Vp9Settings_GopSize:
+			v.GopSize = new(float64)
+			return d.ReadFloat64(schemas.Vp9Settings_GopSize, v.GopSize)
+		case schemas.Vp9Settings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.Vp9Settings_MaxBitrate:
+			v.MaxBitrate = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_MaxBitrate, v.MaxBitrate)
+		case schemas.Vp9Settings_ParControl:
+			var ev string
+			if err := d.ReadString(schemas.Vp9Settings_ParControl, &ev); err != nil {
+				return err
+			}
+			v.ParControl = Vp9ParControl(ev)
+			return nil
+		case schemas.Vp9Settings_ParDenominator:
+			v.ParDenominator = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_ParDenominator, v.ParDenominator)
+		case schemas.Vp9Settings_ParNumerator:
+			v.ParNumerator = new(int32)
+			return d.ReadInt32(schemas.Vp9Settings_ParNumerator, v.ParNumerator)
+		case schemas.Vp9Settings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.Vp9Settings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = Vp9QualityTuningLevel(ev)
+			return nil
+		case schemas.Vp9Settings_RateControlMode:
+			var ev string
+			if err := d.ReadString(schemas.Vp9Settings_RateControlMode, &ev); err != nil {
+				return err
+			}
+			v.RateControlMode = Vp9RateControlMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains any warning codes and their count for the job.
 type WarningGroup struct {
 
@@ -10456,6 +24411,34 @@ type WarningGroup struct {
 	Count *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WarningGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WarningGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WarningGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteInt32(schemas.WarningGroup_Code, *v.Code)
+	}
+	if v.Count != nil {
+		s.WriteInt32(schemas.WarningGroup_Count, *v.Count)
+	}
+}
+func (v *WarningGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WarningGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WarningGroup_Code:
+			v.Code = new(int32)
+			return d.ReadInt32(schemas.WarningGroup_Code, v.Code)
+		case schemas.WarningGroup_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.WarningGroup_Count, v.Count)
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value WAV.
@@ -10482,6 +24465,50 @@ type WavSettings struct {
 	SampleRate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WavSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WavSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WavSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitDepth != nil {
+		s.WriteInt32(schemas.WavSettings_BitDepth, *v.BitDepth)
+	}
+	if v.Channels != nil {
+		s.WriteInt32(schemas.WavSettings_Channels, *v.Channels)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.WavSettings_Format, string(v.Format))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.WavSettings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *WavSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WavSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WavSettings_BitDepth:
+			v.BitDepth = new(int32)
+			return d.ReadInt32(schemas.WavSettings_BitDepth, v.BitDepth)
+		case schemas.WavSettings_Channels:
+			v.Channels = new(int32)
+			return d.ReadInt32(schemas.WavSettings_Channels, v.Channels)
+		case schemas.WavSettings_Format:
+			var ev string
+			if err := d.ReadString(schemas.WavSettings_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = WavFormat(ev)
+			return nil
+		case schemas.WavSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.WavSettings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
 }
 
 // Settings related to WebVTT captions. WebVTT is a sidecar format that holds
@@ -10522,6 +24549,42 @@ type WebvttDestinationSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebvttDestinationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebvttDestinationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebvttDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accessibility != "" {
+		s.WriteString(schemas.WebvttDestinationSettings_Accessibility, string(v.Accessibility))
+	}
+	if v.StylePassthrough != "" {
+		s.WriteString(schemas.WebvttDestinationSettings_StylePassthrough, string(v.StylePassthrough))
+	}
+}
+func (v *WebvttDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebvttDestinationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebvttDestinationSettings_Accessibility:
+			var ev string
+			if err := d.ReadString(schemas.WebvttDestinationSettings_Accessibility, &ev); err != nil {
+				return err
+			}
+			v.Accessibility = WebvttAccessibilitySubs(ev)
+			return nil
+		case schemas.WebvttDestinationSettings_StylePassthrough:
+			var ev string
+			if err := d.ReadString(schemas.WebvttDestinationSettings_StylePassthrough, &ev); err != nil {
+				return err
+			}
+			v.StylePassthrough = WebvttStylePassthrough(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Settings specific to WebVTT sources in HLS alternative rendition group. Specify
 // the properties (renditionGroupId, renditionName or renditionLanguageCode) to
 // identify the unique subtitle track among the alternative rendition groups
@@ -10546,6 +24609,44 @@ type WebvttHlsSourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebvttHlsSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebvttHlsSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebvttHlsSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RenditionGroupId != nil {
+		s.WriteString(schemas.WebvttHlsSourceSettings_RenditionGroupId, *v.RenditionGroupId)
+	}
+	if v.RenditionLanguageCode != "" {
+		s.WriteString(schemas.WebvttHlsSourceSettings_RenditionLanguageCode, string(v.RenditionLanguageCode))
+	}
+	if v.RenditionName != nil {
+		s.WriteString(schemas.WebvttHlsSourceSettings_RenditionName, *v.RenditionName)
+	}
+}
+func (v *WebvttHlsSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebvttHlsSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebvttHlsSourceSettings_RenditionGroupId:
+			v.RenditionGroupId = new(string)
+			return d.ReadString(schemas.WebvttHlsSourceSettings_RenditionGroupId, v.RenditionGroupId)
+		case schemas.WebvttHlsSourceSettings_RenditionLanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.WebvttHlsSourceSettings_RenditionLanguageCode, &ev); err != nil {
+				return err
+			}
+			v.RenditionLanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.WebvttHlsSourceSettings_RenditionName:
+			v.RenditionName = new(string)
+			return d.ReadString(schemas.WebvttHlsSourceSettings_RenditionName, v.RenditionName)
+		}
+		return nil
+	})
+}
+
 // Required when you set Profile to the value XAVC_4K_INTRA_CBG.
 type Xavc4kIntraCbgProfileSettings struct {
 
@@ -10557,6 +24658,32 @@ type Xavc4kIntraCbgProfileSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Xavc4kIntraCbgProfileSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Xavc4kIntraCbgProfileSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Xavc4kIntraCbgProfileSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.XavcClass != "" {
+		s.WriteString(schemas.Xavc4kIntraCbgProfileSettings_XavcClass, string(v.XavcClass))
+	}
+}
+func (v *Xavc4kIntraCbgProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Xavc4kIntraCbgProfileSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Xavc4kIntraCbgProfileSettings_XavcClass:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kIntraCbgProfileSettings_XavcClass, &ev); err != nil {
+				return err
+			}
+			v.XavcClass = Xavc4kIntraCbgProfileClass(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Required when you set Profile to the value XAVC_4K_INTRA_VBR.
 type Xavc4kIntraVbrProfileSettings struct {
 
@@ -10566,6 +24693,32 @@ type Xavc4kIntraVbrProfileSettings struct {
 	XavcClass Xavc4kIntraVbrProfileClass
 
 	noSmithyDocumentSerde
+}
+
+func (v *Xavc4kIntraVbrProfileSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Xavc4kIntraVbrProfileSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Xavc4kIntraVbrProfileSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.XavcClass != "" {
+		s.WriteString(schemas.Xavc4kIntraVbrProfileSettings_XavcClass, string(v.XavcClass))
+	}
+}
+func (v *Xavc4kIntraVbrProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Xavc4kIntraVbrProfileSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Xavc4kIntraVbrProfileSettings_XavcClass:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kIntraVbrProfileSettings_XavcClass, &ev); err != nil {
+				return err
+			}
+			v.XavcClass = Xavc4kIntraVbrProfileClass(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Profile to the value XAVC_4K.
@@ -10625,6 +24778,90 @@ type Xavc4kProfileSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Xavc4kProfileSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Xavc4kProfileSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Xavc4kProfileSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitrateClass != "" {
+		s.WriteString(schemas.Xavc4kProfileSettings_BitrateClass, string(v.BitrateClass))
+	}
+	if v.CodecProfile != "" {
+		s.WriteString(schemas.Xavc4kProfileSettings_CodecProfile, string(v.CodecProfile))
+	}
+	if v.FlickerAdaptiveQuantization != "" {
+		s.WriteString(schemas.Xavc4kProfileSettings_FlickerAdaptiveQuantization, string(v.FlickerAdaptiveQuantization))
+	}
+	if v.GopBReference != "" {
+		s.WriteString(schemas.Xavc4kProfileSettings_GopBReference, string(v.GopBReference))
+	}
+	if v.GopClosedCadence != nil {
+		s.WriteInt32(schemas.Xavc4kProfileSettings_GopClosedCadence, *v.GopClosedCadence)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.Xavc4kProfileSettings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.Xavc4kProfileSettings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.Slices != nil {
+		s.WriteInt32(schemas.Xavc4kProfileSettings_Slices, *v.Slices)
+	}
+}
+func (v *Xavc4kProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Xavc4kProfileSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Xavc4kProfileSettings_BitrateClass:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kProfileSettings_BitrateClass, &ev); err != nil {
+				return err
+			}
+			v.BitrateClass = Xavc4kProfileBitrateClass(ev)
+			return nil
+		case schemas.Xavc4kProfileSettings_CodecProfile:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kProfileSettings_CodecProfile, &ev); err != nil {
+				return err
+			}
+			v.CodecProfile = Xavc4kProfileCodecProfile(ev)
+			return nil
+		case schemas.Xavc4kProfileSettings_FlickerAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kProfileSettings_FlickerAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.FlickerAdaptiveQuantization = XavcFlickerAdaptiveQuantization(ev)
+			return nil
+		case schemas.Xavc4kProfileSettings_GopBReference:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kProfileSettings_GopBReference, &ev); err != nil {
+				return err
+			}
+			v.GopBReference = XavcGopBReference(ev)
+			return nil
+		case schemas.Xavc4kProfileSettings_GopClosedCadence:
+			v.GopClosedCadence = new(int32)
+			return d.ReadInt32(schemas.Xavc4kProfileSettings_GopClosedCadence, v.GopClosedCadence)
+		case schemas.Xavc4kProfileSettings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.Xavc4kProfileSettings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.Xavc4kProfileSettings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.Xavc4kProfileSettings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = Xavc4kProfileQualityTuningLevel(ev)
+			return nil
+		case schemas.Xavc4kProfileSettings_Slices:
+			v.Slices = new(int32)
+			return d.ReadInt32(schemas.Xavc4kProfileSettings_Slices, v.Slices)
+		}
+		return nil
+	})
+}
+
 // Required when you set Profile to the value XAVC_HD_INTRA_CBG.
 type XavcHdIntraCbgProfileSettings struct {
 
@@ -10646,6 +24883,42 @@ type XavcHdIntraCbgProfileSettings struct {
 	XavcClass XavcHdIntraCbgProfileClass
 
 	noSmithyDocumentSerde
+}
+
+func (v *XavcHdIntraCbgProfileSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XavcHdIntraCbgProfileSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XavcHdIntraCbgProfileSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.XavcHdIntraCbgProfileSettings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.XavcClass != "" {
+		s.WriteString(schemas.XavcHdIntraCbgProfileSettings_XavcClass, string(v.XavcClass))
+	}
+}
+func (v *XavcHdIntraCbgProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XavcHdIntraCbgProfileSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XavcHdIntraCbgProfileSettings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdIntraCbgProfileSettings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = XavcInterlaceMode(ev)
+			return nil
+		case schemas.XavcHdIntraCbgProfileSettings_XavcClass:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdIntraCbgProfileSettings_XavcClass, &ev); err != nil {
+				return err
+			}
+			v.XavcClass = XavcHdIntraCbgProfileClass(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Profile to the value XAVC_HD.
@@ -10717,6 +24990,100 @@ type XavcHdProfileSettings struct {
 	Telecine XavcHdProfileTelecine
 
 	noSmithyDocumentSerde
+}
+
+func (v *XavcHdProfileSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XavcHdProfileSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XavcHdProfileSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BitrateClass != "" {
+		s.WriteString(schemas.XavcHdProfileSettings_BitrateClass, string(v.BitrateClass))
+	}
+	if v.FlickerAdaptiveQuantization != "" {
+		s.WriteString(schemas.XavcHdProfileSettings_FlickerAdaptiveQuantization, string(v.FlickerAdaptiveQuantization))
+	}
+	if v.GopBReference != "" {
+		s.WriteString(schemas.XavcHdProfileSettings_GopBReference, string(v.GopBReference))
+	}
+	if v.GopClosedCadence != nil {
+		s.WriteInt32(schemas.XavcHdProfileSettings_GopClosedCadence, *v.GopClosedCadence)
+	}
+	if v.HrdBufferSize != nil {
+		s.WriteInt32(schemas.XavcHdProfileSettings_HrdBufferSize, *v.HrdBufferSize)
+	}
+	if v.InterlaceMode != "" {
+		s.WriteString(schemas.XavcHdProfileSettings_InterlaceMode, string(v.InterlaceMode))
+	}
+	if v.QualityTuningLevel != "" {
+		s.WriteString(schemas.XavcHdProfileSettings_QualityTuningLevel, string(v.QualityTuningLevel))
+	}
+	if v.Slices != nil {
+		s.WriteInt32(schemas.XavcHdProfileSettings_Slices, *v.Slices)
+	}
+	if v.Telecine != "" {
+		s.WriteString(schemas.XavcHdProfileSettings_Telecine, string(v.Telecine))
+	}
+}
+func (v *XavcHdProfileSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XavcHdProfileSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XavcHdProfileSettings_BitrateClass:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdProfileSettings_BitrateClass, &ev); err != nil {
+				return err
+			}
+			v.BitrateClass = XavcHdProfileBitrateClass(ev)
+			return nil
+		case schemas.XavcHdProfileSettings_FlickerAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdProfileSettings_FlickerAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.FlickerAdaptiveQuantization = XavcFlickerAdaptiveQuantization(ev)
+			return nil
+		case schemas.XavcHdProfileSettings_GopBReference:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdProfileSettings_GopBReference, &ev); err != nil {
+				return err
+			}
+			v.GopBReference = XavcGopBReference(ev)
+			return nil
+		case schemas.XavcHdProfileSettings_GopClosedCadence:
+			v.GopClosedCadence = new(int32)
+			return d.ReadInt32(schemas.XavcHdProfileSettings_GopClosedCadence, v.GopClosedCadence)
+		case schemas.XavcHdProfileSettings_HrdBufferSize:
+			v.HrdBufferSize = new(int32)
+			return d.ReadInt32(schemas.XavcHdProfileSettings_HrdBufferSize, v.HrdBufferSize)
+		case schemas.XavcHdProfileSettings_InterlaceMode:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdProfileSettings_InterlaceMode, &ev); err != nil {
+				return err
+			}
+			v.InterlaceMode = XavcInterlaceMode(ev)
+			return nil
+		case schemas.XavcHdProfileSettings_QualityTuningLevel:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdProfileSettings_QualityTuningLevel, &ev); err != nil {
+				return err
+			}
+			v.QualityTuningLevel = XavcHdProfileQualityTuningLevel(ev)
+			return nil
+		case schemas.XavcHdProfileSettings_Slices:
+			v.Slices = new(int32)
+			return d.ReadInt32(schemas.XavcHdProfileSettings_Slices, v.Slices)
+		case schemas.XavcHdProfileSettings_Telecine:
+			var ev string
+			if err := d.ReadString(schemas.XavcHdProfileSettings_Telecine, &ev); err != nil {
+				return err
+			}
+			v.Telecine = XavcHdProfileTelecine(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Required when you set Codec to the value XAVC.
@@ -10880,6 +25247,163 @@ type XavcSettings struct {
 	XavcHdProfileSettings *XavcHdProfileSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *XavcSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XavcSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XavcSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveQuantization != "" {
+		s.WriteString(schemas.XavcSettings_AdaptiveQuantization, string(v.AdaptiveQuantization))
+	}
+	if v.EntropyEncoding != "" {
+		s.WriteString(schemas.XavcSettings_EntropyEncoding, string(v.EntropyEncoding))
+	}
+	if v.FramerateControl != "" {
+		s.WriteString(schemas.XavcSettings_FramerateControl, string(v.FramerateControl))
+	}
+	if v.FramerateConversionAlgorithm != "" {
+		s.WriteString(schemas.XavcSettings_FramerateConversionAlgorithm, string(v.FramerateConversionAlgorithm))
+	}
+	if v.FramerateDenominator != nil {
+		s.WriteInt32(schemas.XavcSettings_FramerateDenominator, *v.FramerateDenominator)
+	}
+	if v.FramerateNumerator != nil {
+		s.WriteInt32(schemas.XavcSettings_FramerateNumerator, *v.FramerateNumerator)
+	}
+	serialize__listOfFrameMetricType(s, schemas.XavcSettings_PerFrameMetrics, v.PerFrameMetrics)
+	if v.Profile != "" {
+		s.WriteString(schemas.XavcSettings_Profile, string(v.Profile))
+	}
+	if v.SlowPal != "" {
+		s.WriteString(schemas.XavcSettings_SlowPal, string(v.SlowPal))
+	}
+	if v.Softness != nil {
+		s.WriteInt32(schemas.XavcSettings_Softness, *v.Softness)
+	}
+	if v.SpatialAdaptiveQuantization != "" {
+		s.WriteString(schemas.XavcSettings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
+	}
+	if v.TemporalAdaptiveQuantization != "" {
+		s.WriteString(schemas.XavcSettings_TemporalAdaptiveQuantization, string(v.TemporalAdaptiveQuantization))
+	}
+	if v.Xavc4kIntraCbgProfileSettings != nil {
+		s.WriteStruct(schemas.XavcSettings_Xavc4kIntraCbgProfileSettings)
+		v.Xavc4kIntraCbgProfileSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Xavc4kIntraVbrProfileSettings != nil {
+		s.WriteStruct(schemas.XavcSettings_Xavc4kIntraVbrProfileSettings)
+		v.Xavc4kIntraVbrProfileSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Xavc4kProfileSettings != nil {
+		s.WriteStruct(schemas.XavcSettings_Xavc4kProfileSettings)
+		v.Xavc4kProfileSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XavcHdIntraCbgProfileSettings != nil {
+		s.WriteStruct(schemas.XavcSettings_XavcHdIntraCbgProfileSettings)
+		v.XavcHdIntraCbgProfileSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XavcHdProfileSettings != nil {
+		s.WriteStruct(schemas.XavcSettings_XavcHdProfileSettings)
+		v.XavcHdProfileSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *XavcSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XavcSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XavcSettings_AdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_AdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.AdaptiveQuantization = XavcAdaptiveQuantization(ev)
+			return nil
+		case schemas.XavcSettings_EntropyEncoding:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_EntropyEncoding, &ev); err != nil {
+				return err
+			}
+			v.EntropyEncoding = XavcEntropyEncoding(ev)
+			return nil
+		case schemas.XavcSettings_FramerateControl:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_FramerateControl, &ev); err != nil {
+				return err
+			}
+			v.FramerateControl = XavcFramerateControl(ev)
+			return nil
+		case schemas.XavcSettings_FramerateConversionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_FramerateConversionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.FramerateConversionAlgorithm = XavcFramerateConversionAlgorithm(ev)
+			return nil
+		case schemas.XavcSettings_FramerateDenominator:
+			v.FramerateDenominator = new(int32)
+			return d.ReadInt32(schemas.XavcSettings_FramerateDenominator, v.FramerateDenominator)
+		case schemas.XavcSettings_FramerateNumerator:
+			v.FramerateNumerator = new(int32)
+			return d.ReadInt32(schemas.XavcSettings_FramerateNumerator, v.FramerateNumerator)
+		case schemas.XavcSettings_PerFrameMetrics:
+			return deserialize__listOfFrameMetricType(d, schemas.XavcSettings_PerFrameMetrics, &v.PerFrameMetrics)
+		case schemas.XavcSettings_Profile:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_Profile, &ev); err != nil {
+				return err
+			}
+			v.Profile = XavcProfile(ev)
+			return nil
+		case schemas.XavcSettings_SlowPal:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_SlowPal, &ev); err != nil {
+				return err
+			}
+			v.SlowPal = XavcSlowPal(ev)
+			return nil
+		case schemas.XavcSettings_Softness:
+			v.Softness = new(int32)
+			return d.ReadInt32(schemas.XavcSettings_Softness, v.Softness)
+		case schemas.XavcSettings_SpatialAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_SpatialAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.SpatialAdaptiveQuantization = XavcSpatialAdaptiveQuantization(ev)
+			return nil
+		case schemas.XavcSettings_TemporalAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.XavcSettings_TemporalAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.TemporalAdaptiveQuantization = XavcTemporalAdaptiveQuantization(ev)
+			return nil
+		case schemas.XavcSettings_Xavc4kIntraCbgProfileSettings:
+			v.Xavc4kIntraCbgProfileSettings = &Xavc4kIntraCbgProfileSettings{}
+			return v.Xavc4kIntraCbgProfileSettings.Deserialize(d)
+		case schemas.XavcSettings_Xavc4kIntraVbrProfileSettings:
+			v.Xavc4kIntraVbrProfileSettings = &Xavc4kIntraVbrProfileSettings{}
+			return v.Xavc4kIntraVbrProfileSettings.Deserialize(d)
+		case schemas.XavcSettings_Xavc4kProfileSettings:
+			v.Xavc4kProfileSettings = &Xavc4kProfileSettings{}
+			return v.Xavc4kProfileSettings.Deserialize(d)
+		case schemas.XavcSettings_XavcHdIntraCbgProfileSettings:
+			v.XavcHdIntraCbgProfileSettings = &XavcHdIntraCbgProfileSettings{}
+			return v.XavcHdIntraCbgProfileSettings.Deserialize(d)
+		case schemas.XavcSettings_XavcHdProfileSettings:
+			v.XavcHdProfileSettings = &XavcHdProfileSettings{}
+			return v.XavcHdProfileSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

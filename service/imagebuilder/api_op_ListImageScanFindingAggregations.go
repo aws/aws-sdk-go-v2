@@ -5,7 +5,9 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,11 +48,28 @@ type ListImageScanFindingAggregationsInput struct {
 	// by specific criteria, such as tags, attributes, or IDs.
 	Filter *types.Filter
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListImageScanFindingAggregationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageScanFindingAggregationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageScanFindingAggregationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListImageScanFindingAggregationsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListImageScanFindingAggregationsOutput struct {
@@ -90,13 +109,47 @@ type ListImageScanFindingAggregationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageScanFindingAggregationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageScanFindingAggregationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageScanFindingAggregationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationType != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_aggregationType, *v.AggregationType)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_requestId, *v.RequestId)
+	}
+	serializeImageScanFindingAggregationsList(s, schemas.ListImageScanFindingAggregationsResponse_responses, v.Responses)
+}
+func (v *ListImageScanFindingAggregationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageScanFindingAggregationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageScanFindingAggregationsResponse_aggregationType:
+			v.AggregationType = new(string)
+			return d.ReadString(schemas.ListImageScanFindingAggregationsResponse_aggregationType, v.AggregationType)
+		case schemas.ListImageScanFindingAggregationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageScanFindingAggregationsResponse_nextToken, v.NextToken)
+		case schemas.ListImageScanFindingAggregationsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImageScanFindingAggregationsResponse_requestId, v.RequestId)
+		case schemas.ListImageScanFindingAggregationsResponse_responses:
+			return deserializeImageScanFindingAggregationsList(d, schemas.ListImageScanFindingAggregationsResponse_responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageScanFindingAggregations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageScanFindingAggregations, schemas.ListImageScanFindingAggregationsRequest, schemas.ListImageScanFindingAggregationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageScanFindingAggregations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageScanFindingAggregations, schemas.ListImageScanFindingAggregationsRequest, schemas.ListImageScanFindingAggregationsResponse), output: &ListImageScanFindingAggregationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

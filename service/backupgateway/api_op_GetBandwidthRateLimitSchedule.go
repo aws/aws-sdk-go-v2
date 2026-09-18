@@ -4,7 +4,9 @@ package backupgateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,28 @@ type GetBandwidthRateLimitScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBandwidthRateLimitScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBandwidthRateLimitScheduleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBandwidthRateLimitScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.GetBandwidthRateLimitScheduleInput_GatewayArn, *v.GatewayArn)
+	}
+}
+func (v *GetBandwidthRateLimitScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBandwidthRateLimitScheduleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBandwidthRateLimitScheduleInput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.GetBandwidthRateLimitScheduleInput_GatewayArn, v.GatewayArn)
+		}
+		return nil
+	})
+}
+
 type GetBandwidthRateLimitScheduleOutput struct {
 
 	// An array containing bandwidth rate limit schedule intervals for a gateway. When
@@ -58,13 +82,35 @@ type GetBandwidthRateLimitScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBandwidthRateLimitScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBandwidthRateLimitScheduleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBandwidthRateLimitScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBandwidthRateLimitIntervals(s, schemas.GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals, v.BandwidthRateLimitIntervals)
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.GetBandwidthRateLimitScheduleOutput_GatewayArn, *v.GatewayArn)
+	}
+}
+func (v *GetBandwidthRateLimitScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBandwidthRateLimitScheduleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals:
+			return deserializeBandwidthRateLimitIntervals(d, schemas.GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals, &v.BandwidthRateLimitIntervals)
+		case schemas.GetBandwidthRateLimitScheduleOutput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.GetBandwidthRateLimitScheduleOutput_GatewayArn, v.GatewayArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBandwidthRateLimitScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetBandwidthRateLimitSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBandwidthRateLimitSchedule, schemas.GetBandwidthRateLimitScheduleInput, schemas.GetBandwidthRateLimitScheduleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetBandwidthRateLimitSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBandwidthRateLimitSchedule, schemas.GetBandwidthRateLimitScheduleInput, schemas.GetBandwidthRateLimitScheduleOutput), output: &GetBandwidthRateLimitScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

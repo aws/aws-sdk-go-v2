@@ -4,7 +4,9 @@ package kafka
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeVpcConnectionInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeVpcConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeVpcConnectionRequest_Arn, *v.Arn)
+	}
 }
 
 type DescribeVpcConnectionOutput struct {
@@ -70,13 +84,75 @@ type DescribeVpcConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authentication != nil {
+		s.WriteString(schemas.DescribeVpcConnectionResponse_Authentication, *v.Authentication)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeVpcConnectionResponse_CreationTime, *v.CreationTime)
+	}
+	serialize__listOf__string(s, schemas.DescribeVpcConnectionResponse_SecurityGroups, v.SecurityGroups)
+	if v.State != "" {
+		s.WriteString(schemas.DescribeVpcConnectionResponse_State, string(v.State))
+	}
+	serialize__listOf__string(s, schemas.DescribeVpcConnectionResponse_Subnets, v.Subnets)
+	serialize__mapOf__string(s, schemas.DescribeVpcConnectionResponse_Tags, v.Tags)
+	if v.TargetClusterArn != nil {
+		s.WriteString(schemas.DescribeVpcConnectionResponse_TargetClusterArn, *v.TargetClusterArn)
+	}
+	if v.VpcConnectionArn != nil {
+		s.WriteString(schemas.DescribeVpcConnectionResponse_VpcConnectionArn, *v.VpcConnectionArn)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DescribeVpcConnectionResponse_VpcId, *v.VpcId)
+	}
+}
+func (v *DescribeVpcConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcConnectionResponse_Authentication:
+			v.Authentication = new(string)
+			return d.ReadString(schemas.DescribeVpcConnectionResponse_Authentication, v.Authentication)
+		case schemas.DescribeVpcConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeVpcConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeVpcConnectionResponse_SecurityGroups:
+			return deserialize__listOf__string(d, schemas.DescribeVpcConnectionResponse_SecurityGroups, &v.SecurityGroups)
+		case schemas.DescribeVpcConnectionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeVpcConnectionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.VpcConnectionState(ev)
+			return nil
+		case schemas.DescribeVpcConnectionResponse_Subnets:
+			return deserialize__listOf__string(d, schemas.DescribeVpcConnectionResponse_Subnets, &v.Subnets)
+		case schemas.DescribeVpcConnectionResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeVpcConnectionResponse_Tags, &v.Tags)
+		case schemas.DescribeVpcConnectionResponse_TargetClusterArn:
+			v.TargetClusterArn = new(string)
+			return d.ReadString(schemas.DescribeVpcConnectionResponse_TargetClusterArn, v.TargetClusterArn)
+		case schemas.DescribeVpcConnectionResponse_VpcConnectionArn:
+			v.VpcConnectionArn = new(string)
+			return d.ReadString(schemas.DescribeVpcConnectionResponse_VpcConnectionArn, v.VpcConnectionArn)
+		case schemas.DescribeVpcConnectionResponse_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DescribeVpcConnectionResponse_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcConnection, schemas.DescribeVpcConnectionRequest, schemas.DescribeVpcConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcConnection, schemas.DescribeVpcConnectionRequest, schemas.DescribeVpcConnectionResponse), output: &DescribeVpcConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

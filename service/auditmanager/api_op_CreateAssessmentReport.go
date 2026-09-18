@@ -4,7 +4,9 @@ package auditmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,27 @@ type CreateAssessmentReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.CreateAssessmentReportRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAssessmentReportRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAssessmentReportRequest_name, *v.Name)
+	}
+	if v.QueryStatement != nil {
+		s.WriteString(schemas.CreateAssessmentReportRequest_queryStatement, *v.QueryStatement)
+	}
+}
+
 type CreateAssessmentReportOutput struct {
 
 	//  The new assessment report that the CreateAssessmentReport API returned.
@@ -72,13 +95,34 @@ type CreateAssessmentReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentReport != nil {
+		s.WriteStruct(schemas.CreateAssessmentReportResponse_assessmentReport)
+		v.AssessmentReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAssessmentReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssessmentReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssessmentReportResponse_assessmentReport:
+			v.AssessmentReport = &types.AssessmentReport{}
+			return v.AssessmentReport.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssessmentReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssessmentReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentReport, schemas.CreateAssessmentReportRequest, schemas.CreateAssessmentReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssessmentReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentReport, schemas.CreateAssessmentReportRequest, schemas.CreateAssessmentReportResponse), output: &CreateAssessmentReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

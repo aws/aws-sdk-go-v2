@@ -8,13 +8,28 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Return the tags applied to an AWS Elastic Beanstalk resource. The response
-// contains a list of tag key-value pairs.
+// Return the tags applied to an Elastic Beanstalk resource. The response contains
+// a list of tag key-value pairs.
 //
 // Elastic Beanstalk supports tagging of all of its resources. For details about
 // resource tagging, see [Tagging Application Resources].
 //
+// This action only returns information about resources that the calling principle
+// has IAM permissions to access. For example, consider a case where a user only
+// has permission to access one of three resources. When the user calls the this
+// action, the response will only include the one resource that the user has
+// permission to access instead of all three resources. If the user doesn’t have
+// access to any of the resources an empty result is returned.
+//
+// The [AWSElasticBeanstalkReadOnly] managed policy allows operators to view information about resources
+// related to Elastic Beanstalk. For more information, see [Managing Elastic Beanstalk user policies]in the Elastic
+// Beanstalk Developer Guide. For detailed instructions to attach a policy to a
+// user or group, see the section [Controlling access with managed policies]in the same topic.
+//
+// [AWSElasticBeanstalkReadOnly]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+// [Managing Elastic Beanstalk user policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
 // [Tagging Application Resources]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html
+// [Controlling access with managed policies]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

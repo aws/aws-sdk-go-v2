@@ -4,7 +4,9 @@ package securityhub
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *
 
 type DescribeOrganizationConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOrganizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeOrganizationConfigurationOutput struct {
@@ -77,13 +88,56 @@ type DescribeOrganizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnable != nil {
+		s.WriteBool(schemas.DescribeOrganizationConfigurationResponse_AutoEnable, *v.AutoEnable)
+	}
+	if v.AutoEnableStandards != "" {
+		s.WriteString(schemas.DescribeOrganizationConfigurationResponse_AutoEnableStandards, string(v.AutoEnableStandards))
+	}
+	if v.MemberAccountLimitReached != nil {
+		s.WriteBool(schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached, *v.MemberAccountLimitReached)
+	}
+	if v.OrganizationConfiguration != nil {
+		s.WriteStruct(schemas.DescribeOrganizationConfigurationResponse_OrganizationConfiguration)
+		v.OrganizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationConfigurationResponse_AutoEnable:
+			v.AutoEnable = new(bool)
+			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_AutoEnable, v.AutoEnable)
+		case schemas.DescribeOrganizationConfigurationResponse_AutoEnableStandards:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOrganizationConfigurationResponse_AutoEnableStandards, &ev); err != nil {
+				return err
+			}
+			v.AutoEnableStandards = types.AutoEnableStandards(ev)
+			return nil
+		case schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached:
+			v.MemberAccountLimitReached = new(bool)
+			return d.ReadBool(schemas.DescribeOrganizationConfigurationResponse_MemberAccountLimitReached, v.MemberAccountLimitReached)
+		case schemas.DescribeOrganizationConfigurationResponse_OrganizationConfiguration:
+			v.OrganizationConfiguration = &types.OrganizationConfiguration{}
+			return v.OrganizationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOrganizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConfiguration, schemas.DescribeOrganizationConfigurationRequest, schemas.DescribeOrganizationConfigurationResponse), output: &DescribeOrganizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

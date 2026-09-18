@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can apply up to 10 custom attributes for each resource. You can view the
 // attributes of a resource with [ListAttributes]. You can remove existing attributes on a
@@ -63,6 +85,27 @@ func (e *AttributeLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AttributeLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AttributeLimitExceededException_message, *v.Message)
+	}
+}
+func (v *AttributeLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AttributeLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your Amazon Web Services account was blocked. For more information, contact [Amazon Web Services Support].
 //
@@ -91,6 +134,27 @@ func (e *BlockedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BlockedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BlockedException_message, *v.Message)
+	}
+}
+func (v *BlockedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BlockedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // These errors are usually caused by a client action. This client action might be
 // using an action or resource on behalf of a user that doesn't have permissions to
@@ -120,6 +184,27 @@ func (e *ClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClientException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClientException_message, *v.Message)
+	}
+}
+func (v *ClientException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClientException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The cluster contains one or more capacity providers that prevent the requested
 // operation. This exception occurs when you try to delete a cluster that still has
@@ -151,6 +236,27 @@ func (e *ClusterContainsCapacityProviderException) ErrorCode() string {
 }
 func (e *ClusterContainsCapacityProviderException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *ClusterContainsCapacityProviderException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterContainsCapacityProviderException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterContainsCapacityProviderException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterContainsCapacityProviderException_message, *v.Message)
+	}
+}
+func (v *ClusterContainsCapacityProviderException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterContainsCapacityProviderException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterContainsCapacityProviderException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterContainsCapacityProviderException_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // You can't delete a cluster that has registered container instances. First,
@@ -184,6 +290,27 @@ func (e *ClusterContainsContainerInstancesException) ErrorCode() string {
 func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ClusterContainsContainerInstancesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterContainsContainerInstancesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterContainsContainerInstancesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterContainsContainerInstancesException_message, *v.Message)
+	}
+}
+func (v *ClusterContainsContainerInstancesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterContainsContainerInstancesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterContainsContainerInstancesException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterContainsContainerInstancesException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't delete a cluster that contains services. First, update the service to
 // reduce its desired task count to 0, and then delete the service. For more
@@ -215,6 +342,27 @@ func (e *ClusterContainsServicesException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClusterContainsServicesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClusterContainsServicesException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterContainsServicesException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterContainsServicesException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterContainsServicesException_message, *v.Message)
+	}
+}
+func (v *ClusterContainsServicesException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterContainsServicesException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterContainsServicesException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterContainsServicesException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't delete a cluster that has active tasks.
 type ClusterContainsTasksException struct {
@@ -241,6 +389,27 @@ func (e *ClusterContainsTasksException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClusterContainsTasksException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterContainsTasksException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterContainsTasksException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterContainsTasksException_message, *v.Message)
+	}
+}
+func (v *ClusterContainsTasksException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterContainsTasksException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterContainsTasksException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterContainsTasksException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified cluster wasn't found. You can view your available clusters with [ListClusters].
 // Amazon ECS clusters are Region specific.
@@ -270,6 +439,27 @@ func (e *ClusterNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClusterNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterNotFoundException_message, *v.Message)
+	}
+}
+func (v *ClusterNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request could not be processed because of conflict in the current state of
 // the resource.
@@ -299,6 +489,30 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+	serializeResourceIds(s, schemas.ConflictException_resourceIds, v.ResourceIds)
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		case schemas.ConflictException_resourceIds:
+			return deserializeResourceIds(d, schemas.ConflictException_resourceIds, &v.ResourceIds)
+		}
+		return nil
+	})
+}
 
 // The specified daemon isn't active. You can't update a daemon that's inactive.
 // If you have previously deleted a daemon, you can re-create it with [CreateDaemon].
@@ -328,6 +542,27 @@ func (e *DaemonNotActiveException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DaemonNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DaemonNotActiveException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DaemonNotActiveException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DaemonNotActiveException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DaemonNotActiveException_message, *v.Message)
+	}
+}
+func (v *DaemonNotActiveException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DaemonNotActiveException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DaemonNotActiveException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DaemonNotActiveException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified daemon wasn't found. You can view your available daemons with [ListDaemons].
 // Amazon ECS daemons are cluster specific and Region specific.
@@ -357,6 +592,27 @@ func (e *DaemonNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DaemonNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DaemonNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DaemonNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DaemonNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DaemonNotFoundException_message, *v.Message)
+	}
+}
+func (v *DaemonNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DaemonNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DaemonNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DaemonNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified parameter isn't valid. Review the available parameters for the
 // API request.
@@ -388,6 +644,27 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The limit for the resource was exceeded.
 type LimitExceededException struct {
@@ -414,6 +691,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon ECS can't determine the current version of the Amazon ECS container
 // agent on the container instance and doesn't have enough information to proceed
@@ -444,6 +742,27 @@ func (e *MissingVersionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingVersionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingVersionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingVersionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MissingVersionException_message, *v.Message)
+	}
+}
+func (v *MissingVersionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingVersionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingVersionException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingVersionException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified namespace wasn't found.
 type NamespaceNotFoundException struct {
@@ -470,6 +789,27 @@ func (e *NamespaceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NamespaceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NamespaceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NamespaceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NamespaceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NamespaceNotFoundException_message, *v.Message)
+	}
+}
+func (v *NamespaceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NamespaceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NamespaceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NamespaceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There's no update available for this Amazon ECS container agent. This might be
 // because the agent is already running the latest version or because it's so old
@@ -498,6 +838,27 @@ func (e *NoUpdateAvailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoUpdateAvailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoUpdateAvailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoUpdateAvailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoUpdateAvailableException_message, *v.Message)
+	}
+}
+func (v *NoUpdateAvailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoUpdateAvailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoUpdateAvailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoUpdateAvailableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified platform version doesn't satisfy the required capabilities of the
 // task definition.
@@ -527,6 +888,27 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorCode() string {
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *PlatformTaskDefinitionIncompatibilityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformTaskDefinitionIncompatibilityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformTaskDefinitionIncompatibilityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PlatformTaskDefinitionIncompatibilityException_message, *v.Message)
+	}
+}
+func (v *PlatformTaskDefinitionIncompatibilityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformTaskDefinitionIncompatibilityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformTaskDefinitionIncompatibilityException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PlatformTaskDefinitionIncompatibilityException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified platform version doesn't exist.
 type PlatformUnknownException struct {
@@ -553,6 +935,27 @@ func (e *PlatformUnknownException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PlatformUnknownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PlatformUnknownException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformUnknownException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformUnknownException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PlatformUnknownException_message, *v.Message)
+	}
+}
+func (v *PlatformUnknownException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformUnknownException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformUnknownException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PlatformUnknownException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource is in-use and can't be removed.
 type ResourceInUseException struct {
@@ -579,6 +982,27 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseException_message, *v.Message)
+	}
+}
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource wasn't found.
 type ResourceNotFoundException struct {
@@ -605,6 +1029,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // These errors are usually caused by a server issue.
 type ServerException struct {
@@ -631,6 +1076,27 @@ func (e *ServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServerException_message, *v.Message)
+	}
+}
+func (v *ServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The service deploy ARN that you specified in the ContinueServiceDeployment
 // doesn't exist. You can use ListServiceDeployments to retrieve the service
@@ -661,6 +1127,27 @@ func (e *ServiceDeploymentNotFoundException) ErrorCode() string {
 func (e *ServiceDeploymentNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ServiceDeploymentNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceDeploymentNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceDeploymentNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceDeploymentNotFoundException_message, *v.Message)
+	}
+}
+func (v *ServiceDeploymentNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceDeploymentNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceDeploymentNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceDeploymentNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified service isn't active. You can't update a service that's inactive.
 // If you have previously deleted a service, you can re-create it with [CreateService].
@@ -690,6 +1177,27 @@ func (e *ServiceNotActiveException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceNotActiveException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNotActiveException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNotActiveException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceNotActiveException_message, *v.Message)
+	}
+}
+func (v *ServiceNotActiveException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNotActiveException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNotActiveException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceNotActiveException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified service wasn't found. You can view your available services with [ListServices].
 // Amazon ECS services are cluster specific and Region specific.
@@ -719,6 +1227,27 @@ func (e *ServiceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceNotFoundException_message, *v.Message)
+	}
+}
+func (v *ServiceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The execute command cannot run. This error can be caused by any of the
 // following configuration issues:
@@ -758,6 +1287,27 @@ func (e *TargetNotConnectedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TargetNotConnectedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetNotConnectedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetNotConnectedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TargetNotConnectedException_message, *v.Message)
+	}
+}
+func (v *TargetNotConnectedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetNotConnectedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetNotConnectedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TargetNotConnectedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified target wasn't found. You can view your available container
 // instances with [ListContainerInstances]. Amazon ECS container instances are cluster-specific and
@@ -788,6 +1338,27 @@ func (e *TargetNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TargetNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TargetNotFoundException_message, *v.Message)
+	}
+}
+func (v *TargetNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TargetNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified task set wasn't found. You can view your available task sets with [DescribeTaskSets]
 // . Task sets are specific to each cluster, service and Region.
@@ -817,6 +1388,27 @@ func (e *TaskSetNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TaskSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TaskSetNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskSetNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskSetNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TaskSetNotFoundException_message, *v.Message)
+	}
+}
+func (v *TaskSetNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskSetNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskSetNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TaskSetNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified task isn't supported in this Region.
 type UnsupportedFeatureException struct {
@@ -843,6 +1435,27 @@ func (e *UnsupportedFeatureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedFeatureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedFeatureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedFeatureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedFeatureException_message, *v.Message)
+	}
+}
+func (v *UnsupportedFeatureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedFeatureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedFeatureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedFeatureException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // There's already a current Amazon ECS container agent update in progress on the
 // container instance that's specified. If the container agent becomes disconnected
@@ -873,3 +1486,24 @@ func (e *UpdateInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UpdateInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UpdateInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateInProgressException_message, *v.Message)
+	}
+}
+func (v *UpdateInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateInProgressException_message, v.Message)
+		}
+		return nil
+	})
+}

@@ -5,7 +5,9 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,44 @@ type CreateRouterOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_ClientToken, *v.ClientToken)
+	}
+	serializeRouterOutputConfiguration(s, schemas.CreateRouterOutputRequest_Configuration, v.Configuration)
+	if v.FabricConfiguration != nil {
+		s.WriteStruct(schemas.CreateRouterOutputRequest_FabricConfiguration)
+		v.FabricConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMaintenanceConfiguration(s, schemas.CreateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.CreateRouterOutputRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_RegionName, *v.RegionName)
+	}
+	if v.RoutingScope != "" {
+		s.WriteString(schemas.CreateRouterOutputRequest_RoutingScope, string(v.RoutingScope))
+	}
+	serialize__mapOfString(s, schemas.CreateRouterOutputRequest_Tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.CreateRouterOutputRequest_Tier, string(v.Tier))
+	}
+}
+
 type CreateRouterOutputOutput struct {
 
 	// The newly-created router output.
@@ -92,13 +132,34 @@ type CreateRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterOutput != nil {
+		s.WriteStruct(schemas.CreateRouterOutputResponse_RouterOutput)
+		v.RouterOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouterOutputResponse_RouterOutput:
+			v.RouterOutput = &types.RouterOutput{}
+			return v.RouterOutput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterOutput, schemas.CreateRouterOutputRequest, schemas.CreateRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterOutput, schemas.CreateRouterOutputRequest, schemas.CreateRouterOutputResponse), output: &CreateRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

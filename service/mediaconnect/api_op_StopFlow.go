@@ -4,7 +4,9 @@ package mediaconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.StopFlowRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type StopFlowOutput struct {
 
 	//  The ARN of the flow that you stopped.
@@ -48,13 +62,42 @@ type StopFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.StopFlowResponse_FlowArn, *v.FlowArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StopFlowResponse_Status, string(v.Status))
+	}
+}
+func (v *StopFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopFlowResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.StopFlowResponse_FlowArn, v.FlowArn)
+		case schemas.StopFlowResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StopFlowResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopFlow, schemas.StopFlowRequest, schemas.StopFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopFlow, schemas.StopFlowRequest, schemas.StopFlowResponse), output: &StopFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

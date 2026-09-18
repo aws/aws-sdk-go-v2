@@ -233,6 +233,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(string(v.InputType))
 	}
 
+	if v.MultiviewConfiguration != nil {
+		ok := object.Key("MultiviewConfiguration")
+		if err := awsRestjson1_serializeDocumentMultiviewConfiguration(v.MultiviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutputHeaderConfiguration != nil {
 		ok := object.Key("OutputHeaderConfiguration")
 		if err := awsRestjson1_serializeDocumentOutputHeaderConfiguration(v.OutputHeaderConfiguration, ok); err != nil {
@@ -2680,6 +2687,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.MultiviewConfiguration != nil {
+		ok := object.Key("MultiviewConfiguration")
+		if err := awsRestjson1_serializeDocumentMultiviewConfiguration(v.MultiviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutputHeaderConfiguration != nil {
 		ok := object.Key("OutputHeaderConfiguration")
 		if err := awsRestjson1_serializeDocumentOutputHeaderConfiguration(v.OutputHeaderConfiguration, ok); err != nil {
@@ -3855,6 +3869,49 @@ func awsRestjson1_serializeDocumentInputSwitchConfiguration(v *types.InputSwitch
 		ok.Integer(*v.PreferredInput)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiviewConfiguration(v *types.MultiviewConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailableLayouts != nil {
+		ok := object.Key("AvailableLayouts")
+		if err := awsRestjson1_serializeDocumentMultiviewLayoutList(v.AvailableLayouts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AvailableSources != nil {
+		ok := object.Key("AvailableSources")
+		if err := awsRestjson1_serializeDocumentMultiviewSourceList(v.AvailableSources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiviewLayoutList(v []types.MultiviewLayoutType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiviewSourceList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

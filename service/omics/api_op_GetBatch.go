@@ -74,7 +74,8 @@ type GetBatchOutput struct {
 	// PENDING (ready to submit runs), SUBMITTING (submitting runs), INPROGRESS (runs
 	// executing), STOPPING (cancellation in progress), PROCESSED (all runs
 	// completed), CANCELLED (batch cancelled), FAILED (batch failed), RUNS_DELETING
-	// (deleting runs), RUNS_DELETED (runs deleted).
+	// (deleting runs), RUNS_DELETE_FAILED (run deletion failed for some or all runs),
+	// RUNS_DELETED (runs deleted).
 	Status types.BatchStatus
 
 	// A summary of run submission outcomes. See SubmissionSummary .
@@ -83,7 +84,7 @@ type GetBatchOutput struct {
 	// The timestamp when all run submissions completed.
 	SubmittedTime *time.Time
 
-	// AWS tags associated with the run batch.
+	// Amazon Web Services tags associated with the run batch.
 	Tags map[string]string
 
 	// The total number of runs in the batch.

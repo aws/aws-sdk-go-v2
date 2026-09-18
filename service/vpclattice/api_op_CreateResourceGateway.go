@@ -67,15 +67,18 @@ type CreateResourceGatewayInput struct {
 	// The number of IPv4 addresses in each ENI for the resource gateway.
 	Ipv4AddressesPerEni *int32
 
-	// Indicates how DNS is resolved for resource configurations associated to this
-	// resource gateway. ResourceConfigDnsResolution is set at creation time and cannot
-	// be changed.
+	// Indicates how DNS is resolved for resource configurations associated with this
+	// resource gateway. This value is set when you create the resource gateway and
+	// can't be changed afterward. The default is PUBLIC .
 	//
 	//   - IN_VPC - DNS resolution occurs privately within the resource gateway's VPC.
 	//   DNS queries for resources behind this resource gateway resolve using the DNS
 	//   resolvers defined in the VPC's DHCP option sets. Use this when your resource
 	//   domain names are hosted in private Route 53 hosted zones or on-premises DNS
-	//   servers reachable from the VPC.
+	//   servers reachable from the VPC. A CIDR resource configuration requires a
+	//   resource gateway that uses IN_VPC , and an IN_VPC resource gateway can't be
+	//   used for ARN resource configurations, so a single resource gateway can't serve
+	//   both ARN and CIDR resource configurations.
 	//
 	//   - PUBLIC - DNS resolution occurs against public DNS resolvers. DNS queries for
 	//   resources behind this resource gateway resolve using standard public DNS. Use
