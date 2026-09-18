@@ -1,3 +1,7 @@
+# v1.160.0 (2026-09-18)
+
+* **Feature**: Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.
+
 # v1.159.0 (2026-09-14)
 
 * **Feature**: Amazon Glue releasing the new API ListIntegrationTableProperties and adding IntegrationArn to TargetTableConfig

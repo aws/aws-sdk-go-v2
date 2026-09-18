@@ -1,8 +1,0 @@
-{
-    "id": "3d407a13-288a-4b73-8b99-0aaff9b2608e",
-    "type": "feature",
-    "description": "This release adds support for A2A servers via the ApplicationType and AuthConfig fields, allowing customers to register their agent-to-agent servers with API key authentication.",
-    "modules": [
-        "service/appintegrations"
-    ]
-}

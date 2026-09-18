@@ -1,8 +1,0 @@
-{
-    "id": "28db1555-5c48-4e63-89ef-15283e05d095",
-    "type": "feature",
-    "description": "Adds support for specifying Notebook type",
-    "modules": [
-        "service/datazone"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "b6f01fc6-18cb-42e9-a2b0-c9158ee82a6f",
-    "type": "feature",
-    "description": "Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.278.0 (2026-09-18)
+
+* **Feature**: Adds support for the hub content resource in SageMaker Search.
+
 # v1.277.0 (2026-09-10)
 
 * **Feature**: This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.

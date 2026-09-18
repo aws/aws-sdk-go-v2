@@ -1,3 +1,7 @@
+# v1.335.0 (2026-09-18)
+
+* **Feature**: This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+
 # v1.334.0 (2026-09-17)
 
 * **Feature**: Adding support for "Tunnel" VPC Endpoint

@@ -1,3 +1,25 @@
+# Release (2026-09-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.47.0](service/appintegrations/CHANGELOG.md#v1470-2026-09-18)
+  * **Feature**: This release adds support for A2A servers via the ApplicationType and AuthConfig fields, allowing customers to register their agent-to-agent servers with API key authentication.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.201.0](service/connect/CHANGELOG.md#v12010-2026-09-18)
+  * **Feature**: This release adds the ListSecurityProfileAIAgents API and updates the CreateSecurityProfile and UpdateSecurityProfile APIs to support the AllowedAIAgents field on security profiles, allowing customers to manage the 3P AI agents associated with a security profile for Agent-to-Agent interactions.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.75.0](service/datazone/CHANGELOG.md#v1750-2026-09-18)
+  * **Feature**: Adds support for specifying Notebook type
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.335.0](service/ec2/CHANGELOG.md#v13350-2026-09-18)
+  * **Feature**: This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.160.0](service/glue/CHANGELOG.md#v11600-2026-09-18)
+  * **Feature**: Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.44.0](service/ivsrealtime/CHANGELOG.md#v1440-2026-09-18)
+  * **Feature**: GetParticipant, ListParticipantEvents, ListParticipantReplicas, StartParticipantReplication, and StopParticipantReplication now accept participant IDs containing underscores.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.41.0](service/qconnect/CHANGELOG.md#v1410-2026-09-18)
+  * **Feature**: Amazon Connect AI Agents now support multi-agent orchestration and structured JSON input and output messaging for orchestration agents.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.278.0](service/sagemaker/CHANGELOG.md#v12780-2026-09-18)
+  * **Feature**: Adds support for the hub content resource in SageMaker Search.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.66.0](service/transcribe/CHANGELOG.md#v1660-2026-09-18)
+  * **Feature**: Amazon Transcribe now lets you encrypt your custom vocabularies, custom vocabulary filters, and custom language models with a customer managed AWS KMS key instead of an AWS owned key, and adds a new UpdateLanguageModel operation to transition CLM encryption to a different KMS key.
+
 # Release (2026-09-17)
 
 ## Module Highlights

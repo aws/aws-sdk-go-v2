@@ -1,3 +1,7 @@
+# v1.75.0 (2026-09-18)
+
+* **Feature**: Adds support for specifying Notebook type
+
 # v1.74.0 (2026-09-09)
 
 * **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.

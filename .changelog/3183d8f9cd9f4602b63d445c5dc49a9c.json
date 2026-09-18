@@ -1,8 +1,0 @@
-{
-    "id": "3183d8f9-cd9f-4602-b63d-445c5dc49a9c",
-    "type": "feature",
-    "description": "GetParticipant, ListParticipantEvents, ListParticipantReplicas, StartParticipantReplication, and StopParticipantReplication now accept participant IDs containing underscores.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

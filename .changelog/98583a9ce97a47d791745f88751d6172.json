@@ -1,8 +1,0 @@
-{
-    "id": "98583a9c-e97a-47d7-9174-5f88751d6172",
-    "type": "feature",
-    "description": "This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.",
-    "modules": [
-        "service/ec2"
-    ]
-}

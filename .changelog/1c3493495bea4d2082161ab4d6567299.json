@@ -1,8 +1,0 @@
-{
-    "id": "1c349349-5bea-4d20-8216-1ab4d6567299",
-    "type": "feature",
-    "description": "Amazon Connect AI Agents now support multi-agent orchestration and structured JSON input and output messaging for orchestration agents.",
-    "modules": [
-        "service/qconnect"
-    ]
-}
