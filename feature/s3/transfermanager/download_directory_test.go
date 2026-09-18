@@ -887,8 +887,7 @@ func TestDownloadDirectoryNoHeadObject(t *testing.T) {
 	s3Client.Data = []byte("hello world")
 	s3Client.PartsCount = 1
 
-	dstPath := filepath.Join("testdata", "no-head-object")
-	defer os.RemoveAll(dstPath)
+	dstPath := t.TempDir()
 
 	out, err := New(s3Client).DownloadDirectory(context.Background(), &DownloadDirectoryInput{
 		Bucket:      aws.String("mock-bucket"),
@@ -928,8 +927,7 @@ func TestDownloadDirectoryWriteOffsets(t *testing.T) {
 	s3Client.PartsData = [][]byte{partA, partB, partC}
 	s3Client.PartsCount = 3
 
-	dstPath := filepath.Join("testdata", "write-offsets")
-	defer os.RemoveAll(dstPath)
+	dstPath := t.TempDir()
 
 	out, err := New(s3Client).DownloadDirectory(context.Background(), &DownloadDirectoryInput{
 		Bucket:      aws.String("mock-bucket"),
@@ -1037,10 +1035,6 @@ func distinctValue(t reflect.Type, seed int) (reflect.Value, error) {
 		case reflect.String:
 			p := reflect.New(t.Elem())
 			p.Elem().Set(reflect.ValueOf(fmt.Sprintf("value-%d", seed)).Convert(t.Elem()))
-			return p, nil
-		case reflect.Bool:
-			p := reflect.New(t.Elem())
-			p.Elem().SetBool(true)
 			return p, nil
 		case reflect.Int32, reflect.Int64:
 			p := reflect.New(t.Elem())
