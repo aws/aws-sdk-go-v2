@@ -2463,6 +2463,7 @@ func TestCheckResponseSnapshot_CreateNotebook(t *testing.T) {
 			{},
 		},
 		Status:        types.NotebookStatus("ACTIVE"),
+		Type:          types.NotebookType("DATA"),
 		Description:   ptr.String("__Description__"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedBy:     ptr.String("__CreatedBy__"),
@@ -2511,6 +2512,7 @@ func TestCheckResponseSnapshot_CreateNotebook(t *testing.T) {
 		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
 		Name:                    ptr.String("__Name__"),
 		Description:             ptr.String("__Description__"),
+		Type:                    types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -6133,6 +6135,7 @@ func TestCheckResponseSnapshot_GetNotebook(t *testing.T) {
 			{},
 		},
 		Status:        types.NotebookStatus("ACTIVE"),
+		Type:          types.NotebookType("DATA"),
 		Description:   ptr.String("__Description__"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedBy:     ptr.String("__CreatedBy__"),
@@ -8871,6 +8874,7 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 				OwningProjectId: ptr.String("__OwningProjectId__"),
 				DomainId:        ptr.String("__DomainId__"),
 				Status:          types.NotebookStatus("ACTIVE"),
+				Type:            types.NotebookType("DATA"),
 				Description:     ptr.String("__Description__"),
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CreatedBy:       ptr.String("__CreatedBy__"),
@@ -8883,6 +8887,7 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 				OwningProjectId: ptr.String("__OwningProjectId__"),
 				DomainId:        ptr.String("__DomainId__"),
 				Status:          types.NotebookStatus("ACTIVE"),
+				Type:            types.NotebookType("DATA"),
 				Description:     ptr.String("__Description__"),
 				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CreatedBy:       ptr.String("__CreatedBy__"),
@@ -8907,6 +8912,7 @@ func TestCheckResponseSnapshot_ListNotebooks(t *testing.T) {
 		SortOrder:               types.SortOrder("ASCENDING"),
 		SortBy:                  types.SortKey("CREATED_AT"),
 		Status:                  types.NotebookStatus("ACTIVE"),
+		Type:                    types.NotebookType("DATA"),
 		NextToken:               ptr.String("__NextToken__"),
 	})
 	if err != nil {
@@ -13169,6 +13175,7 @@ func TestCheckResponseSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 		},
 		Status:        types.NotebookStatus("ACTIVE"),
+		Type:          types.NotebookType("DATA"),
 		Description:   ptr.String("__Description__"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedBy:     ptr.String("__CreatedBy__"),
@@ -13222,6 +13229,7 @@ func TestCheckResponseSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 			{},
 		},
+		Type: types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},

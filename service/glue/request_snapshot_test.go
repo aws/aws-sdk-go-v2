@@ -13130,6 +13130,7 @@ func TestCheckRequestSnapshot_StartDataQualityRuleRecommendationRun(t *testing.T
 		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
 			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
 		},
+		RecommendationMode: types.RecommendationMode("BASIC"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -31707,6 +31708,7 @@ func TestUpdateRequestSnapshot_StartDataQualityRuleRecommendationRun(t *testing.
 		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
 			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
 		},
+		RecommendationMode: types.RecommendationMode("BASIC"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

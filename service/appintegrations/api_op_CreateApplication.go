@@ -48,6 +48,10 @@ type CreateApplicationInput struct {
 	// The type of application.
 	ApplicationType types.ApplicationType
 
+	// The authentication settings that Connect Customer uses when calling the
+	// external application.
+	AuthConfig *types.AuthConfig
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].

@@ -67,12 +67,17 @@ type GetDataQualityRuleRecommendationRunOutput struct {
 	// The number of G.1X workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
 
+	// The mode that Glue Data Quality uses to recommend rules.
+	//
+	// The default is BASIC .
+	RecommendationMode types.RecommendationMode
+
 	// When a start rule recommendation run completes, it creates a recommended
 	// ruleset (a set of rules). This member has those rules in Data Quality Definition
 	// Language (DQDL) format.
 	RecommendedRuleset *string
 
-	// An IAM role supplied to encrypt the results of the run.
+	// The IAM role that Glue assumes to access resources for the run.
 	Role *string
 
 	// The unique run identifier associated with this run.

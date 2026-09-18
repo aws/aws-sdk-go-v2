@@ -13067,6 +13067,7 @@ const (
 	UnlimitedSupportedInstanceFamilyT3  UnlimitedSupportedInstanceFamily = "t3"
 	UnlimitedSupportedInstanceFamilyT3a UnlimitedSupportedInstanceFamily = "t3a"
 	UnlimitedSupportedInstanceFamilyT4g UnlimitedSupportedInstanceFamily = "t4g"
+	UnlimitedSupportedInstanceFamilyT8i UnlimitedSupportedInstanceFamily = "t8i"
 )
 
 // Values returns all known values for UnlimitedSupportedInstanceFamily. Note that
@@ -13080,6 +13081,7 @@ func (UnlimitedSupportedInstanceFamily) Values() []UnlimitedSupportedInstanceFam
 		"t3",
 		"t3a",
 		"t4g",
+		"t8i",
 	}
 }
 

@@ -14,6 +14,8 @@ import (
 // Updates an existing custom vocabulary filter with a new list of words. The new
 // list you provide overwrites all previous entries; you cannot append new terms
 // onto an existing custom vocabulary filter.
+//
+// You must include either Words or VocabularyFilterFileUri in your request.
 func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocabularyFilterInput, optFns ...func(*Options)) (*UpdateVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &UpdateVocabularyFilterInput{}
@@ -39,8 +41,10 @@ type UpdateVocabularyFilterInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
-	// vocabulary filter). If the role that you specify doesn’t have the appropriate
-	// permissions to access the specified Amazon S3 location, your request fails.
+	// vocabulary filter). If you include EncryptionConfiguration in your request,
+	// this role must also have permissions to access the specified KMS key. If the
+	// role that you specify doesn’t have the appropriate permissions, your request
+	// fails.
 	//
 	// IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path . For example:
@@ -50,6 +54,11 @@ type UpdateVocabularyFilterInput struct {
 	//
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
+
+	// Specifies the new encryption configuration for your custom vocabulary filter.
+	// The vocabulary filter artifacts are re-encrypted in place using the specified
+	// KMS key or with an AWS-owned key if a key is not supplied.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The Amazon S3 location of the text file that contains your custom vocabulary
 	// filter terms. The URI must be located in the same Amazon Web Services Region as
@@ -89,6 +98,11 @@ func (v *UpdateVocabularyFilterInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpdateVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataAccessRoleArn != nil {
 		s.WriteString(schemas.UpdateVocabularyFilterRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateVocabularyFilterRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.VocabularyFilterFileUri != nil {
 		s.WriteString(schemas.UpdateVocabularyFilterRequest_VocabularyFilterFileUri, *v.VocabularyFilterFileUri)

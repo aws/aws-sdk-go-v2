@@ -7543,6 +7543,15 @@ func awsRestjson1_deserializeOpDocumentCreateNotebookOutput(v **CreateNotebookOu
 				sv.Status = types.NotebookStatus(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NotebookType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.NotebookType(jtv)
+			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21274,6 +21283,15 @@ func awsRestjson1_deserializeOpDocumentGetNotebookOutput(v **GetNotebookOutput, 
 					return fmt.Errorf("expected NotebookStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.NotebookStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NotebookType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.NotebookType(jtv)
 			}
 
 		case "updatedAt":
@@ -39334,6 +39352,15 @@ func awsRestjson1_deserializeOpDocumentUpdateNotebookOutput(v **UpdateNotebookOu
 				sv.Status = types.NotebookStatus(jtv)
 			}
 
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NotebookType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.NotebookType(jtv)
+			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -55980,6 +56007,15 @@ func awsRestjson1_deserializeDocumentNotebookSummary(v **types.NotebookSummary, 
 					return fmt.Errorf("expected NotebookStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.NotebookStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NotebookType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.NotebookType(jtv)
 			}
 
 		case "updatedAt":

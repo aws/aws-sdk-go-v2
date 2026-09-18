@@ -3850,6 +3850,16 @@ func TestCheckResponseSnapshot_CreateSecurityProfile(t *testing.T) {
 				FlowModuleId: ptr.String("__FlowModuleId__"),
 			},
 		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
 			DataTableAccessControlConfiguration: &types.DataTableAccessControlConfiguration{
 				PrimaryAttributeAccessControlConfiguration: &types.PrimaryAttributeAccessControlConfigurationItem{
@@ -14166,6 +14176,44 @@ func TestCheckResponseSnapshot_ListSecurityKeys(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	want := &ListSecurityProfileAIAgentsOutput{
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+		},
+		NextToken:          ptr.String("__NextToken__"),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSecurityProfileAIAgents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSecurityProfileAIAgents(context.Background(), &ListSecurityProfileAIAgentsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSecurityProfileAIAgents.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListSecurityProfileApplications(t *testing.T) {
 	want := &ListSecurityProfileApplicationsOutput{
 		Applications: []types.Application{
@@ -23939,6 +23987,16 @@ func TestCheckResponseSnapshot_UpdateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{

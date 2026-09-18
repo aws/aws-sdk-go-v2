@@ -179,6 +179,13 @@ func TestUpdateResponseSnapshot_CreateEncoderConfiguration(t *testing.T) {
 
 func TestUpdateResponseSnapshot_CreateIngestConfiguration(t *testing.T) {
 	want := &CreateIngestConfigurationOutput{
+		AccessControlAllowOrigin:   ptr.String("__AccessControlAllowOrigin__"),
+		AccessControlExposeHeaders: ptr.String("__AccessControlExposeHeaders__"),
+		CacheControl:               ptr.String("__CacheControl__"),
+		ContentSecurityPolicy:      ptr.String("__ContentSecurityPolicy__"),
+		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
+		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
+		XFrameOptions:              ptr.String("__XFrameOptions__"),
 		IngestConfiguration: &types.IngestConfiguration{
 			Name:            ptr.String("__Name__"),
 			Arn:             ptr.String("__Arn__"),
@@ -1801,6 +1808,13 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateIngestConfiguration(t *testing.T) {
 	want := &UpdateIngestConfigurationOutput{
+		AccessControlAllowOrigin:   ptr.String("__AccessControlAllowOrigin__"),
+		AccessControlExposeHeaders: ptr.String("__AccessControlExposeHeaders__"),
+		CacheControl:               ptr.String("__CacheControl__"),
+		ContentSecurityPolicy:      ptr.String("__ContentSecurityPolicy__"),
+		StrictTransportSecurity:    ptr.String("__StrictTransportSecurity__"),
+		XContentTypeOptions:        ptr.String("__XContentTypeOptions__"),
+		XFrameOptions:              ptr.String("__XFrameOptions__"),
 		IngestConfiguration: &types.IngestConfiguration{
 			Name:            ptr.String("__Name__"),
 			Arn:             ptr.String("__Arn__"),

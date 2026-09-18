@@ -39,7 +39,7 @@ type UpdateQuickResponseInput struct {
 	// This member is required.
 	QuickResponseId *string
 
-	// The Amazon Connect contact channels this quick response applies to. The
+	// The Connect Customer contact channels this quick response applies to. The
 	// supported contact channel types include Chat .
 	Channels []string
 

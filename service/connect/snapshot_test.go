@@ -2930,6 +2930,18 @@ func TestCheckSnapshot_ListSecurityKeys(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityProfileAIAgents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSecurityProfileAIAgents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListSecurityProfileApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSecurityProfileApplications(context.Background(), nil, func(o *Options) {
@@ -7674,6 +7686,18 @@ func TestUpdateSnapshot_ListSecurityKeys(t *testing.T) {
 	_, err := svc.ListSecurityKeys(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSecurityKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityProfileAIAgents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSecurityProfileAIAgents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

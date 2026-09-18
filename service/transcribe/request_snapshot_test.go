@@ -291,6 +291,12 @@ func TestCheckRequestSnapshot_CreateLanguageModel(t *testing.T) {
 			TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 			DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
 		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -384,6 +390,12 @@ func TestCheckRequestSnapshot_CreateVocabulary(t *testing.T) {
 			},
 		},
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -428,6 +440,12 @@ func TestCheckRequestSnapshot_CreateVocabularyFilter(t *testing.T) {
 			},
 		},
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1691,6 +1709,40 @@ func TestCheckRequestSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateLanguageModel(t *testing.T) {
+	input := &UpdateLanguageModelInput{
+		ModelName:         ptr.String("__ModelName__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLanguageModel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLanguageModel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateMedicalVocabulary(t *testing.T) {
 	input := &UpdateMedicalVocabularyInput{
 		VocabularyName:    ptr.String("__VocabularyName__"),
@@ -1730,6 +1782,12 @@ func TestCheckRequestSnapshot_UpdateVocabulary(t *testing.T) {
 		},
 		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1763,6 +1821,12 @@ func TestCheckRequestSnapshot_UpdateVocabularyFilter(t *testing.T) {
 		},
 		VocabularyFilterFileUri: ptr.String("__VocabularyFilterFileUri__"),
 		DataAccessRoleArn:       ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1872,6 +1936,12 @@ func TestUpdateRequestSnapshot_CreateLanguageModel(t *testing.T) {
 			TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 			DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
 		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -1965,6 +2035,12 @@ func TestUpdateRequestSnapshot_CreateVocabulary(t *testing.T) {
 			},
 		},
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2009,6 +2085,12 @@ func TestUpdateRequestSnapshot_CreateVocabularyFilter(t *testing.T) {
 			},
 		},
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3272,6 +3354,40 @@ func TestUpdateRequestSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateLanguageModel(t *testing.T) {
+	input := &UpdateLanguageModelInput{
+		ModelName:         ptr.String("__ModelName__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLanguageModel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLanguageModel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateMedicalVocabulary(t *testing.T) {
 	input := &UpdateMedicalVocabularyInput{
 		VocabularyName:    ptr.String("__VocabularyName__"),
@@ -3311,6 +3427,12 @@ func TestUpdateRequestSnapshot_UpdateVocabulary(t *testing.T) {
 		},
 		VocabularyFileUri: ptr.String("__VocabularyFileUri__"),
 		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3344,6 +3466,12 @@ func TestUpdateRequestSnapshot_UpdateVocabularyFilter(t *testing.T) {
 		},
 		VocabularyFilterFileUri: ptr.String("__VocabularyFilterFileUri__"),
 		DataAccessRoleArn:       ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -19480,6 +19480,7 @@ func TestCheckResponseSnapshot_GetDataQualityRuleRecommendationRun(t *testing.T)
 		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
 			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
 		},
+		RecommendationMode: types.RecommendationMode("BASIC"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDataQualityRuleRecommendationRun.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -36648,6 +36649,7 @@ func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 					},
 				},
 				CreatedRulesetName: ptr.String("__CreatedRulesetName__"),
+				RecommendationMode: types.RecommendationMode("BASIC"),
 			},
 			{
 				RunId:     ptr.String("__RunId__"),
@@ -36675,6 +36677,7 @@ func TestCheckResponseSnapshot_ListDataQualityRuleRecommendationRuns(t *testing.
 					},
 				},
 				CreatedRulesetName: ptr.String("__CreatedRulesetName__"),
+				RecommendationMode: types.RecommendationMode("BASIC"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -40448,6 +40451,7 @@ func TestCheckResponseSnapshot_StartDataQualityRuleRecommendationRun(t *testing.
 		AdditionalRunOptions: &types.DataQualityRuleRecommendationRunAdditionalRunOptions{
 			CustomLogGroupPrefix: ptr.String("__CustomLogGroupPrefix__"),
 		},
+		RecommendationMode: types.RecommendationMode("BASIC"),
 	})
 	if err != nil {
 		t.Fatal(err)

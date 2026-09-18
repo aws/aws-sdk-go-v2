@@ -50861,6 +50861,15 @@ func awsAwsjson11_deserializeDocumentDataQualityRuleRecommendationRunDescription
 				return err
 			}
 
+		case "RecommendationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationMode to be of type string, got %T instead", value)
+				}
+				sv.RecommendationMode = types.RecommendationMode(jtv)
+			}
+
 		case "RunId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -86410,6 +86419,15 @@ func awsAwsjson11_deserializeOpDocumentGetDataQualityRuleRecommendationRunOutput
 					return err
 				}
 				sv.NumberOfWorkers = ptr.Int32(int32(i64))
+			}
+
+		case "RecommendationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationMode to be of type string, got %T instead", value)
+				}
+				sv.RecommendationMode = types.RecommendationMode(jtv)
 			}
 
 		case "RecommendedRuleset":

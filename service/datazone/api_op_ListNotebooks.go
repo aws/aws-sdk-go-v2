@@ -61,6 +61,9 @@ type ListNotebooksInput struct {
 	// The status to filter notebooks by.
 	Status types.NotebookStatus
 
+	// The type to filter notebooks by.
+	Type types.NotebookType
+
 	noSmithyDocumentSerde
 }
 

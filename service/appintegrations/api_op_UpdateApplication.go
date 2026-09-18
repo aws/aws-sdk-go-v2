@@ -40,6 +40,10 @@ type UpdateApplicationInput struct {
 	// The type of application.
 	ApplicationType types.ApplicationType
 
+	// The authentication settings that Connect Customer uses when calling the
+	// external application.
+	AuthConfig *types.AuthConfig
+
 	// The description of the application.
 	Description *string
 

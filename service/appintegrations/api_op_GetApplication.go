@@ -49,6 +49,10 @@ type GetApplicationOutput struct {
 	// The Amazon Resource Name (ARN) of the Application.
 	Arn *string
 
+	// The authentication settings that Connect Customer uses when calling the
+	// external application.
+	AuthConfig *types.AuthConfig
+
 	// The created time of the Application.
 	CreatedTime *time.Time
 

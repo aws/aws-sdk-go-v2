@@ -546,6 +546,12 @@ func TestUpdateResponseSnapshot_DescribeLanguageModel(t *testing.T) {
 				TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 				DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
 			},
+			EncryptionConfiguration: &types.EncryptionConfiguration{
+				KMSEncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+				KMSKey: ptr.String("__KMSKey__"),
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.Transcribe)
@@ -1043,12 +1049,19 @@ func TestUpdateResponseSnapshot_GetTranscriptionJob(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetVocabulary(t *testing.T) {
 	want := &GetVocabularyOutput{
-		VocabularyName:   ptr.String("__VocabularyName__"),
-		LanguageCode:     types.LanguageCode("af-ZA"),
-		VocabularyState:  types.VocabularyState("PENDING"),
-		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		FailureReason:    ptr.String("__FailureReason__"),
-		DownloadUri:      ptr.String("__DownloadUri__"),
+		VocabularyName:    ptr.String("__VocabularyName__"),
+		LanguageCode:      types.LanguageCode("af-ZA"),
+		VocabularyState:   types.VocabularyState("PENDING"),
+		LastModifiedTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:     ptr.String("__FailureReason__"),
+		DownloadUri:       ptr.String("__DownloadUri__"),
+		DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	proto := awsjson.New11(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetVocabulary, schemas.GetVocabularyResponse, schemas.GetVocabularyResponse)
@@ -1076,6 +1089,13 @@ func TestUpdateResponseSnapshot_GetVocabularyFilter(t *testing.T) {
 		LanguageCode:         types.LanguageCode("af-ZA"),
 		LastModifiedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		DownloadUri:          ptr.String("__DownloadUri__"),
+		DataAccessRoleArn:    ptr.String("__DataAccessRoleArn__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KMSEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+			KMSKey: ptr.String("__KMSKey__"),
+		},
 	}
 	proto := awsjson.New11(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.GetVocabularyFilter, schemas.GetVocabularyFilterResponse, schemas.GetVocabularyFilterResponse)
@@ -1322,6 +1342,12 @@ func TestUpdateResponseSnapshot_ListLanguageModels(t *testing.T) {
 					TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 					DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
 				},
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					KMSEncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+					KMSKey: ptr.String("__KMSKey__"),
+				},
 			},
 			{
 				ModelName:           ptr.String("__ModelName__"),
@@ -1336,6 +1362,12 @@ func TestUpdateResponseSnapshot_ListLanguageModels(t *testing.T) {
 					S3Uri:             ptr.String("__S3Uri__"),
 					TuningDataS3Uri:   ptr.String("__TuningDataS3Uri__"),
 					DataAccessRoleArn: ptr.String("__DataAccessRoleArn__"),
+				},
+				EncryptionConfiguration: &types.EncryptionConfiguration{
+					KMSEncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+					KMSKey: ptr.String("__KMSKey__"),
 				},
 			},
 		},
@@ -2213,6 +2245,32 @@ func TestUpdateResponseSnapshot_UpdateCallAnalyticsCategory(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateCallAnalyticsCategory.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateLanguageModel(t *testing.T) {
+	want := &UpdateLanguageModelOutput{
+		ModelName:        ptr.String("__ModelName__"),
+		ModelStatus:      types.ModelStatus("IN_PROGRESS"),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New11(schemas.Transcribe)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateLanguageModel, schemas.UpdateLanguageModelResponse, schemas.UpdateLanguageModelResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateLanguageModel.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

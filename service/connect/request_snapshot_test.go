@@ -3740,6 +3740,16 @@ func TestCheckRequestSnapshot_CreateSecurityProfile(t *testing.T) {
 				FlowModuleId: ptr.String("__FlowModuleId__"),
 			},
 		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
 			DataTableAccessControlConfiguration: &types.DataTableAccessControlConfiguration{
 				PrimaryAttributeAccessControlConfiguration: &types.PrimaryAttributeAccessControlConfigurationItem{
@@ -9615,6 +9625,36 @@ func TestCheckRequestSnapshot_ListSecurityKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	input := &ListSecurityProfileAIAgentsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSecurityProfileAIAgents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityProfileAIAgents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -17514,6 +17554,16 @@ func TestCheckRequestSnapshot_UpdateSecurityProfile(t *testing.T) {
 				FlowModuleId: ptr.String("__FlowModuleId__"),
 			},
 		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
 			DataTableAccessControlConfiguration: &types.DataTableAccessControlConfiguration{
 				PrimaryAttributeAccessControlConfiguration: &types.PrimaryAttributeAccessControlConfigurationItem{
@@ -21979,6 +22029,16 @@ func TestUpdateRequestSnapshot_CreateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{
@@ -27856,6 +27916,36 @@ func TestUpdateRequestSnapshot_ListSecurityKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	input := &ListSecurityProfileAIAgentsInput{
+		SecurityProfileId: ptr.String("__SecurityProfileId__"),
+		InstanceId:        ptr.String("__InstanceId__"),
+		NextToken:         ptr.String("__NextToken__"),
+		MaxResults:        ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSecurityProfileAIAgents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSecurityProfileAIAgents"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -35753,6 +35843,16 @@ func TestUpdateRequestSnapshot_UpdateSecurityProfile(t *testing.T) {
 			{
 				Type:         types.FlowModuleType("MCP"),
 				FlowModuleId: ptr.String("__FlowModuleId__"),
+			},
+		},
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
 			},
 		},
 		GranularAccessControlConfiguration: &types.GranularAccessControlConfiguration{

@@ -94,6 +94,11 @@ type CreateLanguageModelInput struct {
 	// This member is required.
 	ModelName *string
 
+	// Specifies the encryption configuration for your custom language model. Your
+	// model artifacts are encrypted with the specified KMS key or with an AWS-owned
+	// key if a key is not supplied.
+	EncryptionConfiguration *types.EncryptionConfiguration
+
 	// Adds one or more custom tags, each in the form of a key:value pair, to a new
 	// custom language model at the time you create this new model.
 	//
@@ -114,6 +119,11 @@ func (v *CreateLanguageModelInput) Serialize(s smithy.ShapeSerializer) {
 func (v *CreateLanguageModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseModelName != "" {
 		s.WriteString(schemas.CreateLanguageModelRequest_BaseModelName, string(v.BaseModelName))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateLanguageModelRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.InputDataConfig != nil {
 		s.WriteStruct(schemas.CreateLanguageModelRequest_InputDataConfig)

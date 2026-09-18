@@ -1051,6 +1051,51 @@ func (v *AgentStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Information about an AI agent that a security profile allows access to for
+// Agent-to-Agent authorization.
+type AIAgent struct {
+
+	// The Amazon Resource Name (ARN) of the AI agent.
+	Arn *string
+
+	// The type of the AI agent. The valid value is THIRD_PARTY .
+	Type AIAgentType
+
+	noSmithyDocumentSerde
+}
+
+func (v *AIAgent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AIAgent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AIAgent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AIAgent_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AIAgent_Type, string(v.Type))
+	}
+}
+func (v *AIAgent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AIAgent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AIAgent_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AIAgent_Arn, v.Arn)
+		case schemas.AIAgent_Type:
+			var ev string
+			if err := d.ReadString(schemas.AIAgent_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AIAgentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information of the AI agent involved in the contact.
 type AiAgentInfo struct {
 

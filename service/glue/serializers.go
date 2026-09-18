@@ -37290,6 +37290,11 @@ func awsAwsjson11_serializeOpDocumentStartDataQualityRuleRecommendationRunInput(
 		ok.Integer(*v.NumberOfWorkers)
 	}
 
+	if len(v.RecommendationMode) > 0 {
+		ok := object.Key("RecommendationMode")
+		ok.String(string(v.RecommendationMode))
+	}
+
 	if v.Role != nil {
 		ok := object.Key("Role")
 		ok.String(*v.Role)

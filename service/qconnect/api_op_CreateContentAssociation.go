@@ -28,7 +28,7 @@ import (
 //
 //   - You can associate a step-by-step guide with multiple content resources.
 //
-// For more information, see [Integrate Amazon Q in Connect with step-by-step guides] in the Amazon Connect Administrator Guide.
+// For more information, see [Integrate Amazon Q in Connect with step-by-step guides] in the Connect Customer Administrator Guide.
 //
 // [Integrate Amazon Q in Connect with step-by-step guides]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
 // [step-by-step guides]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html

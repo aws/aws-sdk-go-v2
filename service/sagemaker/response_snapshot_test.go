@@ -34617,6 +34617,50 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 						},
 					},
 				},
+				HubContent: &types.HubContent{
+					HubContentName:               ptr.String("__HubContentName__"),
+					HubContentArn:                ptr.String("__HubContentArn__"),
+					HubContentVersion:            ptr.String("__HubContentVersion__"),
+					HubContentType:               types.HubContentType("Model"),
+					DocumentSchemaVersion:        ptr.String("__DocumentSchemaVersion__"),
+					HubName:                      ptr.String("__HubName__"),
+					HubArn:                       ptr.String("__HubArn__"),
+					HubContentDisplayName:        ptr.String("__HubContentDisplayName__"),
+					HubContentDescription:        ptr.String("__HubContentDescription__"),
+					HubContentMarkdown:           ptr.String("__HubContentMarkdown__"),
+					HubContentDocument:           ptr.String("__HubContentDocument__"),
+					SageMakerPublicHubContentArn: ptr.String("__SageMakerPublicHubContentArn__"),
+					ReferenceMinVersion:          ptr.String("__ReferenceMinVersion__"),
+					SupportStatus:                types.HubContentSupportStatus("Supported"),
+					HubContentSearchKeywords: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HubContentDependencies: []types.HubContentDependency{
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+					},
+					HubContentStatus: types.HubContentStatus("Available"),
+					FailureReason:    ptr.String("__FailureReason__"),
+					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
 			},
 			{
 				TrainingJob: &types.TrainingJob{
@@ -39760,6 +39804,50 @@ func TestCheckResponseSnapshot_Search(t *testing.T) {
 						},
 					},
 					FailureReason: ptr.String("__FailureReason__"),
+					Tags: []types.Tag{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+				HubContent: &types.HubContent{
+					HubContentName:               ptr.String("__HubContentName__"),
+					HubContentArn:                ptr.String("__HubContentArn__"),
+					HubContentVersion:            ptr.String("__HubContentVersion__"),
+					HubContentType:               types.HubContentType("Model"),
+					DocumentSchemaVersion:        ptr.String("__DocumentSchemaVersion__"),
+					HubName:                      ptr.String("__HubName__"),
+					HubArn:                       ptr.String("__HubArn__"),
+					HubContentDisplayName:        ptr.String("__HubContentDisplayName__"),
+					HubContentDescription:        ptr.String("__HubContentDescription__"),
+					HubContentMarkdown:           ptr.String("__HubContentMarkdown__"),
+					HubContentDocument:           ptr.String("__HubContentDocument__"),
+					SageMakerPublicHubContentArn: ptr.String("__SageMakerPublicHubContentArn__"),
+					ReferenceMinVersion:          ptr.String("__ReferenceMinVersion__"),
+					SupportStatus:                types.HubContentSupportStatus("Supported"),
+					HubContentSearchKeywords: []string{
+						"__Member__",
+						"__Member__",
+					},
+					HubContentDependencies: []types.HubContentDependency{
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+						{
+							DependencyOriginPath: ptr.String("__DependencyOriginPath__"),
+							DependencyCopyPath:   ptr.String("__DependencyCopyPath__"),
+						},
+					},
+					HubContentStatus: types.HubContentStatus("Available"),
+					FailureReason:    ptr.String("__FailureReason__"),
+					CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Tags: []types.Tag{
 						{
 							Key:   ptr.String("__Key__"),

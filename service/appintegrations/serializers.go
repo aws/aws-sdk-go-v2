@@ -107,6 +107,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(string(v.ApplicationType))
 	}
 
+	if v.AuthConfig != nil {
+		ok := object.Key("AuthConfig")
+		if err := awsRestjson1_serializeDocumentAuthConfig(v.AuthConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -1769,6 +1776,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		ok.String(string(v.ApplicationType))
 	}
 
+	if v.AuthConfig != nil {
+		ok := object.Key("AuthConfig")
+		if err := awsRestjson1_serializeDocumentAuthConfig(v.AuthConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -2152,6 +2166,23 @@ func awsRestjson1_serializeDocumentApplicationSourceConfig(v *types.ApplicationS
 		if err := awsRestjson1_serializeDocumentExternalUrlConfig(v.ExternalUrlConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAuthConfig(v *types.AuthConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AuthType) > 0 {
+		ok := object.Key("AuthType")
+		ok.String(string(v.AuthType))
+	}
+
+	if v.CredentialProviderIdentifier != nil {
+		ok := object.Key("CredentialProviderIdentifier")
+		ok.String(*v.CredentialProviderIdentifier)
 	}
 
 	return nil

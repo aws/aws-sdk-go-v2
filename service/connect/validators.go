@@ -4750,6 +4750,26 @@ func (m *validateOpListSecurityKeys) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSecurityProfileAIAgents struct {
+}
+
+func (*validateOpListSecurityProfileAIAgents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSecurityProfileAIAgents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSecurityProfileAIAgentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSecurityProfileAIAgentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSecurityProfileApplications struct {
 }
 
@@ -8776,6 +8796,10 @@ func addOpListRulesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListSecurityKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSecurityKeys{}, middleware.After)
+}
+
+func addOpListSecurityProfileAIAgentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSecurityProfileAIAgents{}, middleware.After)
 }
 
 func addOpListSecurityProfileApplicationsValidationMiddleware(stack *middleware.Stack) error {
@@ -18189,6 +18213,24 @@ func validateOpListSecurityKeysInput(v *ListSecurityKeysInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListSecurityKeysInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSecurityProfileAIAgentsInput(v *ListSecurityProfileAIAgentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSecurityProfileAIAgentsInput"}
+	if v.SecurityProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}

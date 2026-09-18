@@ -3819,6 +3819,11 @@ type DataQualityRuleRecommendationRunDescription struct {
 	// The data source (Glue table) associated with the recommendation run.
 	DataSource *DataSource
 
+	// The mode that Glue Data Quality uses to recommend rules.
+	//
+	// The default is BASIC .
+	RecommendationMode RecommendationMode
+
 	// The unique run identifier associated with this run.
 	RunId *string
 

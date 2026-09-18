@@ -749,6 +749,25 @@ func (ImportJobType) Values() []ImportJobType {
 	}
 }
 
+type InteractionMode string
+
+// Enum values for InteractionMode
+const (
+	InteractionModeDelegate InteractionMode = "DELEGATE"
+	InteractionModeHandoff  InteractionMode = "HANDOFF"
+)
+
+// Values returns all known values for InteractionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InteractionMode) Values() []InteractionMode {
+	return []InteractionMode{
+		"DELEGATE",
+		"HANDOFF",
+	}
+}
+
 type KnowledgeBaseSearchType string
 
 // Enum values for KnowledgeBaseSearchType
@@ -909,6 +928,7 @@ type MessageType string
 const (
 	MessageTypeText          MessageType = "TEXT"
 	MessageTypeToolUseResult MessageType = "TOOL_USE_RESULT"
+	MessageTypeData          MessageType = "DATA"
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
@@ -919,6 +939,7 @@ func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TEXT",
 		"TOOL_USE_RESULT",
+		"DATA",
 	}
 }
 
@@ -1367,6 +1388,29 @@ func (RelevanceLevel) Values() []RelevanceLevel {
 		"HIGH",
 		"MEDIUM",
 		"LOW",
+	}
+}
+
+type ReturnReason string
+
+// Enum values for ReturnReason
+const (
+	ReturnReasonComplete          ReturnReason = "COMPLETE"
+	ReturnReasonCompleteWithError ReturnReason = "COMPLETE_WITH_ERROR"
+	ReturnReasonEscalate          ReturnReason = "ESCALATE"
+	ReturnReasonOutOfDomain       ReturnReason = "OUT_OF_DOMAIN"
+)
+
+// Values returns all known values for ReturnReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReturnReason) Values() []ReturnReason {
+	return []ReturnReason{
+		"COMPLETE",
+		"COMPLETE_WITH_ERROR",
+		"ESCALATE",
+		"OUT_OF_DOMAIN",
 	}
 }
 

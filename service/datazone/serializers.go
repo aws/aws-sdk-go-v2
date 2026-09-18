@@ -3720,6 +3720,11 @@ func awsRestjson1_serializeOpDocumentCreateNotebookInput(v *CreateNotebookInput,
 		}
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -12673,6 +12678,10 @@ func awsRestjson1_serializeOpHttpBindingsListNotebooksInput(v *ListNotebooksInpu
 		encoder.SetQuery("status").String(string(v.Status))
 	}
 
+	if len(v.Type) > 0 {
+		encoder.SetQuery("type").String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -18438,6 +18447,11 @@ func awsRestjson1_serializeOpDocumentUpdateNotebookInput(v *UpdateNotebookInput,
 	if len(v.Status) > 0 {
 		ok := object.Key("status")
 		ok.String(string(v.Status))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

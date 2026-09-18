@@ -1575,6 +1575,7 @@ func TestCheckRequestSnapshot_CreateNotebook(t *testing.T) {
 		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
 		Name:                    ptr.String("__Name__"),
 		Description:             ptr.String("__Description__"),
+		Type:                    types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4868,6 +4869,7 @@ func TestCheckRequestSnapshot_ListNotebooks(t *testing.T) {
 		SortOrder:               types.SortOrder("ASCENDING"),
 		SortBy:                  types.SortKey("CREATED_AT"),
 		Status:                  types.NotebookStatus("ACTIVE"),
+		Type:                    types.NotebookType("DATA"),
 		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -6888,6 +6890,7 @@ func TestCheckRequestSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 			{},
 		},
+		Type: types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -8763,6 +8766,7 @@ func TestUpdateRequestSnapshot_CreateNotebook(t *testing.T) {
 		OwningProjectIdentifier: ptr.String("__OwningProjectIdentifier__"),
 		Name:                    ptr.String("__Name__"),
 		Description:             ptr.String("__Description__"),
+		Type:                    types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},
@@ -12056,6 +12060,7 @@ func TestUpdateRequestSnapshot_ListNotebooks(t *testing.T) {
 		SortOrder:               types.SortOrder("ASCENDING"),
 		SortBy:                  types.SortKey("CREATED_AT"),
 		Status:                  types.NotebookStatus("ACTIVE"),
+		Type:                    types.NotebookType("DATA"),
 		NextToken:               ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
@@ -14076,6 +14081,7 @@ func TestUpdateRequestSnapshot_UpdateNotebook(t *testing.T) {
 			{},
 			{},
 		},
+		Type: types.NotebookType("DATA"),
 		Metadata: map[string]string{
 			"key0": "__Value__",
 		},

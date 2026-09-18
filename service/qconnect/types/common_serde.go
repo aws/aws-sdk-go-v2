@@ -3,9 +3,25 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/qconnect/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 )
+
+func serializeAgentTarget(s smithy.ShapeSerializer, schema *smithy.Schema, v AgentTarget) {
+	switch vv := v.(type) {
+	case *AgentTargetMemberAiAgentId:
+		s.WriteUnion(schema, schemas.AgentTarget_aiAgentId)
+		s.WriteString(schemas.AgentTarget_aiAgentId, vv.Value)
+		s.CloseUnion()
+	case *AgentTargetMemberApplicationId:
+		s.WriteUnion(schema, schemas.AgentTarget_applicationId)
+		s.WriteString(schemas.AgentTarget_applicationId, vv.Value)
+		s.CloseUnion()
+	}
+}
 
 func serializeAIAgentConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v AIAgentConfiguration) {
 	switch vv := v.(type) {
@@ -275,6 +291,10 @@ func serializeManagedSourceConfiguration(s smithy.ShapeSerializer, schema *smith
 
 func serializeMessageData(s smithy.ShapeSerializer, schema *smithy.Schema, v MessageData) {
 	switch vv := v.(type) {
+	case *MessageDataMemberData:
+		s.WriteUnion(schema, schemas.MessageData_data)
+		s.WriteDocument(schemas.MessageData_data, &smithydocument.Opaque{Value: vv.Value})
+		s.CloseUnion()
 	case *MessageDataMemberText:
 		s.WriteUnion(schema, schemas.MessageData_text)
 		s.WriteStruct(schemas.MessageData_text)
@@ -344,6 +364,23 @@ func serializeMessageTemplateSourceConfigurationSummary(s smithy.ShapeSerializer
 	case *MessageTemplateSourceConfigurationSummaryMemberWhatsApp:
 		s.WriteUnion(schema, schemas.MessageTemplateSourceConfigurationSummary_whatsApp)
 		s.WriteStruct(schemas.MessageTemplateSourceConfigurationSummary_whatsApp)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeMultiAgentConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v MultiAgentConfiguration) {
+	switch vv := v.(type) {
+	case *MultiAgentConfigurationMemberDelegateAgentConfiguration:
+		s.WriteUnion(schema, schemas.MultiAgentConfiguration_delegateAgentConfiguration)
+		s.WriteStruct(schemas.MultiAgentConfiguration_delegateAgentConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *MultiAgentConfigurationMemberHandoffAgentConfiguration:
+		s.WriteUnion(schema, schemas.MultiAgentConfiguration_handoffAgentConfiguration)
+		s.WriteStruct(schemas.MultiAgentConfiguration_handoffAgentConfiguration)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -590,6 +627,22 @@ func serializeToolOverrideInputValueConfiguration(s smithy.ShapeSerializer, sche
 	}
 }
 
+func deserializeAgentTarget(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgentTarget) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgentTarget_aiAgentId:
+			vv := &AgentTargetMemberAiAgentId{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgentTarget_applicationId:
+			vv := &AgentTargetMemberApplicationId{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeAIAgentConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *AIAgentConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -829,6 +882,10 @@ func deserializeManagedSourceConfiguration(d smithy.ShapeDeserializer, s *smithy
 func deserializeMessageData(d smithy.ShapeDeserializer, s *smithy.Schema, v *MessageData) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.MessageData_data:
+			vv := &MessageDataMemberData{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.MessageData_text:
 			vv := &MessageDataMemberText{}
 			*v = vv
@@ -895,6 +952,22 @@ func deserializeMessageTemplateSourceConfigurationSummary(d smithy.ShapeDeserial
 		switch ms {
 		case schemas.MessageTemplateSourceConfigurationSummary_whatsApp:
 			vv := &MessageTemplateSourceConfigurationSummaryMemberWhatsApp{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeMultiAgentConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *MultiAgentConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.MultiAgentConfiguration_delegateAgentConfiguration:
+			vv := &MultiAgentConfigurationMemberDelegateAgentConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.MultiAgentConfiguration_handoffAgentConfiguration:
+			vv := &MultiAgentConfigurationMemberHandoffAgentConfiguration{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1558,6 +1631,17 @@ func serializeImportJobList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.CloseList()
 }
 
+func serializeJSONDocumentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []document.Interface) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteDocument(schema.ListMember(), &smithydocument.Opaque{Value: vv})
+	}
+	s.CloseList()
+}
+
 func serializeKnowledgeBaseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []KnowledgeBaseSummary) {
 	if v == nil {
 		return
@@ -1715,6 +1799,28 @@ func serializeModelSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMultiAgentConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MultiAgentConfiguration) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeMultiAgentConfiguration(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeMultiAgentExampleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -2622,6 +2728,25 @@ func deserializeImportJobList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	})
 }
 
+func deserializeJSONDocumentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]document.Interface) error {
+	*v = make([]document.Interface, 0)
+	var vv smithydocument.Value
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadDocument(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, func() document.Interface {
+			if ov, ok := vv.(smithydocument.Opaque); ok {
+				return internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}())
+		return nil
+	})
+}
+
 func deserializeKnowledgeBaseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]KnowledgeBaseSummary) error {
 	*v = make([]KnowledgeBaseSummary, 0)
 	var vv KnowledgeBaseSummary
@@ -2796,6 +2921,34 @@ func deserializeModelSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	return smithy.ReadList(d, s, func() error {
 		vv = ModelSummary{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMultiAgentConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MultiAgentConfiguration) error {
+	*v = make([]MultiAgentConfiguration, 0)
+	var vv MultiAgentConfiguration
+	return smithy.ReadList(d, s, func() error {
+
+		if err := deserializeMultiAgentConfiguration(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMultiAgentExampleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

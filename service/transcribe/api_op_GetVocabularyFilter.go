@@ -54,9 +54,17 @@ func (v *GetVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetVocabularyFilterOutput struct {
 
+	// The Amazon Resource Name (ARN) of the IAM role used to access the Amazon S3
+	// bucket that contains your input files and, if applicable, the KMS key specified
+	// in EncryptionConfiguration .
+	DataAccessRoleArn *string
+
 	// The Amazon S3 location where the custom vocabulary filter is stored; use this
 	// URI to view or download the custom vocabulary filter.
 	DownloadUri *string
+
+	// The encryption configuration used for your custom vocabulary filter.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The language code you selected for your custom vocabulary filter.
 	LanguageCode types.LanguageCode
@@ -83,8 +91,16 @@ func (v *GetVocabularyFilterOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVocabularyFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.GetVocabularyFilterResponse_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
 	if v.DownloadUri != nil {
 		s.WriteString(schemas.GetVocabularyFilterResponse_DownloadUri, *v.DownloadUri)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetVocabularyFilterResponse_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.GetVocabularyFilterResponse_LanguageCode, string(v.LanguageCode))
@@ -99,9 +115,15 @@ func (v *GetVocabularyFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetVocabularyFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetVocabularyFilterResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetVocabularyFilterResponse_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.GetVocabularyFilterResponse_DataAccessRoleArn, v.DataAccessRoleArn)
 		case schemas.GetVocabularyFilterResponse_DownloadUri:
 			v.DownloadUri = new(string)
 			return d.ReadString(schemas.GetVocabularyFilterResponse_DownloadUri, v.DownloadUri)
+		case schemas.GetVocabularyFilterResponse_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
 		case schemas.GetVocabularyFilterResponse_LanguageCode:
 			var ev string
 			if err := d.ReadString(schemas.GetVocabularyFilterResponse_LanguageCode, &ev); err != nil {

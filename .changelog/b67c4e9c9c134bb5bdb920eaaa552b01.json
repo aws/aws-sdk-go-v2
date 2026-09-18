@@ -1,0 +1,8 @@
+{
+    "id": "b67c4e9c-9c13-4bb5-bdb9-20eaaa552b01",
+    "type": "feature",
+    "description": "Adds support for the hub content resource in SageMaker Search.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

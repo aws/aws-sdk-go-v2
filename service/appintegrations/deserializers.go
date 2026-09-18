@@ -1301,6 +1301,11 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AuthConfig":
+			if err := awsRestjson1_deserializeDocumentAuthConfig(&sv.AuthConfig, value); err != nil {
+				return err
+			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4402,6 +4407,55 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 					return fmt.Errorf("expected ApplicationNamespace to be of type string, got %T instead", value)
 				}
 				sv.Namespace = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAuthConfig(v **types.AuthConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AuthConfig
+	if *v == nil {
+		sv = &types.AuthConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthType to be of type string, got %T instead", value)
+				}
+				sv.AuthType = types.AuthType(jtv)
+			}
+
+		case "CredentialProviderIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.CredentialProviderIdentifier = ptr.String(jtv)
 			}
 
 		default:

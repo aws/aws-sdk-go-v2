@@ -37,7 +37,11 @@ type StartDataQualityRuleRecommendationRunInput struct {
 	// This member is required.
 	DataSource *types.DataSource
 
-	// An IAM role supplied to encrypt the results of the run.
+	// The IAM role that Glue assumes to access resources for the run.
+	//
+	// For more information, see [Configure IAM permissions for Glue Data Quality].
+	//
+	// [Configure IAM permissions for Glue Data Quality]: https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html
 	//
 	// This member is required.
 	Role *string
@@ -58,6 +62,11 @@ type StartDataQualityRuleRecommendationRunInput struct {
 
 	// The number of G.1X workers to be used in the run. The default is 5.
 	NumberOfWorkers *int32
+
+	// The mode that Glue Data Quality uses to recommend rules.
+	//
+	// The default is BASIC .
+	RecommendationMode types.RecommendationMode
 
 	// The timeout for a run in minutes. This is the maximum time that a run can
 	// consume resources before it is terminated and enters TIMEOUT status. The

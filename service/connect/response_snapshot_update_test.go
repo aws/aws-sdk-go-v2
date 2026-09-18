@@ -11479,6 +11479,42 @@ func TestUpdateResponseSnapshot_ListSecurityKeys(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListSecurityProfileAIAgents(t *testing.T) {
+	want := &ListSecurityProfileAIAgentsOutput{
+		AllowedAIAgents: []types.AIAgent{
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+			{
+				Arn:  ptr.String("__Arn__"),
+				Type: types.AIAgentType("THIRD_PARTY"),
+			},
+		},
+		NextToken:          ptr.String("__NextToken__"),
+		LastModifiedTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedRegion: ptr.String("__LastModifiedRegion__"),
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.ListSecurityProfileAIAgents, schemas.ListSecurityProfileAIAgentsResponse, schemas.ListSecurityProfileAIAgentsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListSecurityProfileAIAgents.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListSecurityProfileApplications(t *testing.T) {
 	want := &ListSecurityProfileApplicationsOutput{
 		Applications: []types.Application{

@@ -113,6 +113,23 @@ func (AgentStatusType) Values() []AgentStatusType {
 	}
 }
 
+type AIAgentType string
+
+// Enum values for AIAgentType
+const (
+	AIAgentTypeThirdParty AIAgentType = "THIRD_PARTY"
+)
+
+// Values returns all known values for AIAgentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIAgentType) Values() []AIAgentType {
+	return []AIAgentType{
+		"THIRD_PARTY",
+	}
+}
+
 type AiUseCase string
 
 // Enum values for AiUseCase

@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Transcribe.GetVocabulary
 
-{"DownloadUri":"__DownloadUri__","FailureReason":"__FailureReason__","LanguageCode":"af-ZA","LastModifiedTime":946684800,"VocabularyName":"__VocabularyName__","VocabularyState":"PENDING"}
+{"DataAccessRoleArn":"__DataAccessRoleArn__","DownloadUri":"__DownloadUri__","EncryptionConfiguration":{"KMSEncryptionContext":{"key0":"__Value__"},"KMSKey":"__KMSKey__"},"FailureReason":"__FailureReason__","LanguageCode":"af-ZA","LastModifiedTime":946684800,"VocabularyName":"__VocabularyName__","VocabularyState":"PENDING"}

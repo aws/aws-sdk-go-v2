@@ -267,6 +267,10 @@ func TestCheckRequestSnapshot_CreateApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -920,6 +924,10 @@ func TestCheckRequestSnapshot_UpdateApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1102,6 +1110,10 @@ func TestUpdateRequestSnapshot_CreateApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1755,6 +1767,10 @@ func TestUpdateRequestSnapshot_UpdateApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

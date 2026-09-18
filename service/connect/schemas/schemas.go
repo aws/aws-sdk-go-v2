@@ -1681,6 +1681,13 @@ var ListSecurityKeys = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/instance/{InstanceId}/security-keys",
 	Code: 200})
 
+var ListSecurityProfileAIAgents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListSecurityProfileAIAgents",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/security-profiles-ai-agents/{InstanceId}/{SecurityProfileId}",
+	Code: 200})
+
 var ListSecurityProfileApplications = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListSecurityProfileApplications",
@@ -3213,6 +3220,14 @@ var _AgentUsername = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgentUsername",
 }, smithy.ShapeTypeString, 0)
 
+var AIAgent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "AIAgent",
+}, smithy.ShapeTypeStructure, 2)
+var AIAgent_Arn *smithy.Schema
+
+var AIAgent_Type *smithy.Schema
+
 var _AiAgentId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "AiAgentId",
@@ -3264,6 +3279,12 @@ var _AiAgentSearchCriteriaList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AiAgentSearchCriteriaList_member *smithy.Schema
 
+var AIAgentType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "AIAgentType",
+}, smithy.ShapeTypeEnum, 1)
+var AIAgentType_THIRD_PARTY *smithy.Schema
+
 var _AiAgentVersionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "AiAgentVersionId",
@@ -3306,6 +3327,12 @@ var _AllowedAccessControlTags = smithy.NewSchema(smithy.ShapeID{
 var _AllowedAccessControlTags_key *smithy.Schema
 
 var _AllowedAccessControlTags_value *smithy.Schema
+
+var _AllowedAIAgents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "AllowedAIAgents",
+}, smithy.ShapeTypeList, 1)
+var _AllowedAIAgents_member *smithy.Schema
 
 var AllowedCapabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -18304,7 +18331,7 @@ var CreateRuleResponse_RuleId *smithy.Schema
 var CreateSecurityProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateSecurityProfileRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateSecurityProfileRequest_SecurityProfileName *smithy.Schema
 
 var CreateSecurityProfileRequest_Description *smithy.Schema
@@ -18326,6 +18353,8 @@ var CreateSecurityProfileRequest_HierarchyRestrictedResources *smithy.Schema
 var CreateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId *smithy.Schema
 
 var CreateSecurityProfileRequest_AllowedFlowModules *smithy.Schema
+
+var CreateSecurityProfileRequest_AllowedAIAgents *smithy.Schema
 
 var CreateSecurityProfileRequest_GranularAccessControlConfiguration *smithy.Schema
 
@@ -21351,6 +21380,30 @@ var ListSecurityKeysResponse_SecurityKeys *smithy.Schema
 
 var ListSecurityKeysResponse_NextToken *smithy.Schema
 
+var ListSecurityProfileAIAgentsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListSecurityProfileAIAgentsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListSecurityProfileAIAgentsRequest_SecurityProfileId *smithy.Schema
+
+var ListSecurityProfileAIAgentsRequest_InstanceId *smithy.Schema
+
+var ListSecurityProfileAIAgentsRequest_NextToken *smithy.Schema
+
+var ListSecurityProfileAIAgentsRequest_MaxResults *smithy.Schema
+
+var ListSecurityProfileAIAgentsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ListSecurityProfileAIAgentsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListSecurityProfileAIAgentsResponse_AllowedAIAgents *smithy.Schema
+
+var ListSecurityProfileAIAgentsResponse_NextToken *smithy.Schema
+
+var ListSecurityProfileAIAgentsResponse_LastModifiedTime *smithy.Schema
+
+var ListSecurityProfileAIAgentsResponse_LastModifiedRegion *smithy.Schema
+
 var ListSecurityProfileApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListSecurityProfileApplicationsRequest",
@@ -24129,7 +24182,7 @@ var UpdateRuleRequest_PreEvaluationFilters *smithy.Schema
 var UpdateSecurityProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateSecurityProfileRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateSecurityProfileRequest_Description *smithy.Schema
 
 var UpdateSecurityProfileRequest_Permissions *smithy.Schema
@@ -24149,6 +24202,8 @@ var UpdateSecurityProfileRequest_HierarchyRestrictedResources *smithy.Schema
 var UpdateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId *smithy.Schema
 
 var UpdateSecurityProfileRequest_AllowedFlowModules *smithy.Schema
+
+var UpdateSecurityProfileRequest_AllowedAIAgents *smithy.Schema
 
 var UpdateSecurityProfileRequest_GranularAccessControlConfiguration *smithy.Schema
 
@@ -24833,6 +24888,12 @@ func init() {
 
 	_AgentStatusTypes_member = _AgentStatusTypes.AddMember("member", AgentStatusType)
 
+	AIAgentType_THIRD_PARTY = AIAgentType.AddMember("THIRD_PARTY", smithyprelude.Unit)
+
+	AIAgent_Arn = AIAgent.AddMember("Arn", _ARN)
+
+	AIAgent_Type = AIAgent.AddMember("Type", AIAgentType)
+
 	AiUseCase_AgentAssistance = AiUseCase.AddMember("AgentAssistance", smithyprelude.Unit)
 
 	AiUseCase_SelfService = AiUseCase.AddMember("SelfService", smithyprelude.Unit)
@@ -24866,6 +24927,8 @@ func init() {
 	_AllowedAccessControlTags_key = _AllowedAccessControlTags.AddMember("key", _SecurityProfilePolicyKey)
 
 	_AllowedAccessControlTags_value = _AllowedAccessControlTags.AddMember("value", _SecurityProfilePolicyValue)
+
+	_AllowedAIAgents_member = _AllowedAIAgents.AddMember("member", AIAgent)
 
 	AllowedCapabilities_Customer = AllowedCapabilities.AddMember("Customer", ParticipantCapabilities)
 
@@ -32523,6 +32586,8 @@ func init() {
 
 	CreateSecurityProfileRequest_AllowedFlowModules = CreateSecurityProfileRequest.AddMember("AllowedFlowModules", _AllowedFlowModules)
 
+	CreateSecurityProfileRequest_AllowedAIAgents = CreateSecurityProfileRequest.AddMember("AllowedAIAgents", _AllowedAIAgents)
+
 	CreateSecurityProfileRequest_GranularAccessControlConfiguration = CreateSecurityProfileRequest.AddMember("GranularAccessControlConfiguration", GranularAccessControlConfiguration)
 
 	CreateSecurityProfileResponse_SecurityProfileId = CreateSecurityProfileResponse.AddMember("SecurityProfileId", _SecurityProfileId)
@@ -34218,6 +34283,22 @@ func init() {
 	ListSecurityKeysResponse_SecurityKeys = ListSecurityKeysResponse.AddMember("SecurityKeys", _SecurityKeysList)
 
 	ListSecurityKeysResponse_NextToken = ListSecurityKeysResponse.AddMember("NextToken", _NextToken)
+
+	ListSecurityProfileAIAgentsRequest_SecurityProfileId = ListSecurityProfileAIAgentsRequest.AddMember("SecurityProfileId", _SecurityProfileId, &smithytraits.HTTPLabel{})
+
+	ListSecurityProfileAIAgentsRequest_InstanceId = ListSecurityProfileAIAgentsRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
+
+	ListSecurityProfileAIAgentsRequest_NextToken = ListSecurityProfileAIAgentsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListSecurityProfileAIAgentsRequest_MaxResults = ListSecurityProfileAIAgentsRequest.AddMember("MaxResults", _MaxResult1000, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListSecurityProfileAIAgentsResponse_AllowedAIAgents = ListSecurityProfileAIAgentsResponse.AddMember("AllowedAIAgents", _AllowedAIAgents)
+
+	ListSecurityProfileAIAgentsResponse_NextToken = ListSecurityProfileAIAgentsResponse.AddMember("NextToken", _NextToken)
+
+	ListSecurityProfileAIAgentsResponse_LastModifiedTime = ListSecurityProfileAIAgentsResponse.AddMember("LastModifiedTime", _Timestamp)
+
+	ListSecurityProfileAIAgentsResponse_LastModifiedRegion = ListSecurityProfileAIAgentsResponse.AddMember("LastModifiedRegion", _RegionName)
 
 	ListSecurityProfileApplicationsRequest_SecurityProfileId = ListSecurityProfileApplicationsRequest.AddMember("SecurityProfileId", _SecurityProfileId, &smithytraits.HTTPLabel{})
 
@@ -35982,6 +36063,8 @@ func init() {
 	UpdateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId = UpdateSecurityProfileRequest.AddMember("AllowedAccessControlHierarchyGroupId", _HierarchyGroupId)
 
 	UpdateSecurityProfileRequest_AllowedFlowModules = UpdateSecurityProfileRequest.AddMember("AllowedFlowModules", _AllowedFlowModules)
+
+	UpdateSecurityProfileRequest_AllowedAIAgents = UpdateSecurityProfileRequest.AddMember("AllowedAIAgents", _AllowedAIAgents)
 
 	UpdateSecurityProfileRequest_GranularAccessControlConfiguration = UpdateSecurityProfileRequest.AddMember("GranularAccessControlConfiguration", GranularAccessControlConfiguration)
 

@@ -71,8 +71,9 @@ type CreateVocabularyInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
-	// vocabulary). If the role that you specify doesn’t have the appropriate
-	// permissions to access the specified Amazon S3 location, your request fails.
+	// vocabulary). If you include EncryptionConfiguration in your request, this role
+	// must also have permissions to access the specified KMS key. If the role that you
+	// specify doesn’t have the appropriate permissions, your request fails.
 	//
 	// IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path . For example:
@@ -82,6 +83,11 @@ type CreateVocabularyInput struct {
 	//
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
+
+	// Specifies the encryption configuration for your custom vocabulary. Your
+	// vocabulary artifacts are encrypted with the specified KMS key or with an
+	// AWS-owned key if a key is not supplied.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Use this parameter if you want to create your custom vocabulary by including
 	// all desired terms, as comma-separated values, within your request. The other
@@ -129,6 +135,11 @@ func (v *CreateVocabularyInput) Serialize(s smithy.ShapeSerializer) {
 func (v *CreateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataAccessRoleArn != nil {
 		s.WriteString(schemas.CreateVocabularyRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateVocabularyRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.CreateVocabularyRequest_LanguageCode, string(v.LanguageCode))

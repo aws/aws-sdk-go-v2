@@ -14,7 +14,7 @@ import (
 // Lists the content associations.
 //
 // For more information about content associations--what they are and when they
-// are used--see [Integrate Amazon Q in Connect with step-by-step guides]in the Amazon Connect Administrator Guide.
+// are used--see [Integrate Amazon Q in Connect with step-by-step guides]in the Connect Customer Administrator Guide.
 //
 // [Integrate Amazon Q in Connect with step-by-step guides]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
 func (c *Client) ListContentAssociations(ctx context.Context, params *ListContentAssociationsInput, optFns ...func(*Options)) (*ListContentAssociationsOutput, error) {

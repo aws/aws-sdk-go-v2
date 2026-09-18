@@ -45,7 +45,7 @@ type CreateQuickResponseInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Connect channels this quick response applies to.
+	// The Connect Customer channels this quick response applies to.
 	Channels []string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency

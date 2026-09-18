@@ -4,8 +4,30 @@ package types_test
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/document"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 )
+
+func ExampleAgentTarget_outputUsage() {
+	var union types.AgentTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentTargetMemberAiAgentId:
+		_ = v.Value // Value is string
+
+	case *types.AgentTargetMemberApplicationId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleAIAgentConfiguration_outputUsage() {
 	var union types.AIAgentConfiguration
@@ -319,6 +341,9 @@ func ExampleMessageData_outputUsage() {
 	var union types.MessageData
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.MessageDataMemberData:
+		_ = v.Value // Value is document.Interface
+
 	case *types.MessageDataMemberText:
 		_ = v.Value // Value is types.TextMessage
 
@@ -336,6 +361,7 @@ func ExampleMessageData_outputUsage() {
 
 var _ *types.ToolUseResultData
 var _ *types.TextMessage
+var _ document.Interface
 
 func ExampleMessageTemplateBodyContentProvider_outputUsage() {
 	var union types.MessageTemplateBodyContentProvider
@@ -420,6 +446,28 @@ func ExampleMessageTemplateSourceConfigurationSummary_outputUsage() {
 }
 
 var _ *types.WhatsAppMessageTemplateSourceConfigurationSummary
+
+func ExampleMultiAgentConfiguration_outputUsage() {
+	var union types.MultiAgentConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MultiAgentConfigurationMemberDelegateAgentConfiguration:
+		_ = v.Value // Value is types.DelegateAgentConfiguration
+
+	case *types.MultiAgentConfigurationMemberHandoffAgentConfiguration:
+		_ = v.Value // Value is types.HandoffAgentConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HandoffAgentConfiguration
+var _ *types.DelegateAgentConfiguration
 
 func ExampleOrCondition_outputUsage() {
 	var union types.OrCondition

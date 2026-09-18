@@ -1375,6 +1375,27 @@ func (NotebookStatus) Values() []NotebookStatus {
 	}
 }
 
+type NotebookType string
+
+// Enum values for NotebookType
+const (
+	// A data notebook.
+	NotebookTypeData NotebookType = "DATA"
+	// A SQL notebook.
+	NotebookTypeSql NotebookType = "SQL"
+)
+
+// Values returns all known values for NotebookType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookType) Values() []NotebookType {
+	return []NotebookType{
+		"DATA",
+		"SQL",
+	}
+}
+
 type NotificationResourceType string
 
 // Enum values for NotificationResourceType

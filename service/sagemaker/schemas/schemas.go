@@ -10526,6 +10526,52 @@ var _HubArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "HubArn",
 }, smithy.ShapeTypeString, 0)
 
+var HubContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "HubContent",
+}, smithy.ShapeTypeStructure, 21)
+var HubContent_HubContentName *smithy.Schema
+
+var HubContent_HubContentArn *smithy.Schema
+
+var HubContent_HubContentVersion *smithy.Schema
+
+var HubContent_HubContentType *smithy.Schema
+
+var HubContent_DocumentSchemaVersion *smithy.Schema
+
+var HubContent_HubName *smithy.Schema
+
+var HubContent_HubArn *smithy.Schema
+
+var HubContent_HubContentDisplayName *smithy.Schema
+
+var HubContent_HubContentDescription *smithy.Schema
+
+var HubContent_HubContentMarkdown *smithy.Schema
+
+var HubContent_HubContentDocument *smithy.Schema
+
+var HubContent_SageMakerPublicHubContentArn *smithy.Schema
+
+var HubContent_ReferenceMinVersion *smithy.Schema
+
+var HubContent_SupportStatus *smithy.Schema
+
+var HubContent_HubContentSearchKeywords *smithy.Schema
+
+var HubContent_HubContentDependencies *smithy.Schema
+
+var HubContent_HubContentStatus *smithy.Schema
+
+var HubContent_FailureReason *smithy.Schema
+
+var HubContent_CreationTime *smithy.Schema
+
+var HubContent_LastModifiedTime *smithy.Schema
+
+var HubContent_Tags *smithy.Schema
+
 var _HubContentArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "HubContentArn",
@@ -20033,7 +20079,7 @@ var ResourceSpec_TrainingPlanArn *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 19)
+}, smithy.ShapeTypeEnum, 20)
 var ResourceType_TRAINING_JOB *smithy.Schema
 
 var ResourceType_EXPERIMENT *smithy.Schema
@@ -20071,6 +20117,8 @@ var ResourceType_MODEL_CARD *smithy.Schema
 var ResourceType_PIPELINE_VERSION *smithy.Schema
 
 var ResourceType_JOB *smithy.Schema
+
+var ResourceType_HUB_CONTENT *smithy.Schema
 
 var _ResponseMIMEType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -20556,7 +20604,7 @@ var _SearchExpressionList_member *smithy.Schema
 var SearchRecord = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "SearchRecord",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var SearchRecord_TrainingJob *smithy.Schema
 
 var SearchRecord_Experiment *smithy.Schema
@@ -20590,6 +20638,8 @@ var SearchRecord_ModelCard *smithy.Schema
 var SearchRecord_Model *smithy.Schema
 
 var SearchRecord_Job *smithy.Schema
+
+var SearchRecord_HubContent *smithy.Schema
 
 var _SearchResultsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -41552,12 +41602,6 @@ func init() {
 
 	HomeEfsFileSystemCreation_Disabled = HomeEfsFileSystemCreation.AddMember("Disabled", smithyprelude.Unit)
 
-	HubContentDependency_DependencyOriginPath = HubContentDependency.AddMember("DependencyOriginPath", _DependencyOriginPath)
-
-	HubContentDependency_DependencyCopyPath = HubContentDependency.AddMember("DependencyCopyPath", _DependencyCopyPath)
-
-	_HubContentDependencyList_member = _HubContentDependencyList.AddMember("member", HubContentDependency)
-
 	HubContentType_MODEL = HubContentType.AddMember("MODEL", smithyprelude.Unit)
 
 	HubContentType_NOTEBOOK = HubContentType.AddMember("NOTEBOOK", smithyprelude.Unit)
@@ -41576,6 +41620,12 @@ func init() {
 
 	_HubContentSearchKeywordList_member = _HubContentSearchKeywordList.AddMember("member", _HubContentSearchKeyword)
 
+	HubContentDependency_DependencyOriginPath = HubContentDependency.AddMember("DependencyOriginPath", _DependencyOriginPath)
+
+	HubContentDependency_DependencyCopyPath = HubContentDependency.AddMember("DependencyCopyPath", _DependencyCopyPath)
+
+	_HubContentDependencyList_member = _HubContentDependencyList.AddMember("member", HubContentDependency)
+
 	HubContentStatus_AVAILABLE = HubContentStatus.AddMember("AVAILABLE", smithyprelude.Unit)
 
 	HubContentStatus_IMPORTING = HubContentStatus.AddMember("IMPORTING", smithyprelude.Unit)
@@ -41589,6 +41639,48 @@ func init() {
 	HubContentStatus_PENDING_IMPORT = HubContentStatus.AddMember("PENDING_IMPORT", smithyprelude.Unit)
 
 	HubContentStatus_PENDING_DELETE = HubContentStatus.AddMember("PENDING_DELETE", smithyprelude.Unit)
+
+	HubContent_HubContentName = HubContent.AddMember("HubContentName", _HubContentName)
+
+	HubContent_HubContentArn = HubContent.AddMember("HubContentArn", _HubContentArn)
+
+	HubContent_HubContentVersion = HubContent.AddMember("HubContentVersion", _HubContentVersion)
+
+	HubContent_HubContentType = HubContent.AddMember("HubContentType", HubContentType)
+
+	HubContent_DocumentSchemaVersion = HubContent.AddMember("DocumentSchemaVersion", _DocumentSchemaVersion)
+
+	HubContent_HubName = HubContent.AddMember("HubName", _HubName)
+
+	HubContent_HubArn = HubContent.AddMember("HubArn", _HubArn)
+
+	HubContent_HubContentDisplayName = HubContent.AddMember("HubContentDisplayName", _HubContentDisplayName)
+
+	HubContent_HubContentDescription = HubContent.AddMember("HubContentDescription", _HubContentDescription)
+
+	HubContent_HubContentMarkdown = HubContent.AddMember("HubContentMarkdown", _HubContentMarkdown)
+
+	HubContent_HubContentDocument = HubContent.AddMember("HubContentDocument", _HubContentDocument)
+
+	HubContent_SageMakerPublicHubContentArn = HubContent.AddMember("SageMakerPublicHubContentArn", _SageMakerPublicHubContentArn)
+
+	HubContent_ReferenceMinVersion = HubContent.AddMember("ReferenceMinVersion", _ReferenceMinVersion)
+
+	HubContent_SupportStatus = HubContent.AddMember("SupportStatus", HubContentSupportStatus)
+
+	HubContent_HubContentSearchKeywords = HubContent.AddMember("HubContentSearchKeywords", _HubContentSearchKeywordList)
+
+	HubContent_HubContentDependencies = HubContent.AddMember("HubContentDependencies", _HubContentDependencyList)
+
+	HubContent_HubContentStatus = HubContent.AddMember("HubContentStatus", HubContentStatus)
+
+	HubContent_FailureReason = HubContent.AddMember("FailureReason", _FailureReason)
+
+	HubContent_CreationTime = HubContent.AddMember("CreationTime", _Timestamp)
+
+	HubContent_LastModifiedTime = HubContent.AddMember("LastModifiedTime", _Timestamp)
+
+	HubContent_Tags = HubContent.AddMember("Tags", _TagList)
 
 	HubContentInfo_HubContentName = HubContentInfo.AddMember("HubContentName", _HubContentName)
 
@@ -45524,6 +45616,8 @@ func init() {
 
 	ResourceType_JOB = ResourceType.AddMember("JOB", smithyprelude.Unit)
 
+	ResourceType_HUB_CONTENT = ResourceType.AddMember("HUB_CONTENT", smithyprelude.Unit)
+
 	RetentionType_Retain = RetentionType.AddMember("Retain", smithyprelude.Unit)
 
 	RetentionType_Delete = RetentionType.AddMember("Delete", smithyprelude.Unit)
@@ -45923,6 +46017,8 @@ func init() {
 	SearchRecord_Model = SearchRecord.AddMember("Model", ModelDashboardModel)
 
 	SearchRecord_Job = SearchRecord.AddMember("Job", Job)
+
+	SearchRecord_HubContent = SearchRecord.AddMember("HubContent", HubContent)
 
 	_SearchResultsList_member = _SearchResultsList.AddMember("member", SearchRecord)
 

@@ -4858,6 +4858,9 @@ type NotebookSummary struct {
 	// The description of the notebook.
 	Description *string
 
+	// The type of the notebook.
+	Type NotebookType
+
 	// The timestamp of when the notebook was last updated.
 	UpdatedAt *time.Time
 

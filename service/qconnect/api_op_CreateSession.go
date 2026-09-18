@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a session. A session is a contextual container used for generating
-// recommendations. Amazon Connect creates a new Amazon Q in Connect session for
+// recommendations. Connect Customer creates a new Amazon Q in Connect session for
 // each contact on which Amazon Q in Connect is enabled.
 func (c *Client) CreateSession(ctx context.Context, params *CreateSessionInput, optFns ...func(*Options)) (*CreateSessionOutput, error) {
 	if params == nil {
@@ -53,8 +53,8 @@ type CreateSessionInput struct {
 	// [Making retries safe with idempotent APIs]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to
-	// retrieve email content and establish session context for AI-powered email
+	// The Amazon Resource Name (ARN) of the email contact in Connect Customer. Used
+	// to retrieve email content and establish session context for AI-powered email
 	// assistance.
 	ContactArn *string
 

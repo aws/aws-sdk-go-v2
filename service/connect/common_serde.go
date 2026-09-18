@@ -911,6 +911,19 @@ func serializeAliasConfigurationList(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeAllowedAIAgents(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AIAgent) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAllowedExtensionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AllowedExtension) {
 	if v == nil {
 		return
@@ -5130,6 +5143,20 @@ func deserializeAliasConfigurationList(d smithy.ShapeDeserializer, s *smithy.Sch
 	var vv types.AliasConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AliasConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAllowedAIAgents(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AIAgent) error {
+	*v = make([]types.AIAgent, 0)
+	var vv types.AIAgent
+	return smithy.ReadList(d, s, func() error {
+		vv = types.AIAgent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

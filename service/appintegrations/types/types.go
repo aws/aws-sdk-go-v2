@@ -73,6 +73,21 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the authentication settings that Connect Customer uses to call an
+// external application endpoint. The configuration includes the authentication
+// type and credential location.
+type AuthConfig struct {
+
+	// The type of authentication used when calling the external application.
+	AuthType AuthType
+
+	// The ARN of the Secrets Manager secret that stores the credentials. The secret
+	// must be accessible to Connect Customer.
+	CredentialProviderIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
 // The contact handling configuration for the application.
 type ContactHandling struct {
 

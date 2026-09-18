@@ -22012,6 +22012,243 @@ func (v *HubAccessConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains information about a hub content resource, including its name, version,
+// type, associated documents, dependencies, and status, as returned by a search
+// result.
+type HubContent struct {
+
+	// The date and time that hub content was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The document schema version for the hub content.
+	//
+	// This member is required.
+	DocumentSchemaVersion *string
+
+	// The Amazon Resource Name (ARN) of the hub that contains the content.
+	//
+	// This member is required.
+	HubArn *string
+
+	// The Amazon Resource Name (ARN) of the hub content.
+	//
+	// This member is required.
+	HubContentArn *string
+
+	// The name of the hub content.
+	//
+	// This member is required.
+	HubContentName *string
+
+	// The status of the hub content.
+	//
+	// This member is required.
+	HubContentStatus HubContentStatus
+
+	// The type of hub content.
+	//
+	// This member is required.
+	HubContentType HubContentType
+
+	// The version of the hub content.
+	//
+	// This member is required.
+	HubContentVersion *string
+
+	// The name of the hub that contains the content.
+	//
+	// This member is required.
+	HubName *string
+
+	// The failure reason if importing hub content failed.
+	FailureReason *string
+
+	// The location of any dependencies that the hub content has, such as scripts,
+	// model artifacts, datasets, or notebooks.
+	HubContentDependencies []HubContentDependency
+
+	// A description of the hub content.
+	HubContentDescription *string
+
+	// The display name of the hub content.
+	HubContentDisplayName *string
+
+	// The hub content document that describes information about the hub content such
+	// as type, associated containers, scripts, and more.
+	HubContentDocument *string
+
+	// A string that provides a description of the hub content. This string can
+	// include links, tables, and standard markdown formatting.
+	HubContentMarkdown *string
+
+	// The searchable keywords for the hub content.
+	HubContentSearchKeywords []string
+
+	// The last modified time of the hub content.
+	LastModifiedTime *time.Time
+
+	// The minimum version of the hub content.
+	ReferenceMinVersion *string
+
+	// The Amazon Resource Name (ARN) of the public hub content.
+	SageMakerPublicHubContentArn *string
+
+	// The support status of the hub content.
+	SupportStatus HubContentSupportStatus
+
+	// Any tags associated with the hub content.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+func (v *HubContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HubContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HubContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.HubContent_CreationTime, *v.CreationTime)
+	}
+	if v.DocumentSchemaVersion != nil {
+		s.WriteString(schemas.HubContent_DocumentSchemaVersion, *v.DocumentSchemaVersion)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.HubContent_FailureReason, *v.FailureReason)
+	}
+	if v.HubArn != nil {
+		s.WriteString(schemas.HubContent_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.HubContent_HubContentArn, *v.HubContentArn)
+	}
+	serializeHubContentDependencyList(s, schemas.HubContent_HubContentDependencies, v.HubContentDependencies)
+	if v.HubContentDescription != nil {
+		s.WriteString(schemas.HubContent_HubContentDescription, *v.HubContentDescription)
+	}
+	if v.HubContentDisplayName != nil {
+		s.WriteString(schemas.HubContent_HubContentDisplayName, *v.HubContentDisplayName)
+	}
+	if v.HubContentDocument != nil {
+		s.WriteString(schemas.HubContent_HubContentDocument, *v.HubContentDocument)
+	}
+	if v.HubContentMarkdown != nil {
+		s.WriteString(schemas.HubContent_HubContentMarkdown, *v.HubContentMarkdown)
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.HubContent_HubContentName, *v.HubContentName)
+	}
+	serializeHubContentSearchKeywordList(s, schemas.HubContent_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentStatus != "" {
+		s.WriteString(schemas.HubContent_HubContentStatus, string(v.HubContentStatus))
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.HubContent_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.HubContent_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.HubContent_HubName, *v.HubName)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.HubContent_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ReferenceMinVersion != nil {
+		s.WriteString(schemas.HubContent_ReferenceMinVersion, *v.ReferenceMinVersion)
+	}
+	if v.SageMakerPublicHubContentArn != nil {
+		s.WriteString(schemas.HubContent_SageMakerPublicHubContentArn, *v.SageMakerPublicHubContentArn)
+	}
+	if v.SupportStatus != "" {
+		s.WriteString(schemas.HubContent_SupportStatus, string(v.SupportStatus))
+	}
+	serializeTagList(s, schemas.HubContent_Tags, v.Tags)
+}
+func (v *HubContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HubContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HubContent_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.HubContent_CreationTime, v.CreationTime)
+		case schemas.HubContent_DocumentSchemaVersion:
+			v.DocumentSchemaVersion = new(string)
+			return d.ReadString(schemas.HubContent_DocumentSchemaVersion, v.DocumentSchemaVersion)
+		case schemas.HubContent_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.HubContent_FailureReason, v.FailureReason)
+		case schemas.HubContent_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.HubContent_HubArn, v.HubArn)
+		case schemas.HubContent_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.HubContent_HubContentArn, v.HubContentArn)
+		case schemas.HubContent_HubContentDependencies:
+			return deserializeHubContentDependencyList(d, schemas.HubContent_HubContentDependencies, &v.HubContentDependencies)
+		case schemas.HubContent_HubContentDescription:
+			v.HubContentDescription = new(string)
+			return d.ReadString(schemas.HubContent_HubContentDescription, v.HubContentDescription)
+		case schemas.HubContent_HubContentDisplayName:
+			v.HubContentDisplayName = new(string)
+			return d.ReadString(schemas.HubContent_HubContentDisplayName, v.HubContentDisplayName)
+		case schemas.HubContent_HubContentDocument:
+			v.HubContentDocument = new(string)
+			return d.ReadString(schemas.HubContent_HubContentDocument, v.HubContentDocument)
+		case schemas.HubContent_HubContentMarkdown:
+			v.HubContentMarkdown = new(string)
+			return d.ReadString(schemas.HubContent_HubContentMarkdown, v.HubContentMarkdown)
+		case schemas.HubContent_HubContentName:
+			v.HubContentName = new(string)
+			return d.ReadString(schemas.HubContent_HubContentName, v.HubContentName)
+		case schemas.HubContent_HubContentSearchKeywords:
+			return deserializeHubContentSearchKeywordList(d, schemas.HubContent_HubContentSearchKeywords, &v.HubContentSearchKeywords)
+		case schemas.HubContent_HubContentStatus:
+			var ev string
+			if err := d.ReadString(schemas.HubContent_HubContentStatus, &ev); err != nil {
+				return err
+			}
+			v.HubContentStatus = HubContentStatus(ev)
+			return nil
+		case schemas.HubContent_HubContentType:
+			var ev string
+			if err := d.ReadString(schemas.HubContent_HubContentType, &ev); err != nil {
+				return err
+			}
+			v.HubContentType = HubContentType(ev)
+			return nil
+		case schemas.HubContent_HubContentVersion:
+			v.HubContentVersion = new(string)
+			return d.ReadString(schemas.HubContent_HubContentVersion, v.HubContentVersion)
+		case schemas.HubContent_HubName:
+			v.HubName = new(string)
+			return d.ReadString(schemas.HubContent_HubName, v.HubName)
+		case schemas.HubContent_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.HubContent_LastModifiedTime, v.LastModifiedTime)
+		case schemas.HubContent_ReferenceMinVersion:
+			v.ReferenceMinVersion = new(string)
+			return d.ReadString(schemas.HubContent_ReferenceMinVersion, v.ReferenceMinVersion)
+		case schemas.HubContent_SageMakerPublicHubContentArn:
+			v.SageMakerPublicHubContentArn = new(string)
+			return d.ReadString(schemas.HubContent_SageMakerPublicHubContentArn, v.SageMakerPublicHubContentArn)
+		case schemas.HubContent_SupportStatus:
+			var ev string
+			if err := d.ReadString(schemas.HubContent_SupportStatus, &ev); err != nil {
+				return err
+			}
+			v.SupportStatus = HubContentSupportStatus(ev)
+			return nil
+		case schemas.HubContent_Tags:
+			return deserializeTagList(d, schemas.HubContent_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Any dependencies related to hub content, such as scripts, model artifacts,
 // datasets, or notebooks.
 type HubContentDependency struct {
@@ -48676,6 +48913,9 @@ type SearchRecord struct {
 	// The feature metadata used to search through the features.
 	FeatureMetadata *FeatureMetadata
 
+	// The properties of a hub content resource.
+	HubContent *HubContent
+
 	// The properties of a hyperparameter tuning job.
 	HyperParameterTuningJob *HyperParameterTuningJobSearchEntity
 
@@ -48755,6 +48995,11 @@ func (v *SearchRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeatureMetadata != nil {
 		s.WriteStruct(schemas.SearchRecord_FeatureMetadata)
 		v.FeatureMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HubContent != nil {
+		s.WriteStruct(schemas.SearchRecord_HubContent)
+		v.HubContent.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.HyperParameterTuningJob != nil {
@@ -48838,6 +49083,9 @@ func (v *SearchRecord) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SearchRecord_FeatureMetadata:
 			v.FeatureMetadata = &FeatureMetadata{}
 			return v.FeatureMetadata.Deserialize(d)
+		case schemas.SearchRecord_HubContent:
+			v.HubContent = &HubContent{}
+			return v.HubContent.Deserialize(d)
 		case schemas.SearchRecord_HyperParameterTuningJob:
 			v.HyperParameterTuningJob = &HyperParameterTuningJobSearchEntity{}
 			return v.HyperParameterTuningJob.Deserialize(d)

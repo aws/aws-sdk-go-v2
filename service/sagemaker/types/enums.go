@@ -8579,6 +8579,7 @@ const (
 	ResourceTypeModelCard                ResourceType = "ModelCard"
 	ResourceTypePipelineVersion          ResourceType = "PipelineVersion"
 	ResourceTypeJob                      ResourceType = "Job"
+	ResourceTypeHubContent               ResourceType = "HubContent"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -8606,6 +8607,7 @@ func (ResourceType) Values() []ResourceType {
 		"ModelCard",
 		"PipelineVersion",
 		"Job",
+		"HubContent",
 	}
 }
 

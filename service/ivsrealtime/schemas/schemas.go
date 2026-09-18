@@ -1741,7 +1741,21 @@ var CreateIngestConfigurationRequest_tags *smithy.Schema
 var CreateIngestConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "CreateIngestConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 8)
+var CreateIngestConfigurationResponse_accessControlAllowOrigin *smithy.Schema
+
+var CreateIngestConfigurationResponse_accessControlExposeHeaders *smithy.Schema
+
+var CreateIngestConfigurationResponse_cacheControl *smithy.Schema
+
+var CreateIngestConfigurationResponse_contentSecurityPolicy *smithy.Schema
+
+var CreateIngestConfigurationResponse_strictTransportSecurity *smithy.Schema
+
+var CreateIngestConfigurationResponse_xContentTypeOptions *smithy.Schema
+
+var CreateIngestConfigurationResponse_xFrameOptions *smithy.Schema
+
 var CreateIngestConfigurationResponse_ingestConfiguration *smithy.Schema
 
 var CreateParticipantTokenRequest = smithy.NewSchema(smithy.ShapeID{
@@ -2324,7 +2338,21 @@ var UpdateIngestConfigurationRequest_redundantIngest *smithy.Schema
 var UpdateIngestConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivsrealtime",
 	Name:      "UpdateIngestConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 8)
+var UpdateIngestConfigurationResponse_accessControlAllowOrigin *smithy.Schema
+
+var UpdateIngestConfigurationResponse_accessControlExposeHeaders *smithy.Schema
+
+var UpdateIngestConfigurationResponse_cacheControl *smithy.Schema
+
+var UpdateIngestConfigurationResponse_contentSecurityPolicy *smithy.Schema
+
+var UpdateIngestConfigurationResponse_strictTransportSecurity *smithy.Schema
+
+var UpdateIngestConfigurationResponse_xContentTypeOptions *smithy.Schema
+
+var UpdateIngestConfigurationResponse_xFrameOptions *smithy.Schema
+
 var UpdateIngestConfigurationResponse_ingestConfiguration *smithy.Schema
 
 var UpdateStageRequest = smithy.NewSchema(smithy.ShapeID{
@@ -3042,6 +3070,20 @@ func init() {
 
 	CreateIngestConfigurationRequest_tags = CreateIngestConfigurationRequest.AddMember("tags", _Tags)
 
+	CreateIngestConfigurationResponse_accessControlAllowOrigin = CreateIngestConfigurationResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
+
+	CreateIngestConfigurationResponse_accessControlExposeHeaders = CreateIngestConfigurationResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
+
+	CreateIngestConfigurationResponse_cacheControl = CreateIngestConfigurationResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
+
+	CreateIngestConfigurationResponse_contentSecurityPolicy = CreateIngestConfigurationResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
+
+	CreateIngestConfigurationResponse_strictTransportSecurity = CreateIngestConfigurationResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
+
+	CreateIngestConfigurationResponse_xContentTypeOptions = CreateIngestConfigurationResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
+
+	CreateIngestConfigurationResponse_xFrameOptions = CreateIngestConfigurationResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
+
 	CreateIngestConfigurationResponse_ingestConfiguration = CreateIngestConfigurationResponse.AddMember("ingestConfiguration", IngestConfiguration)
 
 	CreateParticipantTokenRequest_stageArn = CreateParticipantTokenRequest.AddMember("stageArn", _StageArn)
@@ -3327,6 +3369,20 @@ func init() {
 	UpdateIngestConfigurationRequest_stageArn = UpdateIngestConfigurationRequest.AddMember("stageArn", _IngestConfigurationStageArn)
 
 	UpdateIngestConfigurationRequest_redundantIngest = UpdateIngestConfigurationRequest.AddMember("redundantIngest", _RedundantIngest)
+
+	UpdateIngestConfigurationResponse_accessControlAllowOrigin = UpdateIngestConfigurationResponse.AddMember("accessControlAllowOrigin", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Allow-Origin"})
+
+	UpdateIngestConfigurationResponse_accessControlExposeHeaders = UpdateIngestConfigurationResponse.AddMember("accessControlExposeHeaders", _String, &smithytraits.HTTPHeader{Name: "Access-Control-Expose-Headers"})
+
+	UpdateIngestConfigurationResponse_cacheControl = UpdateIngestConfigurationResponse.AddMember("cacheControl", _String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
+
+	UpdateIngestConfigurationResponse_contentSecurityPolicy = UpdateIngestConfigurationResponse.AddMember("contentSecurityPolicy", _String, &smithytraits.HTTPHeader{Name: "Content-Security-Policy"})
+
+	UpdateIngestConfigurationResponse_strictTransportSecurity = UpdateIngestConfigurationResponse.AddMember("strictTransportSecurity", _String, &smithytraits.HTTPHeader{Name: "Strict-Transport-Security"})
+
+	UpdateIngestConfigurationResponse_xContentTypeOptions = UpdateIngestConfigurationResponse.AddMember("xContentTypeOptions", _String, &smithytraits.HTTPHeader{Name: "X-Content-Type-Options"})
+
+	UpdateIngestConfigurationResponse_xFrameOptions = UpdateIngestConfigurationResponse.AddMember("xFrameOptions", _String, &smithytraits.HTTPHeader{Name: "X-Frame-Options"})
 
 	UpdateIngestConfigurationResponse_ingestConfiguration = UpdateIngestConfigurationResponse.AddMember("ingestConfiguration", IngestConfiguration)
 

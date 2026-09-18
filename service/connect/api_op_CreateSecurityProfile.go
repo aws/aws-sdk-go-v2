@@ -48,6 +48,9 @@ type CreateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
+	// A list of AI agents that the security profile will give access to.
+	AllowedAIAgents []types.AIAgent
+
 	// The identifier of the hierarchy group that a security profile uses to restrict
 	// access to resources in Connect Customer.
 	AllowedAccessControlHierarchyGroupId *string
@@ -101,6 +104,7 @@ func (v *CreateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedAIAgents(s, schemas.CreateSecurityProfileRequest_AllowedAIAgents, v.AllowedAIAgents)
 	if v.AllowedAccessControlHierarchyGroupId != nil {
 		s.WriteString(schemas.CreateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId, *v.AllowedAccessControlHierarchyGroupId)
 	}

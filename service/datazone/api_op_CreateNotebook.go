@@ -63,6 +63,9 @@ type CreateNotebookInput struct {
 	// 1024 characters.
 	Parameters map[string]string
 
+	// The type of the notebook.
+	Type types.NotebookType
+
 	noSmithyDocumentSerde
 }
 
@@ -133,6 +136,9 @@ type CreateNotebookOutput struct {
 
 	// The sensitive parameters of the notebook.
 	Parameters map[string]string
+
+	// The type of the notebook.
+	Type types.NotebookType
 
 	// The timestamp of when the notebook was last updated.
 	UpdatedAt *time.Time

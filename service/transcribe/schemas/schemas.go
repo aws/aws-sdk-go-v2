@@ -288,6 +288,13 @@ var UpdateCallAnalyticsCategory = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/callanalyticscategories/{CategoryName}",
 	Code: 200})
 
+var UpdateLanguageModel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "UpdateLanguageModel",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/languagemodels/{ModelName}",
+	Code: 200})
+
 var UpdateMedicalVocabulary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "UpdateMedicalVocabulary",
@@ -584,6 +591,14 @@ var _DurationInSeconds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "DurationInSeconds",
 }, smithy.ShapeTypeFloat, 0)
+
+var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "EncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var EncryptionConfiguration_KMSEncryptionContext *smithy.Schema
+
+var EncryptionConfiguration_KMSKey *smithy.Schema
 
 var _FailureReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -927,7 +942,7 @@ var _LanguageIdSettingsMap_value *smithy.Schema
 var LanguageModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "LanguageModel",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var LanguageModel_ModelName *smithy.Schema
 
 var LanguageModel_CreateTime *smithy.Schema
@@ -945,6 +960,8 @@ var LanguageModel_UpgradeAvailability *smithy.Schema
 var LanguageModel_FailureReason *smithy.Schema
 
 var LanguageModel_InputDataConfig *smithy.Schema
+
+var LanguageModel_EncryptionConfiguration *smithy.Schema
 
 var _LanguageOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -1431,6 +1448,11 @@ var _PiiEntityTypes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PiiEntityTypes_member *smithy.Schema
 
+var _PrintableNonEmptyString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "PrintableNonEmptyString",
+}, smithy.ShapeTypeString, 0)
+
 var Pronouns = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "Pronouns",
@@ -1915,7 +1937,7 @@ var CreateCallAnalyticsCategoryResponse_CategoryProperties *smithy.Schema
 var CreateLanguageModelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "CreateLanguageModelRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var CreateLanguageModelRequest_LanguageCode *smithy.Schema
 
 var CreateLanguageModelRequest_BaseModelName *smithy.Schema
@@ -1923,6 +1945,8 @@ var CreateLanguageModelRequest_BaseModelName *smithy.Schema
 var CreateLanguageModelRequest_ModelName *smithy.Schema
 
 var CreateLanguageModelRequest_InputDataConfig *smithy.Schema
+
+var CreateLanguageModelRequest_EncryptionConfiguration *smithy.Schema
 
 var CreateLanguageModelRequest_Tags *smithy.Schema
 
@@ -1969,7 +1993,7 @@ var CreateMedicalVocabularyResponse_FailureReason *smithy.Schema
 var CreateVocabularyFilterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "CreateVocabularyFilterRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
 
 var CreateVocabularyFilterRequest_LanguageCode *smithy.Schema
@@ -1981,6 +2005,8 @@ var CreateVocabularyFilterRequest_VocabularyFilterFileUri *smithy.Schema
 var CreateVocabularyFilterRequest_Tags *smithy.Schema
 
 var CreateVocabularyFilterRequest_DataAccessRoleArn *smithy.Schema
+
+var CreateVocabularyFilterRequest_EncryptionConfiguration *smithy.Schema
 
 var CreateVocabularyFilterResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -1995,7 +2021,7 @@ var CreateVocabularyFilterResponse_LastModifiedTime *smithy.Schema
 var CreateVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "CreateVocabularyRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateVocabularyRequest_VocabularyName *smithy.Schema
 
 var CreateVocabularyRequest_LanguageCode *smithy.Schema
@@ -2007,6 +2033,8 @@ var CreateVocabularyRequest_VocabularyFileUri *smithy.Schema
 var CreateVocabularyRequest_Tags *smithy.Schema
 
 var CreateVocabularyRequest_DataAccessRoleArn *smithy.Schema
+
+var CreateVocabularyRequest_EncryptionConfiguration *smithy.Schema
 
 var CreateVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -2189,7 +2217,7 @@ var GetVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
 var GetVocabularyFilterResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "GetVocabularyFilterResponse",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var GetVocabularyFilterResponse_VocabularyFilterName *smithy.Schema
 
 var GetVocabularyFilterResponse_LanguageCode *smithy.Schema
@@ -2197,6 +2225,10 @@ var GetVocabularyFilterResponse_LanguageCode *smithy.Schema
 var GetVocabularyFilterResponse_LastModifiedTime *smithy.Schema
 
 var GetVocabularyFilterResponse_DownloadUri *smithy.Schema
+
+var GetVocabularyFilterResponse_DataAccessRoleArn *smithy.Schema
+
+var GetVocabularyFilterResponse_EncryptionConfiguration *smithy.Schema
 
 var GetVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -2207,7 +2239,7 @@ var GetVocabularyRequest_VocabularyName *smithy.Schema
 var GetVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "GetVocabularyResponse",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var GetVocabularyResponse_VocabularyName *smithy.Schema
 
 var GetVocabularyResponse_LanguageCode *smithy.Schema
@@ -2219,6 +2251,10 @@ var GetVocabularyResponse_LastModifiedTime *smithy.Schema
 var GetVocabularyResponse_FailureReason *smithy.Schema
 
 var GetVocabularyResponse_DownloadUri *smithy.Schema
+
+var GetVocabularyResponse_DataAccessRoleArn *smithy.Schema
+
+var GetVocabularyResponse_EncryptionConfiguration *smithy.Schema
 
 var ListCallAnalyticsCategoriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -2606,6 +2642,26 @@ var UpdateCallAnalyticsCategoryResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateCallAnalyticsCategoryResponse_CategoryProperties *smithy.Schema
 
+var UpdateLanguageModelRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "UpdateLanguageModelRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateLanguageModelRequest_ModelName *smithy.Schema
+
+var UpdateLanguageModelRequest_DataAccessRoleArn *smithy.Schema
+
+var UpdateLanguageModelRequest_EncryptionConfiguration *smithy.Schema
+
+var UpdateLanguageModelResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "UpdateLanguageModelResponse",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateLanguageModelResponse_ModelName *smithy.Schema
+
+var UpdateLanguageModelResponse_ModelStatus *smithy.Schema
+
+var UpdateLanguageModelResponse_LastModifiedTime *smithy.Schema
+
 var UpdateMedicalVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "UpdateMedicalVocabularyRequest",
@@ -2631,7 +2687,7 @@ var UpdateMedicalVocabularyResponse_VocabularyState *smithy.Schema
 var UpdateVocabularyFilterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "UpdateVocabularyFilterRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
 
 var UpdateVocabularyFilterRequest_Words *smithy.Schema
@@ -2639,6 +2695,8 @@ var UpdateVocabularyFilterRequest_Words *smithy.Schema
 var UpdateVocabularyFilterRequest_VocabularyFilterFileUri *smithy.Schema
 
 var UpdateVocabularyFilterRequest_DataAccessRoleArn *smithy.Schema
+
+var UpdateVocabularyFilterRequest_EncryptionConfiguration *smithy.Schema
 
 var UpdateVocabularyFilterResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -2653,7 +2711,7 @@ var UpdateVocabularyFilterResponse_LastModifiedTime *smithy.Schema
 var UpdateVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "UpdateVocabularyRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateVocabularyRequest_VocabularyName *smithy.Schema
 
 var UpdateVocabularyRequest_LanguageCode *smithy.Schema
@@ -2663,6 +2721,8 @@ var UpdateVocabularyRequest_Phrases *smithy.Schema
 var UpdateVocabularyRequest_VocabularyFileUri *smithy.Schema
 
 var UpdateVocabularyRequest_DataAccessRoleArn *smithy.Schema
+
+var UpdateVocabularyRequest_EncryptionConfiguration *smithy.Schema
 
 var UpdateVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -3275,6 +3335,14 @@ func init() {
 
 	ConflictException_Message = ConflictException.AddMember("Message", _String)
 
+	_KMSEncryptionContextMap_key = _KMSEncryptionContextMap.AddMember("key", _PrintableNonEmptyString)
+
+	_KMSEncryptionContextMap_value = _KMSEncryptionContextMap.AddMember("value", _PrintableNonEmptyString)
+
+	EncryptionConfiguration_KMSEncryptionContext = EncryptionConfiguration.AddMember("KMSEncryptionContext", _KMSEncryptionContextMap)
+
+	EncryptionConfiguration_KMSKey = EncryptionConfiguration.AddMember("KMSKey", _KMSKeyId)
+
 	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _Uri)
 
 	InputDataConfig_TuningDataS3Uri = InputDataConfig.AddMember("TuningDataS3Uri", _Uri)
@@ -3286,10 +3354,6 @@ func init() {
 	JobExecutionSettings_AllowDeferredExecution = JobExecutionSettings.AddMember("AllowDeferredExecution", _Boolean)
 
 	JobExecutionSettings_DataAccessRoleArn = JobExecutionSettings.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	_KMSEncryptionContextMap_key = _KMSEncryptionContextMap.AddMember("key", _NonEmptyString)
-
-	_KMSEncryptionContextMap_value = _KMSEncryptionContextMap.AddMember("value", _NonEmptyString)
 
 	LanguageCodeItem_LanguageCode = LanguageCodeItem.AddMember("LanguageCode", LanguageCode)
 
@@ -3320,6 +3384,8 @@ func init() {
 	LanguageModel_FailureReason = LanguageModel.AddMember("FailureReason", _FailureReason)
 
 	LanguageModel_InputDataConfig = LanguageModel.AddMember("InputDataConfig", InputDataConfig)
+
+	LanguageModel_EncryptionConfiguration = LanguageModel.AddMember("EncryptionConfiguration", EncryptionConfiguration)
 
 	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
 
@@ -3681,6 +3747,8 @@ func init() {
 
 	CreateLanguageModelRequest_InputDataConfig = CreateLanguageModelRequest.AddMember("InputDataConfig", InputDataConfig)
 
+	CreateLanguageModelRequest_EncryptionConfiguration = CreateLanguageModelRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
 	CreateLanguageModelRequest_Tags = CreateLanguageModelRequest.AddMember("Tags", _TagList)
 
 	CreateLanguageModelResponse_LanguageCode = CreateLanguageModelResponse.AddMember("LanguageCode", CLMLanguageCode)
@@ -3723,6 +3791,8 @@ func init() {
 
 	CreateVocabularyFilterRequest_DataAccessRoleArn = CreateVocabularyFilterRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
 
+	CreateVocabularyFilterRequest_EncryptionConfiguration = CreateVocabularyFilterRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
 	CreateVocabularyFilterResponse_VocabularyFilterName = CreateVocabularyFilterResponse.AddMember("VocabularyFilterName", _VocabularyFilterName)
 
 	CreateVocabularyFilterResponse_LanguageCode = CreateVocabularyFilterResponse.AddMember("LanguageCode", LanguageCode)
@@ -3740,6 +3810,8 @@ func init() {
 	CreateVocabularyRequest_Tags = CreateVocabularyRequest.AddMember("Tags", _TagList)
 
 	CreateVocabularyRequest_DataAccessRoleArn = CreateVocabularyRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
+
+	CreateVocabularyRequest_EncryptionConfiguration = CreateVocabularyRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
 
 	CreateVocabularyResponse_VocabularyName = CreateVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
 
@@ -3817,6 +3889,10 @@ func init() {
 
 	GetVocabularyFilterResponse_DownloadUri = GetVocabularyFilterResponse.AddMember("DownloadUri", _Uri)
 
+	GetVocabularyFilterResponse_DataAccessRoleArn = GetVocabularyFilterResponse.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
+
+	GetVocabularyFilterResponse_EncryptionConfiguration = GetVocabularyFilterResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
 	GetVocabularyRequest_VocabularyName = GetVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
 
 	GetVocabularyResponse_VocabularyName = GetVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
@@ -3830,6 +3906,10 @@ func init() {
 	GetVocabularyResponse_FailureReason = GetVocabularyResponse.AddMember("FailureReason", _FailureReason)
 
 	GetVocabularyResponse_DownloadUri = GetVocabularyResponse.AddMember("DownloadUri", _Uri)
+
+	GetVocabularyResponse_DataAccessRoleArn = GetVocabularyResponse.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
+
+	GetVocabularyResponse_EncryptionConfiguration = GetVocabularyResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
 
 	ListCallAnalyticsCategoriesRequest_NextToken = ListCallAnalyticsCategoriesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
 
@@ -4079,6 +4159,18 @@ func init() {
 
 	UpdateCallAnalyticsCategoryResponse_CategoryProperties = UpdateCallAnalyticsCategoryResponse.AddMember("CategoryProperties", CategoryProperties)
 
+	UpdateLanguageModelRequest_ModelName = UpdateLanguageModelRequest.AddMember("ModelName", _ModelName, &smithytraits.HTTPLabel{})
+
+	UpdateLanguageModelRequest_DataAccessRoleArn = UpdateLanguageModelRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
+
+	UpdateLanguageModelRequest_EncryptionConfiguration = UpdateLanguageModelRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	UpdateLanguageModelResponse_ModelName = UpdateLanguageModelResponse.AddMember("ModelName", _ModelName)
+
+	UpdateLanguageModelResponse_ModelStatus = UpdateLanguageModelResponse.AddMember("ModelStatus", ModelStatus)
+
+	UpdateLanguageModelResponse_LastModifiedTime = UpdateLanguageModelResponse.AddMember("LastModifiedTime", _DateTime)
+
 	UpdateMedicalVocabularyRequest_VocabularyName = UpdateMedicalVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
 
 	UpdateMedicalVocabularyRequest_LanguageCode = UpdateMedicalVocabularyRequest.AddMember("LanguageCode", LanguageCode)
@@ -4101,6 +4193,8 @@ func init() {
 
 	UpdateVocabularyFilterRequest_DataAccessRoleArn = UpdateVocabularyFilterRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
 
+	UpdateVocabularyFilterRequest_EncryptionConfiguration = UpdateVocabularyFilterRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
 	UpdateVocabularyFilterResponse_VocabularyFilterName = UpdateVocabularyFilterResponse.AddMember("VocabularyFilterName", _VocabularyFilterName)
 
 	UpdateVocabularyFilterResponse_LanguageCode = UpdateVocabularyFilterResponse.AddMember("LanguageCode", LanguageCode)
@@ -4116,6 +4210,8 @@ func init() {
 	UpdateVocabularyRequest_VocabularyFileUri = UpdateVocabularyRequest.AddMember("VocabularyFileUri", _Uri)
 
 	UpdateVocabularyRequest_DataAccessRoleArn = UpdateVocabularyRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
+
+	UpdateVocabularyRequest_EncryptionConfiguration = UpdateVocabularyRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
 
 	UpdateVocabularyResponse_VocabularyName = UpdateVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
 

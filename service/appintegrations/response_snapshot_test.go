@@ -181,6 +181,10 @@ func TestCheckResponseSnapshot_CreateApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -490,6 +494,10 @@ func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetApplication.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1027,6 +1035,10 @@ func TestCheckResponseSnapshot_UpdateApplication(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1188,6 +1200,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1270,6 +1286,10 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1356,6 +1376,10 @@ func TestCheckResponseSnapshot_Error_DuplicateResourceException(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1442,6 +1466,10 @@ func TestCheckResponseSnapshot_Error_InternalServiceError(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1528,6 +1556,10 @@ func TestCheckResponseSnapshot_Error_InvalidRequestException(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1667,6 +1699,10 @@ func TestCheckResponseSnapshot_Error_ResourceQuotaExceededException(t *testing.T
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1753,6 +1789,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1839,6 +1879,10 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 			},
 		},
 		ApplicationType: types.ApplicationType("STANDARD"),
+		AuthConfig: &types.AuthConfig{
+			AuthType:                     types.AuthType("API_KEY"),
+			CredentialProviderIdentifier: ptr.String("__CredentialProviderIdentifier__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

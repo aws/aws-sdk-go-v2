@@ -51,6 +51,47 @@ func (v *AgentAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A union that identifies a collaborator agent to engage. Specify either an
+// Amazon Connect AI Agent or a third-party agent.
+//
+// The following types satisfy this interface:
+//
+//	AgentTargetMemberAiAgentId
+//	AgentTargetMemberApplicationId
+type AgentTarget interface {
+	isAgentTarget()
+}
+
+// The identifier of an Amazon Connect AI Agent to use as the collaborator agent.
+type AgentTargetMemberAiAgentId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTargetMemberAiAgentId) isAgentTarget() {}
+func (v *AgentTargetMemberAiAgentId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AgentTarget_aiAgentId, v.Value)
+}
+func (v *AgentTargetMemberAiAgentId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AgentTarget_aiAgentId, &v.Value)
+}
+
+// The identifier of a third-party agent to use as the collaborator agent.
+type AgentTargetMemberApplicationId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTargetMemberApplicationId) isAgentTarget() {}
+func (v *AgentTargetMemberApplicationId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AgentTarget_applicationId, v.Value)
+}
+func (v *AgentTargetMemberApplicationId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AgentTarget_applicationId, &v.Value)
+}
+
 // A typed union that specifies the configuration based on the type of AI Agent.
 //
 // The following types satisfy this interface:
@@ -1801,8 +1842,8 @@ func (v *AIPromptVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // [step-by-step guide]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html
 type AmazonConnectGuideAssociationData struct {
 
-	//  The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides
-	// are a type of flow.
+	//  The Amazon Resource Name (ARN) of an Connect Customer flow. Step-by-step
+	// guides are a type of flow.
 	FlowId *string
 
 	noSmithyDocumentSerde
@@ -3173,7 +3214,7 @@ type Configuration interface {
 	isConfiguration()
 }
 
-// The configuration information of the Amazon Connect data source.
+// The configuration information of the Connect Customer data source.
 type ConfigurationMemberConnectConfiguration struct {
 	Value ConnectConfiguration
 
@@ -3190,10 +3231,10 @@ func (v *ConfigurationMemberConnectConfiguration) Deserialize(d smithy.ShapeDese
 	return v.Value.Deserialize(d)
 }
 
-// The configuration information of the Amazon Connect data source.
+// The configuration information of the Connect Customer data source.
 type ConnectConfiguration struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the ARN of the instance.
 	InstanceId *string
 
@@ -4905,6 +4946,49 @@ func (v *DataSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A collaborator agent configuration in which the Orchestration AI Agent invokes
+// the collaborator, resuming when the collaborator returns.
+type DelegateAgentConfiguration struct {
+
+	// The collaborator agent to delegate to.
+	//
+	// This member is required.
+	AgentTarget AgentTarget
+
+	// The instruction that tells the Orchestration AI Agent when and how to delegate
+	// to this collaborator agent.
+	Instruction *MultiAgentInstruction
+
+	noSmithyDocumentSerde
+}
+
+func (v *DelegateAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DelegateAgentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DelegateAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentTarget(s, schemas.DelegateAgentConfiguration_agentTarget, v.AgentTarget)
+	if v.Instruction != nil {
+		s.WriteStruct(schemas.DelegateAgentConfiguration_instruction)
+		v.Instruction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DelegateAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DelegateAgentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DelegateAgentConfiguration_agentTarget:
+			return deserializeAgentTarget(d, schemas.DelegateAgentConfiguration_agentTarget, &v.AgentTarget)
+		case schemas.DelegateAgentConfiguration_instruction:
+			v.Instruction = &MultiAgentInstruction{}
+			return v.Instruction.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The document.
 type Document struct {
 
@@ -6108,9 +6192,9 @@ type GroupingConfiguration struct {
 	// The list of values that define different groups of Amazon Q in Connect users.
 	//
 	//   - When setting criteria to RoutingProfileArn , you need to provide a list of
-	//   ARNs of [Amazon Connect routing profiles]as values of this parameter.
+	//   ARNs of [Connect Customer routing profiles]as values of this parameter.
 	//
-	// [Amazon Connect routing profiles]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
+	// [Connect Customer routing profiles]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
 	Values []string
 
 	noSmithyDocumentSerde
@@ -6500,7 +6584,8 @@ type GuardrailPiiEntityConfig struct {
 	//   required for individuals to access government programs and benefits.
 	//
 	// The SIN is formatted as three groups of three digits, such as 123-456-789. A
-	//   SIN can be validated through a simple check-digit process called the [Luhn algorithm].
+	//   SIN can be validated through a simple check-digit process called the Luhn
+	//   algorithm. For more information, see [Luhn algorithm]on the Wikipedia website.
 	//
 	//   - UK Specific
 	//
@@ -6800,6 +6885,71 @@ func (v *GuardrailWordConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GuardrailWordConfig_text:
 			v.Text = new(string)
 			return d.ReadString(schemas.GuardrailWordConfig_text, v.Text)
+		}
+		return nil
+	})
+}
+
+// A collaborator agent configuration in which the Orchestration AI Agent
+// transfers control of the conversation to the collaborator agent.
+type HandoffAgentConfiguration struct {
+
+	// The collaborator agent to hand off to.
+	//
+	// This member is required.
+	AgentTarget AgentTarget
+
+	// Specifies whether the caller's audio is streamed directly to the collaborator
+	// agent and the collaborator's audio response is played back during the handoff.
+	// This applies only to voice handoffs.
+	AudioStreamingEnabled *bool
+
+	// Specifies whether the conversation is handed off to this collaborator agent
+	// immediately on the first turn, without any orchestration reasoning. At most one
+	// handoff in an AI Agent's configuration can set this to true .
+	ImmediateHandoff *bool
+
+	// The instruction that tells the Orchestration AI Agent when and how to hand off
+	// to this collaborator agent.
+	Instruction *MultiAgentInstruction
+
+	noSmithyDocumentSerde
+}
+
+func (v *HandoffAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HandoffAgentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HandoffAgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentTarget(s, schemas.HandoffAgentConfiguration_agentTarget, v.AgentTarget)
+	if v.AudioStreamingEnabled != nil {
+		s.WriteBool(schemas.HandoffAgentConfiguration_audioStreamingEnabled, *v.AudioStreamingEnabled)
+	}
+	if v.ImmediateHandoff != nil {
+		s.WriteBool(schemas.HandoffAgentConfiguration_immediateHandoff, *v.ImmediateHandoff)
+	}
+	if v.Instruction != nil {
+		s.WriteStruct(schemas.HandoffAgentConfiguration_instruction)
+		v.Instruction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HandoffAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HandoffAgentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HandoffAgentConfiguration_agentTarget:
+			return deserializeAgentTarget(d, schemas.HandoffAgentConfiguration_agentTarget, &v.AgentTarget)
+		case schemas.HandoffAgentConfiguration_audioStreamingEnabled:
+			v.AudioStreamingEnabled = new(bool)
+			return d.ReadBool(schemas.HandoffAgentConfiguration_audioStreamingEnabled, v.AudioStreamingEnabled)
+		case schemas.HandoffAgentConfiguration_immediateHandoff:
+			v.ImmediateHandoff = new(bool)
+			return d.ReadBool(schemas.HandoffAgentConfiguration_immediateHandoff, v.ImmediateHandoff)
+		case schemas.HandoffAgentConfiguration_instruction:
+			v.Instruction = &MultiAgentInstruction{}
+			return v.Instruction.Deserialize(d)
 		}
 		return nil
 	})
@@ -7895,10 +8045,34 @@ func (v *MessageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	MessageDataMemberData
 //	MessageDataMemberText
 //	MessageDataMemberToolUseResult
 type MessageData interface {
 	isMessageData()
+}
+
+// The message data as a structured JSON document. This is the payload for a
+// message of type DATA , and must be a JSON object at the root level.
+type MessageDataMemberData struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*MessageDataMemberData) isMessageData() {}
+func (v *MessageDataMemberData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.MessageData_data, &smithydocument.Opaque{Value: v.Value})
+}
+func (v *MessageDataMemberData) Deserialize(d smithy.ShapeDeserializer) error {
+	var dv smithydocument.Value
+	if err := d.ReadDocument(schemas.MessageData_data, &dv); err != nil {
+		return err
+	}
+	if ov, ok := dv.(smithydocument.Opaque); ok {
+		v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+	}
+	return nil
 }
 
 // The message data in text type.
@@ -9442,6 +9616,93 @@ func (v *ModelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A union that configures a single collaborator agent for an Orchestration AI
+// Agent, as either a delegate or a handoff.
+//
+// The following types satisfy this interface:
+//
+//	MultiAgentConfigurationMemberDelegateAgentConfiguration
+//	MultiAgentConfigurationMemberHandoffAgentConfiguration
+type MultiAgentConfiguration interface {
+	isMultiAgentConfiguration()
+}
+
+// Configures the collaborator agent as a delegate that the Orchestration AI Agent
+// invokes while retaining control of the conversation.
+type MultiAgentConfigurationMemberDelegateAgentConfiguration struct {
+	Value DelegateAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*MultiAgentConfigurationMemberDelegateAgentConfiguration) isMultiAgentConfiguration() {}
+func (v *MultiAgentConfigurationMemberDelegateAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiAgentConfiguration_delegateAgentConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MultiAgentConfigurationMemberDelegateAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Configures the collaborator agent as a handoff target that the Orchestration AI
+// Agent transfers control of the conversation to.
+type MultiAgentConfigurationMemberHandoffAgentConfiguration struct {
+	Value HandoffAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*MultiAgentConfigurationMemberHandoffAgentConfiguration) isMultiAgentConfiguration() {}
+func (v *MultiAgentConfigurationMemberHandoffAgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiAgentConfiguration_handoffAgentConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MultiAgentConfigurationMemberHandoffAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The instruction that guides how the Orchestration AI Agent works with a
+// collaborator agent.
+type MultiAgentInstruction struct {
+
+	// Example interactions that illustrate when the Orchestration AI Agent should
+	// engage the collaborator agent.
+	Examples []string
+
+	// The natural-language instruction that tells the Orchestration AI Agent when and
+	// how to engage the collaborator agent.
+	Instruction *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MultiAgentInstruction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiAgentInstruction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiAgentInstruction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMultiAgentExampleList(s, schemas.MultiAgentInstruction_examples, v.Examples)
+	if v.Instruction != nil {
+		s.WriteString(schemas.MultiAgentInstruction_instruction, *v.Instruction)
+	}
+}
+func (v *MultiAgentInstruction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiAgentInstruction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiAgentInstruction_examples:
+			return deserializeMultiAgentExampleList(d, schemas.MultiAgentInstruction_examples, &v.Examples)
+		case schemas.MultiAgentInstruction_instruction:
+			v.Instruction = new(string)
+			return d.ReadString(schemas.MultiAgentInstruction_instruction, v.Instruction)
+		}
+		return nil
+	})
+}
+
 // Details about notes chunk data.
 type NotesChunkDataDetails struct {
 
@@ -9606,20 +9867,32 @@ func (v *NotifyRecommendationsReceivedError) Deserialize(d smithy.ShapeDeseriali
 // The configuration for AI Agents of type ORCHESTRATION .
 type OrchestrationAIAgentConfiguration struct {
 
-	// The AI Prompt identifier used by the Orchestration AI Agent.
-	//
-	// This member is required.
-	OrchestrationAIPromptId *string
-
 	// The Amazon Resource Name (ARN) of the Amazon Connect instance used by the
 	// Orchestration AI Agent.
 	ConnectInstanceArn *string
 
+	// The JSON schemas that define the structure of the structured data input
+	// accepted by the Orchestration AI Agent. The data in a DATA message sent to the
+	// agent is validated against these schemas. You can specify at most one schema.
+	InputSchemas []document.Interface
+
 	// The locale setting for the Orchestration AI Agent.
 	Locale *string
 
+	// The collaborator agents that the Orchestration AI Agent can work with. Each
+	// entry defines another agent that the orchestrator either delegates to or hands
+	// the conversation off to.
+	MultiAgentConfigurations []MultiAgentConfiguration
+
 	// The AI Guardrail identifier used by the Orchestration AI Agent.
 	OrchestrationAIGuardrailId *string
+
+	// The AI Prompt identifier used by the Orchestration AI Agent.
+	OrchestrationAIPromptId *string
+
+	// The JSON schemas that define the structure of the structured output generated
+	// by the Orchestration AI Agent. You can specify at most one schema.
+	OutputSchemas []document.Interface
 
 	// The tool configurations used by the Orchestration AI Agent.
 	ToolConfigurations []ToolConfiguration
@@ -9637,15 +9910,18 @@ func (v *OrchestrationAIAgentConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.ConnectInstanceArn != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_connectInstanceArn, *v.ConnectInstanceArn)
 	}
+	serializeJSONDocumentList(s, schemas.OrchestrationAIAgentConfiguration_inputSchemas, v.InputSchemas)
 	if v.Locale != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_locale, *v.Locale)
 	}
+	serializeMultiAgentConfigurationList(s, schemas.OrchestrationAIAgentConfiguration_multiAgentConfigurations, v.MultiAgentConfigurations)
 	if v.OrchestrationAIGuardrailId != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_orchestrationAIGuardrailId, *v.OrchestrationAIGuardrailId)
 	}
 	if v.OrchestrationAIPromptId != nil {
 		s.WriteString(schemas.OrchestrationAIAgentConfiguration_orchestrationAIPromptId, *v.OrchestrationAIPromptId)
 	}
+	serializeJSONDocumentList(s, schemas.OrchestrationAIAgentConfiguration_outputSchemas, v.OutputSchemas)
 	serializeToolConfigurationList(s, schemas.OrchestrationAIAgentConfiguration_toolConfigurations, v.ToolConfigurations)
 }
 func (v *OrchestrationAIAgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
@@ -9654,15 +9930,21 @@ func (v *OrchestrationAIAgentConfiguration) Deserialize(d smithy.ShapeDeserializ
 		case schemas.OrchestrationAIAgentConfiguration_connectInstanceArn:
 			v.ConnectInstanceArn = new(string)
 			return d.ReadString(schemas.OrchestrationAIAgentConfiguration_connectInstanceArn, v.ConnectInstanceArn)
+		case schemas.OrchestrationAIAgentConfiguration_inputSchemas:
+			return deserializeJSONDocumentList(d, schemas.OrchestrationAIAgentConfiguration_inputSchemas, &v.InputSchemas)
 		case schemas.OrchestrationAIAgentConfiguration_locale:
 			v.Locale = new(string)
 			return d.ReadString(schemas.OrchestrationAIAgentConfiguration_locale, v.Locale)
+		case schemas.OrchestrationAIAgentConfiguration_multiAgentConfigurations:
+			return deserializeMultiAgentConfigurationList(d, schemas.OrchestrationAIAgentConfiguration_multiAgentConfigurations, &v.MultiAgentConfigurations)
 		case schemas.OrchestrationAIAgentConfiguration_orchestrationAIGuardrailId:
 			v.OrchestrationAIGuardrailId = new(string)
 			return d.ReadString(schemas.OrchestrationAIAgentConfiguration_orchestrationAIGuardrailId, v.OrchestrationAIGuardrailId)
 		case schemas.OrchestrationAIAgentConfiguration_orchestrationAIPromptId:
 			v.OrchestrationAIPromptId = new(string)
 			return d.ReadString(schemas.OrchestrationAIAgentConfiguration_orchestrationAIPromptId, v.OrchestrationAIPromptId)
+		case schemas.OrchestrationAIAgentConfiguration_outputSchemas:
+			return deserializeJSONDocumentList(d, schemas.OrchestrationAIAgentConfiguration_outputSchemas, &v.OutputSchemas)
 		case schemas.OrchestrationAIAgentConfiguration_toolConfigurations:
 			return deserializeToolConfigurationList(d, schemas.OrchestrationAIAgentConfiguration_toolConfigurations, &v.ToolConfigurations)
 		}
@@ -10711,7 +10993,7 @@ type QuickResponseData struct {
 	// This member is required.
 	Status QuickResponseStatus
 
-	// The Amazon Connect contact channels this quick response applies to. The
+	// The Connect Customer contact channels this quick response applies to. The
 	// supported contact channel types include Chat .
 	Channels []string
 
@@ -11267,7 +11549,7 @@ type QuickResponseSearchResultData struct {
 	// result is returned.
 	AttributesNotInterpolated []string
 
-	// The Amazon Connect contact channels this quick response applies to. The
+	// The Connect Customer contact channels this quick response applies to. The
 	// supported contact channel types include Chat .
 	Channels []string
 
@@ -11481,7 +11763,7 @@ type QuickResponseSummary struct {
 	// This member is required.
 	Status QuickResponseStatus
 
-	// The Amazon Connect contact channels this quick response applies to. The
+	// The Connect Customer contact channels this quick response applies to. The
 	// supported contact channel types include Chat .
 	Channels []string
 
@@ -13295,6 +13577,10 @@ type SpanAttributes struct {
 	// Amazon Connect instance ARN
 	InstanceArn *string
 
+	// How the orchestrator engaged the collaborator agent. Present on spans that
+	// invoke a collaborator agent.
+	InteractionMode InteractionMode
+
 	// Action being performed
 	OperationName *string
 
@@ -13331,11 +13617,20 @@ type SpanAttributes struct {
 	// Actual model used for response (usually matches requestModel)
 	ResponseModel *string
 
+	// Reason a sub-agent returned control to the calling agent. Present on
+	// return_to_agent spans.
+	ReturnReason ReturnReason
+
 	// Session name
 	SessionName *string
 
 	// System prompt instructions
 	SystemInstructions []SpanMessageValue
+
+	// Identifier of the collaborator agent being invoked. For first-party
+	// collaborators this is the Amazon Connect AI agent ID; for third-party
+	// collaborators this is the external application ID.
+	TargetAgentId *string
 
 	// Sampling temperature for generation
 	Temperature *float32
@@ -13410,6 +13705,9 @@ func (v *SpanAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.SpanAttributes_instanceArn, *v.InstanceArn)
 	}
+	if v.InteractionMode != "" {
+		s.WriteString(schemas.SpanAttributes_interactionMode, string(v.InteractionMode))
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.SpanAttributes_operationName, *v.OperationName)
 	}
@@ -13442,10 +13740,16 @@ func (v *SpanAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResponseModel != nil {
 		s.WriteString(schemas.SpanAttributes_responseModel, *v.ResponseModel)
 	}
+	if v.ReturnReason != "" {
+		s.WriteString(schemas.SpanAttributes_returnReason, string(v.ReturnReason))
+	}
 	if v.SessionName != nil {
 		s.WriteString(schemas.SpanAttributes_sessionName, *v.SessionName)
 	}
 	serializeSpanMessageValueList(s, schemas.SpanAttributes_systemInstructions, v.SystemInstructions)
+	if v.TargetAgentId != nil {
+		s.WriteString(schemas.SpanAttributes_targetAgentId, *v.TargetAgentId)
+	}
 	if v.Temperature != nil {
 		s.WriteFloat32(schemas.SpanAttributes_temperature, *v.Temperature)
 	}
@@ -13518,6 +13822,13 @@ func (v *SpanAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SpanAttributes_instanceArn:
 			v.InstanceArn = new(string)
 			return d.ReadString(schemas.SpanAttributes_instanceArn, v.InstanceArn)
+		case schemas.SpanAttributes_interactionMode:
+			var ev string
+			if err := d.ReadString(schemas.SpanAttributes_interactionMode, &ev); err != nil {
+				return err
+			}
+			v.InteractionMode = InteractionMode(ev)
+			return nil
 		case schemas.SpanAttributes_operationName:
 			v.OperationName = new(string)
 			return d.ReadString(schemas.SpanAttributes_operationName, v.OperationName)
@@ -13556,11 +13867,21 @@ func (v *SpanAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SpanAttributes_responseModel:
 			v.ResponseModel = new(string)
 			return d.ReadString(schemas.SpanAttributes_responseModel, v.ResponseModel)
+		case schemas.SpanAttributes_returnReason:
+			var ev string
+			if err := d.ReadString(schemas.SpanAttributes_returnReason, &ev); err != nil {
+				return err
+			}
+			v.ReturnReason = ReturnReason(ev)
+			return nil
 		case schemas.SpanAttributes_sessionName:
 			v.SessionName = new(string)
 			return d.ReadString(schemas.SpanAttributes_sessionName, v.SessionName)
 		case schemas.SpanAttributes_systemInstructions:
 			return deserializeSpanMessageValueList(d, schemas.SpanAttributes_systemInstructions, &v.SystemInstructions)
+		case schemas.SpanAttributes_targetAgentId:
+			v.TargetAgentId = new(string)
+			return d.ReadString(schemas.SpanAttributes_targetAgentId, v.TargetAgentId)
 		case schemas.SpanAttributes_temperature:
 			v.Temperature = new(float32)
 			return d.ReadFloat32(schemas.SpanAttributes_temperature, v.Temperature)
@@ -15325,6 +15646,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAgentTarget()                               {}
 func (*UnknownUnionMember) isAIAgentConfiguration()                      {}
 func (*UnknownUnionMember) isAIPromptTemplateConfiguration()             {}
 func (*UnknownUnionMember) isAssistantAssociationInputData()             {}
@@ -15342,6 +15664,7 @@ func (*UnknownUnionMember) isMessageTemplateBodyContentProvider()        {}
 func (*UnknownUnionMember) isMessageTemplateContentProvider()            {}
 func (*UnknownUnionMember) isMessageTemplateSourceConfiguration()        {}
 func (*UnknownUnionMember) isMessageTemplateSourceConfigurationSummary() {}
+func (*UnknownUnionMember) isMultiAgentConfiguration()                   {}
 func (*UnknownUnionMember) isOrCondition()                               {}
 func (*UnknownUnionMember) isQueryCondition()                            {}
 func (*UnknownUnionMember) isQueryInputData()                            {}
