@@ -1,8 +1,0 @@
-{
-    "id": "b4cf7afa-6140-4b34-9e74-dda3df0a57bf",
-    "type": "feature",
-    "description": "Add support for CopyTagsToSnapshot field in CreateDbCluster, ModifyDbCluster, RestoreDbClusterFromSnapshot and RestoreDbClusterToPointInTime for DocumentDB.",
-    "modules": [
-        "service/docdb"
-    ]
-}

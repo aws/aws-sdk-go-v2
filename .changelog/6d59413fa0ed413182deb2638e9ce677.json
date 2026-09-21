@@ -1,8 +1,0 @@
-{
-    "id": "6d59413f-a0ed-4131-82de-b2638e9ce677",
-    "type": "feature",
-    "description": "Amazon Bedrock AgentCore Harness now supports lifecycle hooks for invocations and tool calls, with Lambda, SNS, and EventBridge targets. This release also adds apiBase for custom OpenAI-compatible endpoints",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

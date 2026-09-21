@@ -1,3 +1,7 @@
+# v1.52.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.51.0 (2026-09-15)
 
 * **Feature**: AWS Direct Connect is introducing flat-rate pricing, a simplified billing model that gives you a fixed monthly price for dedicated connectivity with no per-gigabyte data transfer out charges within the selected pricing tier.

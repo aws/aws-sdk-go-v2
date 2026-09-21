@@ -1,8 +1,0 @@
-{
-    "id": "8954a8b5-0ab0-46e7-b324-7f68e4b84284",
-    "type": "feature",
-    "description": "Add support for r6i, m8i, c8i, r8i instance types in Training and Processing",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

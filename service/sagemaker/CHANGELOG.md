@@ -1,3 +1,7 @@
+# v1.279.0 (2026-09-21)
+
+* **Feature**: Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
 # v1.278.0 (2026-09-18)
 
 * **Feature**: Adds support for the hub content resource in SageMaker Search.

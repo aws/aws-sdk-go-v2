@@ -1,3 +1,7 @@
+# v1.161.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.160.0 (2026-09-18)
 
 * **Feature**: Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.

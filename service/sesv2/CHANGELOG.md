@@ -1,3 +1,7 @@
+# v1.75.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.74.0 (2026-09-17)
 
 * **Feature**: Added support to query the tenant name for BatchGetMetricData and CreateExportJob APIs to filter metrics and messages at the tenant level.
