@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,23 @@ type UpdateTopicPermissionsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicPermissionsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicPermissionsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicPermissionsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsV2Request_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsV2Request_GrantPermissions, v.GrantPermissions)
+	serializeUpdateResourcePermissionList(s, schemas.UpdateTopicPermissionsV2Request_RevokePermissions, v.RevokePermissions)
+	if v.TopicId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsV2Request_TopicId, *v.TopicId)
+	}
+}
+
 type UpdateTopicPermissionsV2Output struct {
 
 	// A list of resource permissions on the topic.
@@ -71,13 +90,52 @@ type UpdateTopicPermissionsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTopicPermissionsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTopicPermissionsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTopicPermissionsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcePermissionList(s, schemas.UpdateTopicPermissionsV2Response_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsV2Response_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateTopicPermissionsV2Response_Status, v.Status)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsV2Response_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.UpdateTopicPermissionsV2Response_TopicId, *v.TopicId)
+	}
+}
+func (v *UpdateTopicPermissionsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTopicPermissionsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTopicPermissionsV2Response_Permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateTopicPermissionsV2Response_Permissions, &v.Permissions)
+		case schemas.UpdateTopicPermissionsV2Response_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateTopicPermissionsV2Response_RequestId, v.RequestId)
+		case schemas.UpdateTopicPermissionsV2Response_Status:
+			return d.ReadInt32(schemas.UpdateTopicPermissionsV2Response_Status, &v.Status)
+		case schemas.UpdateTopicPermissionsV2Response_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.UpdateTopicPermissionsV2Response_TopicArn, v.TopicArn)
+		case schemas.UpdateTopicPermissionsV2Response_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.UpdateTopicPermissionsV2Response_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTopicPermissionsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTopicPermissionsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopicPermissionsV2, schemas.UpdateTopicPermissionsV2Request, schemas.UpdateTopicPermissionsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTopicPermissionsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTopicPermissionsV2, schemas.UpdateTopicPermissionsV2Request, schemas.UpdateTopicPermissionsV2Response), output: &UpdateTopicPermissionsV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

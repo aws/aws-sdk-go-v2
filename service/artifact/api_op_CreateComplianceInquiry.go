@@ -5,7 +5,9 @@ package artifact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type CreateComplianceInquiryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComplianceInquiryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComplianceInquiryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComplianceInquiryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComplianceInquiryRequest_clientToken, *v.ClientToken)
+	}
+	serializeInquiryContent(s, schemas.CreateComplianceInquiryRequest_inquiryContent, v.InquiryContent)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateComplianceInquiryRequest_name, *v.Name)
+	}
+	if v.SupportMode != "" {
+		s.WriteString(schemas.CreateComplianceInquiryRequest_supportMode, string(v.SupportMode))
+	}
+	serializeTagsMap(s, schemas.CreateComplianceInquiryRequest_tags, v.Tags)
+}
+
 type CreateComplianceInquiryOutput struct {
 
 	// Summary information about the created compliance inquiry.
@@ -65,13 +87,37 @@ type CreateComplianceInquiryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComplianceInquiryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComplianceInquiryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComplianceInquiryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceInquirySummary != nil {
+		s.WriteStruct(schemas.CreateComplianceInquiryResponse_complianceInquirySummary)
+		v.ComplianceInquirySummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateComplianceInquiryResponse_tags, v.Tags)
+}
+func (v *CreateComplianceInquiryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComplianceInquiryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComplianceInquiryResponse_complianceInquirySummary:
+			v.ComplianceInquirySummary = &types.InquirySummary{}
+			return v.ComplianceInquirySummary.Deserialize(d)
+		case schemas.CreateComplianceInquiryResponse_tags:
+			return deserializeTagsMap(d, schemas.CreateComplianceInquiryResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComplianceInquiryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComplianceInquiry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComplianceInquiry, schemas.CreateComplianceInquiryRequest, schemas.CreateComplianceInquiryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComplianceInquiry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComplianceInquiry, schemas.CreateComplianceInquiryRequest, schemas.CreateComplianceInquiryResponse), output: &CreateComplianceInquiryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListDashboardsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDashboardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDashboardsOutput struct {
 
 	// A structure that contains all of the dashboards in your Amazon Web Services
@@ -63,13 +83,46 @@ type ListDashboardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardSummaryList(s, schemas.ListDashboardsResponse_DashboardSummaryList, v.DashboardSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListDashboardsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListDashboardsResponse_Status, v.Status)
+	}
+}
+func (v *ListDashboardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDashboardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDashboardsResponse_DashboardSummaryList:
+			return deserializeDashboardSummaryList(d, schemas.ListDashboardsResponse_DashboardSummaryList, &v.DashboardSummaryList)
+		case schemas.ListDashboardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDashboardsResponse_NextToken, v.NextToken)
+		case schemas.ListDashboardsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListDashboardsResponse_RequestId, v.RequestId)
+		case schemas.ListDashboardsResponse_Status:
+			return d.ReadInt32(schemas.ListDashboardsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsRequest, schemas.ListDashboardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsRequest, schemas.ListDashboardsResponse), output: &ListDashboardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

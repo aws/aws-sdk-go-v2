@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeNamespaceRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeNamespaceRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DescribeNamespaceOutput struct {
 
 	// The information about the namespace that you're describing. The response
@@ -61,13 +78,45 @@ type DescribeNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.DescribeNamespaceResponse_Namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeNamespaceResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeNamespaceResponse_Status, v.Status)
+	}
+}
+func (v *DescribeNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNamespaceResponse_Namespace:
+			v.Namespace = &types.NamespaceInfoV2{}
+			return v.Namespace.Deserialize(d)
+		case schemas.DescribeNamespaceResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeNamespaceResponse_RequestId, v.RequestId)
+		case schemas.DescribeNamespaceResponse_Status:
+			return d.ReadInt32(schemas.DescribeNamespaceResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNamespace, schemas.DescribeNamespaceRequest, schemas.DescribeNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNamespace, schemas.DescribeNamespaceRequest, schemas.DescribeNamespaceResponse), output: &DescribeNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

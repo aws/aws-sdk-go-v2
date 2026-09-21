@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,24 @@ type UpdateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateDeploymentRequest_ApiId, *v.ApiId)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.UpdateDeploymentRequest_DeploymentId, *v.DeploymentId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDeploymentRequest_Description, *v.Description)
+	}
+}
+
 type UpdateDeploymentOutput struct {
 
 	// Specifies whether a deployment was automatically released.
@@ -70,13 +90,66 @@ type UpdateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoDeployed != nil {
+		s.WriteBool(schemas.UpdateDeploymentResponse_AutoDeployed, *v.AutoDeployed)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.UpdateDeploymentResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.UpdateDeploymentResponse_DeploymentId, *v.DeploymentId)
+	}
+	if v.DeploymentStatus != "" {
+		s.WriteString(schemas.UpdateDeploymentResponse_DeploymentStatus, string(v.DeploymentStatus))
+	}
+	if v.DeploymentStatusMessage != nil {
+		s.WriteString(schemas.UpdateDeploymentResponse_DeploymentStatusMessage, *v.DeploymentStatusMessage)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDeploymentResponse_Description, *v.Description)
+	}
+}
+func (v *UpdateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeploymentResponse_AutoDeployed:
+			v.AutoDeployed = new(bool)
+			return d.ReadBool(schemas.UpdateDeploymentResponse_AutoDeployed, v.AutoDeployed)
+		case schemas.UpdateDeploymentResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateDeploymentResponse_CreatedDate, v.CreatedDate)
+		case schemas.UpdateDeploymentResponse_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.UpdateDeploymentResponse_DeploymentId, v.DeploymentId)
+		case schemas.UpdateDeploymentResponse_DeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDeploymentResponse_DeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStatus = types.DeploymentStatus(ev)
+			return nil
+		case schemas.UpdateDeploymentResponse_DeploymentStatusMessage:
+			v.DeploymentStatusMessage = new(string)
+			return d.ReadString(schemas.UpdateDeploymentResponse_DeploymentStatusMessage, v.DeploymentStatusMessage)
+		case schemas.UpdateDeploymentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDeploymentResponse_Description, v.Description)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeployment, schemas.UpdateDeploymentRequest, schemas.UpdateDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeployment, schemas.UpdateDeploymentRequest, schemas.UpdateDeploymentResponse), output: &UpdateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

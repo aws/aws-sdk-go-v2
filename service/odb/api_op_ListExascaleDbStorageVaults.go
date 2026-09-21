@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListExascaleDbStorageVaultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExascaleDbStorageVaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExascaleDbStorageVaultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExascaleDbStorageVaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExascaleDbStorageVaultsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExascaleDbStorageVaultsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListExascaleDbStorageVaultsOutput struct {
 
 	// The list of Exascale storage vaults.
@@ -56,13 +73,35 @@ type ListExascaleDbStorageVaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExascaleDbStorageVaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExascaleDbStorageVaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExascaleDbStorageVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExascaleDbStorageVaultList(s, schemas.ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults, v.ExascaleDbStorageVaults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExascaleDbStorageVaultsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExascaleDbStorageVaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExascaleDbStorageVaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults:
+			return deserializeExascaleDbStorageVaultList(d, schemas.ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults, &v.ExascaleDbStorageVaults)
+		case schemas.ListExascaleDbStorageVaultsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExascaleDbStorageVaultsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExascaleDbStorageVaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListExascaleDbStorageVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExascaleDbStorageVaults, schemas.ListExascaleDbStorageVaultsInput, schemas.ListExascaleDbStorageVaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListExascaleDbStorageVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExascaleDbStorageVaults, schemas.ListExascaleDbStorageVaultsInput, schemas.ListExascaleDbStorageVaultsOutput), output: &ListExascaleDbStorageVaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

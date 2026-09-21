@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetTestGridSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestGridSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestGridSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestGridSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.GetTestGridSessionRequest_projectArn, *v.ProjectArn)
+	}
+	if v.SessionArn != nil {
+		s.WriteString(schemas.GetTestGridSessionRequest_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetTestGridSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type GetTestGridSessionOutput struct {
 
 	// The TestGridSession that was requested.
@@ -55,13 +75,34 @@ type GetTestGridSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestGridSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestGridSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestGridSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestGridSession != nil {
+		s.WriteStruct(schemas.GetTestGridSessionResult_testGridSession)
+		v.TestGridSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTestGridSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestGridSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestGridSessionResult_testGridSession:
+			v.TestGridSession = &types.TestGridSession{}
+			return v.TestGridSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestGridSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTestGridSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestGridSession, schemas.GetTestGridSessionRequest, schemas.GetTestGridSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTestGridSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestGridSession, schemas.GetTestGridSessionRequest, schemas.GetTestGridSessionResult), output: &GetTestGridSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

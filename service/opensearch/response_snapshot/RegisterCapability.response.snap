@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","capabilityConfig":{"aiConfig":{}},"capabilityName":"__CapabilityName__","status":"creating"}

@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type StartAutomationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomationGroupId != nil {
+		s.WriteString(schemas.StartAutomationJobRequest_AutomationGroupId, *v.AutomationGroupId)
+	}
+	if v.AutomationId != nil {
+		s.WriteString(schemas.StartAutomationJobRequest_AutomationId, *v.AutomationId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.StartAutomationJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.InputPayload != nil {
+		s.WriteString(schemas.StartAutomationJobRequest_InputPayload, *v.InputPayload)
+	}
+}
+
 type StartAutomationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the automation job.
@@ -71,13 +94,49 @@ type StartAutomationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartAutomationJobResponse_Arn, *v.Arn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartAutomationJobResponse_JobId, *v.JobId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartAutomationJobResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.StartAutomationJobResponse_Status, v.Status)
+	}
+}
+func (v *StartAutomationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAutomationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAutomationJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartAutomationJobResponse_Arn, v.Arn)
+		case schemas.StartAutomationJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartAutomationJobResponse_JobId, v.JobId)
+		case schemas.StartAutomationJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartAutomationJobResponse_RequestId, v.RequestId)
+		case schemas.StartAutomationJobResponse_Status:
+			return d.ReadInt32(schemas.StartAutomationJobResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAutomationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAutomationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationJob, schemas.StartAutomationJobRequest, schemas.StartAutomationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAutomationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationJob, schemas.StartAutomationJobRequest, schemas.StartAutomationJobResponse), output: &StartAutomationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

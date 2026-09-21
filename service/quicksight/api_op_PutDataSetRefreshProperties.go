@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type PutDataSetRefreshPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDataSetRefreshPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDataSetRefreshPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDataSetRefreshPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.PutDataSetRefreshPropertiesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.PutDataSetRefreshPropertiesRequest_DataSetId, *v.DataSetId)
+	}
+	if v.DataSetRefreshProperties != nil {
+		s.WriteStruct(schemas.PutDataSetRefreshPropertiesRequest_DataSetRefreshProperties)
+		v.DataSetRefreshProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutDataSetRefreshPropertiesOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -58,13 +80,37 @@ type PutDataSetRefreshPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDataSetRefreshPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDataSetRefreshPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDataSetRefreshPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.PutDataSetRefreshPropertiesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.PutDataSetRefreshPropertiesResponse_Status, v.Status)
+	}
+}
+func (v *PutDataSetRefreshPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDataSetRefreshPropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDataSetRefreshPropertiesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PutDataSetRefreshPropertiesResponse_RequestId, v.RequestId)
+		case schemas.PutDataSetRefreshPropertiesResponse_Status:
+			return d.ReadInt32(schemas.PutDataSetRefreshPropertiesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDataSetRefreshPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDataSetRefreshProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataSetRefreshProperties, schemas.PutDataSetRefreshPropertiesRequest, schemas.PutDataSetRefreshPropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDataSetRefreshProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataSetRefreshProperties, schemas.PutDataSetRefreshPropertiesRequest, schemas.PutDataSetRefreshPropertiesResponse), output: &PutDataSetRefreshPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

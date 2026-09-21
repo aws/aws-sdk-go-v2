@@ -5,7 +5,9 @@ package invoicing
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListProcurementPortalSuppliersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProcurementPortalSuppliersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProcurementPortalSuppliersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProcurementPortalSuppliersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProcurementPortalSuppliersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProcurementPortalSuppliersRequest_NextToken, *v.NextToken)
+	}
+	if v.PortalIdentifier != nil {
+		s.WriteString(schemas.ListProcurementPortalSuppliersRequest_PortalIdentifier, *v.PortalIdentifier)
+	}
+}
+
 type ListProcurementPortalSuppliersOutput struct {
 
 	// The list of suppliers configured for the specified procurement portal.
@@ -64,13 +84,35 @@ type ListProcurementPortalSuppliersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProcurementPortalSuppliersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProcurementPortalSuppliersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProcurementPortalSuppliersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProcurementPortalSuppliersResponse_NextToken, *v.NextToken)
+	}
+	serializeProcurementPortalSuppliers(s, schemas.ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers, v.ProcurementPortalSuppliers)
+}
+func (v *ListProcurementPortalSuppliersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProcurementPortalSuppliersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProcurementPortalSuppliersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProcurementPortalSuppliersResponse_NextToken, v.NextToken)
+		case schemas.ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers:
+			return deserializeProcurementPortalSuppliers(d, schemas.ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers, &v.ProcurementPortalSuppliers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProcurementPortalSuppliersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProcurementPortalSuppliers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProcurementPortalSuppliers, schemas.ListProcurementPortalSuppliersRequest, schemas.ListProcurementPortalSuppliersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProcurementPortalSuppliers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProcurementPortalSuppliers, schemas.ListProcurementPortalSuppliersRequest, schemas.ListProcurementPortalSuppliersResponse), output: &ListProcurementPortalSuppliersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

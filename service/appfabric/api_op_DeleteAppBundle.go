@@ -4,6 +4,8 @@ package appfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteAppBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.DeleteAppBundleRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+}
+
 type DeleteAppBundleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteAppBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppBundleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppBundleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAppBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppBundleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppBundle, schemas.DeleteAppBundleRequest, schemas.DeleteAppBundleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppBundle, schemas.DeleteAppBundleRequest, schemas.DeleteAppBundleResponse), output: &DeleteAppBundleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

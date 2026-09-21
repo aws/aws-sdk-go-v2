@@ -5,7 +5,9 @@ package evs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type DeleteEnvironmentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteEnvironmentConnectorRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.DeleteEnvironmentConnectorRequest_connectorId, *v.ConnectorId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteEnvironmentConnectorRequest_environmentId, *v.EnvironmentId)
+	}
+}
+
 type DeleteEnvironmentConnectorOutput struct {
 
 	// A description of the deleted connector.
@@ -65,13 +85,42 @@ type DeleteEnvironmentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connector != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentConnectorResponse_connector)
+		v.Connector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnvironmentSummary != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentConnectorResponse_environmentSummary)
+		v.EnvironmentSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEnvironmentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentConnectorResponse_connector:
+			v.Connector = &types.Connector{}
+			return v.Connector.Deserialize(d)
+		case schemas.DeleteEnvironmentConnectorResponse_environmentSummary:
+			v.EnvironmentSummary = &types.EnvironmentSummary{}
+			return v.EnvironmentSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentConnector, schemas.DeleteEnvironmentConnectorRequest, schemas.DeleteEnvironmentConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEnvironmentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentConnector, schemas.DeleteEnvironmentConnectorRequest, schemas.DeleteEnvironmentConnectorResponse), output: &DeleteEnvironmentConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DescribeUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeUserRequest_Namespace, *v.Namespace)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DescribeUserRequest_UserName, *v.UserName)
+	}
+}
+
 type DescribeUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -63,13 +83,45 @@ type DescribeUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeUserResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeUserResponse_Status, v.Status)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.DescribeUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeUserResponse_RequestId, v.RequestId)
+		case schemas.DescribeUserResponse_Status:
+			return d.ReadInt32(schemas.DescribeUserResponse_Status, &v.Status)
+		case schemas.DescribeUserResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUser, schemas.DescribeUserRequest, schemas.DescribeUserResponse), output: &DescribeUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

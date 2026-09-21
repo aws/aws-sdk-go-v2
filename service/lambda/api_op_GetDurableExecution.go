@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetDurableExecutionInput struct {
 	IncludeExecutionData *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDurableExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDurableExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDurableExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurableExecutionArn != nil {
+		s.WriteString(schemas.GetDurableExecutionRequest_DurableExecutionArn, *v.DurableExecutionArn)
+	}
+	if v.IncludeExecutionData != nil {
+		s.WriteBool(schemas.GetDurableExecutionRequest_IncludeExecutionData, *v.IncludeExecutionData)
+	}
 }
 
 // The response from the GetDurableExecution operation, containing detailed
@@ -121,13 +138,114 @@ type GetDurableExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDurableExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDurableExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDurableExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurableConfig != nil {
+		s.WriteStruct(schemas.GetDurableExecutionResponse_DurableConfig)
+		v.DurableConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DurableExecutionArn != nil {
+		s.WriteString(schemas.GetDurableExecutionResponse_DurableExecutionArn, *v.DurableExecutionArn)
+	}
+	if v.DurableExecutionName != nil {
+		s.WriteString(schemas.GetDurableExecutionResponse_DurableExecutionName, *v.DurableExecutionName)
+	}
+	if v.EndTimestamp != nil {
+		s.WriteTime(schemas.GetDurableExecutionResponse_EndTimestamp, *v.EndTimestamp)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetDurableExecutionResponse_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionDataIncluded != nil {
+		s.WriteBool(schemas.GetDurableExecutionResponse_ExecutionDataIncluded, *v.ExecutionDataIncluded)
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.GetDurableExecutionResponse_FunctionArn, *v.FunctionArn)
+	}
+	if v.InputPayload != nil {
+		s.WriteString(schemas.GetDurableExecutionResponse_InputPayload, *v.InputPayload)
+	}
+	if v.Result != nil {
+		s.WriteString(schemas.GetDurableExecutionResponse_Result, *v.Result)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.GetDurableExecutionResponse_StartTimestamp, *v.StartTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDurableExecutionResponse_Status, string(v.Status))
+	}
+	if v.TraceHeader != nil {
+		s.WriteStruct(schemas.GetDurableExecutionResponse_TraceHeader)
+		v.TraceHeader.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetDurableExecutionResponse_Version, *v.Version)
+	}
+}
+func (v *GetDurableExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDurableExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDurableExecutionResponse_DurableConfig:
+			v.DurableConfig = &types.DurableConfig{}
+			return v.DurableConfig.Deserialize(d)
+		case schemas.GetDurableExecutionResponse_DurableExecutionArn:
+			v.DurableExecutionArn = new(string)
+			return d.ReadString(schemas.GetDurableExecutionResponse_DurableExecutionArn, v.DurableExecutionArn)
+		case schemas.GetDurableExecutionResponse_DurableExecutionName:
+			v.DurableExecutionName = new(string)
+			return d.ReadString(schemas.GetDurableExecutionResponse_DurableExecutionName, v.DurableExecutionName)
+		case schemas.GetDurableExecutionResponse_EndTimestamp:
+			v.EndTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetDurableExecutionResponse_EndTimestamp, v.EndTimestamp)
+		case schemas.GetDurableExecutionResponse_Error:
+			v.Error = &types.ErrorObject{}
+			return v.Error.Deserialize(d)
+		case schemas.GetDurableExecutionResponse_ExecutionDataIncluded:
+			v.ExecutionDataIncluded = new(bool)
+			return d.ReadBool(schemas.GetDurableExecutionResponse_ExecutionDataIncluded, v.ExecutionDataIncluded)
+		case schemas.GetDurableExecutionResponse_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.GetDurableExecutionResponse_FunctionArn, v.FunctionArn)
+		case schemas.GetDurableExecutionResponse_InputPayload:
+			v.InputPayload = new(string)
+			return d.ReadString(schemas.GetDurableExecutionResponse_InputPayload, v.InputPayload)
+		case schemas.GetDurableExecutionResponse_Result:
+			v.Result = new(string)
+			return d.ReadString(schemas.GetDurableExecutionResponse_Result, v.Result)
+		case schemas.GetDurableExecutionResponse_StartTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetDurableExecutionResponse_StartTimestamp, v.StartTimestamp)
+		case schemas.GetDurableExecutionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDurableExecutionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExecutionStatus(ev)
+			return nil
+		case schemas.GetDurableExecutionResponse_TraceHeader:
+			v.TraceHeader = &types.TraceHeader{}
+			return v.TraceHeader.Deserialize(d)
+		case schemas.GetDurableExecutionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetDurableExecutionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDurableExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDurableExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDurableExecution, schemas.GetDurableExecutionRequest, schemas.GetDurableExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDurableExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDurableExecution, schemas.GetDurableExecutionRequest, schemas.GetDurableExecutionResponse), output: &GetDurableExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

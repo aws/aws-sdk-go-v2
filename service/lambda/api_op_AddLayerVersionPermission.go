@@ -4,6 +4,8 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,36 @@ type AddLayerVersionPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddLayerVersionPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddLayerVersionPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddLayerVersionPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionRequest_Action, *v.Action)
+	}
+	if v.LayerName != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionRequest_LayerName, *v.LayerName)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionRequest_Principal, *v.Principal)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionRequest_RevisionId, *v.RevisionId)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionRequest_StatementId, *v.StatementId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.AddLayerVersionPermissionRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type AddLayerVersionPermissionOutput struct {
 
 	// A unique identifier for the current revision of the policy.
@@ -88,13 +120,38 @@ type AddLayerVersionPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddLayerVersionPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddLayerVersionPermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddLayerVersionPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RevisionId != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionResponse_RevisionId, *v.RevisionId)
+	}
+	if v.Statement != nil {
+		s.WriteString(schemas.AddLayerVersionPermissionResponse_Statement, *v.Statement)
+	}
+}
+func (v *AddLayerVersionPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddLayerVersionPermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddLayerVersionPermissionResponse_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.AddLayerVersionPermissionResponse_RevisionId, v.RevisionId)
+		case schemas.AddLayerVersionPermissionResponse_Statement:
+			v.Statement = new(string)
+			return d.ReadString(schemas.AddLayerVersionPermissionResponse_Statement, v.Statement)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddLayerVersionPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddLayerVersionPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddLayerVersionPermission, schemas.AddLayerVersionPermissionRequest, schemas.AddLayerVersionPermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddLayerVersionPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddLayerVersionPermission, schemas.AddLayerVersionPermissionRequest, schemas.AddLayerVersionPermissionResponse), output: &AddLayerVersionPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

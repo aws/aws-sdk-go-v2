@@ -5,7 +5,9 @@ package apigateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetModelsRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetModelsRequest_position, *v.Position)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetModelsRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // Represents a collection of Model resources.
 type GetModelsOutput struct {
 
@@ -58,13 +78,35 @@ type GetModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Models)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfModel(s, schemas.Models_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.Models_position, *v.Position)
+	}
+}
+func (v *GetModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Models, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Models_items:
+			return deserializeListOfModel(d, schemas.Models_items, &v.Items)
+		case schemas.Models_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.Models_position, v.Position)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModels, schemas.GetModelsRequest, schemas.Models)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModels, schemas.GetModelsRequest, schemas.Models), output: &GetModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

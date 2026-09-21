@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListDataIngestionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIngestionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIngestionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIngestionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ListDataIngestionJobsRequest_DatasetName, *v.DatasetName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataIngestionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIngestionJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListDataIngestionJobsRequest_Status, string(v.Status))
+	}
+}
+
 type ListDataIngestionJobsOutput struct {
 
 	// Specifies information about the specific data ingestion job, including dataset
@@ -60,13 +83,35 @@ type ListDataIngestionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIngestionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIngestionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIngestionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataIngestionJobSummaries(s, schemas.ListDataIngestionJobsResponse_DataIngestionJobSummaries, v.DataIngestionJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIngestionJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataIngestionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataIngestionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataIngestionJobsResponse_DataIngestionJobSummaries:
+			return deserializeDataIngestionJobSummaries(d, schemas.ListDataIngestionJobsResponse_DataIngestionJobSummaries, &v.DataIngestionJobSummaries)
+		case schemas.ListDataIngestionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataIngestionJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataIngestionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDataIngestionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIngestionJobs, schemas.ListDataIngestionJobsRequest, schemas.ListDataIngestionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDataIngestionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIngestionJobs, schemas.ListDataIngestionJobsRequest, schemas.ListDataIngestionJobsResponse), output: &ListDataIngestionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

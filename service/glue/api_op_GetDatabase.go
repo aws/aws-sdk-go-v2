@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetDatabaseRequest_CatalogId, *v.CatalogId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDatabaseRequest_Name, *v.Name)
+	}
+}
+
 type GetDatabaseOutput struct {
 
 	// The definition of the specified database in the Data Catalog.
@@ -50,13 +67,34 @@ type GetDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteStruct(schemas.GetDatabaseResponse_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatabaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatabaseResponse_Database:
+			v.Database = &types.Database{}
+			return v.Database.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabase, schemas.GetDatabaseRequest, schemas.GetDatabaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabase, schemas.GetDatabaseRequest, schemas.GetDatabaseResponse), output: &GetDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetCrawlerMetrics
+
+{"CrawlerMetricsList":[{"CrawlerName":"__CrawlerName__","LastRuntimeSeconds":1,"MedianRuntimeSeconds":1,"StillEstimating":true,"TablesCreated":1,"TablesDeleted":1,"TablesUpdated":1,"TimeLeftSeconds":1},{"CrawlerName":"__CrawlerName__","LastRuntimeSeconds":1,"MedianRuntimeSeconds":1,"StillEstimating":true,"TablesCreated":1,"TablesDeleted":1,"TablesUpdated":1,"TimeLeftSeconds":1}],"NextToken":"__NextToken__"}

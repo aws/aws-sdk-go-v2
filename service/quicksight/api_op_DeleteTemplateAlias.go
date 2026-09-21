@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTemplateAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTemplateAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTemplateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeleteTemplateAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteTemplateAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DeleteTemplateAliasRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type DeleteTemplateAliasOutput struct {
 
 	// The name for the template alias.
@@ -70,13 +90,55 @@ type DeleteTemplateAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTemplateAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTemplateAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTemplateAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeleteTemplateAliasResponse_AliasName, *v.AliasName)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteTemplateAliasResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteTemplateAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteTemplateAliasResponse_Status, v.Status)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DeleteTemplateAliasResponse_TemplateId, *v.TemplateId)
+	}
+}
+func (v *DeleteTemplateAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTemplateAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTemplateAliasResponse_AliasName:
+			v.AliasName = new(string)
+			return d.ReadString(schemas.DeleteTemplateAliasResponse_AliasName, v.AliasName)
+		case schemas.DeleteTemplateAliasResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteTemplateAliasResponse_Arn, v.Arn)
+		case schemas.DeleteTemplateAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteTemplateAliasResponse_RequestId, v.RequestId)
+		case schemas.DeleteTemplateAliasResponse_Status:
+			return d.ReadInt32(schemas.DeleteTemplateAliasResponse_Status, &v.Status)
+		case schemas.DeleteTemplateAliasResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.DeleteTemplateAliasResponse_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTemplateAlias, schemas.DeleteTemplateAliasRequest, schemas.DeleteTemplateAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTemplateAlias, schemas.DeleteTemplateAliasRequest, schemas.DeleteTemplateAliasResponse), output: &DeleteTemplateAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

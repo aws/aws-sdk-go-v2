@@ -5,7 +5,9 @@ package iotthingsgraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,33 @@ type SearchFlowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFlowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFlowExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFlowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.SearchFlowExecutionsRequest_endTime, *v.EndTime)
+	}
+	if v.FlowExecutionId != nil {
+		s.WriteString(schemas.SearchFlowExecutionsRequest_flowExecutionId, *v.FlowExecutionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchFlowExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFlowExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.SearchFlowExecutionsRequest_startTime, *v.StartTime)
+	}
+	if v.SystemInstanceId != nil {
+		s.WriteString(schemas.SearchFlowExecutionsRequest_systemInstanceId, *v.SystemInstanceId)
+	}
+}
+
 type SearchFlowExecutionsOutput struct {
 
 	// The string to specify as nextToken when you request the next page of results.
@@ -69,13 +98,35 @@ type SearchFlowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFlowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFlowExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFlowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchFlowExecutionsResponse_nextToken, *v.NextToken)
+	}
+	serializeFlowExecutionSummaries(s, schemas.SearchFlowExecutionsResponse_summaries, v.Summaries)
+}
+func (v *SearchFlowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFlowExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFlowExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchFlowExecutionsResponse_nextToken, v.NextToken)
+		case schemas.SearchFlowExecutionsResponse_summaries:
+			return deserializeFlowExecutionSummaries(d, schemas.SearchFlowExecutionsResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchFlowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFlowExecutions, schemas.SearchFlowExecutionsRequest, schemas.SearchFlowExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchFlowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchFlowExecutions, schemas.SearchFlowExecutionsRequest, schemas.SearchFlowExecutionsResponse), output: &SearchFlowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

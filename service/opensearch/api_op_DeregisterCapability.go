@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeregisterCapabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeregisterCapabilityRequest_applicationId, *v.ApplicationId)
+	}
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.DeregisterCapabilityRequest_capabilityName, *v.CapabilityName)
+	}
+}
+
 // The result of a DeregisterCapability request.
 type DeregisterCapabilityOutput struct {
 
@@ -55,13 +72,36 @@ type DeregisterCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeregisterCapabilityResponse_status, string(v.Status))
+	}
+}
+func (v *DeregisterCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterCapabilityResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeregisterCapabilityResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CapabilityStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterCapability, schemas.DeregisterCapabilityRequest, schemas.DeregisterCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterCapability, schemas.DeregisterCapabilityRequest, schemas.DeregisterCapabilityResponse), output: &DeregisterCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

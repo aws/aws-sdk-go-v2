@@ -5,7 +5,9 @@ package marketplaceagreement
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,33 @@ type SendAgreementPaymentRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendAgreementPaymentRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendAgreementPaymentRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendAgreementPaymentRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestInput_agreementId, *v.AgreementId)
+	}
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestInput_chargeAmount, *v.ChargeAmount)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestInput_name, *v.Name)
+	}
+	if v.TermId != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestInput_termId, *v.TermId)
+	}
+}
+
 type SendAgreementPaymentRequestOutput struct {
 
 	// The agreement identifier for this payment request.
@@ -105,13 +134,78 @@ type SendAgreementPaymentRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendAgreementPaymentRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendAgreementPaymentRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendAgreementPaymentRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_agreementId, *v.AgreementId)
+	}
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_chargeAmount, *v.ChargeAmount)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SendAgreementPaymentRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_currencyCode, *v.CurrencyCode)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_name, *v.Name)
+	}
+	if v.PaymentRequestId != nil {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_paymentRequestId, *v.PaymentRequestId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SendAgreementPaymentRequestOutput_status, string(v.Status))
+	}
+}
+func (v *SendAgreementPaymentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendAgreementPaymentRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendAgreementPaymentRequestOutput_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.SendAgreementPaymentRequestOutput_agreementId, v.AgreementId)
+		case schemas.SendAgreementPaymentRequestOutput_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.SendAgreementPaymentRequestOutput_chargeAmount, v.ChargeAmount)
+		case schemas.SendAgreementPaymentRequestOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SendAgreementPaymentRequestOutput_createdAt, v.CreatedAt)
+		case schemas.SendAgreementPaymentRequestOutput_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.SendAgreementPaymentRequestOutput_currencyCode, v.CurrencyCode)
+		case schemas.SendAgreementPaymentRequestOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SendAgreementPaymentRequestOutput_description, v.Description)
+		case schemas.SendAgreementPaymentRequestOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SendAgreementPaymentRequestOutput_name, v.Name)
+		case schemas.SendAgreementPaymentRequestOutput_paymentRequestId:
+			v.PaymentRequestId = new(string)
+			return d.ReadString(schemas.SendAgreementPaymentRequestOutput_paymentRequestId, v.PaymentRequestId)
+		case schemas.SendAgreementPaymentRequestOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.SendAgreementPaymentRequestOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentRequestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendAgreementPaymentRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendAgreementPaymentRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendAgreementPaymentRequest, schemas.SendAgreementPaymentRequestInput, schemas.SendAgreementPaymentRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendAgreementPaymentRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendAgreementPaymentRequest, schemas.SendAgreementPaymentRequestInput, schemas.SendAgreementPaymentRequestOutput), output: &SendAgreementPaymentRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

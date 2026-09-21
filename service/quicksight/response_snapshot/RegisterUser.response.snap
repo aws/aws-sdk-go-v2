@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RequestId":"__RequestId__","Status":200,"User":{"Active":true,"Arn":"__Arn__","CustomPermissionsName":"__CustomPermissionsName__","Email":"__Email__","ExternalLoginFederationProviderType":"__ExternalLoginFederationProviderType__","ExternalLoginFederationProviderUrl":"__ExternalLoginFederationProviderUrl__","ExternalLoginId":"__ExternalLoginId__","IdentityType":"IAM","PrincipalId":"__PrincipalId__","Role":"ADMIN","UserName":"__UserName__"},"UserInvitationUrl":"__UserInvitationUrl__"}

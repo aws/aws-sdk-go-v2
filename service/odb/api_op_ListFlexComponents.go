@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListFlexComponentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlexComponentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlexComponentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlexComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlexComponentsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlexComponentsInput_nextToken, *v.NextToken)
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.ListFlexComponentsInput_shape, *v.Shape)
+	}
+}
+
 type ListFlexComponentsOutput struct {
 
 	// The list of flex components along with their properties.
@@ -60,13 +80,35 @@ type ListFlexComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlexComponentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlexComponentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlexComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlexComponentList(s, schemas.ListFlexComponentsOutput_flexComponents, v.FlexComponents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlexComponentsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFlexComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlexComponentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlexComponentsOutput_flexComponents:
+			return deserializeFlexComponentList(d, schemas.ListFlexComponentsOutput_flexComponents, &v.FlexComponents)
+		case schemas.ListFlexComponentsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlexComponentsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlexComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFlexComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlexComponents, schemas.ListFlexComponentsInput, schemas.ListFlexComponentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFlexComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlexComponents, schemas.ListFlexComponentsInput, schemas.ListFlexComponentsOutput), output: &ListFlexComponentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

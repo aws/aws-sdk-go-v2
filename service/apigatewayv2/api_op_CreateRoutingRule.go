@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,26 @@ type CreateRoutingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoutingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfRoutingRuleAction(s, schemas.CreateRoutingRuleRequest_Actions, v.Actions)
+	serialize__listOfRoutingRuleCondition(s, schemas.CreateRoutingRuleRequest_Conditions, v.Conditions)
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateRoutingRuleRequest_DomainName, *v.DomainName)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.CreateRoutingRuleRequest_DomainNameId, *v.DomainNameId)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateRoutingRuleRequest_Priority, *v.Priority)
+	}
+}
+
 type CreateRoutingRuleOutput struct {
 
 	// Represents a routing rule action. The only supported action is invokeApi.
@@ -81,13 +103,50 @@ type CreateRoutingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoutingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoutingRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfRoutingRuleAction(s, schemas.CreateRoutingRuleResponse_Actions, v.Actions)
+	serialize__listOfRoutingRuleCondition(s, schemas.CreateRoutingRuleResponse_Conditions, v.Conditions)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateRoutingRuleResponse_Priority, *v.Priority)
+	}
+	if v.RoutingRuleArn != nil {
+		s.WriteString(schemas.CreateRoutingRuleResponse_RoutingRuleArn, *v.RoutingRuleArn)
+	}
+	if v.RoutingRuleId != nil {
+		s.WriteString(schemas.CreateRoutingRuleResponse_RoutingRuleId, *v.RoutingRuleId)
+	}
+}
+func (v *CreateRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRoutingRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRoutingRuleResponse_Actions:
+			return deserialize__listOfRoutingRuleAction(d, schemas.CreateRoutingRuleResponse_Actions, &v.Actions)
+		case schemas.CreateRoutingRuleResponse_Conditions:
+			return deserialize__listOfRoutingRuleCondition(d, schemas.CreateRoutingRuleResponse_Conditions, &v.Conditions)
+		case schemas.CreateRoutingRuleResponse_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.CreateRoutingRuleResponse_Priority, v.Priority)
+		case schemas.CreateRoutingRuleResponse_RoutingRuleArn:
+			v.RoutingRuleArn = new(string)
+			return d.ReadString(schemas.CreateRoutingRuleResponse_RoutingRuleArn, v.RoutingRuleArn)
+		case schemas.CreateRoutingRuleResponse_RoutingRuleId:
+			v.RoutingRuleId = new(string)
+			return d.ReadString(schemas.CreateRoutingRuleResponse_RoutingRuleId, v.RoutingRuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingRule, schemas.CreateRoutingRuleRequest, schemas.CreateRoutingRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingRule, schemas.CreateRoutingRuleRequest, schemas.CreateRoutingRuleResponse), output: &CreateRoutingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

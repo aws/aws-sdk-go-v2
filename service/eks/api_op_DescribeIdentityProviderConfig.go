@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type DescribeIdentityProviderConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeIdentityProviderConfigRequest_clusterName, *v.ClusterName)
+	}
+	if v.IdentityProviderConfig != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderConfigRequest_identityProviderConfig)
+		v.IdentityProviderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DescribeIdentityProviderConfigOutput struct {
 
 	// The object that represents an OpenID Connect (OIDC) identity provider
@@ -51,13 +70,34 @@ type DescribeIdentityProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProviderConfig != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderConfigResponse_identityProviderConfig)
+		v.IdentityProviderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeIdentityProviderConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIdentityProviderConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIdentityProviderConfigResponse_identityProviderConfig:
+			v.IdentityProviderConfig = &types.IdentityProviderConfigResponse{}
+			return v.IdentityProviderConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIdentityProviderConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProviderConfig, schemas.DescribeIdentityProviderConfigRequest, schemas.DescribeIdentityProviderConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIdentityProviderConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProviderConfig, schemas.DescribeIdentityProviderConfigRequest, schemas.DescribeIdentityProviderConfigResponse), output: &DescribeIdentityProviderConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

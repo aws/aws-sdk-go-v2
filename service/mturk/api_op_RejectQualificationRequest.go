@@ -4,6 +4,8 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type RejectQualificationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectQualificationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectQualificationRequestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectQualificationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationRequestId != nil {
+		s.WriteString(schemas.RejectQualificationRequestRequest_QualificationRequestId, *v.QualificationRequestId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.RejectQualificationRequestRequest_Reason, *v.Reason)
+	}
+}
+
 type RejectQualificationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type RejectQualificationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectQualificationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectQualificationRequestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectQualificationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RejectQualificationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectQualificationRequestResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectQualificationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectQualificationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectQualificationRequest, schemas.RejectQualificationRequestRequest, schemas.RejectQualificationRequestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRejectQualificationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectQualificationRequest, schemas.RejectQualificationRequestRequest, schemas.RejectQualificationRequestResponse), output: &RejectQualificationRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,31 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compatibility != "" {
+		s.WriteString(schemas.UpdateSchemaInput_Compatibility, string(v.Compatibility))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSchemaInput_Description, *v.Description)
+	}
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.UpdateSchemaInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaVersionNumber != nil {
+		s.WriteStruct(schemas.UpdateSchemaInput_SchemaVersionNumber)
+		v.SchemaVersionNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSchemaOutput struct {
 
 	// The name of the registry that contains the schema.
@@ -80,13 +107,44 @@ type UpdateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryName != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaName, *v.SchemaName)
+	}
+}
+func (v *UpdateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSchemaResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_RegistryName, v.RegistryName)
+		case schemas.UpdateSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.UpdateSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaName, v.SchemaName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaInput, schemas.UpdateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaInput, schemas.UpdateSchemaResponse), output: &UpdateSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

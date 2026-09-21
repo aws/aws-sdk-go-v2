@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,32 @@ type UpdateClusterVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateClusterVersionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.UpdateClusterVersionRequest_force, v.Force)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateClusterVersionRequest_name, *v.Name)
+	}
+	if v.RollbackConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterVersionRequest_rollbackConfig)
+		v.RollbackConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateClusterVersionRequest_version, *v.Version)
+	}
+}
+
 type UpdateClusterVersionOutput struct {
 
 	// The full description of the specified update
@@ -76,13 +104,34 @@ type UpdateClusterVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateClusterVersionResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateClusterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterVersionResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateClusterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterVersion, schemas.UpdateClusterVersionRequest, schemas.UpdateClusterVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateClusterVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterVersion, schemas.UpdateClusterVersionRequest, schemas.UpdateClusterVersionResponse), output: &UpdateClusterVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

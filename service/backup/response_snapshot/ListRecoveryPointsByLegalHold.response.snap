@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RecoveryPoints":[{"BackupVaultName":"__BackupVaultName__","RecoveryPointArn":"__RecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"},{"BackupVaultName":"__BackupVaultName__","RecoveryPointArn":"__RecoveryPointArn__","ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"}]}

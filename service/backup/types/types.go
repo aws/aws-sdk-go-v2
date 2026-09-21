@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -45,6 +47,31 @@ type AdvancedBackupSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdvancedBackupSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedBackupSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedBackupSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupOptions(s, schemas.AdvancedBackupSetting_BackupOptions, v.BackupOptions)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.AdvancedBackupSetting_ResourceType, *v.ResourceType)
+	}
+}
+func (v *AdvancedBackupSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedBackupSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedBackupSetting_BackupOptions:
+			return deserializeBackupOptions(d, schemas.AdvancedBackupSetting_BackupOptions, &v.BackupOptions)
+		case schemas.AdvancedBackupSetting_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.AdvancedBackupSetting_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Contains aggregated scan results across multiple scan operations, providing a
 // summary of scan status and findings.
 type AggregatedScanResult struct {
@@ -60,6 +87,37 @@ type AggregatedScanResult struct {
 	LastComputed *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *AggregatedScanResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregatedScanResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregatedScanResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedScan != nil {
+		s.WriteBool(schemas.AggregatedScanResult_FailedScan, *v.FailedScan)
+	}
+	serializeScanFindings(s, schemas.AggregatedScanResult_Findings, v.Findings)
+	if v.LastComputed != nil {
+		s.WriteTime(schemas.AggregatedScanResult_LastComputed, *v.LastComputed)
+	}
+}
+func (v *AggregatedScanResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregatedScanResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregatedScanResult_FailedScan:
+			v.FailedScan = new(bool)
+			return d.ReadBool(schemas.AggregatedScanResult_FailedScan, v.FailedScan)
+		case schemas.AggregatedScanResult_Findings:
+			return deserializeScanFindings(d, schemas.AggregatedScanResult_Findings, &v.Findings)
+		case schemas.AggregatedScanResult_LastComputed:
+			v.LastComputed = new(time.Time)
+			return d.ReadTime(schemas.AggregatedScanResult_LastComputed, v.LastComputed)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about a backup job.
@@ -263,6 +321,205 @@ type BackupJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BackupJob_AccountId, *v.AccountId)
+	}
+	if v.BackupJobId != nil {
+		s.WriteString(schemas.BackupJob_BackupJobId, *v.BackupJobId)
+	}
+	serializeBackupOptions(s, schemas.BackupJob_BackupOptions, v.BackupOptions)
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.BackupJob_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	if v.BackupType != nil {
+		s.WriteString(schemas.BackupJob_BackupType, *v.BackupType)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.BackupJob_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.BackupJob_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.BytesTransferred != nil {
+		s.WriteInt64(schemas.BackupJob_BytesTransferred, *v.BytesTransferred)
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.BackupJob_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.BackupJob_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.BackupJob_CreationDate, *v.CreationDate)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.BackupJob_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.ExpectedCompletionDate != nil {
+		s.WriteTime(schemas.BackupJob_ExpectedCompletionDate, *v.ExpectedCompletionDate)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.BackupJob_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.BackupJob_InitiationDate, *v.InitiationDate)
+	}
+	if v.IsEncrypted != false {
+		s.WriteBool(schemas.BackupJob_IsEncrypted, v.IsEncrypted)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.BackupJob_IsParent, v.IsParent)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.BackupJob_MessageCategory, *v.MessageCategory)
+	}
+	if v.ParentJobId != nil {
+		s.WriteString(schemas.BackupJob_ParentJobId, *v.ParentJobId)
+	}
+	if v.PercentDone != nil {
+		s.WriteString(schemas.BackupJob_PercentDone, *v.PercentDone)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.BackupJob_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.RecoveryPointLifecycle != nil {
+		s.WriteStruct(schemas.BackupJob_RecoveryPointLifecycle)
+		v.RecoveryPointLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BackupJob_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.BackupJob_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.BackupJob_ResourceType, *v.ResourceType)
+	}
+	if v.StartBy != nil {
+		s.WriteTime(schemas.BackupJob_StartBy, *v.StartBy)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.BackupJob_State, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.BackupJob_StatusMessage, *v.StatusMessage)
+	}
+	if v.VaultLockState != nil {
+		s.WriteString(schemas.BackupJob_VaultLockState, *v.VaultLockState)
+	}
+	if v.VaultType != nil {
+		s.WriteString(schemas.BackupJob_VaultType, *v.VaultType)
+	}
+}
+func (v *BackupJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupJob_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BackupJob_AccountId, v.AccountId)
+		case schemas.BackupJob_BackupJobId:
+			v.BackupJobId = new(string)
+			return d.ReadString(schemas.BackupJob_BackupJobId, v.BackupJobId)
+		case schemas.BackupJob_BackupOptions:
+			return deserializeBackupOptions(d, schemas.BackupJob_BackupOptions, &v.BackupOptions)
+		case schemas.BackupJob_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.BackupJob_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.BackupJob_BackupType:
+			v.BackupType = new(string)
+			return d.ReadString(schemas.BackupJob_BackupType, v.BackupType)
+		case schemas.BackupJob_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.BackupJob_BackupVaultArn, v.BackupVaultArn)
+		case schemas.BackupJob_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.BackupJob_BackupVaultName, v.BackupVaultName)
+		case schemas.BackupJob_BytesTransferred:
+			v.BytesTransferred = new(int64)
+			return d.ReadInt64(schemas.BackupJob_BytesTransferred, v.BytesTransferred)
+		case schemas.BackupJob_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.BackupJob_CompletionDate, v.CompletionDate)
+		case schemas.BackupJob_CreatedBy:
+			v.CreatedBy = &RecoveryPointCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.BackupJob_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.BackupJob_CreationDate, v.CreationDate)
+		case schemas.BackupJob_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.BackupJob_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.BackupJob_ExpectedCompletionDate:
+			v.ExpectedCompletionDate = new(time.Time)
+			return d.ReadTime(schemas.BackupJob_ExpectedCompletionDate, v.ExpectedCompletionDate)
+		case schemas.BackupJob_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.BackupJob_IamRoleArn, v.IamRoleArn)
+		case schemas.BackupJob_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.BackupJob_InitiationDate, v.InitiationDate)
+		case schemas.BackupJob_IsEncrypted:
+			return d.ReadBool(schemas.BackupJob_IsEncrypted, &v.IsEncrypted)
+		case schemas.BackupJob_IsParent:
+			return d.ReadBool(schemas.BackupJob_IsParent, &v.IsParent)
+		case schemas.BackupJob_MessageCategory:
+			v.MessageCategory = new(string)
+			return d.ReadString(schemas.BackupJob_MessageCategory, v.MessageCategory)
+		case schemas.BackupJob_ParentJobId:
+			v.ParentJobId = new(string)
+			return d.ReadString(schemas.BackupJob_ParentJobId, v.ParentJobId)
+		case schemas.BackupJob_PercentDone:
+			v.PercentDone = new(string)
+			return d.ReadString(schemas.BackupJob_PercentDone, v.PercentDone)
+		case schemas.BackupJob_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.BackupJob_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.BackupJob_RecoveryPointLifecycle:
+			v.RecoveryPointLifecycle = &Lifecycle{}
+			return v.RecoveryPointLifecycle.Deserialize(d)
+		case schemas.BackupJob_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BackupJob_ResourceArn, v.ResourceArn)
+		case schemas.BackupJob_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.BackupJob_ResourceName, v.ResourceName)
+		case schemas.BackupJob_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.BackupJob_ResourceType, v.ResourceType)
+		case schemas.BackupJob_StartBy:
+			v.StartBy = new(time.Time)
+			return d.ReadTime(schemas.BackupJob_StartBy, v.StartBy)
+		case schemas.BackupJob_State:
+			var ev string
+			if err := d.ReadString(schemas.BackupJob_State, &ev); err != nil {
+				return err
+			}
+			v.State = BackupJobState(ev)
+			return nil
+		case schemas.BackupJob_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.BackupJob_StatusMessage, v.StatusMessage)
+		case schemas.BackupJob_VaultLockState:
+			v.VaultLockState = new(string)
+			return d.ReadString(schemas.BackupJob_VaultLockState, v.VaultLockState)
+		case schemas.BackupJob_VaultType:
+			v.VaultType = new(string)
+			return d.ReadString(schemas.BackupJob_VaultType, v.VaultType)
+		}
+		return nil
+	})
+}
+
 // This is a summary of jobs created or running within the most recent 14 days.
 //
 // The returned summary may contain the following: Region, Account, State,
@@ -315,6 +572,73 @@ type BackupJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.BackupJobSummary_AccountId, *v.AccountId)
+	}
+	if v.Count != 0 {
+		s.WriteInt32(schemas.BackupJobSummary_Count, v.Count)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.BackupJobSummary_EndTime, *v.EndTime)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.BackupJobSummary_MessageCategory, *v.MessageCategory)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.BackupJobSummary_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.BackupJobSummary_ResourceType, *v.ResourceType)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.BackupJobSummary_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.BackupJobSummary_State, string(v.State))
+	}
+}
+func (v *BackupJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupJobSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.BackupJobSummary_AccountId, v.AccountId)
+		case schemas.BackupJobSummary_Count:
+			return d.ReadInt32(schemas.BackupJobSummary_Count, &v.Count)
+		case schemas.BackupJobSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.BackupJobSummary_EndTime, v.EndTime)
+		case schemas.BackupJobSummary_MessageCategory:
+			v.MessageCategory = new(string)
+			return d.ReadString(schemas.BackupJobSummary_MessageCategory, v.MessageCategory)
+		case schemas.BackupJobSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.BackupJobSummary_Region, v.Region)
+		case schemas.BackupJobSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.BackupJobSummary_ResourceType, v.ResourceType)
+		case schemas.BackupJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.BackupJobSummary_StartTime, v.StartTime)
+		case schemas.BackupJobSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.BackupJobSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = BackupJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains an optional backup plan display name and an array of BackupRule
 // objects, each of which specifies a backup rule. Each rule in a backup plan is a
 // separate scheduled task and can back up a different selection of Amazon Web
@@ -346,6 +670,37 @@ type BackupPlan struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupPlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupPlan) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedBackupSettings(s, schemas.BackupPlan_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.BackupPlanName != nil {
+		s.WriteString(schemas.BackupPlan_BackupPlanName, *v.BackupPlanName)
+	}
+	serializeBackupRules(s, schemas.BackupPlan_Rules, v.Rules)
+	serializeScanSettings(s, schemas.BackupPlan_ScanSettings, v.ScanSettings)
+}
+func (v *BackupPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupPlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupPlan_AdvancedBackupSettings:
+			return deserializeAdvancedBackupSettings(d, schemas.BackupPlan_AdvancedBackupSettings, &v.AdvancedBackupSettings)
+		case schemas.BackupPlan_BackupPlanName:
+			v.BackupPlanName = new(string)
+			return d.ReadString(schemas.BackupPlan_BackupPlanName, v.BackupPlanName)
+		case schemas.BackupPlan_Rules:
+			return deserializeBackupRules(d, schemas.BackupPlan_Rules, &v.Rules)
+		case schemas.BackupPlan_ScanSettings:
+			return deserializeScanSettings(d, schemas.BackupPlan_ScanSettings, &v.ScanSettings)
+		}
+		return nil
+	})
+}
+
 // Contains an optional backup plan display name and an array of BackupRule
 // objects, each of which specifies a backup rule. Each rule in a backup plan is a
 // separate scheduled task.
@@ -372,6 +727,37 @@ type BackupPlanInput struct {
 	ScanSettings []ScanSetting
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackupPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedBackupSettings(s, schemas.BackupPlanInput_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.BackupPlanName != nil {
+		s.WriteString(schemas.BackupPlanInput_BackupPlanName, *v.BackupPlanName)
+	}
+	serializeBackupRulesInput(s, schemas.BackupPlanInput_Rules, v.Rules)
+	serializeScanSettings(s, schemas.BackupPlanInput_ScanSettings, v.ScanSettings)
+}
+func (v *BackupPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupPlanInput_AdvancedBackupSettings:
+			return deserializeAdvancedBackupSettings(d, schemas.BackupPlanInput_AdvancedBackupSettings, &v.AdvancedBackupSettings)
+		case schemas.BackupPlanInput_BackupPlanName:
+			v.BackupPlanName = new(string)
+			return d.ReadString(schemas.BackupPlanInput_BackupPlanName, v.BackupPlanName)
+		case schemas.BackupPlanInput_Rules:
+			return deserializeBackupRulesInput(d, schemas.BackupPlanInput_Rules, &v.Rules)
+		case schemas.BackupPlanInput_ScanSettings:
+			return deserializeScanSettings(d, schemas.BackupPlanInput_ScanSettings, &v.ScanSettings)
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a backup plan.
@@ -423,6 +809,73 @@ type BackupPlansListMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupPlansListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupPlansListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupPlansListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedBackupSettings(s, schemas.BackupPlansListMember_AdvancedBackupSettings, v.AdvancedBackupSettings)
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.BackupPlansListMember_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.BackupPlansListMember_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.BackupPlanName != nil {
+		s.WriteString(schemas.BackupPlansListMember_BackupPlanName, *v.BackupPlanName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.BackupPlansListMember_CreationDate, *v.CreationDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.BackupPlansListMember_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DeletionDate != nil {
+		s.WriteTime(schemas.BackupPlansListMember_DeletionDate, *v.DeletionDate)
+	}
+	if v.LastExecutionDate != nil {
+		s.WriteTime(schemas.BackupPlansListMember_LastExecutionDate, *v.LastExecutionDate)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.BackupPlansListMember_VersionId, *v.VersionId)
+	}
+}
+func (v *BackupPlansListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupPlansListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupPlansListMember_AdvancedBackupSettings:
+			return deserializeAdvancedBackupSettings(d, schemas.BackupPlansListMember_AdvancedBackupSettings, &v.AdvancedBackupSettings)
+		case schemas.BackupPlansListMember_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.BackupPlansListMember_BackupPlanArn, v.BackupPlanArn)
+		case schemas.BackupPlansListMember_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.BackupPlansListMember_BackupPlanId, v.BackupPlanId)
+		case schemas.BackupPlansListMember_BackupPlanName:
+			v.BackupPlanName = new(string)
+			return d.ReadString(schemas.BackupPlansListMember_BackupPlanName, v.BackupPlanName)
+		case schemas.BackupPlansListMember_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.BackupPlansListMember_CreationDate, v.CreationDate)
+		case schemas.BackupPlansListMember_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.BackupPlansListMember_CreatorRequestId, v.CreatorRequestId)
+		case schemas.BackupPlansListMember_DeletionDate:
+			v.DeletionDate = new(time.Time)
+			return d.ReadTime(schemas.BackupPlansListMember_DeletionDate, v.DeletionDate)
+		case schemas.BackupPlansListMember_LastExecutionDate:
+			v.LastExecutionDate = new(time.Time)
+			return d.ReadTime(schemas.BackupPlansListMember_LastExecutionDate, v.LastExecutionDate)
+		case schemas.BackupPlansListMember_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.BackupPlansListMember_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
+
 // An object specifying metadata associated with a backup plan template.
 type BackupPlanTemplatesListMember struct {
 
@@ -433,6 +886,34 @@ type BackupPlanTemplatesListMember struct {
 	BackupPlanTemplateName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackupPlanTemplatesListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupPlanTemplatesListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupPlanTemplatesListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanTemplateId != nil {
+		s.WriteString(schemas.BackupPlanTemplatesListMember_BackupPlanTemplateId, *v.BackupPlanTemplateId)
+	}
+	if v.BackupPlanTemplateName != nil {
+		s.WriteString(schemas.BackupPlanTemplatesListMember_BackupPlanTemplateName, *v.BackupPlanTemplateName)
+	}
+}
+func (v *BackupPlanTemplatesListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupPlanTemplatesListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupPlanTemplatesListMember_BackupPlanTemplateId:
+			v.BackupPlanTemplateId = new(string)
+			return d.ReadString(schemas.BackupPlanTemplatesListMember_BackupPlanTemplateId, v.BackupPlanTemplateId)
+		case schemas.BackupPlanTemplatesListMember_BackupPlanTemplateName:
+			v.BackupPlanTemplateName = new(string)
+			return d.ReadString(schemas.BackupPlanTemplatesListMember_BackupPlanTemplateName, v.BackupPlanTemplateName)
+		}
+		return nil
+	})
 }
 
 // Specifies a scheduled task used to back up a selection of resources.
@@ -542,6 +1023,96 @@ type BackupRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionWindowMinutes != nil {
+		s.WriteInt64(schemas.BackupRule_CompletionWindowMinutes, *v.CompletionWindowMinutes)
+	}
+	serializeCopyActions(s, schemas.BackupRule_CopyActions, v.CopyActions)
+	if v.EnableContinuousBackup != nil {
+		s.WriteBool(schemas.BackupRule_EnableContinuousBackup, *v.EnableContinuousBackup)
+	}
+	serializeIndexActions(s, schemas.BackupRule_IndexActions, v.IndexActions)
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.BackupRule_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.BackupRule_RecoveryPointTags, v.RecoveryPointTags)
+	if v.RuleId != nil {
+		s.WriteString(schemas.BackupRule_RuleId, *v.RuleId)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.BackupRule_RuleName, *v.RuleName)
+	}
+	serializeScanActions(s, schemas.BackupRule_ScanActions, v.ScanActions)
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.BackupRule_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimezone != nil {
+		s.WriteString(schemas.BackupRule_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
+	}
+	if v.StartWindowMinutes != nil {
+		s.WriteInt64(schemas.BackupRule_StartWindowMinutes, *v.StartWindowMinutes)
+	}
+	if v.TargetBackupVaultName != nil {
+		s.WriteString(schemas.BackupRule_TargetBackupVaultName, *v.TargetBackupVaultName)
+	}
+	if v.TargetLogicallyAirGappedBackupVaultArn != nil {
+		s.WriteString(schemas.BackupRule_TargetLogicallyAirGappedBackupVaultArn, *v.TargetLogicallyAirGappedBackupVaultArn)
+	}
+}
+func (v *BackupRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupRule_CompletionWindowMinutes:
+			v.CompletionWindowMinutes = new(int64)
+			return d.ReadInt64(schemas.BackupRule_CompletionWindowMinutes, v.CompletionWindowMinutes)
+		case schemas.BackupRule_CopyActions:
+			return deserializeCopyActions(d, schemas.BackupRule_CopyActions, &v.CopyActions)
+		case schemas.BackupRule_EnableContinuousBackup:
+			v.EnableContinuousBackup = new(bool)
+			return d.ReadBool(schemas.BackupRule_EnableContinuousBackup, v.EnableContinuousBackup)
+		case schemas.BackupRule_IndexActions:
+			return deserializeIndexActions(d, schemas.BackupRule_IndexActions, &v.IndexActions)
+		case schemas.BackupRule_Lifecycle:
+			v.Lifecycle = &Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.BackupRule_RecoveryPointTags:
+			return deserializeTags(d, schemas.BackupRule_RecoveryPointTags, &v.RecoveryPointTags)
+		case schemas.BackupRule_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.BackupRule_RuleId, v.RuleId)
+		case schemas.BackupRule_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.BackupRule_RuleName, v.RuleName)
+		case schemas.BackupRule_ScanActions:
+			return deserializeScanActions(d, schemas.BackupRule_ScanActions, &v.ScanActions)
+		case schemas.BackupRule_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.BackupRule_ScheduleExpression, v.ScheduleExpression)
+		case schemas.BackupRule_ScheduleExpressionTimezone:
+			v.ScheduleExpressionTimezone = new(string)
+			return d.ReadString(schemas.BackupRule_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
+		case schemas.BackupRule_StartWindowMinutes:
+			v.StartWindowMinutes = new(int64)
+			return d.ReadInt64(schemas.BackupRule_StartWindowMinutes, v.StartWindowMinutes)
+		case schemas.BackupRule_TargetBackupVaultName:
+			v.TargetBackupVaultName = new(string)
+			return d.ReadString(schemas.BackupRule_TargetBackupVaultName, v.TargetBackupVaultName)
+		case schemas.BackupRule_TargetLogicallyAirGappedBackupVaultArn:
+			v.TargetLogicallyAirGappedBackupVaultArn = new(string)
+			return d.ReadString(schemas.BackupRule_TargetLogicallyAirGappedBackupVaultArn, v.TargetLogicallyAirGappedBackupVaultArn)
+		}
+		return nil
+	})
+}
+
 // Specifies a scheduled task used to back up a selection of resources.
 type BackupRuleInput struct {
 
@@ -641,6 +1212,90 @@ type BackupRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionWindowMinutes != nil {
+		s.WriteInt64(schemas.BackupRuleInput_CompletionWindowMinutes, *v.CompletionWindowMinutes)
+	}
+	serializeCopyActions(s, schemas.BackupRuleInput_CopyActions, v.CopyActions)
+	if v.EnableContinuousBackup != nil {
+		s.WriteBool(schemas.BackupRuleInput_EnableContinuousBackup, *v.EnableContinuousBackup)
+	}
+	serializeIndexActions(s, schemas.BackupRuleInput_IndexActions, v.IndexActions)
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.BackupRuleInput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.BackupRuleInput_RecoveryPointTags, v.RecoveryPointTags)
+	if v.RuleName != nil {
+		s.WriteString(schemas.BackupRuleInput_RuleName, *v.RuleName)
+	}
+	serializeScanActions(s, schemas.BackupRuleInput_ScanActions, v.ScanActions)
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.BackupRuleInput_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimezone != nil {
+		s.WriteString(schemas.BackupRuleInput_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
+	}
+	if v.StartWindowMinutes != nil {
+		s.WriteInt64(schemas.BackupRuleInput_StartWindowMinutes, *v.StartWindowMinutes)
+	}
+	if v.TargetBackupVaultName != nil {
+		s.WriteString(schemas.BackupRuleInput_TargetBackupVaultName, *v.TargetBackupVaultName)
+	}
+	if v.TargetLogicallyAirGappedBackupVaultArn != nil {
+		s.WriteString(schemas.BackupRuleInput_TargetLogicallyAirGappedBackupVaultArn, *v.TargetLogicallyAirGappedBackupVaultArn)
+	}
+}
+func (v *BackupRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupRuleInput_CompletionWindowMinutes:
+			v.CompletionWindowMinutes = new(int64)
+			return d.ReadInt64(schemas.BackupRuleInput_CompletionWindowMinutes, v.CompletionWindowMinutes)
+		case schemas.BackupRuleInput_CopyActions:
+			return deserializeCopyActions(d, schemas.BackupRuleInput_CopyActions, &v.CopyActions)
+		case schemas.BackupRuleInput_EnableContinuousBackup:
+			v.EnableContinuousBackup = new(bool)
+			return d.ReadBool(schemas.BackupRuleInput_EnableContinuousBackup, v.EnableContinuousBackup)
+		case schemas.BackupRuleInput_IndexActions:
+			return deserializeIndexActions(d, schemas.BackupRuleInput_IndexActions, &v.IndexActions)
+		case schemas.BackupRuleInput_Lifecycle:
+			v.Lifecycle = &Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.BackupRuleInput_RecoveryPointTags:
+			return deserializeTags(d, schemas.BackupRuleInput_RecoveryPointTags, &v.RecoveryPointTags)
+		case schemas.BackupRuleInput_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.BackupRuleInput_RuleName, v.RuleName)
+		case schemas.BackupRuleInput_ScanActions:
+			return deserializeScanActions(d, schemas.BackupRuleInput_ScanActions, &v.ScanActions)
+		case schemas.BackupRuleInput_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.BackupRuleInput_ScheduleExpression, v.ScheduleExpression)
+		case schemas.BackupRuleInput_ScheduleExpressionTimezone:
+			v.ScheduleExpressionTimezone = new(string)
+			return d.ReadString(schemas.BackupRuleInput_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
+		case schemas.BackupRuleInput_StartWindowMinutes:
+			v.StartWindowMinutes = new(int64)
+			return d.ReadInt64(schemas.BackupRuleInput_StartWindowMinutes, v.StartWindowMinutes)
+		case schemas.BackupRuleInput_TargetBackupVaultName:
+			v.TargetBackupVaultName = new(string)
+			return d.ReadString(schemas.BackupRuleInput_TargetBackupVaultName, v.TargetBackupVaultName)
+		case schemas.BackupRuleInput_TargetLogicallyAirGappedBackupVaultArn:
+			v.TargetLogicallyAirGappedBackupVaultArn = new(string)
+			return d.ReadString(schemas.BackupRuleInput_TargetLogicallyAirGappedBackupVaultArn, v.TargetLogicallyAirGappedBackupVaultArn)
+		}
+		return nil
+	})
+}
+
 // Used to specify a set of resources to a backup plan.
 //
 // We recommend that you specify conditions, tags, or resources to include or
@@ -712,6 +1367,51 @@ type BackupSelection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.BackupSelection_Conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.BackupSelection_IamRoleArn, *v.IamRoleArn)
+	}
+	serializeListOfTags(s, schemas.BackupSelection_ListOfTags, v.ListOfTags)
+	serializeResourceArns(s, schemas.BackupSelection_NotResources, v.NotResources)
+	serializeResourceArns(s, schemas.BackupSelection_Resources, v.Resources)
+	if v.SelectionName != nil {
+		s.WriteString(schemas.BackupSelection_SelectionName, *v.SelectionName)
+	}
+}
+func (v *BackupSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupSelection_Conditions:
+			v.Conditions = &Conditions{}
+			return v.Conditions.Deserialize(d)
+		case schemas.BackupSelection_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.BackupSelection_IamRoleArn, v.IamRoleArn)
+		case schemas.BackupSelection_ListOfTags:
+			return deserializeListOfTags(d, schemas.BackupSelection_ListOfTags, &v.ListOfTags)
+		case schemas.BackupSelection_NotResources:
+			return deserializeResourceArns(d, schemas.BackupSelection_NotResources, &v.NotResources)
+		case schemas.BackupSelection_Resources:
+			return deserializeResourceArns(d, schemas.BackupSelection_Resources, &v.Resources)
+		case schemas.BackupSelection_SelectionName:
+			v.SelectionName = new(string)
+			return d.ReadString(schemas.BackupSelection_SelectionName, v.SelectionName)
+		}
+		return nil
+	})
+}
+
 // Contains metadata about a BackupSelection object.
 type BackupSelectionsListMember struct {
 
@@ -742,6 +1442,58 @@ type BackupSelectionsListMember struct {
 	SelectionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackupSelectionsListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupSelectionsListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupSelectionsListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.BackupSelectionsListMember_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.BackupSelectionsListMember_CreationDate, *v.CreationDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.BackupSelectionsListMember_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.BackupSelectionsListMember_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.SelectionId != nil {
+		s.WriteString(schemas.BackupSelectionsListMember_SelectionId, *v.SelectionId)
+	}
+	if v.SelectionName != nil {
+		s.WriteString(schemas.BackupSelectionsListMember_SelectionName, *v.SelectionName)
+	}
+}
+func (v *BackupSelectionsListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupSelectionsListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupSelectionsListMember_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.BackupSelectionsListMember_BackupPlanId, v.BackupPlanId)
+		case schemas.BackupSelectionsListMember_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.BackupSelectionsListMember_CreationDate, v.CreationDate)
+		case schemas.BackupSelectionsListMember_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.BackupSelectionsListMember_CreatorRequestId, v.CreatorRequestId)
+		case schemas.BackupSelectionsListMember_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.BackupSelectionsListMember_IamRoleArn, v.IamRoleArn)
+		case schemas.BackupSelectionsListMember_SelectionId:
+			v.SelectionId = new(string)
+			return d.ReadString(schemas.BackupSelectionsListMember_SelectionId, v.SelectionId)
+		case schemas.BackupSelectionsListMember_SelectionName:
+			v.SelectionName = new(string)
+			return d.ReadString(schemas.BackupSelectionsListMember_SelectionName, v.SelectionName)
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a backup vault.
@@ -842,6 +1594,111 @@ type BackupVaultListMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BackupVaultListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupVaultListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupVaultListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.BackupVaultListMember_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.BackupVaultListMember_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.BackupVaultListMember_CreationDate, *v.CreationDate)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.BackupVaultListMember_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.BackupVaultListMember_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyType != "" {
+		s.WriteString(schemas.BackupVaultListMember_EncryptionKeyType, string(v.EncryptionKeyType))
+	}
+	if v.LockDate != nil {
+		s.WriteTime(schemas.BackupVaultListMember_LockDate, *v.LockDate)
+	}
+	if v.Locked != nil {
+		s.WriteBool(schemas.BackupVaultListMember_Locked, *v.Locked)
+	}
+	if v.MaxRetentionDays != nil {
+		s.WriteInt64(schemas.BackupVaultListMember_MaxRetentionDays, *v.MaxRetentionDays)
+	}
+	if v.MinRetentionDays != nil {
+		s.WriteInt64(schemas.BackupVaultListMember_MinRetentionDays, *v.MinRetentionDays)
+	}
+	if v.NumberOfRecoveryPoints != 0 {
+		s.WriteInt64(schemas.BackupVaultListMember_NumberOfRecoveryPoints, v.NumberOfRecoveryPoints)
+	}
+	if v.VaultState != "" {
+		s.WriteString(schemas.BackupVaultListMember_VaultState, string(v.VaultState))
+	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.BackupVaultListMember_VaultType, string(v.VaultType))
+	}
+}
+func (v *BackupVaultListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupVaultListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupVaultListMember_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.BackupVaultListMember_BackupVaultArn, v.BackupVaultArn)
+		case schemas.BackupVaultListMember_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.BackupVaultListMember_BackupVaultName, v.BackupVaultName)
+		case schemas.BackupVaultListMember_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.BackupVaultListMember_CreationDate, v.CreationDate)
+		case schemas.BackupVaultListMember_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.BackupVaultListMember_CreatorRequestId, v.CreatorRequestId)
+		case schemas.BackupVaultListMember_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.BackupVaultListMember_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.BackupVaultListMember_EncryptionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.BackupVaultListMember_EncryptionKeyType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionKeyType = EncryptionKeyType(ev)
+			return nil
+		case schemas.BackupVaultListMember_LockDate:
+			v.LockDate = new(time.Time)
+			return d.ReadTime(schemas.BackupVaultListMember_LockDate, v.LockDate)
+		case schemas.BackupVaultListMember_Locked:
+			v.Locked = new(bool)
+			return d.ReadBool(schemas.BackupVaultListMember_Locked, v.Locked)
+		case schemas.BackupVaultListMember_MaxRetentionDays:
+			v.MaxRetentionDays = new(int64)
+			return d.ReadInt64(schemas.BackupVaultListMember_MaxRetentionDays, v.MaxRetentionDays)
+		case schemas.BackupVaultListMember_MinRetentionDays:
+			v.MinRetentionDays = new(int64)
+			return d.ReadInt64(schemas.BackupVaultListMember_MinRetentionDays, v.MinRetentionDays)
+		case schemas.BackupVaultListMember_NumberOfRecoveryPoints:
+			return d.ReadInt64(schemas.BackupVaultListMember_NumberOfRecoveryPoints, &v.NumberOfRecoveryPoints)
+		case schemas.BackupVaultListMember_VaultState:
+			var ev string
+			if err := d.ReadString(schemas.BackupVaultListMember_VaultState, &ev); err != nil {
+				return err
+			}
+			v.VaultState = VaultState(ev)
+			return nil
+		case schemas.BackupVaultListMember_VaultType:
+			var ev string
+			if err := d.ReadString(schemas.BackupVaultListMember_VaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = VaultType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains DeleteAt and MoveToColdStorageAt timestamps, which are used to specify
 // a lifecycle for a recovery point.
 //
@@ -867,6 +1724,34 @@ type CalculatedLifecycle struct {
 	MoveToColdStorageAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *CalculatedLifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculatedLifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculatedLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteAt != nil {
+		s.WriteTime(schemas.CalculatedLifecycle_DeleteAt, *v.DeleteAt)
+	}
+	if v.MoveToColdStorageAt != nil {
+		s.WriteTime(schemas.CalculatedLifecycle_MoveToColdStorageAt, *v.MoveToColdStorageAt)
+	}
+}
+func (v *CalculatedLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculatedLifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculatedLifecycle_DeleteAt:
+			v.DeleteAt = new(time.Time)
+			return d.ReadTime(schemas.CalculatedLifecycle_DeleteAt, v.DeleteAt)
+		case schemas.CalculatedLifecycle_MoveToColdStorageAt:
+			v.MoveToColdStorageAt = new(time.Time)
+			return d.ReadTime(schemas.CalculatedLifecycle_MoveToColdStorageAt, v.MoveToColdStorageAt)
+		}
+		return nil
+	})
 }
 
 // Contains an array of triplets made up of a condition type (such as StringEquals
@@ -899,6 +1784,44 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Condition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Condition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionKey != nil {
+		s.WriteString(schemas.Condition_ConditionKey, *v.ConditionKey)
+	}
+	if v.ConditionType != "" {
+		s.WriteString(schemas.Condition_ConditionType, string(v.ConditionType))
+	}
+	if v.ConditionValue != nil {
+		s.WriteString(schemas.Condition_ConditionValue, *v.ConditionValue)
+	}
+}
+func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Condition_ConditionKey:
+			v.ConditionKey = new(string)
+			return d.ReadString(schemas.Condition_ConditionKey, v.ConditionKey)
+		case schemas.Condition_ConditionType:
+			var ev string
+			if err := d.ReadString(schemas.Condition_ConditionType, &ev); err != nil {
+				return err
+			}
+			v.ConditionType = ConditionType(ev)
+			return nil
+		case schemas.Condition_ConditionValue:
+			v.ConditionValue = new(string)
+			return d.ReadString(schemas.Condition_ConditionValue, v.ConditionValue)
+		}
+		return nil
+	})
+}
+
 // Includes information about tags you define to assign tagged resources to a
 // backup plan.
 //
@@ -915,6 +1838,34 @@ type ConditionParameter struct {
 	ConditionValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConditionParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionKey != nil {
+		s.WriteString(schemas.ConditionParameter_ConditionKey, *v.ConditionKey)
+	}
+	if v.ConditionValue != nil {
+		s.WriteString(schemas.ConditionParameter_ConditionValue, *v.ConditionValue)
+	}
+}
+func (v *ConditionParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionParameter_ConditionKey:
+			v.ConditionKey = new(string)
+			return d.ReadString(schemas.ConditionParameter_ConditionKey, v.ConditionKey)
+		case schemas.ConditionParameter_ConditionValue:
+			v.ConditionValue = new(string)
+			return d.ReadString(schemas.ConditionParameter_ConditionValue, v.ConditionValue)
+		}
+		return nil
+	})
 }
 
 // Contains information about which resources to include or exclude from a backup
@@ -941,6 +1892,34 @@ type Conditions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Conditions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Conditions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Conditions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConditionParameters(s, schemas.Conditions_StringEquals, v.StringEquals)
+	serializeConditionParameters(s, schemas.Conditions_StringLike, v.StringLike)
+	serializeConditionParameters(s, schemas.Conditions_StringNotEquals, v.StringNotEquals)
+	serializeConditionParameters(s, schemas.Conditions_StringNotLike, v.StringNotLike)
+}
+func (v *Conditions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Conditions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Conditions_StringEquals:
+			return deserializeConditionParameters(d, schemas.Conditions_StringEquals, &v.StringEquals)
+		case schemas.Conditions_StringLike:
+			return deserializeConditionParameters(d, schemas.Conditions_StringLike, &v.StringLike)
+		case schemas.Conditions_StringNotEquals:
+			return deserializeConditionParameters(d, schemas.Conditions_StringNotEquals, &v.StringNotEquals)
+		case schemas.Conditions_StringNotLike:
+			return deserializeConditionParameters(d, schemas.Conditions_StringNotLike, &v.StringNotLike)
+		}
+		return nil
+	})
+}
+
 // The parameters for a control. A control can have zero, one, or more than one
 // parameter. An example of a control with two parameters is: "backup plan
 // frequency is at least daily and the retention period is at least 1 year ". The
@@ -954,6 +1933,34 @@ type ControlInputParameter struct {
 	ParameterValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ControlInputParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlInputParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlInputParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != nil {
+		s.WriteString(schemas.ControlInputParameter_ParameterName, *v.ParameterName)
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.ControlInputParameter_ParameterValue, *v.ParameterValue)
+	}
+}
+func (v *ControlInputParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlInputParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlInputParameter_ParameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.ControlInputParameter_ParameterName, v.ParameterName)
+		case schemas.ControlInputParameter_ParameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.ControlInputParameter_ParameterValue, v.ParameterValue)
+		}
+		return nil
+	})
 }
 
 // A framework consists of one or more controls. Each control has its own control
@@ -986,6 +1993,31 @@ type ControlScope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlScope) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceResourceIdList(s, schemas.ControlScope_ComplianceResourceIds, v.ComplianceResourceIds)
+	serializeResourceTypeList(s, schemas.ControlScope_ComplianceResourceTypes, v.ComplianceResourceTypes)
+	serializestringMap(s, schemas.ControlScope_Tags, v.Tags)
+}
+func (v *ControlScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlScope_ComplianceResourceIds:
+			return deserializeComplianceResourceIdList(d, schemas.ControlScope_ComplianceResourceIds, &v.ComplianceResourceIds)
+		case schemas.ControlScope_ComplianceResourceTypes:
+			return deserializeResourceTypeList(d, schemas.ControlScope_ComplianceResourceTypes, &v.ComplianceResourceTypes)
+		case schemas.ControlScope_Tags:
+			return deserializestringMap(d, schemas.ControlScope_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The details of the copy operation.
 type CopyAction struct {
 
@@ -1016,6 +2048,36 @@ type CopyAction struct {
 	Lifecycle *Lifecycle
 
 	noSmithyDocumentSerde
+}
+
+func (v *CopyAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationBackupVaultArn != nil {
+		s.WriteString(schemas.CopyAction_DestinationBackupVaultArn, *v.DestinationBackupVaultArn)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.CopyAction_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyAction_DestinationBackupVaultArn:
+			v.DestinationBackupVaultArn = new(string)
+			return d.ReadString(schemas.CopyAction_DestinationBackupVaultArn, v.DestinationBackupVaultArn)
+		case schemas.CopyAction_Lifecycle:
+			v.Lifecycle = &Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about a copy job.
@@ -1162,6 +2224,188 @@ type CopyJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CopyJob_AccountId, *v.AccountId)
+	}
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.CopyJob_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	serializeCopyJobChildJobsInState(s, schemas.CopyJob_ChildJobsInState, v.ChildJobsInState)
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.CopyJob_CompletionDate, *v.CompletionDate)
+	}
+	if v.CompositeMemberIdentifier != nil {
+		s.WriteString(schemas.CopyJob_CompositeMemberIdentifier, *v.CompositeMemberIdentifier)
+	}
+	if v.CopyJobId != nil {
+		s.WriteString(schemas.CopyJob_CopyJobId, *v.CopyJobId)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.CopyJob_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedByBackupJobId != nil {
+		s.WriteString(schemas.CopyJob_CreatedByBackupJobId, *v.CreatedByBackupJobId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CopyJob_CreationDate, *v.CreationDate)
+	}
+	if v.DestinationBackupVaultArn != nil {
+		s.WriteString(schemas.CopyJob_DestinationBackupVaultArn, *v.DestinationBackupVaultArn)
+	}
+	if v.DestinationEncryptionKeyArn != nil {
+		s.WriteString(schemas.CopyJob_DestinationEncryptionKeyArn, *v.DestinationEncryptionKeyArn)
+	}
+	if v.DestinationRecoveryPointArn != nil {
+		s.WriteString(schemas.CopyJob_DestinationRecoveryPointArn, *v.DestinationRecoveryPointArn)
+	}
+	if v.DestinationRecoveryPointLifecycle != nil {
+		s.WriteStruct(schemas.CopyJob_DestinationRecoveryPointLifecycle)
+		v.DestinationRecoveryPointLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationVaultLockState != nil {
+		s.WriteString(schemas.CopyJob_DestinationVaultLockState, *v.DestinationVaultLockState)
+	}
+	if v.DestinationVaultType != nil {
+		s.WriteString(schemas.CopyJob_DestinationVaultType, *v.DestinationVaultType)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CopyJob_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.CopyJob_IsParent, v.IsParent)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.CopyJob_MessageCategory, *v.MessageCategory)
+	}
+	if v.NumberOfChildJobs != nil {
+		s.WriteInt64(schemas.CopyJob_NumberOfChildJobs, *v.NumberOfChildJobs)
+	}
+	if v.ParentJobId != nil {
+		s.WriteString(schemas.CopyJob_ParentJobId, *v.ParentJobId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CopyJob_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CopyJob_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CopyJob_ResourceType, *v.ResourceType)
+	}
+	if v.SourceBackupVaultArn != nil {
+		s.WriteString(schemas.CopyJob_SourceBackupVaultArn, *v.SourceBackupVaultArn)
+	}
+	if v.SourceRecoveryPointArn != nil {
+		s.WriteString(schemas.CopyJob_SourceRecoveryPointArn, *v.SourceRecoveryPointArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CopyJob_State, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.CopyJob_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *CopyJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyJob_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CopyJob_AccountId, v.AccountId)
+		case schemas.CopyJob_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.CopyJob_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.CopyJob_ChildJobsInState:
+			return deserializeCopyJobChildJobsInState(d, schemas.CopyJob_ChildJobsInState, &v.ChildJobsInState)
+		case schemas.CopyJob_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.CopyJob_CompletionDate, v.CompletionDate)
+		case schemas.CopyJob_CompositeMemberIdentifier:
+			v.CompositeMemberIdentifier = new(string)
+			return d.ReadString(schemas.CopyJob_CompositeMemberIdentifier, v.CompositeMemberIdentifier)
+		case schemas.CopyJob_CopyJobId:
+			v.CopyJobId = new(string)
+			return d.ReadString(schemas.CopyJob_CopyJobId, v.CopyJobId)
+		case schemas.CopyJob_CreatedBy:
+			v.CreatedBy = &RecoveryPointCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.CopyJob_CreatedByBackupJobId:
+			v.CreatedByBackupJobId = new(string)
+			return d.ReadString(schemas.CopyJob_CreatedByBackupJobId, v.CreatedByBackupJobId)
+		case schemas.CopyJob_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CopyJob_CreationDate, v.CreationDate)
+		case schemas.CopyJob_DestinationBackupVaultArn:
+			v.DestinationBackupVaultArn = new(string)
+			return d.ReadString(schemas.CopyJob_DestinationBackupVaultArn, v.DestinationBackupVaultArn)
+		case schemas.CopyJob_DestinationEncryptionKeyArn:
+			v.DestinationEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.CopyJob_DestinationEncryptionKeyArn, v.DestinationEncryptionKeyArn)
+		case schemas.CopyJob_DestinationRecoveryPointArn:
+			v.DestinationRecoveryPointArn = new(string)
+			return d.ReadString(schemas.CopyJob_DestinationRecoveryPointArn, v.DestinationRecoveryPointArn)
+		case schemas.CopyJob_DestinationRecoveryPointLifecycle:
+			v.DestinationRecoveryPointLifecycle = &Lifecycle{}
+			return v.DestinationRecoveryPointLifecycle.Deserialize(d)
+		case schemas.CopyJob_DestinationVaultLockState:
+			v.DestinationVaultLockState = new(string)
+			return d.ReadString(schemas.CopyJob_DestinationVaultLockState, v.DestinationVaultLockState)
+		case schemas.CopyJob_DestinationVaultType:
+			v.DestinationVaultType = new(string)
+			return d.ReadString(schemas.CopyJob_DestinationVaultType, v.DestinationVaultType)
+		case schemas.CopyJob_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.CopyJob_IamRoleArn, v.IamRoleArn)
+		case schemas.CopyJob_IsParent:
+			return d.ReadBool(schemas.CopyJob_IsParent, &v.IsParent)
+		case schemas.CopyJob_MessageCategory:
+			v.MessageCategory = new(string)
+			return d.ReadString(schemas.CopyJob_MessageCategory, v.MessageCategory)
+		case schemas.CopyJob_NumberOfChildJobs:
+			v.NumberOfChildJobs = new(int64)
+			return d.ReadInt64(schemas.CopyJob_NumberOfChildJobs, v.NumberOfChildJobs)
+		case schemas.CopyJob_ParentJobId:
+			v.ParentJobId = new(string)
+			return d.ReadString(schemas.CopyJob_ParentJobId, v.ParentJobId)
+		case schemas.CopyJob_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CopyJob_ResourceArn, v.ResourceArn)
+		case schemas.CopyJob_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.CopyJob_ResourceName, v.ResourceName)
+		case schemas.CopyJob_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.CopyJob_ResourceType, v.ResourceType)
+		case schemas.CopyJob_SourceBackupVaultArn:
+			v.SourceBackupVaultArn = new(string)
+			return d.ReadString(schemas.CopyJob_SourceBackupVaultArn, v.SourceBackupVaultArn)
+		case schemas.CopyJob_SourceRecoveryPointArn:
+			v.SourceRecoveryPointArn = new(string)
+			return d.ReadString(schemas.CopyJob_SourceRecoveryPointArn, v.SourceRecoveryPointArn)
+		case schemas.CopyJob_State:
+			var ev string
+			if err := d.ReadString(schemas.CopyJob_State, &ev); err != nil {
+				return err
+			}
+			v.State = CopyJobState(ev)
+			return nil
+		case schemas.CopyJob_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.CopyJob_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // This is a summary of copy jobs created or running within the most recent 14
 // days.
 //
@@ -1215,6 +2459,73 @@ type CopyJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CopyJobSummary_AccountId, *v.AccountId)
+	}
+	if v.Count != 0 {
+		s.WriteInt32(schemas.CopyJobSummary_Count, v.Count)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CopyJobSummary_EndTime, *v.EndTime)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.CopyJobSummary_MessageCategory, *v.MessageCategory)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.CopyJobSummary_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.CopyJobSummary_ResourceType, *v.ResourceType)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CopyJobSummary_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CopyJobSummary_State, string(v.State))
+	}
+}
+func (v *CopyJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyJobSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CopyJobSummary_AccountId, v.AccountId)
+		case schemas.CopyJobSummary_Count:
+			return d.ReadInt32(schemas.CopyJobSummary_Count, &v.Count)
+		case schemas.CopyJobSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.CopyJobSummary_EndTime, v.EndTime)
+		case schemas.CopyJobSummary_MessageCategory:
+			v.MessageCategory = new(string)
+			return d.ReadString(schemas.CopyJobSummary_MessageCategory, v.MessageCategory)
+		case schemas.CopyJobSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.CopyJobSummary_Region, v.Region)
+		case schemas.CopyJobSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.CopyJobSummary_ResourceType, v.ResourceType)
+		case schemas.CopyJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CopyJobSummary_StartTime, v.StartTime)
+		case schemas.CopyJobSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.CopyJobSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = CopyJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is a resource filter containing FromDate: DateTime and ToDate: DateTime.
 // Both values are required. Future DateTime values are not permitted.
 //
@@ -1240,6 +2551,34 @@ type DateRange struct {
 	ToDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromDate != nil {
+		s.WriteTime(schemas.DateRange_FromDate, *v.FromDate)
+	}
+	if v.ToDate != nil {
+		s.WriteTime(schemas.DateRange_ToDate, *v.ToDate)
+	}
+}
+func (v *DateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateRange_FromDate:
+			v.FromDate = new(time.Time)
+			return d.ReadTime(schemas.DateRange_FromDate, v.FromDate)
+		case schemas.DateRange_ToDate:
+			v.ToDate = new(time.Time)
+			return d.ReadTime(schemas.DateRange_ToDate, v.ToDate)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about a framework. Frameworks contain controls,
@@ -1277,6 +2616,57 @@ type Framework struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Framework) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Framework)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Framework) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Framework_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.Framework_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.FrameworkArn != nil {
+		s.WriteString(schemas.Framework_FrameworkArn, *v.FrameworkArn)
+	}
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.Framework_FrameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.Framework_FrameworkName, *v.FrameworkName)
+	}
+	if v.NumberOfControls != 0 {
+		s.WriteInt32(schemas.Framework_NumberOfControls, v.NumberOfControls)
+	}
+}
+func (v *Framework) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Framework, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Framework_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Framework_CreationTime, v.CreationTime)
+		case schemas.Framework_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.Framework_DeploymentStatus, v.DeploymentStatus)
+		case schemas.Framework_FrameworkArn:
+			v.FrameworkArn = new(string)
+			return d.ReadString(schemas.Framework_FrameworkArn, v.FrameworkArn)
+		case schemas.Framework_FrameworkDescription:
+			v.FrameworkDescription = new(string)
+			return d.ReadString(schemas.Framework_FrameworkDescription, v.FrameworkDescription)
+		case schemas.Framework_FrameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.Framework_FrameworkName, v.FrameworkName)
+		case schemas.Framework_NumberOfControls:
+			return d.ReadInt32(schemas.Framework_NumberOfControls, &v.NumberOfControls)
+		}
+		return nil
+	})
+}
+
 // Contains detailed information about all of the controls of a framework. Each
 // framework must contain at least one control.
 type FrameworkControl struct {
@@ -1301,6 +2691,39 @@ type FrameworkControl struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FrameworkControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameworkControl) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlInputParameters(s, schemas.FrameworkControl_ControlInputParameters, v.ControlInputParameters)
+	if v.ControlName != nil {
+		s.WriteString(schemas.FrameworkControl_ControlName, *v.ControlName)
+	}
+	if v.ControlScope != nil {
+		s.WriteStruct(schemas.FrameworkControl_ControlScope)
+		v.ControlScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FrameworkControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameworkControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameworkControl_ControlInputParameters:
+			return deserializeControlInputParameters(d, schemas.FrameworkControl_ControlInputParameters, &v.ControlInputParameters)
+		case schemas.FrameworkControl_ControlName:
+			v.ControlName = new(string)
+			return d.ReadString(schemas.FrameworkControl_ControlName, v.ControlName)
+		case schemas.FrameworkControl_ControlScope:
+			v.ControlScope = &ControlScope{}
+			return v.ControlScope.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This is an optional array within a BackupRule.
 //
 // IndexAction consists of one ResourceTypes.
@@ -1316,6 +2739,25 @@ type IndexAction struct {
 	ResourceTypes []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IndexAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexAction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceTypes(s, schemas.IndexAction_ResourceTypes, v.ResourceTypes)
+}
+func (v *IndexAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexAction_ResourceTypes:
+			return deserializeResourceTypes(d, schemas.IndexAction_ResourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
 }
 
 // This is a recovery point that has an associated backup index.
@@ -1377,6 +2819,80 @@ type IndexedRecoveryPoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexedRecoveryPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexedRecoveryPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexedRecoveryPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupCreationDate != nil {
+		s.WriteTime(schemas.IndexedRecoveryPoint_BackupCreationDate, *v.BackupCreationDate)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.IndexedRecoveryPoint_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.IndexedRecoveryPoint_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IndexCreationDate != nil {
+		s.WriteTime(schemas.IndexedRecoveryPoint_IndexCreationDate, *v.IndexCreationDate)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.IndexedRecoveryPoint_IndexStatus, string(v.IndexStatus))
+	}
+	if v.IndexStatusMessage != nil {
+		s.WriteString(schemas.IndexedRecoveryPoint_IndexStatusMessage, *v.IndexStatusMessage)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.IndexedRecoveryPoint_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.IndexedRecoveryPoint_ResourceType, *v.ResourceType)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.IndexedRecoveryPoint_SourceResourceArn, *v.SourceResourceArn)
+	}
+}
+func (v *IndexedRecoveryPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexedRecoveryPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexedRecoveryPoint_BackupCreationDate:
+			v.BackupCreationDate = new(time.Time)
+			return d.ReadTime(schemas.IndexedRecoveryPoint_BackupCreationDate, v.BackupCreationDate)
+		case schemas.IndexedRecoveryPoint_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.IndexedRecoveryPoint_BackupVaultArn, v.BackupVaultArn)
+		case schemas.IndexedRecoveryPoint_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.IndexedRecoveryPoint_IamRoleArn, v.IamRoleArn)
+		case schemas.IndexedRecoveryPoint_IndexCreationDate:
+			v.IndexCreationDate = new(time.Time)
+			return d.ReadTime(schemas.IndexedRecoveryPoint_IndexCreationDate, v.IndexCreationDate)
+		case schemas.IndexedRecoveryPoint_IndexStatus:
+			var ev string
+			if err := d.ReadString(schemas.IndexedRecoveryPoint_IndexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = IndexStatus(ev)
+			return nil
+		case schemas.IndexedRecoveryPoint_IndexStatusMessage:
+			v.IndexStatusMessage = new(string)
+			return d.ReadString(schemas.IndexedRecoveryPoint_IndexStatusMessage, v.IndexStatusMessage)
+		case schemas.IndexedRecoveryPoint_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.IndexedRecoveryPoint_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.IndexedRecoveryPoint_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.IndexedRecoveryPoint_ResourceType, v.ResourceType)
+		case schemas.IndexedRecoveryPoint_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.IndexedRecoveryPoint_SourceResourceArn, v.SourceResourceArn)
+		}
+		return nil
+	})
+}
+
 // Pair of two related strings. Allowed characters are letters, white space, and
 // numbers that can be represented in UTF-8 and the following characters: + - = .
 // _ : /
@@ -1403,6 +2919,34 @@ type KeyValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.KeyValue_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.KeyValue_Value, *v.Value)
+	}
+}
+func (v *KeyValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyValue_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.KeyValue_Key, v.Key)
+		case schemas.KeyValue_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.KeyValue_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Contains information about the latest update to an MPA approval team
 // association.
 type LatestMpaApprovalTeamUpdate struct {
@@ -1425,6 +2969,56 @@ type LatestMpaApprovalTeamUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LatestMpaApprovalTeamUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LatestMpaApprovalTeamUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LatestMpaApprovalTeamUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryDate != nil {
+		s.WriteTime(schemas.LatestMpaApprovalTeamUpdate_ExpiryDate, *v.ExpiryDate)
+	}
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.LatestMpaApprovalTeamUpdate_InitiationDate, *v.InitiationDate)
+	}
+	if v.MpaSessionArn != nil {
+		s.WriteString(schemas.LatestMpaApprovalTeamUpdate_MpaSessionArn, *v.MpaSessionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LatestMpaApprovalTeamUpdate_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.LatestMpaApprovalTeamUpdate_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *LatestMpaApprovalTeamUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LatestMpaApprovalTeamUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LatestMpaApprovalTeamUpdate_ExpiryDate:
+			v.ExpiryDate = new(time.Time)
+			return d.ReadTime(schemas.LatestMpaApprovalTeamUpdate_ExpiryDate, v.ExpiryDate)
+		case schemas.LatestMpaApprovalTeamUpdate_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.LatestMpaApprovalTeamUpdate_InitiationDate, v.InitiationDate)
+		case schemas.LatestMpaApprovalTeamUpdate_MpaSessionArn:
+			v.MpaSessionArn = new(string)
+			return d.ReadString(schemas.LatestMpaApprovalTeamUpdate_MpaSessionArn, v.MpaSessionArn)
+		case schemas.LatestMpaApprovalTeamUpdate_Status:
+			var ev string
+			if err := d.ReadString(schemas.LatestMpaApprovalTeamUpdate_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MpaSessionStatus(ev)
+			return nil
+		case schemas.LatestMpaApprovalTeamUpdate_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.LatestMpaApprovalTeamUpdate_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Contains information about the latest request to revoke access to a backup
 // vault.
 type LatestRevokeRequest struct {
@@ -1445,6 +3039,56 @@ type LatestRevokeRequest struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LatestRevokeRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LatestRevokeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LatestRevokeRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryDate != nil {
+		s.WriteTime(schemas.LatestRevokeRequest_ExpiryDate, *v.ExpiryDate)
+	}
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.LatestRevokeRequest_InitiationDate, *v.InitiationDate)
+	}
+	if v.MpaSessionArn != nil {
+		s.WriteString(schemas.LatestRevokeRequest_MpaSessionArn, *v.MpaSessionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LatestRevokeRequest_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.LatestRevokeRequest_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *LatestRevokeRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LatestRevokeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LatestRevokeRequest_ExpiryDate:
+			v.ExpiryDate = new(time.Time)
+			return d.ReadTime(schemas.LatestRevokeRequest_ExpiryDate, v.ExpiryDate)
+		case schemas.LatestRevokeRequest_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.LatestRevokeRequest_InitiationDate, v.InitiationDate)
+		case schemas.LatestRevokeRequest_MpaSessionArn:
+			v.MpaSessionArn = new(string)
+			return d.ReadString(schemas.LatestRevokeRequest_MpaSessionArn, v.MpaSessionArn)
+		case schemas.LatestRevokeRequest_Status:
+			var ev string
+			if err := d.ReadString(schemas.LatestRevokeRequest_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MpaRevokeSessionStatus(ev)
+			return nil
+		case schemas.LatestRevokeRequest_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.LatestRevokeRequest_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // A legal hold is an administrative tool that helps prevent backups from being
@@ -1480,6 +3124,68 @@ type LegalHold struct {
 	Title *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LegalHold) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LegalHold)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LegalHold) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancellationDate != nil {
+		s.WriteTime(schemas.LegalHold_CancellationDate, *v.CancellationDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.LegalHold_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LegalHold_Description, *v.Description)
+	}
+	if v.LegalHoldArn != nil {
+		s.WriteString(schemas.LegalHold_LegalHoldArn, *v.LegalHoldArn)
+	}
+	if v.LegalHoldId != nil {
+		s.WriteString(schemas.LegalHold_LegalHoldId, *v.LegalHoldId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LegalHold_Status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.LegalHold_Title, *v.Title)
+	}
+}
+func (v *LegalHold) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LegalHold, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LegalHold_CancellationDate:
+			v.CancellationDate = new(time.Time)
+			return d.ReadTime(schemas.LegalHold_CancellationDate, v.CancellationDate)
+		case schemas.LegalHold_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.LegalHold_CreationDate, v.CreationDate)
+		case schemas.LegalHold_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LegalHold_Description, v.Description)
+		case schemas.LegalHold_LegalHoldArn:
+			v.LegalHoldArn = new(string)
+			return d.ReadString(schemas.LegalHold_LegalHoldArn, v.LegalHoldArn)
+		case schemas.LegalHold_LegalHoldId:
+			v.LegalHoldId = new(string)
+			return d.ReadString(schemas.LegalHold_LegalHoldId, v.LegalHoldId)
+		case schemas.LegalHold_Status:
+			var ev string
+			if err := d.ReadString(schemas.LegalHold_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = LegalHoldStatus(ev)
+			return nil
+		case schemas.LegalHold_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.LegalHold_Title, v.Title)
+		}
+		return nil
+	})
 }
 
 // Specifies the time period, in days, before a recovery point transitions to cold
@@ -1520,6 +3226,50 @@ type Lifecycle struct {
 	OptInToArchiveForSupportedResources *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Lifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Lifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Lifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteAfterDays != nil {
+		s.WriteInt64(schemas.Lifecycle_DeleteAfterDays, *v.DeleteAfterDays)
+	}
+	if v.DeleteAfterEvent != "" {
+		s.WriteString(schemas.Lifecycle_DeleteAfterEvent, string(v.DeleteAfterEvent))
+	}
+	if v.MoveToColdStorageAfterDays != nil {
+		s.WriteInt64(schemas.Lifecycle_MoveToColdStorageAfterDays, *v.MoveToColdStorageAfterDays)
+	}
+	if v.OptInToArchiveForSupportedResources != nil {
+		s.WriteBool(schemas.Lifecycle_OptInToArchiveForSupportedResources, *v.OptInToArchiveForSupportedResources)
+	}
+}
+func (v *Lifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Lifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Lifecycle_DeleteAfterDays:
+			v.DeleteAfterDays = new(int64)
+			return d.ReadInt64(schemas.Lifecycle_DeleteAfterDays, v.DeleteAfterDays)
+		case schemas.Lifecycle_DeleteAfterEvent:
+			var ev string
+			if err := d.ReadString(schemas.Lifecycle_DeleteAfterEvent, &ev); err != nil {
+				return err
+			}
+			v.DeleteAfterEvent = LifecycleDeleteAfterEvent(ev)
+			return nil
+		case schemas.Lifecycle_MoveToColdStorageAfterDays:
+			v.MoveToColdStorageAfterDays = new(int64)
+			return d.ReadInt64(schemas.Lifecycle_MoveToColdStorageAfterDays, v.MoveToColdStorageAfterDays)
+		case schemas.Lifecycle_OptInToArchiveForSupportedResources:
+			v.OptInToArchiveForSupportedResources = new(bool)
+			return d.ReadBool(schemas.Lifecycle_OptInToArchiveForSupportedResources, v.OptInToArchiveForSupportedResources)
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a backup access point.
@@ -1592,6 +3342,89 @@ type ListAccessPointsMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPointsMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPointsMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPointsMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.ListAccessPointsMember_AccessPointArn, *v.AccessPointArn)
+	}
+	serializeAccessPointMetadataMap(s, schemas.ListAccessPointsMember_AccessPointMetadata, v.AccessPointMetadata)
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.ListAccessPointsMember_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ListAccessPointsMember_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ListAccessPointsMember_CreationTime, *v.CreationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAccessPointsMember_Name, *v.Name)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.ListAccessPointsMember_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListAccessPointsMember_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListAccessPointsMember_ResourceType, *v.ResourceType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListAccessPointsMember_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ListAccessPointsMember_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ListAccessPointsMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPointsMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPointsMember_AccessPointArn:
+			v.AccessPointArn = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_AccessPointArn, v.AccessPointArn)
+		case schemas.ListAccessPointsMember_AccessPointMetadata:
+			return deserializeAccessPointMetadataMap(d, schemas.ListAccessPointsMember_AccessPointMetadata, &v.AccessPointMetadata)
+		case schemas.ListAccessPointsMember_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_BackupVaultArn, v.BackupVaultArn)
+		case schemas.ListAccessPointsMember_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_BackupVaultName, v.BackupVaultName)
+		case schemas.ListAccessPointsMember_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ListAccessPointsMember_CreationTime, v.CreationTime)
+		case schemas.ListAccessPointsMember_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_Name, v.Name)
+		case schemas.ListAccessPointsMember_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.ListAccessPointsMember_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_ResourceArn, v.ResourceArn)
+		case schemas.ListAccessPointsMember_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_ResourceType, v.ResourceType)
+		case schemas.ListAccessPointsMember_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListAccessPointsMember_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AccessPointStatus(ev)
+			return nil
+		case schemas.ListAccessPointsMember_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ListAccessPointsMember_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a backed-up resource.
 type ProtectedResource struct {
 
@@ -1624,6 +3457,58 @@ type ProtectedResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtectedResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectedResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectedResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastBackupTime != nil {
+		s.WriteTime(schemas.ProtectedResource_LastBackupTime, *v.LastBackupTime)
+	}
+	if v.LastBackupVaultArn != nil {
+		s.WriteString(schemas.ProtectedResource_LastBackupVaultArn, *v.LastBackupVaultArn)
+	}
+	if v.LastRecoveryPointArn != nil {
+		s.WriteString(schemas.ProtectedResource_LastRecoveryPointArn, *v.LastRecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ProtectedResource_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.ProtectedResource_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ProtectedResource_ResourceType, *v.ResourceType)
+	}
+}
+func (v *ProtectedResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectedResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectedResource_LastBackupTime:
+			v.LastBackupTime = new(time.Time)
+			return d.ReadTime(schemas.ProtectedResource_LastBackupTime, v.LastBackupTime)
+		case schemas.ProtectedResource_LastBackupVaultArn:
+			v.LastBackupVaultArn = new(string)
+			return d.ReadString(schemas.ProtectedResource_LastBackupVaultArn, v.LastBackupVaultArn)
+		case schemas.ProtectedResource_LastRecoveryPointArn:
+			v.LastRecoveryPointArn = new(string)
+			return d.ReadString(schemas.ProtectedResource_LastRecoveryPointArn, v.LastRecoveryPointArn)
+		case schemas.ProtectedResource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ProtectedResource_ResourceArn, v.ResourceArn)
+		case schemas.ProtectedResource_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ProtectedResource_ResourceName, v.ResourceName)
+		case schemas.ProtectedResource_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ProtectedResource_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // The conditions that you define for resources in your restore testing plan using
 // tags.
 type ProtectedResourceConditions struct {
@@ -1637,6 +3522,28 @@ type ProtectedResourceConditions struct {
 	StringNotEquals []KeyValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProtectedResourceConditions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectedResourceConditions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtectedResourceConditions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyValueList(s, schemas.ProtectedResourceConditions_StringEquals, v.StringEquals)
+	serializeKeyValueList(s, schemas.ProtectedResourceConditions_StringNotEquals, v.StringNotEquals)
+}
+func (v *ProtectedResourceConditions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtectedResourceConditions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtectedResourceConditions_StringEquals:
+			return deserializeKeyValueList(d, schemas.ProtectedResourceConditions_StringEquals, &v.StringEquals)
+		case schemas.ProtectedResourceConditions_StringNotEquals:
+			return deserializeKeyValueList(d, schemas.ProtectedResourceConditions_StringNotEquals, &v.StringNotEquals)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about the recovery points stored in a backup
@@ -1784,6 +3691,212 @@ type RecoveryPointByBackupVault struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecoveryPointByBackupVault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryPointByBackupVault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryPointByBackupVault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregatedScanResult != nil {
+		s.WriteStruct(schemas.RecoveryPointByBackupVault_AggregatedScanResult)
+		v.AggregatedScanResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.RecoveryPointByBackupVault_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CalculatedLifecycle != nil {
+		s.WriteStruct(schemas.RecoveryPointByBackupVault_CalculatedLifecycle)
+		v.CalculatedLifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.RecoveryPointByBackupVault_CompletionDate, *v.CompletionDate)
+	}
+	if v.CompositeMemberIdentifier != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_CompositeMemberIdentifier, *v.CompositeMemberIdentifier)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.RecoveryPointByBackupVault_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.RecoveryPointByBackupVault_CreationDate, *v.CreationDate)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyType != "" {
+		s.WriteString(schemas.RecoveryPointByBackupVault_EncryptionKeyType, string(v.EncryptionKeyType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.RecoveryPointByBackupVault_IndexStatus, string(v.IndexStatus))
+	}
+	if v.IndexStatusMessage != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_IndexStatusMessage, *v.IndexStatusMessage)
+	}
+	if v.InitiationDate != nil {
+		s.WriteTime(schemas.RecoveryPointByBackupVault_InitiationDate, *v.InitiationDate)
+	}
+	if v.IsEncrypted != false {
+		s.WriteBool(schemas.RecoveryPointByBackupVault_IsEncrypted, v.IsEncrypted)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.RecoveryPointByBackupVault_IsParent, v.IsParent)
+	}
+	if v.LastRestoreTime != nil {
+		s.WriteTime(schemas.RecoveryPointByBackupVault_LastRestoreTime, *v.LastRestoreTime)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.RecoveryPointByBackupVault_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentRecoveryPointArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_ParentRecoveryPointArn, *v.ParentRecoveryPointArn)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_ResourceType, *v.ResourceType)
+	}
+	if v.SourceBackupVaultArn != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_SourceBackupVaultArn, *v.SourceBackupVaultArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RecoveryPointByBackupVault_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.RecoveryPointByBackupVault_StatusMessage, *v.StatusMessage)
+	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.RecoveryPointByBackupVault_VaultType, string(v.VaultType))
+	}
+}
+func (v *RecoveryPointByBackupVault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryPointByBackupVault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryPointByBackupVault_AggregatedScanResult:
+			v.AggregatedScanResult = &AggregatedScanResult{}
+			return v.AggregatedScanResult.Deserialize(d)
+		case schemas.RecoveryPointByBackupVault_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.RecoveryPointByBackupVault_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.RecoveryPointByBackupVault_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_BackupVaultArn, v.BackupVaultArn)
+		case schemas.RecoveryPointByBackupVault_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_BackupVaultName, v.BackupVaultName)
+		case schemas.RecoveryPointByBackupVault_CalculatedLifecycle:
+			v.CalculatedLifecycle = &CalculatedLifecycle{}
+			return v.CalculatedLifecycle.Deserialize(d)
+		case schemas.RecoveryPointByBackupVault_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.RecoveryPointByBackupVault_CompletionDate, v.CompletionDate)
+		case schemas.RecoveryPointByBackupVault_CompositeMemberIdentifier:
+			v.CompositeMemberIdentifier = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_CompositeMemberIdentifier, v.CompositeMemberIdentifier)
+		case schemas.RecoveryPointByBackupVault_CreatedBy:
+			v.CreatedBy = &RecoveryPointCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.RecoveryPointByBackupVault_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.RecoveryPointByBackupVault_CreationDate, v.CreationDate)
+		case schemas.RecoveryPointByBackupVault_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.RecoveryPointByBackupVault_EncryptionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByBackupVault_EncryptionKeyType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionKeyType = EncryptionKeyType(ev)
+			return nil
+		case schemas.RecoveryPointByBackupVault_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_IamRoleArn, v.IamRoleArn)
+		case schemas.RecoveryPointByBackupVault_IndexStatus:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByBackupVault_IndexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = IndexStatus(ev)
+			return nil
+		case schemas.RecoveryPointByBackupVault_IndexStatusMessage:
+			v.IndexStatusMessage = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_IndexStatusMessage, v.IndexStatusMessage)
+		case schemas.RecoveryPointByBackupVault_InitiationDate:
+			v.InitiationDate = new(time.Time)
+			return d.ReadTime(schemas.RecoveryPointByBackupVault_InitiationDate, v.InitiationDate)
+		case schemas.RecoveryPointByBackupVault_IsEncrypted:
+			return d.ReadBool(schemas.RecoveryPointByBackupVault_IsEncrypted, &v.IsEncrypted)
+		case schemas.RecoveryPointByBackupVault_IsParent:
+			return d.ReadBool(schemas.RecoveryPointByBackupVault_IsParent, &v.IsParent)
+		case schemas.RecoveryPointByBackupVault_LastRestoreTime:
+			v.LastRestoreTime = new(time.Time)
+			return d.ReadTime(schemas.RecoveryPointByBackupVault_LastRestoreTime, v.LastRestoreTime)
+		case schemas.RecoveryPointByBackupVault_Lifecycle:
+			v.Lifecycle = &Lifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.RecoveryPointByBackupVault_ParentRecoveryPointArn:
+			v.ParentRecoveryPointArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_ParentRecoveryPointArn, v.ParentRecoveryPointArn)
+		case schemas.RecoveryPointByBackupVault_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.RecoveryPointByBackupVault_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_ResourceArn, v.ResourceArn)
+		case schemas.RecoveryPointByBackupVault_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_ResourceName, v.ResourceName)
+		case schemas.RecoveryPointByBackupVault_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_ResourceType, v.ResourceType)
+		case schemas.RecoveryPointByBackupVault_SourceBackupVaultArn:
+			v.SourceBackupVaultArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_SourceBackupVaultArn, v.SourceBackupVaultArn)
+		case schemas.RecoveryPointByBackupVault_Status:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByBackupVault_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecoveryPointStatus(ev)
+			return nil
+		case schemas.RecoveryPointByBackupVault_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.RecoveryPointByBackupVault_StatusMessage, v.StatusMessage)
+		case schemas.RecoveryPointByBackupVault_VaultType:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByBackupVault_VaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = VaultType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains detailed information about a saved recovery point.
 type RecoveryPointByResource struct {
 
@@ -1855,6 +3968,129 @@ type RecoveryPointByResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecoveryPointByResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryPointByResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryPointByResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregatedScanResult != nil {
+		s.WriteStruct(schemas.RecoveryPointByResource_AggregatedScanResult)
+		v.AggregatedScanResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackupSizeBytes != nil {
+		s.WriteInt64(schemas.RecoveryPointByResource_BackupSizeBytes, *v.BackupSizeBytes)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.RecoveryPointByResource_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.RecoveryPointByResource_CreationDate, *v.CreationDate)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.RecoveryPointByResource_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyType != "" {
+		s.WriteString(schemas.RecoveryPointByResource_EncryptionKeyType, string(v.EncryptionKeyType))
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.RecoveryPointByResource_IndexStatus, string(v.IndexStatus))
+	}
+	if v.IndexStatusMessage != nil {
+		s.WriteString(schemas.RecoveryPointByResource_IndexStatusMessage, *v.IndexStatusMessage)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.RecoveryPointByResource_IsParent, v.IsParent)
+	}
+	if v.ParentRecoveryPointArn != nil {
+		s.WriteString(schemas.RecoveryPointByResource_ParentRecoveryPointArn, *v.ParentRecoveryPointArn)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.RecoveryPointByResource_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.RecoveryPointByResource_ResourceName, *v.ResourceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RecoveryPointByResource_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.RecoveryPointByResource_StatusMessage, *v.StatusMessage)
+	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.RecoveryPointByResource_VaultType, string(v.VaultType))
+	}
+}
+func (v *RecoveryPointByResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryPointByResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryPointByResource_AggregatedScanResult:
+			v.AggregatedScanResult = &AggregatedScanResult{}
+			return v.AggregatedScanResult.Deserialize(d)
+		case schemas.RecoveryPointByResource_BackupSizeBytes:
+			v.BackupSizeBytes = new(int64)
+			return d.ReadInt64(schemas.RecoveryPointByResource_BackupSizeBytes, v.BackupSizeBytes)
+		case schemas.RecoveryPointByResource_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_BackupVaultName, v.BackupVaultName)
+		case schemas.RecoveryPointByResource_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.RecoveryPointByResource_CreationDate, v.CreationDate)
+		case schemas.RecoveryPointByResource_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.RecoveryPointByResource_EncryptionKeyType:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByResource_EncryptionKeyType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionKeyType = EncryptionKeyType(ev)
+			return nil
+		case schemas.RecoveryPointByResource_IndexStatus:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByResource_IndexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = IndexStatus(ev)
+			return nil
+		case schemas.RecoveryPointByResource_IndexStatusMessage:
+			v.IndexStatusMessage = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_IndexStatusMessage, v.IndexStatusMessage)
+		case schemas.RecoveryPointByResource_IsParent:
+			return d.ReadBool(schemas.RecoveryPointByResource_IsParent, &v.IsParent)
+		case schemas.RecoveryPointByResource_ParentRecoveryPointArn:
+			v.ParentRecoveryPointArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_ParentRecoveryPointArn, v.ParentRecoveryPointArn)
+		case schemas.RecoveryPointByResource_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.RecoveryPointByResource_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_ResourceName, v.ResourceName)
+		case schemas.RecoveryPointByResource_Status:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByResource_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecoveryPointStatus(ev)
+			return nil
+		case schemas.RecoveryPointByResource_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.RecoveryPointByResource_StatusMessage, v.StatusMessage)
+		case schemas.RecoveryPointByResource_VaultType:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryPointByResource_VaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = VaultType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the backup plan and rule that Backup used to
 // initiate the recovery point backup.
 type RecoveryPointCreator struct {
@@ -1895,6 +4131,70 @@ type RecoveryPointCreator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecoveryPointCreator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryPointCreator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryPointCreator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.BackupPlanName != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupPlanName, *v.BackupPlanName)
+	}
+	if v.BackupPlanVersion != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupPlanVersion, *v.BackupPlanVersion)
+	}
+	if v.BackupRuleCron != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupRuleCron, *v.BackupRuleCron)
+	}
+	if v.BackupRuleId != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupRuleId, *v.BackupRuleId)
+	}
+	if v.BackupRuleName != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupRuleName, *v.BackupRuleName)
+	}
+	if v.BackupRuleTimezone != nil {
+		s.WriteString(schemas.RecoveryPointCreator_BackupRuleTimezone, *v.BackupRuleTimezone)
+	}
+}
+func (v *RecoveryPointCreator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryPointCreator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryPointCreator_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupPlanArn, v.BackupPlanArn)
+		case schemas.RecoveryPointCreator_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupPlanId, v.BackupPlanId)
+		case schemas.RecoveryPointCreator_BackupPlanName:
+			v.BackupPlanName = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupPlanName, v.BackupPlanName)
+		case schemas.RecoveryPointCreator_BackupPlanVersion:
+			v.BackupPlanVersion = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupPlanVersion, v.BackupPlanVersion)
+		case schemas.RecoveryPointCreator_BackupRuleCron:
+			v.BackupRuleCron = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupRuleCron, v.BackupRuleCron)
+		case schemas.RecoveryPointCreator_BackupRuleId:
+			v.BackupRuleId = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupRuleId, v.BackupRuleId)
+		case schemas.RecoveryPointCreator_BackupRuleName:
+			v.BackupRuleName = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupRuleName, v.BackupRuleName)
+		case schemas.RecoveryPointCreator_BackupRuleTimezone:
+			v.BackupRuleTimezone = new(string)
+			return d.ReadString(schemas.RecoveryPointCreator_BackupRuleTimezone, v.BackupRuleTimezone)
+		}
+		return nil
+	})
+}
+
 // This is a recovery point which is a child (nested) recovery point of a parent
 // (composite) recovery point. These recovery points can be disassociated from
 // their parent (composite) recovery point, in which case they will no longer be a
@@ -1915,6 +4215,46 @@ type RecoveryPointMember struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecoveryPointMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryPointMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryPointMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.RecoveryPointMember_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.RecoveryPointMember_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RecoveryPointMember_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RecoveryPointMember_ResourceType, *v.ResourceType)
+	}
+}
+func (v *RecoveryPointMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryPointMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryPointMember_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.RecoveryPointMember_BackupVaultName, v.BackupVaultName)
+		case schemas.RecoveryPointMember_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.RecoveryPointMember_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.RecoveryPointMember_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.RecoveryPointMember_ResourceArn, v.ResourceArn)
+		case schemas.RecoveryPointMember_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RecoveryPointMember_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // This specifies criteria to assign a set of resources, such as resource types or
@@ -1940,6 +4280,36 @@ type RecoveryPointSelection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecoveryPointSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryPointSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryPointSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.RecoveryPointSelection_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceIdentifiers(s, schemas.RecoveryPointSelection_ResourceIdentifiers, v.ResourceIdentifiers)
+	serializeVaultNames(s, schemas.RecoveryPointSelection_VaultNames, v.VaultNames)
+}
+func (v *RecoveryPointSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryPointSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryPointSelection_DateRange:
+			v.DateRange = &DateRange{}
+			return v.DateRange.Deserialize(d)
+		case schemas.RecoveryPointSelection_ResourceIdentifiers:
+			return deserializeResourceIdentifiers(d, schemas.RecoveryPointSelection_ResourceIdentifiers, &v.ResourceIdentifiers)
+		case schemas.RecoveryPointSelection_VaultNames:
+			return deserializeVaultNames(d, schemas.RecoveryPointSelection_VaultNames, &v.VaultNames)
+		}
+		return nil
+	})
+}
+
 // Contains information from your report plan about where to deliver your reports,
 // specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your
 // reports.
@@ -1963,6 +4333,37 @@ type ReportDeliveryChannel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportDeliveryChannel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportDeliveryChannel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportDeliveryChannel) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormatList(s, schemas.ReportDeliveryChannel_Formats, v.Formats)
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.ReportDeliveryChannel_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.ReportDeliveryChannel_S3KeyPrefix, *v.S3KeyPrefix)
+	}
+}
+func (v *ReportDeliveryChannel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportDeliveryChannel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportDeliveryChannel_Formats:
+			return deserializeFormatList(d, schemas.ReportDeliveryChannel_Formats, &v.Formats)
+		case schemas.ReportDeliveryChannel_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.ReportDeliveryChannel_S3BucketName, v.S3BucketName)
+		case schemas.ReportDeliveryChannel_S3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.ReportDeliveryChannel_S3KeyPrefix, v.S3KeyPrefix)
+		}
+		return nil
+	})
+}
+
 // Contains information from your report job about your report destination.
 type ReportDestination struct {
 
@@ -1973,6 +4374,31 @@ type ReportDestination struct {
 	S3Keys []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReportDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.ReportDestination_S3BucketName, *v.S3BucketName)
+	}
+	serializestringList(s, schemas.ReportDestination_S3Keys, v.S3Keys)
+}
+func (v *ReportDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportDestination_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.ReportDestination_S3BucketName, v.S3BucketName)
+		case schemas.ReportDestination_S3Keys:
+			return deserializestringList(d, schemas.ReportDestination_S3Keys, &v.S3Keys)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about a report job. A report job compiles a
@@ -2023,6 +4449,72 @@ type ReportJob struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReportJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.ReportJob_CompletionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ReportJob_CreationTime, *v.CreationTime)
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.ReportJob_ReportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportJobId != nil {
+		s.WriteString(schemas.ReportJob_ReportJobId, *v.ReportJobId)
+	}
+	if v.ReportPlanArn != nil {
+		s.WriteString(schemas.ReportJob_ReportPlanArn, *v.ReportPlanArn)
+	}
+	if v.ReportTemplate != nil {
+		s.WriteString(schemas.ReportJob_ReportTemplate, *v.ReportTemplate)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ReportJob_Status, *v.Status)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReportJob_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ReportJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportJob_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.ReportJob_CompletionTime, v.CompletionTime)
+		case schemas.ReportJob_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ReportJob_CreationTime, v.CreationTime)
+		case schemas.ReportJob_ReportDestination:
+			v.ReportDestination = &ReportDestination{}
+			return v.ReportDestination.Deserialize(d)
+		case schemas.ReportJob_ReportJobId:
+			v.ReportJobId = new(string)
+			return d.ReadString(schemas.ReportJob_ReportJobId, v.ReportJobId)
+		case schemas.ReportJob_ReportPlanArn:
+			v.ReportPlanArn = new(string)
+			return d.ReadString(schemas.ReportJob_ReportPlanArn, v.ReportPlanArn)
+		case schemas.ReportJob_ReportTemplate:
+			v.ReportTemplate = new(string)
+			return d.ReadString(schemas.ReportJob_ReportTemplate, v.ReportTemplate)
+		case schemas.ReportJob_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ReportJob_Status, v.Status)
+		case schemas.ReportJob_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReportJob_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about a report plan.
@@ -2081,6 +4573,80 @@ type ReportPlan struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportPlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportPlan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ReportPlan_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.ReportPlan_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.LastAttemptedExecutionTime != nil {
+		s.WriteTime(schemas.ReportPlan_LastAttemptedExecutionTime, *v.LastAttemptedExecutionTime)
+	}
+	if v.LastSuccessfulExecutionTime != nil {
+		s.WriteTime(schemas.ReportPlan_LastSuccessfulExecutionTime, *v.LastSuccessfulExecutionTime)
+	}
+	if v.ReportDeliveryChannel != nil {
+		s.WriteStruct(schemas.ReportPlan_ReportDeliveryChannel)
+		v.ReportDeliveryChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportPlanArn != nil {
+		s.WriteString(schemas.ReportPlan_ReportPlanArn, *v.ReportPlanArn)
+	}
+	if v.ReportPlanDescription != nil {
+		s.WriteString(schemas.ReportPlan_ReportPlanDescription, *v.ReportPlanDescription)
+	}
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.ReportPlan_ReportPlanName, *v.ReportPlanName)
+	}
+	if v.ReportSetting != nil {
+		s.WriteStruct(schemas.ReportPlan_ReportSetting)
+		v.ReportSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReportPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportPlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportPlan_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ReportPlan_CreationTime, v.CreationTime)
+		case schemas.ReportPlan_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.ReportPlan_DeploymentStatus, v.DeploymentStatus)
+		case schemas.ReportPlan_LastAttemptedExecutionTime:
+			v.LastAttemptedExecutionTime = new(time.Time)
+			return d.ReadTime(schemas.ReportPlan_LastAttemptedExecutionTime, v.LastAttemptedExecutionTime)
+		case schemas.ReportPlan_LastSuccessfulExecutionTime:
+			v.LastSuccessfulExecutionTime = new(time.Time)
+			return d.ReadTime(schemas.ReportPlan_LastSuccessfulExecutionTime, v.LastSuccessfulExecutionTime)
+		case schemas.ReportPlan_ReportDeliveryChannel:
+			v.ReportDeliveryChannel = &ReportDeliveryChannel{}
+			return v.ReportDeliveryChannel.Deserialize(d)
+		case schemas.ReportPlan_ReportPlanArn:
+			v.ReportPlanArn = new(string)
+			return d.ReadString(schemas.ReportPlan_ReportPlanArn, v.ReportPlanArn)
+		case schemas.ReportPlan_ReportPlanDescription:
+			v.ReportPlanDescription = new(string)
+			return d.ReadString(schemas.ReportPlan_ReportPlanDescription, v.ReportPlanDescription)
+		case schemas.ReportPlan_ReportPlanName:
+			v.ReportPlanName = new(string)
+			return d.ReadString(schemas.ReportPlan_ReportPlanName, v.ReportPlanName)
+		case schemas.ReportPlan_ReportSetting:
+			v.ReportSetting = &ReportSetting{}
+			return v.ReportSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains detailed information about a report setting.
 type ReportSetting struct {
 
@@ -2115,6 +4681,45 @@ type ReportSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	serializestringList(s, schemas.ReportSetting_Accounts, v.Accounts)
+	serializestringList(s, schemas.ReportSetting_FrameworkArns, v.FrameworkArns)
+	if v.NumberOfFrameworks != 0 {
+		s.WriteInt32(schemas.ReportSetting_NumberOfFrameworks, v.NumberOfFrameworks)
+	}
+	serializestringList(s, schemas.ReportSetting_OrganizationUnits, v.OrganizationUnits)
+	serializestringList(s, schemas.ReportSetting_Regions, v.Regions)
+	if v.ReportTemplate != nil {
+		s.WriteString(schemas.ReportSetting_ReportTemplate, *v.ReportTemplate)
+	}
+}
+func (v *ReportSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportSetting_Accounts:
+			return deserializestringList(d, schemas.ReportSetting_Accounts, &v.Accounts)
+		case schemas.ReportSetting_FrameworkArns:
+			return deserializestringList(d, schemas.ReportSetting_FrameworkArns, &v.FrameworkArns)
+		case schemas.ReportSetting_NumberOfFrameworks:
+			return d.ReadInt32(schemas.ReportSetting_NumberOfFrameworks, &v.NumberOfFrameworks)
+		case schemas.ReportSetting_OrganizationUnits:
+			return deserializestringList(d, schemas.ReportSetting_OrganizationUnits, &v.OrganizationUnits)
+		case schemas.ReportSetting_Regions:
+			return deserializestringList(d, schemas.ReportSetting_Regions, &v.Regions)
+		case schemas.ReportSetting_ReportTemplate:
+			v.ReportTemplate = new(string)
+			return d.ReadString(schemas.ReportSetting_ReportTemplate, v.ReportTemplate)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about resource selection for tiering configurations.
 //
 // You can specify up to 5 different resource selections per tiering
@@ -2145,6 +4750,37 @@ type ResourceSelection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceSelection_ResourceType, *v.ResourceType)
+	}
+	serializeResourceArns(s, schemas.ResourceSelection_Resources, v.Resources)
+	if v.TieringDownSettingsInDays != nil {
+		s.WriteInt32(schemas.ResourceSelection_TieringDownSettingsInDays, *v.TieringDownSettingsInDays)
+	}
+}
+func (v *ResourceSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSelection_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceSelection_ResourceType, v.ResourceType)
+		case schemas.ResourceSelection_Resources:
+			return deserializeResourceArns(d, schemas.ResourceSelection_Resources, &v.Resources)
+		case schemas.ResourceSelection_TieringDownSettingsInDays:
+			v.TieringDownSettingsInDays = new(int32)
+			return d.ReadInt32(schemas.ResourceSelection_TieringDownSettingsInDays, v.TieringDownSettingsInDays)
+		}
+		return nil
+	})
+}
+
 // Contains information about a restore access backup vault.
 type RestoreAccessBackupVaultListMember struct {
 
@@ -2166,6 +4802,58 @@ type RestoreAccessBackupVaultListMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreAccessBackupVaultListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreAccessBackupVaultListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreAccessBackupVaultListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalDate != nil {
+		s.WriteTime(schemas.RestoreAccessBackupVaultListMember_ApprovalDate, *v.ApprovalDate)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.RestoreAccessBackupVaultListMember_CreationDate, *v.CreationDate)
+	}
+	if v.LatestRevokeRequest != nil {
+		s.WriteStruct(schemas.RestoreAccessBackupVaultListMember_LatestRevokeRequest)
+		v.LatestRevokeRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RestoreAccessBackupVaultArn != nil {
+		s.WriteString(schemas.RestoreAccessBackupVaultListMember_RestoreAccessBackupVaultArn, *v.RestoreAccessBackupVaultArn)
+	}
+	if v.VaultState != "" {
+		s.WriteString(schemas.RestoreAccessBackupVaultListMember_VaultState, string(v.VaultState))
+	}
+}
+func (v *RestoreAccessBackupVaultListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreAccessBackupVaultListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreAccessBackupVaultListMember_ApprovalDate:
+			v.ApprovalDate = new(time.Time)
+			return d.ReadTime(schemas.RestoreAccessBackupVaultListMember_ApprovalDate, v.ApprovalDate)
+		case schemas.RestoreAccessBackupVaultListMember_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.RestoreAccessBackupVaultListMember_CreationDate, v.CreationDate)
+		case schemas.RestoreAccessBackupVaultListMember_LatestRevokeRequest:
+			v.LatestRevokeRequest = &LatestRevokeRequest{}
+			return v.LatestRevokeRequest.Deserialize(d)
+		case schemas.RestoreAccessBackupVaultListMember_RestoreAccessBackupVaultArn:
+			v.RestoreAccessBackupVaultArn = new(string)
+			return d.ReadString(schemas.RestoreAccessBackupVaultListMember_RestoreAccessBackupVaultArn, v.RestoreAccessBackupVaultArn)
+		case schemas.RestoreAccessBackupVaultListMember_VaultState:
+			var ev string
+			if err := d.ReadString(schemas.RestoreAccessBackupVaultListMember_VaultState, &ev); err != nil {
+				return err
+			}
+			v.VaultState = VaultState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the restore testing plan that Backup used to
 // initiate the restore job.
 type RestoreJobCreator struct {
@@ -2174,6 +4862,28 @@ type RestoreJobCreator struct {
 	RestoreTestingPlanArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RestoreJobCreator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreJobCreator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreJobCreator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreTestingPlanArn != nil {
+		s.WriteString(schemas.RestoreJobCreator_RestoreTestingPlanArn, *v.RestoreTestingPlanArn)
+	}
+}
+func (v *RestoreJobCreator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreJobCreator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreJobCreator_RestoreTestingPlanArn:
+			v.RestoreTestingPlanArn = new(string)
+			return d.ReadString(schemas.RestoreJobCreator_RestoreTestingPlanArn, v.RestoreTestingPlanArn)
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a restore job.
@@ -2272,6 +4982,173 @@ type RestoreJobsListMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreJobsListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreJobsListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreJobsListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RestoreJobsListMember_AccountId, *v.AccountId)
+	}
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.RestoreJobsListMember_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.RestoreJobsListMember_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.RestoreJobsListMember_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.RestoreJobsListMember_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedResourceArn != nil {
+		s.WriteString(schemas.RestoreJobsListMember_CreatedResourceArn, *v.CreatedResourceArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.RestoreJobsListMember_CreationDate, *v.CreationDate)
+	}
+	if v.DeletionStatus != "" {
+		s.WriteString(schemas.RestoreJobsListMember_DeletionStatus, string(v.DeletionStatus))
+	}
+	if v.DeletionStatusMessage != nil {
+		s.WriteString(schemas.RestoreJobsListMember_DeletionStatusMessage, *v.DeletionStatusMessage)
+	}
+	if v.ExpectedCompletionTimeMinutes != nil {
+		s.WriteInt64(schemas.RestoreJobsListMember_ExpectedCompletionTimeMinutes, *v.ExpectedCompletionTimeMinutes)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.RestoreJobsListMember_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.RestoreJobsListMember_IsParent, v.IsParent)
+	}
+	if v.ParentJobId != nil {
+		s.WriteString(schemas.RestoreJobsListMember_ParentJobId, *v.ParentJobId)
+	}
+	if v.PercentDone != nil {
+		s.WriteString(schemas.RestoreJobsListMember_PercentDone, *v.PercentDone)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.RestoreJobsListMember_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.RecoveryPointCreationDate != nil {
+		s.WriteTime(schemas.RestoreJobsListMember_RecoveryPointCreationDate, *v.RecoveryPointCreationDate)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RestoreJobsListMember_ResourceType, *v.ResourceType)
+	}
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.RestoreJobsListMember_RestoreJobId, *v.RestoreJobId)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.RestoreJobsListMember_SourceResourceArn, *v.SourceResourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RestoreJobsListMember_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.RestoreJobsListMember_StatusMessage, *v.StatusMessage)
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.RestoreJobsListMember_ValidationStatus, string(v.ValidationStatus))
+	}
+	if v.ValidationStatusMessage != nil {
+		s.WriteString(schemas.RestoreJobsListMember_ValidationStatusMessage, *v.ValidationStatusMessage)
+	}
+}
+func (v *RestoreJobsListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreJobsListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreJobsListMember_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_AccountId, v.AccountId)
+		case schemas.RestoreJobsListMember_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.RestoreJobsListMember_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.RestoreJobsListMember_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_BackupVaultArn, v.BackupVaultArn)
+		case schemas.RestoreJobsListMember_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.RestoreJobsListMember_CompletionDate, v.CompletionDate)
+		case schemas.RestoreJobsListMember_CreatedBy:
+			v.CreatedBy = &RestoreJobCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.RestoreJobsListMember_CreatedResourceArn:
+			v.CreatedResourceArn = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_CreatedResourceArn, v.CreatedResourceArn)
+		case schemas.RestoreJobsListMember_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.RestoreJobsListMember_CreationDate, v.CreationDate)
+		case schemas.RestoreJobsListMember_DeletionStatus:
+			var ev string
+			if err := d.ReadString(schemas.RestoreJobsListMember_DeletionStatus, &ev); err != nil {
+				return err
+			}
+			v.DeletionStatus = RestoreDeletionStatus(ev)
+			return nil
+		case schemas.RestoreJobsListMember_DeletionStatusMessage:
+			v.DeletionStatusMessage = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_DeletionStatusMessage, v.DeletionStatusMessage)
+		case schemas.RestoreJobsListMember_ExpectedCompletionTimeMinutes:
+			v.ExpectedCompletionTimeMinutes = new(int64)
+			return d.ReadInt64(schemas.RestoreJobsListMember_ExpectedCompletionTimeMinutes, v.ExpectedCompletionTimeMinutes)
+		case schemas.RestoreJobsListMember_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_IamRoleArn, v.IamRoleArn)
+		case schemas.RestoreJobsListMember_IsParent:
+			return d.ReadBool(schemas.RestoreJobsListMember_IsParent, &v.IsParent)
+		case schemas.RestoreJobsListMember_ParentJobId:
+			v.ParentJobId = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_ParentJobId, v.ParentJobId)
+		case schemas.RestoreJobsListMember_PercentDone:
+			v.PercentDone = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_PercentDone, v.PercentDone)
+		case schemas.RestoreJobsListMember_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.RestoreJobsListMember_RecoveryPointCreationDate:
+			v.RecoveryPointCreationDate = new(time.Time)
+			return d.ReadTime(schemas.RestoreJobsListMember_RecoveryPointCreationDate, v.RecoveryPointCreationDate)
+		case schemas.RestoreJobsListMember_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_ResourceType, v.ResourceType)
+		case schemas.RestoreJobsListMember_RestoreJobId:
+			v.RestoreJobId = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_RestoreJobId, v.RestoreJobId)
+		case schemas.RestoreJobsListMember_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_SourceResourceArn, v.SourceResourceArn)
+		case schemas.RestoreJobsListMember_Status:
+			var ev string
+			if err := d.ReadString(schemas.RestoreJobsListMember_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RestoreJobStatus(ev)
+			return nil
+		case schemas.RestoreJobsListMember_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_StatusMessage, v.StatusMessage)
+		case schemas.RestoreJobsListMember_ValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.RestoreJobsListMember_ValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = RestoreValidationStatus(ev)
+			return nil
+		case schemas.RestoreJobsListMember_ValidationStatusMessage:
+			v.ValidationStatusMessage = new(string)
+			return d.ReadString(schemas.RestoreJobsListMember_ValidationStatusMessage, v.ValidationStatusMessage)
+		}
+		return nil
+	})
+}
+
 // This is a summary of restore jobs created or running within the most recent 14
 // days.
 //
@@ -2310,6 +5187,67 @@ type RestoreJobSummary struct {
 	State RestoreJobState
 
 	noSmithyDocumentSerde
+}
+
+func (v *RestoreJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.RestoreJobSummary_AccountId, *v.AccountId)
+	}
+	if v.Count != 0 {
+		s.WriteInt32(schemas.RestoreJobSummary_Count, v.Count)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.RestoreJobSummary_EndTime, *v.EndTime)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RestoreJobSummary_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RestoreJobSummary_ResourceType, *v.ResourceType)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.RestoreJobSummary_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RestoreJobSummary_State, string(v.State))
+	}
+}
+func (v *RestoreJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreJobSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.RestoreJobSummary_AccountId, v.AccountId)
+		case schemas.RestoreJobSummary_Count:
+			return d.ReadInt32(schemas.RestoreJobSummary_Count, &v.Count)
+		case schemas.RestoreJobSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreJobSummary_EndTime, v.EndTime)
+		case schemas.RestoreJobSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RestoreJobSummary_Region, v.Region)
+		case schemas.RestoreJobSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RestoreJobSummary_ResourceType, v.ResourceType)
+		case schemas.RestoreJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreJobSummary_StartTime, v.StartTime)
+		case schemas.RestoreJobSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.RestoreJobSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = RestoreJobState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This contains metadata about a restore testing plan.
@@ -2372,6 +5310,53 @@ type RestoreTestingPlanForCreate struct {
 	StartWindowHours int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RestoreTestingPlanForCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingPlanForCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingPlanForCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPointSelection != nil {
+		s.WriteStruct(schemas.RestoreTestingPlanForCreate_RecoveryPointSelection)
+		v.RecoveryPointSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.RestoreTestingPlanForCreate_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.RestoreTestingPlanForCreate_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimezone != nil {
+		s.WriteString(schemas.RestoreTestingPlanForCreate_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
+	}
+	if v.StartWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingPlanForCreate_StartWindowHours, v.StartWindowHours)
+	}
+}
+func (v *RestoreTestingPlanForCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingPlanForCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingPlanForCreate_RecoveryPointSelection:
+			v.RecoveryPointSelection = &RestoreTestingRecoveryPointSelection{}
+			return v.RecoveryPointSelection.Deserialize(d)
+		case schemas.RestoreTestingPlanForCreate_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForCreate_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		case schemas.RestoreTestingPlanForCreate_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForCreate_ScheduleExpression, v.ScheduleExpression)
+		case schemas.RestoreTestingPlanForCreate_ScheduleExpressionTimezone:
+			v.ScheduleExpressionTimezone = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForCreate_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
+		case schemas.RestoreTestingPlanForCreate_StartWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingPlanForCreate_StartWindowHours, &v.StartWindowHours)
+		}
+		return nil
+	})
 }
 
 // This contains metadata about a restore testing plan.
@@ -2443,6 +5428,83 @@ type RestoreTestingPlanForGet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTestingPlanForGet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingPlanForGet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingPlanForGet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RestoreTestingPlanForGet_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.RestoreTestingPlanForGet_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.LastExecutionTime != nil {
+		s.WriteTime(schemas.RestoreTestingPlanForGet_LastExecutionTime, *v.LastExecutionTime)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.RestoreTestingPlanForGet_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.RecoveryPointSelection != nil {
+		s.WriteStruct(schemas.RestoreTestingPlanForGet_RecoveryPointSelection)
+		v.RecoveryPointSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RestoreTestingPlanArn != nil {
+		s.WriteString(schemas.RestoreTestingPlanForGet_RestoreTestingPlanArn, *v.RestoreTestingPlanArn)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.RestoreTestingPlanForGet_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.RestoreTestingPlanForGet_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimezone != nil {
+		s.WriteString(schemas.RestoreTestingPlanForGet_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
+	}
+	if v.StartWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingPlanForGet_StartWindowHours, v.StartWindowHours)
+	}
+}
+func (v *RestoreTestingPlanForGet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingPlanForGet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingPlanForGet_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingPlanForGet_CreationTime, v.CreationTime)
+		case schemas.RestoreTestingPlanForGet_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForGet_CreatorRequestId, v.CreatorRequestId)
+		case schemas.RestoreTestingPlanForGet_LastExecutionTime:
+			v.LastExecutionTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingPlanForGet_LastExecutionTime, v.LastExecutionTime)
+		case schemas.RestoreTestingPlanForGet_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingPlanForGet_LastUpdateTime, v.LastUpdateTime)
+		case schemas.RestoreTestingPlanForGet_RecoveryPointSelection:
+			v.RecoveryPointSelection = &RestoreTestingRecoveryPointSelection{}
+			return v.RecoveryPointSelection.Deserialize(d)
+		case schemas.RestoreTestingPlanForGet_RestoreTestingPlanArn:
+			v.RestoreTestingPlanArn = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForGet_RestoreTestingPlanArn, v.RestoreTestingPlanArn)
+		case schemas.RestoreTestingPlanForGet_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForGet_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		case schemas.RestoreTestingPlanForGet_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForGet_ScheduleExpression, v.ScheduleExpression)
+		case schemas.RestoreTestingPlanForGet_ScheduleExpressionTimezone:
+			v.ScheduleExpressionTimezone = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForGet_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
+		case schemas.RestoreTestingPlanForGet_StartWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingPlanForGet_StartWindowHours, &v.StartWindowHours)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a restore testing plan.
 type RestoreTestingPlanForList struct {
 
@@ -2498,6 +5560,69 @@ type RestoreTestingPlanForList struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTestingPlanForList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingPlanForList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingPlanForList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RestoreTestingPlanForList_CreationTime, *v.CreationTime)
+	}
+	if v.LastExecutionTime != nil {
+		s.WriteTime(schemas.RestoreTestingPlanForList_LastExecutionTime, *v.LastExecutionTime)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.RestoreTestingPlanForList_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.RestoreTestingPlanArn != nil {
+		s.WriteString(schemas.RestoreTestingPlanForList_RestoreTestingPlanArn, *v.RestoreTestingPlanArn)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.RestoreTestingPlanForList_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.RestoreTestingPlanForList_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimezone != nil {
+		s.WriteString(schemas.RestoreTestingPlanForList_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
+	}
+	if v.StartWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingPlanForList_StartWindowHours, v.StartWindowHours)
+	}
+}
+func (v *RestoreTestingPlanForList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingPlanForList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingPlanForList_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingPlanForList_CreationTime, v.CreationTime)
+		case schemas.RestoreTestingPlanForList_LastExecutionTime:
+			v.LastExecutionTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingPlanForList_LastExecutionTime, v.LastExecutionTime)
+		case schemas.RestoreTestingPlanForList_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingPlanForList_LastUpdateTime, v.LastUpdateTime)
+		case schemas.RestoreTestingPlanForList_RestoreTestingPlanArn:
+			v.RestoreTestingPlanArn = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForList_RestoreTestingPlanArn, v.RestoreTestingPlanArn)
+		case schemas.RestoreTestingPlanForList_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForList_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		case schemas.RestoreTestingPlanForList_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForList_ScheduleExpression, v.ScheduleExpression)
+		case schemas.RestoreTestingPlanForList_ScheduleExpressionTimezone:
+			v.ScheduleExpressionTimezone = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForList_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
+		case schemas.RestoreTestingPlanForList_StartWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingPlanForList_StartWindowHours, &v.StartWindowHours)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a restore testing plan.
 type RestoreTestingPlanForUpdate struct {
 
@@ -2525,6 +5650,47 @@ type RestoreTestingPlanForUpdate struct {
 	StartWindowHours int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RestoreTestingPlanForUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingPlanForUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingPlanForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPointSelection != nil {
+		s.WriteStruct(schemas.RestoreTestingPlanForUpdate_RecoveryPointSelection)
+		v.RecoveryPointSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.RestoreTestingPlanForUpdate_ScheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleExpressionTimezone != nil {
+		s.WriteString(schemas.RestoreTestingPlanForUpdate_ScheduleExpressionTimezone, *v.ScheduleExpressionTimezone)
+	}
+	if v.StartWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingPlanForUpdate_StartWindowHours, v.StartWindowHours)
+	}
+}
+func (v *RestoreTestingPlanForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingPlanForUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingPlanForUpdate_RecoveryPointSelection:
+			v.RecoveryPointSelection = &RestoreTestingRecoveryPointSelection{}
+			return v.RecoveryPointSelection.Deserialize(d)
+		case schemas.RestoreTestingPlanForUpdate_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForUpdate_ScheduleExpression, v.ScheduleExpression)
+		case schemas.RestoreTestingPlanForUpdate_ScheduleExpressionTimezone:
+			v.ScheduleExpressionTimezone = new(string)
+			return d.ReadString(schemas.RestoreTestingPlanForUpdate_ScheduleExpressionTimezone, v.ScheduleExpressionTimezone)
+		case schemas.RestoreTestingPlanForUpdate_StartWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingPlanForUpdate_StartWindowHours, &v.StartWindowHours)
+		}
+		return nil
+	})
 }
 
 // RecoveryPointSelection has five parameters (three required and two optional).
@@ -2581,6 +5747,46 @@ type RestoreTestingRecoveryPointSelection struct {
 	SelectionWindowDays int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RestoreTestingRecoveryPointSelection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingRecoveryPointSelection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingRecoveryPointSelection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != "" {
+		s.WriteString(schemas.RestoreTestingRecoveryPointSelection_Algorithm, string(v.Algorithm))
+	}
+	serializestringList(s, schemas.RestoreTestingRecoveryPointSelection_ExcludeVaults, v.ExcludeVaults)
+	serializestringList(s, schemas.RestoreTestingRecoveryPointSelection_IncludeVaults, v.IncludeVaults)
+	serializeRestoreTestingRecoveryPointTypeList(s, schemas.RestoreTestingRecoveryPointSelection_RecoveryPointTypes, v.RecoveryPointTypes)
+	if v.SelectionWindowDays != 0 {
+		s.WriteInt32(schemas.RestoreTestingRecoveryPointSelection_SelectionWindowDays, v.SelectionWindowDays)
+	}
+}
+func (v *RestoreTestingRecoveryPointSelection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingRecoveryPointSelection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingRecoveryPointSelection_Algorithm:
+			var ev string
+			if err := d.ReadString(schemas.RestoreTestingRecoveryPointSelection_Algorithm, &ev); err != nil {
+				return err
+			}
+			v.Algorithm = RestoreTestingRecoveryPointSelectionAlgorithm(ev)
+			return nil
+		case schemas.RestoreTestingRecoveryPointSelection_ExcludeVaults:
+			return deserializestringList(d, schemas.RestoreTestingRecoveryPointSelection_ExcludeVaults, &v.ExcludeVaults)
+		case schemas.RestoreTestingRecoveryPointSelection_IncludeVaults:
+			return deserializestringList(d, schemas.RestoreTestingRecoveryPointSelection_IncludeVaults, &v.IncludeVaults)
+		case schemas.RestoreTestingRecoveryPointSelection_RecoveryPointTypes:
+			return deserializeRestoreTestingRecoveryPointTypeList(d, schemas.RestoreTestingRecoveryPointSelection_RecoveryPointTypes, &v.RecoveryPointTypes)
+		case schemas.RestoreTestingRecoveryPointSelection_SelectionWindowDays:
+			return d.ReadInt32(schemas.RestoreTestingRecoveryPointSelection_SelectionWindowDays, &v.SelectionWindowDays)
+		}
+		return nil
+	})
 }
 
 // This contains metadata about a specific restore testing selection.
@@ -2675,6 +5881,59 @@ type RestoreTestingSelectionForCreate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTestingSelectionForCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingSelectionForCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingSelectionForCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForCreate_IamRoleArn, *v.IamRoleArn)
+	}
+	serializestringList(s, schemas.RestoreTestingSelectionForCreate_ProtectedResourceArns, v.ProtectedResourceArns)
+	if v.ProtectedResourceConditions != nil {
+		s.WriteStruct(schemas.RestoreTestingSelectionForCreate_ProtectedResourceConditions)
+		v.ProtectedResourceConditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtectedResourceType != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForCreate_ProtectedResourceType, *v.ProtectedResourceType)
+	}
+	serializeSensitiveStringMap(s, schemas.RestoreTestingSelectionForCreate_RestoreMetadataOverrides, v.RestoreMetadataOverrides)
+	if v.RestoreTestingSelectionName != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForCreate_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
+	}
+	if v.ValidationWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingSelectionForCreate_ValidationWindowHours, v.ValidationWindowHours)
+	}
+}
+func (v *RestoreTestingSelectionForCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingSelectionForCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingSelectionForCreate_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForCreate_IamRoleArn, v.IamRoleArn)
+		case schemas.RestoreTestingSelectionForCreate_ProtectedResourceArns:
+			return deserializestringList(d, schemas.RestoreTestingSelectionForCreate_ProtectedResourceArns, &v.ProtectedResourceArns)
+		case schemas.RestoreTestingSelectionForCreate_ProtectedResourceConditions:
+			v.ProtectedResourceConditions = &ProtectedResourceConditions{}
+			return v.ProtectedResourceConditions.Deserialize(d)
+		case schemas.RestoreTestingSelectionForCreate_ProtectedResourceType:
+			v.ProtectedResourceType = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForCreate_ProtectedResourceType, v.ProtectedResourceType)
+		case schemas.RestoreTestingSelectionForCreate_RestoreMetadataOverrides:
+			return deserializeSensitiveStringMap(d, schemas.RestoreTestingSelectionForCreate_RestoreMetadataOverrides, &v.RestoreMetadataOverrides)
+		case schemas.RestoreTestingSelectionForCreate_RestoreTestingSelectionName:
+			v.RestoreTestingSelectionName = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForCreate_RestoreTestingSelectionName, v.RestoreTestingSelectionName)
+		case schemas.RestoreTestingSelectionForCreate_ValidationWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingSelectionForCreate_ValidationWindowHours, &v.ValidationWindowHours)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a restore testing selection.
 type RestoreTestingSelectionForGet struct {
 
@@ -2747,6 +6006,77 @@ type RestoreTestingSelectionForGet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTestingSelectionForGet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingSelectionForGet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingSelectionForGet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RestoreTestingSelectionForGet_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForGet_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForGet_IamRoleArn, *v.IamRoleArn)
+	}
+	serializestringList(s, schemas.RestoreTestingSelectionForGet_ProtectedResourceArns, v.ProtectedResourceArns)
+	if v.ProtectedResourceConditions != nil {
+		s.WriteStruct(schemas.RestoreTestingSelectionForGet_ProtectedResourceConditions)
+		v.ProtectedResourceConditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtectedResourceType != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForGet_ProtectedResourceType, *v.ProtectedResourceType)
+	}
+	serializeSensitiveStringMap(s, schemas.RestoreTestingSelectionForGet_RestoreMetadataOverrides, v.RestoreMetadataOverrides)
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForGet_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.RestoreTestingSelectionName != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForGet_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
+	}
+	if v.ValidationWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingSelectionForGet_ValidationWindowHours, v.ValidationWindowHours)
+	}
+}
+func (v *RestoreTestingSelectionForGet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingSelectionForGet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingSelectionForGet_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingSelectionForGet_CreationTime, v.CreationTime)
+		case schemas.RestoreTestingSelectionForGet_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForGet_CreatorRequestId, v.CreatorRequestId)
+		case schemas.RestoreTestingSelectionForGet_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForGet_IamRoleArn, v.IamRoleArn)
+		case schemas.RestoreTestingSelectionForGet_ProtectedResourceArns:
+			return deserializestringList(d, schemas.RestoreTestingSelectionForGet_ProtectedResourceArns, &v.ProtectedResourceArns)
+		case schemas.RestoreTestingSelectionForGet_ProtectedResourceConditions:
+			v.ProtectedResourceConditions = &ProtectedResourceConditions{}
+			return v.ProtectedResourceConditions.Deserialize(d)
+		case schemas.RestoreTestingSelectionForGet_ProtectedResourceType:
+			v.ProtectedResourceType = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForGet_ProtectedResourceType, v.ProtectedResourceType)
+		case schemas.RestoreTestingSelectionForGet_RestoreMetadataOverrides:
+			return deserializeSensitiveStringMap(d, schemas.RestoreTestingSelectionForGet_RestoreMetadataOverrides, &v.RestoreMetadataOverrides)
+		case schemas.RestoreTestingSelectionForGet_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForGet_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		case schemas.RestoreTestingSelectionForGet_RestoreTestingSelectionName:
+			v.RestoreTestingSelectionName = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForGet_RestoreTestingSelectionName, v.RestoreTestingSelectionName)
+		case schemas.RestoreTestingSelectionForGet_ValidationWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingSelectionForGet_ValidationWindowHours, &v.ValidationWindowHours)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a restore testing selection.
 type RestoreTestingSelectionForList struct {
 
@@ -2796,6 +6126,57 @@ type RestoreTestingSelectionForList struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTestingSelectionForList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingSelectionForList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingSelectionForList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RestoreTestingSelectionForList_CreationTime, *v.CreationTime)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForList_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.ProtectedResourceType != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForList_ProtectedResourceType, *v.ProtectedResourceType)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForList_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.RestoreTestingSelectionName != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForList_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
+	}
+	if v.ValidationWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingSelectionForList_ValidationWindowHours, v.ValidationWindowHours)
+	}
+}
+func (v *RestoreTestingSelectionForList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingSelectionForList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingSelectionForList_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RestoreTestingSelectionForList_CreationTime, v.CreationTime)
+		case schemas.RestoreTestingSelectionForList_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForList_IamRoleArn, v.IamRoleArn)
+		case schemas.RestoreTestingSelectionForList_ProtectedResourceType:
+			v.ProtectedResourceType = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForList_ProtectedResourceType, v.ProtectedResourceType)
+		case schemas.RestoreTestingSelectionForList_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForList_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		case schemas.RestoreTestingSelectionForList_RestoreTestingSelectionName:
+			v.RestoreTestingSelectionName = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForList_RestoreTestingSelectionName, v.RestoreTestingSelectionName)
+		case schemas.RestoreTestingSelectionForList_ValidationWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingSelectionForList_ValidationWindowHours, &v.ValidationWindowHours)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a restore testing selection.
 type RestoreTestingSelectionForUpdate struct {
 
@@ -2831,6 +6212,47 @@ type RestoreTestingSelectionForUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTestingSelectionForUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTestingSelectionForUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTestingSelectionForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.RestoreTestingSelectionForUpdate_IamRoleArn, *v.IamRoleArn)
+	}
+	serializestringList(s, schemas.RestoreTestingSelectionForUpdate_ProtectedResourceArns, v.ProtectedResourceArns)
+	if v.ProtectedResourceConditions != nil {
+		s.WriteStruct(schemas.RestoreTestingSelectionForUpdate_ProtectedResourceConditions)
+		v.ProtectedResourceConditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSensitiveStringMap(s, schemas.RestoreTestingSelectionForUpdate_RestoreMetadataOverrides, v.RestoreMetadataOverrides)
+	if v.ValidationWindowHours != 0 {
+		s.WriteInt32(schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours, v.ValidationWindowHours)
+	}
+}
+func (v *RestoreTestingSelectionForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTestingSelectionForUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTestingSelectionForUpdate_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.RestoreTestingSelectionForUpdate_IamRoleArn, v.IamRoleArn)
+		case schemas.RestoreTestingSelectionForUpdate_ProtectedResourceArns:
+			return deserializestringList(d, schemas.RestoreTestingSelectionForUpdate_ProtectedResourceArns, &v.ProtectedResourceArns)
+		case schemas.RestoreTestingSelectionForUpdate_ProtectedResourceConditions:
+			v.ProtectedResourceConditions = &ProtectedResourceConditions{}
+			return v.ProtectedResourceConditions.Deserialize(d)
+		case schemas.RestoreTestingSelectionForUpdate_RestoreMetadataOverrides:
+			return deserializeSensitiveStringMap(d, schemas.RestoreTestingSelectionForUpdate_RestoreMetadataOverrides, &v.RestoreMetadataOverrides)
+		case schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours:
+			return d.ReadInt32(schemas.RestoreTestingSelectionForUpdate_ValidationWindowHours, &v.ValidationWindowHours)
+		}
+		return nil
+	})
+}
+
 // Defines a scanning action that specifies the malware scanner and scan mode to
 // use.
 type ScanAction struct {
@@ -2845,6 +6267,42 @@ type ScanAction struct {
 	ScanMode ScanMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScanAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ScanAction_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.ScanAction_ScanMode, string(v.ScanMode))
+	}
+}
+func (v *ScanAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanAction_MalwareScanner:
+			var ev string
+			if err := d.ReadString(schemas.ScanAction_MalwareScanner, &ev); err != nil {
+				return err
+			}
+			v.MalwareScanner = MalwareScanner(ev)
+			return nil
+		case schemas.ScanAction_ScanMode:
+			var ev string
+			if err := d.ReadString(schemas.ScanAction_ScanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = ScanMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a scan job, including information about the scanning
@@ -2976,6 +6434,174 @@ type ScanJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ScanJob_AccountId, *v.AccountId)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.ScanJob_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ScanJob_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.ScanJob_CompletionDate, *v.CompletionDate)
+	}
+	if v.ContinuousScanEndTime != nil {
+		s.WriteTime(schemas.ScanJob_ContinuousScanEndTime, *v.ContinuousScanEndTime)
+	}
+	if v.ContinuousScanStartTime != nil {
+		s.WriteTime(schemas.ScanJob_ContinuousScanStartTime, *v.ContinuousScanStartTime)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.ScanJob_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ScanJob_CreationDate, *v.CreationDate)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.ScanJob_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ScanJob_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.ScanJob_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ScanJob_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.ScanJob_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ScanJob_ResourceType, string(v.ResourceType))
+	}
+	if v.ScanBaseRecoveryPointArn != nil {
+		s.WriteString(schemas.ScanJob_ScanBaseRecoveryPointArn, *v.ScanBaseRecoveryPointArn)
+	}
+	if v.ScanId != nil {
+		s.WriteString(schemas.ScanJob_ScanId, *v.ScanId)
+	}
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.ScanJob_ScanJobId, *v.ScanJobId)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.ScanJob_ScanMode, string(v.ScanMode))
+	}
+	if v.ScanResult != nil {
+		s.WriteStruct(schemas.ScanJob_ScanResult)
+		v.ScanResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScannerRoleArn != nil {
+		s.WriteString(schemas.ScanJob_ScannerRoleArn, *v.ScannerRoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScanJob_State, string(v.State))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ScanJob_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ScanJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanJob_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ScanJob_AccountId, v.AccountId)
+		case schemas.ScanJob_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.ScanJob_BackupVaultArn, v.BackupVaultArn)
+		case schemas.ScanJob_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.ScanJob_BackupVaultName, v.BackupVaultName)
+		case schemas.ScanJob_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.ScanJob_CompletionDate, v.CompletionDate)
+		case schemas.ScanJob_ContinuousScanEndTime:
+			v.ContinuousScanEndTime = new(time.Time)
+			return d.ReadTime(schemas.ScanJob_ContinuousScanEndTime, v.ContinuousScanEndTime)
+		case schemas.ScanJob_ContinuousScanStartTime:
+			v.ContinuousScanStartTime = new(time.Time)
+			return d.ReadTime(schemas.ScanJob_ContinuousScanStartTime, v.ContinuousScanStartTime)
+		case schemas.ScanJob_CreatedBy:
+			v.CreatedBy = &ScanJobCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.ScanJob_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ScanJob_CreationDate, v.CreationDate)
+		case schemas.ScanJob_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.ScanJob_IamRoleArn, v.IamRoleArn)
+		case schemas.ScanJob_MalwareScanner:
+			var ev string
+			if err := d.ReadString(schemas.ScanJob_MalwareScanner, &ev); err != nil {
+				return err
+			}
+			v.MalwareScanner = MalwareScanner(ev)
+			return nil
+		case schemas.ScanJob_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.ScanJob_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.ScanJob_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ScanJob_ResourceArn, v.ResourceArn)
+		case schemas.ScanJob_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ScanJob_ResourceName, v.ResourceName)
+		case schemas.ScanJob_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ScanJob_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ScanResourceType(ev)
+			return nil
+		case schemas.ScanJob_ScanBaseRecoveryPointArn:
+			v.ScanBaseRecoveryPointArn = new(string)
+			return d.ReadString(schemas.ScanJob_ScanBaseRecoveryPointArn, v.ScanBaseRecoveryPointArn)
+		case schemas.ScanJob_ScanId:
+			v.ScanId = new(string)
+			return d.ReadString(schemas.ScanJob_ScanId, v.ScanId)
+		case schemas.ScanJob_ScanJobId:
+			v.ScanJobId = new(string)
+			return d.ReadString(schemas.ScanJob_ScanJobId, v.ScanJobId)
+		case schemas.ScanJob_ScanMode:
+			var ev string
+			if err := d.ReadString(schemas.ScanJob_ScanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = ScanMode(ev)
+			return nil
+		case schemas.ScanJob_ScanResult:
+			v.ScanResult = &ScanResultInfo{}
+			return v.ScanResult.Deserialize(d)
+		case schemas.ScanJob_ScannerRoleArn:
+			v.ScannerRoleArn = new(string)
+			return d.ReadString(schemas.ScanJob_ScannerRoleArn, v.ScannerRoleArn)
+		case schemas.ScanJob_State:
+			var ev string
+			if err := d.ReadString(schemas.ScanJob_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScanState(ev)
+			return nil
+		case schemas.ScanJob_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ScanJob_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Contains identifying information about the creation of a scan job, including
 // the backup plan and rule that initiated the scan.
 type ScanJobCreator struct {
@@ -3004,6 +6630,46 @@ type ScanJobCreator struct {
 	BackupRuleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScanJobCreator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanJobCreator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanJobCreator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.ScanJobCreator_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.ScanJobCreator_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.BackupPlanVersion != nil {
+		s.WriteString(schemas.ScanJobCreator_BackupPlanVersion, *v.BackupPlanVersion)
+	}
+	if v.BackupRuleId != nil {
+		s.WriteString(schemas.ScanJobCreator_BackupRuleId, *v.BackupRuleId)
+	}
+}
+func (v *ScanJobCreator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanJobCreator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanJobCreator_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.ScanJobCreator_BackupPlanArn, v.BackupPlanArn)
+		case schemas.ScanJobCreator_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.ScanJobCreator_BackupPlanId, v.BackupPlanId)
+		case schemas.ScanJobCreator_BackupPlanVersion:
+			v.BackupPlanVersion = new(string)
+			return d.ReadString(schemas.ScanJobCreator_BackupPlanVersion, v.BackupPlanVersion)
+		case schemas.ScanJobCreator_BackupRuleId:
+			v.BackupRuleId = new(string)
+			return d.ReadString(schemas.ScanJobCreator_BackupRuleId, v.BackupRuleId)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about scan jobs, including counts and metadata for
@@ -3055,6 +6721,87 @@ type ScanJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ScanJobSummary_AccountId, *v.AccountId)
+	}
+	if v.Count != 0 {
+		s.WriteInt32(schemas.ScanJobSummary_Count, v.Count)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ScanJobSummary_EndTime, *v.EndTime)
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ScanJobSummary_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ScanJobSummary_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ScanJobSummary_ResourceType, *v.ResourceType)
+	}
+	if v.ScanResultStatus != "" {
+		s.WriteString(schemas.ScanJobSummary_ScanResultStatus, string(v.ScanResultStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ScanJobSummary_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScanJobSummary_State, string(v.State))
+	}
+}
+func (v *ScanJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanJobSummary_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ScanJobSummary_AccountId, v.AccountId)
+		case schemas.ScanJobSummary_Count:
+			return d.ReadInt32(schemas.ScanJobSummary_Count, &v.Count)
+		case schemas.ScanJobSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ScanJobSummary_EndTime, v.EndTime)
+		case schemas.ScanJobSummary_MalwareScanner:
+			var ev string
+			if err := d.ReadString(schemas.ScanJobSummary_MalwareScanner, &ev); err != nil {
+				return err
+			}
+			v.MalwareScanner = MalwareScanner(ev)
+			return nil
+		case schemas.ScanJobSummary_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ScanJobSummary_Region, v.Region)
+		case schemas.ScanJobSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ScanJobSummary_ResourceType, v.ResourceType)
+		case schemas.ScanJobSummary_ScanResultStatus:
+			var ev string
+			if err := d.ReadString(schemas.ScanJobSummary_ScanResultStatus, &ev); err != nil {
+				return err
+			}
+			v.ScanResultStatus = ScanResultStatus(ev)
+			return nil
+		case schemas.ScanJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ScanJobSummary_StartTime, v.StartTime)
+		case schemas.ScanJobSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.ScanJobSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScanJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the results of a security scan, including scanner information, scan
 // state, and any findings discovered.
 type ScanResult struct {
@@ -3078,6 +6825,51 @@ type ScanResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScanResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeScanFindings(s, schemas.ScanResult_Findings, v.Findings)
+	if v.LastScanTimestamp != nil {
+		s.WriteTime(schemas.ScanResult_LastScanTimestamp, *v.LastScanTimestamp)
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ScanResult_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.ScanJobState != "" {
+		s.WriteString(schemas.ScanResult_ScanJobState, string(v.ScanJobState))
+	}
+}
+func (v *ScanResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanResult_Findings:
+			return deserializeScanFindings(d, schemas.ScanResult_Findings, &v.Findings)
+		case schemas.ScanResult_LastScanTimestamp:
+			v.LastScanTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ScanResult_LastScanTimestamp, v.LastScanTimestamp)
+		case schemas.ScanResult_MalwareScanner:
+			var ev string
+			if err := d.ReadString(schemas.ScanResult_MalwareScanner, &ev); err != nil {
+				return err
+			}
+			v.MalwareScanner = MalwareScanner(ev)
+			return nil
+		case schemas.ScanResult_ScanJobState:
+			var ev string
+			if err := d.ReadString(schemas.ScanResult_ScanJobState, &ev); err != nil {
+				return err
+			}
+			v.ScanJobState = ScanJobState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the results of a scan job.
 type ScanResultInfo struct {
 
@@ -3089,6 +6881,32 @@ type ScanResultInfo struct {
 	ScanResultStatus ScanResultStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScanResultInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanResultInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanResultInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanResultStatus != "" {
+		s.WriteString(schemas.ScanResultInfo_ScanResultStatus, string(v.ScanResultStatus))
+	}
+}
+func (v *ScanResultInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanResultInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanResultInfo_ScanResultStatus:
+			var ev string
+			if err := d.ReadString(schemas.ScanResultInfo_ScanResultStatus, &ev); err != nil {
+				return err
+			}
+			v.ScanResultStatus = ScanResultStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains configuration settings for malware scanning, including the scanner
@@ -3106,6 +6924,41 @@ type ScanSetting struct {
 	ScannerRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScanSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ScanSetting_MalwareScanner, string(v.MalwareScanner))
+	}
+	serializeResourceTypes(s, schemas.ScanSetting_ResourceTypes, v.ResourceTypes)
+	if v.ScannerRoleArn != nil {
+		s.WriteString(schemas.ScanSetting_ScannerRoleArn, *v.ScannerRoleArn)
+	}
+}
+func (v *ScanSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanSetting_MalwareScanner:
+			var ev string
+			if err := d.ReadString(schemas.ScanSetting_MalwareScanner, &ev); err != nil {
+				return err
+			}
+			v.MalwareScanner = MalwareScanner(ev)
+			return nil
+		case schemas.ScanSetting_ResourceTypes:
+			return deserializeResourceTypes(d, schemas.ScanSetting_ResourceTypes, &v.ResourceTypes)
+		case schemas.ScanSetting_ScannerRoleArn:
+			v.ScannerRoleArn = new(string)
+			return d.ReadString(schemas.ScanSetting_ScannerRoleArn, v.ScannerRoleArn)
+		}
+		return nil
+	})
 }
 
 // Contains information about a scheduled backup plan execution, including the
@@ -3126,6 +6979,44 @@ type ScheduledPlanExecutionMember struct {
 	RuleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduledPlanExecutionMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledPlanExecutionMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledPlanExecutionMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionTime != nil {
+		s.WriteTime(schemas.ScheduledPlanExecutionMember_ExecutionTime, *v.ExecutionTime)
+	}
+	if v.RuleExecutionType != "" {
+		s.WriteString(schemas.ScheduledPlanExecutionMember_RuleExecutionType, string(v.RuleExecutionType))
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.ScheduledPlanExecutionMember_RuleId, *v.RuleId)
+	}
+}
+func (v *ScheduledPlanExecutionMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledPlanExecutionMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledPlanExecutionMember_ExecutionTime:
+			v.ExecutionTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledPlanExecutionMember_ExecutionTime, v.ExecutionTime)
+		case schemas.ScheduledPlanExecutionMember_RuleExecutionType:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledPlanExecutionMember_RuleExecutionType, &ev); err != nil {
+				return err
+			}
+			v.RuleExecutionType = RuleExecutionType(ev)
+			return nil
+		case schemas.ScheduledPlanExecutionMember_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.ScheduledPlanExecutionMember_RuleId, v.RuleId)
+		}
+		return nil
+	})
 }
 
 // This contains metadata about a tiering configuration.
@@ -3172,6 +7063,61 @@ type TieringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TieringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TieringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TieringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.TieringConfiguration_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TieringConfiguration_CreationTime, *v.CreationTime)
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.TieringConfiguration_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.TieringConfiguration_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	serializeResourceSelections(s, schemas.TieringConfiguration_ResourceSelection, v.ResourceSelection)
+	if v.TieringConfigurationArn != nil {
+		s.WriteString(schemas.TieringConfiguration_TieringConfigurationArn, *v.TieringConfigurationArn)
+	}
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.TieringConfiguration_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+func (v *TieringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TieringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TieringConfiguration_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.TieringConfiguration_BackupVaultName, v.BackupVaultName)
+		case schemas.TieringConfiguration_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TieringConfiguration_CreationTime, v.CreationTime)
+		case schemas.TieringConfiguration_CreatorRequestId:
+			v.CreatorRequestId = new(string)
+			return d.ReadString(schemas.TieringConfiguration_CreatorRequestId, v.CreatorRequestId)
+		case schemas.TieringConfiguration_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.TieringConfiguration_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.TieringConfiguration_ResourceSelection:
+			return deserializeResourceSelections(d, schemas.TieringConfiguration_ResourceSelection, &v.ResourceSelection)
+		case schemas.TieringConfiguration_TieringConfigurationArn:
+			v.TieringConfigurationArn = new(string)
+			return d.ReadString(schemas.TieringConfiguration_TieringConfigurationArn, v.TieringConfigurationArn)
+		case schemas.TieringConfiguration_TieringConfigurationName:
+			v.TieringConfigurationName = new(string)
+			return d.ReadString(schemas.TieringConfiguration_TieringConfigurationName, v.TieringConfigurationName)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a tiering configuration for create operations.
 type TieringConfigurationInputForCreate struct {
 
@@ -3196,6 +7142,37 @@ type TieringConfigurationInputForCreate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TieringConfigurationInputForCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TieringConfigurationInputForCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TieringConfigurationInputForCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.TieringConfigurationInputForCreate_BackupVaultName, *v.BackupVaultName)
+	}
+	serializeResourceSelections(s, schemas.TieringConfigurationInputForCreate_ResourceSelection, v.ResourceSelection)
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.TieringConfigurationInputForCreate_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+func (v *TieringConfigurationInputForCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TieringConfigurationInputForCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TieringConfigurationInputForCreate_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.TieringConfigurationInputForCreate_BackupVaultName, v.BackupVaultName)
+		case schemas.TieringConfigurationInputForCreate_ResourceSelection:
+			return deserializeResourceSelections(d, schemas.TieringConfigurationInputForCreate_ResourceSelection, &v.ResourceSelection)
+		case schemas.TieringConfigurationInputForCreate_TieringConfigurationName:
+			v.TieringConfigurationName = new(string)
+			return d.ReadString(schemas.TieringConfigurationInputForCreate_TieringConfigurationName, v.TieringConfigurationName)
+		}
+		return nil
+	})
+}
+
 // This contains metadata about a tiering configuration for update operations.
 type TieringConfigurationInputForUpdate struct {
 
@@ -3212,6 +7189,31 @@ type TieringConfigurationInputForUpdate struct {
 	ResourceSelection []ResourceSelection
 
 	noSmithyDocumentSerde
+}
+
+func (v *TieringConfigurationInputForUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TieringConfigurationInputForUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TieringConfigurationInputForUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.TieringConfigurationInputForUpdate_BackupVaultName, *v.BackupVaultName)
+	}
+	serializeResourceSelections(s, schemas.TieringConfigurationInputForUpdate_ResourceSelection, v.ResourceSelection)
+}
+func (v *TieringConfigurationInputForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TieringConfigurationInputForUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TieringConfigurationInputForUpdate_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.TieringConfigurationInputForUpdate_BackupVaultName, v.BackupVaultName)
+		case schemas.TieringConfigurationInputForUpdate_ResourceSelection:
+			return deserializeResourceSelections(d, schemas.TieringConfigurationInputForUpdate_ResourceSelection, &v.ResourceSelection)
+		}
+		return nil
+	})
 }
 
 // This contains metadata about a tiering configuration returned in a list.
@@ -3241,6 +7243,52 @@ type TieringConfigurationsListMember struct {
 	TieringConfigurationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TieringConfigurationsListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TieringConfigurationsListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TieringConfigurationsListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.TieringConfigurationsListMember_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TieringConfigurationsListMember_CreationTime, *v.CreationTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.TieringConfigurationsListMember_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.TieringConfigurationArn != nil {
+		s.WriteString(schemas.TieringConfigurationsListMember_TieringConfigurationArn, *v.TieringConfigurationArn)
+	}
+	if v.TieringConfigurationName != nil {
+		s.WriteString(schemas.TieringConfigurationsListMember_TieringConfigurationName, *v.TieringConfigurationName)
+	}
+}
+func (v *TieringConfigurationsListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TieringConfigurationsListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TieringConfigurationsListMember_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.TieringConfigurationsListMember_BackupVaultName, v.BackupVaultName)
+		case schemas.TieringConfigurationsListMember_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TieringConfigurationsListMember_CreationTime, v.CreationTime)
+		case schemas.TieringConfigurationsListMember_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.TieringConfigurationsListMember_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.TieringConfigurationsListMember_TieringConfigurationArn:
+			v.TieringConfigurationArn = new(string)
+			return d.ReadString(schemas.TieringConfigurationsListMember_TieringConfigurationArn, v.TieringConfigurationArn)
+		case schemas.TieringConfigurationsListMember_TieringConfigurationName:
+			v.TieringConfigurationName = new(string)
+			return d.ReadString(schemas.TieringConfigurationsListMember_TieringConfigurationName, v.TieringConfigurationName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

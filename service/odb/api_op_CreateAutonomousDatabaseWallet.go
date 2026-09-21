@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,31 @@ type CreateAutonomousDatabaseWalletInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutonomousDatabaseWalletInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutonomousDatabaseWalletInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutonomousDatabaseWalletInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_clientToken, *v.ClientToken)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_password, *v.Password)
+	}
+	if v.PasswordSource != "" {
+		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_passwordSource, string(v.PasswordSource))
+	}
+	serializeWalletPasswordSourceConfigurationInput(s, schemas.CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration, v.PasswordSourceConfiguration)
+	if v.WalletType != "" {
+		s.WriteString(schemas.CreateAutonomousDatabaseWalletInput_walletType, string(v.WalletType))
+	}
+}
+
 type CreateAutonomousDatabaseWalletOutput struct {
 
 	// The generated wallet file for the Autonomous Database, returned as a compressed
@@ -68,13 +95,31 @@ type CreateAutonomousDatabaseWalletOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutonomousDatabaseWalletOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutonomousDatabaseWalletOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutonomousDatabaseWalletOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseWalletFile != nil {
+		s.WriteBlob(schemas.CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile, v.AutonomousDatabaseWalletFile)
+	}
+}
+func (v *CreateAutonomousDatabaseWalletOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutonomousDatabaseWalletOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile:
+			return d.ReadBlob(schemas.CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile, &v.AutonomousDatabaseWalletFile)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutonomousDatabaseWalletMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAutonomousDatabaseWallet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutonomousDatabaseWallet, schemas.CreateAutonomousDatabaseWalletInput, schemas.CreateAutonomousDatabaseWalletOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAutonomousDatabaseWallet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutonomousDatabaseWallet, schemas.CreateAutonomousDatabaseWalletInput, schemas.CreateAutonomousDatabaseWalletOutput), output: &CreateAutonomousDatabaseWalletOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

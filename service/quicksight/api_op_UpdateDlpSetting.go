@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,34 @@ type UpdateDlpSettingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDlpSettingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDlpSettingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDlpSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDlpSettingRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DlpSettingId != nil {
+		s.WriteString(schemas.UpdateDlpSettingRequest_DlpSettingId, *v.DlpSettingId)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateDlpSettingRequest_Enabled, *v.Enabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDlpSettingRequest_Name, *v.Name)
+	}
+	serializeProviderConfig(s, schemas.UpdateDlpSettingRequest_ProviderConfig, v.ProviderConfig)
+	if v.ProviderOutageAction != "" {
+		s.WriteString(schemas.UpdateDlpSettingRequest_ProviderOutageAction, string(v.ProviderOutageAction))
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.UpdateDlpSettingRequest_ProviderType, string(v.ProviderType))
+	}
+}
+
 type UpdateDlpSettingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated DLP setting.
@@ -82,13 +112,44 @@ type UpdateDlpSettingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDlpSettingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDlpSettingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDlpSettingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDlpSettingResponse_Arn, *v.Arn)
+	}
+	if v.DlpSettingId != nil {
+		s.WriteString(schemas.UpdateDlpSettingResponse_DlpSettingId, *v.DlpSettingId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDlpSettingResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *UpdateDlpSettingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDlpSettingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDlpSettingResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDlpSettingResponse_Arn, v.Arn)
+		case schemas.UpdateDlpSettingResponse_DlpSettingId:
+			v.DlpSettingId = new(string)
+			return d.ReadString(schemas.UpdateDlpSettingResponse_DlpSettingId, v.DlpSettingId)
+		case schemas.UpdateDlpSettingResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDlpSettingResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDlpSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDlpSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDlpSetting, schemas.UpdateDlpSettingRequest, schemas.UpdateDlpSettingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDlpSetting{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDlpSetting, schemas.UpdateDlpSettingRequest, schemas.UpdateDlpSettingResponse), output: &UpdateDlpSettingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

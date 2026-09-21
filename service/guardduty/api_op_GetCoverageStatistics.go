@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type GetCoverageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoverageStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoverageStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoverageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetCoverageStatisticsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FilterCriteria != nil {
+		s.WriteStruct(schemas.GetCoverageStatisticsRequest_FilterCriteria)
+		v.FilterCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCoverageStatisticsTypeList(s, schemas.GetCoverageStatisticsRequest_StatisticsType, v.StatisticsType)
+}
+
 type GetCoverageStatisticsOutput struct {
 
 	// Represents the count aggregated by the statusCode and resourceType .
@@ -61,13 +81,34 @@ type GetCoverageStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoverageStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoverageStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoverageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoverageStatistics != nil {
+		s.WriteStruct(schemas.GetCoverageStatisticsResponse_CoverageStatistics)
+		v.CoverageStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCoverageStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCoverageStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCoverageStatisticsResponse_CoverageStatistics:
+			v.CoverageStatistics = &types.CoverageStatistics{}
+			return v.CoverageStatistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCoverageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoverageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoverageStatistics, schemas.GetCoverageStatisticsRequest, schemas.GetCoverageStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoverageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoverageStatistics, schemas.GetCoverageStatisticsRequest, schemas.GetCoverageStatisticsResponse), output: &GetCoverageStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

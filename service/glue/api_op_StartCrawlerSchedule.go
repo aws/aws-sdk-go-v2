@@ -4,6 +4,8 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StartCrawlerScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCrawlerScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCrawlerScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCrawlerScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrawlerName != nil {
+		s.WriteString(schemas.StartCrawlerScheduleRequest_CrawlerName, *v.CrawlerName)
+	}
+}
+
 type StartCrawlerScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type StartCrawlerScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCrawlerScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCrawlerScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCrawlerScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartCrawlerScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCrawlerScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCrawlerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCrawlerSchedule, schemas.StartCrawlerScheduleRequest, schemas.StartCrawlerScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartCrawlerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCrawlerSchedule, schemas.StartCrawlerScheduleRequest, schemas.StartCrawlerScheduleResponse), output: &StartCrawlerScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

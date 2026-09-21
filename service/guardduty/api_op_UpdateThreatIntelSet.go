@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type UpdateThreatIntelSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThreatIntelSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThreatIntelSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThreatIntelSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Activate != nil {
+		s.WriteBool(schemas.UpdateThreatIntelSetRequest_Activate, *v.Activate)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateThreatIntelSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.UpdateThreatIntelSetRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.UpdateThreatIntelSetRequest_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateThreatIntelSetRequest_Name, *v.Name)
+	}
+	if v.ThreatIntelSetId != nil {
+		s.WriteString(schemas.UpdateThreatIntelSetRequest_ThreatIntelSetId, *v.ThreatIntelSetId)
+	}
+}
+
 type UpdateThreatIntelSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +94,26 @@ type UpdateThreatIntelSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThreatIntelSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThreatIntelSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThreatIntelSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateThreatIntelSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThreatIntelSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThreatIntelSet, schemas.UpdateThreatIntelSetRequest, schemas.UpdateThreatIntelSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThreatIntelSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThreatIntelSet, schemas.UpdateThreatIntelSetRequest, schemas.UpdateThreatIntelSetResponse), output: &UpdateThreatIntelSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

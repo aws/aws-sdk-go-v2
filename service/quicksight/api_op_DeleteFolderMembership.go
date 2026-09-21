@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type DeleteFolderMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFolderMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFolderMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFolderMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteFolderMembershipRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.DeleteFolderMembershipRequest_FolderId, *v.FolderId)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.DeleteFolderMembershipRequest_MemberId, *v.MemberId)
+	}
+	if v.MemberType != "" {
+		s.WriteString(schemas.DeleteFolderMembershipRequest_MemberType, string(v.MemberType))
+	}
+}
+
 type DeleteFolderMembershipOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -63,13 +86,37 @@ type DeleteFolderMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFolderMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFolderMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFolderMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteFolderMembershipResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteFolderMembershipResponse_Status, v.Status)
+	}
+}
+func (v *DeleteFolderMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFolderMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFolderMembershipResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteFolderMembershipResponse_RequestId, v.RequestId)
+		case schemas.DeleteFolderMembershipResponse_Status:
+			return d.ReadInt32(schemas.DeleteFolderMembershipResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFolderMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFolderMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFolderMembership, schemas.DeleteFolderMembershipRequest, schemas.DeleteFolderMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFolderMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFolderMembership, schemas.DeleteFolderMembershipRequest, schemas.DeleteFolderMembershipResponse), output: &DeleteFolderMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

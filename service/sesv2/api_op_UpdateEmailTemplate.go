@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,23 @@ type UpdateEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateContent != nil {
+		s.WriteStruct(schemas.UpdateEmailTemplateRequest_TemplateContent)
+		v.TemplateContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type UpdateEmailTemplateOutput struct {
@@ -59,13 +78,26 @@ type UpdateEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailTemplate, schemas.UpdateEmailTemplateRequest, schemas.UpdateEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailTemplate, schemas.UpdateEmailTemplateRequest, schemas.UpdateEmailTemplateResponse), output: &UpdateEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

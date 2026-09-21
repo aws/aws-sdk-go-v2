@@ -4,6 +4,8 @@ package marketplaceagreement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type CancelAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAgreementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.CancelAgreementInput_agreementId, *v.AgreementId)
+	}
+}
+
 type CancelAgreementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type CancelAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAgreementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelAgreementOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAgreement, schemas.CancelAgreementInput, schemas.CancelAgreementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAgreement, schemas.CancelAgreementInput, schemas.CancelAgreementOutput), output: &CancelAgreementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

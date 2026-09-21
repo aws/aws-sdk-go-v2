@@ -5,7 +5,9 @@ package healthlake
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,29 @@ type UpdateProfileWithAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileWithAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileWithAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileWithAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConversationId != nil {
+		s.WriteString(schemas.UpdateProfileWithAgentRequest_ConversationId, *v.ConversationId)
+	}
+	if v.InputMessage != nil {
+		s.WriteStruct(schemas.UpdateProfileWithAgentRequest_InputMessage)
+		v.InputMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateProfileWithAgentRequest_ProfileId, *v.ProfileId)
+	}
+	if v.SourceFormat != "" {
+		s.WriteString(schemas.UpdateProfileWithAgentRequest_SourceFormat, string(v.SourceFormat))
+	}
+}
+
 // The response from the UpdateProfileWithAgent operation.
 type UpdateProfileWithAgentOutput struct {
 
@@ -71,13 +96,40 @@ type UpdateProfileWithAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileWithAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileWithAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileWithAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentResponse != nil {
+		s.WriteStruct(schemas.UpdateProfileWithAgentResponse_AgentResponse)
+		v.AgentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConversationId != nil {
+		s.WriteString(schemas.UpdateProfileWithAgentResponse_ConversationId, *v.ConversationId)
+	}
+}
+func (v *UpdateProfileWithAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileWithAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfileWithAgentResponse_AgentResponse:
+			v.AgentResponse = &types.AgentOutputMessage{}
+			return v.AgentResponse.Deserialize(d)
+		case schemas.UpdateProfileWithAgentResponse_ConversationId:
+			v.ConversationId = new(string)
+			return d.ReadString(schemas.UpdateProfileWithAgentResponse_ConversationId, v.ConversationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileWithAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProfileWithAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UpdateProfileWithAgentRequest, schemas.UpdateProfileWithAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProfileWithAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfileWithAgent, schemas.UpdateProfileWithAgentRequest, schemas.UpdateProfileWithAgentResponse), output: &UpdateProfileWithAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

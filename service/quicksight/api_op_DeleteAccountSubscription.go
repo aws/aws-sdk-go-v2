@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,18 @@ type DeleteAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteAccountSubscriptionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DeleteAccountSubscriptionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -77,13 +91,37 @@ type DeleteAccountSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteAccountSubscriptionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteAccountSubscriptionResponse_Status, v.Status)
+	}
+}
+func (v *DeleteAccountSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccountSubscriptionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteAccountSubscriptionResponse_RequestId, v.RequestId)
+		case schemas.DeleteAccountSubscriptionResponse_Status:
+			return d.ReadInt32(schemas.DeleteAccountSubscriptionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountSubscription, schemas.DeleteAccountSubscriptionRequest, schemas.DeleteAccountSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountSubscription, schemas.DeleteAccountSubscriptionRequest, schemas.DeleteAccountSubscriptionResponse), output: &DeleteAccountSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

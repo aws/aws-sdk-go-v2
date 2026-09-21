@@ -5,6 +5,8 @@ package apigateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type GetUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.GetUsageRequest_endDate, *v.EndDate)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.GetUsageRequest_keyId, *v.KeyId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetUsageRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetUsageRequest_position, *v.Position)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.GetUsageRequest_startDate, *v.StartDate)
+	}
+	if v.UsagePlanId != nil {
+		s.WriteString(schemas.GetUsageRequest_usagePlanId, *v.UsagePlanId)
+	}
+}
+
 // Represents the usage data of a usage plan.
 type GetUsageOutput struct {
 
@@ -84,13 +113,53 @@ type GetUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Usage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.Usage_endDate, *v.EndDate)
+	}
+	serializeMapOfKeyUsages(s, schemas.Usage_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.Usage_position, *v.Position)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.Usage_startDate, *v.StartDate)
+	}
+	if v.UsagePlanId != nil {
+		s.WriteString(schemas.Usage_usagePlanId, *v.UsagePlanId)
+	}
+}
+func (v *GetUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Usage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Usage_endDate:
+			v.EndDate = new(string)
+			return d.ReadString(schemas.Usage_endDate, v.EndDate)
+		case schemas.Usage_items:
+			return deserializeMapOfKeyUsages(d, schemas.Usage_items, &v.Items)
+		case schemas.Usage_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.Usage_position, v.Position)
+		case schemas.Usage_startDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.Usage_startDate, v.StartDate)
+		case schemas.Usage_usagePlanId:
+			v.UsagePlanId = new(string)
+			return d.ReadString(schemas.Usage_usagePlanId, v.UsagePlanId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsage, schemas.GetUsageRequest, schemas.Usage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsage, schemas.GetUsageRequest, schemas.Usage), output: &GetUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

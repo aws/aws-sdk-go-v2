@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,35 @@ type BatchGetPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.BatchGetPartitionRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.BatchGetPartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.BatchGetPartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeBatchGetPartitionValueList(s, schemas.BatchGetPartitionRequest_PartitionsToGet, v.PartitionsToGet)
+	if v.QuerySessionContext != nil {
+		s.WriteStruct(schemas.BatchGetPartitionRequest_QuerySessionContext)
+		v.QuerySessionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.BatchGetPartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type BatchGetPartitionOutput struct {
 
 	// A list of the requested partitions.
@@ -71,13 +102,32 @@ type BatchGetPartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartitionList(s, schemas.BatchGetPartitionResponse_Partitions, v.Partitions)
+	serializeBatchGetPartitionValueList(s, schemas.BatchGetPartitionResponse_UnprocessedKeys, v.UnprocessedKeys)
+}
+func (v *BatchGetPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetPartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetPartitionResponse_Partitions:
+			return deserializePartitionList(d, schemas.BatchGetPartitionResponse_Partitions, &v.Partitions)
+		case schemas.BatchGetPartitionResponse_UnprocessedKeys:
+			return deserializeBatchGetPartitionValueList(d, schemas.BatchGetPartitionResponse_UnprocessedKeys, &v.UnprocessedKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetPartition, schemas.BatchGetPartitionRequest, schemas.BatchGetPartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetPartition, schemas.BatchGetPartitionRequest, schemas.BatchGetPartitionResponse), output: &BatchGetPartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

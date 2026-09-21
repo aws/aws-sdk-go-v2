@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -145,6 +147,54 @@ type ListBackupJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByAccountId != nil {
+		s.WriteString(schemas.ListBackupJobsInput_ByAccountId, *v.ByAccountId)
+	}
+	if v.ByBackupVaultName != nil {
+		s.WriteString(schemas.ListBackupJobsInput_ByBackupVaultName, *v.ByBackupVaultName)
+	}
+	if v.ByCompleteAfter != nil {
+		s.WriteTime(schemas.ListBackupJobsInput_ByCompleteAfter, *v.ByCompleteAfter)
+	}
+	if v.ByCompleteBefore != nil {
+		s.WriteTime(schemas.ListBackupJobsInput_ByCompleteBefore, *v.ByCompleteBefore)
+	}
+	if v.ByCreatedAfter != nil {
+		s.WriteTime(schemas.ListBackupJobsInput_ByCreatedAfter, *v.ByCreatedAfter)
+	}
+	if v.ByCreatedBefore != nil {
+		s.WriteTime(schemas.ListBackupJobsInput_ByCreatedBefore, *v.ByCreatedBefore)
+	}
+	if v.ByMessageCategory != nil {
+		s.WriteString(schemas.ListBackupJobsInput_ByMessageCategory, *v.ByMessageCategory)
+	}
+	if v.ByParentJobId != nil {
+		s.WriteString(schemas.ListBackupJobsInput_ByParentJobId, *v.ByParentJobId)
+	}
+	if v.ByResourceArn != nil {
+		s.WriteString(schemas.ListBackupJobsInput_ByResourceArn, *v.ByResourceArn)
+	}
+	if v.ByResourceType != nil {
+		s.WriteString(schemas.ListBackupJobsInput_ByResourceType, *v.ByResourceType)
+	}
+	if v.ByState != "" {
+		s.WriteString(schemas.ListBackupJobsInput_ByState, string(v.ByState))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupJobsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupJobsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupJobsOutput struct {
 
 	// An array of structures containing metadata about your backup jobs returned in
@@ -163,13 +213,35 @@ type ListBackupJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupJobsList(s, schemas.ListBackupJobsOutput_BackupJobs, v.BackupJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupJobsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupJobsOutput_BackupJobs:
+			return deserializeBackupJobsList(d, schemas.ListBackupJobsOutput_BackupJobs, &v.BackupJobs)
+		case schemas.ListBackupJobsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupJobsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupJobs, schemas.ListBackupJobsInput, schemas.ListBackupJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupJobs, schemas.ListBackupJobsInput, schemas.ListBackupJobsOutput), output: &ListBackupJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

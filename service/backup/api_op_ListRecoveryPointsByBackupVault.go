@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -108,6 +110,45 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.ByBackupPlanId != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByBackupPlanId, *v.ByBackupPlanId)
+	}
+	if v.ByCreatedAfter != nil {
+		s.WriteTime(schemas.ListRecoveryPointsByBackupVaultInput_ByCreatedAfter, *v.ByCreatedAfter)
+	}
+	if v.ByCreatedBefore != nil {
+		s.WriteTime(schemas.ListRecoveryPointsByBackupVaultInput_ByCreatedBefore, *v.ByCreatedBefore)
+	}
+	if v.ByParentRecoveryPointArn != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByParentRecoveryPointArn, *v.ByParentRecoveryPointArn)
+	}
+	if v.ByResourceArn != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByResourceArn, *v.ByResourceArn)
+	}
+	if v.ByResourceType != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByResourceType, *v.ByResourceType)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryPointsByBackupVaultInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecoveryPointsByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -126,13 +167,35 @@ type ListRecoveryPointsByBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultOutput_NextToken, *v.NextToken)
+	}
+	serializeRecoveryPointByBackupVaultList(s, schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints, v.RecoveryPoints)
+}
+func (v *ListRecoveryPointsByBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryPointsByBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryPointsByBackupVaultOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryPointsByBackupVaultOutput_NextToken, v.NextToken)
+		case schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints:
+			return deserializeRecoveryPointByBackupVaultList(d, schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints, &v.RecoveryPoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryPointsByBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryPointsByBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByBackupVault, schemas.ListRecoveryPointsByBackupVaultInput, schemas.ListRecoveryPointsByBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecoveryPointsByBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByBackupVault, schemas.ListRecoveryPointsByBackupVaultInput, schemas.ListRecoveryPointsByBackupVaultOutput), output: &ListRecoveryPointsByBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

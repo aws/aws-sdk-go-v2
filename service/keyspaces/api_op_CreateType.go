@@ -4,7 +4,9 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,22 @@ type CreateTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldList(s, schemas.CreateTypeRequest_fieldDefinitions, v.FieldDefinitions)
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.CreateTypeRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.CreateTypeRequest_typeName, *v.TypeName)
+	}
+}
+
 type CreateTypeOutput struct {
 
 	//  The unique identifier of the keyspace that contains the new type in the format
@@ -88,13 +106,38 @@ type CreateTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceArn != nil {
+		s.WriteString(schemas.CreateTypeResponse_keyspaceArn, *v.KeyspaceArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.CreateTypeResponse_typeName, *v.TypeName)
+	}
+}
+func (v *CreateTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTypeResponse_keyspaceArn:
+			v.KeyspaceArn = new(string)
+			return d.ReadString(schemas.CreateTypeResponse_keyspaceArn, v.KeyspaceArn)
+		case schemas.CreateTypeResponse_typeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.CreateTypeResponse_typeName, v.TypeName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateType, schemas.CreateTypeRequest, schemas.CreateTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateType, schemas.CreateTypeRequest, schemas.CreateTypeResponse), output: &CreateTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

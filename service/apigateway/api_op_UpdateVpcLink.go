@@ -4,7 +4,9 @@ package apigateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type UpdateVpcLinkInput struct {
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateVpcLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfPatchOperation(s, schemas.UpdateVpcLinkRequest_patchOperations, v.PatchOperations)
+	if v.VpcLinkId != nil {
+		s.WriteString(schemas.UpdateVpcLinkRequest_vpcLinkId, *v.VpcLinkId)
+	}
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -77,13 +92,66 @@ type UpdateVpcLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVpcLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcLink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.VpcLink_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.VpcLink_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VpcLink_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VpcLink_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.VpcLink_statusMessage, *v.StatusMessage)
+	}
+	serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
+	serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+}
+func (v *UpdateVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcLink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcLink_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.VpcLink_description, v.Description)
+		case schemas.VpcLink_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VpcLink_id, v.Id)
+		case schemas.VpcLink_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VpcLink_name, v.Name)
+		case schemas.VpcLink_status:
+			var ev string
+			if err := d.ReadString(schemas.VpcLink_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VpcLinkStatus(ev)
+			return nil
+		case schemas.VpcLink_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.VpcLink_statusMessage, v.StatusMessage)
+		case schemas.VpcLink_tags:
+			return deserializeMapOfStringToString(d, schemas.VpcLink_tags, &v.Tags)
+		case schemas.VpcLink_targetArns:
+			return deserializeListOfString(d, schemas.VpcLink_targetArns, &v.TargetArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcLink, schemas.UpdateVpcLinkRequest, schemas.VpcLink)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateVpcLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcLink, schemas.UpdateVpcLinkRequest, schemas.VpcLink), output: &UpdateVpcLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

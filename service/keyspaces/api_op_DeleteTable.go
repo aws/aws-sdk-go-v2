@@ -4,6 +4,8 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,34 @@ type DeleteTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.DeleteTableRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DeleteTableRequest_tableName, *v.TableName)
+	}
+}
+func (v *DeleteTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTableRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.DeleteTableRequest_keyspaceName, v.KeyspaceName)
+		case schemas.DeleteTableRequest_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.DeleteTableRequest_tableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 type DeleteTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +82,26 @@ type DeleteTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTable, schemas.DeleteTableRequest, schemas.DeleteTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTable, schemas.DeleteTableRequest, schemas.DeleteTableResponse), output: &DeleteTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

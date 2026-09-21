@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type UpdateAutonomousDatabaseBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutonomousDatabaseBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutonomousDatabaseBackupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutonomousDatabaseBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseBackupInput_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseBackupInput_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+}
+
 type UpdateAutonomousDatabaseBackupOutput struct {
 
 	// The unique identifier of the Autonomous Database backup that was updated.
@@ -60,13 +77,54 @@ type UpdateAutonomousDatabaseBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutonomousDatabaseBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutonomousDatabaseBackupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutonomousDatabaseBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseBackupId != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseBackupOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseBackupOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseBackupOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *UpdateAutonomousDatabaseBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAutonomousDatabaseBackupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId:
+			v.AutonomousDatabaseBackupId = new(string)
+			return d.ReadString(schemas.UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId, v.AutonomousDatabaseBackupId)
+		case schemas.UpdateAutonomousDatabaseBackupOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateAutonomousDatabaseBackupOutput_displayName, v.DisplayName)
+		case schemas.UpdateAutonomousDatabaseBackupOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAutonomousDatabaseBackupOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.UpdateAutonomousDatabaseBackupOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateAutonomousDatabaseBackupOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAutonomousDatabaseBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutonomousDatabaseBackup, schemas.UpdateAutonomousDatabaseBackupInput, schemas.UpdateAutonomousDatabaseBackupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAutonomousDatabaseBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutonomousDatabaseBackup, schemas.UpdateAutonomousDatabaseBackupInput, schemas.UpdateAutonomousDatabaseBackupOutput), output: &UpdateAutonomousDatabaseBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,46 @@ type CreateExascaleDbStorageVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExascaleDbStorageVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExascaleDbStorageVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExascaleDbStorageVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalFlashCacheInPercent != nil {
+		s.WriteInt32(schemas.CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent, *v.AdditionalFlashCacheInPercent)
+	}
+	if v.AutoscaleLimitInGBs != nil {
+		s.WriteInt32(schemas.CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs, *v.AutoscaleLimitInGBs)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_displayName, *v.DisplayName)
+	}
+	if v.HighCapacityDatabaseStorageTotalSizeInGBs != nil {
+		s.WriteInt32(schemas.CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs, *v.HighCapacityDatabaseStorageTotalSizeInGBs)
+	}
+	if v.IsAutoscaleEnabled != nil {
+		s.WriteBool(schemas.CreateExascaleDbStorageVaultInput_isAutoscaleEnabled, *v.IsAutoscaleEnabled)
+	}
+	serializeRequestTagMap(s, schemas.CreateExascaleDbStorageVaultInput_tags, v.Tags)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultInput_timeZone, *v.TimeZone)
+	}
+}
+
 type CreateExascaleDbStorageVaultOutput struct {
 
 	// The unique identifier of the Exascale storage vault.
@@ -95,13 +137,54 @@ type CreateExascaleDbStorageVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExascaleDbStorageVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExascaleDbStorageVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExascaleDbStorageVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultOutput_displayName, *v.DisplayName)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateExascaleDbStorageVaultOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *CreateExascaleDbStorageVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExascaleDbStorageVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExascaleDbStorageVaultOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateExascaleDbStorageVaultOutput_displayName, v.DisplayName)
+		case schemas.CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.CreateExascaleDbStorageVaultOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateExascaleDbStorageVaultOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateExascaleDbStorageVaultOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateExascaleDbStorageVaultOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExascaleDbStorageVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateExascaleDbStorageVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExascaleDbStorageVault, schemas.CreateExascaleDbStorageVaultInput, schemas.CreateExascaleDbStorageVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateExascaleDbStorageVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExascaleDbStorageVault, schemas.CreateExascaleDbStorageVaultInput, schemas.CreateExascaleDbStorageVaultOutput), output: &CreateExascaleDbStorageVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

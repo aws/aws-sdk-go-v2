@@ -5,6 +5,8 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,36 @@ type PutAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.PutAttachmentRequest_AssetIdentifier, *v.AssetIdentifier)
+	}
+	if v.AttachmentName != nil {
+		s.WriteString(schemas.PutAttachmentRequest_AttachmentName, *v.AttachmentName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.PutAttachmentRequest_Content, *v.Content)
+	}
+	if v.FormTypeId != nil {
+		s.WriteString(schemas.PutAttachmentRequest_FormTypeId, *v.FormTypeId)
+	}
+	if v.ItemIdentifier != nil {
+		s.WriteString(schemas.PutAttachmentRequest_ItemIdentifier, *v.ItemIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.PutAttachmentRequest_IterableFormName, *v.IterableFormName)
+	}
+}
+
 type PutAttachmentOutput struct {
 
 	// The unique identifier of the asset.
@@ -87,13 +119,56 @@ type PutAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetIdentifier != nil {
+		s.WriteString(schemas.PutAttachmentResponse_AssetIdentifier, *v.AssetIdentifier)
+	}
+	if v.AttachmentName != nil {
+		s.WriteString(schemas.PutAttachmentResponse_AttachmentName, *v.AttachmentName)
+	}
+	if v.FormTypeId != nil {
+		s.WriteString(schemas.PutAttachmentResponse_FormTypeId, *v.FormTypeId)
+	}
+	if v.ItemIdentifier != nil {
+		s.WriteString(schemas.PutAttachmentResponse_ItemIdentifier, *v.ItemIdentifier)
+	}
+	if v.IterableFormName != nil {
+		s.WriteString(schemas.PutAttachmentResponse_IterableFormName, *v.IterableFormName)
+	}
+}
+func (v *PutAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAttachmentResponse_AssetIdentifier:
+			v.AssetIdentifier = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_AssetIdentifier, v.AssetIdentifier)
+		case schemas.PutAttachmentResponse_AttachmentName:
+			v.AttachmentName = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_AttachmentName, v.AttachmentName)
+		case schemas.PutAttachmentResponse_FormTypeId:
+			v.FormTypeId = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_FormTypeId, v.FormTypeId)
+		case schemas.PutAttachmentResponse_ItemIdentifier:
+			v.ItemIdentifier = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_ItemIdentifier, v.ItemIdentifier)
+		case schemas.PutAttachmentResponse_IterableFormName:
+			v.IterableFormName = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_IterableFormName, v.IterableFormName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttachment, schemas.PutAttachmentRequest, schemas.PutAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttachment, schemas.PutAttachmentRequest, schemas.PutAttachmentResponse), output: &PutAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

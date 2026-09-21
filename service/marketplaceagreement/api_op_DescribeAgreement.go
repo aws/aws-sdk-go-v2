@@ -4,7 +4,9 @@ package marketplaceagreement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeAgreementInput struct {
 	AgreementId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgreementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.DescribeAgreementInput_agreementId, *v.AgreementId)
+	}
 }
 
 type DescribeAgreementOutput struct {
@@ -111,13 +125,112 @@ type DescribeAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgreementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceTime != nil {
+		s.WriteTime(schemas.DescribeAgreementOutput_acceptanceTime, *v.AcceptanceTime)
+	}
+	if v.Acceptor != nil {
+		s.WriteStruct(schemas.DescribeAgreementOutput_acceptor)
+		v.Acceptor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.DescribeAgreementOutput_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.DescribeAgreementOutput_agreementType, *v.AgreementType)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeAgreementOutput_endTime, *v.EndTime)
+	}
+	if v.EndTimeBehavior != nil {
+		s.WriteStruct(schemas.DescribeAgreementOutput_endTimeBehavior)
+		v.EndTimeBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EstimatedCharges != nil {
+		s.WriteStruct(schemas.DescribeAgreementOutput_estimatedCharges)
+		v.EstimatedCharges.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitialAgreementId != nil {
+		s.WriteString(schemas.DescribeAgreementOutput_initialAgreementId, *v.InitialAgreementId)
+	}
+	if v.ProposalSummary != nil {
+		s.WriteStruct(schemas.DescribeAgreementOutput_proposalSummary)
+		v.ProposalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Proposer != nil {
+		s.WriteStruct(schemas.DescribeAgreementOutput_proposer)
+		v.Proposer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeAgreementOutput_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeAgreementOutput_status, string(v.Status))
+	}
+}
+func (v *DescribeAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAgreementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAgreementOutput_acceptanceTime:
+			v.AcceptanceTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAgreementOutput_acceptanceTime, v.AcceptanceTime)
+		case schemas.DescribeAgreementOutput_acceptor:
+			v.Acceptor = &types.Acceptor{}
+			return v.Acceptor.Deserialize(d)
+		case schemas.DescribeAgreementOutput_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.DescribeAgreementOutput_agreementId, v.AgreementId)
+		case schemas.DescribeAgreementOutput_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.DescribeAgreementOutput_agreementType, v.AgreementType)
+		case schemas.DescribeAgreementOutput_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAgreementOutput_endTime, v.EndTime)
+		case schemas.DescribeAgreementOutput_endTimeBehavior:
+			v.EndTimeBehavior = &types.EndTimeBehavior{}
+			return v.EndTimeBehavior.Deserialize(d)
+		case schemas.DescribeAgreementOutput_estimatedCharges:
+			v.EstimatedCharges = &types.EstimatedCharges{}
+			return v.EstimatedCharges.Deserialize(d)
+		case schemas.DescribeAgreementOutput_initialAgreementId:
+			v.InitialAgreementId = new(string)
+			return d.ReadString(schemas.DescribeAgreementOutput_initialAgreementId, v.InitialAgreementId)
+		case schemas.DescribeAgreementOutput_proposalSummary:
+			v.ProposalSummary = &types.ProposalSummary{}
+			return v.ProposalSummary.Deserialize(d)
+		case schemas.DescribeAgreementOutput_proposer:
+			v.Proposer = &types.Proposer{}
+			return v.Proposer.Deserialize(d)
+		case schemas.DescribeAgreementOutput_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAgreementOutput_startTime, v.StartTime)
+		case schemas.DescribeAgreementOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAgreementOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgreementStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgreement, schemas.DescribeAgreementInput, schemas.DescribeAgreementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgreement, schemas.DescribeAgreementInput, schemas.DescribeAgreementOutput), output: &DescribeAgreementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

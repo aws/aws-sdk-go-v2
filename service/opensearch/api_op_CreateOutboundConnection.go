@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,36 @@ type CreateOutboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutboundConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutboundConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutboundConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionAlias != nil {
+		s.WriteString(schemas.CreateOutboundConnectionRequest_ConnectionAlias, *v.ConnectionAlias)
+	}
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.CreateOutboundConnectionRequest_ConnectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectionProperties != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionRequest_ConnectionProperties)
+		v.ConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocalDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionRequest_LocalDomainInfo)
+		v.LocalDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionRequest_RemoteDomainInfo)
+		v.RemoteDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a CreateOutboundConnection request. Contains details about the
 // newly created cross-cluster connection.
 type CreateOutboundConnectionOutput struct {
@@ -86,13 +118,80 @@ type CreateOutboundConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutboundConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutboundConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutboundConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionAlias != nil {
+		s.WriteString(schemas.CreateOutboundConnectionResponse_ConnectionAlias, *v.ConnectionAlias)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreateOutboundConnectionResponse_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.CreateOutboundConnectionResponse_ConnectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectionProperties != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_ConnectionProperties)
+		v.ConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionStatus != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_ConnectionStatus)
+		v.ConnectionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocalDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_LocalDomainInfo)
+		v.LocalDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_RemoteDomainInfo)
+		v.RemoteDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOutboundConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutboundConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutboundConnectionResponse_ConnectionAlias:
+			v.ConnectionAlias = new(string)
+			return d.ReadString(schemas.CreateOutboundConnectionResponse_ConnectionAlias, v.ConnectionAlias)
+		case schemas.CreateOutboundConnectionResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.CreateOutboundConnectionResponse_ConnectionId, v.ConnectionId)
+		case schemas.CreateOutboundConnectionResponse_ConnectionMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateOutboundConnectionResponse_ConnectionMode, &ev); err != nil {
+				return err
+			}
+			v.ConnectionMode = types.ConnectionMode(ev)
+			return nil
+		case schemas.CreateOutboundConnectionResponse_ConnectionProperties:
+			v.ConnectionProperties = &types.ConnectionProperties{}
+			return v.ConnectionProperties.Deserialize(d)
+		case schemas.CreateOutboundConnectionResponse_ConnectionStatus:
+			v.ConnectionStatus = &types.OutboundConnectionStatus{}
+			return v.ConnectionStatus.Deserialize(d)
+		case schemas.CreateOutboundConnectionResponse_LocalDomainInfo:
+			v.LocalDomainInfo = &types.DomainInformationContainer{}
+			return v.LocalDomainInfo.Deserialize(d)
+		case schemas.CreateOutboundConnectionResponse_RemoteDomainInfo:
+			v.RemoteDomainInfo = &types.DomainInformationContainer{}
+			return v.RemoteDomainInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOutboundConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOutboundConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutboundConnection, schemas.CreateOutboundConnectionRequest, schemas.CreateOutboundConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOutboundConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutboundConnection, schemas.CreateOutboundConnectionRequest, schemas.CreateOutboundConnectionResponse), output: &CreateOutboundConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

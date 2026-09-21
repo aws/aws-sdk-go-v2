@@ -5,7 +5,9 @@ package evs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type AssociateEipToVlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEipToVlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEipToVlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEipToVlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationId != nil {
+		s.WriteString(schemas.AssociateEipToVlanRequest_allocationId, *v.AllocationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateEipToVlanRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.AssociateEipToVlanRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.VlanName != nil {
+		s.WriteString(schemas.AssociateEipToVlanRequest_vlanName, *v.VlanName)
+	}
+}
+
 type AssociateEipToVlanOutput struct {
 
 	// The VLANs that Amazon EVS creates during environment creation.
@@ -66,13 +89,34 @@ type AssociateEipToVlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateEipToVlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateEipToVlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateEipToVlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vlan != nil {
+		s.WriteStruct(schemas.AssociateEipToVlanResponse_vlan)
+		v.Vlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateEipToVlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateEipToVlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateEipToVlanResponse_vlan:
+			v.Vlan = &types.Vlan{}
+			return v.Vlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateEipToVlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateEipToVlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEipToVlan, schemas.AssociateEipToVlanRequest, schemas.AssociateEipToVlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateEipToVlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateEipToVlan, schemas.AssociateEipToVlanRequest, schemas.AssociateEipToVlanResponse), output: &AssociateEipToVlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DkimAttributes":{"CurrentSigningKeyLength":"RSA_1024_BIT","LastKeyGenerationTimestamp":946684800,"NextSigningKeyLength":"RSA_1024_BIT","SigningAttributesOrigin":"AWS_SES","SigningEnabled":true,"SigningHostedZone":"__SigningHostedZone__","Status":"PENDING","Tokens":["__Member__","__Member__"]},"IdentityType":"EMAIL_ADDRESS","VerifiedForSendingStatus":true}

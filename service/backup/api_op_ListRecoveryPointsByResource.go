@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type ListRecoveryPointsByResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedByAWSBackupOnly != false {
+		s.WriteBool(schemas.ListRecoveryPointsByResourceInput_ManagedByAWSBackupOnly, v.ManagedByAWSBackupOnly)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryPointsByResourceInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByResourceInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListRecoveryPointsByResourceInput_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type ListRecoveryPointsByResourceOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -83,13 +106,35 @@ type ListRecoveryPointsByResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByResourceOutput_NextToken, *v.NextToken)
+	}
+	serializeRecoveryPointByResourceList(s, schemas.ListRecoveryPointsByResourceOutput_RecoveryPoints, v.RecoveryPoints)
+}
+func (v *ListRecoveryPointsByResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryPointsByResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryPointsByResourceOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryPointsByResourceOutput_NextToken, v.NextToken)
+		case schemas.ListRecoveryPointsByResourceOutput_RecoveryPoints:
+			return deserializeRecoveryPointByResourceList(d, schemas.ListRecoveryPointsByResourceOutput_RecoveryPoints, &v.RecoveryPoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryPointsByResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByResource, schemas.ListRecoveryPointsByResourceInput, schemas.ListRecoveryPointsByResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecoveryPointsByResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByResource, schemas.ListRecoveryPointsByResourceInput, schemas.ListRecoveryPointsByResourceOutput), output: &ListRecoveryPointsByResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

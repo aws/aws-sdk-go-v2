@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentId != nil {
+		s.WriteString(schemas.DescribeAgentRequest_AgentId, *v.AgentId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAgentRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAgentOutput struct {
 
 	// The full details of the agent, including its configuration, status, and
@@ -56,13 +73,40 @@ type DescribeAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Agent != nil {
+		s.WriteStruct(schemas.DescribeAgentResponse_Agent)
+		v.Agent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAgentResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *DescribeAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAgentResponse_Agent:
+			v.Agent = &types.Agent{}
+			return v.Agent.Deserialize(d)
+		case schemas.DescribeAgentResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAgentResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgent, schemas.DescribeAgentRequest, schemas.DescribeAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAgent, schemas.DescribeAgentRequest, schemas.DescribeAgentResponse), output: &DescribeAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

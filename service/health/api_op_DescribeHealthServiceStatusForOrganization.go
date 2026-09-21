@@ -4,6 +4,8 @@ package health
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type DescribeHealthServiceStatusForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHealthServiceStatusForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHealthServiceStatusForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeHealthServiceStatusForOrganizationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeHealthServiceStatusForOrganizationOutput struct {
 
 	// Information about the status of enabling or disabling the Health organizational
@@ -43,13 +61,32 @@ type DescribeHealthServiceStatusForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHealthServiceStatusForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHealthServiceStatusForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHealthServiceStatusForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthServiceAccessStatusForOrganization != nil {
+		s.WriteString(schemas.DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization, *v.HealthServiceAccessStatusForOrganization)
+	}
+}
+func (v *DescribeHealthServiceStatusForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHealthServiceStatusForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization:
+			v.HealthServiceAccessStatusForOrganization = new(string)
+			return d.ReadString(schemas.DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization, v.HealthServiceAccessStatusForOrganization)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHealthServiceStatusForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHealthServiceStatusForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHealthServiceStatusForOrganization, nil, schemas.DescribeHealthServiceStatusForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHealthServiceStatusForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHealthServiceStatusForOrganization, nil, schemas.DescribeHealthServiceStatusForOrganizationResponse), output: &DescribeHealthServiceStatusForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

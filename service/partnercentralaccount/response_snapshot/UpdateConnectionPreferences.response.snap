@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.UpdateConnectionPreferences
+
+{"AccessType":"ALLOW_ALL","Arn":"__Arn__","Catalog":"__Catalog__","ExcludedParticipantIds":["__Member__","__Member__"],"Revision":1,"UpdatedAt":"2000-01-01T00:00:00Z"}

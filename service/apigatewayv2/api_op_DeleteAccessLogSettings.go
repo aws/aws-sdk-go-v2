@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteAccessLogSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessLogSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessLogSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessLogSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.DeleteAccessLogSettingsRequest_ApiId, *v.ApiId)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.DeleteAccessLogSettingsRequest_StageName, *v.StageName)
+	}
+}
+
 type DeleteAccessLogSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteAccessLogSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessLogSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessLogSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccessLogSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessLogSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccessLogSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessLogSettings, schemas.DeleteAccessLogSettingsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccessLogSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessLogSettings, schemas.DeleteAccessLogSettingsRequest, nil), output: &DeleteAccessLogSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

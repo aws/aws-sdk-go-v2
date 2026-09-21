@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,37 @@ type DescribeClusterVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterType != nil {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_clusterType, *v.ClusterType)
+	}
+	serializeStringList(s, schemas.DescribeClusterVersionsRequest_clusterVersions, v.ClusterVersions)
+	if v.DefaultOnly != nil {
+		s.WriteBool(schemas.DescribeClusterVersionsRequest_defaultOnly, *v.DefaultOnly)
+	}
+	if v.IncludeAll != nil {
+		s.WriteBool(schemas.DescribeClusterVersionsRequest_includeAll, *v.IncludeAll)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeClusterVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_status, string(v.Status))
+	}
+	if v.VersionStatus != "" {
+		s.WriteString(schemas.DescribeClusterVersionsRequest_versionStatus, string(v.VersionStatus))
+	}
+}
+
 type DescribeClusterVersionsOutput struct {
 
 	// List of cluster version information objects.
@@ -73,13 +106,35 @@ type DescribeClusterVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterVersionList(s, schemas.DescribeClusterVersionsResponse_clusterVersions, v.ClusterVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeClusterVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeClusterVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterVersionsResponse_clusterVersions:
+			return deserializeClusterVersionList(d, schemas.DescribeClusterVersionsResponse_clusterVersions, &v.ClusterVersions)
+		case schemas.DescribeClusterVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeClusterVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClusterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterVersions, schemas.DescribeClusterVersionsRequest, schemas.DescribeClusterVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClusterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterVersions, schemas.DescribeClusterVersionsRequest, schemas.DescribeClusterVersionsResponse), output: &DescribeClusterVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

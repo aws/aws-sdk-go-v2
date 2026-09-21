@@ -5,7 +5,10 @@ package opensearch
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/document"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +61,24 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateIndexRequest_DomainName, *v.DomainName)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreateIndexRequest_IndexName, *v.IndexName)
+	}
+	if v.IndexSchema != nil {
+		s.WriteDocument(schemas.CreateIndexRequest_IndexSchema, &smithydocument.Opaque{Value: v.IndexSchema})
+	}
+}
+
 type CreateIndexOutput struct {
 
 	// The status of the index creation operation.
@@ -71,13 +92,36 @@ type CreateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CreateIndexResponse_Status, string(v.Status))
+	}
+}
+func (v *CreateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIndexResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateIndexResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IndexStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexRequest, schemas.CreateIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexRequest, schemas.CreateIndexResponse), output: &CreateIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

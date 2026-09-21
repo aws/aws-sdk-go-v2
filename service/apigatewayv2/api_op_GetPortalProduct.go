@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetPortalProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortalProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortalProductRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortalProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.GetPortalProductRequest_PortalProductId, *v.PortalProductId)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.GetPortalProductRequest_ResourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+}
+
 type GetPortalProductOutput struct {
 
 	// The description of a portal product.
@@ -67,13 +84,67 @@ type GetPortalProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortalProductOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortalProductResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortalProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetPortalProductResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetPortalProductResponse_DisplayName, *v.DisplayName)
+	}
+	if v.DisplayOrder != nil {
+		s.WriteStruct(schemas.GetPortalProductResponse_DisplayOrder)
+		v.DisplayOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetPortalProductResponse_LastModified, *v.LastModified)
+	}
+	if v.PortalProductArn != nil {
+		s.WriteString(schemas.GetPortalProductResponse_PortalProductArn, *v.PortalProductArn)
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.GetPortalProductResponse_PortalProductId, *v.PortalProductId)
+	}
+	serializeTags(s, schemas.GetPortalProductResponse_Tags, v.Tags)
+}
+func (v *GetPortalProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPortalProductResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPortalProductResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_Description, v.Description)
+		case schemas.GetPortalProductResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_DisplayName, v.DisplayName)
+		case schemas.GetPortalProductResponse_DisplayOrder:
+			v.DisplayOrder = &types.DisplayOrder{}
+			return v.DisplayOrder.Deserialize(d)
+		case schemas.GetPortalProductResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetPortalProductResponse_LastModified, v.LastModified)
+		case schemas.GetPortalProductResponse_PortalProductArn:
+			v.PortalProductArn = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_PortalProductArn, v.PortalProductArn)
+		case schemas.GetPortalProductResponse_PortalProductId:
+			v.PortalProductId = new(string)
+			return d.ReadString(schemas.GetPortalProductResponse_PortalProductId, v.PortalProductId)
+		case schemas.GetPortalProductResponse_Tags:
+			return deserializeTags(d, schemas.GetPortalProductResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPortalProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPortalProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortalProduct, schemas.GetPortalProductRequest, schemas.GetPortalProductResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPortalProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortalProduct, schemas.GetPortalProductRequest, schemas.GetPortalProductResponse), output: &GetPortalProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

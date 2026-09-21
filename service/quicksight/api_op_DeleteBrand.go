@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type DeleteBrandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBrandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBrandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBrandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteBrandRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BrandId != nil {
+		s.WriteString(schemas.DeleteBrandRequest_BrandId, *v.BrandId)
+	}
+}
+
 type DeleteBrandOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -62,13 +79,32 @@ type DeleteBrandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBrandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBrandResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBrandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteBrandResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *DeleteBrandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBrandResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBrandResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteBrandResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBrandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBrand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrand, schemas.DeleteBrandRequest, schemas.DeleteBrandResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBrand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBrand, schemas.DeleteBrandRequest, schemas.DeleteBrandResponse), output: &DeleteBrandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

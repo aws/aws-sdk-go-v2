@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,16 @@ type BatchGetTableOptimizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTableOptimizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTableOptimizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTableOptimizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTableOptimizerEntries(s, schemas.BatchGetTableOptimizerRequest_Entries, v.Entries)
+}
+
 type BatchGetTableOptimizerOutput struct {
 
 	// A list of errors from the operation.
@@ -49,13 +61,32 @@ type BatchGetTableOptimizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTableOptimizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTableOptimizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTableOptimizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTableOptimizerErrors(s, schemas.BatchGetTableOptimizerResponse_Failures, v.Failures)
+	serializeBatchTableOptimizers(s, schemas.BatchGetTableOptimizerResponse_TableOptimizers, v.TableOptimizers)
+}
+func (v *BatchGetTableOptimizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetTableOptimizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetTableOptimizerResponse_Failures:
+			return deserializeBatchGetTableOptimizerErrors(d, schemas.BatchGetTableOptimizerResponse_Failures, &v.Failures)
+		case schemas.BatchGetTableOptimizerResponse_TableOptimizers:
+			return deserializeBatchTableOptimizers(d, schemas.BatchGetTableOptimizerResponse_TableOptimizers, &v.TableOptimizers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetTableOptimizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetTableOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTableOptimizer, schemas.BatchGetTableOptimizerRequest, schemas.BatchGetTableOptimizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetTableOptimizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTableOptimizer, schemas.BatchGetTableOptimizerRequest, schemas.BatchGetTableOptimizerResponse), output: &BatchGetTableOptimizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

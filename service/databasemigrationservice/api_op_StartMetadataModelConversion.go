@@ -4,6 +4,8 @@ package databasemigrationservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,21 @@ type StartMetadataModelConversionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelConversionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelConversionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelConversionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelConversionMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelConversionMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelConversionOutput struct {
 
 	// The identifier for the conversion request.
@@ -104,13 +121,32 @@ type StartMetadataModelConversionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelConversionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelConversionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelConversionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelConversionResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelConversionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelConversionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelConversionResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelConversionResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelConversionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelConversion, schemas.StartMetadataModelConversionMessage, schemas.StartMetadataModelConversionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelConversion, schemas.StartMetadataModelConversionMessage, schemas.StartMetadataModelConversionResponse), output: &StartMetadataModelConversionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

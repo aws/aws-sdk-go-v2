@@ -5,7 +5,9 @@ package lambdamicrovms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListMicrovmImageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrovmImageVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrovmImageVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrovmImageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.ListMicrovmImageVersionsInput_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMicrovmImageVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrovmImageVersionsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListMicrovmImageVersionsOutput struct {
 
 	// The list of MicroVM image versions.
@@ -60,13 +80,35 @@ type ListMicrovmImageVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMicrovmImageVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMicrovmImageVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMicrovmImageVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMicrovmImageVersionSummaryList(s, schemas.ListMicrovmImageVersionsOutput_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMicrovmImageVersionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMicrovmImageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMicrovmImageVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMicrovmImageVersionsOutput_items:
+			return deserializeMicrovmImageVersionSummaryList(d, schemas.ListMicrovmImageVersionsOutput_items, &v.Items)
+		case schemas.ListMicrovmImageVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMicrovmImageVersionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMicrovmImageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMicrovmImageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrovmImageVersions, schemas.ListMicrovmImageVersionsInput, schemas.ListMicrovmImageVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMicrovmImageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMicrovmImageVersions, schemas.ListMicrovmImageVersionsInput, schemas.ListMicrovmImageVersionsOutput), output: &ListMicrovmImageVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

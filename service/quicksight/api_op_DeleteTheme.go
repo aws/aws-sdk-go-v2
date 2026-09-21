@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DeleteThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteThemeRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DeleteThemeRequest_ThemeId, *v.ThemeId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DeleteThemeRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type DeleteThemeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource.
@@ -65,13 +85,49 @@ type DeleteThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThemeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThemeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteThemeResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteThemeResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteThemeResponse_Status, v.Status)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DeleteThemeResponse_ThemeId, *v.ThemeId)
+	}
+}
+func (v *DeleteThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThemeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteThemeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteThemeResponse_Arn, v.Arn)
+		case schemas.DeleteThemeResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteThemeResponse_RequestId, v.RequestId)
+		case schemas.DeleteThemeResponse_Status:
+			return d.ReadInt32(schemas.DeleteThemeResponse_Status, &v.Status)
+		case schemas.DeleteThemeResponse_ThemeId:
+			v.ThemeId = new(string)
+			return d.ReadString(schemas.DeleteThemeResponse_ThemeId, v.ThemeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTheme, schemas.DeleteThemeRequest, schemas.DeleteThemeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTheme, schemas.DeleteThemeRequest, schemas.DeleteThemeResponse), output: &DeleteThemeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GetFunctionUrlConfigInput struct {
 	Qualifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFunctionUrlConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionUrlConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionUrlConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetFunctionUrlConfigRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.GetFunctionUrlConfigRequest_Qualifier, *v.Qualifier)
+	}
 }
 
 type GetFunctionUrlConfigOutput struct {
@@ -107,13 +124,78 @@ type GetFunctionUrlConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionUrlConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionUrlConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionUrlConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthType != "" {
+		s.WriteString(schemas.GetFunctionUrlConfigResponse_AuthType, string(v.AuthType))
+	}
+	if v.Cors != nil {
+		s.WriteStruct(schemas.GetFunctionUrlConfigResponse_Cors)
+		v.Cors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.GetFunctionUrlConfigResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.GetFunctionUrlConfigResponse_FunctionArn, *v.FunctionArn)
+	}
+	if v.FunctionUrl != nil {
+		s.WriteString(schemas.GetFunctionUrlConfigResponse_FunctionUrl, *v.FunctionUrl)
+	}
+	if v.InvokeMode != "" {
+		s.WriteString(schemas.GetFunctionUrlConfigResponse_InvokeMode, string(v.InvokeMode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteString(schemas.GetFunctionUrlConfigResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+}
+func (v *GetFunctionUrlConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFunctionUrlConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFunctionUrlConfigResponse_AuthType:
+			var ev string
+			if err := d.ReadString(schemas.GetFunctionUrlConfigResponse_AuthType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.FunctionUrlAuthType(ev)
+			return nil
+		case schemas.GetFunctionUrlConfigResponse_Cors:
+			v.Cors = &types.Cors{}
+			return v.Cors.Deserialize(d)
+		case schemas.GetFunctionUrlConfigResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.GetFunctionUrlConfigResponse_CreationTime, v.CreationTime)
+		case schemas.GetFunctionUrlConfigResponse_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.GetFunctionUrlConfigResponse_FunctionArn, v.FunctionArn)
+		case schemas.GetFunctionUrlConfigResponse_FunctionUrl:
+			v.FunctionUrl = new(string)
+			return d.ReadString(schemas.GetFunctionUrlConfigResponse_FunctionUrl, v.FunctionUrl)
+		case schemas.GetFunctionUrlConfigResponse_InvokeMode:
+			var ev string
+			if err := d.ReadString(schemas.GetFunctionUrlConfigResponse_InvokeMode, &ev); err != nil {
+				return err
+			}
+			v.InvokeMode = types.InvokeMode(ev)
+			return nil
+		case schemas.GetFunctionUrlConfigResponse_LastModifiedTime:
+			v.LastModifiedTime = new(string)
+			return d.ReadString(schemas.GetFunctionUrlConfigResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionUrlConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionUrlConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionUrlConfig, schemas.GetFunctionUrlConfigRequest, schemas.GetFunctionUrlConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunctionUrlConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionUrlConfig, schemas.GetFunctionUrlConfigRequest, schemas.GetFunctionUrlConfigResponse), output: &GetFunctionUrlConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

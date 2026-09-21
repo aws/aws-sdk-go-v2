@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type GetIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetIPSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.IpSetId != nil {
+		s.WriteString(schemas.GetIPSetRequest_IpSetId, *v.IpSetId)
+	}
+}
+
 type GetIPSetOutput struct {
 
 	// The format of the file that contains the IPSet.
@@ -80,13 +97,67 @@ type GetIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.GetIPSetResponse_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetIPSetResponse_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.GetIPSetResponse_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetIPSetResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetIPSetResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetIPSetResponse_Tags, v.Tags)
+}
+func (v *GetIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIPSetResponse_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.GetIPSetResponse_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		case schemas.GetIPSetResponse_Format:
+			var ev string
+			if err := d.ReadString(schemas.GetIPSetResponse_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.IpSetFormat(ev)
+			return nil
+		case schemas.GetIPSetResponse_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GetIPSetResponse_Location, v.Location)
+		case schemas.GetIPSetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetIPSetResponse_Name, v.Name)
+		case schemas.GetIPSetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetIPSetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IpSetStatus(ev)
+			return nil
+		case schemas.GetIPSetResponse_Tags:
+			return deserializeTagMap(d, schemas.GetIPSetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIPSet, schemas.GetIPSetRequest, schemas.GetIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIPSet, schemas.GetIPSetRequest, schemas.GetIPSetResponse), output: &GetIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

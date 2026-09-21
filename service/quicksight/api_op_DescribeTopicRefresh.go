@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DescribeTopicRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeTopicRefreshRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.RefreshId != nil {
+		s.WriteString(schemas.DescribeTopicRefreshRequest_RefreshId, *v.RefreshId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.DescribeTopicRefreshRequest_TopicId, *v.TopicId)
+	}
+}
+
 type DescribeTopicRefreshOutput struct {
 
 	// Details of the refresh, which is performed when the topic is created or updated.
@@ -63,13 +83,45 @@ type DescribeTopicRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTopicRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTopicRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTopicRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RefreshDetails != nil {
+		s.WriteStruct(schemas.DescribeTopicRefreshResponse_RefreshDetails)
+		v.RefreshDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeTopicRefreshResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeTopicRefreshResponse_Status, v.Status)
+	}
+}
+func (v *DescribeTopicRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTopicRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTopicRefreshResponse_RefreshDetails:
+			v.RefreshDetails = &types.TopicRefreshDetails{}
+			return v.RefreshDetails.Deserialize(d)
+		case schemas.DescribeTopicRefreshResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeTopicRefreshResponse_RequestId, v.RequestId)
+		case schemas.DescribeTopicRefreshResponse_Status:
+			return d.ReadInt32(schemas.DescribeTopicRefreshResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTopicRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTopicRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicRefresh, schemas.DescribeTopicRefreshRequest, schemas.DescribeTopicRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTopicRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTopicRefresh, schemas.DescribeTopicRefreshRequest, schemas.DescribeTopicRefreshResponse), output: &DescribeTopicRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

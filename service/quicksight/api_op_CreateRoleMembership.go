@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type CreateRoleMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoleMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoleMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoleMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateRoleMembershipRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MemberName != nil {
+		s.WriteString(schemas.CreateRoleMembershipRequest_MemberName, *v.MemberName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreateRoleMembershipRequest_Namespace, *v.Namespace)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.CreateRoleMembershipRequest_Role, string(v.Role))
+	}
+}
+
 type CreateRoleMembershipOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -66,13 +89,37 @@ type CreateRoleMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoleMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoleMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoleMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateRoleMembershipResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateRoleMembershipResponse_Status, v.Status)
+	}
+}
+func (v *CreateRoleMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRoleMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRoleMembershipResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateRoleMembershipResponse_RequestId, v.RequestId)
+		case schemas.CreateRoleMembershipResponse_Status:
+			return d.ReadInt32(schemas.CreateRoleMembershipResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRoleMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoleMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoleMembership, schemas.CreateRoleMembershipRequest, schemas.CreateRoleMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoleMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoleMembership, schemas.CreateRoleMembershipRequest, schemas.CreateRoleMembershipResponse), output: &CreateRoleMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

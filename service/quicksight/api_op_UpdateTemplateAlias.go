@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type UpdateTemplateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.UpdateTemplateAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateTemplateAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplateAliasRequest_TemplateId, *v.TemplateId)
+	}
+	if v.TemplateVersionNumber != nil {
+		s.WriteInt64(schemas.UpdateTemplateAliasRequest_TemplateVersionNumber, *v.TemplateVersionNumber)
+	}
+}
+
 type UpdateTemplateAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -70,13 +93,45 @@ type UpdateTemplateAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateTemplateAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateTemplateAliasResponse_Status, v.Status)
+	}
+	if v.TemplateAlias != nil {
+		s.WriteStruct(schemas.UpdateTemplateAliasResponse_TemplateAlias)
+		v.TemplateAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTemplateAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplateAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateTemplateAliasResponse_RequestId, v.RequestId)
+		case schemas.UpdateTemplateAliasResponse_Status:
+			return d.ReadInt32(schemas.UpdateTemplateAliasResponse_Status, &v.Status)
+		case schemas.UpdateTemplateAliasResponse_TemplateAlias:
+			v.TemplateAlias = &types.TemplateAlias{}
+			return v.TemplateAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplateAlias, schemas.UpdateTemplateAliasRequest, schemas.UpdateTemplateAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplateAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplateAlias, schemas.UpdateTemplateAliasRequest, schemas.UpdateTemplateAliasResponse), output: &UpdateTemplateAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

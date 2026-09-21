@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListDlpSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDlpSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDlpSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDlpSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListDlpSettingsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDlpSettingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDlpSettingsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDlpSettingsOutput struct {
 
 	// A list of DlpSettingSummary objects for the DLP settings in the account. The
@@ -62,13 +82,41 @@ type ListDlpSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDlpSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDlpSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDlpSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDlpSettingSummaryList(s, schemas.ListDlpSettingsResponse_DlpSettingSummaries, v.DlpSettingSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDlpSettingsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListDlpSettingsResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *ListDlpSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDlpSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDlpSettingsResponse_DlpSettingSummaries:
+			return deserializeDlpSettingSummaryList(d, schemas.ListDlpSettingsResponse_DlpSettingSummaries, &v.DlpSettingSummaries)
+		case schemas.ListDlpSettingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDlpSettingsResponse_NextToken, v.NextToken)
+		case schemas.ListDlpSettingsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListDlpSettingsResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDlpSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDlpSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDlpSettings, schemas.ListDlpSettingsRequest, schemas.ListDlpSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDlpSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDlpSettings, schemas.ListDlpSettingsRequest, schemas.ListDlpSettingsResponse), output: &ListDlpSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

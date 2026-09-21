@@ -5,7 +5,9 @@ package evs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type DisassociateEipFromVlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEipFromVlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEipFromVlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEipFromVlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_associationId, *v.AssociationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.VlanName != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_vlanName, *v.VlanName)
+	}
+}
+
 type DisassociateEipFromVlanOutput struct {
 
 	// The VLANs that Amazon EVS creates during environment creation.
@@ -66,13 +89,34 @@ type DisassociateEipFromVlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEipFromVlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEipFromVlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEipFromVlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vlan != nil {
+		s.WriteStruct(schemas.DisassociateEipFromVlanResponse_vlan)
+		v.Vlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateEipFromVlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateEipFromVlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateEipFromVlanResponse_vlan:
+			v.Vlan = &types.Vlan{}
+			return v.Vlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateEipFromVlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateEipFromVlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEipFromVlan, schemas.DisassociateEipFromVlanRequest, schemas.DisassociateEipFromVlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateEipFromVlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEipFromVlan, schemas.DisassociateEipFromVlanRequest, schemas.DisassociateEipFromVlanResponse), output: &DisassociateEipFromVlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

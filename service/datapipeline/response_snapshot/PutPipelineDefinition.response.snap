@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DataPipeline.PutPipelineDefinition
+
+{"errored":true,"validationErrors":[{"errors":["__Member__","__Member__"],"id":"__Id__"},{"errors":["__Member__","__Member__"],"id":"__Id__"}],"validationWarnings":[{"id":"__Id__","warnings":["__Member__","__Member__"]},{"id":"__Id__","warnings":["__Member__","__Member__"]}]}

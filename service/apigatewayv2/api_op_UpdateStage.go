@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -70,6 +72,45 @@ type UpdateStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogSettings != nil {
+		s.WriteStruct(schemas.UpdateStageRequest_AccessLogSettings)
+		v.AccessLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateStageRequest_ApiId, *v.ApiId)
+	}
+	if v.AutoDeploy != nil {
+		s.WriteBool(schemas.UpdateStageRequest_AutoDeploy, *v.AutoDeploy)
+	}
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.UpdateStageRequest_ClientCertificateId, *v.ClientCertificateId)
+	}
+	if v.DefaultRouteSettings != nil {
+		s.WriteStruct(schemas.UpdateStageRequest_DefaultRouteSettings)
+		v.DefaultRouteSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.UpdateStageRequest_DeploymentId, *v.DeploymentId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStageRequest_Description, *v.Description)
+	}
+	serializeRouteSettingsMap(s, schemas.UpdateStageRequest_RouteSettings, v.RouteSettings)
+	if v.StageName != nil {
+		s.WriteString(schemas.UpdateStageRequest_StageName, *v.StageName)
+	}
+	serializeStageVariablesMap(s, schemas.UpdateStageRequest_StageVariables, v.StageVariables)
+}
+
 type UpdateStageOutput struct {
 
 	// Settings for logging access in this stage.
@@ -128,13 +169,105 @@ type UpdateStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogSettings != nil {
+		s.WriteStruct(schemas.UpdateStageResponse_AccessLogSettings)
+		v.AccessLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.UpdateStageResponse_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.AutoDeploy != nil {
+		s.WriteBool(schemas.UpdateStageResponse_AutoDeploy, *v.AutoDeploy)
+	}
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.UpdateStageResponse_ClientCertificateId, *v.ClientCertificateId)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.UpdateStageResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.DefaultRouteSettings != nil {
+		s.WriteStruct(schemas.UpdateStageResponse_DefaultRouteSettings)
+		v.DefaultRouteSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.UpdateStageResponse_DeploymentId, *v.DeploymentId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStageResponse_Description, *v.Description)
+	}
+	if v.LastDeploymentStatusMessage != nil {
+		s.WriteString(schemas.UpdateStageResponse_LastDeploymentStatusMessage, *v.LastDeploymentStatusMessage)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.UpdateStageResponse_LastUpdatedDate, *v.LastUpdatedDate)
+	}
+	serializeRouteSettingsMap(s, schemas.UpdateStageResponse_RouteSettings, v.RouteSettings)
+	if v.StageName != nil {
+		s.WriteString(schemas.UpdateStageResponse_StageName, *v.StageName)
+	}
+	serializeStageVariablesMap(s, schemas.UpdateStageResponse_StageVariables, v.StageVariables)
+	serializeTags(s, schemas.UpdateStageResponse_Tags, v.Tags)
+}
+func (v *UpdateStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStageResponse_AccessLogSettings:
+			v.AccessLogSettings = &types.AccessLogSettings{}
+			return v.AccessLogSettings.Deserialize(d)
+		case schemas.UpdateStageResponse_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.UpdateStageResponse_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.UpdateStageResponse_AutoDeploy:
+			v.AutoDeploy = new(bool)
+			return d.ReadBool(schemas.UpdateStageResponse_AutoDeploy, v.AutoDeploy)
+		case schemas.UpdateStageResponse_ClientCertificateId:
+			v.ClientCertificateId = new(string)
+			return d.ReadString(schemas.UpdateStageResponse_ClientCertificateId, v.ClientCertificateId)
+		case schemas.UpdateStageResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateStageResponse_CreatedDate, v.CreatedDate)
+		case schemas.UpdateStageResponse_DefaultRouteSettings:
+			v.DefaultRouteSettings = &types.RouteSettings{}
+			return v.DefaultRouteSettings.Deserialize(d)
+		case schemas.UpdateStageResponse_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.UpdateStageResponse_DeploymentId, v.DeploymentId)
+		case schemas.UpdateStageResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateStageResponse_Description, v.Description)
+		case schemas.UpdateStageResponse_LastDeploymentStatusMessage:
+			v.LastDeploymentStatusMessage = new(string)
+			return d.ReadString(schemas.UpdateStageResponse_LastDeploymentStatusMessage, v.LastDeploymentStatusMessage)
+		case schemas.UpdateStageResponse_LastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateStageResponse_LastUpdatedDate, v.LastUpdatedDate)
+		case schemas.UpdateStageResponse_RouteSettings:
+			return deserializeRouteSettingsMap(d, schemas.UpdateStageResponse_RouteSettings, &v.RouteSettings)
+		case schemas.UpdateStageResponse_StageName:
+			v.StageName = new(string)
+			return d.ReadString(schemas.UpdateStageResponse_StageName, v.StageName)
+		case schemas.UpdateStageResponse_StageVariables:
+			return deserializeStageVariablesMap(d, schemas.UpdateStageResponse_StageVariables, &v.StageVariables)
+		case schemas.UpdateStageResponse_Tags:
+			return deserializeTags(d, schemas.UpdateStageResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStage, schemas.UpdateStageRequest, schemas.UpdateStageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStage, schemas.UpdateStageRequest, schemas.UpdateStageResponse), output: &UpdateStageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -44,6 +46,21 @@ type DescribeFargateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFargateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFargateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFargateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeFargateProfileRequest_clusterName, *v.ClusterName)
+	}
+	if v.FargateProfileName != nil {
+		s.WriteString(schemas.DescribeFargateProfileRequest_fargateProfileName, *v.FargateProfileName)
+	}
+}
+
 type DescribeFargateProfileOutput struct {
 
 	// The full description of your Fargate profile.
@@ -55,13 +72,34 @@ type DescribeFargateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFargateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFargateProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFargateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FargateProfile != nil {
+		s.WriteStruct(schemas.DescribeFargateProfileResponse_fargateProfile)
+		v.FargateProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFargateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFargateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFargateProfileResponse_fargateProfile:
+			v.FargateProfile = &types.FargateProfile{}
+			return v.FargateProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFargateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFargateProfile, schemas.DescribeFargateProfileRequest, schemas.DescribeFargateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFargateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFargateProfile, schemas.DescribeFargateProfileRequest, schemas.DescribeFargateProfileResponse), output: &DescribeFargateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

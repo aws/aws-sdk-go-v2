@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type DescribeReplicationConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationConfigsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationConfigsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationConfigsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationConfigsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeReplicationConfigsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -61,13 +79,35 @@ type DescribeReplicationConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationConfigsResponse_Marker, *v.Marker)
+	}
+	serializeReplicationConfigList(s, schemas.DescribeReplicationConfigsResponse_ReplicationConfigs, v.ReplicationConfigs)
+}
+func (v *DescribeReplicationConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationConfigsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationConfigsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationConfigsResponse_ReplicationConfigs:
+			return deserializeReplicationConfigList(d, schemas.DescribeReplicationConfigsResponse_ReplicationConfigs, &v.ReplicationConfigs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationConfigs, schemas.DescribeReplicationConfigsMessage, schemas.DescribeReplicationConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationConfigs, schemas.DescribeReplicationConfigsMessage, schemas.DescribeReplicationConfigsResponse), output: &DescribeReplicationConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

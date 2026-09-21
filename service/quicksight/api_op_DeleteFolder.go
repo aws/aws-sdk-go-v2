@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteFolderRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.DeleteFolderRequest_FolderId, *v.FolderId)
+	}
+}
+
 type DeleteFolderOutput struct {
 
 	// The Amazon Resource Name of the deleted folder.
@@ -58,13 +75,49 @@ type DeleteFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteFolderResponse_Arn, *v.Arn)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.DeleteFolderResponse_FolderId, *v.FolderId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteFolderResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteFolderResponse_Status, v.Status)
+	}
+}
+func (v *DeleteFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFolderResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteFolderResponse_Arn, v.Arn)
+		case schemas.DeleteFolderResponse_FolderId:
+			v.FolderId = new(string)
+			return d.ReadString(schemas.DeleteFolderResponse_FolderId, v.FolderId)
+		case schemas.DeleteFolderResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteFolderResponse_RequestId, v.RequestId)
+		case schemas.DeleteFolderResponse_Status:
+			return d.ReadInt32(schemas.DeleteFolderResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFolder, schemas.DeleteFolderRequest, schemas.DeleteFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFolder, schemas.DeleteFolderRequest, schemas.DeleteFolderResponse), output: &DeleteFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

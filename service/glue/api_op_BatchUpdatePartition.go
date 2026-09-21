@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type BatchUpdatePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdatePartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdatePartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdatePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.BatchUpdatePartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.BatchUpdatePartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeBatchUpdatePartitionRequestEntryList(s, schemas.BatchUpdatePartitionRequest_Entries, v.Entries)
+	if v.TableName != nil {
+		s.WriteString(schemas.BatchUpdatePartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type BatchUpdatePartitionOutput struct {
 
 	// The errors encountered when trying to update the requested partitions. A list
@@ -60,13 +81,29 @@ type BatchUpdatePartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdatePartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdatePartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdatePartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdatePartitionFailureList(s, schemas.BatchUpdatePartitionResponse_Errors, v.Errors)
+}
+func (v *BatchUpdatePartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdatePartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdatePartitionResponse_Errors:
+			return deserializeBatchUpdatePartitionFailureList(d, schemas.BatchUpdatePartitionResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchUpdatePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdatePartition, schemas.BatchUpdatePartitionRequest, schemas.BatchUpdatePartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchUpdatePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdatePartition, schemas.BatchUpdatePartitionRequest, schemas.BatchUpdatePartitionResponse), output: &BatchUpdatePartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

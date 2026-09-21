@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,29 @@ type RevokeVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeVpcEndpointAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeVpcEndpointAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeVpcEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteString(schemas.RevokeVpcEndpointAccessRequest_Account, *v.Account)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.RevokeVpcEndpointAccessRequest_DomainName, *v.DomainName)
+	}
+	if v.Service != "" {
+		s.WriteString(schemas.RevokeVpcEndpointAccessRequest_Service, string(v.Service))
+	}
+	if v.ServiceOptions != nil {
+		s.WriteStruct(schemas.RevokeVpcEndpointAccessRequest_ServiceOptions)
+		v.ServiceOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RevokeVpcEndpointAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +77,26 @@ type RevokeVpcEndpointAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeVpcEndpointAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeVpcEndpointAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeVpcEndpointAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeVpcEndpointAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeVpcEndpointAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeVpcEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeVpcEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeVpcEndpointAccess, schemas.RevokeVpcEndpointAccessRequest, schemas.RevokeVpcEndpointAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeVpcEndpointAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeVpcEndpointAccess, schemas.RevokeVpcEndpointAccessRequest, schemas.RevokeVpcEndpointAccessResponse), output: &RevokeVpcEndpointAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

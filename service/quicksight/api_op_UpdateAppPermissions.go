@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type UpdateAppPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateAppPermissionsRequest_AppId, *v.AppId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAppPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateAppPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeResourcePermissionList(s, schemas.UpdateAppPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.Visibility != "" {
+		s.WriteString(schemas.UpdateAppPermissionsRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type UpdateAppPermissionsOutput struct {
 
 	// The ID of the app.
@@ -75,13 +97,57 @@ type UpdateAppPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateAppPermissionsResponse_AppId, *v.AppId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAppPermissionsResponse_Arn, *v.Arn)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateAppPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAppPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.UpdateAppPermissionsResponse_Visibility, string(v.Visibility))
+	}
+}
+func (v *UpdateAppPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppPermissionsResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateAppPermissionsResponse_AppId, v.AppId)
+		case schemas.UpdateAppPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAppPermissionsResponse_Arn, v.Arn)
+		case schemas.UpdateAppPermissionsResponse_Permissions:
+			return deserializeResourcePermissionList(d, schemas.UpdateAppPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.UpdateAppPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAppPermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateAppPermissionsResponse_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAppPermissionsResponse_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = types.AppVisibility(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppPermissions, schemas.UpdateAppPermissionsRequest, schemas.UpdateAppPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppPermissions, schemas.UpdateAppPermissionsRequest, schemas.UpdateAppPermissionsResponse), output: &UpdateAppPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

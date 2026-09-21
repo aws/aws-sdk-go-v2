@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetPortalInput struct {
 	PortalId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalId != nil {
+		s.WriteString(schemas.GetPortalRequest_PortalId, *v.PortalId)
+	}
 }
 
 type GetPortalOutput struct {
@@ -87,13 +101,118 @@ type GetPortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.GetPortalResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.GetPortalResponse_EndpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__stringMin20Max2048(s, schemas.GetPortalResponse_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetPortalResponse_LastModified, *v.LastModified)
+	}
+	if v.LastPublished != nil {
+		s.WriteTime(schemas.GetPortalResponse_LastPublished, *v.LastPublished)
+	}
+	if v.LastPublishedDescription != nil {
+		s.WriteString(schemas.GetPortalResponse_LastPublishedDescription, *v.LastPublishedDescription)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.GetPortalResponse_PortalArn, *v.PortalArn)
+	}
+	if v.PortalContent != nil {
+		s.WriteStruct(schemas.GetPortalResponse_PortalContent)
+		v.PortalContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalId != nil {
+		s.WriteString(schemas.GetPortalResponse_PortalId, *v.PortalId)
+	}
+	if v.Preview != nil {
+		s.WriteStruct(schemas.GetPortalResponse_Preview)
+		v.Preview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PublishStatus != "" {
+		s.WriteString(schemas.GetPortalResponse_PublishStatus, string(v.PublishStatus))
+	}
+	if v.RumAppMonitorName != nil {
+		s.WriteString(schemas.GetPortalResponse_RumAppMonitorName, *v.RumAppMonitorName)
+	}
+	if v.StatusException != nil {
+		s.WriteStruct(schemas.GetPortalResponse_StatusException)
+		v.StatusException.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.GetPortalResponse_Tags, v.Tags)
+}
+func (v *GetPortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPortalResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.GetPortalResponse_EndpointConfiguration:
+			v.EndpointConfiguration = &types.EndpointConfigurationResponse{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.GetPortalResponse_IncludedPortalProductArns:
+			return deserialize__listOf__stringMin20Max2048(d, schemas.GetPortalResponse_IncludedPortalProductArns, &v.IncludedPortalProductArns)
+		case schemas.GetPortalResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetPortalResponse_LastModified, v.LastModified)
+		case schemas.GetPortalResponse_LastPublished:
+			v.LastPublished = new(time.Time)
+			return d.ReadTime(schemas.GetPortalResponse_LastPublished, v.LastPublished)
+		case schemas.GetPortalResponse_LastPublishedDescription:
+			v.LastPublishedDescription = new(string)
+			return d.ReadString(schemas.GetPortalResponse_LastPublishedDescription, v.LastPublishedDescription)
+		case schemas.GetPortalResponse_PortalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.GetPortalResponse_PortalArn, v.PortalArn)
+		case schemas.GetPortalResponse_PortalContent:
+			v.PortalContent = &types.PortalContent{}
+			return v.PortalContent.Deserialize(d)
+		case schemas.GetPortalResponse_PortalId:
+			v.PortalId = new(string)
+			return d.ReadString(schemas.GetPortalResponse_PortalId, v.PortalId)
+		case schemas.GetPortalResponse_Preview:
+			v.Preview = &types.Preview{}
+			return v.Preview.Deserialize(d)
+		case schemas.GetPortalResponse_PublishStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetPortalResponse_PublishStatus, &ev); err != nil {
+				return err
+			}
+			v.PublishStatus = types.PublishStatus(ev)
+			return nil
+		case schemas.GetPortalResponse_RumAppMonitorName:
+			v.RumAppMonitorName = new(string)
+			return d.ReadString(schemas.GetPortalResponse_RumAppMonitorName, v.RumAppMonitorName)
+		case schemas.GetPortalResponse_StatusException:
+			v.StatusException = &types.StatusException{}
+			return v.StatusException.Deserialize(d)
+		case schemas.GetPortalResponse_Tags:
+			return deserializeTags(d, schemas.GetPortalResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortal, schemas.GetPortalRequest, schemas.GetPortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPortal, schemas.GetPortalRequest, schemas.GetPortalResponse), output: &GetPortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

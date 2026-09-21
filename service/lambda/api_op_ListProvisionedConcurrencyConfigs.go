@@ -5,7 +5,9 @@ package lambda
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type ListProvisionedConcurrencyConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedConcurrencyConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedConcurrencyConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedConcurrencyConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListProvisionedConcurrencyConfigsRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListProvisionedConcurrencyConfigsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListProvisionedConcurrencyConfigsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListProvisionedConcurrencyConfigsOutput struct {
 
 	// The pagination token that's included if more results are available.
@@ -67,13 +87,35 @@ type ListProvisionedConcurrencyConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisionedConcurrencyConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisionedConcurrencyConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisionedConcurrencyConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListProvisionedConcurrencyConfigsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeProvisionedConcurrencyConfigList(s, schemas.ListProvisionedConcurrencyConfigsResponse_ProvisionedConcurrencyConfigs, v.ProvisionedConcurrencyConfigs)
+}
+func (v *ListProvisionedConcurrencyConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisionedConcurrencyConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisionedConcurrencyConfigsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListProvisionedConcurrencyConfigsResponse_NextMarker, v.NextMarker)
+		case schemas.ListProvisionedConcurrencyConfigsResponse_ProvisionedConcurrencyConfigs:
+			return deserializeProvisionedConcurrencyConfigList(d, schemas.ListProvisionedConcurrencyConfigsResponse_ProvisionedConcurrencyConfigs, &v.ProvisionedConcurrencyConfigs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisionedConcurrencyConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisionedConcurrencyConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedConcurrencyConfigs, schemas.ListProvisionedConcurrencyConfigsRequest, schemas.ListProvisionedConcurrencyConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisionedConcurrencyConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisionedConcurrencyConfigs, schemas.ListProvisionedConcurrencyConfigsRequest, schemas.ListProvisionedConcurrencyConfigsResponse), output: &ListProvisionedConcurrencyConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

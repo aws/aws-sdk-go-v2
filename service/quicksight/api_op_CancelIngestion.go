@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type CancelIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelIngestionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelIngestionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CancelIngestionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.CancelIngestionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.IngestionId != nil {
+		s.WriteString(schemas.CancelIngestionRequest_IngestionId, *v.IngestionId)
+	}
+}
+
 type CancelIngestionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the data ingestion.
@@ -63,13 +83,49 @@ type CancelIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelIngestionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelIngestionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelIngestionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelIngestionResponse_Arn, *v.Arn)
+	}
+	if v.IngestionId != nil {
+		s.WriteString(schemas.CancelIngestionResponse_IngestionId, *v.IngestionId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CancelIngestionResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CancelIngestionResponse_Status, v.Status)
+	}
+}
+func (v *CancelIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelIngestionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelIngestionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelIngestionResponse_Arn, v.Arn)
+		case schemas.CancelIngestionResponse_IngestionId:
+			v.IngestionId = new(string)
+			return d.ReadString(schemas.CancelIngestionResponse_IngestionId, v.IngestionId)
+		case schemas.CancelIngestionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CancelIngestionResponse_RequestId, v.RequestId)
+		case schemas.CancelIngestionResponse_Status:
+			return d.ReadInt32(schemas.CancelIngestionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelIngestion, schemas.CancelIngestionRequest, schemas.CancelIngestionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelIngestion, schemas.CancelIngestionRequest, schemas.CancelIngestionResponse), output: &CancelIngestionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type UpdateUsageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUsageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUsageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUsageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateUsageProfileRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateUsageProfileRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateUsageProfileRequest_Name, *v.Name)
+	}
+}
+
 type UpdateUsageProfileOutput struct {
 
 	// The name of the usage profile that was updated.
@@ -54,13 +76,32 @@ type UpdateUsageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUsageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUsageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUsageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateUsageProfileResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateUsageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUsageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUsageProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateUsageProfileResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUsageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUsageProfile, schemas.UpdateUsageProfileRequest, schemas.UpdateUsageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUsageProfile, schemas.UpdateUsageProfileRequest, schemas.UpdateUsageProfileResponse), output: &UpdateUsageProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

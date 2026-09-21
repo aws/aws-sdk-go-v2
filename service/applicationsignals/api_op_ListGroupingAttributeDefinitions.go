@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,24 @@ type ListGroupingAttributeDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupingAttributeDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupingAttributeDefinitionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupingAttributeDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListGroupingAttributeDefinitionsInput_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.IncludeLinkedAccounts != false {
+		s.WriteBool(schemas.ListGroupingAttributeDefinitionsInput_IncludeLinkedAccounts, v.IncludeLinkedAccounts)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupingAttributeDefinitionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListGroupingAttributeDefinitionsOutput struct {
 
 	// An array of structures, where each structure contains information about one
@@ -69,13 +89,41 @@ type ListGroupingAttributeDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupingAttributeDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupingAttributeDefinitionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupingAttributeDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupingAttributeDefinitions(s, schemas.ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupingAttributeDefinitionsOutput_NextToken, *v.NextToken)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ListGroupingAttributeDefinitionsOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ListGroupingAttributeDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupingAttributeDefinitionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions:
+			return deserializeGroupingAttributeDefinitions(d, schemas.ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions, &v.GroupingAttributeDefinitions)
+		case schemas.ListGroupingAttributeDefinitionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupingAttributeDefinitionsOutput_NextToken, v.NextToken)
+		case schemas.ListGroupingAttributeDefinitionsOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListGroupingAttributeDefinitionsOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupingAttributeDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupingAttributeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupingAttributeDefinitions, schemas.ListGroupingAttributeDefinitionsInput, schemas.ListGroupingAttributeDefinitionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupingAttributeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupingAttributeDefinitions, schemas.ListGroupingAttributeDefinitionsInput, schemas.ListGroupingAttributeDefinitionsOutput), output: &ListGroupingAttributeDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

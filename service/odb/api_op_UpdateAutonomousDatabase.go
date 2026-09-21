@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -185,6 +187,140 @@ type UpdateAutonomousDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutonomousDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutonomousDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminPassword != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_adminPassword, *v.AdminPassword)
+	}
+	if v.AdminPasswordSource != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_adminPasswordSource, string(v.AdminPasswordSource))
+	}
+	serializeAdminPasswordSourceConfigurationInput(s, schemas.UpdateAutonomousDatabaseInput_adminPasswordSourceConfiguration, v.AdminPasswordSourceConfiguration)
+	serializeStringList(s, schemas.UpdateAutonomousDatabaseInput_allowlistedIps, v.AllowlistedIps)
+	if v.AutoRefreshFrequencyInSeconds != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_autoRefreshFrequencyInSeconds, *v.AutoRefreshFrequencyInSeconds)
+	}
+	if v.AutoRefreshPointLagInSeconds != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_autoRefreshPointLagInSeconds, *v.AutoRefreshPointLagInSeconds)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.AutonomousMaintenanceScheduleType != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_autonomousMaintenanceScheduleType, string(v.AutonomousMaintenanceScheduleType))
+	}
+	if v.BackupRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_backupRetentionPeriodInDays, *v.BackupRetentionPeriodInDays)
+	}
+	if v.ByolComputeCountLimit != nil {
+		s.WriteFloat64(schemas.UpdateAutonomousDatabaseInput_byolComputeCountLimit, *v.ByolComputeCountLimit)
+	}
+	if v.ComputeCount != nil {
+		s.WriteFloat64(schemas.UpdateAutonomousDatabaseInput_computeCount, *v.ComputeCount)
+	}
+	if v.CpuCoreCount != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_cpuCoreCount, *v.CpuCoreCount)
+	}
+	serializeCustomerContacts(s, schemas.UpdateAutonomousDatabaseInput_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	if v.DataStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_dataStorageSizeInGBs, *v.DataStorageSizeInGBs)
+	}
+	if v.DataStorageSizeInTBs != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_dataStorageSizeInTBs, *v.DataStorageSizeInTBs)
+	}
+	if v.DatabaseEdition != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_databaseEdition, string(v.DatabaseEdition))
+	}
+	if v.DbName != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_dbName, *v.DbName)
+	}
+	serializeDatabaseToolList(s, schemas.UpdateAutonomousDatabaseInput_dbToolsDetails, v.DbToolsDetails)
+	if v.DbVersion != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_dbVersion, *v.DbVersion)
+	}
+	if v.DbWorkload != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_dbWorkload, string(v.DbWorkload))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_displayName, *v.DisplayName)
+	}
+	serializeEncryptionKeyConfigurationInput(s, schemas.UpdateAutonomousDatabaseInput_encryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyProvider != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_encryptionKeyProvider, string(v.EncryptionKeyProvider))
+	}
+	if v.IsAutoScalingEnabled != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isAutoScalingEnabled, *v.IsAutoScalingEnabled)
+	}
+	if v.IsAutoScalingForStorageEnabled != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isAutoScalingForStorageEnabled, *v.IsAutoScalingForStorageEnabled)
+	}
+	if v.IsBackupRetentionLocked != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isBackupRetentionLocked, *v.IsBackupRetentionLocked)
+	}
+	if v.IsDisconnectPeer != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isDisconnectPeer, *v.IsDisconnectPeer)
+	}
+	if v.IsLocalDataGuardEnabled != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isLocalDataGuardEnabled, *v.IsLocalDataGuardEnabled)
+	}
+	if v.IsMtlsConnectionRequired != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isMtlsConnectionRequired, *v.IsMtlsConnectionRequired)
+	}
+	if v.IsRefreshableClone != nil {
+		s.WriteBool(schemas.UpdateAutonomousDatabaseInput_isRefreshableClone, *v.IsRefreshableClone)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_licenseModel, string(v.LicenseModel))
+	}
+	if v.LocalAdgAutoFailoverMaxDataLossLimit != nil {
+		s.WriteInt32(schemas.UpdateAutonomousDatabaseInput_localAdgAutoFailoverMaxDataLossLimit, *v.LocalAdgAutoFailoverMaxDataLossLimit)
+	}
+	if v.LongTermBackupSchedule != nil {
+		s.WriteStruct(schemas.UpdateAutonomousDatabaseInput_longTermBackupSchedule)
+		v.LongTermBackupSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenMode != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_openMode, string(v.OpenMode))
+	}
+	if v.PeerDbId != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_peerDbId, *v.PeerDbId)
+	}
+	if v.PermissionLevel != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_permissionLevel, string(v.PermissionLevel))
+	}
+	if v.PrivateEndpointIp != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_privateEndpointIp, *v.PrivateEndpointIp)
+	}
+	if v.PrivateEndpointLabel != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_privateEndpointLabel, *v.PrivateEndpointLabel)
+	}
+	if v.RefreshableMode != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_refreshableMode, string(v.RefreshableMode))
+	}
+	if v.ResourcePoolLeaderId != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_resourcePoolLeaderId, *v.ResourcePoolLeaderId)
+	}
+	if v.ResourcePoolSummary != nil {
+		s.WriteStruct(schemas.UpdateAutonomousDatabaseInput_resourcePoolSummary)
+		v.ResourcePoolSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScheduledOperationDetailsList(s, schemas.UpdateAutonomousDatabaseInput_scheduledOperations, v.ScheduledOperations)
+	serializeStringList(s, schemas.UpdateAutonomousDatabaseInput_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	if v.StandbyAllowlistedIpsSource != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseInput_standbyAllowlistedIpsSource, string(v.StandbyAllowlistedIpsSource))
+	}
+	if v.TimeOfAutoRefreshStart != nil {
+		s.WriteTime(schemas.UpdateAutonomousDatabaseInput_timeOfAutoRefreshStart, *v.TimeOfAutoRefreshStart)
+	}
+}
+
 type UpdateAutonomousDatabaseOutput struct {
 
 	// The unique identifier of the Autonomous Database that was updated.
@@ -208,13 +344,54 @@ type UpdateAutonomousDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAutonomousDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAutonomousDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAutonomousDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseOutput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAutonomousDatabaseOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateAutonomousDatabaseOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *UpdateAutonomousDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAutonomousDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAutonomousDatabaseOutput_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.UpdateAutonomousDatabaseOutput_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.UpdateAutonomousDatabaseOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateAutonomousDatabaseOutput_displayName, v.DisplayName)
+		case schemas.UpdateAutonomousDatabaseOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAutonomousDatabaseOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AutonomousDatabaseResourceStatus(ev)
+			return nil
+		case schemas.UpdateAutonomousDatabaseOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateAutonomousDatabaseOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAutonomousDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutonomousDatabase, schemas.UpdateAutonomousDatabaseInput, schemas.UpdateAutonomousDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAutonomousDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAutonomousDatabase, schemas.UpdateAutonomousDatabaseInput, schemas.UpdateAutonomousDatabaseOutput), output: &UpdateAutonomousDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

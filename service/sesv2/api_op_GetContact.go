@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,21 @@ type GetContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactListName != nil {
+		s.WriteString(schemas.GetContactRequest_ContactListName, *v.ContactListName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.GetContactRequest_EmailAddress, *v.EmailAddress)
+	}
+}
+
 type GetContactOutput struct {
 
 	// The attribute data attached to a contact.
@@ -73,13 +90,67 @@ type GetContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributesData != nil {
+		s.WriteString(schemas.GetContactResponse_AttributesData, *v.AttributesData)
+	}
+	if v.ContactListName != nil {
+		s.WriteString(schemas.GetContactResponse_ContactListName, *v.ContactListName)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetContactResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.GetContactResponse_EmailAddress, *v.EmailAddress)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetContactResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	serializeTopicPreferenceList(s, schemas.GetContactResponse_TopicDefaultPreferences, v.TopicDefaultPreferences)
+	serializeTopicPreferenceList(s, schemas.GetContactResponse_TopicPreferences, v.TopicPreferences)
+	if v.UnsubscribeAll != false {
+		s.WriteBool(schemas.GetContactResponse_UnsubscribeAll, v.UnsubscribeAll)
+	}
+}
+func (v *GetContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactResponse_AttributesData:
+			v.AttributesData = new(string)
+			return d.ReadString(schemas.GetContactResponse_AttributesData, v.AttributesData)
+		case schemas.GetContactResponse_ContactListName:
+			v.ContactListName = new(string)
+			return d.ReadString(schemas.GetContactResponse_ContactListName, v.ContactListName)
+		case schemas.GetContactResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetContactResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetContactResponse_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.GetContactResponse_EmailAddress, v.EmailAddress)
+		case schemas.GetContactResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetContactResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetContactResponse_TopicDefaultPreferences:
+			return deserializeTopicPreferenceList(d, schemas.GetContactResponse_TopicDefaultPreferences, &v.TopicDefaultPreferences)
+		case schemas.GetContactResponse_TopicPreferences:
+			return deserializeTopicPreferenceList(d, schemas.GetContactResponse_TopicPreferences, &v.TopicPreferences)
+		case schemas.GetContactResponse_UnsubscribeAll:
+			return d.ReadBool(schemas.GetContactResponse_UnsubscribeAll, &v.UnsubscribeAll)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContact, schemas.GetContactRequest, schemas.GetContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContact, schemas.GetContactRequest, schemas.GetContactResponse), output: &GetContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

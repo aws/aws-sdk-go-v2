@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StartInsightsRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInsightsRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInsightsRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInsightsRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.StartInsightsRefreshRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type StartInsightsRefreshOutput struct {
 
 	// The message associated with the insights refresh operation.
@@ -49,13 +63,42 @@ type StartInsightsRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInsightsRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInsightsRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInsightsRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StartInsightsRefreshResponse_message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartInsightsRefreshResponse_status, string(v.Status))
+	}
+}
+func (v *StartInsightsRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInsightsRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInsightsRefreshResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartInsightsRefreshResponse_message, v.Message)
+		case schemas.StartInsightsRefreshResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartInsightsRefreshResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InsightsRefreshStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInsightsRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartInsightsRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInsightsRefresh, schemas.StartInsightsRefreshRequest, schemas.StartInsightsRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartInsightsRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInsightsRefresh, schemas.StartInsightsRefreshRequest, schemas.StartInsightsRefreshResponse), output: &StartInsightsRefreshOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

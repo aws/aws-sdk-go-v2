@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListRecoveryPointsByLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByLegalHoldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByLegalHoldInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByLegalHoldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LegalHoldId != nil {
+		s.WriteString(schemas.ListRecoveryPointsByLegalHoldInput_LegalHoldId, *v.LegalHoldId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryPointsByLegalHoldInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByLegalHoldInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecoveryPointsByLegalHoldOutput struct {
 
 	// The next item following a partial list of returned resources.
@@ -59,13 +79,35 @@ type ListRecoveryPointsByLegalHoldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByLegalHoldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByLegalHoldOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByLegalHoldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByLegalHoldOutput_NextToken, *v.NextToken)
+	}
+	serializeRecoveryPointsList(s, schemas.ListRecoveryPointsByLegalHoldOutput_RecoveryPoints, v.RecoveryPoints)
+}
+func (v *ListRecoveryPointsByLegalHoldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryPointsByLegalHoldOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryPointsByLegalHoldOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryPointsByLegalHoldOutput_NextToken, v.NextToken)
+		case schemas.ListRecoveryPointsByLegalHoldOutput_RecoveryPoints:
+			return deserializeRecoveryPointsList(d, schemas.ListRecoveryPointsByLegalHoldOutput_RecoveryPoints, &v.RecoveryPoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryPointsByLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryPointsByLegalHold{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByLegalHold, schemas.ListRecoveryPointsByLegalHoldInput, schemas.ListRecoveryPointsByLegalHoldOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecoveryPointsByLegalHold{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByLegalHold, schemas.ListRecoveryPointsByLegalHoldInput, schemas.ListRecoveryPointsByLegalHoldOutput), output: &ListRecoveryPointsByLegalHoldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

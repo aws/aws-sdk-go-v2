@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DescribeFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeFolderRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.DescribeFolderRequest_FolderId, *v.FolderId)
+	}
+}
+
 type DescribeFolderOutput struct {
 
 	// Information about the folder.
@@ -56,13 +73,45 @@ type DescribeFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFolderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Folder != nil {
+		s.WriteStruct(schemas.DescribeFolderResponse_Folder)
+		v.Folder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeFolderResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeFolderResponse_Status, v.Status)
+	}
+}
+func (v *DescribeFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFolderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFolderResponse_Folder:
+			v.Folder = &types.Folder{}
+			return v.Folder.Deserialize(d)
+		case schemas.DescribeFolderResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeFolderResponse_RequestId, v.RequestId)
+		case schemas.DescribeFolderResponse_Status:
+			return d.ReadInt32(schemas.DescribeFolderResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFolder, schemas.DescribeFolderRequest, schemas.DescribeFolderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFolder, schemas.DescribeFolderRequest, schemas.DescribeFolderResponse), output: &DescribeFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

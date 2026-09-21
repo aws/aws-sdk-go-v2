@@ -5,7 +5,9 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListProxyConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxyConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxyConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxyConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProxyConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxyConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProxyConfigurationsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -65,13 +82,35 @@ type ListProxyConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxyConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxyConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxyConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxyConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializeProxyConfigurations(s, schemas.ListProxyConfigurationsResponse_ProxyConfigurations, v.ProxyConfigurations)
+}
+func (v *ListProxyConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProxyConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProxyConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProxyConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.ListProxyConfigurationsResponse_ProxyConfigurations:
+			return deserializeProxyConfigurations(d, schemas.ListProxyConfigurationsResponse_ProxyConfigurations, &v.ProxyConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProxyConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProxyConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxyConfigurations, schemas.ListProxyConfigurationsRequest, schemas.ListProxyConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProxyConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxyConfigurations, schemas.ListProxyConfigurationsRequest, schemas.ListProxyConfigurationsResponse), output: &ListProxyConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

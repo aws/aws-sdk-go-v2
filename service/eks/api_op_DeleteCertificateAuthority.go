@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type DeleteCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityId != nil {
+		s.WriteString(schemas.DeleteCertificateAuthorityRequest_certificateAuthorityId, *v.CertificateAuthorityId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteCertificateAuthorityRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DeleteCertificateAuthorityRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DeleteCertificateAuthorityOutput struct {
 
 	// Summary information about the certificate authority that is being deleted.
@@ -72,13 +92,42 @@ type DeleteCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCertificateAuthorityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthority != nil {
+		s.WriteStruct(schemas.DeleteCertificateAuthorityResponse_certificateAuthority)
+		v.CertificateAuthority.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Update != nil {
+		s.WriteStruct(schemas.DeleteCertificateAuthorityResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCertificateAuthorityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCertificateAuthorityResponse_certificateAuthority:
+			v.CertificateAuthority = &types.CertificateAuthoritySummary{}
+			return v.CertificateAuthority.Deserialize(d)
+		case schemas.DeleteCertificateAuthorityResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCertificateAuthority, schemas.DeleteCertificateAuthorityRequest, schemas.DeleteCertificateAuthorityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCertificateAuthority, schemas.DeleteCertificateAuthorityRequest, schemas.DeleteCertificateAuthorityResponse), output: &DeleteCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

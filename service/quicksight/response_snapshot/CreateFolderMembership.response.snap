@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"FolderMember":{"MemberId":"__MemberId__","MemberType":"DASHBOARD"},"RequestId":"__RequestId__","Status":1}

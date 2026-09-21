@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,35 @@ type UpdateCapabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.UpdateCapabilityRequest_capabilityName, *v.CapabilityName)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateCapabilityRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateCapabilityRequest_clusterName, *v.ClusterName)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.UpdateCapabilityRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeletePropagationPolicy != "" {
+		s.WriteString(schemas.UpdateCapabilityRequest_deletePropagationPolicy, string(v.DeletePropagationPolicy))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateCapabilityRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateCapabilityOutput struct {
 
 	// An object representing an asynchronous update.
@@ -76,13 +107,34 @@ type UpdateCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateCapabilityResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCapabilityResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapability, schemas.UpdateCapabilityRequest, schemas.UpdateCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapability, schemas.UpdateCapabilityRequest, schemas.UpdateCapabilityResponse), output: &UpdateCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

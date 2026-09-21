@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetColumnStatisticsTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetColumnStatisticsTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnStatisticsTaskRunId != nil {
+		s.WriteString(schemas.GetColumnStatisticsTaskRunRequest_ColumnStatisticsTaskRunId, *v.ColumnStatisticsTaskRunId)
+	}
+}
+
 type GetColumnStatisticsTaskRunOutput struct {
 
 	// A ColumnStatisticsTaskRun object representing the details of the column stats
@@ -46,13 +60,34 @@ type GetColumnStatisticsTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetColumnStatisticsTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetColumnStatisticsTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetColumnStatisticsTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnStatisticsTaskRun != nil {
+		s.WriteStruct(schemas.GetColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRun)
+		v.ColumnStatisticsTaskRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetColumnStatisticsTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetColumnStatisticsTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetColumnStatisticsTaskRunResponse_ColumnStatisticsTaskRun:
+			v.ColumnStatisticsTaskRun = &types.ColumnStatisticsTaskRun{}
+			return v.ColumnStatisticsTaskRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetColumnStatisticsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetColumnStatisticsTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsTaskRun, schemas.GetColumnStatisticsTaskRunRequest, schemas.GetColumnStatisticsTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetColumnStatisticsTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetColumnStatisticsTaskRun, schemas.GetColumnStatisticsTaskRunRequest, schemas.GetColumnStatisticsTaskRunResponse), output: &GetColumnStatisticsTaskRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

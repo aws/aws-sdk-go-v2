@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListSamplesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSamplesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSamplesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSamplesRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSamplesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list samples request.
 type ListSamplesOutput struct {
 
@@ -59,13 +76,35 @@ type ListSamplesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSamplesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSamplesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSamplesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSamplesResult_nextToken, *v.NextToken)
+	}
+	serializeSamples(s, schemas.ListSamplesResult_samples, v.Samples)
+}
+func (v *ListSamplesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSamplesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSamplesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSamplesResult_nextToken, v.NextToken)
+		case schemas.ListSamplesResult_samples:
+			return deserializeSamples(d, schemas.ListSamplesResult_samples, &v.Samples)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSamplesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSamples{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSamples, schemas.ListSamplesRequest, schemas.ListSamplesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSamples{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSamples, schemas.ListSamplesRequest, schemas.ListSamplesResult), output: &ListSamplesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

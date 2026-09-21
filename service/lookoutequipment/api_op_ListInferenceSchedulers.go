@@ -5,7 +5,9 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListInferenceSchedulersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceSchedulersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceSchedulersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceSchedulersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceSchedulerNameBeginsWith != nil {
+		s.WriteString(schemas.ListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith, *v.InferenceSchedulerNameBeginsWith)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInferenceSchedulersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ListInferenceSchedulersRequest_ModelName, *v.ModelName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceSchedulersRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListInferenceSchedulersRequest_Status, string(v.Status))
+	}
+}
+
 type ListInferenceSchedulersOutput struct {
 
 	// Provides information about the specified inference scheduler, including data
@@ -64,13 +90,35 @@ type ListInferenceSchedulersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceSchedulersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceSchedulersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceSchedulersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInferenceSchedulerSummaries(s, schemas.ListInferenceSchedulersResponse_InferenceSchedulerSummaries, v.InferenceSchedulerSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceSchedulersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInferenceSchedulersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInferenceSchedulersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInferenceSchedulersResponse_InferenceSchedulerSummaries:
+			return deserializeInferenceSchedulerSummaries(d, schemas.ListInferenceSchedulersResponse_InferenceSchedulerSummaries, &v.InferenceSchedulerSummaries)
+		case schemas.ListInferenceSchedulersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInferenceSchedulersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInferenceSchedulersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInferenceSchedulers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceSchedulers, schemas.ListInferenceSchedulersRequest, schemas.ListInferenceSchedulersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInferenceSchedulers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceSchedulers, schemas.ListInferenceSchedulersRequest, schemas.ListInferenceSchedulersResponse), output: &ListInferenceSchedulersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

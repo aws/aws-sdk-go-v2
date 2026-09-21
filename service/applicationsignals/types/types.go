@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,31 @@ type AttributeFilter struct {
 	AttributeFilterValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttributeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeFilterName != nil {
+		s.WriteString(schemas.AttributeFilter_AttributeFilterName, *v.AttributeFilterName)
+	}
+	serializeAttributeFilterValues(s, schemas.AttributeFilter_AttributeFilterValues, v.AttributeFilterValues)
+}
+func (v *AttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeFilter_AttributeFilterName:
+			v.AttributeFilterName = new(string)
+			return d.ReadString(schemas.AttributeFilter_AttributeFilterName, v.AttributeFilterName)
+		case schemas.AttributeFilter_AttributeFilterValues:
+			return deserializeAttributeFilterValues(d, schemas.AttributeFilter_AttributeFilterValues, &v.AttributeFilterValues)
+		}
+		return nil
+	})
 }
 
 // A structure that contains information about an audit finding, which represents
@@ -62,6 +89,56 @@ type AuditFinding struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuditFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditorResults(s, schemas.AuditFinding_AuditorResults, v.AuditorResults)
+	if v.DependencyGraph != nil {
+		s.WriteStruct(schemas.AuditFinding_DependencyGraph)
+		v.DependencyGraph.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.AuditFinding_KeyAttributes, v.KeyAttributes)
+	if v.MetricGraph != nil {
+		s.WriteStruct(schemas.AuditFinding_MetricGraph)
+		v.MetricGraph.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.AuditFinding_Operation, *v.Operation)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.AuditFinding_Type, *v.Type)
+	}
+}
+func (v *AuditFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditFinding_AuditorResults:
+			return deserializeAuditorResults(d, schemas.AuditFinding_AuditorResults, &v.AuditorResults)
+		case schemas.AuditFinding_DependencyGraph:
+			v.DependencyGraph = &DependencyGraph{}
+			return v.DependencyGraph.Deserialize(d)
+		case schemas.AuditFinding_KeyAttributes:
+			return deserializeAttributes(d, schemas.AuditFinding_KeyAttributes, &v.KeyAttributes)
+		case schemas.AuditFinding_MetricGraph:
+			v.MetricGraph = &MetricGraph{}
+			return v.MetricGraph.Deserialize(d)
+		case schemas.AuditFinding_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.AuditFinding_Operation, v.Operation)
+		case schemas.AuditFinding_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AuditFinding_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the result of an automated audit analysis, including
 // the auditor name, description of findings, additional data, and severity level.
 type AuditorResult struct {
@@ -84,6 +161,47 @@ type AuditorResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuditorResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditorResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditorResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Auditor != nil {
+		s.WriteString(schemas.AuditorResult_Auditor, *v.Auditor)
+	}
+	serializeDataMap(s, schemas.AuditorResult_Data, v.Data)
+	if v.Description != nil {
+		s.WriteString(schemas.AuditorResult_Description, *v.Description)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.AuditorResult_Severity, string(v.Severity))
+	}
+}
+func (v *AuditorResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditorResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditorResult_Auditor:
+			v.Auditor = new(string)
+			return d.ReadString(schemas.AuditorResult_Auditor, v.Auditor)
+		case schemas.AuditorResult_Data:
+			return deserializeDataMap(d, schemas.AuditorResult_Data, &v.Data)
+		case schemas.AuditorResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AuditorResult_Description, v.Description)
+		case schemas.AuditorResult_Severity:
+			var ev string
+			if err := d.ReadString(schemas.AuditorResult_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = Severity(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure that specifies the target entity for audit analysis, such as a
 // service , SLO , service_operation , or canary .
 type AuditTarget struct {
@@ -100,6 +218,31 @@ type AuditTarget struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuditTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditTargetEntity(s, schemas.AuditTarget_Data, v.Data)
+	if v.Type != nil {
+		s.WriteString(schemas.AuditTarget_Type, *v.Type)
+	}
+}
+func (v *AuditTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditTarget_Data:
+			return deserializeAuditTargetEntity(d, schemas.AuditTarget_Data, &v.Data)
+		case schemas.AuditTarget_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AuditTarget_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // A union structure that contains the specific entity information for different
@@ -124,6 +267,14 @@ type AuditTargetEntityMemberCanary struct {
 }
 
 func (*AuditTargetEntityMemberCanary) isAuditTargetEntity() {}
+func (v *AuditTargetEntityMemberCanary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditTargetEntity_Canary)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AuditTargetEntityMemberCanary) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Service entity information when the audit target is a service.
 type AuditTargetEntityMemberService struct {
@@ -133,6 +284,14 @@ type AuditTargetEntityMemberService struct {
 }
 
 func (*AuditTargetEntityMemberService) isAuditTargetEntity() {}
+func (v *AuditTargetEntityMemberService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditTargetEntity_Service)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AuditTargetEntityMemberService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Service operation entity information when the audit target is a specific
 // service operation.
@@ -143,6 +302,14 @@ type AuditTargetEntityMemberServiceOperation struct {
 }
 
 func (*AuditTargetEntityMemberServiceOperation) isAuditTargetEntity() {}
+func (v *AuditTargetEntityMemberServiceOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditTargetEntity_ServiceOperation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AuditTargetEntityMemberServiceOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // SLO entity information when the audit target is a service level objective.
 type AuditTargetEntityMemberSlo struct {
@@ -152,6 +319,14 @@ type AuditTargetEntityMemberSlo struct {
 }
 
 func (*AuditTargetEntityMemberSlo) isAuditTargetEntity() {}
+func (v *AuditTargetEntityMemberSlo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditTargetEntity_Slo)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AuditTargetEntityMemberSlo) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Parameters for targeted delete by ARN list.
 type BatchDeleteByResourceArns struct {
@@ -167,6 +342,35 @@ type BatchDeleteByResourceArns struct {
 	ResourceArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteByResourceArns) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteByResourceArns)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteByResourceArns) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.BatchDeleteByResourceArns_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeBatchDeleteResourceArnList(s, schemas.BatchDeleteByResourceArns_ResourceArns, v.ResourceArns)
+}
+func (v *BatchDeleteByResourceArns) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteByResourceArns, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteByResourceArns_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteByResourceArns_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.BatchDeleteByResourceArns_ResourceArns:
+			return deserializeBatchDeleteResourceArnList(d, schemas.BatchDeleteByResourceArns_ResourceArns, &v.ResourceArns)
+		}
+		return nil
+	})
 }
 
 // Union type for batch delete target selection. Exactly one of the two modes must
@@ -188,6 +392,14 @@ type BatchDeleteDeletionTargetMemberResourceArns struct {
 }
 
 func (*BatchDeleteDeletionTargetMemberResourceArns) isBatchDeleteDeletionTarget() {}
+func (v *BatchDeleteDeletionTargetMemberResourceArns) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDeletionTarget_ResourceArns)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *BatchDeleteDeletionTargetMemberResourceArns) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Delete all configurations matching the specified scope.
 type BatchDeleteDeletionTargetMemberScope struct {
@@ -197,6 +409,14 @@ type BatchDeleteDeletionTargetMemberScope struct {
 }
 
 func (*BatchDeleteDeletionTargetMemberScope) isBatchDeleteDeletionTarget() {}
+func (v *BatchDeleteDeletionTargetMemberScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDeletionTarget_Scope)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *BatchDeleteDeletionTargetMemberScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Represents an error that occurred when attempting to delete a configuration.
 type BatchDeleteError struct {
@@ -217,6 +437,44 @@ type BatchDeleteError struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.BatchDeleteError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchDeleteError_Message, *v.Message)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BatchDeleteError_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *BatchDeleteError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteError_Code:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = BatchDeleteErrorCode(ev)
+			return nil
+		case schemas.BatchDeleteError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchDeleteError_Message, v.Message)
+		case schemas.BatchDeleteError_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BatchDeleteError_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // Scope parameters for bulk delete by scope.
@@ -240,6 +498,44 @@ type BatchDeleteScope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Environment != nil {
+		s.WriteString(schemas.BatchDeleteScope_Environment, *v.Environment)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.BatchDeleteScope_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.BatchDeleteScope_Service, *v.Service)
+	}
+}
+func (v *BatchDeleteScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteScope_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.BatchDeleteScope_Environment, v.Environment)
+		case schemas.BatchDeleteScope_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteScope_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.BatchDeleteScope_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.BatchDeleteScope_Service, v.Service)
+		}
+		return nil
+	})
+}
+
 // Represents a successfully deleted instrumentation configuration.
 type BatchDeleteSuccessfulDeletion struct {
 
@@ -255,6 +551,40 @@ type BatchDeleteSuccessfulDeletion struct {
 	SignalType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteSuccessfulDeletion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteSuccessfulDeletion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteSuccessfulDeletion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationHash != nil {
+		s.WriteString(schemas.BatchDeleteSuccessfulDeletion_LocationHash, *v.LocationHash)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BatchDeleteSuccessfulDeletion_ResourceArn, *v.ResourceArn)
+	}
+	if v.SignalType != nil {
+		s.WriteString(schemas.BatchDeleteSuccessfulDeletion_SignalType, *v.SignalType)
+	}
+}
+func (v *BatchDeleteSuccessfulDeletion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteSuccessfulDeletion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteSuccessfulDeletion_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.BatchDeleteSuccessfulDeletion_LocationHash, v.LocationHash)
+		case schemas.BatchDeleteSuccessfulDeletion_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BatchDeleteSuccessfulDeletion_ResourceArn, v.ResourceArn)
+		case schemas.BatchDeleteSuccessfulDeletion_SignalType:
+			v.SignalType = new(string)
+			return d.ReadString(schemas.BatchDeleteSuccessfulDeletion_SignalType, v.SignalType)
+		}
+		return nil
+	})
 }
 
 // An array of structures, where each structure includes an error indicating that
@@ -279,6 +609,40 @@ type BatchUpdateExclusionWindowsError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateExclusionWindowsError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateExclusionWindowsError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateExclusionWindowsError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchUpdateExclusionWindowsError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchUpdateExclusionWindowsError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.SloId != nil {
+		s.WriteString(schemas.BatchUpdateExclusionWindowsError_SloId, *v.SloId)
+	}
+}
+func (v *BatchUpdateExclusionWindowsError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateExclusionWindowsError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateExclusionWindowsError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchUpdateExclusionWindowsError_ErrorCode, v.ErrorCode)
+		case schemas.BatchUpdateExclusionWindowsError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchUpdateExclusionWindowsError_ErrorMessage, v.ErrorMessage)
+		case schemas.BatchUpdateExclusionWindowsError_SloId:
+			v.SloId = new(string)
+			return d.ReadString(schemas.BatchUpdateExclusionWindowsError_SloId, v.SloId)
+		}
+		return nil
+	})
+}
+
 // This object defines the length of the look-back window used to calculate one
 // burn rate metric for this SLO. The burn rate measures how fast the service is
 // consuming the error budget, relative to the attainment goal of the SLO. A burn
@@ -301,6 +665,28 @@ type BurnRateConfiguration struct {
 	LookBackWindowMinutes *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *BurnRateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BurnRateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BurnRateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LookBackWindowMinutes != nil {
+		s.WriteInt32(schemas.BurnRateConfiguration_LookBackWindowMinutes, *v.LookBackWindowMinutes)
+	}
+}
+func (v *BurnRateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BurnRateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BurnRateConfiguration_LookBackWindowMinutes:
+			v.LookBackWindowMinutes = new(int32)
+			return d.ReadInt32(schemas.BurnRateConfiguration_LookBackWindowMinutes, v.LookBackWindowMinutes)
+		}
+		return nil
+	})
 }
 
 // If the interval for this service level objective is a calendar interval, this
@@ -335,6 +721,44 @@ type CalendarInterval struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalendarInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalendarInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalendarInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteInt32(schemas.CalendarInterval_Duration, *v.Duration)
+	}
+	if v.DurationUnit != "" {
+		s.WriteString(schemas.CalendarInterval_DurationUnit, string(v.DurationUnit))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CalendarInterval_StartTime, *v.StartTime)
+	}
+}
+func (v *CalendarInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalendarInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalendarInterval_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.CalendarInterval_Duration, v.Duration)
+		case schemas.CalendarInterval_DurationUnit:
+			var ev string
+			if err := d.ReadString(schemas.CalendarInterval_DurationUnit, &ev); err != nil {
+				return err
+			}
+			v.DurationUnit = DurationUnit(ev)
+			return nil
+		case schemas.CalendarInterval_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CalendarInterval_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // A structure that contains identifying information for a CloudWatch Synthetics
 // canary entity used in audit targeting.
 type CanaryEntity struct {
@@ -345,6 +769,28 @@ type CanaryEntity struct {
 	CanaryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CanaryEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CanaryEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CanaryEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanaryName != nil {
+		s.WriteString(schemas.CanaryEntity_CanaryName, *v.CanaryName)
+	}
+}
+func (v *CanaryEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CanaryEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CanaryEntity_CanaryName:
+			v.CanaryName = new(string)
+			return d.ReadString(schemas.CanaryEntity_CanaryName, v.CanaryName)
+		}
+		return nil
+	})
 }
 
 // A union that defines what data to capture when the instrumentation point is
@@ -366,6 +812,14 @@ type CaptureConfigurationMemberCodeCapture struct {
 }
 
 func (*CaptureConfigurationMemberCodeCapture) isCaptureConfiguration() {}
+func (v *CaptureConfigurationMemberCodeCapture) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptureConfiguration_CodeCapture)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CaptureConfigurationMemberCodeCapture) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Guardrails that prevent instrumentation from impacting application performance
 // by limiting how much data is captured.
@@ -400,6 +854,70 @@ type CaptureLimitsConfig struct {
 	MaxStringLength *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CaptureLimitsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaptureLimitsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaptureLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCollectionDepth != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxCollectionDepth, *v.MaxCollectionDepth)
+	}
+	if v.MaxCollectionWidth != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxCollectionWidth, *v.MaxCollectionWidth)
+	}
+	if v.MaxFieldsPerObject != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxFieldsPerObject, *v.MaxFieldsPerObject)
+	}
+	if v.MaxHits != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxHits, *v.MaxHits)
+	}
+	if v.MaxObjectDepth != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxObjectDepth, *v.MaxObjectDepth)
+	}
+	if v.MaxStackFrames != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxStackFrames, *v.MaxStackFrames)
+	}
+	if v.MaxStackTraceSize != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxStackTraceSize, *v.MaxStackTraceSize)
+	}
+	if v.MaxStringLength != nil {
+		s.WriteInt32(schemas.CaptureLimitsConfig_MaxStringLength, *v.MaxStringLength)
+	}
+}
+func (v *CaptureLimitsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaptureLimitsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaptureLimitsConfig_MaxCollectionDepth:
+			v.MaxCollectionDepth = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxCollectionDepth, v.MaxCollectionDepth)
+		case schemas.CaptureLimitsConfig_MaxCollectionWidth:
+			v.MaxCollectionWidth = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxCollectionWidth, v.MaxCollectionWidth)
+		case schemas.CaptureLimitsConfig_MaxFieldsPerObject:
+			v.MaxFieldsPerObject = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxFieldsPerObject, v.MaxFieldsPerObject)
+		case schemas.CaptureLimitsConfig_MaxHits:
+			v.MaxHits = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxHits, v.MaxHits)
+		case schemas.CaptureLimitsConfig_MaxObjectDepth:
+			v.MaxObjectDepth = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxObjectDepth, v.MaxObjectDepth)
+		case schemas.CaptureLimitsConfig_MaxStackFrames:
+			v.MaxStackFrames = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxStackFrames, v.MaxStackFrames)
+		case schemas.CaptureLimitsConfig_MaxStackTraceSize:
+			v.MaxStackTraceSize = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxStackTraceSize, v.MaxStackTraceSize)
+		case schemas.CaptureLimitsConfig_MaxStringLength:
+			v.MaxStringLength = new(int32)
+			return d.ReadInt32(schemas.CaptureLimitsConfig_MaxStringLength, v.MaxStringLength)
+		}
+		return nil
+	})
 }
 
 // A structure that contains information about a change event that occurred for a
@@ -475,6 +993,71 @@ type ChangeEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangeEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangeEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangeEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ChangeEvent_AccountId, *v.AccountId)
+	}
+	if v.ChangeEventType != "" {
+		s.WriteString(schemas.ChangeEvent_ChangeEventType, string(v.ChangeEventType))
+	}
+	serializeAttributes(s, schemas.ChangeEvent_Entity, v.Entity)
+	if v.EventId != nil {
+		s.WriteString(schemas.ChangeEvent_EventId, *v.EventId)
+	}
+	if v.EventName != nil {
+		s.WriteString(schemas.ChangeEvent_EventName, *v.EventName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.ChangeEvent_Region, *v.Region)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ChangeEvent_Timestamp, *v.Timestamp)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ChangeEvent_UserName, *v.UserName)
+	}
+}
+func (v *ChangeEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangeEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChangeEvent_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ChangeEvent_AccountId, v.AccountId)
+		case schemas.ChangeEvent_ChangeEventType:
+			var ev string
+			if err := d.ReadString(schemas.ChangeEvent_ChangeEventType, &ev); err != nil {
+				return err
+			}
+			v.ChangeEventType = ChangeEventType(ev)
+			return nil
+		case schemas.ChangeEvent_Entity:
+			return deserializeAttributes(d, schemas.ChangeEvent_Entity, &v.Entity)
+		case schemas.ChangeEvent_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.ChangeEvent_EventId, v.EventId)
+		case schemas.ChangeEvent_EventName:
+			v.EventName = new(string)
+			return d.ReadString(schemas.ChangeEvent_EventName, v.EventName)
+		case schemas.ChangeEvent_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.ChangeEvent_Region, v.Region)
+		case schemas.ChangeEvent_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ChangeEvent_Timestamp, v.Timestamp)
+		case schemas.ChangeEvent_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.ChangeEvent_UserName, v.UserName)
+		}
+		return nil
+	})
+}
+
 // Defines what data to capture for code-level instrumentation, including
 // arguments, return values, stack traces, local variables, and safety limits.
 type CodeCaptureConfiguration struct {
@@ -502,6 +1085,48 @@ type CodeCaptureConfiguration struct {
 	CaptureStackTrace *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CodeCaptureConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeCaptureConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeCaptureConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureArguments, v.CaptureArguments)
+	if v.CaptureLimits != nil {
+		s.WriteStruct(schemas.CodeCaptureConfiguration_CaptureLimits)
+		v.CaptureLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureLocals, v.CaptureLocals)
+	if v.CaptureReturn != nil {
+		s.WriteBool(schemas.CodeCaptureConfiguration_CaptureReturn, *v.CaptureReturn)
+	}
+	if v.CaptureStackTrace != nil {
+		s.WriteBool(schemas.CodeCaptureConfiguration_CaptureStackTrace, *v.CaptureStackTrace)
+	}
+}
+func (v *CodeCaptureConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeCaptureConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeCaptureConfiguration_CaptureArguments:
+			return deserializeStringList(d, schemas.CodeCaptureConfiguration_CaptureArguments, &v.CaptureArguments)
+		case schemas.CodeCaptureConfiguration_CaptureLimits:
+			v.CaptureLimits = &CaptureLimitsConfig{}
+			return v.CaptureLimits.Deserialize(d)
+		case schemas.CodeCaptureConfiguration_CaptureLocals:
+			return deserializeStringList(d, schemas.CodeCaptureConfiguration_CaptureLocals, &v.CaptureLocals)
+		case schemas.CodeCaptureConfiguration_CaptureReturn:
+			v.CaptureReturn = new(bool)
+			return d.ReadBool(schemas.CodeCaptureConfiguration_CaptureReturn, v.CaptureReturn)
+		case schemas.CodeCaptureConfiguration_CaptureStackTrace:
+			v.CaptureStackTrace = new(bool)
+			return d.ReadBool(schemas.CodeCaptureConfiguration_CaptureStackTrace, v.CaptureStackTrace)
+		}
+		return nil
+	})
 }
 
 // Identifies a code location to instrument, including the programming language,
@@ -539,6 +1164,62 @@ type CodeLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClassName != nil {
+		s.WriteString(schemas.CodeLocation_ClassName, *v.ClassName)
+	}
+	if v.CodeUnit != nil {
+		s.WriteString(schemas.CodeLocation_CodeUnit, *v.CodeUnit)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.CodeLocation_FilePath, *v.FilePath)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.CodeLocation_Language, string(v.Language))
+	}
+	if v.LineNumber != nil {
+		s.WriteInt32(schemas.CodeLocation_LineNumber, *v.LineNumber)
+	}
+	if v.MethodName != nil {
+		s.WriteString(schemas.CodeLocation_MethodName, *v.MethodName)
+	}
+}
+func (v *CodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeLocation_ClassName:
+			v.ClassName = new(string)
+			return d.ReadString(schemas.CodeLocation_ClassName, v.ClassName)
+		case schemas.CodeLocation_CodeUnit:
+			v.CodeUnit = new(string)
+			return d.ReadString(schemas.CodeLocation_CodeUnit, v.CodeUnit)
+		case schemas.CodeLocation_FilePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.CodeLocation_FilePath, v.FilePath)
+		case schemas.CodeLocation_Language:
+			var ev string
+			if err := d.ReadString(schemas.CodeLocation_Language, &ev); err != nil {
+				return err
+			}
+			v.Language = ProgrammingLanguage(ev)
+			return nil
+		case schemas.CodeLocation_LineNumber:
+			v.LineNumber = new(int32)
+			return d.ReadInt32(schemas.CodeLocation_LineNumber, v.LineNumber)
+		case schemas.CodeLocation_MethodName:
+			v.MethodName = new(string)
+			return d.ReadString(schemas.CodeLocation_MethodName, v.MethodName)
+		}
+		return nil
+	})
+}
+
 // Identifies a single operation to include in a composite SLI for a service-level
 // SLO. Used as an element of the Components list in CompositeSliConfig .
 //
@@ -557,6 +1238,12 @@ type CompositeSliComponentMemberOperationName struct {
 }
 
 func (*CompositeSliComponentMemberOperationName) isCompositeSliComponent() {}
+func (v *CompositeSliComponentMemberOperationName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.CompositeSliComponent_OperationName, v.Value)
+}
+func (v *CompositeSliComponentMemberOperationName) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.CompositeSliComponent_OperationName, &v.Value)
+}
 
 // This structure contains the configuration for a composite service level
 // indicator (SLI) that aggregates metrics across multiple operations of a service
@@ -576,6 +1263,33 @@ type CompositeSliConfig struct {
 	Components []CompositeSliComponent
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompositeSliConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompositeSliConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompositeSliConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompositeSliComponents(s, schemas.CompositeSliConfig_Components, v.Components)
+	if v.SelectionConfig != nil {
+		s.WriteStruct(schemas.CompositeSliConfig_SelectionConfig)
+		v.SelectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CompositeSliConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompositeSliConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompositeSliConfig_Components:
+			return deserializeCompositeSliComponents(d, schemas.CompositeSliConfig_Components, &v.Components)
+		case schemas.CompositeSliConfig_SelectionConfig:
+			v.SelectionConfig = &SelectionConfig{}
+			return v.SelectionConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Identifies the dependency using the DependencyKeyAttributes and
@@ -615,6 +1329,31 @@ type DependencyConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DependencyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.DependencyConfig_DependencyKeyAttributes, v.DependencyKeyAttributes)
+	if v.DependencyOperationName != nil {
+		s.WriteString(schemas.DependencyConfig_DependencyOperationName, *v.DependencyOperationName)
+	}
+}
+func (v *DependencyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyConfig_DependencyKeyAttributes:
+			return deserializeAttributes(d, schemas.DependencyConfig_DependencyKeyAttributes, &v.DependencyKeyAttributes)
+		case schemas.DependencyConfig_DependencyOperationName:
+			v.DependencyOperationName = new(string)
+			return d.ReadString(schemas.DependencyConfig_DependencyOperationName, v.DependencyOperationName)
+		}
+		return nil
+	})
+}
+
 // A structure that represents the dependency relationships relevant to an audit
 // finding, containing nodes and edges that show how services and resources are
 // connected.
@@ -629,6 +1368,28 @@ type DependencyGraph struct {
 	Nodes []Node
 
 	noSmithyDocumentSerde
+}
+
+func (v *DependencyGraph) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyGraph)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyGraph) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEdges(s, schemas.DependencyGraph_Edges, v.Edges)
+	serializeNodes(s, schemas.DependencyGraph_Nodes, v.Nodes)
+}
+func (v *DependencyGraph) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyGraph, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyGraph_Edges:
+			return deserializeEdges(d, schemas.DependencyGraph_Edges, &v.Edges)
+		case schemas.DependencyGraph_Nodes:
+			return deserializeNodes(d, schemas.DependencyGraph_Nodes, &v.Nodes)
+		}
+		return nil
+	})
 }
 
 // A dimension is a name/value pair that is part of the identity of a metric.
@@ -659,6 +1420,34 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Dimension_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Dimension_Value, *v.Value)
+	}
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Dimension_Name, v.Name)
+		case schemas.Dimension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Dimension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A structure that represents a connection between two nodes in a dependency
 // graph, showing the relationship and characteristics of the connection.
 type Edge struct {
@@ -677,6 +1466,50 @@ type Edge struct {
 	SourceNodeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Edge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Edge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Edge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.Edge_ConnectionType, string(v.ConnectionType))
+	}
+	if v.DestinationNodeId != nil {
+		s.WriteString(schemas.Edge_DestinationNodeId, *v.DestinationNodeId)
+	}
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.Edge_Duration, *v.Duration)
+	}
+	if v.SourceNodeId != nil {
+		s.WriteString(schemas.Edge_SourceNodeId, *v.SourceNodeId)
+	}
+}
+func (v *Edge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Edge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Edge_ConnectionType:
+			var ev string
+			if err := d.ReadString(schemas.Edge_ConnectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = ConnectionType(ev)
+			return nil
+		case schemas.Edge_DestinationNodeId:
+			v.DestinationNodeId = new(string)
+			return d.ReadString(schemas.Edge_DestinationNodeId, v.DestinationNodeId)
+		case schemas.Edge_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.Edge_Duration, v.Duration)
+		case schemas.Edge_SourceNodeId:
+			v.SourceNodeId = new(string)
+			return d.ReadString(schemas.Edge_SourceNodeId, v.SourceNodeId)
+		}
+		return nil
+	})
 }
 
 // The core SLO time window exclusion object that includes Window, StartTime,
@@ -701,6 +1534,50 @@ type ExclusionWindow struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExclusionWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExclusionWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExclusionWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.ExclusionWindow_Reason, *v.Reason)
+	}
+	if v.RecurrenceRule != nil {
+		s.WriteStruct(schemas.ExclusionWindow_RecurrenceRule)
+		v.RecurrenceRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ExclusionWindow_StartTime, *v.StartTime)
+	}
+	if v.Window != nil {
+		s.WriteStruct(schemas.ExclusionWindow_Window)
+		v.Window.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExclusionWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExclusionWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExclusionWindow_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ExclusionWindow_Reason, v.Reason)
+		case schemas.ExclusionWindow_RecurrenceRule:
+			v.RecurrenceRule = &RecurrenceRule{}
+			return v.RecurrenceRule.Deserialize(d)
+		case schemas.ExclusionWindow_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ExclusionWindow_StartTime, v.StartTime)
+		case schemas.ExclusionWindow_Window:
+			v.Window = &Window{}
+			return v.Window.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This structure contains the attributes that determine the goal of an SLO. This
@@ -733,6 +1610,37 @@ type Goal struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Goal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Goal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Goal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttainmentGoal != nil {
+		s.WriteFloat64(schemas.Goal_AttainmentGoal, *v.AttainmentGoal)
+	}
+	serializeInterval(s, schemas.Goal_Interval, v.Interval)
+	if v.WarningThreshold != nil {
+		s.WriteFloat64(schemas.Goal_WarningThreshold, *v.WarningThreshold)
+	}
+}
+func (v *Goal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Goal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Goal_AttainmentGoal:
+			v.AttainmentGoal = new(float64)
+			return d.ReadFloat64(schemas.Goal_AttainmentGoal, v.AttainmentGoal)
+		case schemas.Goal_Interval:
+			return deserializeInterval(d, schemas.Goal_Interval, &v.Interval)
+		case schemas.Goal_WarningThreshold:
+			v.WarningThreshold = new(float64)
+			return d.ReadFloat64(schemas.Goal_WarningThreshold, v.WarningThreshold)
+		}
+		return nil
+	})
+}
+
 // A structure that defines how services should be grouped based on specific
 // attributes. This includes the friendly name for the grouping, the source keys to
 // derive values from, and an optional default value.
@@ -757,6 +1665,37 @@ type GroupingAttributeDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupingAttributeDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupingAttributeDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupingAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultGroupingValue != nil {
+		s.WriteString(schemas.GroupingAttributeDefinition_DefaultGroupingValue, *v.DefaultGroupingValue)
+	}
+	if v.GroupingName != nil {
+		s.WriteString(schemas.GroupingAttributeDefinition_GroupingName, *v.GroupingName)
+	}
+	serializeGroupingSourceKeyStringList(s, schemas.GroupingAttributeDefinition_GroupingSourceKeys, v.GroupingSourceKeys)
+}
+func (v *GroupingAttributeDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupingAttributeDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupingAttributeDefinition_DefaultGroupingValue:
+			v.DefaultGroupingValue = new(string)
+			return d.ReadString(schemas.GroupingAttributeDefinition_DefaultGroupingValue, v.DefaultGroupingValue)
+		case schemas.GroupingAttributeDefinition_GroupingName:
+			v.GroupingName = new(string)
+			return d.ReadString(schemas.GroupingAttributeDefinition_GroupingName, v.GroupingName)
+		case schemas.GroupingAttributeDefinition_GroupingSourceKeys:
+			return deserializeGroupingSourceKeyStringList(d, schemas.GroupingAttributeDefinition_GroupingSourceKeys, &v.GroupingSourceKeys)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the complete grouping configuration for an account,
 // including all defined grouping attributes and metadata about when it was last
 // updated.
@@ -775,6 +1714,31 @@ type GroupingConfiguration struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupingAttributeDefinitions(s, schemas.GroupingConfiguration_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GroupingConfiguration_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GroupingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupingConfiguration_GroupingAttributeDefinitions:
+			return deserializeGroupingAttributeDefinitions(d, schemas.GroupingConfiguration_GroupingAttributeDefinitions, &v.GroupingAttributeDefinitions)
+		case schemas.GroupingConfiguration_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GroupingConfiguration_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // The full instrumentation configuration, including the instrumentation type,
@@ -840,6 +1804,93 @@ type InstrumentationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstrumentationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_ARN, *v.ARN)
+	}
+	serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfiguration_AttributeFilters, v.AttributeFilters)
+	serializeCaptureConfiguration(s, schemas.InstrumentationConfiguration_CaptureConfiguration, v.CaptureConfiguration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InstrumentationConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_Description, *v.Description)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_Environment, *v.Environment)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.InstrumentationConfiguration_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.InstrumentationConfiguration_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocation(s, schemas.InstrumentationConfiguration_Location, v.Location)
+	if v.LocationHash != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_LocationHash, *v.LocationHash)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.InstrumentationConfiguration_Service, *v.Service)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.InstrumentationConfiguration_SignalType, string(v.SignalType))
+	}
+}
+func (v *InstrumentationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfiguration_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_ARN, v.ARN)
+		case schemas.InstrumentationConfiguration_AttributeFilters:
+			return deserializeDynamicInstrumentationAttributeFilters(d, schemas.InstrumentationConfiguration_AttributeFilters, &v.AttributeFilters)
+		case schemas.InstrumentationConfiguration_CaptureConfiguration:
+			return deserializeCaptureConfiguration(d, schemas.InstrumentationConfiguration_CaptureConfiguration, &v.CaptureConfiguration)
+		case schemas.InstrumentationConfiguration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.InstrumentationConfiguration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_Description, v.Description)
+		case schemas.InstrumentationConfiguration_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_Environment, v.Environment)
+		case schemas.InstrumentationConfiguration_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfiguration_ExpiresAt, v.ExpiresAt)
+		case schemas.InstrumentationConfiguration_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfiguration_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.InstrumentationConfiguration_Location:
+			return deserializeLocation(d, schemas.InstrumentationConfiguration_Location, &v.Location)
+		case schemas.InstrumentationConfiguration_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_LocationHash, v.LocationHash)
+		case schemas.InstrumentationConfiguration_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.InstrumentationConfiguration_Service, v.Service)
+		case schemas.InstrumentationConfiguration_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfiguration_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The status of a single instrumentation configuration reported by an SDK
 // instance.
 type InstrumentationConfigurationStatusReport struct {
@@ -876,6 +1927,74 @@ type InstrumentationConfigurationStatusReport struct {
 	ErrorCause InstrumentationErrorCause
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstrumentationConfigurationStatusReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfigurationStatusReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationConfigurationStatusReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCause != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_ErrorCause, string(v.ErrorCause))
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.LocationHash != nil {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_LocationHash, *v.LocationHash)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_SignalType, string(v.SignalType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InstrumentationConfigurationStatusReport_Status, string(v.Status))
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationStatusReport_Time, *v.Time)
+	}
+}
+func (v *InstrumentationConfigurationStatusReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfigurationStatusReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfigurationStatusReport_ErrorCause:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_ErrorCause, &ev); err != nil {
+				return err
+			}
+			v.ErrorCause = InstrumentationErrorCause(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationStatusReport_LocationHash, v.LocationHash)
+		case schemas.InstrumentationConfigurationStatusReport_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_Status:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationStatusReport_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstrumentationConfigurationStatus(ev)
+			return nil
+		case schemas.InstrumentationConfigurationStatusReport_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationStatusReport_Time, v.Time)
+		}
+		return nil
+	})
 }
 
 // An instrumentation configuration that omits service and environment because
@@ -930,6 +2049,81 @@ type InstrumentationConfigurationWithoutServiceEnv struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstrumentationConfigurationWithoutServiceEnv) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationConfigurationWithoutServiceEnv)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationConfigurationWithoutServiceEnv) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_ARN, *v.ARN)
+	}
+	serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters, v.AttributeFilters)
+	serializeCaptureConfiguration(s, schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, v.CaptureConfiguration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_Description, *v.Description)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.InstrumentationConfigurationWithoutServiceEnv_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType, string(v.InstrumentationType))
+	}
+	serializeLocation(s, schemas.InstrumentationConfigurationWithoutServiceEnv_Location, v.Location)
+	if v.LocationHash != nil {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash, *v.LocationHash)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_SignalType, string(v.SignalType))
+	}
+}
+func (v *InstrumentationConfigurationWithoutServiceEnv) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationConfigurationWithoutServiceEnv, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_ARN, v.ARN)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters:
+			return deserializeDynamicInstrumentationAttributeFilters(d, schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters, &v.AttributeFilters)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration:
+			return deserializeCaptureConfiguration(d, schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, &v.CaptureConfiguration)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt, v.CreatedAt)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_Description, v.Description)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationConfigurationWithoutServiceEnv_ExpiresAt, v.ExpiresAt)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_Location:
+			return deserializeLocation(d, schemas.InstrumentationConfigurationWithoutServiceEnv_Location, &v.Location)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash, v.LocationHash)
+		case schemas.InstrumentationConfigurationWithoutServiceEnv_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationConfigurationWithoutServiceEnv_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A status event for an instrumentation configuration returned by
 // GetInstrumentationConfigurationStatus . Events include the timestamp and, for
 // errors, an error cause.
@@ -944,6 +2138,38 @@ type InstrumentationStatusEvent struct {
 	ErrorCause InstrumentationErrorCause
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstrumentationStatusEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstrumentationStatusEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstrumentationStatusEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCause != "" {
+		s.WriteString(schemas.InstrumentationStatusEvent_ErrorCause, string(v.ErrorCause))
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.InstrumentationStatusEvent_Time, *v.Time)
+	}
+}
+func (v *InstrumentationStatusEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstrumentationStatusEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstrumentationStatusEvent_ErrorCause:
+			var ev string
+			if err := d.ReadString(schemas.InstrumentationStatusEvent_ErrorCause, &ev); err != nil {
+				return err
+			}
+			v.ErrorCause = InstrumentationErrorCause(ev)
+			return nil
+		case schemas.InstrumentationStatusEvent_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.InstrumentationStatusEvent_Time, v.Time)
+		}
+		return nil
+	})
 }
 
 // The time period used to evaluate the SLO. It can be either a calendar interval
@@ -966,6 +2192,14 @@ type IntervalMemberCalendarInterval struct {
 }
 
 func (*IntervalMemberCalendarInterval) isInterval() {}
+func (v *IntervalMemberCalendarInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Interval_CalendarInterval)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IntervalMemberCalendarInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // If the interval is a rolling interval, this structure contains the interval
 // specifications.
@@ -976,6 +2210,14 @@ type IntervalMemberRollingInterval struct {
 }
 
 func (*IntervalMemberRollingInterval) isInterval() {}
+func (v *IntervalMemberRollingInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Interval_RollingInterval)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IntervalMemberRollingInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A union that identifies the location to instrument. Specify a CodeLocation for
 // code-level instrumentation.
@@ -996,6 +2238,14 @@ type LocationMemberCodeLocation struct {
 }
 
 func (*LocationMemberCodeLocation) isLocation() {}
+func (v *LocationMemberCodeLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Location_CodeLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LocationMemberCodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Union type for identifying an instrumentation configuration by code location or
 // locationHash. Used in Get/Delete/GetStatus operations to allow flexible
@@ -1017,6 +2267,14 @@ type LocationIdentifierMemberCodeLocation struct {
 }
 
 func (*LocationIdentifierMemberCodeLocation) isLocationIdentifier() {}
+func (v *LocationIdentifierMemberCodeLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocationIdentifier_CodeLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *LocationIdentifierMemberCodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The pre-computed location hash (16-character hex string)
 type LocationIdentifierMemberLocationHash struct {
@@ -1026,6 +2284,12 @@ type LocationIdentifierMemberLocationHash struct {
 }
 
 func (*LocationIdentifierMemberLocationHash) isLocationIdentifier() {}
+func (v *LocationIdentifierMemberLocationHash) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.LocationIdentifier_LocationHash, v.Value)
+}
+func (v *LocationIdentifierMemberLocationHash) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.LocationIdentifier_LocationHash, &v.Value)
+}
 
 // This structure defines the metric used for a service level indicator, including
 // the metric name, namespace, and dimensions
@@ -1046,6 +2310,37 @@ type Metric struct {
 	Namespace *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Metric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.Metric_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.Metric_Namespace, *v.Namespace)
+	}
+}
+func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metric_Dimensions:
+			return deserializeDimensions(d, schemas.Metric_Dimensions, &v.Dimensions)
+		case schemas.Metric_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.Metric_MetricName, v.MetricName)
+		case schemas.Metric_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.Metric_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 // Use this structure to define a metric or metric math expression that you want
@@ -1144,6 +2439,66 @@ type MetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDataQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MetricDataQuery_AccountId, *v.AccountId)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.MetricDataQuery_Expression, *v.Expression)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataQuery_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.MetricDataQuery_Label, *v.Label)
+	}
+	if v.MetricStat != nil {
+		s.WriteStruct(schemas.MetricDataQuery_MetricStat)
+		v.MetricStat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricDataQuery_Period, *v.Period)
+	}
+	if v.ReturnData != nil {
+		s.WriteBool(schemas.MetricDataQuery_ReturnData, *v.ReturnData)
+	}
+}
+func (v *MetricDataQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataQuery_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MetricDataQuery_AccountId, v.AccountId)
+		case schemas.MetricDataQuery_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Expression, v.Expression)
+		case schemas.MetricDataQuery_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Id, v.Id)
+		case schemas.MetricDataQuery_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Label, v.Label)
+		case schemas.MetricDataQuery_MetricStat:
+			v.MetricStat = &MetricStat{}
+			return v.MetricStat.Deserialize(d)
+		case schemas.MetricDataQuery_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricDataQuery_Period, v.Period)
+		case schemas.MetricDataQuery_ReturnData:
+			v.ReturnData = new(bool)
+			return d.ReadBool(schemas.MetricDataQuery_ReturnData, v.ReturnData)
+		}
+		return nil
+	})
+}
+
 // A structure that contains metric data queries and time range information that
 // provides context for audit findings through relevant performance metrics.
 type MetricGraph struct {
@@ -1161,6 +2516,37 @@ type MetricGraph struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricGraph) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricGraph)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricGraph) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.MetricGraph_EndTime, *v.EndTime)
+	}
+	serializeMetricDataQueries(s, schemas.MetricGraph_MetricDataQueries, v.MetricDataQueries)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MetricGraph_StartTime, *v.StartTime)
+	}
+}
+func (v *MetricGraph) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricGraph, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricGraph_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.MetricGraph_EndTime, v.EndTime)
+		case schemas.MetricGraph_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.MetricGraph_MetricDataQueries, &v.MetricDataQueries)
+		case schemas.MetricGraph_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MetricGraph_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about one CloudWatch metric associated with
@@ -1196,6 +2582,49 @@ type MetricReference struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MetricReference_AccountId, *v.AccountId)
+	}
+	serializeDimensions(s, schemas.MetricReference_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricReference_MetricName, *v.MetricName)
+	}
+	if v.MetricType != nil {
+		s.WriteString(schemas.MetricReference_MetricType, *v.MetricType)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.MetricReference_Namespace, *v.Namespace)
+	}
+}
+func (v *MetricReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricReference_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MetricReference_AccountId, v.AccountId)
+		case schemas.MetricReference_Dimensions:
+			return deserializeDimensions(d, schemas.MetricReference_Dimensions, &v.Dimensions)
+		case schemas.MetricReference_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricReference_MetricName, v.MetricName)
+		case schemas.MetricReference_MetricType:
+			v.MetricType = new(string)
+			return d.ReadString(schemas.MetricReference_MetricType, v.MetricType)
+		case schemas.MetricReference_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.MetricReference_Namespace, v.Namespace)
+		}
+		return nil
+	})
+}
+
 // Identifies the metric source for SLOs on resources other than Application
 // Signals services.
 type MetricSource struct {
@@ -1209,6 +2638,28 @@ type MetricSource struct {
 	MetricSourceAttributes map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricSource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.MetricSource_MetricSourceAttributes, v.MetricSourceAttributes)
+	serializeAttributes(s, schemas.MetricSource_MetricSourceKeyAttributes, v.MetricSourceKeyAttributes)
+}
+func (v *MetricSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricSource_MetricSourceAttributes:
+			return deserializeAttributes(d, schemas.MetricSource_MetricSourceAttributes, &v.MetricSourceAttributes)
+		case schemas.MetricSource_MetricSourceKeyAttributes:
+			return deserializeAttributes(d, schemas.MetricSource_MetricSourceKeyAttributes, &v.MetricSourceKeyAttributes)
+		}
+		return nil
+	})
 }
 
 // This structure defines the metric to be used as the service level indicator,
@@ -1250,6 +2701,52 @@ type MetricStat struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricStat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteStruct(schemas.MetricStat_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricStat_Period, *v.Period)
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.MetricStat_Stat, *v.Stat)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricStat_Unit, string(v.Unit))
+	}
+}
+func (v *MetricStat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStat_Metric:
+			v.Metric = &Metric{}
+			return v.Metric.Deserialize(d)
+		case schemas.MetricStat_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricStat_Period, v.Period)
+		case schemas.MetricStat_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.MetricStat_Stat, v.Stat)
+		case schemas.MetricStat_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricStat_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This structure defines the metric that is used as the "good request" or "bad
 // request" value for a request-based SLO. This value observed for the metric
 // defined in TotalRequestCountMetric is divided by the number found for
@@ -1275,6 +2772,12 @@ type MonitoredRequestCountMetricDataQueriesMemberBadCountMetric struct {
 
 func (*MonitoredRequestCountMetricDataQueriesMemberBadCountMetric) isMonitoredRequestCountMetricDataQueries() {
 }
+func (v *MonitoredRequestCountMetricDataQueriesMemberBadCountMetric) Serialize(s smithy.ShapeSerializer) {
+	serializeMetricDataQueries(s, schemas.MonitoredRequestCountMetricDataQueries_BadCountMetric, v.Value)
+}
+func (v *MonitoredRequestCountMetricDataQueriesMemberBadCountMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeMetricDataQueries(d, schemas.MonitoredRequestCountMetricDataQueries_BadCountMetric, &v.Value)
+}
 
 // If you want to count "good requests" to determine the percentage of successful
 // requests for this request-based SLO, specify the metric to use as "good
@@ -1286,6 +2789,12 @@ type MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric struct {
 }
 
 func (*MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric) isMonitoredRequestCountMetricDataQueries() {
+}
+func (v *MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric) Serialize(s smithy.ShapeSerializer) {
+	serializeMetricDataQueries(s, schemas.MonitoredRequestCountMetricDataQueries_GoodCountMetric, v.Value)
+}
+func (v *MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeMetricDataQueries(d, schemas.MonitoredRequestCountMetricDataQueries_GoodCountMetric, &v.Value)
 }
 
 // A structure that represents a node in a dependency graph, containing
@@ -1323,6 +2832,61 @@ type Node struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Node) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Node)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteFloat64(schemas.Node_Duration, *v.Duration)
+	}
+	serializeAttributes(s, schemas.Node_KeyAttributes, v.KeyAttributes)
+	if v.Name != nil {
+		s.WriteString(schemas.Node_Name, *v.Name)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.Node_NodeId, *v.NodeId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.Node_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Node_Status, *v.Status)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Node_Type, *v.Type)
+	}
+}
+func (v *Node) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Node, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Node_Duration:
+			v.Duration = new(float64)
+			return d.ReadFloat64(schemas.Node_Duration, v.Duration)
+		case schemas.Node_KeyAttributes:
+			return deserializeAttributes(d, schemas.Node_KeyAttributes, &v.KeyAttributes)
+		case schemas.Node_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Node_Name, v.Name)
+		case schemas.Node_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.Node_NodeId, v.NodeId)
+		case schemas.Node_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.Node_Operation, v.Operation)
+		case schemas.Node_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Node_Status, v.Status)
+		case schemas.Node_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Node_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // The recurrence rule for the SLO time window exclusion .
 type RecurrenceRule struct {
 
@@ -1332,6 +2896,28 @@ type RecurrenceRule struct {
 	Expression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecurrenceRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecurrenceRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecurrenceRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.RecurrenceRule_Expression, *v.Expression)
+	}
+}
+func (v *RecurrenceRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecurrenceRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecurrenceRule_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.RecurrenceRule_Expression, v.Expression)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about the performance metric that a
@@ -1354,6 +2940,46 @@ type RequestBasedServiceLevelIndicator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestBasedServiceLevelIndicator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestBasedServiceLevelIndicator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestBasedServiceLevelIndicator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicator_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.MetricThreshold != nil {
+		s.WriteFloat64(schemas.RequestBasedServiceLevelIndicator_MetricThreshold, *v.MetricThreshold)
+	}
+	if v.RequestBasedSliMetric != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicator_RequestBasedSliMetric)
+		v.RequestBasedSliMetric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestBasedServiceLevelIndicator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestBasedServiceLevelIndicator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestBasedServiceLevelIndicator_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.RequestBasedServiceLevelIndicator_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ServiceLevelIndicatorComparisonOperator(ev)
+			return nil
+		case schemas.RequestBasedServiceLevelIndicator_MetricThreshold:
+			v.MetricThreshold = new(float64)
+			return d.ReadFloat64(schemas.RequestBasedServiceLevelIndicator_MetricThreshold, v.MetricThreshold)
+		case schemas.RequestBasedServiceLevelIndicator_RequestBasedSliMetric:
+			v.RequestBasedSliMetric = &RequestBasedServiceLevelIndicatorMetric{}
+			return v.RequestBasedSliMetric.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This structure specifies the information about the service and the performance
 // metric that a request-based SLO is to monitor.
 type RequestBasedServiceLevelIndicatorConfig struct {
@@ -1373,6 +2999,46 @@ type RequestBasedServiceLevelIndicatorConfig struct {
 	MetricThreshold *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestBasedServiceLevelIndicatorConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestBasedServiceLevelIndicatorConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicatorConfig_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.MetricThreshold != nil {
+		s.WriteFloat64(schemas.RequestBasedServiceLevelIndicatorConfig_MetricThreshold, *v.MetricThreshold)
+	}
+	if v.RequestBasedSliMetricConfig != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig)
+		v.RequestBasedSliMetricConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestBasedServiceLevelIndicatorConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestBasedServiceLevelIndicatorConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestBasedServiceLevelIndicatorConfig_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.RequestBasedServiceLevelIndicatorConfig_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ServiceLevelIndicatorComparisonOperator(ev)
+			return nil
+		case schemas.RequestBasedServiceLevelIndicatorConfig_MetricThreshold:
+			v.MetricThreshold = new(float64)
+			return d.ReadFloat64(schemas.RequestBasedServiceLevelIndicatorConfig_MetricThreshold, v.MetricThreshold)
+		case schemas.RequestBasedServiceLevelIndicatorConfig_RequestBasedSliMetricConfig:
+			v.RequestBasedSliMetricConfig = &RequestBasedServiceLevelIndicatorMetricConfig{}
+			return v.RequestBasedSliMetricConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This structure contains the information about the metric that is used for a
@@ -1435,6 +3101,71 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 	OperationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestBasedServiceLevelIndicatorMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestBasedServiceLevelIndicatorMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompositeSliConfig != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetric_CompositeSliConfig)
+		v.CompositeSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DependencyConfig != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetric_DependencyConfig)
+		v.DependencyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.RequestBasedServiceLevelIndicatorMetric_KeyAttributes, v.KeyAttributes)
+	if v.MetricSource != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetric_MetricSource)
+		v.MetricSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetric_MetricType, string(v.MetricType))
+	}
+	serializeMonitoredRequestCountMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric, v.MonitoredRequestCountMetric)
+	if v.OperationName != nil {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetric_OperationName, *v.OperationName)
+	}
+	serializeMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric, v.TotalRequestCountMetric)
+}
+func (v *RequestBasedServiceLevelIndicatorMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestBasedServiceLevelIndicatorMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestBasedServiceLevelIndicatorMetric_CompositeSliConfig:
+			v.CompositeSliConfig = &CompositeSliConfig{}
+			return v.CompositeSliConfig.Deserialize(d)
+		case schemas.RequestBasedServiceLevelIndicatorMetric_DependencyConfig:
+			v.DependencyConfig = &DependencyConfig{}
+			return v.DependencyConfig.Deserialize(d)
+		case schemas.RequestBasedServiceLevelIndicatorMetric_KeyAttributes:
+			return deserializeAttributes(d, schemas.RequestBasedServiceLevelIndicatorMetric_KeyAttributes, &v.KeyAttributes)
+		case schemas.RequestBasedServiceLevelIndicatorMetric_MetricSource:
+			v.MetricSource = &MetricSource{}
+			return v.MetricSource.Deserialize(d)
+		case schemas.RequestBasedServiceLevelIndicatorMetric_MetricType:
+			var ev string
+			if err := d.ReadString(schemas.RequestBasedServiceLevelIndicatorMetric_MetricType, &ev); err != nil {
+				return err
+			}
+			v.MetricType = ServiceLevelIndicatorMetricType(ev)
+			return nil
+		case schemas.RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric:
+			return deserializeMonitoredRequestCountMetricDataQueries(d, schemas.RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric, &v.MonitoredRequestCountMetric)
+		case schemas.RequestBasedServiceLevelIndicatorMetric_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.RequestBasedServiceLevelIndicatorMetric_OperationName, v.OperationName)
+		case schemas.RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric:
+			return deserializeMetricDataQueries(d, schemas.RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric, &v.TotalRequestCountMetric)
+		}
+		return nil
+	})
 }
 
 // Use this structure to specify the information for the metric that a
@@ -1502,6 +3233,77 @@ type RequestBasedServiceLevelIndicatorMetricConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestBasedServiceLevelIndicatorMetricConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetricConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestBasedServiceLevelIndicatorMetricConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompositeSliConfig != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig)
+		v.CompositeSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DependencyConfig != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig)
+		v.DependencyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes, v.KeyAttributes)
+	if v.MetricName != nil {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricName, *v.MetricName)
+	}
+	if v.MetricSource != nil {
+		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricSource)
+		v.MetricSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricType, string(v.MetricType))
+	}
+	serializeMonitoredRequestCountMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric, v.MonitoredRequestCountMetric)
+	if v.OperationName != nil {
+		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_OperationName, *v.OperationName)
+	}
+	serializeMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric, v.TotalRequestCountMetric)
+}
+func (v *RequestBasedServiceLevelIndicatorMetricConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestBasedServiceLevelIndicatorMetricConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_CompositeSliConfig:
+			v.CompositeSliConfig = &CompositeSliConfig{}
+			return v.CompositeSliConfig.Deserialize(d)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_DependencyConfig:
+			v.DependencyConfig = &DependencyConfig{}
+			return v.DependencyConfig.Deserialize(d)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes:
+			return deserializeAttributes(d, schemas.RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes, &v.KeyAttributes)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricName, v.MetricName)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricSource:
+			v.MetricSource = &MetricSource{}
+			return v.MetricSource.Deserialize(d)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricType:
+			var ev string
+			if err := d.ReadString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricType, &ev); err != nil {
+				return err
+			}
+			v.MetricType = ServiceLevelIndicatorMetricType(ev)
+			return nil
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric:
+			return deserializeMonitoredRequestCountMetricDataQueries(d, schemas.RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric, &v.MonitoredRequestCountMetric)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_OperationName, v.OperationName)
+		case schemas.RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric:
+			return deserializeMetricDataQueries(d, schemas.RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric, &v.TotalRequestCountMetric)
+		}
+		return nil
+	})
+}
+
 // If the interval for this SLO is a rolling interval, this structure contains the
 // interval specifications.
 type RollingInterval struct {
@@ -1518,6 +3320,38 @@ type RollingInterval struct {
 	DurationUnit DurationUnit
 
 	noSmithyDocumentSerde
+}
+
+func (v *RollingInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollingInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollingInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteInt32(schemas.RollingInterval_Duration, *v.Duration)
+	}
+	if v.DurationUnit != "" {
+		s.WriteString(schemas.RollingInterval_DurationUnit, string(v.DurationUnit))
+	}
+}
+func (v *RollingInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollingInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollingInterval_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.RollingInterval_Duration, v.Duration)
+		case schemas.RollingInterval_DurationUnit:
+			var ev string
+			if err := d.ReadString(schemas.RollingInterval_DurationUnit, &ev); err != nil {
+				return err
+			}
+			v.DurationUnit = DurationUnit(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines how operations are selected for a service-level SLO.
@@ -1545,6 +3379,38 @@ type SelectionConfig struct {
 	Pattern *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SelectionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pattern != nil {
+		s.WriteString(schemas.SelectionConfig_Pattern, *v.Pattern)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SelectionConfig_Type, string(v.Type))
+	}
+}
+func (v *SelectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectionConfig_Pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.SelectionConfig_Pattern, v.Pattern)
+		case schemas.SelectionConfig_Type:
+			var ev string
+			if err := d.ReadString(schemas.SelectionConfig_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SelectionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This structure contains information about one of your services that was
@@ -1644,6 +3510,37 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Service) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Service)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMaps(s, schemas.Service_AttributeMaps, v.AttributeMaps)
+	serializeAttributes(s, schemas.Service_KeyAttributes, v.KeyAttributes)
+	serializeLogGroupReferences(s, schemas.Service_LogGroupReferences, v.LogGroupReferences)
+	serializeMetricReferences(s, schemas.Service_MetricReferences, v.MetricReferences)
+	serializeServiceGroups(s, schemas.Service_ServiceGroups, v.ServiceGroups)
+}
+func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Service_AttributeMaps:
+			return deserializeAttributeMaps(d, schemas.Service_AttributeMaps, &v.AttributeMaps)
+		case schemas.Service_KeyAttributes:
+			return deserializeAttributes(d, schemas.Service_KeyAttributes, &v.KeyAttributes)
+		case schemas.Service_LogGroupReferences:
+			return deserializeLogGroupReferences(d, schemas.Service_LogGroupReferences, &v.LogGroupReferences)
+		case schemas.Service_MetricReferences:
+			return deserializeMetricReferences(d, schemas.Service_MetricReferences, &v.MetricReferences)
+		case schemas.Service_ServiceGroups:
+			return deserializeServiceGroups(d, schemas.Service_ServiceGroups, &v.ServiceGroups)
+		}
+		return nil
+	})
+}
+
 // This structure contains information about one dependency of this service.
 type ServiceDependency struct {
 
@@ -1684,6 +3581,40 @@ type ServiceDependency struct {
 	OperationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceDependency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceDependency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceDependency) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.ServiceDependency_DependencyKeyAttributes, v.DependencyKeyAttributes)
+	if v.DependencyOperationName != nil {
+		s.WriteString(schemas.ServiceDependency_DependencyOperationName, *v.DependencyOperationName)
+	}
+	serializeMetricReferences(s, schemas.ServiceDependency_MetricReferences, v.MetricReferences)
+	if v.OperationName != nil {
+		s.WriteString(schemas.ServiceDependency_OperationName, *v.OperationName)
+	}
+}
+func (v *ServiceDependency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceDependency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceDependency_DependencyKeyAttributes:
+			return deserializeAttributes(d, schemas.ServiceDependency_DependencyKeyAttributes, &v.DependencyKeyAttributes)
+		case schemas.ServiceDependency_DependencyOperationName:
+			v.DependencyOperationName = new(string)
+			return d.ReadString(schemas.ServiceDependency_DependencyOperationName, v.DependencyOperationName)
+		case schemas.ServiceDependency_MetricReferences:
+			return deserializeMetricReferences(d, schemas.ServiceDependency_MetricReferences, &v.MetricReferences)
+		case schemas.ServiceDependency_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.ServiceDependency_OperationName, v.OperationName)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about a service dependent that was
@@ -1730,6 +3661,40 @@ type ServiceDependent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceDependent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceDependent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceDependent) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.ServiceDependent_DependentKeyAttributes, v.DependentKeyAttributes)
+	if v.DependentOperationName != nil {
+		s.WriteString(schemas.ServiceDependent_DependentOperationName, *v.DependentOperationName)
+	}
+	serializeMetricReferences(s, schemas.ServiceDependent_MetricReferences, v.MetricReferences)
+	if v.OperationName != nil {
+		s.WriteString(schemas.ServiceDependent_OperationName, *v.OperationName)
+	}
+}
+func (v *ServiceDependent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceDependent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceDependent_DependentKeyAttributes:
+			return deserializeAttributes(d, schemas.ServiceDependent_DependentKeyAttributes, &v.DependentKeyAttributes)
+		case schemas.ServiceDependent_DependentOperationName:
+			v.DependentOperationName = new(string)
+			return d.ReadString(schemas.ServiceDependent_DependentOperationName, v.DependentOperationName)
+		case schemas.ServiceDependent_MetricReferences:
+			return deserializeMetricReferences(d, schemas.ServiceDependent_MetricReferences, &v.MetricReferences)
+		case schemas.ServiceDependent_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.ServiceDependent_OperationName, v.OperationName)
+		}
+		return nil
+	})
+}
+
 // A structure that contains identifying information for a service entity.
 type ServiceEntity struct {
 
@@ -1747,6 +3712,46 @@ type ServiceEntity struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ServiceEntity_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Environment != nil {
+		s.WriteString(schemas.ServiceEntity_Environment, *v.Environment)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceEntity_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceEntity_Type, *v.Type)
+	}
+}
+func (v *ServiceEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceEntity_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.ServiceEntity_AwsAccountId, v.AwsAccountId)
+		case schemas.ServiceEntity_Environment:
+			v.Environment = new(string)
+			return d.ReadString(schemas.ServiceEntity_Environment, v.Environment)
+		case schemas.ServiceEntity_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceEntity_Name, v.Name)
+		case schemas.ServiceEntity_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceEntity_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // A structure that represents a logical grouping of services based on shared
@@ -1778,6 +3783,46 @@ type ServiceGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupIdentifier != nil {
+		s.WriteString(schemas.ServiceGroup_GroupIdentifier, *v.GroupIdentifier)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.ServiceGroup_GroupName, *v.GroupName)
+	}
+	if v.GroupSource != nil {
+		s.WriteString(schemas.ServiceGroup_GroupSource, *v.GroupSource)
+	}
+	if v.GroupValue != nil {
+		s.WriteString(schemas.ServiceGroup_GroupValue, *v.GroupValue)
+	}
+}
+func (v *ServiceGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceGroup_GroupIdentifier:
+			v.GroupIdentifier = new(string)
+			return d.ReadString(schemas.ServiceGroup_GroupIdentifier, v.GroupIdentifier)
+		case schemas.ServiceGroup_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.ServiceGroup_GroupName, v.GroupName)
+		case schemas.ServiceGroup_GroupSource:
+			v.GroupSource = new(string)
+			return d.ReadString(schemas.ServiceGroup_GroupSource, v.GroupSource)
+		case schemas.ServiceGroup_GroupValue:
+			v.GroupValue = new(string)
+			return d.ReadString(schemas.ServiceGroup_GroupValue, v.GroupValue)
+		}
+		return nil
+	})
+}
+
 // This structure contains information about the performance metric that a
 // period-based SLO monitors.
 type ServiceLevelIndicator struct {
@@ -1799,6 +3844,46 @@ type ServiceLevelIndicator struct {
 	SliMetric *ServiceLevelIndicatorMetric
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelIndicator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelIndicator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelIndicator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.ServiceLevelIndicator_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.MetricThreshold != nil {
+		s.WriteFloat64(schemas.ServiceLevelIndicator_MetricThreshold, *v.MetricThreshold)
+	}
+	if v.SliMetric != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicator_SliMetric)
+		v.SliMetric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceLevelIndicator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelIndicator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelIndicator_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelIndicator_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ServiceLevelIndicatorComparisonOperator(ev)
+			return nil
+		case schemas.ServiceLevelIndicator_MetricThreshold:
+			v.MetricThreshold = new(float64)
+			return d.ReadFloat64(schemas.ServiceLevelIndicator_MetricThreshold, v.MetricThreshold)
+		case schemas.ServiceLevelIndicator_SliMetric:
+			v.SliMetric = &ServiceLevelIndicatorMetric{}
+			return v.SliMetric.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This structure specifies the information about the service and the performance
@@ -1824,6 +3909,46 @@ type ServiceLevelIndicatorConfig struct {
 	MetricThreshold *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelIndicatorConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelIndicatorConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelIndicatorConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.ServiceLevelIndicatorConfig_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.MetricThreshold != nil {
+		s.WriteFloat64(schemas.ServiceLevelIndicatorConfig_MetricThreshold, *v.MetricThreshold)
+	}
+	if v.SliMetricConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorConfig_SliMetricConfig)
+		v.SliMetricConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceLevelIndicatorConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelIndicatorConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelIndicatorConfig_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelIndicatorConfig_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ServiceLevelIndicatorComparisonOperator(ev)
+			return nil
+		case schemas.ServiceLevelIndicatorConfig_MetricThreshold:
+			v.MetricThreshold = new(float64)
+			return d.ReadFloat64(schemas.ServiceLevelIndicatorConfig_MetricThreshold, v.MetricThreshold)
+		case schemas.ServiceLevelIndicatorConfig_SliMetricConfig:
+			v.SliMetricConfig = &ServiceLevelIndicatorMetricConfig{}
+			return v.SliMetricConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This structure contains the information about the metric that is used for a
@@ -1876,6 +4001,68 @@ type ServiceLevelIndicatorMetric struct {
 	OperationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelIndicatorMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelIndicatorMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelIndicatorMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompositeSliConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorMetric_CompositeSliConfig)
+		v.CompositeSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DependencyConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorMetric_DependencyConfig)
+		v.DependencyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.ServiceLevelIndicatorMetric_KeyAttributes, v.KeyAttributes)
+	serializeMetricDataQueries(s, schemas.ServiceLevelIndicatorMetric_MetricDataQueries, v.MetricDataQueries)
+	if v.MetricSource != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorMetric_MetricSource)
+		v.MetricSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.ServiceLevelIndicatorMetric_MetricType, string(v.MetricType))
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.ServiceLevelIndicatorMetric_OperationName, *v.OperationName)
+	}
+}
+func (v *ServiceLevelIndicatorMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelIndicatorMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelIndicatorMetric_CompositeSliConfig:
+			v.CompositeSliConfig = &CompositeSliConfig{}
+			return v.CompositeSliConfig.Deserialize(d)
+		case schemas.ServiceLevelIndicatorMetric_DependencyConfig:
+			v.DependencyConfig = &DependencyConfig{}
+			return v.DependencyConfig.Deserialize(d)
+		case schemas.ServiceLevelIndicatorMetric_KeyAttributes:
+			return deserializeAttributes(d, schemas.ServiceLevelIndicatorMetric_KeyAttributes, &v.KeyAttributes)
+		case schemas.ServiceLevelIndicatorMetric_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.ServiceLevelIndicatorMetric_MetricDataQueries, &v.MetricDataQueries)
+		case schemas.ServiceLevelIndicatorMetric_MetricSource:
+			v.MetricSource = &MetricSource{}
+			return v.MetricSource.Deserialize(d)
+		case schemas.ServiceLevelIndicatorMetric_MetricType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelIndicatorMetric_MetricType, &ev); err != nil {
+				return err
+			}
+			v.MetricType = ServiceLevelIndicatorMetricType(ev)
+			return nil
+		case schemas.ServiceLevelIndicatorMetric_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.ServiceLevelIndicatorMetric_OperationName, v.OperationName)
+		}
+		return nil
+	})
 }
 
 // Use this structure to specify the information for the metric that a
@@ -1945,6 +4132,86 @@ type ServiceLevelIndicatorMetricConfig struct {
 	Statistic *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelIndicatorMetricConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelIndicatorMetricConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelIndicatorMetricConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompositeSliConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorMetricConfig_CompositeSliConfig)
+		v.CompositeSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DependencyConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorMetricConfig_DependencyConfig)
+		v.DependencyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.ServiceLevelIndicatorMetricConfig_KeyAttributes, v.KeyAttributes)
+	serializeMetricDataQueries(s, schemas.ServiceLevelIndicatorMetricConfig_MetricDataQueries, v.MetricDataQueries)
+	if v.MetricName != nil {
+		s.WriteString(schemas.ServiceLevelIndicatorMetricConfig_MetricName, *v.MetricName)
+	}
+	if v.MetricSource != nil {
+		s.WriteStruct(schemas.ServiceLevelIndicatorMetricConfig_MetricSource)
+		v.MetricSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.ServiceLevelIndicatorMetricConfig_MetricType, string(v.MetricType))
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.ServiceLevelIndicatorMetricConfig_OperationName, *v.OperationName)
+	}
+	if v.PeriodSeconds != nil {
+		s.WriteInt32(schemas.ServiceLevelIndicatorMetricConfig_PeriodSeconds, *v.PeriodSeconds)
+	}
+	if v.Statistic != nil {
+		s.WriteString(schemas.ServiceLevelIndicatorMetricConfig_Statistic, *v.Statistic)
+	}
+}
+func (v *ServiceLevelIndicatorMetricConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelIndicatorMetricConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelIndicatorMetricConfig_CompositeSliConfig:
+			v.CompositeSliConfig = &CompositeSliConfig{}
+			return v.CompositeSliConfig.Deserialize(d)
+		case schemas.ServiceLevelIndicatorMetricConfig_DependencyConfig:
+			v.DependencyConfig = &DependencyConfig{}
+			return v.DependencyConfig.Deserialize(d)
+		case schemas.ServiceLevelIndicatorMetricConfig_KeyAttributes:
+			return deserializeAttributes(d, schemas.ServiceLevelIndicatorMetricConfig_KeyAttributes, &v.KeyAttributes)
+		case schemas.ServiceLevelIndicatorMetricConfig_MetricDataQueries:
+			return deserializeMetricDataQueries(d, schemas.ServiceLevelIndicatorMetricConfig_MetricDataQueries, &v.MetricDataQueries)
+		case schemas.ServiceLevelIndicatorMetricConfig_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.ServiceLevelIndicatorMetricConfig_MetricName, v.MetricName)
+		case schemas.ServiceLevelIndicatorMetricConfig_MetricSource:
+			v.MetricSource = &MetricSource{}
+			return v.MetricSource.Deserialize(d)
+		case schemas.ServiceLevelIndicatorMetricConfig_MetricType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelIndicatorMetricConfig_MetricType, &ev); err != nil {
+				return err
+			}
+			v.MetricType = ServiceLevelIndicatorMetricType(ev)
+			return nil
+		case schemas.ServiceLevelIndicatorMetricConfig_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.ServiceLevelIndicatorMetricConfig_OperationName, v.OperationName)
+		case schemas.ServiceLevelIndicatorMetricConfig_PeriodSeconds:
+			v.PeriodSeconds = new(int32)
+			return d.ReadInt32(schemas.ServiceLevelIndicatorMetricConfig_PeriodSeconds, v.PeriodSeconds)
+		case schemas.ServiceLevelIndicatorMetricConfig_Statistic:
+			v.Statistic = new(string)
+			return d.ReadString(schemas.ServiceLevelIndicatorMetricConfig_Statistic, v.Statistic)
+		}
+		return nil
+	})
 }
 
 // A structure containing information about one service level objective (SLO) that
@@ -2025,6 +4292,105 @@ type ServiceLevelObjective struct {
 	Sli *ServiceLevelIndicator
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelObjective) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelObjective)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelObjective) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ServiceLevelObjective_Arn, *v.Arn)
+	}
+	if v.AutoInvestigationEnabled != nil {
+		s.WriteBool(schemas.ServiceLevelObjective_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
+	}
+	serializeBurnRateConfigurations(s, schemas.ServiceLevelObjective_BurnRateConfigurations, v.BurnRateConfigurations)
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.ServiceLevelObjective_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ServiceLevelObjective_Description, *v.Description)
+	}
+	if v.EvaluationType != "" {
+		s.WriteString(schemas.ServiceLevelObjective_EvaluationType, string(v.EvaluationType))
+	}
+	if v.Goal != nil {
+		s.WriteStruct(schemas.ServiceLevelObjective_Goal)
+		v.Goal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ServiceLevelObjective_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.MetricSourceType != "" {
+		s.WriteString(schemas.ServiceLevelObjective_MetricSourceType, string(v.MetricSourceType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceLevelObjective_Name, *v.Name)
+	}
+	if v.RequestBasedSli != nil {
+		s.WriteStruct(schemas.ServiceLevelObjective_RequestBasedSli)
+		v.RequestBasedSli.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sli != nil {
+		s.WriteStruct(schemas.ServiceLevelObjective_Sli)
+		v.Sli.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceLevelObjective) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelObjective, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelObjective_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ServiceLevelObjective_Arn, v.Arn)
+		case schemas.ServiceLevelObjective_AutoInvestigationEnabled:
+			v.AutoInvestigationEnabled = new(bool)
+			return d.ReadBool(schemas.ServiceLevelObjective_AutoInvestigationEnabled, v.AutoInvestigationEnabled)
+		case schemas.ServiceLevelObjective_BurnRateConfigurations:
+			return deserializeBurnRateConfigurations(d, schemas.ServiceLevelObjective_BurnRateConfigurations, &v.BurnRateConfigurations)
+		case schemas.ServiceLevelObjective_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.ServiceLevelObjective_CreatedTime, v.CreatedTime)
+		case schemas.ServiceLevelObjective_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ServiceLevelObjective_Description, v.Description)
+		case schemas.ServiceLevelObjective_EvaluationType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelObjective_EvaluationType, &ev); err != nil {
+				return err
+			}
+			v.EvaluationType = EvaluationType(ev)
+			return nil
+		case schemas.ServiceLevelObjective_Goal:
+			v.Goal = &Goal{}
+			return v.Goal.Deserialize(d)
+		case schemas.ServiceLevelObjective_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ServiceLevelObjective_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ServiceLevelObjective_MetricSourceType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelObjective_MetricSourceType, &ev); err != nil {
+				return err
+			}
+			v.MetricSourceType = MetricSourceType(ev)
+			return nil
+		case schemas.ServiceLevelObjective_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceLevelObjective_Name, v.Name)
+		case schemas.ServiceLevelObjective_RequestBasedSli:
+			v.RequestBasedSli = &RequestBasedServiceLevelIndicator{}
+			return v.RequestBasedSli.Deserialize(d)
+		case schemas.ServiceLevelObjective_Sli:
+			v.Sli = &ServiceLevelIndicator{}
+			return v.Sli.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure containing an SLO budget report that you have requested.
@@ -2119,6 +4485,108 @@ type ServiceLevelObjectiveBudgetReport struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceLevelObjectiveBudgetReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelObjectiveBudgetReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelObjectiveBudgetReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReport_Arn, *v.Arn)
+	}
+	if v.Attainment != nil {
+		s.WriteFloat64(schemas.ServiceLevelObjectiveBudgetReport_Attainment, *v.Attainment)
+	}
+	if v.BudgetRequestsRemaining != nil {
+		s.WriteInt32(schemas.ServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining, *v.BudgetRequestsRemaining)
+	}
+	if v.BudgetSecondsRemaining != nil {
+		s.WriteInt32(schemas.ServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining, *v.BudgetSecondsRemaining)
+	}
+	if v.BudgetStatus != "" {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReport_BudgetStatus, string(v.BudgetStatus))
+	}
+	if v.EvaluationType != "" {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReport_EvaluationType, string(v.EvaluationType))
+	}
+	if v.Goal != nil {
+		s.WriteStruct(schemas.ServiceLevelObjectiveBudgetReport_Goal)
+		v.Goal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReport_Name, *v.Name)
+	}
+	if v.RequestBasedSli != nil {
+		s.WriteStruct(schemas.ServiceLevelObjectiveBudgetReport_RequestBasedSli)
+		v.RequestBasedSli.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sli != nil {
+		s.WriteStruct(schemas.ServiceLevelObjectiveBudgetReport_Sli)
+		v.Sli.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalBudgetRequests != nil {
+		s.WriteInt32(schemas.ServiceLevelObjectiveBudgetReport_TotalBudgetRequests, *v.TotalBudgetRequests)
+	}
+	if v.TotalBudgetSeconds != nil {
+		s.WriteInt32(schemas.ServiceLevelObjectiveBudgetReport_TotalBudgetSeconds, *v.TotalBudgetSeconds)
+	}
+}
+func (v *ServiceLevelObjectiveBudgetReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelObjectiveBudgetReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelObjectiveBudgetReport_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveBudgetReport_Arn, v.Arn)
+		case schemas.ServiceLevelObjectiveBudgetReport_Attainment:
+			v.Attainment = new(float64)
+			return d.ReadFloat64(schemas.ServiceLevelObjectiveBudgetReport_Attainment, v.Attainment)
+		case schemas.ServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining:
+			v.BudgetRequestsRemaining = new(int32)
+			return d.ReadInt32(schemas.ServiceLevelObjectiveBudgetReport_BudgetRequestsRemaining, v.BudgetRequestsRemaining)
+		case schemas.ServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining:
+			v.BudgetSecondsRemaining = new(int32)
+			return d.ReadInt32(schemas.ServiceLevelObjectiveBudgetReport_BudgetSecondsRemaining, v.BudgetSecondsRemaining)
+		case schemas.ServiceLevelObjectiveBudgetReport_BudgetStatus:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelObjectiveBudgetReport_BudgetStatus, &ev); err != nil {
+				return err
+			}
+			v.BudgetStatus = ServiceLevelObjectiveBudgetStatus(ev)
+			return nil
+		case schemas.ServiceLevelObjectiveBudgetReport_EvaluationType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelObjectiveBudgetReport_EvaluationType, &ev); err != nil {
+				return err
+			}
+			v.EvaluationType = EvaluationType(ev)
+			return nil
+		case schemas.ServiceLevelObjectiveBudgetReport_Goal:
+			v.Goal = &Goal{}
+			return v.Goal.Deserialize(d)
+		case schemas.ServiceLevelObjectiveBudgetReport_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveBudgetReport_Name, v.Name)
+		case schemas.ServiceLevelObjectiveBudgetReport_RequestBasedSli:
+			v.RequestBasedSli = &RequestBasedServiceLevelIndicator{}
+			return v.RequestBasedSli.Deserialize(d)
+		case schemas.ServiceLevelObjectiveBudgetReport_Sli:
+			v.Sli = &ServiceLevelIndicator{}
+			return v.Sli.Deserialize(d)
+		case schemas.ServiceLevelObjectiveBudgetReport_TotalBudgetRequests:
+			v.TotalBudgetRequests = new(int32)
+			return d.ReadInt32(schemas.ServiceLevelObjectiveBudgetReport_TotalBudgetRequests, v.TotalBudgetRequests)
+		case schemas.ServiceLevelObjectiveBudgetReport_TotalBudgetSeconds:
+			v.TotalBudgetSeconds = new(int32)
+			return d.ReadInt32(schemas.ServiceLevelObjectiveBudgetReport_TotalBudgetSeconds, v.TotalBudgetSeconds)
+		}
+		return nil
+	})
+}
+
 // A structure containing information about one error that occurred during a [BatchGetServiceLevelObjectiveBudgetReport]
 // operation.
 //
@@ -2148,6 +4616,46 @@ type ServiceLevelObjectiveBudgetReportError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceLevelObjectiveBudgetReportError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelObjectiveBudgetReportError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelObjectiveBudgetReportError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReportError_Arn, *v.Arn)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReportError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReportError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveBudgetReportError_Name, *v.Name)
+	}
+}
+func (v *ServiceLevelObjectiveBudgetReportError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelObjectiveBudgetReportError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelObjectiveBudgetReportError_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveBudgetReportError_Arn, v.Arn)
+		case schemas.ServiceLevelObjectiveBudgetReportError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveBudgetReportError_ErrorCode, v.ErrorCode)
+		case schemas.ServiceLevelObjectiveBudgetReportError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveBudgetReportError_ErrorMessage, v.ErrorMessage)
+		case schemas.ServiceLevelObjectiveBudgetReportError_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveBudgetReportError_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A structure that contains identifying information for a service level objective
 // entity.
 type ServiceLevelObjectiveEntity struct {
@@ -2160,6 +4668,34 @@ type ServiceLevelObjectiveEntity struct {
 	SloName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLevelObjectiveEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelObjectiveEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelObjectiveEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SloArn != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveEntity_SloArn, *v.SloArn)
+	}
+	if v.SloName != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveEntity_SloName, *v.SloName)
+	}
+}
+func (v *ServiceLevelObjectiveEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelObjectiveEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelObjectiveEntity_SloArn:
+			v.SloArn = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveEntity_SloArn, v.SloArn)
+		case schemas.ServiceLevelObjectiveEntity_SloName:
+			v.SloName = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveEntity_SloName, v.SloName)
+		}
+		return nil
+	})
 }
 
 // A structure that contains information about one service level objective (SLO)
@@ -2234,6 +4770,93 @@ type ServiceLevelObjectiveSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceLevelObjectiveSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLevelObjectiveSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLevelObjectiveSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveSummary_Arn, *v.Arn)
+	}
+	if v.CompositeSliConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelObjectiveSummary_CompositeSliConfig)
+		v.CompositeSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.ServiceLevelObjectiveSummary_CreatedTime, *v.CreatedTime)
+	}
+	if v.DependencyConfig != nil {
+		s.WriteStruct(schemas.ServiceLevelObjectiveSummary_DependencyConfig)
+		v.DependencyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationType != "" {
+		s.WriteString(schemas.ServiceLevelObjectiveSummary_EvaluationType, string(v.EvaluationType))
+	}
+	serializeAttributes(s, schemas.ServiceLevelObjectiveSummary_KeyAttributes, v.KeyAttributes)
+	if v.MetricSource != nil {
+		s.WriteStruct(schemas.ServiceLevelObjectiveSummary_MetricSource)
+		v.MetricSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricSourceType != "" {
+		s.WriteString(schemas.ServiceLevelObjectiveSummary_MetricSourceType, string(v.MetricSourceType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveSummary_Name, *v.Name)
+	}
+	if v.OperationName != nil {
+		s.WriteString(schemas.ServiceLevelObjectiveSummary_OperationName, *v.OperationName)
+	}
+}
+func (v *ServiceLevelObjectiveSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLevelObjectiveSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLevelObjectiveSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveSummary_Arn, v.Arn)
+		case schemas.ServiceLevelObjectiveSummary_CompositeSliConfig:
+			v.CompositeSliConfig = &CompositeSliConfig{}
+			return v.CompositeSliConfig.Deserialize(d)
+		case schemas.ServiceLevelObjectiveSummary_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.ServiceLevelObjectiveSummary_CreatedTime, v.CreatedTime)
+		case schemas.ServiceLevelObjectiveSummary_DependencyConfig:
+			v.DependencyConfig = &DependencyConfig{}
+			return v.DependencyConfig.Deserialize(d)
+		case schemas.ServiceLevelObjectiveSummary_EvaluationType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelObjectiveSummary_EvaluationType, &ev); err != nil {
+				return err
+			}
+			v.EvaluationType = EvaluationType(ev)
+			return nil
+		case schemas.ServiceLevelObjectiveSummary_KeyAttributes:
+			return deserializeAttributes(d, schemas.ServiceLevelObjectiveSummary_KeyAttributes, &v.KeyAttributes)
+		case schemas.ServiceLevelObjectiveSummary_MetricSource:
+			v.MetricSource = &MetricSource{}
+			return v.MetricSource.Deserialize(d)
+		case schemas.ServiceLevelObjectiveSummary_MetricSourceType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLevelObjectiveSummary_MetricSourceType, &ev); err != nil {
+				return err
+			}
+			v.MetricSourceType = MetricSourceType(ev)
+			return nil
+		case schemas.ServiceLevelObjectiveSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveSummary_Name, v.Name)
+		case schemas.ServiceLevelObjectiveSummary_OperationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.ServiceLevelObjectiveSummary_OperationName, v.OperationName)
+		}
+		return nil
+	})
+}
+
 // This structure contains information about an operation discovered by
 // Application Signals. An operation is a specific function performed by a service
 // that was discovered by Application Signals, and is often an API that is called
@@ -2255,6 +4878,31 @@ type ServiceOperation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricReferences(s, schemas.ServiceOperation_MetricReferences, v.MetricReferences)
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceOperation_Name, *v.Name)
+	}
+}
+func (v *ServiceOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceOperation_MetricReferences:
+			return deserializeMetricReferences(d, schemas.ServiceOperation_MetricReferences, &v.MetricReferences)
+		case schemas.ServiceOperation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceOperation_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A structure that contains identifying information for a service operation
 // entity.
 type ServiceOperationEntity struct {
@@ -2269,6 +4917,42 @@ type ServiceOperationEntity struct {
 	Service *ServiceEntity
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceOperationEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceOperationEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceOperationEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricType != nil {
+		s.WriteString(schemas.ServiceOperationEntity_MetricType, *v.MetricType)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ServiceOperationEntity_Operation, *v.Operation)
+	}
+	if v.Service != nil {
+		s.WriteStruct(schemas.ServiceOperationEntity_Service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceOperationEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceOperationEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceOperationEntity_MetricType:
+			v.MetricType = new(string)
+			return d.ReadString(schemas.ServiceOperationEntity_MetricType, v.MetricType)
+		case schemas.ServiceOperationEntity_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.ServiceOperationEntity_Operation, v.Operation)
+		case schemas.ServiceOperationEntity_Service:
+			v.Service = &ServiceEntity{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure that contains information about the current state of a service,
@@ -2293,6 +4977,31 @@ type ServiceState struct {
 	AttributeFilters []AttributeFilter
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceState) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeFilters(s, schemas.ServiceState_AttributeFilters, v.AttributeFilters)
+	serializeLatestChangeEvents(s, schemas.ServiceState_LatestChangeEvents, v.LatestChangeEvents)
+	serializeAttributes(s, schemas.ServiceState_Service, v.Service)
+}
+func (v *ServiceState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceState_AttributeFilters:
+			return deserializeAttributeFilters(d, schemas.ServiceState_AttributeFilters, &v.AttributeFilters)
+		case schemas.ServiceState_LatestChangeEvents:
+			return deserializeLatestChangeEvents(d, schemas.ServiceState_LatestChangeEvents, &v.LatestChangeEvents)
+		case schemas.ServiceState_Service:
+			return deserializeAttributes(d, schemas.ServiceState_Service, &v.Service)
+		}
+		return nil
+	})
 }
 
 // This structure contains information about one of your services that was
@@ -2382,6 +5091,34 @@ type ServiceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMaps(s, schemas.ServiceSummary_AttributeMaps, v.AttributeMaps)
+	serializeAttributes(s, schemas.ServiceSummary_KeyAttributes, v.KeyAttributes)
+	serializeMetricReferences(s, schemas.ServiceSummary_MetricReferences, v.MetricReferences)
+	serializeServiceGroups(s, schemas.ServiceSummary_ServiceGroups, v.ServiceGroups)
+}
+func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceSummary_AttributeMaps:
+			return deserializeAttributeMaps(d, schemas.ServiceSummary_AttributeMaps, &v.AttributeMaps)
+		case schemas.ServiceSummary_KeyAttributes:
+			return deserializeAttributes(d, schemas.ServiceSummary_KeyAttributes, &v.KeyAttributes)
+		case schemas.ServiceSummary_MetricReferences:
+			return deserializeMetricReferences(d, schemas.ServiceSummary_MetricReferences, &v.MetricReferences)
+		case schemas.ServiceSummary_ServiceGroups:
+			return deserializeServiceGroups(d, schemas.ServiceSummary_ServiceGroups, &v.ServiceGroups)
+		}
+		return nil
+	})
+}
+
 // A key-value pair associated with a resource. Tags can help you organize and
 // categorize your resources.
 type Tag struct {
@@ -2398,6 +5135,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A status event that could not be processed by the service.
@@ -2437,6 +5202,74 @@ type UnprocessedStatusEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnprocessedStatusEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessedStatusEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessedStatusEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailedReason != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_FailedReason, string(v.FailedReason))
+	}
+	if v.InstrumentationType != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_InstrumentationType, string(v.InstrumentationType))
+	}
+	if v.LocationHash != nil {
+		s.WriteString(schemas.UnprocessedStatusEvent_LocationHash, *v.LocationHash)
+	}
+	if v.SignalType != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_SignalType, string(v.SignalType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UnprocessedStatusEvent_Status, string(v.Status))
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.UnprocessedStatusEvent_Time, *v.Time)
+	}
+}
+func (v *UnprocessedStatusEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessedStatusEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessedStatusEvent_FailedReason:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_FailedReason, &ev); err != nil {
+				return err
+			}
+			v.FailedReason = UnprocessedStatusEventFailureReason(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_InstrumentationType:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_InstrumentationType, &ev); err != nil {
+				return err
+			}
+			v.InstrumentationType = InstrumentationType(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_LocationHash:
+			v.LocationHash = new(string)
+			return d.ReadString(schemas.UnprocessedStatusEvent_LocationHash, v.LocationHash)
+		case schemas.UnprocessedStatusEvent_SignalType:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_SignalType, &ev); err != nil {
+				return err
+			}
+			v.SignalType = DynamicInstrumentationSignalType(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_Status:
+			var ev string
+			if err := d.ReadString(schemas.UnprocessedStatusEvent_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstrumentationConfigurationStatus(ev)
+			return nil
+		case schemas.UnprocessedStatusEvent_Time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.UnprocessedStatusEvent_Time, v.Time)
+		}
+		return nil
+	})
+}
+
 // The object that defines the time length of an exclusion window.
 type Window struct {
 
@@ -2452,6 +5285,38 @@ type Window struct {
 	DurationUnit DurationUnit
 
 	noSmithyDocumentSerde
+}
+
+func (v *Window) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Window)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Window) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteInt32(schemas.Window_Duration, *v.Duration)
+	}
+	if v.DurationUnit != "" {
+		s.WriteString(schemas.Window_DurationUnit, string(v.DurationUnit))
+	}
+}
+func (v *Window) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Window, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Window_Duration:
+			v.Duration = new(int32)
+			return d.ReadInt32(schemas.Window_Duration, v.Duration)
+		case schemas.Window_DurationUnit:
+			var ev string
+			if err := d.ReadString(schemas.Window_DurationUnit, &ev); err != nil {
+				return err
+			}
+			v.DurationUnit = DurationUnit(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

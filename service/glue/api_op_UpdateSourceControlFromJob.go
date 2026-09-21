@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,42 @@ type UpdateSourceControlFromJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSourceControlFromJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSourceControlFromJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSourceControlFromJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthStrategy != "" {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_AuthStrategy, string(v.AuthStrategy))
+	}
+	if v.AuthToken != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_AuthToken, *v.AuthToken)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_BranchName, *v.BranchName)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_CommitId, *v.CommitId)
+	}
+	if v.Folder != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_Folder, *v.Folder)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_JobName, *v.JobName)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_Provider, string(v.Provider))
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_RepositoryName, *v.RepositoryName)
+	}
+	if v.RepositoryOwner != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobRequest_RepositoryOwner, *v.RepositoryOwner)
+	}
+}
+
 type UpdateSourceControlFromJobOutput struct {
 
 	// The name of the Glue job.
@@ -75,13 +113,32 @@ type UpdateSourceControlFromJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSourceControlFromJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSourceControlFromJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSourceControlFromJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.UpdateSourceControlFromJobResponse_JobName, *v.JobName)
+	}
+}
+func (v *UpdateSourceControlFromJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSourceControlFromJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSourceControlFromJobResponse_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.UpdateSourceControlFromJobResponse_JobName, v.JobName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSourceControlFromJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSourceControlFromJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSourceControlFromJob, schemas.UpdateSourceControlFromJobRequest, schemas.UpdateSourceControlFromJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSourceControlFromJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSourceControlFromJob, schemas.UpdateSourceControlFromJobRequest, schemas.UpdateSourceControlFromJobResponse), output: &UpdateSourceControlFromJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

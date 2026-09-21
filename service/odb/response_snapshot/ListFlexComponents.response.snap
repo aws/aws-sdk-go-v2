@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.ListFlexComponents
+
+{"flexComponents":[{"availableCoreCount":1,"availableDbStorageInGBs":1,"availableLocalStorageInGBs":1,"availableMemoryInGBs":1,"computeModel":"ECPU","descriptionSummary":"__DescriptionSummary__","hardwareType":"COMPUTE","minimumCoreCount":1,"name":"__Name__","runtimeMinimumCoreCount":1,"shape":"__Shape__"},{"availableCoreCount":1,"availableDbStorageInGBs":1,"availableLocalStorageInGBs":1,"availableMemoryInGBs":1,"computeModel":"ECPU","descriptionSummary":"__DescriptionSummary__","hardwareType":"COMPUTE","minimumCoreCount":1,"name":"__Name__","runtimeMinimumCoreCount":1,"shape":"__Shape__"}],"nextToken":"__NextToken__"}

@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,23 @@ type UpdateDataSetPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSetPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSetPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSetPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDataSetPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateDataSetPermissionsRequest_DataSetId, *v.DataSetId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateDataSetPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeResourcePermissionList(s, schemas.UpdateDataSetPermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateDataSetPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset.
@@ -70,13 +89,49 @@ type UpdateDataSetPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSetPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSetPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSetPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetArn != nil {
+		s.WriteString(schemas.UpdateDataSetPermissionsResponse_DataSetArn, *v.DataSetArn)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateDataSetPermissionsResponse_DataSetId, *v.DataSetId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDataSetPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDataSetPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *UpdateDataSetPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSetPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSetPermissionsResponse_DataSetArn:
+			v.DataSetArn = new(string)
+			return d.ReadString(schemas.UpdateDataSetPermissionsResponse_DataSetArn, v.DataSetArn)
+		case schemas.UpdateDataSetPermissionsResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateDataSetPermissionsResponse_DataSetId, v.DataSetId)
+		case schemas.UpdateDataSetPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDataSetPermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateDataSetPermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateDataSetPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSetPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSetPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSetPermissions, schemas.UpdateDataSetPermissionsRequest, schemas.UpdateDataSetPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSetPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSetPermissions, schemas.UpdateDataSetPermissionsRequest, schemas.UpdateDataSetPermissionsResponse), output: &UpdateDataSetPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

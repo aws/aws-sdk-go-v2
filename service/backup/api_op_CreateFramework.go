@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,26 @@ type CreateFrameworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFrameworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFrameworkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFrameworkControls(s, schemas.CreateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkDescription != nil {
+		s.WriteString(schemas.CreateFrameworkInput_FrameworkDescription, *v.FrameworkDescription)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.CreateFrameworkInput_FrameworkName, *v.FrameworkName)
+	}
+	serializestringMap(s, schemas.CreateFrameworkInput_FrameworkTags, v.FrameworkTags)
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateFrameworkInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+}
+
 type CreateFrameworkOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
@@ -75,13 +97,38 @@ type CreateFrameworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFrameworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFrameworkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFrameworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameworkArn != nil {
+		s.WriteString(schemas.CreateFrameworkOutput_FrameworkArn, *v.FrameworkArn)
+	}
+	if v.FrameworkName != nil {
+		s.WriteString(schemas.CreateFrameworkOutput_FrameworkName, *v.FrameworkName)
+	}
+}
+func (v *CreateFrameworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFrameworkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFrameworkOutput_FrameworkArn:
+			v.FrameworkArn = new(string)
+			return d.ReadString(schemas.CreateFrameworkOutput_FrameworkArn, v.FrameworkArn)
+		case schemas.CreateFrameworkOutput_FrameworkName:
+			v.FrameworkName = new(string)
+			return d.ReadString(schemas.CreateFrameworkOutput_FrameworkName, v.FrameworkName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFramework, schemas.CreateFrameworkInput, schemas.CreateFrameworkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFramework{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFramework, schemas.CreateFrameworkInput, schemas.CreateFrameworkOutput), output: &CreateFrameworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

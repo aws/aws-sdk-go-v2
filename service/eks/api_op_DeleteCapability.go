@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type DeleteCapabilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCapabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCapabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityName != nil {
+		s.WriteString(schemas.DeleteCapabilityRequest_capabilityName, *v.CapabilityName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DeleteCapabilityRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DeleteCapabilityOutput struct {
 
 	// An object containing information about the deleted capability, including its
@@ -60,13 +77,34 @@ type DeleteCapabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCapabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCapabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capability != nil {
+		s.WriteStruct(schemas.DeleteCapabilityResponse_capability)
+		v.Capability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCapabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCapabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCapabilityResponse_capability:
+			v.Capability = &types.Capability{}
+			return v.Capability.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCapabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCapability, schemas.DeleteCapabilityRequest, schemas.DeleteCapabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCapability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCapability, schemas.DeleteCapabilityRequest, schemas.DeleteCapabilityResponse), output: &DeleteCapabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

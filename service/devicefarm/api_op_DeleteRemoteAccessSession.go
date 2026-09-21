@@ -4,6 +4,8 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRemoteAccessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRemoteAccessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRemoteAccessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteRemoteAccessSessionRequest_arn, *v.Arn)
+	}
+}
+
 // The response from the server when a request is made to delete the remote access
 // session.
 type DeleteRemoteAccessSessionOutput struct {
@@ -47,13 +61,26 @@ type DeleteRemoteAccessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRemoteAccessSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRemoteAccessSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRemoteAccessSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRemoteAccessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRemoteAccessSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRemoteAccessSession, schemas.DeleteRemoteAccessSessionRequest, schemas.DeleteRemoteAccessSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRemoteAccessSession, schemas.DeleteRemoteAccessSessionRequest, schemas.DeleteRemoteAccessSessionResult), output: &DeleteRemoteAccessSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

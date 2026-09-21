@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeTemplatePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplatePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplatePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplatePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeTemplatePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DescribeTemplatePermissionsRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type DescribeTemplatePermissionsOutput struct {
 
 	// A list of resource permissions to be set on the template.
@@ -63,13 +80,52 @@ type DescribeTemplatePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplatePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplatePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplatePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateResourcePermissionList(s, schemas.DescribeTemplatePermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeTemplatePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeTemplatePermissionsResponse_Status, v.Status)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.DescribeTemplatePermissionsResponse_TemplateArn, *v.TemplateArn)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DescribeTemplatePermissionsResponse_TemplateId, *v.TemplateId)
+	}
+}
+func (v *DescribeTemplatePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTemplatePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTemplatePermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.DescribeTemplatePermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeTemplatePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeTemplatePermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeTemplatePermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeTemplatePermissionsResponse_Status, &v.Status)
+		case schemas.DescribeTemplatePermissionsResponse_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.DescribeTemplatePermissionsResponse_TemplateArn, v.TemplateArn)
+		case schemas.DescribeTemplatePermissionsResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.DescribeTemplatePermissionsResponse_TemplateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTemplatePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplatePermissions, schemas.DescribeTemplatePermissionsRequest, schemas.DescribeTemplatePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTemplatePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplatePermissions, schemas.DescribeTemplatePermissionsRequest, schemas.DescribeTemplatePermissionsResponse), output: &DescribeTemplatePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

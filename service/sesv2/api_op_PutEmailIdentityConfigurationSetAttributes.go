@@ -4,6 +4,8 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type PutEmailIdentityConfigurationSetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityConfigurationSetAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityConfigurationSetAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityConfigurationSetAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.PutEmailIdentityConfigurationSetAttributesRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.PutEmailIdentityConfigurationSetAttributesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type PutEmailIdentityConfigurationSetAttributesOutput struct {
@@ -46,13 +63,26 @@ type PutEmailIdentityConfigurationSetAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityConfigurationSetAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityConfigurationSetAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityConfigurationSetAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutEmailIdentityConfigurationSetAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEmailIdentityConfigurationSetAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEmailIdentityConfigurationSetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityConfigurationSetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityConfigurationSetAttributes, schemas.PutEmailIdentityConfigurationSetAttributesRequest, schemas.PutEmailIdentityConfigurationSetAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEmailIdentityConfigurationSetAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityConfigurationSetAttributes, schemas.PutEmailIdentityConfigurationSetAttributesRequest, schemas.PutEmailIdentityConfigurationSetAttributesResponse), output: &PutEmailIdentityConfigurationSetAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

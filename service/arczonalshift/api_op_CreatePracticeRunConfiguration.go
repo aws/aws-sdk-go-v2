@@ -4,7 +4,9 @@ package arczonalshift
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -129,6 +131,23 @@ type CreatePracticeRunConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePracticeRunConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePracticeRunConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePracticeRunConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedWindows(s, schemas.CreatePracticeRunConfigurationRequest_allowedWindows, v.AllowedWindows)
+	serializeBlockedDates(s, schemas.CreatePracticeRunConfigurationRequest_blockedDates, v.BlockedDates)
+	serializeBlockedWindows(s, schemas.CreatePracticeRunConfigurationRequest_blockedWindows, v.BlockedWindows)
+	serializeBlockingAlarms(s, schemas.CreatePracticeRunConfigurationRequest_blockingAlarms, v.BlockingAlarms)
+	serializeOutcomeAlarms(s, schemas.CreatePracticeRunConfigurationRequest_outcomeAlarms, v.OutcomeAlarms)
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreatePracticeRunConfigurationRequest_resourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+
 type CreatePracticeRunConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you configured the practice
@@ -167,13 +186,56 @@ type CreatePracticeRunConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePracticeRunConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePracticeRunConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePracticeRunConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePracticeRunConfigurationResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePracticeRunConfigurationResponse_name, *v.Name)
+	}
+	if v.PracticeRunConfiguration != nil {
+		s.WriteStruct(schemas.CreatePracticeRunConfigurationResponse_practiceRunConfiguration)
+		v.PracticeRunConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ZonalAutoshiftStatus != "" {
+		s.WriteString(schemas.CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
+	}
+}
+func (v *CreatePracticeRunConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePracticeRunConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePracticeRunConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePracticeRunConfigurationResponse_arn, v.Arn)
+		case schemas.CreatePracticeRunConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePracticeRunConfigurationResponse_name, v.Name)
+		case schemas.CreatePracticeRunConfigurationResponse_practiceRunConfiguration:
+			v.PracticeRunConfiguration = &types.PracticeRunConfiguration{}
+			return v.PracticeRunConfiguration.Deserialize(d)
+		case schemas.CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus, &ev); err != nil {
+				return err
+			}
+			v.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePracticeRunConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePracticeRunConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePracticeRunConfiguration, schemas.CreatePracticeRunConfigurationRequest, schemas.CreatePracticeRunConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePracticeRunConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePracticeRunConfiguration, schemas.CreatePracticeRunConfigurationRequest, schemas.CreatePracticeRunConfigurationResponse), output: &CreatePracticeRunConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

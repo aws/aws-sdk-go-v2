@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,27 @@ type GetSessionEmbedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEmbedUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEmbedUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEmbedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.EntryPoint != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlRequest_EntryPoint, *v.EntryPoint)
+	}
+	if v.SessionLifetimeInMinutes != nil {
+		s.WriteInt64(schemas.GetSessionEmbedUrlRequest_SessionLifetimeInMinutes, *v.SessionLifetimeInMinutes)
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlRequest_UserArn, *v.UserArn)
+	}
+}
+
 type GetSessionEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side web page to embed your
@@ -109,13 +132,43 @@ type GetSessionEmbedUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEmbedUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEmbedUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEmbedUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmbedUrl != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlResponse_EmbedUrl, *v.EmbedUrl)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetSessionEmbedUrlResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.GetSessionEmbedUrlResponse_Status, v.Status)
+	}
+}
+func (v *GetSessionEmbedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionEmbedUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionEmbedUrlResponse_EmbedUrl:
+			v.EmbedUrl = new(string)
+			return d.ReadString(schemas.GetSessionEmbedUrlResponse_EmbedUrl, v.EmbedUrl)
+		case schemas.GetSessionEmbedUrlResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetSessionEmbedUrlResponse_RequestId, v.RequestId)
+		case schemas.GetSessionEmbedUrlResponse_Status:
+			return d.ReadInt32(schemas.GetSessionEmbedUrlResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionEmbedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEmbedUrl, schemas.GetSessionEmbedUrlRequest, schemas.GetSessionEmbedUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionEmbedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEmbedUrl, schemas.GetSessionEmbedUrlRequest, schemas.GetSessionEmbedUrlResponse), output: &GetSessionEmbedUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

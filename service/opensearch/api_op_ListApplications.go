@@ -5,7 +5,9 @@ package opensearch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListApplicationsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsRequest_nextToken, *v.NextToken)
+	}
+	serializeApplicationStatuses(s, schemas.ListApplicationsRequest_statuses, v.Statuses)
+}
+
 type ListApplicationsOutput struct {
 
 	// Summarizes OpenSearch applications, including ID, ARN, name, endpoint, status,
@@ -60,13 +78,35 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationSummaries(s, schemas.ListApplicationsResponse_ApplicationSummaries, v.ApplicationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationsResponse_ApplicationSummaries:
+			return deserializeApplicationSummaries(d, schemas.ListApplicationsResponse_ApplicationSummaries, &v.ApplicationSummaries)
+		case schemas.ListApplicationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsRequest, schemas.ListApplicationsResponse), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

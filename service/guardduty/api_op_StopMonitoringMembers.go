@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,19 @@ type StopMonitoringMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMonitoringMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMonitoringMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMonitoringMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.StopMonitoringMembersRequest_AccountIds, v.AccountIds)
+	if v.DetectorId != nil {
+		s.WriteString(schemas.StopMonitoringMembersRequest_DetectorId, *v.DetectorId)
+	}
+}
+
 type StopMonitoringMembersOutput struct {
 
 	// A list of objects that contain an accountId for each account that could not be
@@ -64,13 +79,29 @@ type StopMonitoringMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMonitoringMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMonitoringMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMonitoringMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedAccounts(s, schemas.StopMonitoringMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *StopMonitoringMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMonitoringMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMonitoringMembersResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccounts(d, schemas.StopMonitoringMembersResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMonitoringMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopMonitoringMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMonitoringMembers, schemas.StopMonitoringMembersRequest, schemas.StopMonitoringMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopMonitoringMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMonitoringMembers, schemas.StopMonitoringMembersRequest, schemas.StopMonitoringMembersResponse), output: &StopMonitoringMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

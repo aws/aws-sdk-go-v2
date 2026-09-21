@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type GetPartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetPartitionRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetPartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetPartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializeValueStringList(s, schemas.GetPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.TableName != nil {
+		s.WriteString(schemas.GetPartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type GetPartitionOutput struct {
 
 	// The requested information, in the form of a Partition object.
@@ -62,13 +88,34 @@ type GetPartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Partition != nil {
+		s.WriteStruct(schemas.GetPartitionResponse_Partition)
+		v.Partition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPartitionResponse_Partition:
+			v.Partition = &types.Partition{}
+			return v.Partition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartition, schemas.GetPartitionRequest, schemas.GetPartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPartition, schemas.GetPartitionRequest, schemas.GetPartitionResponse), output: &GetPartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

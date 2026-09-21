@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -69,6 +71,25 @@ type DescribeExtensionPackAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExtensionPackAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExtensionPackAssociationsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExtensionPackAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeExtensionPackAssociationsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeExtensionPackAssociationsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeExtensionPackAssociationsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeExtensionPackAssociationsMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type DescribeExtensionPackAssociationsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -92,13 +113,35 @@ type DescribeExtensionPackAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExtensionPackAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExtensionPackAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExtensionPackAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeExtensionPackAssociationsResponse_Marker, *v.Marker)
+	}
+	serializeSchemaConversionRequestList(s, schemas.DescribeExtensionPackAssociationsResponse_Requests, v.Requests)
+}
+func (v *DescribeExtensionPackAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExtensionPackAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExtensionPackAssociationsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeExtensionPackAssociationsResponse_Marker, v.Marker)
+		case schemas.DescribeExtensionPackAssociationsResponse_Requests:
+			return deserializeSchemaConversionRequestList(d, schemas.DescribeExtensionPackAssociationsResponse_Requests, &v.Requests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExtensionPackAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExtensionPackAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExtensionPackAssociations, schemas.DescribeExtensionPackAssociationsMessage, schemas.DescribeExtensionPackAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExtensionPackAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExtensionPackAssociations, schemas.DescribeExtensionPackAssociationsMessage, schemas.DescribeExtensionPackAssociationsResponse), output: &DescribeExtensionPackAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

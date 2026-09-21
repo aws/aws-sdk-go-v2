@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetBackupVaultNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupVaultNotificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupVaultNotificationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupVaultNotificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetBackupVaultNotificationsInput_BackupVaultName, *v.BackupVaultName)
+	}
+}
+
 type GetBackupVaultNotificationsOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
@@ -61,13 +75,47 @@ type GetBackupVaultNotificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupVaultNotificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupVaultNotificationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupVaultNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.GetBackupVaultNotificationsOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	serializeBackupVaultEvents(s, schemas.GetBackupVaultNotificationsOutput_BackupVaultEvents, v.BackupVaultEvents)
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetBackupVaultNotificationsOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.SNSTopicArn != nil {
+		s.WriteString(schemas.GetBackupVaultNotificationsOutput_SNSTopicArn, *v.SNSTopicArn)
+	}
+}
+func (v *GetBackupVaultNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackupVaultNotificationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackupVaultNotificationsOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.GetBackupVaultNotificationsOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.GetBackupVaultNotificationsOutput_BackupVaultEvents:
+			return deserializeBackupVaultEvents(d, schemas.GetBackupVaultNotificationsOutput_BackupVaultEvents, &v.BackupVaultEvents)
+		case schemas.GetBackupVaultNotificationsOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.GetBackupVaultNotificationsOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.GetBackupVaultNotificationsOutput_SNSTopicArn:
+			v.SNSTopicArn = new(string)
+			return d.ReadString(schemas.GetBackupVaultNotificationsOutput_SNSTopicArn, v.SNSTopicArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupVaultNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupVaultNotifications, schemas.GetBackupVaultNotificationsInput, schemas.GetBackupVaultNotificationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackupVaultNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupVaultNotifications, schemas.GetBackupVaultNotificationsInput, schemas.GetBackupVaultNotificationsOutput), output: &GetBackupVaultNotificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

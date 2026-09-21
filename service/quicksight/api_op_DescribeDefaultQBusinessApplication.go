@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeDefaultQBusinessApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultQBusinessApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultQBusinessApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultQBusinessApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDefaultQBusinessApplicationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DescribeDefaultQBusinessApplicationRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DescribeDefaultQBusinessApplicationOutput struct {
 
 	// The ID of the Amazon Q Business application that is linked to the Quick Sight
@@ -58,13 +75,43 @@ type DescribeDefaultQBusinessApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDefaultQBusinessApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDefaultQBusinessApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDefaultQBusinessApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DescribeDefaultQBusinessApplicationResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDefaultQBusinessApplicationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDefaultQBusinessApplicationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDefaultQBusinessApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDefaultQBusinessApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDefaultQBusinessApplicationResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.DescribeDefaultQBusinessApplicationResponse_ApplicationId, v.ApplicationId)
+		case schemas.DescribeDefaultQBusinessApplicationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDefaultQBusinessApplicationResponse_RequestId, v.RequestId)
+		case schemas.DescribeDefaultQBusinessApplicationResponse_Status:
+			return d.ReadInt32(schemas.DescribeDefaultQBusinessApplicationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDefaultQBusinessApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDefaultQBusinessApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultQBusinessApplication, schemas.DescribeDefaultQBusinessApplicationRequest, schemas.DescribeDefaultQBusinessApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDefaultQBusinessApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDefaultQBusinessApplication, schemas.DescribeDefaultQBusinessApplicationRequest, schemas.DescribeDefaultQBusinessApplicationResponse), output: &DescribeDefaultQBusinessApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

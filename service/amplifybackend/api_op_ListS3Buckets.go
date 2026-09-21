@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type ListS3BucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListS3BucketsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListS3BucketsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListS3BucketsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListS3BucketsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListS3BucketsOutput struct {
 
 	// The list of S3 buckets.
@@ -47,13 +61,35 @@ type ListS3BucketsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListS3BucketsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListS3BucketsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListS3BucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfS3BucketInfo(s, schemas.ListS3BucketsResponse_Buckets, v.Buckets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListS3BucketsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListS3BucketsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListS3BucketsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListS3BucketsResponse_Buckets:
+			return deserializeListOfS3BucketInfo(d, schemas.ListS3BucketsResponse_Buckets, &v.Buckets)
+		case schemas.ListS3BucketsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListS3BucketsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListS3BucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListS3Buckets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListS3Buckets, schemas.ListS3BucketsRequest, schemas.ListS3BucketsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListS3Buckets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListS3Buckets, schemas.ListS3BucketsRequest, schemas.ListS3BucketsResponse), output: &ListS3BucketsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

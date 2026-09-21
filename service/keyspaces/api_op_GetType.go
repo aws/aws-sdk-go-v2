@@ -4,7 +4,9 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,21 @@ type GetTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetTypeRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.GetTypeRequest_typeName, *v.TypeName)
+	}
+}
+
 type GetTypeOutput struct {
 
 	//  The unique identifier of the keyspace that contains this type in the format of
@@ -95,13 +112,74 @@ type GetTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTypeNameList(s, schemas.GetTypeResponse_directParentTypes, v.DirectParentTypes)
+	serializeTableNameList(s, schemas.GetTypeResponse_directReferringTables, v.DirectReferringTables)
+	serializeFieldList(s, schemas.GetTypeResponse_fieldDefinitions, v.FieldDefinitions)
+	if v.KeyspaceArn != nil {
+		s.WriteString(schemas.GetTypeResponse_keyspaceArn, *v.KeyspaceArn)
+	}
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetTypeResponse_keyspaceName, *v.KeyspaceName)
+	}
+	if v.LastModifiedTimestamp != nil {
+		s.WriteTime(schemas.GetTypeResponse_lastModifiedTimestamp, *v.LastModifiedTimestamp)
+	}
+	if v.MaxNestingDepth != 0 {
+		s.WriteInt32(schemas.GetTypeResponse_maxNestingDepth, v.MaxNestingDepth)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTypeResponse_status, string(v.Status))
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.GetTypeResponse_typeName, *v.TypeName)
+	}
+}
+func (v *GetTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTypeResponse_directParentTypes:
+			return deserializeTypeNameList(d, schemas.GetTypeResponse_directParentTypes, &v.DirectParentTypes)
+		case schemas.GetTypeResponse_directReferringTables:
+			return deserializeTableNameList(d, schemas.GetTypeResponse_directReferringTables, &v.DirectReferringTables)
+		case schemas.GetTypeResponse_fieldDefinitions:
+			return deserializeFieldList(d, schemas.GetTypeResponse_fieldDefinitions, &v.FieldDefinitions)
+		case schemas.GetTypeResponse_keyspaceArn:
+			v.KeyspaceArn = new(string)
+			return d.ReadString(schemas.GetTypeResponse_keyspaceArn, v.KeyspaceArn)
+		case schemas.GetTypeResponse_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.GetTypeResponse_keyspaceName, v.KeyspaceName)
+		case schemas.GetTypeResponse_lastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetTypeResponse_lastModifiedTimestamp, v.LastModifiedTimestamp)
+		case schemas.GetTypeResponse_maxNestingDepth:
+			return d.ReadInt32(schemas.GetTypeResponse_maxNestingDepth, &v.MaxNestingDepth)
+		case schemas.GetTypeResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetTypeResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TypeStatus(ev)
+			return nil
+		case schemas.GetTypeResponse_typeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.GetTypeResponse_typeName, v.TypeName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetType, schemas.GetTypeRequest, schemas.GetTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetType, schemas.GetTypeRequest, schemas.GetTypeResponse), output: &GetTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

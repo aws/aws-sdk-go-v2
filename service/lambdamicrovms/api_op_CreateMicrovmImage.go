@@ -5,7 +5,9 @@ package lambdamicrovms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,46 @@ type CreateMicrovmImageInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateMicrovmImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMicrovmImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMicrovmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.CreateMicrovmImageRequest_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	if v.BaseImageArn != nil {
+		s.WriteString(schemas.CreateMicrovmImageRequest_baseImageArn, *v.BaseImageArn)
+	}
+	if v.BaseImageVersion != nil {
+		s.WriteString(schemas.CreateMicrovmImageRequest_baseImageVersion, *v.BaseImageVersion)
+	}
+	if v.BuildRoleArn != nil {
+		s.WriteString(schemas.CreateMicrovmImageRequest_buildRoleArn, *v.BuildRoleArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMicrovmImageRequest_clientToken, *v.ClientToken)
+	}
+	serializeCodeArtifact(s, schemas.CreateMicrovmImageRequest_codeArtifact, v.CodeArtifact)
+	serializeCpuConfigurationList(s, schemas.CreateMicrovmImageRequest_cpuConfigurations, v.CpuConfigurations)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMicrovmImageRequest_description, *v.Description)
+	}
+	serializeNetworkConnectorList(s, schemas.CreateMicrovmImageRequest_egressNetworkConnectors, v.EgressNetworkConnectors)
+	serializeEnvironmentVariableMap(s, schemas.CreateMicrovmImageRequest_environmentVariables, v.EnvironmentVariables)
+	if v.Hooks != nil {
+		s.WriteStruct(schemas.CreateMicrovmImageRequest_hooks)
+		v.Hooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLogging(s, schemas.CreateMicrovmImageRequest_logging, v.Logging)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMicrovmImageRequest_name, *v.Name)
+	}
+	serializeResourcesList(s, schemas.CreateMicrovmImageRequest_resources, v.Resources)
+	serializeTags(s, schemas.CreateMicrovmImageRequest_tags, v.Tags)
 }
 
 type CreateMicrovmImageOutput struct {
@@ -189,13 +231,134 @@ type CreateMicrovmImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMicrovmImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMicrovmImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.CreateMicrovmImageResponse_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	if v.BaseImageArn != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_baseImageArn, *v.BaseImageArn)
+	}
+	if v.BaseImageVersion != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_baseImageVersion, *v.BaseImageVersion)
+	}
+	if v.BuildRoleArn != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_buildRoleArn, *v.BuildRoleArn)
+	}
+	serializeCodeArtifact(s, schemas.CreateMicrovmImageResponse_codeArtifact, v.CodeArtifact)
+	serializeCpuConfigurationList(s, schemas.CreateMicrovmImageResponse_cpuConfigurations, v.CpuConfigurations)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateMicrovmImageResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_description, *v.Description)
+	}
+	serializeNetworkConnectorList(s, schemas.CreateMicrovmImageResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	serializeEnvironmentVariableMap(s, schemas.CreateMicrovmImageResponse_environmentVariables, v.EnvironmentVariables)
+	if v.Hooks != nil {
+		s.WriteStruct(schemas.CreateMicrovmImageResponse_hooks)
+		v.Hooks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_imageArn, *v.ImageArn)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_imageVersion, *v.ImageVersion)
+	}
+	if v.LatestActiveImageVersion != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_latestActiveImageVersion, *v.LatestActiveImageVersion)
+	}
+	if v.LatestFailedImageVersion != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_latestFailedImageVersion, *v.LatestFailedImageVersion)
+	}
+	serializeLogging(s, schemas.CreateMicrovmImageResponse_logging, v.Logging)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMicrovmImageResponse_name, *v.Name)
+	}
+	serializeResourcesList(s, schemas.CreateMicrovmImageResponse_resources, v.Resources)
+	if v.State != "" {
+		s.WriteString(schemas.CreateMicrovmImageResponse_state, string(v.State))
+	}
+	serializeTags(s, schemas.CreateMicrovmImageResponse_tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateMicrovmImageResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateMicrovmImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMicrovmImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMicrovmImageResponse_additionalOsCapabilities:
+			return deserializeCapabilityList(d, schemas.CreateMicrovmImageResponse_additionalOsCapabilities, &v.AdditionalOsCapabilities)
+		case schemas.CreateMicrovmImageResponse_baseImageArn:
+			v.BaseImageArn = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_baseImageArn, v.BaseImageArn)
+		case schemas.CreateMicrovmImageResponse_baseImageVersion:
+			v.BaseImageVersion = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_baseImageVersion, v.BaseImageVersion)
+		case schemas.CreateMicrovmImageResponse_buildRoleArn:
+			v.BuildRoleArn = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_buildRoleArn, v.BuildRoleArn)
+		case schemas.CreateMicrovmImageResponse_codeArtifact:
+			return deserializeCodeArtifact(d, schemas.CreateMicrovmImageResponse_codeArtifact, &v.CodeArtifact)
+		case schemas.CreateMicrovmImageResponse_cpuConfigurations:
+			return deserializeCpuConfigurationList(d, schemas.CreateMicrovmImageResponse_cpuConfigurations, &v.CpuConfigurations)
+		case schemas.CreateMicrovmImageResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateMicrovmImageResponse_createdAt, v.CreatedAt)
+		case schemas.CreateMicrovmImageResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_description, v.Description)
+		case schemas.CreateMicrovmImageResponse_egressNetworkConnectors:
+			return deserializeNetworkConnectorList(d, schemas.CreateMicrovmImageResponse_egressNetworkConnectors, &v.EgressNetworkConnectors)
+		case schemas.CreateMicrovmImageResponse_environmentVariables:
+			return deserializeEnvironmentVariableMap(d, schemas.CreateMicrovmImageResponse_environmentVariables, &v.EnvironmentVariables)
+		case schemas.CreateMicrovmImageResponse_hooks:
+			v.Hooks = &types.Hooks{}
+			return v.Hooks.Deserialize(d)
+		case schemas.CreateMicrovmImageResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_imageArn, v.ImageArn)
+		case schemas.CreateMicrovmImageResponse_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_imageVersion, v.ImageVersion)
+		case schemas.CreateMicrovmImageResponse_latestActiveImageVersion:
+			v.LatestActiveImageVersion = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_latestActiveImageVersion, v.LatestActiveImageVersion)
+		case schemas.CreateMicrovmImageResponse_latestFailedImageVersion:
+			v.LatestFailedImageVersion = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_latestFailedImageVersion, v.LatestFailedImageVersion)
+		case schemas.CreateMicrovmImageResponse_logging:
+			return deserializeLogging(d, schemas.CreateMicrovmImageResponse_logging, &v.Logging)
+		case schemas.CreateMicrovmImageResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateMicrovmImageResponse_name, v.Name)
+		case schemas.CreateMicrovmImageResponse_resources:
+			return deserializeResourcesList(d, schemas.CreateMicrovmImageResponse_resources, &v.Resources)
+		case schemas.CreateMicrovmImageResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CreateMicrovmImageResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.MicrovmImageState(ev)
+			return nil
+		case schemas.CreateMicrovmImageResponse_tags:
+			return deserializeTags(d, schemas.CreateMicrovmImageResponse_tags, &v.Tags)
+		case schemas.CreateMicrovmImageResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateMicrovmImageResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMicrovmImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMicrovmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrovmImage, schemas.CreateMicrovmImageRequest, schemas.CreateMicrovmImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMicrovmImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrovmImage, schemas.CreateMicrovmImageRequest, schemas.CreateMicrovmImageResponse), output: &CreateMicrovmImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"identityProviderConfigs":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"nextToken":"__NextToken__"}

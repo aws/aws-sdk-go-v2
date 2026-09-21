@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.GetVerification
+
+{"CompletedAt":"2000-01-01T00:00:00Z","StartedAt":"2000-01-01T00:00:00Z","VerificationResponseDetails":{"BusinessVerificationResponse":{"BusinessVerificationDetails":{"CountryCode":"__CountryCode__","JurisdictionOfIncorporation":"__JurisdictionOfIncorporation__","LegalName":"__LegalName__","RegistrationId":"__RegistrationId__"},"CompletionUrl":"__CompletionUrl__","CompletionUrlExpiresAt":"2000-01-01T00:00:00Z"}},"VerificationStatus":"PENDING_CUSTOMER_ACTION","VerificationStatusReason":"__VerificationStatusReason__","VerificationType":"BUSINESS_VERIFICATION"}

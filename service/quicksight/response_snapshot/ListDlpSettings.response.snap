@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DlpSettingSummaries":[{"Arn":"__Arn__","CreatedAt":946684800,"DlpSettingId":"__DlpSettingId__","Name":"__Name__","ProviderType":"MICROSOFT_PURVIEW","Status":"ACTIVE","UpdatedAt":946684800},{"Arn":"__Arn__","CreatedAt":946684800,"DlpSettingId":"__DlpSettingId__","Name":"__Name__","ProviderType":"MICROSOFT_PURVIEW","Status":"ACTIVE","UpdatedAt":946684800}],"NextToken":"__NextToken__","RequestId":"__RequestId__"}

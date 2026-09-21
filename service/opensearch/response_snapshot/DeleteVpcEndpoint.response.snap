@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VpcEndpointSummary":{"DomainArn":"__DomainArn__","Status":"CREATING","VpcEndpointId":"__VpcEndpointId__","VpcEndpointOwner":"__VpcEndpointOwner__"}}

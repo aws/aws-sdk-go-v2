@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListDbNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbNodesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmClusterId != nil {
+		s.WriteString(schemas.ListDbNodesInput_cloudVmClusterId, *v.CloudVmClusterId)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.ListDbNodesInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDbNodesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbNodesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListDbNodesOutput struct {
 
 	// The list of DB nodes along with their properties.
@@ -65,13 +88,35 @@ type ListDbNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbNodesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDbNodeList(s, schemas.ListDbNodesOutput_dbNodes, v.DbNodes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbNodesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDbNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDbNodesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDbNodesOutput_dbNodes:
+			return deserializeDbNodeList(d, schemas.ListDbNodesOutput_dbNodes, &v.DbNodes)
+		case schemas.ListDbNodesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDbNodesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDbNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbNodes, schemas.ListDbNodesInput, schemas.ListDbNodesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbNodes, schemas.ListDbNodesInput, schemas.ListDbNodesOutput), output: &ListDbNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

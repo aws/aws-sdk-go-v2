@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -55,6 +57,44 @@ type AutoshiftInResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoshiftInResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoshiftInResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoshiftInResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppliedStatus != "" {
+		s.WriteString(schemas.AutoshiftInResource_appliedStatus, string(v.AppliedStatus))
+	}
+	if v.AwayFrom != nil {
+		s.WriteString(schemas.AutoshiftInResource_awayFrom, *v.AwayFrom)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AutoshiftInResource_startTime, *v.StartTime)
+	}
+}
+func (v *AutoshiftInResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoshiftInResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoshiftInResource_appliedStatus:
+			var ev string
+			if err := d.ReadString(schemas.AutoshiftInResource_appliedStatus, &ev); err != nil {
+				return err
+			}
+			v.AppliedStatus = AutoshiftAppliedStatus(ev)
+			return nil
+		case schemas.AutoshiftInResource_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.AutoshiftInResource_awayFrom, v.AwayFrom)
+		case schemas.AutoshiftInResource_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AutoshiftInResource_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Information about an autoshift. Amazon Web Services starts an autoshift to
 // temporarily move traffic for a resource away from an Availability Zone in an
 // Amazon Web Services Region when Amazon Web Services determines that there's an
@@ -96,6 +136,50 @@ type AutoshiftSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoshiftSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoshiftSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoshiftSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwayFrom != nil {
+		s.WriteString(schemas.AutoshiftSummary_awayFrom, *v.AwayFrom)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AutoshiftSummary_endTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AutoshiftSummary_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutoshiftSummary_status, string(v.Status))
+	}
+}
+func (v *AutoshiftSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoshiftSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoshiftSummary_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.AutoshiftSummary_awayFrom, v.AwayFrom)
+		case schemas.AutoshiftSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AutoshiftSummary_endTime, v.EndTime)
+		case schemas.AutoshiftSummary_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AutoshiftSummary_startTime, v.StartTime)
+		case schemas.AutoshiftSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AutoshiftSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutoshiftExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A control condition is an alarm that you specify for a practice run. When you
 // configure practice runs with zonal autoshift for a resource, you specify Amazon
 // CloudWatch alarms, which you create in CloudWatch to use with the practice run.
@@ -124,6 +208,38 @@ type ControlCondition struct {
 	Type ControlConditionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ControlCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmIdentifier != nil {
+		s.WriteString(schemas.ControlCondition_alarmIdentifier, *v.AlarmIdentifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ControlCondition_type, string(v.Type))
+	}
+}
+func (v *ControlCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlCondition_alarmIdentifier:
+			v.AlarmIdentifier = new(string)
+			return d.ReadString(schemas.ControlCondition_alarmIdentifier, v.AlarmIdentifier)
+		case schemas.ControlCondition_type:
+			var ev string
+			if err := d.ReadString(schemas.ControlCondition_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ControlConditionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A complex structure for a managed resource in an Amazon Web Services account
@@ -175,6 +291,66 @@ type ManagedResourceSummary struct {
 	ZonalShifts []ZonalShiftInResource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedResourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedResourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppliedWeights(s, schemas.ManagedResourceSummary_appliedWeights, v.AppliedWeights)
+	if v.Arn != nil {
+		s.WriteString(schemas.ManagedResourceSummary_arn, *v.Arn)
+	}
+	serializeAutoshiftsInResource(s, schemas.ManagedResourceSummary_autoshifts, v.Autoshifts)
+	serializeAvailabilityZones(s, schemas.ManagedResourceSummary_availabilityZones, v.AvailabilityZones)
+	if v.Name != nil {
+		s.WriteString(schemas.ManagedResourceSummary_name, *v.Name)
+	}
+	if v.PracticeRunStatus != "" {
+		s.WriteString(schemas.ManagedResourceSummary_practiceRunStatus, string(v.PracticeRunStatus))
+	}
+	if v.ZonalAutoshiftStatus != "" {
+		s.WriteString(schemas.ManagedResourceSummary_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
+	}
+	serializeZonalShiftsInResource(s, schemas.ManagedResourceSummary_zonalShifts, v.ZonalShifts)
+}
+func (v *ManagedResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedResourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedResourceSummary_appliedWeights:
+			return deserializeAppliedWeights(d, schemas.ManagedResourceSummary_appliedWeights, &v.AppliedWeights)
+		case schemas.ManagedResourceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ManagedResourceSummary_arn, v.Arn)
+		case schemas.ManagedResourceSummary_autoshifts:
+			return deserializeAutoshiftsInResource(d, schemas.ManagedResourceSummary_autoshifts, &v.Autoshifts)
+		case schemas.ManagedResourceSummary_availabilityZones:
+			return deserializeAvailabilityZones(d, schemas.ManagedResourceSummary_availabilityZones, &v.AvailabilityZones)
+		case schemas.ManagedResourceSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ManagedResourceSummary_name, v.Name)
+		case schemas.ManagedResourceSummary_practiceRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.ManagedResourceSummary_practiceRunStatus, &ev); err != nil {
+				return err
+			}
+			v.PracticeRunStatus = ZonalAutoshiftStatus(ev)
+			return nil
+		case schemas.ManagedResourceSummary_zonalAutoshiftStatus:
+			var ev string
+			if err := d.ReadString(schemas.ManagedResourceSummary_zonalAutoshiftStatus, &ev); err != nil {
+				return err
+			}
+			v.ZonalAutoshiftStatus = ZonalAutoshiftStatus(ev)
+			return nil
+		case schemas.ManagedResourceSummary_zonalShifts:
+			return deserializeZonalShiftsInResource(d, schemas.ManagedResourceSummary_zonalShifts, &v.ZonalShifts)
+		}
+		return nil
+	})
 }
 
 // A practice run configuration for a resource includes the Amazon CloudWatch
@@ -230,6 +406,37 @@ type PracticeRunConfiguration struct {
 	BlockingAlarms []ControlCondition
 
 	noSmithyDocumentSerde
+}
+
+func (v *PracticeRunConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PracticeRunConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PracticeRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedWindows(s, schemas.PracticeRunConfiguration_allowedWindows, v.AllowedWindows)
+	serializeBlockedDates(s, schemas.PracticeRunConfiguration_blockedDates, v.BlockedDates)
+	serializeBlockedWindows(s, schemas.PracticeRunConfiguration_blockedWindows, v.BlockedWindows)
+	serializeBlockingAlarms(s, schemas.PracticeRunConfiguration_blockingAlarms, v.BlockingAlarms)
+	serializeOutcomeAlarms(s, schemas.PracticeRunConfiguration_outcomeAlarms, v.OutcomeAlarms)
+}
+func (v *PracticeRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PracticeRunConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PracticeRunConfiguration_allowedWindows:
+			return deserializeAllowedWindows(d, schemas.PracticeRunConfiguration_allowedWindows, &v.AllowedWindows)
+		case schemas.PracticeRunConfiguration_blockedDates:
+			return deserializeBlockedDates(d, schemas.PracticeRunConfiguration_blockedDates, &v.BlockedDates)
+		case schemas.PracticeRunConfiguration_blockedWindows:
+			return deserializeBlockedWindows(d, schemas.PracticeRunConfiguration_blockedWindows, &v.BlockedWindows)
+		case schemas.PracticeRunConfiguration_blockingAlarms:
+			return deserializeBlockingAlarms(d, schemas.PracticeRunConfiguration_blockingAlarms, &v.BlockingAlarms)
+		case schemas.PracticeRunConfiguration_outcomeAlarms:
+			return deserializeOutcomeAlarms(d, schemas.PracticeRunConfiguration_outcomeAlarms, &v.OutcomeAlarms)
+		}
+		return nil
+	})
 }
 
 // A complex structure that lists the zonal shifts for a managed resource and
@@ -351,6 +558,88 @@ type ZonalShiftInResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ZonalShiftInResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZonalShiftInResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZonalShiftInResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppliedStatus != "" {
+		s.WriteString(schemas.ZonalShiftInResource_appliedStatus, string(v.AppliedStatus))
+	}
+	if v.AwayFrom != nil {
+		s.WriteString(schemas.ZonalShiftInResource_awayFrom, *v.AwayFrom)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.ZonalShiftInResource_comment, *v.Comment)
+	}
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.ZonalShiftInResource_expiryTime, *v.ExpiryTime)
+	}
+	if v.PracticeRunOutcome != "" {
+		s.WriteString(schemas.ZonalShiftInResource_practiceRunOutcome, string(v.PracticeRunOutcome))
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ZonalShiftInResource_resourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ShiftType != "" {
+		s.WriteString(schemas.ZonalShiftInResource_shiftType, string(v.ShiftType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ZonalShiftInResource_startTime, *v.StartTime)
+	}
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.ZonalShiftInResource_zonalShiftId, *v.ZonalShiftId)
+	}
+}
+func (v *ZonalShiftInResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZonalShiftInResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZonalShiftInResource_appliedStatus:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShiftInResource_appliedStatus, &ev); err != nil {
+				return err
+			}
+			v.AppliedStatus = AppliedStatus(ev)
+			return nil
+		case schemas.ZonalShiftInResource_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.ZonalShiftInResource_awayFrom, v.AwayFrom)
+		case schemas.ZonalShiftInResource_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.ZonalShiftInResource_comment, v.Comment)
+		case schemas.ZonalShiftInResource_expiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.ZonalShiftInResource_expiryTime, v.ExpiryTime)
+		case schemas.ZonalShiftInResource_practiceRunOutcome:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShiftInResource_practiceRunOutcome, &ev); err != nil {
+				return err
+			}
+			v.PracticeRunOutcome = PracticeRunOutcome(ev)
+			return nil
+		case schemas.ZonalShiftInResource_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.ZonalShiftInResource_resourceIdentifier, v.ResourceIdentifier)
+		case schemas.ZonalShiftInResource_shiftType:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShiftInResource_shiftType, &ev); err != nil {
+				return err
+			}
+			v.ShiftType = ShiftType(ev)
+			return nil
+		case schemas.ZonalShiftInResource_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ZonalShiftInResource_startTime, v.StartTime)
+		case schemas.ZonalShiftInResource_zonalShiftId:
+			v.ZonalShiftId = new(string)
+			return d.ReadString(schemas.ZonalShiftInResource_zonalShiftId, v.ZonalShiftId)
+		}
+		return nil
+	})
+}
+
 // Lists information about zonal shifts in Amazon Application Recovery Controller,
 // including zonal shifts that you start yourself and zonal shifts that ARC starts
 // on your behalf for practice runs with zonal autoshift.
@@ -465,6 +754,88 @@ type ZonalShiftSummary struct {
 	ShiftType ShiftType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZonalShiftSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZonalShiftSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZonalShiftSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwayFrom != nil {
+		s.WriteString(schemas.ZonalShiftSummary_awayFrom, *v.AwayFrom)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.ZonalShiftSummary_comment, *v.Comment)
+	}
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.ZonalShiftSummary_expiryTime, *v.ExpiryTime)
+	}
+	if v.PracticeRunOutcome != "" {
+		s.WriteString(schemas.ZonalShiftSummary_practiceRunOutcome, string(v.PracticeRunOutcome))
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ZonalShiftSummary_resourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ShiftType != "" {
+		s.WriteString(schemas.ZonalShiftSummary_shiftType, string(v.ShiftType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ZonalShiftSummary_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ZonalShiftSummary_status, string(v.Status))
+	}
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.ZonalShiftSummary_zonalShiftId, *v.ZonalShiftId)
+	}
+}
+func (v *ZonalShiftSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZonalShiftSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZonalShiftSummary_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.ZonalShiftSummary_awayFrom, v.AwayFrom)
+		case schemas.ZonalShiftSummary_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.ZonalShiftSummary_comment, v.Comment)
+		case schemas.ZonalShiftSummary_expiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.ZonalShiftSummary_expiryTime, v.ExpiryTime)
+		case schemas.ZonalShiftSummary_practiceRunOutcome:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShiftSummary_practiceRunOutcome, &ev); err != nil {
+				return err
+			}
+			v.PracticeRunOutcome = PracticeRunOutcome(ev)
+			return nil
+		case schemas.ZonalShiftSummary_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.ZonalShiftSummary_resourceIdentifier, v.ResourceIdentifier)
+		case schemas.ZonalShiftSummary_shiftType:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShiftSummary_shiftType, &ev); err != nil {
+				return err
+			}
+			v.ShiftType = ShiftType(ev)
+			return nil
+		case schemas.ZonalShiftSummary_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ZonalShiftSummary_startTime, v.StartTime)
+		case schemas.ZonalShiftSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShiftSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ZonalShiftStatus(ev)
+			return nil
+		case schemas.ZonalShiftSummary_zonalShiftId:
+			v.ZonalShiftId = new(string)
+			return d.ReadString(schemas.ZonalShiftSummary_zonalShiftId, v.ZonalShiftId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,6 +4,8 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type DeleteGroupMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGroupMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGroupMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGroupMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteGroupMembershipRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.DeleteGroupMembershipRequest_GroupName, *v.GroupName)
+	}
+	if v.MemberName != nil {
+		s.WriteString(schemas.DeleteGroupMembershipRequest_MemberName, *v.MemberName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeleteGroupMembershipRequest_Namespace, *v.Namespace)
+	}
+}
+
 type DeleteGroupMembershipOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -64,13 +87,37 @@ type DeleteGroupMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGroupMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGroupMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGroupMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DeleteGroupMembershipResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DeleteGroupMembershipResponse_Status, v.Status)
+	}
+}
+func (v *DeleteGroupMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGroupMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGroupMembershipResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DeleteGroupMembershipResponse_RequestId, v.RequestId)
+		case schemas.DeleteGroupMembershipResponse_Status:
+			return d.ReadInt32(schemas.DeleteGroupMembershipResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGroupMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroupMembership, schemas.DeleteGroupMembershipRequest, schemas.DeleteGroupMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGroupMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGroupMembership, schemas.DeleteGroupMembershipRequest, schemas.DeleteGroupMembershipResponse), output: &DeleteGroupMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

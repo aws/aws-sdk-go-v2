@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Folders":["__Member__","__Member__"],"NextToken":"__NextToken__","RequestId":"__RequestId__","Status":200}

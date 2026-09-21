@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type GetMasterAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMasterAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMasterAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMasterAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetMasterAccountRequest_DetectorId, *v.DetectorId)
+	}
+}
+
 type GetMasterAccountOutput struct {
 
 	// The administrator account details.
@@ -55,13 +69,34 @@ type GetMasterAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMasterAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMasterAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMasterAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Master != nil {
+		s.WriteStruct(schemas.GetMasterAccountResponse_Master)
+		v.Master.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMasterAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMasterAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMasterAccountResponse_Master:
+			v.Master = &types.Master{}
+			return v.Master.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMasterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMasterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMasterAccount, schemas.GetMasterAccountRequest, schemas.GetMasterAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMasterAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMasterAccount, schemas.GetMasterAccountRequest, schemas.GetMasterAccountResponse), output: &GetMasterAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

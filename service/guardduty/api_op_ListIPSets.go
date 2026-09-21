@@ -5,6 +5,8 @@ package guardduty
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListIPSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIPSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIPSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIPSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ListIPSetsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIPSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIPSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIPSetsOutput struct {
 
 	// The IDs of the IPSet resources.
@@ -68,13 +88,35 @@ type ListIPSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIPSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIPSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIPSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpSetIds(s, schemas.ListIPSetsResponse_IpSetIds, v.IpSetIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIPSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIPSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIPSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIPSetsResponse_IpSetIds:
+			return deserializeIpSetIds(d, schemas.ListIPSetsResponse_IpSetIds, &v.IpSetIds)
+		case schemas.ListIPSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIPSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIPSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIPSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIPSets, schemas.ListIPSetsRequest, schemas.ListIPSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIPSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIPSets, schemas.ListIPSetsRequest, schemas.ListIPSetsResponse), output: &ListIPSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

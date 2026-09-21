@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListProtectedResourcesByBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesByBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesByBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesByBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectedResourcesByBackupVaultInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtectedResourcesByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -67,13 +90,35 @@ type ListProtectedResourcesByBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesByBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesByBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesByBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultOutput_NextToken, *v.NextToken)
+	}
+	serializeProtectedResourcesList(s, schemas.ListProtectedResourcesByBackupVaultOutput_Results, v.Results)
+}
+func (v *ListProtectedResourcesByBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedResourcesByBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedResourcesByBackupVaultOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedResourcesByBackupVaultOutput_NextToken, v.NextToken)
+		case schemas.ListProtectedResourcesByBackupVaultOutput_Results:
+			return deserializeProtectedResourcesList(d, schemas.ListProtectedResourcesByBackupVaultOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectedResourcesByBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedResourcesByBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResourcesByBackupVault, schemas.ListProtectedResourcesByBackupVaultInput, schemas.ListProtectedResourcesByBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedResourcesByBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResourcesByBackupVault, schemas.ListProtectedResourcesByBackupVaultInput, schemas.ListProtectedResourcesByBackupVaultOutput), output: &ListProtectedResourcesByBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

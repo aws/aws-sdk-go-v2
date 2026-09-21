@@ -5,7 +5,9 @@ package opensearch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListPackagesForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackagesForDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackagesForDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackagesForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListPackagesForDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListPackagesForDomainRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackagesForDomainRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for the response parameters to the ListPackagesForDomain operation.
 type ListPackagesForDomainOutput struct {
 
@@ -65,13 +85,35 @@ type ListPackagesForDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPackagesForDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPackagesForDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPackagesForDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainPackageDetailsList(s, schemas.ListPackagesForDomainResponse_DomainPackageDetailsList, v.DomainPackageDetailsList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPackagesForDomainResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPackagesForDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPackagesForDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPackagesForDomainResponse_DomainPackageDetailsList:
+			return deserializeDomainPackageDetailsList(d, schemas.ListPackagesForDomainResponse_DomainPackageDetailsList, &v.DomainPackageDetailsList)
+		case schemas.ListPackagesForDomainResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPackagesForDomainResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPackagesForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPackagesForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackagesForDomain, schemas.ListPackagesForDomainRequest, schemas.ListPackagesForDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPackagesForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPackagesForDomain, schemas.ListPackagesForDomainRequest, schemas.ListPackagesForDomainResponse), output: &ListPackagesForDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

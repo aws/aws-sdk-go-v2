@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -121,6 +123,36 @@ type UpdatePodIdentityAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePodIdentityAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePodIdentityAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePodIdentityAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.UpdatePodIdentityAssociationRequest_associationId, *v.AssociationId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdatePodIdentityAssociationRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdatePodIdentityAssociationRequest_clusterName, *v.ClusterName)
+	}
+	if v.DisableSessionTags != nil {
+		s.WriteBool(schemas.UpdatePodIdentityAssociationRequest_disableSessionTags, *v.DisableSessionTags)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdatePodIdentityAssociationRequest_policy, *v.Policy)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdatePodIdentityAssociationRequest_roleArn, *v.RoleArn)
+	}
+	if v.TargetRoleArn != nil {
+		s.WriteString(schemas.UpdatePodIdentityAssociationRequest_targetRoleArn, *v.TargetRoleArn)
+	}
+}
+
 type UpdatePodIdentityAssociationOutput struct {
 
 	// The full description of the association that was updated.
@@ -132,13 +164,34 @@ type UpdatePodIdentityAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePodIdentityAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePodIdentityAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePodIdentityAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.UpdatePodIdentityAssociationResponse_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePodIdentityAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePodIdentityAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePodIdentityAssociationResponse_association:
+			v.Association = &types.PodIdentityAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePodIdentityAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePodIdentityAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePodIdentityAssociation, schemas.UpdatePodIdentityAssociationRequest, schemas.UpdatePodIdentityAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePodIdentityAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePodIdentityAssociation, schemas.UpdatePodIdentityAssociationRequest, schemas.UpdatePodIdentityAssociationResponse), output: &UpdatePodIdentityAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

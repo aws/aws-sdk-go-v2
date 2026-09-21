@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetDeliverabilityTestReportInput struct {
 	ReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeliverabilityTestReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityTestReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityTestReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetDeliverabilityTestReportRequest_ReportId, *v.ReportId)
+	}
 }
 
 // The results of the predictive inbox placement test.
@@ -70,13 +84,54 @@ type GetDeliverabilityTestReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeliverabilityTestReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityTestReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityTestReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliverabilityTestReport != nil {
+		s.WriteStruct(schemas.GetDeliverabilityTestReportResponse_DeliverabilityTestReport)
+		v.DeliverabilityTestReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIspPlacements(s, schemas.GetDeliverabilityTestReportResponse_IspPlacements, v.IspPlacements)
+	if v.Message != nil {
+		s.WriteString(schemas.GetDeliverabilityTestReportResponse_Message, *v.Message)
+	}
+	if v.OverallPlacement != nil {
+		s.WriteStruct(schemas.GetDeliverabilityTestReportResponse_OverallPlacement)
+		v.OverallPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.GetDeliverabilityTestReportResponse_Tags, v.Tags)
+}
+func (v *GetDeliverabilityTestReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeliverabilityTestReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeliverabilityTestReportResponse_DeliverabilityTestReport:
+			v.DeliverabilityTestReport = &types.DeliverabilityTestReport{}
+			return v.DeliverabilityTestReport.Deserialize(d)
+		case schemas.GetDeliverabilityTestReportResponse_IspPlacements:
+			return deserializeIspPlacements(d, schemas.GetDeliverabilityTestReportResponse_IspPlacements, &v.IspPlacements)
+		case schemas.GetDeliverabilityTestReportResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetDeliverabilityTestReportResponse_Message, v.Message)
+		case schemas.GetDeliverabilityTestReportResponse_OverallPlacement:
+			v.OverallPlacement = &types.PlacementStatistics{}
+			return v.OverallPlacement.Deserialize(d)
+		case schemas.GetDeliverabilityTestReportResponse_Tags:
+			return deserializeTagList(d, schemas.GetDeliverabilityTestReportResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeliverabilityTestReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityTestReport, schemas.GetDeliverabilityTestReportRequest, schemas.GetDeliverabilityTestReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeliverabilityTestReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityTestReport, schemas.GetDeliverabilityTestReportRequest, schemas.GetDeliverabilityTestReportResponse), output: &GetDeliverabilityTestReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

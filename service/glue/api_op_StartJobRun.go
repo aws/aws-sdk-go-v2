@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -189,6 +191,54 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedCapacity != 0 {
+		s.WriteInt32(schemas.StartJobRunRequest_AllocatedCapacity, v.AllocatedCapacity)
+	}
+	serializeGenericMap(s, schemas.StartJobRunRequest_Arguments, v.Arguments)
+	if v.ExecutionClass != "" {
+		s.WriteString(schemas.StartJobRunRequest_ExecutionClass, string(v.ExecutionClass))
+	}
+	if v.ExecutionRoleSessionPolicy != nil {
+		s.WriteString(schemas.StartJobRunRequest_ExecutionRoleSessionPolicy, *v.ExecutionRoleSessionPolicy)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartJobRunRequest_JobName, *v.JobName)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.StartJobRunRequest_JobRunId, *v.JobRunId)
+	}
+	if v.JobRunQueuingEnabled != nil {
+		s.WriteBool(schemas.StartJobRunRequest_JobRunQueuingEnabled, *v.JobRunQueuingEnabled)
+	}
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.StartJobRunRequest_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.NotificationProperty != nil {
+		s.WriteStruct(schemas.StartJobRunRequest_NotificationProperty)
+		v.NotificationProperty.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumberOfWorkers != nil {
+		s.WriteInt32(schemas.StartJobRunRequest_NumberOfWorkers, *v.NumberOfWorkers)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.StartJobRunRequest_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.StartJobRunRequest_Timeout, *v.Timeout)
+	}
+	if v.WorkerType != "" {
+		s.WriteString(schemas.StartJobRunRequest_WorkerType, string(v.WorkerType))
+	}
+}
+
 type StartJobRunOutput struct {
 
 	// The ID assigned to this job run.
@@ -200,13 +250,32 @@ type StartJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobRunId != nil {
+		s.WriteString(schemas.StartJobRunResponse_JobRunId, *v.JobRunId)
+	}
+}
+func (v *StartJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobRunResponse_JobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.StartJobRunResponse_JobRunId, v.JobRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobRun, schemas.StartJobRunRequest, schemas.StartJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobRun, schemas.StartJobRunRequest, schemas.StartJobRunResponse), output: &StartJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

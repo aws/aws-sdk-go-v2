@@ -4,7 +4,9 @@ package sagemakeredge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,31 @@ type SendHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendHeartbeatRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEdgeMetrics(s, schemas.SendHeartbeatRequest_AgentMetrics, v.AgentMetrics)
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.SendHeartbeatRequest_AgentVersion, *v.AgentVersion)
+	}
+	if v.DeploymentResult != nil {
+		s.WriteStruct(schemas.SendHeartbeatRequest_DeploymentResult)
+		v.DeploymentResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.SendHeartbeatRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.SendHeartbeatRequest_DeviceName, *v.DeviceName)
+	}
+	serializeModels(s, schemas.SendHeartbeatRequest_Models, v.Models)
+}
+
 type SendHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +88,26 @@ type SendHeartbeatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendHeartbeatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendHeartbeatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendHeartbeatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendHeartbeat, schemas.SendHeartbeatRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendHeartbeat, schemas.SendHeartbeatRequest, nil), output: &SendHeartbeatOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

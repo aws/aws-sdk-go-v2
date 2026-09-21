@@ -4,7 +4,9 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -142,6 +144,39 @@ type InvokeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientContext != nil {
+		s.WriteString(schemas.InvocationRequest_ClientContext, *v.ClientContext)
+	}
+	if v.DurableExecutionName != nil {
+		s.WriteString(schemas.InvocationRequest_DurableExecutionName, *v.DurableExecutionName)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.InvocationRequest_FunctionName, *v.FunctionName)
+	}
+	if v.InvocationType != "" {
+		s.WriteString(schemas.InvocationRequest_InvocationType, string(v.InvocationType))
+	}
+	if v.LogType != "" {
+		s.WriteString(schemas.InvocationRequest_LogType, string(v.LogType))
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.InvocationRequest_Payload, v.Payload)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.InvocationRequest_Qualifier, *v.Qualifier)
+	}
+	if v.TenantId != nil {
+		s.WriteString(schemas.InvocationRequest_TenantId, *v.TenantId)
+	}
+}
+
 type InvokeOutput struct {
 
 	// The ARN of the durable execution that was started. This is returned when
@@ -175,13 +210,60 @@ type InvokeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurableExecutionArn != nil {
+		s.WriteString(schemas.InvocationResponse_DurableExecutionArn, *v.DurableExecutionArn)
+	}
+	if v.ExecutedVersion != nil {
+		s.WriteString(schemas.InvocationResponse_ExecutedVersion, *v.ExecutedVersion)
+	}
+	if v.FunctionError != nil {
+		s.WriteString(schemas.InvocationResponse_FunctionError, *v.FunctionError)
+	}
+	if v.LogResult != nil {
+		s.WriteString(schemas.InvocationResponse_LogResult, *v.LogResult)
+	}
+	if v.Payload != nil {
+		s.WriteBlob(schemas.InvocationResponse_Payload, v.Payload)
+	}
+	if v.StatusCode != 0 {
+		s.WriteInt32(schemas.InvocationResponse_StatusCode, v.StatusCode)
+	}
+}
+func (v *InvokeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvocationResponse_DurableExecutionArn:
+			v.DurableExecutionArn = new(string)
+			return d.ReadString(schemas.InvocationResponse_DurableExecutionArn, v.DurableExecutionArn)
+		case schemas.InvocationResponse_ExecutedVersion:
+			v.ExecutedVersion = new(string)
+			return d.ReadString(schemas.InvocationResponse_ExecutedVersion, v.ExecutedVersion)
+		case schemas.InvocationResponse_FunctionError:
+			v.FunctionError = new(string)
+			return d.ReadString(schemas.InvocationResponse_FunctionError, v.FunctionError)
+		case schemas.InvocationResponse_LogResult:
+			v.LogResult = new(string)
+			return d.ReadString(schemas.InvocationResponse_LogResult, v.LogResult)
+		case schemas.InvocationResponse_Payload:
+			return d.ReadBlob(schemas.InvocationResponse_Payload, &v.Payload)
+		case schemas.InvocationResponse_StatusCode:
+			return d.ReadInt32(schemas.InvocationResponse_StatusCode, &v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvoke{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Invoke, schemas.InvocationRequest, schemas.InvocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvoke{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Invoke, schemas.InvocationRequest, schemas.InvocationResponse), output: &InvokeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

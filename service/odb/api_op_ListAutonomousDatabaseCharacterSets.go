@@ -5,7 +5,9 @@ package odb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListAutonomousDatabaseCharacterSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseCharacterSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseCharacterSetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseCharacterSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CharacterSetType != "" {
+		s.WriteString(schemas.ListAutonomousDatabaseCharacterSetsInput_characterSetType, string(v.CharacterSetType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutonomousDatabaseCharacterSetsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseCharacterSetsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutonomousDatabaseCharacterSetsOutput struct {
 
 	// The list of available Autonomous Database character sets.
@@ -59,13 +79,35 @@ type ListAutonomousDatabaseCharacterSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousDatabaseCharacterSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousDatabaseCharacterSetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousDatabaseCharacterSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutonomousDatabaseCharacterSetList(s, schemas.ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets, v.AutonomousDatabaseCharacterSets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousDatabaseCharacterSetsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutonomousDatabaseCharacterSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutonomousDatabaseCharacterSetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets:
+			return deserializeAutonomousDatabaseCharacterSetList(d, schemas.ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets, &v.AutonomousDatabaseCharacterSets)
+		case schemas.ListAutonomousDatabaseCharacterSetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutonomousDatabaseCharacterSetsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutonomousDatabaseCharacterSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutonomousDatabaseCharacterSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseCharacterSets, schemas.ListAutonomousDatabaseCharacterSetsInput, schemas.ListAutonomousDatabaseCharacterSetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutonomousDatabaseCharacterSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousDatabaseCharacterSets, schemas.ListAutonomousDatabaseCharacterSetsInput, schemas.ListAutonomousDatabaseCharacterSetsOutput), output: &ListAutonomousDatabaseCharacterSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

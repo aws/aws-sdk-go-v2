@@ -4,6 +4,8 @@ package lambda
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type PutFunctionCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFunctionCodeSigningConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFunctionCodeSigningConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFunctionCodeSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfigArn != nil {
+		s.WriteString(schemas.PutFunctionCodeSigningConfigRequest_CodeSigningConfigArn, *v.CodeSigningConfigArn)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.PutFunctionCodeSigningConfigRequest_FunctionName, *v.FunctionName)
+	}
+}
+
 type PutFunctionCodeSigningConfigOutput struct {
 
 	// The The Amazon Resource Name (ARN) of the code signing configuration.
@@ -80,13 +97,38 @@ type PutFunctionCodeSigningConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFunctionCodeSigningConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFunctionCodeSigningConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFunctionCodeSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfigArn != nil {
+		s.WriteString(schemas.PutFunctionCodeSigningConfigResponse_CodeSigningConfigArn, *v.CodeSigningConfigArn)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.PutFunctionCodeSigningConfigResponse_FunctionName, *v.FunctionName)
+	}
+}
+func (v *PutFunctionCodeSigningConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFunctionCodeSigningConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFunctionCodeSigningConfigResponse_CodeSigningConfigArn:
+			v.CodeSigningConfigArn = new(string)
+			return d.ReadString(schemas.PutFunctionCodeSigningConfigResponse_CodeSigningConfigArn, v.CodeSigningConfigArn)
+		case schemas.PutFunctionCodeSigningConfigResponse_FunctionName:
+			v.FunctionName = new(string)
+			return d.ReadString(schemas.PutFunctionCodeSigningConfigResponse_FunctionName, v.FunctionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFunctionCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFunctionCodeSigningConfig, schemas.PutFunctionCodeSigningConfigRequest, schemas.PutFunctionCodeSigningConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFunctionCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFunctionCodeSigningConfig, schemas.PutFunctionCodeSigningConfigRequest, schemas.PutFunctionCodeSigningConfigResponse), output: &PutFunctionCodeSigningConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

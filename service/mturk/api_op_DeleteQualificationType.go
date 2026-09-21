@@ -4,6 +4,8 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type DeleteQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQualificationTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQualificationTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQualificationTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationTypeId != nil {
+		s.WriteString(schemas.DeleteQualificationTypeRequest_QualificationTypeId, *v.QualificationTypeId)
+	}
+}
+
 type DeleteQualificationTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +67,26 @@ type DeleteQualificationTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQualificationTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQualificationTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQualificationTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQualificationTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteQualificationTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQualificationType, schemas.DeleteQualificationTypeRequest, schemas.DeleteQualificationTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQualificationType, schemas.DeleteQualificationTypeRequest, schemas.DeleteQualificationTypeResponse), output: &DeleteQualificationTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

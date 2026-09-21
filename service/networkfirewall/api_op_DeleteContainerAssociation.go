@@ -4,7 +4,9 @@ package networkfirewall
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteContainerAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerAssociationArn != nil {
+		s.WriteString(schemas.DeleteContainerAssociationRequest_ContainerAssociationArn, *v.ContainerAssociationArn)
+	}
+	if v.ContainerAssociationName != nil {
+		s.WriteString(schemas.DeleteContainerAssociationRequest_ContainerAssociationName, *v.ContainerAssociationName)
+	}
+}
+
 type DeleteContainerAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the container association.
@@ -60,13 +77,48 @@ type DeleteContainerAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerAssociationArn != nil {
+		s.WriteString(schemas.DeleteContainerAssociationResponse_ContainerAssociationArn, *v.ContainerAssociationArn)
+	}
+	if v.ContainerAssociationName != nil {
+		s.WriteString(schemas.DeleteContainerAssociationResponse_ContainerAssociationName, *v.ContainerAssociationName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteContainerAssociationResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteContainerAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContainerAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteContainerAssociationResponse_ContainerAssociationArn:
+			v.ContainerAssociationArn = new(string)
+			return d.ReadString(schemas.DeleteContainerAssociationResponse_ContainerAssociationArn, v.ContainerAssociationArn)
+		case schemas.DeleteContainerAssociationResponse_ContainerAssociationName:
+			v.ContainerAssociationName = new(string)
+			return d.ReadString(schemas.DeleteContainerAssociationResponse_ContainerAssociationName, v.ContainerAssociationName)
+		case schemas.DeleteContainerAssociationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteContainerAssociationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ContainerAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContainerAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteContainerAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerAssociation, schemas.DeleteContainerAssociationRequest, schemas.DeleteContainerAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteContainerAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerAssociation, schemas.DeleteContainerAssociationRequest, schemas.DeleteContainerAssociationResponse), output: &DeleteContainerAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

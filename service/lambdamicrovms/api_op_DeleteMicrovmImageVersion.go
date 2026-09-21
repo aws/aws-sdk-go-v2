@@ -4,7 +4,9 @@ package lambdamicrovms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambdamicrovms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteMicrovmImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrovmImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrovmImageVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrovmImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.DeleteMicrovmImageVersionInput_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.DeleteMicrovmImageVersionInput_imageVersion, *v.ImageVersion)
+	}
+}
+
 type DeleteMicrovmImageVersionOutput struct {
 
 	// The identifier of the MicroVM image.
@@ -63,13 +80,48 @@ type DeleteMicrovmImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMicrovmImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMicrovmImageVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMicrovmImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.DeleteMicrovmImageVersionOutput_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageVersion != nil {
+		s.WriteString(schemas.DeleteMicrovmImageVersionOutput_imageVersion, *v.ImageVersion)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteMicrovmImageVersionOutput_state, string(v.State))
+	}
+}
+func (v *DeleteMicrovmImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMicrovmImageVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMicrovmImageVersionOutput_imageIdentifier:
+			v.ImageIdentifier = new(string)
+			return d.ReadString(schemas.DeleteMicrovmImageVersionOutput_imageIdentifier, v.ImageIdentifier)
+		case schemas.DeleteMicrovmImageVersionOutput_imageVersion:
+			v.ImageVersion = new(string)
+			return d.ReadString(schemas.DeleteMicrovmImageVersionOutput_imageVersion, v.ImageVersion)
+		case schemas.DeleteMicrovmImageVersionOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.DeleteMicrovmImageVersionOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.MicrovmImageVersionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMicrovmImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMicrovmImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrovmImageVersion, schemas.DeleteMicrovmImageVersionInput, schemas.DeleteMicrovmImageVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMicrovmImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMicrovmImageVersion, schemas.DeleteMicrovmImageVersionInput, schemas.DeleteMicrovmImageVersionOutput), output: &DeleteMicrovmImageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

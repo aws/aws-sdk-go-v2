@@ -4,7 +4,9 @@ package applicationsignals
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,19 @@ type BatchGetServiceLevelObjectiveBudgetReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetServiceLevelObjectiveBudgetReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetServiceLevelObjectiveBudgetReportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetServiceLevelObjectiveBudgetReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceLevelObjectiveIds(s, schemas.BatchGetServiceLevelObjectiveBudgetReportInput_SloIds, v.SloIds)
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp, *v.Timestamp)
+	}
+}
+
 type BatchGetServiceLevelObjectiveBudgetReportOutput struct {
 
 	// An array of structures, where each structure includes an error indicating that
@@ -81,13 +96,38 @@ type BatchGetServiceLevelObjectiveBudgetReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceLevelObjectiveBudgetReportErrors(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors, v.Errors)
+	serializeServiceLevelObjectiveBudgetReports(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports, v.Reports)
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp, *v.Timestamp)
+	}
+}
+func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors:
+			return deserializeServiceLevelObjectiveBudgetReportErrors(d, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors, &v.Errors)
+		case schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports:
+			return deserializeServiceLevelObjectiveBudgetReports(d, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports, &v.Reports)
+		case schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetServiceLevelObjectiveBudgetReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetServiceLevelObjectiveBudgetReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetServiceLevelObjectiveBudgetReport, schemas.BatchGetServiceLevelObjectiveBudgetReportInput, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetServiceLevelObjectiveBudgetReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetServiceLevelObjectiveBudgetReport, schemas.BatchGetServiceLevelObjectiveBudgetReportInput, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput), output: &BatchGetServiceLevelObjectiveBudgetReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

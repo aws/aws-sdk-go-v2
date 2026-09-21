@@ -4,7 +4,9 @@ package odb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetAutonomousDatabaseWalletDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutonomousDatabaseWalletDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutonomousDatabaseWalletDetailsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutonomousDatabaseWalletDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.GetAutonomousDatabaseWalletDetailsInput_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+}
+
 type GetAutonomousDatabaseWalletDetailsOutput struct {
 
 	// The wallet details for the Autonomous Database.
@@ -47,13 +61,34 @@ type GetAutonomousDatabaseWalletDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutonomousDatabaseWalletDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutonomousDatabaseWalletDetailsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutonomousDatabaseWalletDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseWalletDetails != nil {
+		s.WriteStruct(schemas.GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails)
+		v.AutonomousDatabaseWalletDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAutonomousDatabaseWalletDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutonomousDatabaseWalletDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails:
+			v.AutonomousDatabaseWalletDetails = &types.AutonomousDatabaseWalletDetails{}
+			return v.AutonomousDatabaseWalletDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutonomousDatabaseWalletDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAutonomousDatabaseWalletDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutonomousDatabaseWalletDetails, schemas.GetAutonomousDatabaseWalletDetailsInput, schemas.GetAutonomousDatabaseWalletDetailsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAutonomousDatabaseWalletDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutonomousDatabaseWalletDetails, schemas.GetAutonomousDatabaseWalletDetailsInput, schemas.GetAutonomousDatabaseWalletDetailsOutput), output: &GetAutonomousDatabaseWalletDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

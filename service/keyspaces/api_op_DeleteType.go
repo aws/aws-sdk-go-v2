@@ -4,6 +4,8 @@ package keyspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DeleteTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.DeleteTypeRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DeleteTypeRequest_typeName, *v.TypeName)
+	}
+}
+
 type DeleteTypeOutput struct {
 
 	//  The unique identifier of the keyspace from which the type was deleted in the
@@ -64,13 +81,38 @@ type DeleteTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceArn != nil {
+		s.WriteString(schemas.DeleteTypeResponse_keyspaceArn, *v.KeyspaceArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DeleteTypeResponse_typeName, *v.TypeName)
+	}
+}
+func (v *DeleteTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTypeResponse_keyspaceArn:
+			v.KeyspaceArn = new(string)
+			return d.ReadString(schemas.DeleteTypeResponse_keyspaceArn, v.KeyspaceArn)
+		case schemas.DeleteTypeResponse_typeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.DeleteTypeResponse_typeName, v.TypeName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteType, schemas.DeleteTypeRequest, schemas.DeleteTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteType, schemas.DeleteTypeRequest, schemas.DeleteTypeResponse), output: &DeleteTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

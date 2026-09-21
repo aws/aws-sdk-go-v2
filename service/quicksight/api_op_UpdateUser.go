@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -139,6 +141,45 @@ type UpdateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomFederationProviderUrl != nil {
+		s.WriteString(schemas.UpdateUserRequest_CustomFederationProviderUrl, *v.CustomFederationProviderUrl)
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.UpdateUserRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.UpdateUserRequest_Email, *v.Email)
+	}
+	if v.ExternalLoginFederationProviderType != nil {
+		s.WriteString(schemas.UpdateUserRequest_ExternalLoginFederationProviderType, *v.ExternalLoginFederationProviderType)
+	}
+	if v.ExternalLoginId != nil {
+		s.WriteString(schemas.UpdateUserRequest_ExternalLoginId, *v.ExternalLoginId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateUserRequest_Namespace, *v.Namespace)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateUserRequest_Role, string(v.Role))
+	}
+	if v.UnapplyCustomPermissions != false {
+		s.WriteBool(schemas.UpdateUserRequest_UnapplyCustomPermissions, v.UnapplyCustomPermissions)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UpdateUserRequest_UserName, *v.UserName)
+	}
+}
+
 type UpdateUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -156,13 +197,45 @@ type UpdateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateUserResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateUserResponse_Status, v.Status)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.UpdateUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateUserResponse_RequestId, v.RequestId)
+		case schemas.UpdateUserResponse_Status:
+			return d.ReadInt32(schemas.UpdateUserResponse_Status, &v.Status)
+		case schemas.UpdateUserResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUser, schemas.UpdateUserRequest, schemas.UpdateUserResponse), output: &UpdateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

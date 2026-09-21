@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListRunsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRunsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list runs request.
 type ListRunsOutput struct {
 
@@ -57,13 +74,35 @@ type ListRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRunsResult_nextToken, *v.NextToken)
+	}
+	serializeRuns(s, schemas.ListRunsResult_runs, v.Runs)
+}
+func (v *ListRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRunsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRunsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRunsResult_nextToken, v.NextToken)
+		case schemas.ListRunsResult_runs:
+			return deserializeRuns(d, schemas.ListRunsResult_runs, &v.Runs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuns, schemas.ListRunsRequest, schemas.ListRunsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRuns, schemas.ListRunsRequest, schemas.ListRunsResult), output: &ListRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

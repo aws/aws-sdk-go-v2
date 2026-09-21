@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,23 @@ type DeleteSchemaVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.DeleteSchemaVersionsInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Versions != nil {
+		s.WriteString(schemas.DeleteSchemaVersionsInput_Versions, *v.Versions)
+	}
+}
+
 type DeleteSchemaVersionsOutput struct {
 
 	// A list of SchemaVersionErrorItem objects, each containing an error and schema
@@ -73,13 +92,29 @@ type DeleteSchemaVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaVersionErrorList(s, schemas.DeleteSchemaVersionsResponse_SchemaVersionErrors, v.SchemaVersionErrors)
+}
+func (v *DeleteSchemaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSchemaVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSchemaVersionsResponse_SchemaVersionErrors:
+			return deserializeSchemaVersionErrorList(d, schemas.DeleteSchemaVersionsResponse_SchemaVersionErrors, &v.SchemaVersionErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchemaVersions, schemas.DeleteSchemaVersionsInput, schemas.DeleteSchemaVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSchemaVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchemaVersions, schemas.DeleteSchemaVersionsInput, schemas.DeleteSchemaVersionsResponse), output: &DeleteSchemaVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

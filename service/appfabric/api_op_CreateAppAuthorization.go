@@ -5,7 +5,9 @@ package appfabric
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -107,6 +109,34 @@ type CreateAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteString(schemas.CreateAppAuthorizationRequest_app, *v.App)
+	}
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.CreateAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreateAppAuthorizationRequest_authType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAppAuthorizationRequest_clientToken, *v.ClientToken)
+	}
+	serializeCredential(s, schemas.CreateAppAuthorizationRequest_credential, v.Credential)
+	serializeTagList(s, schemas.CreateAppAuthorizationRequest_tags, v.Tags)
+	if v.Tenant != nil {
+		s.WriteStruct(schemas.CreateAppAuthorizationRequest_tenant)
+		v.Tenant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.
@@ -120,13 +150,34 @@ type CreateAppAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorization != nil {
+		s.WriteStruct(schemas.CreateAppAuthorizationResponse_appAuthorization)
+		v.AppAuthorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAppAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppAuthorizationResponse_appAuthorization:
+			v.AppAuthorization = &types.AppAuthorization{}
+			return v.AppAuthorization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppAuthorization, schemas.CreateAppAuthorizationRequest, schemas.CreateAppAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppAuthorization, schemas.CreateAppAuthorizationRequest, schemas.CreateAppAuthorizationResponse), output: &CreateAppAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

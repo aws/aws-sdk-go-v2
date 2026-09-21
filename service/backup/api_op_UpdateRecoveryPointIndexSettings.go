@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,27 @@ type UpdateRecoveryPointIndexSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPointIndexSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPointIndexSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPointIndexSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsInput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.Index != "" {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsInput_Index, string(v.Index))
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+
 type UpdateRecoveryPointIndexSettingsOutput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
@@ -97,13 +120,58 @@ type UpdateRecoveryPointIndexSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryPointIndexSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryPointIndexSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryPointIndexSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.Index != "" {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsOutput_Index, string(v.Index))
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsOutput_IndexStatus, string(v.IndexStatus))
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.UpdateRecoveryPointIndexSettingsOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+}
+func (v *UpdateRecoveryPointIndexSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecoveryPointIndexSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecoveryPointIndexSettingsOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.UpdateRecoveryPointIndexSettingsOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.UpdateRecoveryPointIndexSettingsOutput_Index:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRecoveryPointIndexSettingsOutput_Index, &ev); err != nil {
+				return err
+			}
+			v.Index = types.Index(ev)
+			return nil
+		case schemas.UpdateRecoveryPointIndexSettingsOutput_IndexStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRecoveryPointIndexSettingsOutput_IndexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = types.IndexStatus(ev)
+			return nil
+		case schemas.UpdateRecoveryPointIndexSettingsOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.UpdateRecoveryPointIndexSettingsOutput_RecoveryPointArn, v.RecoveryPointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecoveryPointIndexSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryPointIndexSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPointIndexSettings, schemas.UpdateRecoveryPointIndexSettingsInput, schemas.UpdateRecoveryPointIndexSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecoveryPointIndexSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryPointIndexSettings, schemas.UpdateRecoveryPointIndexSettingsInput, schemas.UpdateRecoveryPointIndexSettingsOutput), output: &UpdateRecoveryPointIndexSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

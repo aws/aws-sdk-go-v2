@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type CreateFolderMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFolderMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFolderMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFolderMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateFolderMembershipRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.CreateFolderMembershipRequest_FolderId, *v.FolderId)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.CreateFolderMembershipRequest_MemberId, *v.MemberId)
+	}
+	if v.MemberType != "" {
+		s.WriteString(schemas.CreateFolderMembershipRequest_MemberType, string(v.MemberType))
+	}
+}
+
 type CreateFolderMembershipOutput struct {
 
 	// Information about the member in the folder.
@@ -66,13 +89,45 @@ type CreateFolderMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFolderMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFolderMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFolderMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FolderMember != nil {
+		s.WriteStruct(schemas.CreateFolderMembershipResponse_FolderMember)
+		v.FolderMember.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateFolderMembershipResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateFolderMembershipResponse_Status, v.Status)
+	}
+}
+func (v *CreateFolderMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFolderMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFolderMembershipResponse_FolderMember:
+			v.FolderMember = &types.FolderMember{}
+			return v.FolderMember.Deserialize(d)
+		case schemas.CreateFolderMembershipResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateFolderMembershipResponse_RequestId, v.RequestId)
+		case schemas.CreateFolderMembershipResponse_Status:
+			return d.ReadInt32(schemas.CreateFolderMembershipResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFolderMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFolderMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFolderMembership, schemas.CreateFolderMembershipRequest, schemas.CreateFolderMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFolderMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFolderMembership, schemas.CreateFolderMembershipRequest, schemas.CreateFolderMembershipResponse), output: &CreateFolderMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type ListTenantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTenantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTenantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTenantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTenantsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListTenantsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // Information about tenants associated with your account.
 type ListTenantsOutput struct {
 
@@ -63,13 +80,35 @@ type ListTenantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTenantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTenantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTenantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTenantsResponse_NextToken, *v.NextToken)
+	}
+	serializeTenantInfoList(s, schemas.ListTenantsResponse_Tenants, v.Tenants)
+}
+func (v *ListTenantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTenantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTenantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTenantsResponse_NextToken, v.NextToken)
+		case schemas.ListTenantsResponse_Tenants:
+			return deserializeTenantInfoList(d, schemas.ListTenantsResponse_Tenants, &v.Tenants)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTenantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTenants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTenants, schemas.ListTenantsRequest, schemas.ListTenantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTenants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTenants, schemas.ListTenantsRequest, schemas.ListTenantsResponse), output: &ListTenantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

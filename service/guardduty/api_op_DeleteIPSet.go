@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeleteIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DeleteIPSetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.IpSetId != nil {
+		s.WriteString(schemas.DeleteIPSetRequest_IpSetId, *v.IpSetId)
+	}
+}
+
 type DeleteIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type DeleteIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIPSet, schemas.DeleteIPSetRequest, schemas.DeleteIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIPSet, schemas.DeleteIPSetRequest, schemas.DeleteIPSetResponse), output: &DeleteIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

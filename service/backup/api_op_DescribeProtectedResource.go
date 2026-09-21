@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeProtectedResourceInput struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeProtectedResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProtectedResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProtectedResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeProtectedResourceInput_ResourceArn, *v.ResourceArn)
+	}
 }
 
 type DescribeProtectedResourceOutput struct {
@@ -78,13 +92,80 @@ type DescribeProtectedResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProtectedResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProtectedResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProtectedResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastBackupTime != nil {
+		s.WriteTime(schemas.DescribeProtectedResourceOutput_LastBackupTime, *v.LastBackupTime)
+	}
+	if v.LastBackupVaultArn != nil {
+		s.WriteString(schemas.DescribeProtectedResourceOutput_LastBackupVaultArn, *v.LastBackupVaultArn)
+	}
+	if v.LastRecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeProtectedResourceOutput_LastRecoveryPointArn, *v.LastRecoveryPointArn)
+	}
+	if v.LatestRestoreExecutionTimeMinutes != nil {
+		s.WriteInt64(schemas.DescribeProtectedResourceOutput_LatestRestoreExecutionTimeMinutes, *v.LatestRestoreExecutionTimeMinutes)
+	}
+	if v.LatestRestoreJobCreationDate != nil {
+		s.WriteTime(schemas.DescribeProtectedResourceOutput_LatestRestoreJobCreationDate, *v.LatestRestoreJobCreationDate)
+	}
+	if v.LatestRestoreRecoveryPointCreationDate != nil {
+		s.WriteTime(schemas.DescribeProtectedResourceOutput_LatestRestoreRecoveryPointCreationDate, *v.LatestRestoreRecoveryPointCreationDate)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeProtectedResourceOutput_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DescribeProtectedResourceOutput_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeProtectedResourceOutput_ResourceType, *v.ResourceType)
+	}
+}
+func (v *DescribeProtectedResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProtectedResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProtectedResourceOutput_LastBackupTime:
+			v.LastBackupTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProtectedResourceOutput_LastBackupTime, v.LastBackupTime)
+		case schemas.DescribeProtectedResourceOutput_LastBackupVaultArn:
+			v.LastBackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeProtectedResourceOutput_LastBackupVaultArn, v.LastBackupVaultArn)
+		case schemas.DescribeProtectedResourceOutput_LastRecoveryPointArn:
+			v.LastRecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeProtectedResourceOutput_LastRecoveryPointArn, v.LastRecoveryPointArn)
+		case schemas.DescribeProtectedResourceOutput_LatestRestoreExecutionTimeMinutes:
+			v.LatestRestoreExecutionTimeMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeProtectedResourceOutput_LatestRestoreExecutionTimeMinutes, v.LatestRestoreExecutionTimeMinutes)
+		case schemas.DescribeProtectedResourceOutput_LatestRestoreJobCreationDate:
+			v.LatestRestoreJobCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeProtectedResourceOutput_LatestRestoreJobCreationDate, v.LatestRestoreJobCreationDate)
+		case schemas.DescribeProtectedResourceOutput_LatestRestoreRecoveryPointCreationDate:
+			v.LatestRestoreRecoveryPointCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeProtectedResourceOutput_LatestRestoreRecoveryPointCreationDate, v.LatestRestoreRecoveryPointCreationDate)
+		case schemas.DescribeProtectedResourceOutput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeProtectedResourceOutput_ResourceArn, v.ResourceArn)
+		case schemas.DescribeProtectedResourceOutput_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DescribeProtectedResourceOutput_ResourceName, v.ResourceName)
+		case schemas.DescribeProtectedResourceOutput_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DescribeProtectedResourceOutput_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProtectedResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProtectedResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProtectedResource, schemas.DescribeProtectedResourceInput, schemas.DescribeProtectedResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProtectedResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProtectedResource, schemas.DescribeProtectedResourceInput, schemas.DescribeProtectedResourceOutput), output: &DescribeProtectedResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

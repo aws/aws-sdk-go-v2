@@ -4,6 +4,8 @@ package mturk
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DisassociateQualificationFromWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateQualificationFromWorkerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateQualificationFromWorkerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateQualificationFromWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationTypeId != nil {
+		s.WriteString(schemas.DisassociateQualificationFromWorkerRequest_QualificationTypeId, *v.QualificationTypeId)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.DisassociateQualificationFromWorkerRequest_Reason, *v.Reason)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.DisassociateQualificationFromWorkerRequest_WorkerId, *v.WorkerId)
+	}
+}
+
 type DisassociateQualificationFromWorkerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DisassociateQualificationFromWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateQualificationFromWorkerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateQualificationFromWorkerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateQualificationFromWorkerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateQualificationFromWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateQualificationFromWorkerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateQualificationFromWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateQualificationFromWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateQualificationFromWorker, schemas.DisassociateQualificationFromWorkerRequest, schemas.DisassociateQualificationFromWorkerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateQualificationFromWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateQualificationFromWorker, schemas.DisassociateQualificationFromWorkerRequest, schemas.DisassociateQualificationFromWorkerResponse), output: &DisassociateQualificationFromWorkerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

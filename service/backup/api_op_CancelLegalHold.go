@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type CancelLegalHoldInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelLegalHoldInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelLegalHoldInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelLegalHoldInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelDescription != nil {
+		s.WriteString(schemas.CancelLegalHoldInput_CancelDescription, *v.CancelDescription)
+	}
+	if v.LegalHoldId != nil {
+		s.WriteString(schemas.CancelLegalHoldInput_LegalHoldId, *v.LegalHoldId)
+	}
+	if v.RetainRecordInDays != nil {
+		s.WriteInt64(schemas.CancelLegalHoldInput_RetainRecordInDays, *v.RetainRecordInDays)
+	}
+}
+
 type CancelLegalHoldOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +69,26 @@ type CancelLegalHoldOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelLegalHoldOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelLegalHoldOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelLegalHoldOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelLegalHoldOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelLegalHoldOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelLegalHoldMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelLegalHold{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLegalHold, schemas.CancelLegalHoldInput, schemas.CancelLegalHoldOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelLegalHold{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLegalHold, schemas.CancelLegalHoldInput, schemas.CancelLegalHoldOutput), output: &CancelLegalHoldOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

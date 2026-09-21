@@ -4,7 +4,9 @@ package dynamodbstreams
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type GetRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecordsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetRecordsInput_Limit, *v.Limit)
+	}
+	if v.ShardIterator != nil {
+		s.WriteString(schemas.GetRecordsInput_ShardIterator, *v.ShardIterator)
+	}
+}
+
 // Represents the output of a GetRecords operation.
 type GetRecordsOutput struct {
 
@@ -67,13 +84,35 @@ type GetRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecordsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextShardIterator != nil {
+		s.WriteString(schemas.GetRecordsOutput_NextShardIterator, *v.NextShardIterator)
+	}
+	serializeRecordList(s, schemas.GetRecordsOutput_Records, v.Records)
+}
+func (v *GetRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecordsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecordsOutput_NextShardIterator:
+			v.NextShardIterator = new(string)
+			return d.ReadString(schemas.GetRecordsOutput_NextShardIterator, v.NextShardIterator)
+		case schemas.GetRecordsOutput_Records:
+			return deserializeRecordList(d, schemas.GetRecordsOutput_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecords, schemas.GetRecordsInput, schemas.GetRecordsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecords, schemas.GetRecordsInput, schemas.GetRecordsOutput), output: &GetRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

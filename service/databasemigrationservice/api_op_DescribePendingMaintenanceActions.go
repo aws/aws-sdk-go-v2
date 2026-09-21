@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type DescribePendingMaintenanceActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePendingMaintenanceActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePendingMaintenanceActionsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePendingMaintenanceActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribePendingMaintenanceActionsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribePendingMaintenanceActionsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.DescribePendingMaintenanceActionsMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+}
+
 type DescribePendingMaintenanceActionsOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -67,13 +88,35 @@ type DescribePendingMaintenanceActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePendingMaintenanceActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePendingMaintenanceActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePendingMaintenanceActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribePendingMaintenanceActionsResponse_Marker, *v.Marker)
+	}
+	serializePendingMaintenanceActions(s, schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions, v.PendingMaintenanceActions)
+}
+func (v *DescribePendingMaintenanceActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePendingMaintenanceActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePendingMaintenanceActionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribePendingMaintenanceActionsResponse_Marker, v.Marker)
+		case schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions:
+			return deserializePendingMaintenanceActions(d, schemas.DescribePendingMaintenanceActionsResponse_PendingMaintenanceActions, &v.PendingMaintenanceActions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePendingMaintenanceActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingMaintenanceActions, schemas.DescribePendingMaintenanceActionsMessage, schemas.DescribePendingMaintenanceActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePendingMaintenanceActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePendingMaintenanceActions, schemas.DescribePendingMaintenanceActionsMessage, schemas.DescribePendingMaintenanceActionsResponse), output: &DescribePendingMaintenanceActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

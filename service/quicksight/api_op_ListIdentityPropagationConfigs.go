@@ -4,7 +4,9 @@ package quicksight
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListIdentityPropagationConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityPropagationConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityPropagationConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityPropagationConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityPropagationConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIdentityPropagationConfigsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -66,13 +86,46 @@ type ListIdentityPropagationConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityPropagationConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityPropagationConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityPropagationConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsResponse_RequestId, *v.RequestId)
+	}
+	serializeAuthorizedTargetsByServices(s, schemas.ListIdentityPropagationConfigsResponse_Services, v.Services)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListIdentityPropagationConfigsResponse_Status, v.Status)
+	}
+}
+func (v *ListIdentityPropagationConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityPropagationConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityPropagationConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityPropagationConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListIdentityPropagationConfigsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListIdentityPropagationConfigsResponse_RequestId, v.RequestId)
+		case schemas.ListIdentityPropagationConfigsResponse_Services:
+			return deserializeAuthorizedTargetsByServices(d, schemas.ListIdentityPropagationConfigsResponse_Services, &v.Services)
+		case schemas.ListIdentityPropagationConfigsResponse_Status:
+			return d.ReadInt32(schemas.ListIdentityPropagationConfigsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityPropagationConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityPropagationConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityPropagationConfigs, schemas.ListIdentityPropagationConfigsRequest, schemas.ListIdentityPropagationConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityPropagationConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityPropagationConfigs, schemas.ListIdentityPropagationConfigsRequest, schemas.ListIdentityPropagationConfigsResponse), output: &ListIdentityPropagationConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

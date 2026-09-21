@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -208,6 +210,68 @@ type UpdateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_ApiId, *v.ApiId)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.UpdateIntegrationRequest_ConnectionType, string(v.ConnectionType))
+	}
+	if v.ContentHandlingStrategy != "" {
+		s.WriteString(schemas.UpdateIntegrationRequest_ContentHandlingStrategy, string(v.ContentHandlingStrategy))
+	}
+	if v.CredentialsArn != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_CredentialsArn, *v.CredentialsArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_Description, *v.Description)
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_IntegrationId, *v.IntegrationId)
+	}
+	if v.IntegrationMethod != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_IntegrationMethod, *v.IntegrationMethod)
+	}
+	if v.IntegrationSubtype != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_IntegrationSubtype, *v.IntegrationSubtype)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.UpdateIntegrationRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.IntegrationUri != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_IntegrationUri, *v.IntegrationUri)
+	}
+	if v.PassthroughBehavior != "" {
+		s.WriteString(schemas.UpdateIntegrationRequest_PassthroughBehavior, string(v.PassthroughBehavior))
+	}
+	if v.PayloadFormatVersion != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_PayloadFormatVersion, *v.PayloadFormatVersion)
+	}
+	serializeIntegrationParameters(s, schemas.UpdateIntegrationRequest_RequestParameters, v.RequestParameters)
+	serializeTemplateMap(s, schemas.UpdateIntegrationRequest_RequestTemplates, v.RequestTemplates)
+	serializeResponseParameters(s, schemas.UpdateIntegrationRequest_ResponseParameters, v.ResponseParameters)
+	if v.TemplateSelectionExpression != nil {
+		s.WriteString(schemas.UpdateIntegrationRequest_TemplateSelectionExpression, *v.TemplateSelectionExpression)
+	}
+	if v.TimeoutInMillis != nil {
+		s.WriteInt32(schemas.UpdateIntegrationRequest_TimeoutInMillis, *v.TimeoutInMillis)
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.UpdateIntegrationRequest_TlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateIntegrationOutput struct {
 
 	// Specifies whether an integration is managed by API Gateway. If you created an
@@ -398,13 +462,155 @@ type UpdateIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegrationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiGatewayManaged != nil {
+		s.WriteBool(schemas.UpdateIntegrationResult_ApiGatewayManaged, *v.ApiGatewayManaged)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.UpdateIntegrationResult_ConnectionType, string(v.ConnectionType))
+	}
+	if v.ContentHandlingStrategy != "" {
+		s.WriteString(schemas.UpdateIntegrationResult_ContentHandlingStrategy, string(v.ContentHandlingStrategy))
+	}
+	if v.CredentialsArn != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_CredentialsArn, *v.CredentialsArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_Description, *v.Description)
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_IntegrationId, *v.IntegrationId)
+	}
+	if v.IntegrationMethod != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_IntegrationMethod, *v.IntegrationMethod)
+	}
+	if v.IntegrationResponseSelectionExpression != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_IntegrationResponseSelectionExpression, *v.IntegrationResponseSelectionExpression)
+	}
+	if v.IntegrationSubtype != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_IntegrationSubtype, *v.IntegrationSubtype)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.UpdateIntegrationResult_IntegrationType, string(v.IntegrationType))
+	}
+	if v.IntegrationUri != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_IntegrationUri, *v.IntegrationUri)
+	}
+	if v.PassthroughBehavior != "" {
+		s.WriteString(schemas.UpdateIntegrationResult_PassthroughBehavior, string(v.PassthroughBehavior))
+	}
+	if v.PayloadFormatVersion != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_PayloadFormatVersion, *v.PayloadFormatVersion)
+	}
+	serializeIntegrationParameters(s, schemas.UpdateIntegrationResult_RequestParameters, v.RequestParameters)
+	serializeTemplateMap(s, schemas.UpdateIntegrationResult_RequestTemplates, v.RequestTemplates)
+	serializeResponseParameters(s, schemas.UpdateIntegrationResult_ResponseParameters, v.ResponseParameters)
+	if v.TemplateSelectionExpression != nil {
+		s.WriteString(schemas.UpdateIntegrationResult_TemplateSelectionExpression, *v.TemplateSelectionExpression)
+	}
+	if v.TimeoutInMillis != nil {
+		s.WriteInt32(schemas.UpdateIntegrationResult_TimeoutInMillis, *v.TimeoutInMillis)
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.UpdateIntegrationResult_TlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntegrationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIntegrationResult_ApiGatewayManaged:
+			v.ApiGatewayManaged = new(bool)
+			return d.ReadBool(schemas.UpdateIntegrationResult_ApiGatewayManaged, v.ApiGatewayManaged)
+		case schemas.UpdateIntegrationResult_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_ConnectionId, v.ConnectionId)
+		case schemas.UpdateIntegrationResult_ConnectionType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIntegrationResult_ConnectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = types.ConnectionType(ev)
+			return nil
+		case schemas.UpdateIntegrationResult_ContentHandlingStrategy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIntegrationResult_ContentHandlingStrategy, &ev); err != nil {
+				return err
+			}
+			v.ContentHandlingStrategy = types.ContentHandlingStrategy(ev)
+			return nil
+		case schemas.UpdateIntegrationResult_CredentialsArn:
+			v.CredentialsArn = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_CredentialsArn, v.CredentialsArn)
+		case schemas.UpdateIntegrationResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_Description, v.Description)
+		case schemas.UpdateIntegrationResult_IntegrationId:
+			v.IntegrationId = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_IntegrationId, v.IntegrationId)
+		case schemas.UpdateIntegrationResult_IntegrationMethod:
+			v.IntegrationMethod = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_IntegrationMethod, v.IntegrationMethod)
+		case schemas.UpdateIntegrationResult_IntegrationResponseSelectionExpression:
+			v.IntegrationResponseSelectionExpression = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_IntegrationResponseSelectionExpression, v.IntegrationResponseSelectionExpression)
+		case schemas.UpdateIntegrationResult_IntegrationSubtype:
+			v.IntegrationSubtype = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_IntegrationSubtype, v.IntegrationSubtype)
+		case schemas.UpdateIntegrationResult_IntegrationType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIntegrationResult_IntegrationType, &ev); err != nil {
+				return err
+			}
+			v.IntegrationType = types.IntegrationType(ev)
+			return nil
+		case schemas.UpdateIntegrationResult_IntegrationUri:
+			v.IntegrationUri = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_IntegrationUri, v.IntegrationUri)
+		case schemas.UpdateIntegrationResult_PassthroughBehavior:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIntegrationResult_PassthroughBehavior, &ev); err != nil {
+				return err
+			}
+			v.PassthroughBehavior = types.PassthroughBehavior(ev)
+			return nil
+		case schemas.UpdateIntegrationResult_PayloadFormatVersion:
+			v.PayloadFormatVersion = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_PayloadFormatVersion, v.PayloadFormatVersion)
+		case schemas.UpdateIntegrationResult_RequestParameters:
+			return deserializeIntegrationParameters(d, schemas.UpdateIntegrationResult_RequestParameters, &v.RequestParameters)
+		case schemas.UpdateIntegrationResult_RequestTemplates:
+			return deserializeTemplateMap(d, schemas.UpdateIntegrationResult_RequestTemplates, &v.RequestTemplates)
+		case schemas.UpdateIntegrationResult_ResponseParameters:
+			return deserializeResponseParameters(d, schemas.UpdateIntegrationResult_ResponseParameters, &v.ResponseParameters)
+		case schemas.UpdateIntegrationResult_TemplateSelectionExpression:
+			v.TemplateSelectionExpression = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResult_TemplateSelectionExpression, v.TemplateSelectionExpression)
+		case schemas.UpdateIntegrationResult_TimeoutInMillis:
+			v.TimeoutInMillis = new(int32)
+			return d.ReadInt32(schemas.UpdateIntegrationResult_TimeoutInMillis, v.TimeoutInMillis)
+		case schemas.UpdateIntegrationResult_TlsConfig:
+			v.TlsConfig = &types.TlsConfig{}
+			return v.TlsConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegration, schemas.UpdateIntegrationRequest, schemas.UpdateIntegrationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegration, schemas.UpdateIntegrationRequest, schemas.UpdateIntegrationResult), output: &UpdateIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

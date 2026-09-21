@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,35 @@ type CreateClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClassifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClassifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClassifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CsvClassifier != nil {
+		s.WriteStruct(schemas.CreateClassifierRequest_CsvClassifier)
+		v.CsvClassifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GrokClassifier != nil {
+		s.WriteStruct(schemas.CreateClassifierRequest_GrokClassifier)
+		v.GrokClassifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JsonClassifier != nil {
+		s.WriteStruct(schemas.CreateClassifierRequest_JsonClassifier)
+		v.JsonClassifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XMLClassifier != nil {
+		s.WriteStruct(schemas.CreateClassifierRequest_XMLClassifier)
+		v.XMLClassifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +81,26 @@ type CreateClassifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClassifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClassifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClassifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateClassifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClassifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClassifier, schemas.CreateClassifierRequest, schemas.CreateClassifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClassifier, schemas.CreateClassifierRequest, schemas.CreateClassifierResponse), output: &CreateClassifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

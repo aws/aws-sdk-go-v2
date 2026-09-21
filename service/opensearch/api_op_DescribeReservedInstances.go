@@ -5,7 +5,9 @@ package opensearch
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DescribeReservedInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeReservedInstancesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedInstancesRequest_NextToken, *v.NextToken)
+	}
+	if v.ReservedInstanceId != nil {
+		s.WriteString(schemas.DescribeReservedInstancesRequest_ReservedInstanceId, *v.ReservedInstanceId)
+	}
+}
+
 // Container for results from DescribeReservedInstances
 type DescribeReservedInstancesOutput struct {
 
@@ -64,13 +84,35 @@ type DescribeReservedInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedInstancesResponse_NextToken, *v.NextToken)
+	}
+	serializeReservedInstanceList(s, schemas.DescribeReservedInstancesResponse_ReservedInstances, v.ReservedInstances)
+}
+func (v *DescribeReservedInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReservedInstancesResponse_NextToken, v.NextToken)
+		case schemas.DescribeReservedInstancesResponse_ReservedInstances:
+			return deserializeReservedInstanceList(d, schemas.DescribeReservedInstancesResponse_ReservedInstances, &v.ReservedInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservedInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedInstances, schemas.DescribeReservedInstancesRequest, schemas.DescribeReservedInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReservedInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedInstances, schemas.DescribeReservedInstancesRequest, schemas.DescribeReservedInstancesResponse), output: &DescribeReservedInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

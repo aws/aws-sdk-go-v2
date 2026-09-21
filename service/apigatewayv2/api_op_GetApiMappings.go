@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetApiMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiMappingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetApiMappingsRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.GetApiMappingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetApiMappingsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetApiMappingsOutput struct {
 
 	// The elements from this collection.
@@ -56,13 +76,35 @@ type GetApiMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApiMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApiMappingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApiMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfApiMapping(s, schemas.GetApiMappingsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetApiMappingsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetApiMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApiMappingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApiMappingsResponse_Items:
+			return deserialize__listOfApiMapping(d, schemas.GetApiMappingsResponse_Items, &v.Items)
+		case schemas.GetApiMappingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetApiMappingsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApiMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApiMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiMappings, schemas.GetApiMappingsRequest, schemas.GetApiMappingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApiMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApiMappings, schemas.GetApiMappingsRequest, schemas.GetApiMappingsResponse), output: &GetApiMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

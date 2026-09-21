@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -69,6 +71,25 @@ type DescribeMetadataModelExportsAsScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelExportsAsScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelExportsAsScriptMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelExportsAsScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeMetadataModelExportsAsScriptMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelExportsAsScriptMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeMetadataModelExportsAsScriptMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeMetadataModelExportsAsScriptMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type DescribeMetadataModelExportsAsScriptOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -90,13 +111,35 @@ type DescribeMetadataModelExportsAsScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelExportsAsScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelExportsAsScriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelExportsAsScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelExportsAsScriptResponse_Marker, *v.Marker)
+	}
+	serializeSchemaConversionRequestList(s, schemas.DescribeMetadataModelExportsAsScriptResponse_Requests, v.Requests)
+}
+func (v *DescribeMetadataModelExportsAsScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetadataModelExportsAsScriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetadataModelExportsAsScriptResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelExportsAsScriptResponse_Marker, v.Marker)
+		case schemas.DescribeMetadataModelExportsAsScriptResponse_Requests:
+			return deserializeSchemaConversionRequestList(d, schemas.DescribeMetadataModelExportsAsScriptResponse_Requests, &v.Requests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetadataModelExportsAsScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetadataModelExportsAsScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelExportsAsScript, schemas.DescribeMetadataModelExportsAsScriptMessage, schemas.DescribeMetadataModelExportsAsScriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMetadataModelExportsAsScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelExportsAsScript, schemas.DescribeMetadataModelExportsAsScriptMessage, schemas.DescribeMetadataModelExportsAsScriptResponse), output: &DescribeMetadataModelExportsAsScriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

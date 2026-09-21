@@ -4,6 +4,8 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteReportPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReportPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReportPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReportPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportPlanName != nil {
+		s.WriteString(schemas.DeleteReportPlanInput_ReportPlanName, *v.ReportPlanName)
+	}
+}
+
 type DeleteReportPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteReportPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReportPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReportPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReportPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReportPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReportPlan, schemas.DeleteReportPlanInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReportPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReportPlan, schemas.DeleteReportPlanInput, nil), output: &DeleteReportPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,6 +19,38 @@ type Checksum struct {
 	Type ChecksumType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Checksum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Checksum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Checksum) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sum != nil {
+		s.WriteString(schemas.Checksum_Sum, *v.Sum)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Checksum_Type, string(v.Type))
+	}
+}
+func (v *Checksum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Checksum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Checksum_Sum:
+			v.Sum = new(string)
+			return d.ReadString(schemas.Checksum_Sum, v.Sum)
+		case schemas.Checksum_Type:
+			var ev string
+			if err := d.ReadString(schemas.Checksum_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ChecksumType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type Definition struct {
@@ -34,6 +68,52 @@ type Definition struct {
 	State ModelState
 
 	noSmithyDocumentSerde
+}
+
+func (v *Definition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Definition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Definition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteStruct(schemas.Definition_Checksum)
+		v.Checksum.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelHandle != nil {
+		s.WriteString(schemas.Definition_ModelHandle, *v.ModelHandle)
+	}
+	if v.S3Url != nil {
+		s.WriteString(schemas.Definition_S3Url, *v.S3Url)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Definition_State, string(v.State))
+	}
+}
+func (v *Definition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Definition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Definition_Checksum:
+			v.Checksum = &Checksum{}
+			return v.Checksum.Deserialize(d)
+		case schemas.Definition_ModelHandle:
+			v.ModelHandle = new(string)
+			return d.ReadString(schemas.Definition_ModelHandle, v.ModelHandle)
+		case schemas.Definition_S3Url:
+			v.S3Url = new(string)
+			return d.ReadString(schemas.Definition_S3Url, v.S3Url)
+		case schemas.Definition_State:
+			var ev string
+			if err := d.ReadString(schemas.Definition_State, &ev); err != nil {
+				return err
+			}
+			v.State = ModelState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type DeploymentModel struct {
@@ -65,6 +145,82 @@ type DeploymentModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredState != "" {
+		s.WriteString(schemas.DeploymentModel_DesiredState, string(v.DesiredState))
+	}
+	if v.ModelHandle != nil {
+		s.WriteString(schemas.DeploymentModel_ModelHandle, *v.ModelHandle)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.DeploymentModel_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.DeploymentModel_ModelVersion, *v.ModelVersion)
+	}
+	if v.RollbackFailureReason != nil {
+		s.WriteString(schemas.DeploymentModel_RollbackFailureReason, *v.RollbackFailureReason)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeploymentModel_State, string(v.State))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeploymentModel_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DeploymentModel_StatusReason, *v.StatusReason)
+	}
+}
+func (v *DeploymentModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentModel_DesiredState:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentModel_DesiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = ModelState(ev)
+			return nil
+		case schemas.DeploymentModel_ModelHandle:
+			v.ModelHandle = new(string)
+			return d.ReadString(schemas.DeploymentModel_ModelHandle, v.ModelHandle)
+		case schemas.DeploymentModel_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DeploymentModel_ModelName, v.ModelName)
+		case schemas.DeploymentModel_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.DeploymentModel_ModelVersion, v.ModelVersion)
+		case schemas.DeploymentModel_RollbackFailureReason:
+			v.RollbackFailureReason = new(string)
+			return d.ReadString(schemas.DeploymentModel_RollbackFailureReason, v.RollbackFailureReason)
+		case schemas.DeploymentModel_State:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentModel_State, &ev); err != nil {
+				return err
+			}
+			v.State = ModelState(ev)
+			return nil
+		case schemas.DeploymentModel_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentModel_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeploymentStatus(ev)
+			return nil
+		case schemas.DeploymentModel_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DeploymentModel_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // Information about the result of a deployment on an edge device that is
 // registered with SageMaker Edge Manager.
 type DeploymentResult struct {
@@ -91,6 +247,55 @@ type DeploymentResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeploymentResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentEndTime != nil {
+		s.WriteTime(schemas.DeploymentResult_DeploymentEndTime, *v.DeploymentEndTime)
+	}
+	serializeDeploymentModels(s, schemas.DeploymentResult_DeploymentModels, v.DeploymentModels)
+	if v.DeploymentName != nil {
+		s.WriteString(schemas.DeploymentResult_DeploymentName, *v.DeploymentName)
+	}
+	if v.DeploymentStartTime != nil {
+		s.WriteTime(schemas.DeploymentResult_DeploymentStartTime, *v.DeploymentStartTime)
+	}
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.DeploymentResult_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.DeploymentStatusMessage != nil {
+		s.WriteString(schemas.DeploymentResult_DeploymentStatusMessage, *v.DeploymentStatusMessage)
+	}
+}
+func (v *DeploymentResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentResult_DeploymentEndTime:
+			v.DeploymentEndTime = new(time.Time)
+			return d.ReadTime(schemas.DeploymentResult_DeploymentEndTime, v.DeploymentEndTime)
+		case schemas.DeploymentResult_DeploymentModels:
+			return deserializeDeploymentModels(d, schemas.DeploymentResult_DeploymentModels, &v.DeploymentModels)
+		case schemas.DeploymentResult_DeploymentName:
+			v.DeploymentName = new(string)
+			return d.ReadString(schemas.DeploymentResult_DeploymentName, v.DeploymentName)
+		case schemas.DeploymentResult_DeploymentStartTime:
+			v.DeploymentStartTime = new(time.Time)
+			return d.ReadTime(schemas.DeploymentResult_DeploymentStartTime, v.DeploymentStartTime)
+		case schemas.DeploymentResult_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.DeploymentResult_DeploymentStatus, v.DeploymentStatus)
+		case schemas.DeploymentResult_DeploymentStatusMessage:
+			v.DeploymentStatusMessage = new(string)
+			return d.ReadString(schemas.DeploymentResult_DeploymentStatusMessage, v.DeploymentStatusMessage)
+		}
+		return nil
+	})
+}
+
 // Information about a deployment on an edge device that is registered with
 // SageMaker Edge Manager.
 type EdgeDeployment struct {
@@ -110,6 +315,51 @@ type EdgeDeployment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EdgeDeployment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdgeDeployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdgeDeployment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDefinitions(s, schemas.EdgeDeployment_Definitions, v.Definitions)
+	if v.DeploymentName != nil {
+		s.WriteString(schemas.EdgeDeployment_DeploymentName, *v.DeploymentName)
+	}
+	if v.FailureHandlingPolicy != "" {
+		s.WriteString(schemas.EdgeDeployment_FailureHandlingPolicy, string(v.FailureHandlingPolicy))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EdgeDeployment_Type, string(v.Type))
+	}
+}
+func (v *EdgeDeployment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdgeDeployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdgeDeployment_Definitions:
+			return deserializeDefinitions(d, schemas.EdgeDeployment_Definitions, &v.Definitions)
+		case schemas.EdgeDeployment_DeploymentName:
+			v.DeploymentName = new(string)
+			return d.ReadString(schemas.EdgeDeployment_DeploymentName, v.DeploymentName)
+		case schemas.EdgeDeployment_FailureHandlingPolicy:
+			var ev string
+			if err := d.ReadString(schemas.EdgeDeployment_FailureHandlingPolicy, &ev); err != nil {
+				return err
+			}
+			v.FailureHandlingPolicy = FailureHandlingPolicy(ev)
+			return nil
+		case schemas.EdgeDeployment_Type:
+			var ev string
+			if err := d.ReadString(schemas.EdgeDeployment_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DeploymentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information required for edge device metrics.
 type EdgeMetric struct {
 
@@ -126,6 +376,46 @@ type EdgeMetric struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *EdgeMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdgeMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdgeMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimension != nil {
+		s.WriteString(schemas.EdgeMetric_Dimension, *v.Dimension)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.EdgeMetric_MetricName, *v.MetricName)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.EdgeMetric_Timestamp, *v.Timestamp)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.EdgeMetric_Value, *v.Value)
+	}
+}
+func (v *EdgeMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdgeMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdgeMetric_Dimension:
+			v.Dimension = new(string)
+			return d.ReadString(schemas.EdgeMetric_Dimension, v.Dimension)
+		case schemas.EdgeMetric_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.EdgeMetric_MetricName, v.MetricName)
+		case schemas.EdgeMetric_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.EdgeMetric_Timestamp, v.Timestamp)
+		case schemas.EdgeMetric_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.EdgeMetric_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about a model deployed on an edge device that is registered with
@@ -148,6 +438,49 @@ type Model struct {
 	ModelVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Model) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Model)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Model) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestInference != nil {
+		s.WriteTime(schemas.Model_LatestInference, *v.LatestInference)
+	}
+	if v.LatestSampleTime != nil {
+		s.WriteTime(schemas.Model_LatestSampleTime, *v.LatestSampleTime)
+	}
+	serializeEdgeMetrics(s, schemas.Model_ModelMetrics, v.ModelMetrics)
+	if v.ModelName != nil {
+		s.WriteString(schemas.Model_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.Model_ModelVersion, *v.ModelVersion)
+	}
+}
+func (v *Model) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Model, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Model_LatestInference:
+			v.LatestInference = new(time.Time)
+			return d.ReadTime(schemas.Model_LatestInference, v.LatestInference)
+		case schemas.Model_LatestSampleTime:
+			v.LatestSampleTime = new(time.Time)
+			return d.ReadTime(schemas.Model_LatestSampleTime, v.LatestSampleTime)
+		case schemas.Model_ModelMetrics:
+			return deserializeEdgeMetrics(d, schemas.Model_ModelMetrics, &v.ModelMetrics)
+		case schemas.Model_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.Model_ModelName, v.ModelName)
+		case schemas.Model_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.Model_ModelVersion, v.ModelVersion)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

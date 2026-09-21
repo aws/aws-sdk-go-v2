@@ -4,7 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,29 @@ type UpdatePortalProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortalProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortalProductRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortalProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePortalProductRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdatePortalProductRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DisplayOrder != nil {
+		s.WriteStruct(schemas.UpdatePortalProductRequest_DisplayOrder)
+		v.DisplayOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.UpdatePortalProductRequest_PortalProductId, *v.PortalProductId)
+	}
+}
+
 type UpdatePortalProductOutput struct {
 
 	// The description of the portal product.
@@ -74,13 +99,67 @@ type UpdatePortalProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePortalProductOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePortalProductResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePortalProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePortalProductResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdatePortalProductResponse_DisplayName, *v.DisplayName)
+	}
+	if v.DisplayOrder != nil {
+		s.WriteStruct(schemas.UpdatePortalProductResponse_DisplayOrder)
+		v.DisplayOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.UpdatePortalProductResponse_LastModified, *v.LastModified)
+	}
+	if v.PortalProductArn != nil {
+		s.WriteString(schemas.UpdatePortalProductResponse_PortalProductArn, *v.PortalProductArn)
+	}
+	if v.PortalProductId != nil {
+		s.WriteString(schemas.UpdatePortalProductResponse_PortalProductId, *v.PortalProductId)
+	}
+	serializeTags(s, schemas.UpdatePortalProductResponse_Tags, v.Tags)
+}
+func (v *UpdatePortalProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePortalProductResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePortalProductResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdatePortalProductResponse_Description, v.Description)
+		case schemas.UpdatePortalProductResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdatePortalProductResponse_DisplayName, v.DisplayName)
+		case schemas.UpdatePortalProductResponse_DisplayOrder:
+			v.DisplayOrder = &types.DisplayOrder{}
+			return v.DisplayOrder.Deserialize(d)
+		case schemas.UpdatePortalProductResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.UpdatePortalProductResponse_LastModified, v.LastModified)
+		case schemas.UpdatePortalProductResponse_PortalProductArn:
+			v.PortalProductArn = new(string)
+			return d.ReadString(schemas.UpdatePortalProductResponse_PortalProductArn, v.PortalProductArn)
+		case schemas.UpdatePortalProductResponse_PortalProductId:
+			v.PortalProductId = new(string)
+			return d.ReadString(schemas.UpdatePortalProductResponse_PortalProductId, v.PortalProductId)
+		case schemas.UpdatePortalProductResponse_Tags:
+			return deserializeTags(d, schemas.UpdatePortalProductResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePortalProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePortalProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortalProduct, schemas.UpdatePortalProductRequest, schemas.UpdatePortalProductResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePortalProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePortalProduct, schemas.UpdatePortalProductRequest, schemas.UpdatePortalProductResponse), output: &UpdatePortalProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

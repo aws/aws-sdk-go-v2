@@ -5,7 +5,9 @@ package devicefarm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,24 @@ type ListUploadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUploadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUploadsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUploadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListUploadsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUploadsRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListUploadsRequest_type, string(v.Type))
+	}
+}
+
 // Represents the result of a list uploads request.
 type ListUploadsOutput struct {
 
@@ -121,13 +141,35 @@ type ListUploadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUploadsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUploadsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUploadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUploadsResult_nextToken, *v.NextToken)
+	}
+	serializeUploads(s, schemas.ListUploadsResult_uploads, v.Uploads)
+}
+func (v *ListUploadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUploadsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUploadsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUploadsResult_nextToken, v.NextToken)
+		case schemas.ListUploadsResult_uploads:
+			return deserializeUploads(d, schemas.ListUploadsResult_uploads, &v.Uploads)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUploads{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUploads, schemas.ListUploadsRequest, schemas.ListUploadsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUploads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUploads, schemas.ListUploadsRequest, schemas.ListUploadsResult), output: &ListUploadsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

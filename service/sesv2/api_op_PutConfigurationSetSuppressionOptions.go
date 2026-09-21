@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,27 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetSuppressionOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetSuppressionOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetSuppressionOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.PutConfigurationSetSuppressionOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeSuppressionListReasons(s, schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.SuppressionScope != "" {
+		s.WriteString(schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressionScope, string(v.SuppressionScope))
+	}
+	if v.ValidationOptions != nil {
+		s.WriteStruct(schemas.PutConfigurationSetSuppressionOptionsRequest_ValidationOptions)
+		v.ValidationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutConfigurationSetSuppressionOptionsOutput struct {
@@ -74,13 +97,26 @@ type PutConfigurationSetSuppressionOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetSuppressionOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetSuppressionOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetSuppressionOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutConfigurationSetSuppressionOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfigurationSetSuppressionOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfigurationSetSuppressionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetSuppressionOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetSuppressionOptions, schemas.PutConfigurationSetSuppressionOptionsRequest, schemas.PutConfigurationSetSuppressionOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConfigurationSetSuppressionOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetSuppressionOptions, schemas.PutConfigurationSetSuppressionOptionsRequest, schemas.PutConfigurationSetSuppressionOptionsResponse), output: &PutConfigurationSetSuppressionOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

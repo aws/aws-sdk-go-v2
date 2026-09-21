@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,22 @@ type GetOrganizationStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetOrganizationStatisticsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetOrganizationStatisticsOutput struct {
 
 	// Information about the statistics report for your organization.
@@ -44,13 +62,34 @@ type GetOrganizationStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationDetails != nil {
+		s.WriteStruct(schemas.GetOrganizationStatisticsResponse_OrganizationDetails)
+		v.OrganizationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOrganizationStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrganizationStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrganizationStatisticsResponse_OrganizationDetails:
+			v.OrganizationDetails = &types.OrganizationDetails{}
+			return v.OrganizationDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrganizationStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOrganizationStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationStatistics, nil, schemas.GetOrganizationStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOrganizationStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationStatistics, nil, schemas.GetOrganizationStatisticsResponse), output: &GetOrganizationStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

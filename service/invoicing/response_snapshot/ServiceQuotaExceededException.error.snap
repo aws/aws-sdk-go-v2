@@ -1,0 +1,5 @@
+402
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.CreateProcurementPortalPreference
+
+{"__type":"ServiceQuotaExceededException","message":"__Message__"}

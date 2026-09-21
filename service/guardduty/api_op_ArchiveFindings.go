@@ -4,6 +4,8 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type ArchiveFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArchiveFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ArchiveFindingsRequest_DetectorId, *v.DetectorId)
+	}
+	serializeFindingIds(s, schemas.ArchiveFindingsRequest_FindingIds, v.FindingIds)
+}
+
 type ArchiveFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +69,26 @@ type ArchiveFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ArchiveFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ArchiveFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ArchiveFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationArchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpArchiveFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ArchiveFindings, schemas.ArchiveFindingsRequest, schemas.ArchiveFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpArchiveFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ArchiveFindings, schemas.ArchiveFindingsRequest, schemas.ArchiveFindingsResponse), output: &ArchiveFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

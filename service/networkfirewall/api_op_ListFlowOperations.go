@@ -5,7 +5,9 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,36 @@ type ListFlowOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FlowOperationType != "" {
+		s.WriteString(schemas.ListFlowOperationsRequest_FlowOperationType, string(v.FlowOperationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_NextToken, *v.NextToken)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+
 type ListFlowOperationsOutput struct {
 
 	// Flow operations let you manage the flows tracked in the flow table, also known
@@ -96,13 +128,35 @@ type ListFlowOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowOperations(s, schemas.ListFlowOperationsResponse_FlowOperations, v.FlowOperations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowOperationsResponse_FlowOperations:
+			return deserializeFlowOperations(d, schemas.ListFlowOperationsResponse_FlowOperations, &v.FlowOperations)
+		case schemas.ListFlowOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFlowOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowOperations, schemas.ListFlowOperationsRequest, schemas.ListFlowOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFlowOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowOperations, schemas.ListFlowOperationsRequest, schemas.ListFlowOperationsResponse), output: &ListFlowOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

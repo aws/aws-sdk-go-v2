@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,35 @@ type GetTableVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetTableVersionsRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetTableVersionsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetTableVersionsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTableVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTableVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableVersionsRequest_TableName, *v.TableName)
+	}
+}
+
 type GetTableVersionsOutput struct {
 
 	// A continuation token, if the list of available versions does not include the
@@ -70,13 +101,35 @@ type GetTableVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTableVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializeGetTableVersionsList(s, schemas.GetTableVersionsResponse_TableVersions, v.TableVersions)
+}
+func (v *GetTableVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTableVersionsResponse_NextToken, v.NextToken)
+		case schemas.GetTableVersionsResponse_TableVersions:
+			return deserializeGetTableVersionsList(d, schemas.GetTableVersionsResponse_TableVersions, &v.TableVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTableVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableVersions, schemas.GetTableVersionsRequest, schemas.GetTableVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTableVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableVersions, schemas.GetTableVersionsRequest, schemas.GetTableVersionsResponse), output: &GetTableVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

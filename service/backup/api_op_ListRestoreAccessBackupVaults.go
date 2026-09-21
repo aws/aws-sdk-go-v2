@@ -5,7 +5,9 @@ package backup
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListRestoreAccessBackupVaultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreAccessBackupVaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreAccessBackupVaultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreAccessBackupVaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ListRestoreAccessBackupVaultsInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRestoreAccessBackupVaultsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreAccessBackupVaultsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRestoreAccessBackupVaultsOutput struct {
 
 	// The pagination token to use in a subsequent request to retrieve the next set of
@@ -60,13 +80,35 @@ type ListRestoreAccessBackupVaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreAccessBackupVaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreAccessBackupVaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreAccessBackupVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreAccessBackupVaultsOutput_NextToken, *v.NextToken)
+	}
+	serializeRestoreAccessBackupVaultList(s, schemas.ListRestoreAccessBackupVaultsOutput_RestoreAccessBackupVaults, v.RestoreAccessBackupVaults)
+}
+func (v *ListRestoreAccessBackupVaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRestoreAccessBackupVaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRestoreAccessBackupVaultsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRestoreAccessBackupVaultsOutput_NextToken, v.NextToken)
+		case schemas.ListRestoreAccessBackupVaultsOutput_RestoreAccessBackupVaults:
+			return deserializeRestoreAccessBackupVaultList(d, schemas.ListRestoreAccessBackupVaultsOutput_RestoreAccessBackupVaults, &v.RestoreAccessBackupVaults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRestoreAccessBackupVaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRestoreAccessBackupVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreAccessBackupVaults, schemas.ListRestoreAccessBackupVaultsInput, schemas.ListRestoreAccessBackupVaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRestoreAccessBackupVaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreAccessBackupVaults, schemas.ListRestoreAccessBackupVaultsInput, schemas.ListRestoreAccessBackupVaultsOutput), output: &ListRestoreAccessBackupVaultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

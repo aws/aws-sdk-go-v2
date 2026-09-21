@@ -4,7 +4,9 @@ package backup
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,21 @@ type GetRecoveryPointIndexDetailsInput struct {
 	RecoveryPointArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRecoveryPointIndexDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecoveryPointIndexDetailsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecoveryPointIndexDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
 }
 
 type GetRecoveryPointIndexDetailsOutput struct {
@@ -104,13 +121,84 @@ type GetRecoveryPointIndexDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecoveryPointIndexDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecoveryPointIndexDetailsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecoveryPointIndexDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.IndexCompletionDate != nil {
+		s.WriteTime(schemas.GetRecoveryPointIndexDetailsOutput_IndexCompletionDate, *v.IndexCompletionDate)
+	}
+	if v.IndexCreationDate != nil {
+		s.WriteTime(schemas.GetRecoveryPointIndexDetailsOutput_IndexCreationDate, *v.IndexCreationDate)
+	}
+	if v.IndexDeletionDate != nil {
+		s.WriteTime(schemas.GetRecoveryPointIndexDetailsOutput_IndexDeletionDate, *v.IndexDeletionDate)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsOutput_IndexStatus, string(v.IndexStatus))
+	}
+	if v.IndexStatusMessage != nil {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsOutput_IndexStatusMessage, *v.IndexStatusMessage)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.GetRecoveryPointIndexDetailsOutput_SourceResourceArn, *v.SourceResourceArn)
+	}
+	if v.TotalItemsIndexed != nil {
+		s.WriteInt64(schemas.GetRecoveryPointIndexDetailsOutput_TotalItemsIndexed, *v.TotalItemsIndexed)
+	}
+}
+func (v *GetRecoveryPointIndexDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecoveryPointIndexDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecoveryPointIndexDetailsOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.GetRecoveryPointIndexDetailsOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.GetRecoveryPointIndexDetailsOutput_IndexCompletionDate:
+			v.IndexCompletionDate = new(time.Time)
+			return d.ReadTime(schemas.GetRecoveryPointIndexDetailsOutput_IndexCompletionDate, v.IndexCompletionDate)
+		case schemas.GetRecoveryPointIndexDetailsOutput_IndexCreationDate:
+			v.IndexCreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetRecoveryPointIndexDetailsOutput_IndexCreationDate, v.IndexCreationDate)
+		case schemas.GetRecoveryPointIndexDetailsOutput_IndexDeletionDate:
+			v.IndexDeletionDate = new(time.Time)
+			return d.ReadTime(schemas.GetRecoveryPointIndexDetailsOutput_IndexDeletionDate, v.IndexDeletionDate)
+		case schemas.GetRecoveryPointIndexDetailsOutput_IndexStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetRecoveryPointIndexDetailsOutput_IndexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = types.IndexStatus(ev)
+			return nil
+		case schemas.GetRecoveryPointIndexDetailsOutput_IndexStatusMessage:
+			v.IndexStatusMessage = new(string)
+			return d.ReadString(schemas.GetRecoveryPointIndexDetailsOutput_IndexStatusMessage, v.IndexStatusMessage)
+		case schemas.GetRecoveryPointIndexDetailsOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.GetRecoveryPointIndexDetailsOutput_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.GetRecoveryPointIndexDetailsOutput_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.GetRecoveryPointIndexDetailsOutput_SourceResourceArn, v.SourceResourceArn)
+		case schemas.GetRecoveryPointIndexDetailsOutput_TotalItemsIndexed:
+			v.TotalItemsIndexed = new(int64)
+			return d.ReadInt64(schemas.GetRecoveryPointIndexDetailsOutput_TotalItemsIndexed, v.TotalItemsIndexed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecoveryPointIndexDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecoveryPointIndexDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryPointIndexDetails, schemas.GetRecoveryPointIndexDetailsInput, schemas.GetRecoveryPointIndexDetailsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecoveryPointIndexDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryPointIndexDetails, schemas.GetRecoveryPointIndexDetailsInput, schemas.GetRecoveryPointIndexDetailsOutput), output: &GetRecoveryPointIndexDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

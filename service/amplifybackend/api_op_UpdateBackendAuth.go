@@ -4,7 +4,9 @@ package amplifybackend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type UpdateBackendAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendAuthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendAuthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendAuthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendAuthRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBackendAuthRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendAuthRequest_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.UpdateBackendAuthRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type UpdateBackendAuthOutput struct {
 
 	// The app ID.
@@ -76,13 +101,62 @@ type UpdateBackendAuthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendAuthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendAuthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendAuthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendAuthResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.UpdateBackendAuthResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.UpdateBackendAuthResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateBackendAuthResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.UpdateBackendAuthResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UpdateBackendAuthResponse_Status, *v.Status)
+	}
+}
+func (v *UpdateBackendAuthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBackendAuthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBackendAuthResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateBackendAuthResponse_AppId, v.AppId)
+		case schemas.UpdateBackendAuthResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateBackendAuthResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.UpdateBackendAuthResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.UpdateBackendAuthResponse_Error, v.Error)
+		case schemas.UpdateBackendAuthResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.UpdateBackendAuthResponse_JobId, v.JobId)
+		case schemas.UpdateBackendAuthResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.UpdateBackendAuthResponse_Operation, v.Operation)
+		case schemas.UpdateBackendAuthResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UpdateBackendAuthResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackendAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendAuth, schemas.UpdateBackendAuthRequest, schemas.UpdateBackendAuthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBackendAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendAuth, schemas.UpdateBackendAuthRequest, schemas.UpdateBackendAuthResponse), output: &UpdateBackendAuthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

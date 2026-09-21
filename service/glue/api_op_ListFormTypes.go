@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListFormTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFormTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFormTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFormTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFormTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFormTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFormTypesOutput struct {
 
 	// The list of form type items.
@@ -52,13 +69,35 @@ type ListFormTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFormTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFormTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFormTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFormTypeItemList(s, schemas.ListFormTypesResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFormTypesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFormTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFormTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFormTypesResponse_Items:
+			return deserializeFormTypeItemList(d, schemas.ListFormTypesResponse_Items, &v.Items)
+		case schemas.ListFormTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFormTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFormTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFormTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFormTypes, schemas.ListFormTypesRequest, schemas.ListFormTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFormTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFormTypes, schemas.ListFormTypesRequest, schemas.ListFormTypesResponse), output: &ListFormTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

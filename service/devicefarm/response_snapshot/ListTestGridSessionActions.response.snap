@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.ListTestGridSessionActions
+
+{"actions":[{"action":"__Action__","duration":1,"requestMethod":"__RequestMethod__","started":946684800,"statusCode":"__StatusCode__"},{"action":"__Action__","duration":1,"requestMethod":"__RequestMethod__","started":946684800,"statusCode":"__StatusCode__"}],"nextToken":"__NextToken__"}

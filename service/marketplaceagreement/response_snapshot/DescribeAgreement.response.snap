@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.DescribeAgreement
+
+{"acceptanceTime":946684800,"acceptor":{"accountId":"__AccountId__"},"agreementId":"__AgreementId__","agreementType":"__AgreementType__","endTime":946684800,"endTimeBehavior":{"reasonCode":"PROPOSER_RENEW_OPTED_OUT","renewalSummary":{"offerId":"__OfferId__"},"type":"RENEW"},"estimatedCharges":{"agreementValue":"__AgreementValue__","currencyCode":"__CurrencyCode__"},"initialAgreementId":"__InitialAgreementId__","proposalSummary":{"offerId":"__OfferId__","offerSetId":"__OfferSetId__","resources":[{"id":"__Id__","type":"__Type__"},{"id":"__Id__","type":"__Type__"}]},"proposer":{"accountId":"__AccountId__"},"startTime":946684800,"status":"ACTIVE"}

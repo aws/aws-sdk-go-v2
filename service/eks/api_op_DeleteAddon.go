@@ -4,7 +4,9 @@ package eks
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DeleteAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAddonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAddonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DeleteAddonRequest_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DeleteAddonRequest_clusterName, *v.ClusterName)
+	}
+	if v.Preserve != false {
+		s.WriteBool(schemas.DeleteAddonRequest_preserve, v.Preserve)
+	}
+}
+
 type DeleteAddonOutput struct {
 
 	// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
@@ -63,13 +83,34 @@ type DeleteAddonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAddonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAddonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAddonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Addon != nil {
+		s.WriteStruct(schemas.DeleteAddonResponse_addon)
+		v.Addon.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAddonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAddonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAddonResponse_addon:
+			v.Addon = &types.Addon{}
+			return v.Addon.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAddon, schemas.DeleteAddonRequest, schemas.DeleteAddonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAddon, schemas.DeleteAddonRequest, schemas.DeleteAddonResponse), output: &DeleteAddonOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

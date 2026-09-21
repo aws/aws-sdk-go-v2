@@ -4,7 +4,9 @@ package glue
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type BatchCreatePartitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreatePartitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreatePartitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreatePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.BatchCreatePartitionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.BatchCreatePartitionRequest_DatabaseName, *v.DatabaseName)
+	}
+	serializePartitionInputList(s, schemas.BatchCreatePartitionRequest_PartitionInputList, v.PartitionInputList)
+	if v.TableName != nil {
+		s.WriteString(schemas.BatchCreatePartitionRequest_TableName, *v.TableName)
+	}
+}
+
 type BatchCreatePartitionOutput struct {
 
 	// The errors encountered when trying to create the requested partitions.
@@ -59,13 +80,29 @@ type BatchCreatePartitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreatePartitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreatePartitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreatePartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartitionErrors(s, schemas.BatchCreatePartitionResponse_Errors, v.Errors)
+}
+func (v *BatchCreatePartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreatePartitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreatePartitionResponse_Errors:
+			return deserializePartitionErrors(d, schemas.BatchCreatePartitionResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchCreatePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreatePartition, schemas.BatchCreatePartitionRequest, schemas.BatchCreatePartitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchCreatePartition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreatePartition, schemas.BatchCreatePartitionRequest, schemas.BatchCreatePartitionResponse), output: &BatchCreatePartitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

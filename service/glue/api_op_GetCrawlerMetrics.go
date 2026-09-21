@@ -5,7 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type GetCrawlerMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCrawlerMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCrawlerMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCrawlerMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrawlerNameList(s, schemas.GetCrawlerMetricsRequest_CrawlerNameList, v.CrawlerNameList)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCrawlerMetricsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCrawlerMetricsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetCrawlerMetricsOutput struct {
 
 	// A list of metrics for the specified crawler.
@@ -54,13 +72,35 @@ type GetCrawlerMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCrawlerMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCrawlerMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCrawlerMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrawlerMetricsList(s, schemas.GetCrawlerMetricsResponse_CrawlerMetricsList, v.CrawlerMetricsList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCrawlerMetricsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetCrawlerMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCrawlerMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCrawlerMetricsResponse_CrawlerMetricsList:
+			return deserializeCrawlerMetricsList(d, schemas.GetCrawlerMetricsResponse_CrawlerMetricsList, &v.CrawlerMetricsList)
+		case schemas.GetCrawlerMetricsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCrawlerMetricsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCrawlerMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCrawlerMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCrawlerMetrics, schemas.GetCrawlerMetricsRequest, schemas.GetCrawlerMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCrawlerMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCrawlerMetrics, schemas.GetCrawlerMetricsRequest, schemas.GetCrawlerMetricsResponse), output: &GetCrawlerMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

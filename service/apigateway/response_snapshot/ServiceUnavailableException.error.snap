@@ -1,0 +1,5 @@
+503
+Content-Type: application/json
+Retry-After: __RetryAfterSeconds__
+
+{"__type":"ServiceUnavailableException","message":"__Message__"}

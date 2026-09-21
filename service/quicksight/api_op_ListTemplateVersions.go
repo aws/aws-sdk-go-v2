@@ -5,7 +5,9 @@ package quicksight
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListTemplateVersionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTemplateVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.ListTemplateVersionsRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type ListTemplateVersionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -68,13 +91,46 @@ type ListTemplateVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateVersionsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListTemplateVersionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListTemplateVersionsResponse_Status, v.Status)
+	}
+	serializeTemplateVersionSummaryList(s, schemas.ListTemplateVersionsResponse_TemplateVersionSummaryList, v.TemplateVersionSummaryList)
+}
+func (v *ListTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListTemplateVersionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListTemplateVersionsResponse_RequestId, v.RequestId)
+		case schemas.ListTemplateVersionsResponse_Status:
+			return d.ReadInt32(schemas.ListTemplateVersionsResponse_Status, &v.Status)
+		case schemas.ListTemplateVersionsResponse_TemplateVersionSummaryList:
+			return deserializeTemplateVersionSummaryList(d, schemas.ListTemplateVersionsResponse_TemplateVersionSummaryList, &v.TemplateVersionSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateVersions, schemas.ListTemplateVersionsRequest, schemas.ListTemplateVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateVersions, schemas.ListTemplateVersionsRequest, schemas.ListTemplateVersionsResponse), output: &ListTemplateVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

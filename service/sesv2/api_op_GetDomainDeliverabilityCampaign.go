@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type GetDomainDeliverabilityCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainDeliverabilityCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainDeliverabilityCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainDeliverabilityCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignId != nil {
+		s.WriteString(schemas.GetDomainDeliverabilityCampaignRequest_CampaignId, *v.CampaignId)
+	}
+}
+
 // An object that contains all the deliverability data for a specific campaign.
 // This data is available for a campaign only if the campaign sent email by using a
 // domain that the Deliverability dashboard is enabled for.
@@ -57,13 +71,34 @@ type GetDomainDeliverabilityCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainDeliverabilityCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainDeliverabilityCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainDeliverabilityCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainDeliverabilityCampaign != nil {
+		s.WriteStruct(schemas.GetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign)
+		v.DomainDeliverabilityCampaign.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDomainDeliverabilityCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainDeliverabilityCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign:
+			v.DomainDeliverabilityCampaign = &types.DomainDeliverabilityCampaign{}
+			return v.DomainDeliverabilityCampaign.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainDeliverabilityCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainDeliverabilityCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainDeliverabilityCampaign, schemas.GetDomainDeliverabilityCampaignRequest, schemas.GetDomainDeliverabilityCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainDeliverabilityCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainDeliverabilityCampaign, schemas.GetDomainDeliverabilityCampaignRequest, schemas.GetDomainDeliverabilityCampaignResponse), output: &GetDomainDeliverabilityCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

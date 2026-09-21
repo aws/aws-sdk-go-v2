@@ -4,7 +4,9 @@ package sesv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,16 @@ type BatchGetMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetMetricDataQueries(s, schemas.BatchGetMetricDataRequest_Queries, v.Queries)
+}
+
 // Represents the result of processing your metric data batch request
 type BatchGetMetricDataOutput struct {
 
@@ -54,13 +66,32 @@ type BatchGetMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetMetricDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDataErrorList(s, schemas.BatchGetMetricDataResponse_Errors, v.Errors)
+	serializeMetricDataResultList(s, schemas.BatchGetMetricDataResponse_Results, v.Results)
+}
+func (v *BatchGetMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetMetricDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetMetricDataResponse_Errors:
+			return deserializeMetricDataErrorList(d, schemas.BatchGetMetricDataResponse_Errors, &v.Errors)
+		case schemas.BatchGetMetricDataResponse_Results:
+			return deserializeMetricDataResultList(d, schemas.BatchGetMetricDataResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMetricData, schemas.BatchGetMetricDataRequest, schemas.BatchGetMetricDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMetricData, schemas.BatchGetMetricDataRequest, schemas.BatchGetMetricDataResponse), output: &BatchGetMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

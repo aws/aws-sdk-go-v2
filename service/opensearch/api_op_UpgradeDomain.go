@@ -4,7 +4,9 @@ package opensearch
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,25 @@ type UpgradeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedOptions(s, schemas.UpgradeDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpgradeDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.PerformCheckOnly != nil {
+		s.WriteBool(schemas.UpgradeDomainRequest_PerformCheckOnly, *v.PerformCheckOnly)
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.UpgradeDomainRequest_TargetVersion, *v.TargetVersion)
+	}
+}
+
 // Container for the response returned by UpgradeDomain operation.
 type UpgradeDomainOutput struct {
 
@@ -80,13 +101,61 @@ type UpgradeDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedOptions(s, schemas.UpgradeDomainResponse_AdvancedOptions, v.AdvancedOptions)
+	if v.ChangeProgressDetails != nil {
+		s.WriteStruct(schemas.UpgradeDomainResponse_ChangeProgressDetails)
+		v.ChangeProgressDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpgradeDomainResponse_DomainName, *v.DomainName)
+	}
+	if v.PerformCheckOnly != nil {
+		s.WriteBool(schemas.UpgradeDomainResponse_PerformCheckOnly, *v.PerformCheckOnly)
+	}
+	if v.TargetVersion != nil {
+		s.WriteString(schemas.UpgradeDomainResponse_TargetVersion, *v.TargetVersion)
+	}
+	if v.UpgradeId != nil {
+		s.WriteString(schemas.UpgradeDomainResponse_UpgradeId, *v.UpgradeId)
+	}
+}
+func (v *UpgradeDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpgradeDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpgradeDomainResponse_AdvancedOptions:
+			return deserializeAdvancedOptions(d, schemas.UpgradeDomainResponse_AdvancedOptions, &v.AdvancedOptions)
+		case schemas.UpgradeDomainResponse_ChangeProgressDetails:
+			v.ChangeProgressDetails = &types.ChangeProgressDetails{}
+			return v.ChangeProgressDetails.Deserialize(d)
+		case schemas.UpgradeDomainResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.UpgradeDomainResponse_DomainName, v.DomainName)
+		case schemas.UpgradeDomainResponse_PerformCheckOnly:
+			v.PerformCheckOnly = new(bool)
+			return d.ReadBool(schemas.UpgradeDomainResponse_PerformCheckOnly, v.PerformCheckOnly)
+		case schemas.UpgradeDomainResponse_TargetVersion:
+			v.TargetVersion = new(string)
+			return d.ReadString(schemas.UpgradeDomainResponse_TargetVersion, v.TargetVersion)
+		case schemas.UpgradeDomainResponse_UpgradeId:
+			v.UpgradeId = new(string)
+			return d.ReadString(schemas.UpgradeDomainResponse_UpgradeId, v.UpgradeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradeDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeDomain, schemas.UpgradeDomainRequest, schemas.UpgradeDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpgradeDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeDomain, schemas.UpgradeDomainRequest, schemas.UpgradeDomainResponse), output: &UpgradeDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

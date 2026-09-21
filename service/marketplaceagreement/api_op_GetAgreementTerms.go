@@ -5,7 +5,9 @@ package marketplaceagreement
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type GetAgreementTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementTermsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.GetAgreementTermsInput_agreementId, *v.AgreementId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAgreementTermsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgreementTermsInput_nextToken, *v.NextToken)
+	}
+}
+
 type GetAgreementTermsOutput struct {
 
 	// A subset of terms proposed by the proposer that have been accepted by the
@@ -73,13 +93,35 @@ type GetAgreementTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementTermsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcceptedTermList(s, schemas.GetAgreementTermsOutput_acceptedTerms, v.AcceptedTerms)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgreementTermsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAgreementTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgreementTermsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgreementTermsOutput_acceptedTerms:
+			return deserializeAcceptedTermList(d, schemas.GetAgreementTermsOutput_acceptedTerms, &v.AcceptedTerms)
+		case schemas.GetAgreementTermsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAgreementTermsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgreementTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAgreementTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementTerms, schemas.GetAgreementTermsInput, schemas.GetAgreementTermsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAgreementTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementTerms, schemas.GetAgreementTermsInput, schemas.GetAgreementTermsOutput), output: &GetAgreementTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

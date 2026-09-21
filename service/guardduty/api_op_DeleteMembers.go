@@ -4,7 +4,9 @@ package guardduty
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,19 @@ type DeleteMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.DeleteMembersRequest_AccountIds, v.AccountIds)
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DeleteMembersRequest_DetectorId, *v.DetectorId)
+	}
+}
+
 type DeleteMembersOutput struct {
 
 	// The accounts that could not be processed.
@@ -63,13 +78,29 @@ type DeleteMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedAccounts(s, schemas.DeleteMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *DeleteMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMembersResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccounts(d, schemas.DeleteMembersResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMembers, schemas.DeleteMembersRequest, schemas.DeleteMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMembers, schemas.DeleteMembersRequest, schemas.DeleteMembersResponse), output: &DeleteMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

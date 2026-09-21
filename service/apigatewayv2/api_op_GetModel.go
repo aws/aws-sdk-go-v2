@@ -4,6 +4,8 @@ package apigatewayv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.GetModelRequest_ApiId, *v.ApiId)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelRequest_ModelId, *v.ModelId)
+	}
+}
+
 type GetModelOutput struct {
 
 	// The content-type for the model, for example, "application/json".
@@ -62,13 +79,56 @@ type GetModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetModelResponse_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetModelResponse_Description, *v.Description)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelResponse_ModelId, *v.ModelId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetModelResponse_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.GetModelResponse_Schema, *v.Schema)
+	}
+}
+func (v *GetModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetModelResponse_ContentType, v.ContentType)
+		case schemas.GetModelResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetModelResponse_Description, v.Description)
+		case schemas.GetModelResponse_ModelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.GetModelResponse_ModelId, v.ModelId)
+		case schemas.GetModelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetModelResponse_Name, v.Name)
+		case schemas.GetModelResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.GetModelResponse_Schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModel, schemas.GetModelRequest, schemas.GetModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModel, schemas.GetModelRequest, schemas.GetModelResponse), output: &GetModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

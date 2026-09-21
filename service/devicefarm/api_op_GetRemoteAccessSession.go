@@ -4,7 +4,9 @@ package devicefarm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRemoteAccessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRemoteAccessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRemoteAccessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRemoteAccessSessionRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the response from the server that lists detailed information about
 // the remote access session.
 type GetRemoteAccessSessionOutput struct {
@@ -50,13 +64,34 @@ type GetRemoteAccessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRemoteAccessSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRemoteAccessSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRemoteAccessSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteAccessSession != nil {
+		s.WriteStruct(schemas.GetRemoteAccessSessionResult_remoteAccessSession)
+		v.RemoteAccessSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRemoteAccessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRemoteAccessSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRemoteAccessSessionResult_remoteAccessSession:
+			v.RemoteAccessSession = &types.RemoteAccessSession{}
+			return v.RemoteAccessSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRemoteAccessSession, schemas.GetRemoteAccessSessionRequest, schemas.GetRemoteAccessSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRemoteAccessSession, schemas.GetRemoteAccessSessionRequest, schemas.GetRemoteAccessSessionResult), output: &GetRemoteAccessSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

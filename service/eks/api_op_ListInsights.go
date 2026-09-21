@@ -5,7 +5,9 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,29 @@ type ListInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListInsightsRequest_clusterName, *v.ClusterName)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListInsightsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInsightsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListInsightsOutput struct {
 
 	// The returned list of insights.
@@ -84,13 +109,35 @@ type ListInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightSummaries(s, schemas.ListInsightsResponse_insights, v.Insights)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInsightsResponse_insights:
+			return deserializeInsightSummaries(d, schemas.ListInsightsResponse_insights, &v.Insights)
+		case schemas.ListInsightsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInsightsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsights, schemas.ListInsightsRequest, schemas.ListInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsights, schemas.ListInsightsRequest, schemas.ListInsightsResponse), output: &ListInsightsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

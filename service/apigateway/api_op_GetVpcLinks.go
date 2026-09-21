@@ -5,7 +5,9 @@ package apigateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetVpcLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVpcLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVpcLinksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVpcLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetVpcLinksRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetVpcLinksRequest_position, *v.Position)
+	}
+}
+
 // The collection of VPC links under the caller's account in a region.
 type GetVpcLinksOutput struct {
 
@@ -53,13 +70,35 @@ type GetVpcLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVpcLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcLinks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVpcLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfVpcLink(s, schemas.VpcLinks_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.VpcLinks_position, *v.Position)
+	}
+}
+func (v *GetVpcLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcLinks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcLinks_items:
+			return deserializeListOfVpcLink(d, schemas.VpcLinks_items, &v.Items)
+		case schemas.VpcLinks_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.VpcLinks_position, v.Position)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVpcLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVpcLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVpcLinks, schemas.GetVpcLinksRequest, schemas.VpcLinks)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVpcLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVpcLinks, schemas.GetVpcLinksRequest, schemas.VpcLinks), output: &GetVpcLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

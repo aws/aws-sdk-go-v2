@@ -5,7 +5,9 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,25 @@ type DescribeReplicationTableStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTableStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTableStatisticsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTableStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationTableStatisticsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationTableStatisticsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsMessage_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+}
+
 type DescribeReplicationTableStatisticsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -69,13 +90,41 @@ type DescribeReplicationTableStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTableStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTableStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTableStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsResponse_Marker, *v.Marker)
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsResponse_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+	serializeReplicationTableStatisticsList(s, schemas.DescribeReplicationTableStatisticsResponse_ReplicationTableStatistics, v.ReplicationTableStatistics)
+}
+func (v *DescribeReplicationTableStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationTableStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationTableStatisticsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationTableStatisticsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationTableStatisticsResponse_ReplicationConfigArn:
+			v.ReplicationConfigArn = new(string)
+			return d.ReadString(schemas.DescribeReplicationTableStatisticsResponse_ReplicationConfigArn, v.ReplicationConfigArn)
+		case schemas.DescribeReplicationTableStatisticsResponse_ReplicationTableStatistics:
+			return deserializeReplicationTableStatisticsList(d, schemas.DescribeReplicationTableStatisticsResponse_ReplicationTableStatistics, &v.ReplicationTableStatistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationTableStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTableStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTableStatistics, schemas.DescribeReplicationTableStatisticsMessage, schemas.DescribeReplicationTableStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationTableStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTableStatistics, schemas.DescribeReplicationTableStatisticsMessage, schemas.DescribeReplicationTableStatisticsResponse), output: &DescribeReplicationTableStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

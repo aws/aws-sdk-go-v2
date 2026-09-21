@@ -4,7 +4,9 @@ package directconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type DescribeDirectConnectGatewayAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectConnectGatewayAttachmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectConnectGatewayAttachmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectConnectGatewayAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDirectConnectGatewayAttachmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAttachmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
 
 	// The attachments.
@@ -64,13 +87,35 @@ type DescribeDirectConnectGatewayAttachmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectConnectGatewayAttachmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectConnectGatewayAttachmentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectConnectGatewayAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectConnectGatewayAttachmentList(s, schemas.DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments, v.DirectConnectGatewayAttachments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAttachmentsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDirectConnectGatewayAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDirectConnectGatewayAttachmentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments:
+			return deserializeDirectConnectGatewayAttachmentList(d, schemas.DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments, &v.DirectConnectGatewayAttachments)
+		case schemas.DescribeDirectConnectGatewayAttachmentsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDirectConnectGatewayAttachmentsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDirectConnectGatewayAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectConnectGatewayAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAttachments, schemas.DescribeDirectConnectGatewayAttachmentsRequest, schemas.DescribeDirectConnectGatewayAttachmentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAttachments, schemas.DescribeDirectConnectGatewayAttachmentsRequest, schemas.DescribeDirectConnectGatewayAttachmentsResult), output: &DescribeDirectConnectGatewayAttachmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

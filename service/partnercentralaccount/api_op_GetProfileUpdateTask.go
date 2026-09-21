@@ -4,7 +4,9 @@ package partnercentralaccount
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetProfileUpdateTaskInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProfileUpdateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileUpdateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileUpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetProfileUpdateTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetProfileUpdateTaskRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetProfileUpdateTaskOutput struct {
@@ -90,13 +107,83 @@ type GetProfileUpdateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileUpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileUpdateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileUpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetProfileUpdateTaskResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetProfileUpdateTaskResponse_Catalog, *v.Catalog)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetProfileUpdateTaskResponse_EndedAt, *v.EndedAt)
+	}
+	serializeErrorDetailList(s, schemas.GetProfileUpdateTaskResponse_ErrorDetailList, v.ErrorDetailList)
+	if v.Id != nil {
+		s.WriteString(schemas.GetProfileUpdateTaskResponse_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetProfileUpdateTaskResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetProfileUpdateTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskDetails != nil {
+		s.WriteStruct(schemas.GetProfileUpdateTaskResponse_TaskDetails)
+		v.TaskDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetProfileUpdateTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *GetProfileUpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileUpdateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileUpdateTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetProfileUpdateTaskResponse_Arn, v.Arn)
+		case schemas.GetProfileUpdateTaskResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetProfileUpdateTaskResponse_Catalog, v.Catalog)
+		case schemas.GetProfileUpdateTaskResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProfileUpdateTaskResponse_EndedAt, v.EndedAt)
+		case schemas.GetProfileUpdateTaskResponse_ErrorDetailList:
+			return deserializeErrorDetailList(d, schemas.GetProfileUpdateTaskResponse_ErrorDetailList, &v.ErrorDetailList)
+		case schemas.GetProfileUpdateTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetProfileUpdateTaskResponse_Id, v.Id)
+		case schemas.GetProfileUpdateTaskResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetProfileUpdateTaskResponse_StartedAt, v.StartedAt)
+		case schemas.GetProfileUpdateTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetProfileUpdateTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProfileTaskStatus(ev)
+			return nil
+		case schemas.GetProfileUpdateTaskResponse_TaskDetails:
+			v.TaskDetails = &types.TaskDetails{}
+			return v.TaskDetails.Deserialize(d)
+		case schemas.GetProfileUpdateTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetProfileUpdateTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetProfileUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileUpdateTask, schemas.GetProfileUpdateTaskRequest, schemas.GetProfileUpdateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetProfileUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileUpdateTask, schemas.GetProfileUpdateTaskRequest, schemas.GetProfileUpdateTaskResponse), output: &GetProfileUpdateTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
