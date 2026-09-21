@@ -202,7 +202,10 @@ func UnmarshalListOfMapsWithOptions(l []map[string]types.AttributeValue, out int
 type DecodeTimeAttributes struct {
 	// Will decode S attribute values and SS attribute value elements into time.Time
 	//
-	// Default string parsing format is time.RFC3339
+	// Default string parsing format tries time.RFC3339Nano, time.RFC3339,
+	// and ISO 8601 variants with literal "Z" or no timezone.
+	// All input strings are validated against these formats before the
+	// decode function is called.
 	S func(string) (time.Time, error)
 	// Will decode N attribute values and NS attribute value elements into time.Time
 	//
@@ -1039,7 +1042,7 @@ func (e *UnmarshalError) Error() string {
 }
 
 func defaultDecodeTimeS(v string) (time.Time, error) {
-	t, err := time.Parse(time.RFC3339, v)
+	t, err := parseTimeS(v)
 	if err != nil {
 		return time.Time{}, &UnmarshalError{Err: err, Value: v, Type: timeType}
 	}
@@ -1048,4 +1051,8 @@ func defaultDecodeTimeS(v string) (time.Time, error) {
 
 func defaultDecodeTimeN(v string) (time.Time, error) {
 	return decodeUnixTime(v)
+}
+
+func parseTimeS(v string) (time.Time, error) {
+	return time.Parse(time.RFC3339, v)
 }
