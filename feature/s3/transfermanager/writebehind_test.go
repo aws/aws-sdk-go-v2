@@ -67,6 +67,9 @@ func TestWriteBehindDefaultWorkerPolicy(t *testing.T) {
 	if got, want := writeBehindMaxWorkers, 64; got != want {
 		t.Fatalf("max workers = %d, want %d", got, want)
 	}
+	if got, want := writeBehindMaxBuffers, 128; got != want {
+		t.Fatalf("max buffers = %d, want %d", got, want)
+	}
 }
 
 func TestWriteBehindStartsInitialWorkers(t *testing.T) {
@@ -174,6 +177,44 @@ func TestWriteBehindOwnedWriterBatchesOriginalBuffers(t *testing.T) {
 		if got[i] != want[i] {
 			t.Fatalf("pwritev pointer %d = %#x, want original buffer %#x", i, got[i], want[i])
 		}
+	}
+}
+
+func TestWriteBehindBufferLimitFlushesOwnedPendingWrites(t *testing.T) {
+	destination := &recordingVectorWriterAt{}
+	grouped := newGroupedVectorWriterAt(destination, 4, 4, false)
+	config := testWriteBehindConfig(4)
+	config.maxBuffers = 4
+	writer := newWriteBehindWriterAtWithConfig(grouped, 4, config)
+
+	var lastSeq uint64
+	for _, off := range []int64{0, 16, 32, 48} {
+		buf := writer.getBuffer()
+		seq, err := writer.enqueue(buf, 4, off)
+		if err != nil {
+			t.Fatalf("enqueue at %d: %v", off, err)
+		}
+		lastSeq = seq
+	}
+	writer.waitAcceptedThrough(lastSeq)
+
+	gotBuffer := make(chan []byte, 1)
+	go func() {
+		gotBuffer <- writer.getBuffer()
+	}()
+
+	select {
+	case buf := <-gotBuffer:
+		writer.putBuffer(buf)
+	case <-time.After(time.Second):
+		t.Fatal("getBuffer remained blocked with flushable pending writes")
+	}
+
+	if got := len(destination.snapshot()); got != 4 {
+		t.Fatalf("pwritev calls = %d, want 4 after budget flush", got)
+	}
+	if err := writer.drain(); err != nil {
+		t.Fatalf("drain: %v", err)
 	}
 }
 

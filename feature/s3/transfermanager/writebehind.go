@@ -14,6 +14,7 @@ const (
 	writeBehindInitialWorkers     = 16
 	writeBehindWorkerBatch        = 16
 	writeBehindMaxWorkers         = 64
+	writeBehindMaxBuffers         = writeBehindQueueDepth + writeBehindMaxWorkers
 	writeBehindScaleCheckInterval = 10 * time.Millisecond
 	writeBehindSaturationDuration = 100 * time.Millisecond
 	writeBehindChunkSize          = 8 * 1024 * 1024
@@ -47,6 +48,7 @@ type writeBehindWorkerConfig struct {
 	initialWorkers     int
 	workerBatch        int
 	maxWorkers         int
+	maxBuffers         int
 	scaleCheckInterval time.Duration
 	saturationDuration time.Duration
 }
@@ -61,6 +63,10 @@ type writeBehindWriterAt struct {
 	workerCount  atomic.Int64
 	scaleStop    chan struct{}
 	scaleDone    chan struct{}
+
+	bufferMu     sync.Mutex
+	bufferCond   *sync.Cond
+	buffersInUse int
 
 	closeMu sync.RWMutex
 	closed  bool
@@ -85,6 +91,7 @@ func newWriteBehindWriterAt(w io.WriterAt, chunkSize int64) *writeBehindWriterAt
 		initialWorkers:     writeBehindInitialWorkers,
 		workerBatch:        writeBehindWorkerBatch,
 		maxWorkers:         writeBehindMaxWorkers,
+		maxBuffers:         writeBehindMaxBuffers,
 		scaleCheckInterval: writeBehindScaleCheckInterval,
 		saturationDuration: writeBehindSaturationDuration,
 	})
@@ -93,6 +100,9 @@ func newWriteBehindWriterAt(w io.WriterAt, chunkSize int64) *writeBehindWriterAt
 func newWriteBehindWriterAtWithConfig(w io.WriterAt, chunkSize int64, workerConfig writeBehindWorkerConfig) *writeBehindWriterAt {
 	if chunkSize <= 0 {
 		chunkSize = writeBehindChunkSize
+	}
+	if workerConfig.maxBuffers <= 0 {
+		workerConfig.maxBuffers = writeBehindMaxBuffers
 	}
 
 	alignment := int64(1)
@@ -108,6 +118,7 @@ func newWriteBehindWriterAtWithConfig(w io.WriterAt, chunkSize int64, workerConf
 		scaleDone:    make(chan struct{}),
 	}
 	writer.pool.New = func() any { return newWriteBuffer(chunkSize, alignment) }
+	writer.bufferCond = sync.NewCond(&writer.bufferMu)
 	writer.acceptedCond = sync.NewCond(&writer.acceptedMu)
 	writer.accepted = map[uint64]struct{}{}
 	writer.completeCond = sync.NewCond(&writer.completeMu)
@@ -184,11 +195,36 @@ func newWriteBuffer(size, alignment int64) []byte {
 }
 
 func (w *writeBehindWriterAt) getBuffer() []byte {
-	return w.pool.Get().([]byte)
+	for {
+		w.bufferMu.Lock()
+		if w.buffersInUse < w.workerConfig.maxBuffers {
+			w.buffersInUse++
+			w.bufferMu.Unlock()
+			return w.pool.Get().([]byte)
+		}
+		w.bufferMu.Unlock()
+
+		if owner, ok := w.w.(ownedWriteBehindWriter); ok {
+			if err := owner.flushPending(); err != nil {
+				w.setErr(err)
+			}
+		}
+
+		w.bufferMu.Lock()
+		if w.buffersInUse >= w.workerConfig.maxBuffers {
+			w.bufferCond.Wait()
+		}
+		w.bufferMu.Unlock()
+	}
 }
 
 func (w *writeBehindWriterAt) putBuffer(buf []byte) {
 	w.pool.Put(buf[:w.chunkSize])
+
+	w.bufferMu.Lock()
+	w.buffersInUse--
+	w.bufferCond.Broadcast()
+	w.bufferMu.Unlock()
 }
 
 func (w *writeBehindWriterAt) enqueue(buf []byte, n int64, off int64) (uint64, error) {
