@@ -468,6 +468,48 @@ func (HarnessConversationRole) Values() []HarnessConversationRole {
 	}
 }
 
+type HarnessHookDecision string
+
+// Enum values for HarnessHookDecision
+const (
+	HarnessHookDecisionAllow HarnessHookDecision = "allow"
+	HarnessHookDecisionDeny  HarnessHookDecision = "deny"
+)
+
+// Values returns all known values for HarnessHookDecision. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookDecision) Values() []HarnessHookDecision {
+	return []HarnessHookDecision{
+		"allow",
+		"deny",
+	}
+}
+
+type HarnessHookEventType string
+
+// Enum values for HarnessHookEventType
+const (
+	HarnessHookEventTypeBeforeToolCall   HarnessHookEventType = "before_tool_call"
+	HarnessHookEventTypeAfterToolCall    HarnessHookEventType = "after_tool_call"
+	HarnessHookEventTypeBeforeInvocation HarnessHookEventType = "before_invocation"
+	HarnessHookEventTypeAfterInvocation  HarnessHookEventType = "after_invocation"
+)
+
+// Values returns all known values for HarnessHookEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookEventType) Values() []HarnessHookEventType {
+	return []HarnessHookEventType{
+		"before_tool_call",
+		"after_tool_call",
+		"before_invocation",
+		"after_invocation",
+	}
+}
+
 type HarnessOpenAiApiFormat string
 
 // Enum values for HarnessOpenAiApiFormat
@@ -507,6 +549,7 @@ const (
 	HarnessStopReasonMaxIterationsExceeded      HarnessStopReason = "max_iterations_exceeded"
 	HarnessStopReasonMaxOutputTokensExceeded    HarnessStopReason = "max_output_tokens_exceeded"
 	HarnessStopReasonTimeoutExceeded            HarnessStopReason = "timeout_exceeded"
+	HarnessStopReasonHookStopped                HarnessStopReason = "hook_stopped"
 )
 
 // Values returns all known values for HarnessStopReason. Note that this can be
@@ -529,6 +572,7 @@ func (HarnessStopReason) Values() []HarnessStopReason {
 		"max_iterations_exceeded",
 		"max_output_tokens_exceeded",
 		"timeout_exceeded",
+		"hook_stopped",
 	}
 }
 

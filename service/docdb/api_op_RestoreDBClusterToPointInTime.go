@@ -54,6 +54,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// This member is required.
 	SourceDBClusterIdentifier *string
 
+	// Specifies whether to copy all tags from the restored DB cluster to snapshots of
+	// the restored DB cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The subnet group name to use for the new cluster.
 	//
 	// Constraints: If provided, must match the name of an existing DBSubnetGroup .
@@ -105,7 +109,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// Valid Values: IPV4 | DUAL
 	//
-	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+	// [DocumentDB clusters in a VPC]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
 	NetworkType *string
 
 	// The port number on which the new cluster accepts connections.

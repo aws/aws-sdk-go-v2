@@ -1,0 +1,5 @@
+POST /get-billing-transfer-preference
+
+Content-Type: application/json
+
+{"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"}

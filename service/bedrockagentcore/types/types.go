@@ -2423,6 +2423,35 @@ type HarnessGeminiModelConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A lifecycle hook event emitted in the invocation stream for visibility into
+// hook decisions.
+type HarnessHookEvent struct {
+
+	// The unique identifier for this hook event.
+	//
+	// This member is required.
+	HookEventId *string
+
+	// The name of the hook that ran.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of lifecycle hook event.
+	//
+	// This member is required.
+	Type HarnessHookEventType
+
+	// The decision applied to the hook event. This field is present only for blocking
+	// Lambda targets.
+	Decision HarnessHookDecision
+
+	// The optional reason for the applied decision.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for an inline function tool. When the agent calls this tool, the
 // tool call is returned to the caller for external execution.
 type HarnessInlineFunctionConfig struct {
@@ -2589,6 +2618,9 @@ type HarnessOpenAiModelConfig struct {
 
 	// Provider-specific parameters passed through to the model provider unchanged.
 	AdditionalParams document.Interface
+
+	// Optional custom endpoint URL for an OpenAI-compatible endpoint.
+	ApiBase *string
 
 	// The API format to use when calling the OpenAI provider.
 	ApiFormat HarnessOpenAiApiFormat
@@ -3249,6 +3281,7 @@ func (*InvokeAgentRuntimeCommandStreamOutputMemberChunk) isInvokeAgentRuntimeCom
 //	InvokeHarnessStreamOutputMemberContentBlockDelta
 //	InvokeHarnessStreamOutputMemberContentBlockStart
 //	InvokeHarnessStreamOutputMemberContentBlockStop
+//	InvokeHarnessStreamOutputMemberHookEvent
 //	InvokeHarnessStreamOutputMemberMessageStart
 //	InvokeHarnessStreamOutputMemberMessageStop
 //	InvokeHarnessStreamOutputMemberMetadata
@@ -3282,6 +3315,15 @@ type InvokeHarnessStreamOutputMemberContentBlockStop struct {
 }
 
 func (*InvokeHarnessStreamOutputMemberContentBlockStop) isInvokeHarnessStreamOutput() {}
+
+// A lifecycle hook event emitted when a configured hook runs.
+type InvokeHarnessStreamOutputMemberHookEvent struct {
+	Value HarnessHookEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberHookEvent) isInvokeHarnessStreamOutput() {}
 
 // Indicates the start of a new message from the agent.
 type InvokeHarnessStreamOutputMemberMessageStart struct {

@@ -2296,6 +2296,13 @@ func awsRestjson1_serializeOpDocumentCreateHarnessInput(v *CreateHarnessInput, v
 		ok.String(*v.HarnessName)
 	}
 
+	if v.Hooks != nil {
+		ok := object.Key("hooks")
+		if err := awsRestjson1_serializeDocumentHarnessHooks(v.Hooks, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxIterations != nil {
 		ok := object.Key("maxIterations")
 		ok.Integer(*v.MaxIterations)
@@ -14298,6 +14305,13 @@ func awsRestjson1_serializeOpDocumentUpdateHarnessInput(v *UpdateHarnessInput, v
 		ok.String(*v.ExecutionRoleArn)
 	}
 
+	if v.Hooks != nil {
+		ok := object.Key("hooks")
+		if err := awsRestjson1_serializeDocumentHarnessHooks(v.Hooks, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxIterations != nil {
 		ok := object.Key("maxIterations")
 		ok.Integer(*v.MaxIterations)
@@ -18732,6 +18746,44 @@ func awsRestjson1_serializeDocumentGoogleOauth2ProviderConfigInput(v *types.Goog
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHarnessAfterInvocationHook(v *types.HarnessAfterInvocationHook, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Target != nil {
+		ok := object.Key("target")
+		if err := awsRestjson1_serializeDocumentHarnessHookTarget(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessAfterToolCallHook(v *types.HarnessAfterToolCallHook, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Target != nil {
+		ok := object.Key("target")
+		if err := awsRestjson1_serializeDocumentHarnessHookTarget(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHarnessAgentCoreBrowserConfig(v *types.HarnessAgentCoreBrowserConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18968,6 +19020,44 @@ func awsRestjson1_serializeDocumentHarnessBedrockModelConfig(v *types.HarnessBed
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHarnessBeforeInvocationHook(v *types.HarnessBeforeInvocationHook, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Target != nil {
+		ok := object.Key("target")
+		if err := awsRestjson1_serializeDocumentHarnessHookTarget(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessBeforeToolCallHook(v *types.HarnessBeforeToolCallHook, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Target != nil {
+		ok := object.Key("target")
+		if err := awsRestjson1_serializeDocumentHarnessHookTarget(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHarnessDisabledMemoryConfiguration(v *types.HarnessDisabledMemoryConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19108,6 +19198,134 @@ func awsRestjson1_serializeDocumentHarnessGeminiModelConfig(v *types.HarnessGemi
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessHook(v types.HarnessHook, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.HarnessHookMemberAfterInvocation:
+		av := object.Key("afterInvocation")
+		if err := awsRestjson1_serializeDocumentHarnessAfterInvocationHook(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.HarnessHookMemberAfterToolCall:
+		av := object.Key("afterToolCall")
+		if err := awsRestjson1_serializeDocumentHarnessAfterToolCallHook(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.HarnessHookMemberBeforeInvocation:
+		av := object.Key("beforeInvocation")
+		if err := awsRestjson1_serializeDocumentHarnessBeforeInvocationHook(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.HarnessHookMemberBeforeToolCall:
+		av := object.Key("beforeToolCall")
+		if err := awsRestjson1_serializeDocumentHarnessBeforeToolCallHook(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessHookEventBridgeTarget(v *types.HarnessHookEventBridgeTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessHookLambdaTarget(v *types.HarnessHookLambdaTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if len(v.FailureMode) > 0 {
+		ok := object.Key("failureMode")
+		ok.String(string(v.FailureMode))
+	}
+
+	if v.TimeoutSeconds != nil {
+		ok := object.Key("timeoutSeconds")
+		ok.Integer(*v.TimeoutSeconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessHooks(v []types.HarnessHook, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentHarnessHook(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessHookSnsTarget(v *types.HarnessHookSnsTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessHookTarget(v types.HarnessHookTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.HarnessHookTargetMemberEventBridge:
+		av := object.Key("eventBridge")
+		if err := awsRestjson1_serializeDocumentHarnessHookEventBridgeTarget(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.HarnessHookTargetMemberLambda:
+		av := object.Key("lambda")
+		if err := awsRestjson1_serializeDocumentHarnessHookLambdaTarget(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.HarnessHookTargetMemberSns:
+		av := object.Key("sns")
+		if err := awsRestjson1_serializeDocumentHarnessHookSnsTarget(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -19315,6 +19533,11 @@ func awsRestjson1_serializeDocumentHarnessOpenAiModelConfig(v *types.HarnessOpen
 		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalParams, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ApiBase != nil {
+		ok := object.Key("apiBase")
+		ok.String(*v.ApiBase)
 	}
 
 	if len(v.ApiFormat) > 0 {

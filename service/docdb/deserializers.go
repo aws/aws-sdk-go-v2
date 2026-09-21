@@ -10095,6 +10095,22 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.ClusterCreateTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("CopyTagsToSnapshot", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.CopyTagsToSnapshot = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("DBClusterArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

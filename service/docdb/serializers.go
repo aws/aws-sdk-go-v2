@@ -4297,6 +4297,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -5393,6 +5398,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		}
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -5782,6 +5792,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		}
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -5871,6 +5886,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *RestoreDBClusterToPointInTimeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
 
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")

@@ -788,6 +788,9 @@ func ExampleInvokeHarnessStreamOutput_outputUsage() {
 	case *types.InvokeHarnessStreamOutputMemberContentBlockStop:
 		_ = v.Value // Value is types.HarnessContentBlockStopEvent
 
+	case *types.InvokeHarnessStreamOutputMemberHookEvent:
+		_ = v.Value // Value is types.HarnessHookEvent
+
 	case *types.InvokeHarnessStreamOutputMemberMessageStart:
 		_ = v.Value // Value is types.HarnessMessageStartEvent
 
@@ -810,6 +813,7 @@ var _ *types.HarnessContentBlockDeltaEvent
 var _ *types.HarnessMetadataEvent
 var _ *types.HarnessContentBlockStartEvent
 var _ *types.HarnessMessageStopEvent
+var _ *types.HarnessHookEvent
 var _ *types.HarnessContentBlockStopEvent
 var _ *types.HarnessMessageStartEvent
 

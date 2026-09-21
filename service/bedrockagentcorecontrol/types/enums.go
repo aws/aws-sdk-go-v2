@@ -1154,6 +1154,27 @@ func (HarnessEndpointStatus) Values() []HarnessEndpointStatus {
 	}
 }
 
+type HarnessHookFailureMode string
+
+// Enum values for HarnessHookFailureMode
+const (
+	// Specifies that the current action continues when the hook target fails.
+	HarnessHookFailureModeAllow HarnessHookFailureMode = "allow"
+	// Specifies that the service denies the current action when the hook target fails.
+	HarnessHookFailureModeDeny HarnessHookFailureMode = "deny"
+)
+
+// Values returns all known values for HarnessHookFailureMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessHookFailureMode) Values() []HarnessHookFailureMode {
+	return []HarnessHookFailureMode{
+		"allow",
+		"deny",
+	}
+}
+
 type HarnessManagedMemoryStrategyType string
 
 // Enum values for HarnessManagedMemoryStrategyType

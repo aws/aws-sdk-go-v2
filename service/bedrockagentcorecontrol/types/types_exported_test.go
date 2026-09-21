@@ -807,6 +807,62 @@ func ExampleHarnessGatewayOutboundAuth_outputUsage() {
 var _ *types.Unit
 var _ *types.OAuthCredentialProvider
 
+func ExampleHarnessHook_outputUsage() {
+	var union types.HarnessHook
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessHookMemberAfterInvocation:
+		_ = v.Value // Value is types.HarnessAfterInvocationHook
+
+	case *types.HarnessHookMemberAfterToolCall:
+		_ = v.Value // Value is types.HarnessAfterToolCallHook
+
+	case *types.HarnessHookMemberBeforeInvocation:
+		_ = v.Value // Value is types.HarnessBeforeInvocationHook
+
+	case *types.HarnessHookMemberBeforeToolCall:
+		_ = v.Value // Value is types.HarnessBeforeToolCallHook
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessAfterToolCallHook
+var _ *types.HarnessAfterInvocationHook
+var _ *types.HarnessBeforeInvocationHook
+var _ *types.HarnessBeforeToolCallHook
+
+func ExampleHarnessHookTarget_outputUsage() {
+	var union types.HarnessHookTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessHookTargetMemberEventBridge:
+		_ = v.Value // Value is types.HarnessHookEventBridgeTarget
+
+	case *types.HarnessHookTargetMemberLambda:
+		_ = v.Value // Value is types.HarnessHookLambdaTarget
+
+	case *types.HarnessHookTargetMemberSns:
+		_ = v.Value // Value is types.HarnessHookSnsTarget
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessHookSnsTarget
+var _ *types.HarnessHookEventBridgeTarget
+var _ *types.HarnessHookLambdaTarget
+
 func ExampleHarnessMemoryConfiguration_outputUsage() {
 	var union types.HarnessMemoryConfiguration
 	// type switches can be used to check the union value

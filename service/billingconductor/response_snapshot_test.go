@@ -706,6 +706,34 @@ func TestCheckResponseSnapshot_GetBillingGroupCostReport(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetBillingTransferPreference(t *testing.T) {
+	want := &GetBillingTransferPreferenceOutput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		LastModifiedTime: ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetBillingTransferPreference.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetBillingTransferPreference(context.Background(), &GetBillingTransferPreferenceInput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetBillingTransferPreference.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAccountAssociations(t *testing.T) {
 	want := &ListAccountAssociationsOutput{
 		LinkedAccounts: []types.AccountAssociationsListElement{
@@ -1558,6 +1586,39 @@ func TestCheckResponseSnapshot_UpdateBillingGroup(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateBillingGroup.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateBillingTransferPreference(t *testing.T) {
+	want := &UpdateBillingTransferPreferenceOutput{
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+		LastModifiedTime: 1,
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateBillingTransferPreference.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateBillingTransferPreference(context.Background(), &UpdateBillingTransferPreferenceInput{
+		ClientToken:               ptr.String("__ClientToken__"),
+		ResponsibilityTransferArn: ptr.String("__ResponsibilityTransferArn__"),
+		AutoBillingTransferBillingGroupCreation: &types.AutoTransferBillingGroupCreationPreference{
+			Enabled:        ptr.Bool(true),
+			PricingPlanArn: ptr.String("__PricingPlanArn__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateBillingTransferPreference.response", err)
 	}
 }
 

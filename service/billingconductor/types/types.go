@@ -247,6 +247,56 @@ func (v *Attribute) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+//	The auto billing group creation preference for a billing transfer. When the
+//
+// preference is enabled, Billing Conductor automatically creates an indirect
+// billing transfer billing group, with the specified pricing plan, for each
+// account that transfers its bill to the bill source account of the billing
+// transfer.
+type AutoTransferBillingGroupCreationPreference struct {
+
+	//  Specifies whether Billing Conductor automatically creates billing groups for
+	// the billing transfer. The preference is disabled by default.
+	//
+	// This member is required.
+	Enabled *bool
+
+	//  The Amazon Resource Name (ARN) of the pricing plan to apply to the
+	// automatically created billing groups. This value is required when Enabled is
+	// true , and must be omitted when Enabled is false .
+	PricingPlanArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoTransferBillingGroupCreationPreference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoTransferBillingGroupCreationPreference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoTransferBillingGroupCreationPreference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.AutoTransferBillingGroupCreationPreference_Enabled, *v.Enabled)
+	}
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.AutoTransferBillingGroupCreationPreference_PricingPlanArn, *v.PricingPlanArn)
+	}
+}
+func (v *AutoTransferBillingGroupCreationPreference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoTransferBillingGroupCreationPreference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoTransferBillingGroupCreationPreference_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.AutoTransferBillingGroupCreationPreference_Enabled, v.Enabled)
+		case schemas.AutoTransferBillingGroupCreationPreference_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.AutoTransferBillingGroupCreationPreference_PricingPlanArn, v.PricingPlanArn)
+		}
+		return nil
+	})
+}
+
 // A summary report of actual Amazon Web Services charges and calculated Amazon
 // Web Services charges, based on the associated pricing plan of a billing group.
 type BillingGroupCostReportElement struct {

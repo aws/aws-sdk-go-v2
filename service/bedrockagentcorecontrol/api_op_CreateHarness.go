@@ -63,6 +63,9 @@ type CreateHarnessInput struct {
 	// Environment variables to set in the harness runtime environment.
 	EnvironmentVariables map[string]string
 
+	// The lifecycle hooks to run at defined points in the agent loop.
+	Hooks []types.HarnessHook
+
 	// The maximum number of iterations the agent loop can execute per invocation.
 	MaxIterations *int32
 
