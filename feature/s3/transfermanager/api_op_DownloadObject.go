@@ -15,6 +15,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalio "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/io"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -561,6 +562,8 @@ type downloader struct {
 	err error
 
 	emitter *singleObjectProgressEmitter
+
+	bufpool *sync.Pool
 }
 
 func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error) {
@@ -812,10 +815,25 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		chunk.start = respStart
 	}
 
+	var initErr error
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
 		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
+
+		// TODO vary this
+		d.bufpool = internalio.Pools.Pool(8 * 1024 * 1024)
+
+		if i, ok := d.in.WriterAt.(internalio.File); ok {
+			if err := i.Init(d.totalBytes); err != nil {
+				initErr = err
+				return
+			}
+		}
+
 	}) // Set total in first GET
+	if initErr != nil {
+		return nil, err
+	}
 
 	var n int64
 	defer out.Body.Close()
@@ -947,4 +965,8 @@ func (c *dlChunk) Write(p []byte) (int, error) {
 	c.cur += int64(n)
 
 	return n, err
+}
+
+func (c *dlChunk) ReadFrom(r io.Reader) (n int64, err error) {
+	return 0, nil
 }
