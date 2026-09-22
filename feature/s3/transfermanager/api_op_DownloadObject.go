@@ -822,9 +822,8 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 
 		// TODO vary this
 		d.bufpool = internalio.Pools.Pool(8 * 1024 * 1024)
-
 		if i, ok := d.in.WriterAt.(internalio.File); ok {
-			if err := i.Init(d.totalBytes); err != nil {
+			if err := i.Init(d.totalBytes, 8*1024*1024); err != nil {
 				initErr = err
 				return
 			}
@@ -837,7 +836,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 
 	var n int64
 	defer out.Body.Close()
-	n, err = io.Copy(chunk, out.Body)
+	n, err = chunk.ReadFrom(out.Body)
 	if err != nil {
 		return nil, &errReadingBody{err: err}
 	}
@@ -958,15 +957,28 @@ type dlChunk struct {
 
 	part      int32
 	withRange string
+
+	// TODO wire these in
+	bufpool *sync.Pool
+	sink    internalio.AsyncWriterAt
 }
 
-func (c *dlChunk) Write(p []byte) (int, error) {
-	n, err := c.w.WriteAt(p, c.start+c.cur)
-	c.cur += int64(n)
+func (c *dlChunk) ReadFrom(r io.Reader) (int64, error) {
+	var total int64
+	for {
+		buf := c.bufpool.Get().([]byte)
+		n, err := r.Read(buf)
+		off := c.start + total
+		if n > 0 {
+			c.sink.WriteAt(buf[:n], c.start+total)
+		}
+		total += int64(n)
 
-	return n, err
-}
-
-func (c *dlChunk) ReadFrom(r io.Reader) (n int64, err error) {
-	return 0, nil
+		if err == io.EOF {
+			return total, nil
+		}
+		if err != nil {
+			return 0, err
+		}
+	}
 }
