@@ -2893,6 +2893,9 @@
                     "target": "com.amazonaws.ec2#CreateCapacityReservationCancellationQuote"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuote"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateCapacityReservationFleet"
                 },
                 {
@@ -3581,6 +3584,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeCapacityReservationCancellationQuotes"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotes"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeCapacityReservationFleets"
@@ -14773,6 +14779,30 @@
                         "smithy.api#xmlName": "interruptionInfo"
                     }
                 },
+                "AdjustmentStatus": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentStatus",
+                        "smithy.api#documentation": "<p>The status of the most recent modification to the Capacity Reservation. A Capacity\n\t\t\tReservation can have one of the following adjustment statuses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>requested</code> - The modification was requested and is being\n\t\t\t\t\tprocessed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>applied</code> - The modification was applied to the Capacity\n\t\t\t\t\tReservation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rejected</code> - The modification was not applied and the Capacity\n\t\t\t\t\tReservation keeps its existing configuration.</p>\n            </li>\n         </ul>\n         <p>This field is not returned if the Capacity Reservation has never been modified.</p>",
+                        "smithy.api#xmlName": "adjustmentStatus"
+                    }
+                },
+                "AdjustmentDetails": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentDetails",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentDetails",
+                        "smithy.api#documentation": "<p>The configuration that the Capacity Reservation will have after the requested adjustment\n\t\t\tis applied.</p>",
+                        "smithy.api#xmlName": "adjustmentDetails"
+                    }
+                },
+                "OriginalStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OriginalStartDate",
+                        "smithy.api#documentation": "<p>The start date that you originally requested for the Capacity Reservation, in the ISO8601\n\t\t\tformat in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). This value doesn't\n\t\t\tchange when you push out the start date.</p>",
+                        "smithy.api#xmlName": "originalStartDate"
+                    }
+                },
                 "ZeroSizePreference": {
                     "target": "com.amazonaws.ec2#ZeroSizePreference",
                     "traits": {
@@ -14784,6 +14814,77 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationAdjustmentDetails": {
+            "type": "structure",
+            "members": {
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation will have after the adjustment.</p>",
+                        "smithy.api#xmlName": "startDate"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDate",
+                        "smithy.api#documentation": "<p>The end date that the Capacity Reservation will have after the adjustment.</p>",
+                        "smithy.api#xmlName": "endDate"
+                    }
+                },
+                "CommitmentEndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CommitmentEndDate",
+                        "smithy.api#documentation": "<p>The date and time at which the commitment duration will expire after the\n\t\t\tadjustment.</p>",
+                        "smithy.api#xmlName": "commitmentEndDate"
+                    }
+                },
+                "EndDateType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDateType",
+                        "smithy.api#documentation": "<p>Indicates the way in which the Capacity Reservation will end after the adjustment.\n\t\t\tPossible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>unlimited</code> - The Capacity Reservation remains active until you\n\t\t\t\t\texplicitly cancel it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>limited</code> - The Capacity Reservation expires automatically at the\n\t\t\t\t\tdate and time given by <code>endDate</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "endDateType"
+                    }
+                },
+                "CommitmentDuration": {
+                    "target": "com.amazonaws.ec2#BoxedLong",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CommitmentDuration",
+                        "smithy.api#documentation": "<p>The commitment duration, in seconds, that the Capacity Reservation will have after the\n\t\t\tadjustment.</p>",
+                        "smithy.api#xmlName": "commitmentDuration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration that a Capacity Reservation will have after a pending\n\t\t\tadjustment is applied.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationAdjustmentStatus": {
+            "type": "enum",
+            "members": {
+                "requested": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "requested"
+                    }
+                },
+                "applied": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "applied"
+                    }
+                },
+                "rejected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rejected"
+                    }
+                }
             }
         },
         "com.amazonaws.ec2#CapacityReservationBillingRequest": {
@@ -15042,6 +15143,14 @@
                         "aws.protocols#ec2QueryName": "CommitmentEndDate",
                         "smithy.api#documentation": "<p>The date and time at which the commitment duration expires, in the ISO8601 format in\n\t\t\tthe UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). You can't decrease the\n\t\t\tinstance count or cancel the Capacity Reservation before this date and time.</p>",
                         "smithy.api#xmlName": "commitmentEndDate"
+                    }
+                },
+                "CommitmentDuration": {
+                    "target": "com.amazonaws.ec2#BoxedLong",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CommitmentDuration",
+                        "smithy.api#documentation": "<p>The commitment duration, in seconds, for the future-dated Capacity Reservation. This is\n\t\t\tthe minimum duration for which you commit to having the Capacity Reservation in the\n\t\t\t<code>active</code> state in your account after it has been delivered.</p>",
+                        "smithy.api#xmlName": "commitmentDuration"
                     }
                 }
             },
@@ -15509,6 +15618,122 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Ubuntu Pro"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuote": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuoteId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationModificationQuoteId",
+                        "smithy.api#documentation": "<p>The ID of the modification quote.</p>",
+                        "smithy.api#xmlName": "capacityReservationModificationQuoteId"
+                    }
+                },
+                "CapacityReservationId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation associated with the modification quote.</p>",
+                        "smithy.api#xmlName": "capacityReservationId"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreateTime",
+                        "smithy.api#documentation": "<p>The date and time at which the modification quote was created.</p>",
+                        "smithy.api#xmlName": "createTime"
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ExpirationTime",
+                        "smithy.api#documentation": "<p>The date and time at which the modification quote expires.</p>",
+                        "smithy.api#xmlName": "expirationTime"
+                    }
+                },
+                "QuoteState": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "QuoteState",
+                        "smithy.api#documentation": "<p>The state of the modification quote itself. Possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>active</code> - The quote can still be used.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expired</code> - The quote can no longer be used. A quote becomes\n\t\t\t\t\t<code>expired</code> at its <code>expirationTime</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "quoteState"
+                    }
+                },
+                "CurrentConfiguration": {
+                    "target": "com.amazonaws.ec2#ModificationQuoteCurrentConfiguration",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CurrentConfiguration",
+                        "smithy.api#documentation": "<p>The configuration that the Capacity Reservation has at the time the quote was\n\t\t\tgenerated.</p>",
+                        "smithy.api#xmlName": "currentConfiguration"
+                    }
+                },
+                "ModificationTerms": {
+                    "target": "com.amazonaws.ec2#ModificationTerms",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ModificationTerms",
+                        "smithy.api#documentation": "<p>The terms of the modification, including the configuration that the Capacity Reservation\n\t\t\twill have if you accept them by using <code>ModifyCapacityReservation</code>.</p>",
+                        "smithy.api#xmlName": "modificationTerms"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the modification quote.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Capacity Reservation modification quote, which provides the terms for\n\t\t\tchanging the start date or the commitment of a future-dated Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteIdSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteResponseSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationModificationQuote",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationModificationQuoteState": {
+            "type": "enum",
+            "members": {
+                "active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "expired": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "expired"
                     }
                 }
             }
@@ -19253,6 +19478,78 @@
                         "aws.protocols#ec2QueryName": "CapacityReservationCancellationQuote",
                         "smithy.api#documentation": "<p>Information about the Capacity Reservation cancellation quote.</p>",
                         "smithy.api#xmlName": "capacityReservationCancellationQuote"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuote": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a quote for changing the start date of a future-dated Capacity Reservation\n\t\t\tthat has not yet been delivered. The quote includes the new start date, the resulting\n\t\t\tcommitment end date, and a quote ID. Pass the quote ID to\n\t\t\t<code>ModifyCapacityReservation</code> to apply the change.</p>\n         <p>The cumulative pushout across all changes is limited to 30 days from the Capacity\n\t\t\tReservation's original start date. Quotes are valid for 24 hours, and always expire at\n\t\t\tleast one hour before the start date.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The requested new start date for the Capacity Reservation, in the ISO8601 format in the\n\t\t\tUTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). The new start date must be later\n\t\t\tthan the current start date and within the cumulative 30-day pushout limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensure Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the date change quote.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationDateChangeQuoteResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuote": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuote",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationModificationQuote",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation date change quote.</p>",
+                        "smithy.api#xmlName": "capacityReservationModificationQuote"
                     }
                 }
             },
@@ -38325,6 +38622,97 @@
                         "aws.protocols#ec2QueryName": "CapacityReservationCancellationQuoteSet",
                         "smithy.api#documentation": "<p>Information about the Capacity Reservation cancellation quotes.</p>",
                         "smithy.api#xmlName": "capacityReservationCancellationQuoteSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more Capacity Reservation date change quotes that you generated by using\n\t\t\tthe <code>CreateCapacityReservationDateChangeQuote</code> operation.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CapacityReservationModificationQuotes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuoteIds": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteIdSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the date change quotes to describe.</p>",
+                        "smithy.api#xmlName": "CapacityReservationModificationQuoteId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequestMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, \n    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesRequestMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationDateChangeQuotesResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationModificationQuotes": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteResponseSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationModificationQuoteSet",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation date change quotes.</p>",
+                        "smithy.api#xmlName": "capacityReservationModificationQuoteSet"
                     }
                 },
                 "NextToken": {
@@ -102440,6 +102828,94 @@
         "com.amazonaws.ec2#MillisecondDateTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.ec2#ModificationQuoteCurrentConfiguration": {
+            "type": "structure",
+            "members": {
+                "InstanceCount": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceCount",
+                        "smithy.api#documentation": "<p>The number of instances in the Capacity Reservation.</p>",
+                        "smithy.api#xmlName": "instanceCount"
+                    }
+                },
+                "ReservationState": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReservationState",
+                        "smithy.api#documentation": "<p>The current state of the Capacity Reservation.</p>",
+                        "smithy.api#xmlName": "reservationState"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation has before the quoted modification is\n\t\t\tapplied.</p>",
+                        "smithy.api#xmlName": "startDate"
+                    }
+                },
+                "OriginalStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OriginalStartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation was originally requested with. This value\n\t\t\tdoes not change when you push out the start date.</p>",
+                        "smithy.api#xmlName": "originalStartDate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration that a Capacity Reservation has at the time a modification\n\t\t\tquote is generated.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModificationReservationUpdate": {
+            "type": "structure",
+            "members": {
+                "NewCommitmentEndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NewCommitmentEndDate",
+                        "smithy.api#documentation": "<p>The date and time at which the commitment duration will expire after the modification,\n\t\t\tin the ISO8601 format in the UTC time zone\n\t\t\t(<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>",
+                        "smithy.api#xmlName": "newCommitmentEndDate"
+                    }
+                },
+                "NewStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NewStartDate",
+                        "smithy.api#documentation": "<p>The start date that the Capacity Reservation will have after the modification, in the\n\t\t\tISO8601 format in the UTC time zone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>).</p>",
+                        "smithy.api#xmlName": "newStartDate"
+                    }
+                },
+                "NewCommitmentDuration": {
+                    "target": "com.amazonaws.ec2#BoxedInteger",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NewCommitmentDuration",
+                        "smithy.api#documentation": "<p>The commitment duration, in seconds, that the Capacity Reservation will have after the\n\t\t\tmodification.</p>",
+                        "smithy.api#xmlName": "newCommitmentDuration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the changes that a Capacity Reservation modification quote will apply to a\n\t\t\tCapacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModificationTerms": {
+            "type": "structure",
+            "members": {
+                "ReservationUpdate": {
+                    "target": "com.amazonaws.ec2#ModificationReservationUpdate",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReservationUpdate",
+                        "smithy.api#documentation": "<p>The changes that will be applied to the Capacity Reservation if you accept the\n\t\t\tmodification terms.</p>",
+                        "smithy.api#xmlName": "reservationUpdate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the terms of a Capacity Reservation modification quote.</p>"
+            }
+        },
         "com.amazonaws.ec2#ModifyAccountVpcEncryptionControl": {
             "type": "operation",
             "input": {
@@ -102842,7 +103318,7 @@
                 "target": "com.amazonaws.ec2#ModifyCapacityReservationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a Capacity Reservation's capacity, instance eligibility, and the conditions\n\t\t\tunder which it is to be released. You can't modify a Capacity Reservation's instance\n\t\t\ttype, EBS optimization, platform, instance store settings, Availability Zone, or\n\t\t\ttenancy. If you need to modify any of these attributes, we recommend that you cancel the\n\t\t\tCapacity Reservation, and then create a new one with the required attributes. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html\"> Modify an active\n\t\t\t\tCapacity Reservation</a>.</p>\n         <p>The allowed modifications depend on the state of the Capacity Reservation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>assessing</code> or <code>scheduled</code> state - You can modify the\n\t\t\t\t\ttags only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state but still within the commitment duration - You can't\n\t\t\t\t\tdecrease the instance count or set an end date that is within the commitment\n\t\t\t\t\tduration. All other modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state with no commitment duration or elapsed commitment\n\t\t\t\t\tduration - All modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expired</code>, <code>cancelled</code>, <code>unsupported</code>, or\n\t\t\t\t\t\t<code>failed</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Modifies a Capacity Reservation's capacity, instance eligibility, and the conditions\n\t\t\tunder which it is to be released. You can't modify a Capacity Reservation's instance\n\t\t\ttype, EBS optimization, platform, instance store settings, Availability Zone, or\n\t\t\ttenancy. If you need to modify any of these attributes, we recommend that you cancel the\n\t\t\tCapacity Reservation, and then create a new one with the required attributes. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html\"> Modify an active\n\t\t\t\tCapacity Reservation</a>.</p>\n         <p>The allowed modifications depend on the state of the Capacity Reservation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>assessing</code> or <code>scheduled</code> state - You can modify the\n\t\t\t\t\ttags only.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state but still within the commitment duration - You can't\n\t\t\t\t\tdecrease the instance count or set an end date that is within the commitment\n\t\t\t\t\tduration. All other modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> state with no commitment duration or elapsed commitment\n\t\t\t\t\tduration - All modifications are allowed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>expired</code>, <code>cancelled</code>, <code>unsupported</code>, or\n\t\t\t\t\t\t<code>failed</code> state - You can't modify the Capacity Reservation in any\n\t\t\t\t\tway.</p>\n            </li>\n         </ul>\n         <p>For a future-dated Capacity Reservation that has not yet been delivered, pushing out the\n\t\t\tstart date requires a quote generated by\n\t\t\t<code>CreateCapacityReservationDateChangeQuote</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html\">Modify an active\n\t\t\t\tCapacity Reservation</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyCapacityReservationFleet": {
@@ -102965,6 +103441,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The matching criteria (instance eligibility) that you want to use in the modified\n\t\t\tCapacity Reservation. If you change the instance eligibility of an existing Capacity\n\t\t\tReservation from <code>targeted</code> to <code>open</code>, any running instances that\n\t\t\tmatch the attributes of the Capacity Reservation, have the\n\t\t\t\t<code>CapacityReservationPreference</code> set to <code>open</code>, and are not yet\n\t\t\trunning in the Capacity Reservation, will automatically use the modified Capacity\n\t\t\tReservation. </p>\n         <p>To modify the instance eligibility, the Capacity Reservation must be completely idle\n\t\t\t(zero usage).</p>"
                     }
+                },
+                "AcceptModificationTerms": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that you accept the modification terms of the quote identified by\n\t\t\t<code>QuoteId</code>. To apply a quoted modification, set this parameter to\n\t\t\t<code>true</code>.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new start date for the Capacity Reservation, in the ISO8601 format in the UTC time\n\t\t\tzone (<code>YYYY-MM-DDThh:mm:ss.sssZ</code>). Applies to future-dated Capacity\n\t\t\tReservations only. Requires a quote from\n\t\t\t<code>CreateCapacityReservationDateChangeQuote</code>; pass the quote ID in\n\t\t\t<code>QuoteId</code> with <code>AcceptModificationTerms</code> set to\n\t\t\t<code>true</code>.</p>"
+                    }
+                },
+                "QuoteId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationModificationQuoteId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the quote that describes the modification you want to apply. Generate a quote\n\t\t\tby using <code>CreateCapacityReservationDateChangeQuote</code>. The quote must be in the\n\t\t\t<code>active</code> state, and each quote can be used only once.</p>"
+                    }
                 }
             },
             "traits": {
@@ -102980,6 +103474,22 @@
                         "aws.protocols#ec2QueryName": "Return",
                         "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
                         "smithy.api#xmlName": "return"
+                    }
+                },
+                "AdjustmentStatus": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentStatus",
+                        "smithy.api#documentation": "<p>The status of the requested modification. For a description of each possible value, see\n\t\t\tthe <code>adjustmentStatus</code> field of the <code>CapacityReservation</code> data\n\t\t\ttype.</p>",
+                        "smithy.api#xmlName": "adjustmentStatus"
+                    }
+                },
+                "AdjustmentDetails": {
+                    "target": "com.amazonaws.ec2#CapacityReservationAdjustmentDetails",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdjustmentDetails",
+                        "smithy.api#documentation": "<p>The configuration that the Capacity Reservation will have after the adjustment is\n\t\t\tapplied.</p>",
+                        "smithy.api#xmlName": "adjustmentDetails"
                     }
                 }
             },
@@ -122594,6 +123104,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "application-status-check"
+                    }
+                },
+                "capacity_reservation_modification_quote": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-reservation-modification-quote"
                     }
                 }
             }
