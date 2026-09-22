@@ -9470,6 +9470,11 @@ var _NullableInteger = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NullableInteger",
 }, smithy.ShapeTypeInteger, 0)
 
+var _NullableLong = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "NullableLong",
+}, smithy.ShapeTypeLong, 0)
+
 var _NullableString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "NullableString",
@@ -12136,6 +12141,24 @@ var SparkConnectorTarget_AdditionalOptions *smithy.Schema
 
 var SparkConnectorTarget_OutputSchemas *smithy.Schema
 
+var _SparkPipelineInfoKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SparkPipelineInfoKey",
+}, smithy.ShapeTypeString, 0)
+
+var _SparkPipelineInfoMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SparkPipelineInfoMap",
+}, smithy.ShapeTypeMap, 2)
+var _SparkPipelineInfoMap_key *smithy.Schema
+
+var _SparkPipelineInfoMap_value *smithy.Schema
+
+var _SparkPipelineInfoValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SparkPipelineInfoValue",
+}, smithy.ShapeTypeString, 0)
+
 var SparkSQL = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SparkSQL",
@@ -12464,6 +12487,42 @@ var _StringToStringMap = smithy.NewSchema(smithy.ShapeID{
 var _StringToStringMap_key *smithy.Schema
 
 var _StringToStringMap_value *smithy.Schema
+
+var SubObjectSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SubObjectSourceType",
+}, smithy.ShapeTypeEnum, 6)
+var SubObjectSourceType_HIVE_PARQUET *smithy.Schema
+
+var SubObjectSourceType_HIVE_ORC *smithy.Schema
+
+var SubObjectSourceType_HIVE_CSV *smithy.Schema
+
+var SubObjectSourceType_HIVE_JSON *smithy.Schema
+
+var SubObjectSourceType_PLAIN_PARQUET *smithy.Schema
+
+var SubObjectSourceType_ICEBERG *smithy.Schema
+
+var _SubObjectsStatisticsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SubObjectsStatisticsList",
+}, smithy.ShapeTypeList, 1)
+var _SubObjectsStatisticsList_member *smithy.Schema
+
+var SubObjectStatistics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SubObjectStatistics",
+}, smithy.ShapeTypeStructure, 5)
+var SubObjectStatistics_SourceType *smithy.Schema
+
+var SubObjectStatistics_GlueVersionId *smithy.Schema
+
+var SubObjectStatistics_PartitionCount *smithy.Schema
+
+var SubObjectStatistics_FileCount *smithy.Schema
+
+var SubObjectStatistics_TotalFileBytes *smithy.Schema
 
 var SupportedDialect = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -13592,7 +13651,7 @@ var _VersionString = smithy.NewSchema(smithy.ShapeID{
 var ViewDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ViewDefinition",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var ViewDefinition_IsProtected *smithy.Schema
 
 var ViewDefinition_Definer *smithy.Schema
@@ -13609,12 +13668,16 @@ var ViewDefinition_SubObjects *smithy.Schema
 
 var ViewDefinition_SubObjectVersionIds *smithy.Schema
 
+var ViewDefinition_SubObjectsStatistics *smithy.Schema
+
 var ViewDefinition_Representations *smithy.Schema
+
+var ViewDefinition_SparkPipelineInfo *smithy.Schema
 
 var ViewDefinitionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "ViewDefinitionInput",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var ViewDefinitionInput_IsProtected *smithy.Schema
 
 var ViewDefinitionInput_Definer *smithy.Schema
@@ -13632,6 +13695,10 @@ var ViewDefinitionInput_LastRefreshType *smithy.Schema
 var ViewDefinitionInput_SubObjects *smithy.Schema
 
 var ViewDefinitionInput_SubObjectVersionIds *smithy.Schema
+
+var ViewDefinitionInput_SubObjectsStatistics *smithy.Schema
+
+var ViewDefinitionInput_SparkPipelineInfo *smithy.Schema
 
 var ViewDialect = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -24778,6 +24845,30 @@ func init() {
 
 	_ViewSubObjectVersionIdsList_member = _ViewSubObjectVersionIdsList.AddMember("member", _TableVersionId)
 
+	SubObjectSourceType_HIVE_PARQUET = SubObjectSourceType.AddMember("HIVE_PARQUET", smithyprelude.Unit)
+
+	SubObjectSourceType_HIVE_ORC = SubObjectSourceType.AddMember("HIVE_ORC", smithyprelude.Unit)
+
+	SubObjectSourceType_HIVE_CSV = SubObjectSourceType.AddMember("HIVE_CSV", smithyprelude.Unit)
+
+	SubObjectSourceType_HIVE_JSON = SubObjectSourceType.AddMember("HIVE_JSON", smithyprelude.Unit)
+
+	SubObjectSourceType_PLAIN_PARQUET = SubObjectSourceType.AddMember("PLAIN_PARQUET", smithyprelude.Unit)
+
+	SubObjectSourceType_ICEBERG = SubObjectSourceType.AddMember("ICEBERG", smithyprelude.Unit)
+
+	SubObjectStatistics_SourceType = SubObjectStatistics.AddMember("SourceType", SubObjectSourceType)
+
+	SubObjectStatistics_GlueVersionId = SubObjectStatistics.AddMember("GlueVersionId", _NullableString)
+
+	SubObjectStatistics_PartitionCount = SubObjectStatistics.AddMember("PartitionCount", _NullableLong)
+
+	SubObjectStatistics_FileCount = SubObjectStatistics.AddMember("FileCount", _NullableLong)
+
+	SubObjectStatistics_TotalFileBytes = SubObjectStatistics.AddMember("TotalFileBytes", _NullableLong)
+
+	_SubObjectsStatisticsList_member = _SubObjectsStatisticsList.AddMember("member", SubObjectStatistics)
+
 	ViewDialect_REDSHIFT = ViewDialect.AddMember("REDSHIFT", smithyprelude.Unit)
 
 	ViewDialect_ATHENA = ViewDialect.AddMember("ATHENA", smithyprelude.Unit)
@@ -24798,6 +24889,10 @@ func init() {
 
 	_ViewRepresentationList_member = _ViewRepresentationList.AddMember("member", ViewRepresentation)
 
+	_SparkPipelineInfoMap_key = _SparkPipelineInfoMap.AddMember("key", _SparkPipelineInfoKey)
+
+	_SparkPipelineInfoMap_value = _SparkPipelineInfoMap.AddMember("value", _SparkPipelineInfoValue)
+
 	ViewDefinition_IsProtected = ViewDefinition.AddMember("IsProtected", _NullableBoolean)
 
 	ViewDefinition_Definer = ViewDefinition.AddMember("Definer", _ArnString)
@@ -24814,7 +24909,11 @@ func init() {
 
 	ViewDefinition_SubObjectVersionIds = ViewDefinition.AddMember("SubObjectVersionIds", _ViewSubObjectVersionIdsList)
 
+	ViewDefinition_SubObjectsStatistics = ViewDefinition.AddMember("SubObjectsStatistics", _SubObjectsStatisticsList)
+
 	ViewDefinition_Representations = ViewDefinition.AddMember("Representations", _ViewRepresentationList)
+
+	ViewDefinition_SparkPipelineInfo = ViewDefinition.AddMember("SparkPipelineInfo", _SparkPipelineInfoMap)
 
 	_IcebergSchemaList_member = _IcebergSchemaList.AddMember("member", IcebergSchema)
 
@@ -26297,6 +26396,10 @@ func init() {
 	ViewDefinitionInput_SubObjects = ViewDefinitionInput.AddMember("SubObjects", _ViewSubObjectsList)
 
 	ViewDefinitionInput_SubObjectVersionIds = ViewDefinitionInput.AddMember("SubObjectVersionIds", _ViewSubObjectVersionIdsList)
+
+	ViewDefinitionInput_SubObjectsStatistics = ViewDefinitionInput.AddMember("SubObjectsStatistics", _SubObjectsStatisticsList)
+
+	ViewDefinitionInput_SparkPipelineInfo = ViewDefinitionInput.AddMember("SparkPipelineInfo", _SparkPipelineInfoMap)
 
 	TableInput_Name = TableInput.AddMember("Name", _NameString)
 

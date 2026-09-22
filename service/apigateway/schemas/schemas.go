@@ -2017,7 +2017,7 @@ var SdkType_configurationProperties *smithy.Schema
 var SecurityPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.apigateway",
 	Name:      "SecurityPolicy",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 14)
 var SecurityPolicy_TLS_1_0 *smithy.Schema
 
 var SecurityPolicy_TLS_1_2 *smithy.Schema
@@ -2031,6 +2031,10 @@ var SecurityPolicy_SecurityPolicy_TLS13_1_2_PFS_PQ_2025_09 *smithy.Schema
 var SecurityPolicy_SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09 *smithy.Schema
 
 var SecurityPolicy_SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09 *smithy.Schema
+
+var SecurityPolicy_SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09 *smithy.Schema
+
+var SecurityPolicy_SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09 *smithy.Schema
 
 var SecurityPolicy_SecurityPolicy_TLS13_1_2_PQ_2025_09 *smithy.Schema
 
@@ -4120,6 +4124,10 @@ func init() {
 	SecurityPolicy_SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09 = SecurityPolicy.AddMember("SecurityPolicy_TLS13_1_2_FIPS_PQ_2025_09", smithyprelude.Unit)
 
 	SecurityPolicy_SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09 = SecurityPolicy.AddMember("SecurityPolicy_TLS13_1_2_FIPS_PFS_PQ_2025_09", smithyprelude.Unit)
+
+	SecurityPolicy_SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09 = SecurityPolicy.AddMember("SecurityPolicy_TLS13_1_2_Ext2_PQ_2025_09", smithyprelude.Unit)
+
+	SecurityPolicy_SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09 = SecurityPolicy.AddMember("SecurityPolicy_TLS13_1_2_Ext2_FIPS_PQ_2025_09", smithyprelude.Unit)
 
 	SecurityPolicy_SecurityPolicy_TLS13_1_2_PQ_2025_09 = SecurityPolicy.AddMember("SecurityPolicy_TLS13_1_2_PQ_2025_09", smithyprelude.Unit)
 

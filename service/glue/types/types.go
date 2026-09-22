@@ -30906,6 +30906,83 @@ func (v *StringColumnStatisticsData) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// Statistics for one sub-object referenced by a materialized view, recorded when
+// the materialized view was created or last fully refreshed. These values describe
+// what that refresh selected from the sub-object, which can be a subset of the
+// table when the materialized view's definition limits the data it reads. The
+// fields present depend on the sub-object's format.
+type SubObjectStatistics struct {
+
+	// The number of sub-object data files selected for that refresh.
+	FileCount *int64
+
+	// The Glue version ID of the sub-object that the statistics were captured for.
+	GlueVersionId *string
+
+	// The number of sub-object partitions selected for that refresh. Not present for
+	// unpartitioned sub-objects.
+	PartitionCount *int64
+
+	// The source type of the sub-object (for example, its table format), which
+	// identifies the sub-object.
+	SourceType SubObjectSourceType
+
+	// The total size, in bytes, of the data files counted by FileCount .
+	TotalFileBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubObjectStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubObjectStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubObjectStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileCount != nil {
+		s.WriteInt64(schemas.SubObjectStatistics_FileCount, *v.FileCount)
+	}
+	if v.GlueVersionId != nil {
+		s.WriteString(schemas.SubObjectStatistics_GlueVersionId, *v.GlueVersionId)
+	}
+	if v.PartitionCount != nil {
+		s.WriteInt64(schemas.SubObjectStatistics_PartitionCount, *v.PartitionCount)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.SubObjectStatistics_SourceType, string(v.SourceType))
+	}
+	if v.TotalFileBytes != nil {
+		s.WriteInt64(schemas.SubObjectStatistics_TotalFileBytes, *v.TotalFileBytes)
+	}
+}
+func (v *SubObjectStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubObjectStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubObjectStatistics_FileCount:
+			v.FileCount = new(int64)
+			return d.ReadInt64(schemas.SubObjectStatistics_FileCount, v.FileCount)
+		case schemas.SubObjectStatistics_GlueVersionId:
+			v.GlueVersionId = new(string)
+			return d.ReadString(schemas.SubObjectStatistics_GlueVersionId, v.GlueVersionId)
+		case schemas.SubObjectStatistics_PartitionCount:
+			v.PartitionCount = new(int64)
+			return d.ReadInt64(schemas.SubObjectStatistics_PartitionCount, v.PartitionCount)
+		case schemas.SubObjectStatistics_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.SubObjectStatistics_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SubObjectSourceType(ev)
+			return nil
+		case schemas.SubObjectStatistics_TotalFileBytes:
+			v.TotalFileBytes = new(int64)
+			return d.ReadInt64(schemas.SubObjectStatistics_TotalFileBytes, v.TotalFileBytes)
+		}
+		return nil
+	})
+}
+
 // A structure specifying the dialect and dialect version used by the query engine.
 type SupportedDialect struct {
 
@@ -34155,11 +34232,21 @@ type ViewDefinition struct {
 	// A list of representations.
 	Representations []ViewRepresentation
 
+	// A map of key-value pairs containing Spark Declarative Pipelines (SDP)
+	// information for the materialized view.
+	SparkPipelineInfo map[string]string
+
 	// List of the Apache Iceberg table versions referenced by the materialized view.
 	SubObjectVersionIds []int64
 
 	// A list of table Amazon Resource Names (ARNs).
 	SubObjects []string
+
+	// Statistics captured for each sub-object referenced by the materialized view as
+	// of its most recent refresh, such as the source type, Glue version ID, and the
+	// partition, file, and byte counts. Each entry describes one sub-object,
+	// identified by its source type.
+	SubObjectsStatistics []SubObjectStatistics
 
 	// The ID value that identifies this view's version. For materialized views, the
 	// version ID is the Apache Iceberg table's snapshot ID.
@@ -34191,8 +34278,10 @@ func (v *ViewDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteInt64(schemas.ViewDefinition_RefreshSeconds, *v.RefreshSeconds)
 	}
 	serializeViewRepresentationList(s, schemas.ViewDefinition_Representations, v.Representations)
+	serializeSparkPipelineInfoMap(s, schemas.ViewDefinition_SparkPipelineInfo, v.SparkPipelineInfo)
 	serializeViewSubObjectVersionIdsList(s, schemas.ViewDefinition_SubObjectVersionIds, v.SubObjectVersionIds)
 	serializeViewSubObjectsList(s, schemas.ViewDefinition_SubObjects, v.SubObjects)
+	serializeSubObjectsStatisticsList(s, schemas.ViewDefinition_SubObjectsStatistics, v.SubObjectsStatistics)
 	if v.ViewVersionId != 0 {
 		s.WriteInt64(schemas.ViewDefinition_ViewVersionId, v.ViewVersionId)
 	}
@@ -34221,10 +34310,14 @@ func (v *ViewDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt64(schemas.ViewDefinition_RefreshSeconds, v.RefreshSeconds)
 		case schemas.ViewDefinition_Representations:
 			return deserializeViewRepresentationList(d, schemas.ViewDefinition_Representations, &v.Representations)
+		case schemas.ViewDefinition_SparkPipelineInfo:
+			return deserializeSparkPipelineInfoMap(d, schemas.ViewDefinition_SparkPipelineInfo, &v.SparkPipelineInfo)
 		case schemas.ViewDefinition_SubObjectVersionIds:
 			return deserializeViewSubObjectVersionIdsList(d, schemas.ViewDefinition_SubObjectVersionIds, &v.SubObjectVersionIds)
 		case schemas.ViewDefinition_SubObjects:
 			return deserializeViewSubObjectsList(d, schemas.ViewDefinition_SubObjects, &v.SubObjects)
+		case schemas.ViewDefinition_SubObjectsStatistics:
+			return deserializeSubObjectsStatisticsList(d, schemas.ViewDefinition_SubObjectsStatistics, &v.SubObjectsStatistics)
 		case schemas.ViewDefinition_ViewVersionId:
 			return d.ReadInt64(schemas.ViewDefinition_ViewVersionId, &v.ViewVersionId)
 		case schemas.ViewDefinition_ViewVersionToken:
@@ -34259,11 +34352,20 @@ type ViewDefinitionInput struct {
 	// defines the view.
 	Representations []ViewRepresentationInput
 
+	// A map of key-value pairs containing Spark Declarative Pipelines (SDP)
+	// information for the materialized view.
+	SparkPipelineInfo map[string]string
+
 	// List of the Apache Iceberg table versions referenced by the materialized view.
 	SubObjectVersionIds []int64
 
 	// A list of base table ARNs that make up the view.
 	SubObjects []string
+
+	// Statistics for each sub-object referenced by the materialized view, such as the
+	// source type, Glue version ID, and the partition, file, and byte counts. Each
+	// entry describes one sub-object, identified by its source type.
+	SubObjectsStatistics []SubObjectStatistics
 
 	// The ID value that identifies this view's version. For materialized views, the
 	// version ID is the Apache Iceberg table's snapshot ID.
@@ -34295,8 +34397,10 @@ func (v *ViewDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteInt64(schemas.ViewDefinitionInput_RefreshSeconds, *v.RefreshSeconds)
 	}
 	serializeViewRepresentationInputList(s, schemas.ViewDefinitionInput_Representations, v.Representations)
+	serializeSparkPipelineInfoMap(s, schemas.ViewDefinitionInput_SparkPipelineInfo, v.SparkPipelineInfo)
 	serializeViewSubObjectVersionIdsList(s, schemas.ViewDefinitionInput_SubObjectVersionIds, v.SubObjectVersionIds)
 	serializeViewSubObjectsList(s, schemas.ViewDefinitionInput_SubObjects, v.SubObjects)
+	serializeSubObjectsStatisticsList(s, schemas.ViewDefinitionInput_SubObjectsStatistics, v.SubObjectsStatistics)
 	if v.ViewVersionId != 0 {
 		s.WriteInt64(schemas.ViewDefinitionInput_ViewVersionId, v.ViewVersionId)
 	}
@@ -34325,10 +34429,14 @@ func (v *ViewDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt64(schemas.ViewDefinitionInput_RefreshSeconds, v.RefreshSeconds)
 		case schemas.ViewDefinitionInput_Representations:
 			return deserializeViewRepresentationInputList(d, schemas.ViewDefinitionInput_Representations, &v.Representations)
+		case schemas.ViewDefinitionInput_SparkPipelineInfo:
+			return deserializeSparkPipelineInfoMap(d, schemas.ViewDefinitionInput_SparkPipelineInfo, &v.SparkPipelineInfo)
 		case schemas.ViewDefinitionInput_SubObjectVersionIds:
 			return deserializeViewSubObjectVersionIdsList(d, schemas.ViewDefinitionInput_SubObjectVersionIds, &v.SubObjectVersionIds)
 		case schemas.ViewDefinitionInput_SubObjects:
 			return deserializeViewSubObjectsList(d, schemas.ViewDefinitionInput_SubObjects, &v.SubObjects)
+		case schemas.ViewDefinitionInput_SubObjectsStatistics:
+			return deserializeSubObjectsStatisticsList(d, schemas.ViewDefinitionInput_SubObjectsStatistics, &v.SubObjectsStatistics)
 		case schemas.ViewDefinitionInput_ViewVersionId:
 			return d.ReadInt64(schemas.ViewDefinitionInput_ViewVersionId, &v.ViewVersionId)
 		case schemas.ViewDefinitionInput_ViewVersionToken:

@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/UpdateIntegration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jcredential¡soauthCodeCredential¿hauthCodel__AuthCode__ÿjidentifier¡mintegrationIdx,__IntegrationIdentifierMemberIntegrationId__uintegrationAttributes¿dkey0i__Value__ÿgroleArnk__RoleArn__ÿ

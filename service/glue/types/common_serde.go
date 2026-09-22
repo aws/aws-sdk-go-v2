@@ -2688,6 +2688,19 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.CloseList()
 }
 
+func serializeSubObjectsStatisticsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SubObjectStatistics) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeTableAttributesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TableAttributes) {
 	if v == nil {
 		return
@@ -5938,6 +5951,20 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 	})
 }
 
+func deserializeSubObjectsStatisticsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubObjectStatistics) error {
+	*v = make([]SubObjectStatistics, 0)
+	var vv SubObjectStatistics
+	return smithy.ReadList(d, s, func() error {
+		vv = SubObjectStatistics{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeTableAttributesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TableAttributes) error {
 	*v = make([]TableAttributes, 0)
 	var vv string
@@ -6810,6 +6837,18 @@ func serializeRuleMetricsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseMap()
 }
 
+func serializeSparkPipelineInfoMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeStatisticPropertiesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	if v == nil {
 		return
@@ -7408,6 +7447,20 @@ func deserializeRuleMetricsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	return smithy.ReadMap(d, s, func(k string) error {
 
 		if err := d.ReadFloat64(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeSparkPipelineInfoMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
 		}
 

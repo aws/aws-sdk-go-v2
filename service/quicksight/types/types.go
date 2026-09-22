@@ -9683,6 +9683,12 @@ type Capabilities struct {
 	// The ability to add or run anomaly detection.
 	AddOrRunAnomalyDetectionForAnalyses CapabilityState
 
+	// The ability to perform actions using Adobe Marketing Agent connectors.
+	AdobeAction CapabilityState
+
+	// The ability to perform actions using Airtable connectors.
+	AirtableAction CapabilityState
+
 	// The ability to perform actions using Bedrock Agent connectors.
 	AmazonBedrockARSAction CapabilityState
 
@@ -9725,6 +9731,9 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	BedrockManagedKnowledgeBase CapabilityState
 
+	// The ability to perform actions using Bee connectors.
+	BeeAction CapabilityState
+
 	// The ability to perform actions using Box Agent connectors.
 	BoxAgentAction CapabilityState
 
@@ -9749,6 +9758,13 @@ type Capabilities struct {
 	// The ability to perform chat-related actions.
 	ChatAgent CapabilityState
 
+	// The ability to perform actions using Cisco Webex Meetings connectors.
+	CiscoWebexMeetingsAction CapabilityState
+
+	// The ability to perform actions using Cisco Webex Video Messaging Agent
+	// connectors.
+	CiscoWebexVidcastAction CapabilityState
+
 	// The ability to perform actions using Comprehend connectors.
 	ComprehendAction CapabilityState
 
@@ -9769,6 +9785,12 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	ConfluenceKnowledgeBase CapabilityState
+
+	// The ability to create and update Adobe Marketing Agent actions.
+	CreateAndUpdateAdobeAction CapabilityState
+
+	// The ability to create and update Airtable actions.
+	CreateAndUpdateAirtableAction CapabilityState
 
 	// The ability to create and update Bedrock Agent actions.
 	CreateAndUpdateAmazonBedrockARSAction CapabilityState
@@ -9803,6 +9825,9 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	CreateAndUpdateBedrockManagedKnowledgeBase CapabilityState
 
+	// The ability to create and update Bee actions.
+	CreateAndUpdateBeeAction CapabilityState
+
 	// The ability to create and update Box Agent actions.
 	CreateAndUpdateBoxAgentAction CapabilityState
 
@@ -9820,6 +9845,12 @@ type Capabilities struct {
 
 	// The ability to create and update Canva Agent actions.
 	CreateAndUpdateCanvaAgentAction CapabilityState
+
+	// The ability to create and update Cisco Webex Meetings actions.
+	CreateAndUpdateCiscoWebexMeetingsAction CapabilityState
+
+	// The ability to create and update Cisco Webex Video Messaging Agent actions.
+	CreateAndUpdateCiscoWebexVidcastAction CapabilityState
 
 	// The ability to create and update Comprehend actions.
 	CreateAndUpdateComprehendAction CapabilityState
@@ -9851,8 +9882,17 @@ type Capabilities struct {
 	// The ability to create and update datasets.
 	CreateAndUpdateDatasets CapabilityState
 
+	// The ability to create and update Dropbox actions.
+	CreateAndUpdateDropboxAction CapabilityState
+
+	// The ability to create and update Dun and Bradstreet actions.
+	CreateAndUpdateDunAndBradstreetAction CapabilityState
+
 	// The ability to create and update FactSet actions.
 	CreateAndUpdateFactSetAction CapabilityState
+
+	// The ability to create and update Figma actions.
+	CreateAndUpdateFigmaAction CapabilityState
 
 	// The ability to create and update REST API connection actions.
 	CreateAndUpdateGenericHTTPAction CapabilityState
@@ -9860,8 +9900,23 @@ type Capabilities struct {
 	// The ability to create and update GitHub actions.
 	CreateAndUpdateGithubAction CapabilityState
 
+	// The ability to create and update Gmail actions.
+	CreateAndUpdateGmailAction CapabilityState
+
+	// The ability to create and update Google Analytics actions.
+	CreateAndUpdateGoogleAnalyticsAction CapabilityState
+
 	// The ability to create and update Google Calendar actions.
 	CreateAndUpdateGoogleCalendarAction CapabilityState
+
+	// The ability to create and update Google Chat actions.
+	CreateAndUpdateGoogleChatAction CapabilityState
+
+	// The ability to create and update Google Docs actions.
+	CreateAndUpdateGoogleDocsAction CapabilityState
+
+	// The ability to create and update Google Drive actions.
+	CreateAndUpdateGoogleDriveAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -9874,6 +9929,18 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	CreateAndUpdateGoogleDriveKnowledgeBase CapabilityState
+
+	// The ability to create and update Google Meet actions.
+	CreateAndUpdateGoogleMeetAction CapabilityState
+
+	// The ability to create and update Google Sheets actions.
+	CreateAndUpdateGoogleSheetsAction CapabilityState
+
+	// The ability to create and update Google Slides actions.
+	CreateAndUpdateGoogleSlidesAction CapabilityState
+
+	// The ability to create and update HG Insights Agent actions.
+	CreateAndUpdateHGInsightsAction CapabilityState
 
 	// The ability to create and update Hubspot actions.
 	CreateAndUpdateHubspotAction CapabilityState
@@ -9926,6 +9993,9 @@ type Capabilities struct {
 	// The ability to create and update Monday actions.
 	CreateAndUpdateMondayAction CapabilityState
 
+	// The ability to create and update Moody's GenAI Ready Data actions.
+	CreateAndUpdateMoodysAction CapabilityState
+
 	// The ability to create and update New Relic actions.
 	CreateAndUpdateNewRelicAction CapabilityState
 
@@ -9947,11 +10017,17 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	CreateAndUpdateOneDriveKnowledgeBase CapabilityState
 
+	// The ability to create and update Microsoft OneNote actions.
+	CreateAndUpdateOneNoteAction CapabilityState
+
 	// The ability to create and update OpenAPI Specification actions.
 	CreateAndUpdateOpenAPIAction CapabilityState
 
 	// The ability to create and update PagerDuty Advance actions.
 	CreateAndUpdatePagerDutyAction CapabilityState
+
+	// The ability to create and update PagerDuty Agent actions.
+	CreateAndUpdatePagerDutyAgentAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -9964,6 +10040,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	CreateAndUpdateQBusinessKnowledgeBase CapabilityState
+
+	// The ability to create and update QuickBooks actions.
+	CreateAndUpdateQuickBooksAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10019,11 +10098,17 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	CreateAndUpdateSharePointKnowledgeBase CapabilityState
 
+	// The ability to create and update Shopify actions.
+	CreateAndUpdateShopifyAction CapabilityState
+
 	// The ability to create and update Slack actions.
 	CreateAndUpdateSlackAction CapabilityState
 
 	// The ability to create and update Smartsheet actions.
 	CreateAndUpdateSmartsheetAction CapabilityState
+
+	// The ability to create and update Snowflake Cortex Agent actions.
+	CreateAndUpdateSnowFlakeAction CapabilityState
 
 	// The ability to create and update Textract actions.
 	CreateAndUpdateTextractAction CapabilityState
@@ -10033,6 +10118,9 @@ type Capabilities struct {
 
 	// The ability to create and update threshold alerts.
 	CreateAndUpdateThresholdAlerts CapabilityState
+
+	// The ability to create and update Visier Agent actions.
+	CreateAndUpdateVisierAgentAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10046,8 +10134,20 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	CreateAndUpdateWebCrawlerKnowledgeBase CapabilityState
 
+	// The ability to create and update WhatsApp actions.
+	CreateAndUpdateWhatsAppAction CapabilityState
+
+	// The ability to create and update Zapier Agent actions.
+	CreateAndUpdateZapierAction CapabilityState
+
 	// The ability to create and update Zendesk actions.
 	CreateAndUpdateZendeskAction CapabilityState
+
+	// The ability to create and update Zoom actions.
+	CreateAndUpdateZoomAction CapabilityState
+
+	// The ability to create and update ZoomInfo Agent actions.
+	CreateAndUpdateZoomInfoAction CapabilityState
 
 	// The ability to create chat agents.
 	CreateChatAgents CapabilityState
@@ -10066,6 +10166,12 @@ type Capabilities struct {
 
 	// The ability to perform dashboard-related actions.
 	Dashboard CapabilityState
+
+	// The ability to perform actions using Dropbox connectors.
+	DropboxAction CapabilityState
+
+	// The ability to perform actions using Dun and Bradstreet connectors.
+	DunAndBradstreetAction CapabilityState
 
 	// The ability to Edit Visual with AI
 	EditVisualWithQ CapabilityState
@@ -10094,6 +10200,9 @@ type Capabilities struct {
 	// The ability to perform actions using FactSet connectors.
 	FactSetAction CapabilityState
 
+	// The ability to perform actions using Figma connectors.
+	FigmaAction CapabilityState
+
 	// The ability to perform flow-related actions.
 	Flow CapabilityState
 
@@ -10106,8 +10215,23 @@ type Capabilities struct {
 	// The ability to perform actions using GitHub connectors.
 	GithubAction CapabilityState
 
+	// The ability to perform actions using Gmail connectors.
+	GmailAction CapabilityState
+
+	// The ability to perform actions using Google Analytics connectors.
+	GoogleAnalyticsAction CapabilityState
+
 	// The ability to perform actions using Google Calendar connectors.
 	GoogleCalendarAction CapabilityState
+
+	// The ability to perform actions using Google Chat connectors.
+	GoogleChatAction CapabilityState
+
+	// The ability to perform actions using Google Docs connectors.
+	GoogleDocsAction CapabilityState
+
+	// The ability to perform actions using Google Drive connectors.
+	GoogleDriveAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10120,6 +10244,18 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	GoogleDriveKnowledgeBase CapabilityState
+
+	// The ability to perform actions using Google Meet connectors.
+	GoogleMeetAction CapabilityState
+
+	// The ability to perform actions using Google Sheets connectors.
+	GoogleSheetsAction CapabilityState
+
+	// The ability to perform actions using Google Slides connectors.
+	GoogleSlidesAction CapabilityState
+
+	// The ability to perform actions using HG Insights Agent connectors.
+	HGInsightsAction CapabilityState
 
 	// The ability to perform actions using Hubspot connectors.
 	HubspotAction CapabilityState
@@ -10182,6 +10318,9 @@ type Capabilities struct {
 	// The ability to perform actions using Monday connectors.
 	MondayAction CapabilityState
 
+	// The ability to perform actions using Moody's GenAI Ready Data connectors.
+	MoodysAction CapabilityState
+
 	// The ability to perform actions using New Relic connectors.
 	NewRelicAction CapabilityState
 
@@ -10203,11 +10342,17 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	OneDriveKnowledgeBase CapabilityState
 
+	// The ability to perform actions using Microsoft OneNote connectors.
+	OneNoteAction CapabilityState
+
 	// The ability to perform actions using OpenAPI Specification connectors.
 	OpenAPIAction CapabilityState
 
 	// The ability to perform actions using PagerDuty Advance connectors.
 	PagerDutyAction CapabilityState
+
+	// The ability to perform actions using PagerDuty Agent connectors.
+	PagerDutyAgentAction CapabilityState
 
 	// The ability to use UI Agent step to perform tasks on public websites.
 	PerformFlowUiTask CapabilityState
@@ -10229,6 +10374,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	QBusinessKnowledgeBase CapabilityState
+
+	// The ability to perform actions using QuickBooks connectors.
+	QuickBooksAction CapabilityState
 
 	// The ability to create, view, edit, delete, and run Quick event triggers for
 	// flows and automations.
@@ -10289,6 +10437,12 @@ type Capabilities struct {
 	// The ability to perform actions using ServiceNow connectors.
 	ServiceNowAction CapabilityState
 
+	// The ability to share Adobe Marketing Agent actions.
+	ShareAdobeAction CapabilityState
+
+	// The ability to share Airtable actions.
+	ShareAirtableAction CapabilityState
+
 	// The ability to share Bedrock Agent actions.
 	ShareAmazonBedrockARSAction CapabilityState
 
@@ -10325,6 +10479,9 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	ShareBedrockManagedKnowledgeBase CapabilityState
 
+	// The ability to share Bee actions.
+	ShareBeeAction CapabilityState
+
 	// The ability to share Box Agent actions.
 	ShareBoxAgentAction CapabilityState
 
@@ -10345,6 +10502,12 @@ type Capabilities struct {
 
 	// The ability to share chat agents with other users and groups.
 	ShareChatAgents CapabilityState
+
+	// The ability to share Cisco Webex Meetings actions.
+	ShareCiscoWebexMeetingsAction CapabilityState
+
+	// The ability to share Cisco Webex Video Messaging Agent actions.
+	ShareCiscoWebexVidcastAction CapabilityState
 
 	// The ability to share Comprehend actions.
 	ShareComprehendAction CapabilityState
@@ -10376,8 +10539,17 @@ type Capabilities struct {
 	// The ability to share datasets.
 	ShareDatasets CapabilityState
 
+	// The ability to share Dropbox actions.
+	ShareDropboxAction CapabilityState
+
+	// The ability to share Dun and Bradstreet actions.
+	ShareDunAndBradstreetAction CapabilityState
+
 	// The ability to share FactSet actions.
 	ShareFactSetAction CapabilityState
+
+	// The ability to share Figma actions.
+	ShareFigmaAction CapabilityState
 
 	// The ability to share REST API connection actions.
 	ShareGenericHTTPAction CapabilityState
@@ -10385,8 +10557,23 @@ type Capabilities struct {
 	// The ability to share GitHub actions.
 	ShareGithubAction CapabilityState
 
+	// The ability to share Gmail actions.
+	ShareGmailAction CapabilityState
+
+	// The ability to share Google Analytics actions.
+	ShareGoogleAnalyticsAction CapabilityState
+
 	// The ability to share Google Calendar actions.
 	ShareGoogleCalendarAction CapabilityState
+
+	// The ability to share Google Chat actions.
+	ShareGoogleChatAction CapabilityState
+
+	// The ability to share Google Docs actions.
+	ShareGoogleDocsAction CapabilityState
+
+	// The ability to share Google Drive actions.
+	ShareGoogleDriveAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10399,6 +10586,18 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	ShareGoogleDriveKnowledgeBase CapabilityState
+
+	// The ability to share Google Meet actions.
+	ShareGoogleMeetAction CapabilityState
+
+	// The ability to share Google Sheets actions.
+	ShareGoogleSheetsAction CapabilityState
+
+	// The ability to share Google Slides actions.
+	ShareGoogleSlidesAction CapabilityState
+
+	// The ability to share HG Insights Agent actions.
+	ShareHGInsightsAction CapabilityState
 
 	// The ability to share Hubspot actions.
 	ShareHubspotAction CapabilityState
@@ -10451,6 +10650,9 @@ type Capabilities struct {
 	// The ability to share Monday actions.
 	ShareMondayAction CapabilityState
 
+	// The ability to share Moody's GenAI Ready Data actions.
+	ShareMoodysAction CapabilityState
+
 	// The ability to share New Relic actions.
 	ShareNewRelicAction CapabilityState
 
@@ -10472,11 +10674,17 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	ShareOneDriveKnowledgeBase CapabilityState
 
+	// The ability to share Microsoft OneNote actions.
+	ShareOneNoteAction CapabilityState
+
 	// The ability to share OpenAPI Specification actions.
 	ShareOpenAPIAction CapabilityState
 
 	// The ability to share PagerDuty Advance actions.
 	SharePagerDutyAction CapabilityState
+
+	// The ability to share PagerDuty Agent actions.
+	SharePagerDutyAgentAction CapabilityState
 
 	// The ability to perform actions using Microsoft SharePoint Online connectors.
 	SharePointAction CapabilityState
@@ -10504,6 +10712,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	ShareQBusinessKnowledgeBase CapabilityState
+
+	// The ability to share QuickBooks actions.
+	ShareQuickBooksAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10559,17 +10770,26 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	ShareSharePointKnowledgeBase CapabilityState
 
+	// The ability to share Shopify actions.
+	ShareShopifyAction CapabilityState
+
 	// The ability to share Slack actions.
 	ShareSlackAction CapabilityState
 
 	// The ability to share Smartsheet actions.
 	ShareSmartsheetAction CapabilityState
 
+	// The ability to share Snowflake Cortex Agent actions.
+	ShareSnowFlakeAction CapabilityState
+
 	// The ability to share spaces with other users and groups.
 	ShareSpaces CapabilityState
 
 	// The ability to share Textract actions.
 	ShareTextractAction CapabilityState
+
+	// The ability to share Visier Agent actions.
+	ShareVisierAgentAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10583,14 +10803,32 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	ShareWebCrawlerKnowledgeBase CapabilityState
 
+	// The ability to share WhatsApp actions.
+	ShareWhatsAppAction CapabilityState
+
+	// The ability to share Zapier Agent actions.
+	ShareZapierAction CapabilityState
+
 	// The ability to share Zendesk actions.
 	ShareZendeskAction CapabilityState
+
+	// The ability to share Zoom actions.
+	ShareZoomAction CapabilityState
+
+	// The ability to share ZoomInfo Agent actions.
+	ShareZoomInfoAction CapabilityState
+
+	// The ability to perform actions using Shopify connectors.
+	ShopifyAction CapabilityState
 
 	// The ability to perform actions using Slack connectors.
 	SlackAction CapabilityState
 
 	// The ability to perform actions using Smartsheet connectors.
 	SmartsheetAction CapabilityState
+
+	// The ability to perform actions using Snowflake Cortex Agent connectors.
+	SnowFlakeAction CapabilityState
 
 	// The ability to perform space-related actions.
 	Space CapabilityState
@@ -10610,10 +10848,16 @@ type Capabilities struct {
 	// The ability to manage trigger-related settings for flows and automations.
 	Trigger CapabilityState
 
+	// The ability to use Adobe Marketing Agent actions.
+	UseAdobeAction CapabilityState
+
 	// The ability to use internet to enhance results in Chat Agents, Flows, and Quick
 	// Research. Web search queries will be processed securely in an Amazon Web
 	// Services region us-east-1 .
 	UseAgentWebSearch CapabilityState
+
+	// The ability to use Airtable actions.
+	UseAirtableAction CapabilityState
 
 	// The ability to use Bedrock Agent actions.
 	UseAmazonBedrockARSAction CapabilityState
@@ -10648,6 +10892,9 @@ type Capabilities struct {
 	// The ability to use Bedrock models for general knowledge step in flows.
 	UseBedrockModels CapabilityState
 
+	// The ability to use Bee actions.
+	UseBeeAction CapabilityState
+
 	// The ability to use Box Agent actions.
 	UseBoxAgentAction CapabilityState
 
@@ -10670,6 +10917,12 @@ type Capabilities struct {
 	// The ability to use Canva Agent actions.
 	UseCanvaAgentAction CapabilityState
 
+	// The ability to use Cisco Webex Meetings actions.
+	UseCiscoWebexMeetingsAction CapabilityState
+
+	// The ability to use Cisco Webex Video Messaging Agent actions.
+	UseCiscoWebexVidcastAction CapabilityState
+
 	// The ability to use Comprehend actions.
 	UseComprehendAction CapabilityState
 
@@ -10691,11 +10944,20 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	UseConfluenceKnowledgeBase CapabilityState
 
+	// The ability to use Dropbox actions.
+	UseDropboxAction CapabilityState
+
+	// The ability to use Dun and Bradstreet actions.
+	UseDunAndBradstreetAction CapabilityState
+
 	// The ability to use Amazon Quick through the Microsoft Excel add-in.
 	UseExcelAddInExtension CapabilityState
 
 	// The ability to use FactSet actions.
 	UseFactSetAction CapabilityState
+
+	// The ability to use Figma actions.
+	UseFigmaAction CapabilityState
 
 	// The ability to use REST API connection actions.
 	UseGenericHTTPAction CapabilityState
@@ -10703,8 +10965,23 @@ type Capabilities struct {
 	// The ability to use GitHub actions.
 	UseGithubAction CapabilityState
 
+	// The ability to use Gmail actions.
+	UseGmailAction CapabilityState
+
+	// The ability to use Google Analytics actions.
+	UseGoogleAnalyticsAction CapabilityState
+
 	// The ability to use Google Calendar actions.
 	UseGoogleCalendarAction CapabilityState
+
+	// The ability to use Google Chat actions.
+	UseGoogleChatAction CapabilityState
+
+	// The ability to use Google Docs actions.
+	UseGoogleDocsAction CapabilityState
+
+	// The ability to use Google Drive actions.
+	UseGoogleDriveAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10717,6 +10994,18 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	UseGoogleDriveKnowledgeBase CapabilityState
+
+	// The ability to use Google Meet actions.
+	UseGoogleMeetAction CapabilityState
+
+	// The ability to use Google Sheets actions.
+	UseGoogleSheetsAction CapabilityState
+
+	// The ability to use Google Slides actions.
+	UseGoogleSlidesAction CapabilityState
+
+	// The ability to use HG Insights Agent actions.
+	UseHGInsightsAction CapabilityState
 
 	// The ability to use Hubspot actions.
 	UseHubspotAction CapabilityState
@@ -10757,6 +11046,9 @@ type Capabilities struct {
 	// The ability to use Monday actions.
 	UseMondayAction CapabilityState
 
+	// The ability to use Moody's GenAI Ready Data actions.
+	UseMoodysAction CapabilityState
+
 	// The ability to use New Relic actions.
 	UseNewRelicAction CapabilityState
 
@@ -10778,6 +11070,9 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	UseOneDriveKnowledgeBase CapabilityState
 
+	// The ability to use Microsoft OneNote actions.
+	UseOneNoteAction CapabilityState
+
 	// The ability to use OpenAPI Specification actions.
 	UseOpenAPIAction CapabilityState
 
@@ -10786,6 +11081,9 @@ type Capabilities struct {
 
 	// The ability to use PagerDuty Advance actions.
 	UsePagerDutyAction CapabilityState
+
+	// The ability to use PagerDuty Agent actions.
+	UsePagerDutyAgentAction CapabilityState
 
 	// The ability to use Amazon Quick through the Microsoft PowerPoint add-in.
 	UsePowerpointAddInExtension CapabilityState
@@ -10801,6 +11099,9 @@ type Capabilities struct {
 	//   . In a governed category, this value overrides the category-level
 	//   deny-by-default behavior for that capability only.
 	UseQBusinessKnowledgeBase CapabilityState
+
+	// The ability to use QuickBooks actions.
+	UseQuickBooksAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10856,14 +11157,23 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	UseSharePointKnowledgeBase CapabilityState
 
+	// The ability to use Shopify actions.
+	UseShopifyAction CapabilityState
+
 	// The ability to use Slack actions.
 	UseSlackAction CapabilityState
 
 	// The ability to use Smartsheet actions.
 	UseSmartsheetAction CapabilityState
 
+	// The ability to use Snowflake Cortex Agent actions.
+	UseSnowFlakeAction CapabilityState
+
 	// The ability to use Textract actions.
 	UseTextractAction CapabilityState
+
+	// The ability to use Visier Agent actions.
+	UseVisierAgentAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10877,14 +11187,29 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	UseWebCrawlerKnowledgeBase CapabilityState
 
+	// The ability to use WhatsApp actions.
+	UseWhatsAppAction CapabilityState
+
 	// The ability to use Amazon Quick through the Microsoft Word add-in.
 	UseWordAddInExtension CapabilityState
+
+	// The ability to use Zapier Agent actions.
+	UseZapierAction CapabilityState
 
 	// The ability to use Zendesk actions.
 	UseZendeskAction CapabilityState
 
+	// The ability to use Zoom actions.
+	UseZoomAction CapabilityState
+
+	// The ability to use ZoomInfo Agent actions.
+	UseZoomInfoAction CapabilityState
+
 	// The ability to view account SPICE capacity.
 	ViewAccountSPICECapacity CapabilityState
+
+	// The ability to perform actions using Visier Agent connectors.
+	VisierAgentAction CapabilityState
 
 	// The permission state of a capability in a custom permissions profile. Valid
 	// values:
@@ -10898,8 +11223,20 @@ type Capabilities struct {
 	//   deny-by-default behavior for that capability only.
 	WebCrawlerKnowledgeBase CapabilityState
 
+	// The ability to perform actions using WhatsApp connectors.
+	WhatsAppAction CapabilityState
+
+	// The ability to perform actions using Zapier Agent connectors.
+	ZapierAction CapabilityState
+
 	// The ability to perform actions using Zendesk connectors.
 	ZendeskAction CapabilityState
+
+	// The ability to perform actions using Zoom connectors.
+	ZoomAction CapabilityState
+
+	// The ability to perform actions using ZoomInfo Agent connectors.
+	ZoomInfoAction CapabilityState
 
 	noSmithyDocumentSerde
 }
@@ -10919,6 +11256,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AddOrRunAnomalyDetectionForAnalyses != "" {
 		s.WriteString(schemas.Capabilities_AddOrRunAnomalyDetectionForAnalyses, string(v.AddOrRunAnomalyDetectionForAnalyses))
+	}
+	if v.AdobeAction != "" {
+		s.WriteString(schemas.Capabilities_AdobeAction, string(v.AdobeAction))
+	}
+	if v.AirtableAction != "" {
+		s.WriteString(schemas.Capabilities_AirtableAction, string(v.AirtableAction))
 	}
 	if v.AmazonBedrockARSAction != "" {
 		s.WriteString(schemas.Capabilities_AmazonBedrockARSAction, string(v.AmazonBedrockARSAction))
@@ -10953,6 +11296,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BedrockManagedKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_BedrockManagedKnowledgeBase, string(v.BedrockManagedKnowledgeBase))
 	}
+	if v.BeeAction != "" {
+		s.WriteString(schemas.Capabilities_BeeAction, string(v.BeeAction))
+	}
 	if v.BoxAgentAction != "" {
 		s.WriteString(schemas.Capabilities_BoxAgentAction, string(v.BoxAgentAction))
 	}
@@ -10968,6 +11314,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChatAgent != "" {
 		s.WriteString(schemas.Capabilities_ChatAgent, string(v.ChatAgent))
 	}
+	if v.CiscoWebexMeetingsAction != "" {
+		s.WriteString(schemas.Capabilities_CiscoWebexMeetingsAction, string(v.CiscoWebexMeetingsAction))
+	}
+	if v.CiscoWebexVidcastAction != "" {
+		s.WriteString(schemas.Capabilities_CiscoWebexVidcastAction, string(v.CiscoWebexVidcastAction))
+	}
 	if v.ComprehendAction != "" {
 		s.WriteString(schemas.Capabilities_ComprehendAction, string(v.ComprehendAction))
 	}
@@ -10979,6 +11331,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ConfluenceKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ConfluenceKnowledgeBase, string(v.ConfluenceKnowledgeBase))
+	}
+	if v.CreateAndUpdateAdobeAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateAdobeAction, string(v.CreateAndUpdateAdobeAction))
+	}
+	if v.CreateAndUpdateAirtableAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateAirtableAction, string(v.CreateAndUpdateAirtableAction))
 	}
 	if v.CreateAndUpdateAmazonBedrockARSAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateAmazonBedrockARSAction, string(v.CreateAndUpdateAmazonBedrockARSAction))
@@ -11004,6 +11362,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateBedrockManagedKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateBedrockManagedKnowledgeBase, string(v.CreateAndUpdateBedrockManagedKnowledgeBase))
 	}
+	if v.CreateAndUpdateBeeAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateBeeAction, string(v.CreateAndUpdateBeeAction))
+	}
 	if v.CreateAndUpdateBoxAgentAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateBoxAgentAction, string(v.CreateAndUpdateBoxAgentAction))
 	}
@@ -11012,6 +11373,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreateAndUpdateCanvaAgentAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateCanvaAgentAction, string(v.CreateAndUpdateCanvaAgentAction))
+	}
+	if v.CreateAndUpdateCiscoWebexMeetingsAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateCiscoWebexMeetingsAction, string(v.CreateAndUpdateCiscoWebexMeetingsAction))
+	}
+	if v.CreateAndUpdateCiscoWebexVidcastAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateCiscoWebexVidcastAction, string(v.CreateAndUpdateCiscoWebexVidcastAction))
 	}
 	if v.CreateAndUpdateComprehendAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateComprehendAction, string(v.CreateAndUpdateComprehendAction))
@@ -11034,8 +11401,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateDatasets != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateDatasets, string(v.CreateAndUpdateDatasets))
 	}
+	if v.CreateAndUpdateDropboxAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateDropboxAction, string(v.CreateAndUpdateDropboxAction))
+	}
+	if v.CreateAndUpdateDunAndBradstreetAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateDunAndBradstreetAction, string(v.CreateAndUpdateDunAndBradstreetAction))
+	}
 	if v.CreateAndUpdateFactSetAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateFactSetAction, string(v.CreateAndUpdateFactSetAction))
+	}
+	if v.CreateAndUpdateFigmaAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateFigmaAction, string(v.CreateAndUpdateFigmaAction))
 	}
 	if v.CreateAndUpdateGenericHTTPAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateGenericHTTPAction, string(v.CreateAndUpdateGenericHTTPAction))
@@ -11043,11 +11419,38 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateGithubAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateGithubAction, string(v.CreateAndUpdateGithubAction))
 	}
+	if v.CreateAndUpdateGmailAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGmailAction, string(v.CreateAndUpdateGmailAction))
+	}
+	if v.CreateAndUpdateGoogleAnalyticsAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleAnalyticsAction, string(v.CreateAndUpdateGoogleAnalyticsAction))
+	}
 	if v.CreateAndUpdateGoogleCalendarAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleCalendarAction, string(v.CreateAndUpdateGoogleCalendarAction))
 	}
+	if v.CreateAndUpdateGoogleChatAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleChatAction, string(v.CreateAndUpdateGoogleChatAction))
+	}
+	if v.CreateAndUpdateGoogleDocsAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleDocsAction, string(v.CreateAndUpdateGoogleDocsAction))
+	}
+	if v.CreateAndUpdateGoogleDriveAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleDriveAction, string(v.CreateAndUpdateGoogleDriveAction))
+	}
 	if v.CreateAndUpdateGoogleDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleDriveKnowledgeBase, string(v.CreateAndUpdateGoogleDriveKnowledgeBase))
+	}
+	if v.CreateAndUpdateGoogleMeetAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleMeetAction, string(v.CreateAndUpdateGoogleMeetAction))
+	}
+	if v.CreateAndUpdateGoogleSheetsAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleSheetsAction, string(v.CreateAndUpdateGoogleSheetsAction))
+	}
+	if v.CreateAndUpdateGoogleSlidesAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateGoogleSlidesAction, string(v.CreateAndUpdateGoogleSlidesAction))
+	}
+	if v.CreateAndUpdateHGInsightsAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateHGInsightsAction, string(v.CreateAndUpdateHGInsightsAction))
 	}
 	if v.CreateAndUpdateHubspotAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateHubspotAction, string(v.CreateAndUpdateHubspotAction))
@@ -11082,6 +11485,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateMondayAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateMondayAction, string(v.CreateAndUpdateMondayAction))
 	}
+	if v.CreateAndUpdateMoodysAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateMoodysAction, string(v.CreateAndUpdateMoodysAction))
+	}
 	if v.CreateAndUpdateNewRelicAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateNewRelicAction, string(v.CreateAndUpdateNewRelicAction))
 	}
@@ -11094,14 +11500,23 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateOneDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateOneDriveKnowledgeBase, string(v.CreateAndUpdateOneDriveKnowledgeBase))
 	}
+	if v.CreateAndUpdateOneNoteAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateOneNoteAction, string(v.CreateAndUpdateOneNoteAction))
+	}
 	if v.CreateAndUpdateOpenAPIAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateOpenAPIAction, string(v.CreateAndUpdateOpenAPIAction))
 	}
 	if v.CreateAndUpdatePagerDutyAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdatePagerDutyAction, string(v.CreateAndUpdatePagerDutyAction))
 	}
+	if v.CreateAndUpdatePagerDutyAgentAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdatePagerDutyAgentAction, string(v.CreateAndUpdatePagerDutyAgentAction))
+	}
 	if v.CreateAndUpdateQBusinessKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateQBusinessKnowledgeBase, string(v.CreateAndUpdateQBusinessKnowledgeBase))
+	}
+	if v.CreateAndUpdateQuickBooksAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateQuickBooksAction, string(v.CreateAndUpdateQuickBooksAction))
 	}
 	if v.CreateAndUpdateS3KnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateS3KnowledgeBase, string(v.CreateAndUpdateS3KnowledgeBase))
@@ -11139,11 +11554,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateSharePointKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateSharePointKnowledgeBase, string(v.CreateAndUpdateSharePointKnowledgeBase))
 	}
+	if v.CreateAndUpdateShopifyAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateShopifyAction, string(v.CreateAndUpdateShopifyAction))
+	}
 	if v.CreateAndUpdateSlackAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateSlackAction, string(v.CreateAndUpdateSlackAction))
 	}
 	if v.CreateAndUpdateSmartsheetAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateSmartsheetAction, string(v.CreateAndUpdateSmartsheetAction))
+	}
+	if v.CreateAndUpdateSnowFlakeAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateSnowFlakeAction, string(v.CreateAndUpdateSnowFlakeAction))
 	}
 	if v.CreateAndUpdateTextractAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateTextractAction, string(v.CreateAndUpdateTextractAction))
@@ -11154,11 +11575,26 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateThresholdAlerts != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateThresholdAlerts, string(v.CreateAndUpdateThresholdAlerts))
 	}
+	if v.CreateAndUpdateVisierAgentAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateVisierAgentAction, string(v.CreateAndUpdateVisierAgentAction))
+	}
 	if v.CreateAndUpdateWebCrawlerKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateWebCrawlerKnowledgeBase, string(v.CreateAndUpdateWebCrawlerKnowledgeBase))
 	}
+	if v.CreateAndUpdateWhatsAppAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateWhatsAppAction, string(v.CreateAndUpdateWhatsAppAction))
+	}
+	if v.CreateAndUpdateZapierAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateZapierAction, string(v.CreateAndUpdateZapierAction))
+	}
 	if v.CreateAndUpdateZendeskAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateZendeskAction, string(v.CreateAndUpdateZendeskAction))
+	}
+	if v.CreateAndUpdateZoomAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateZoomAction, string(v.CreateAndUpdateZoomAction))
+	}
+	if v.CreateAndUpdateZoomInfoAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateZoomInfoAction, string(v.CreateAndUpdateZoomInfoAction))
 	}
 	if v.CreateChatAgents != "" {
 		s.WriteString(schemas.Capabilities_CreateChatAgents, string(v.CreateChatAgents))
@@ -11177,6 +11613,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Dashboard != "" {
 		s.WriteString(schemas.Capabilities_Dashboard, string(v.Dashboard))
+	}
+	if v.DropboxAction != "" {
+		s.WriteString(schemas.Capabilities_DropboxAction, string(v.DropboxAction))
+	}
+	if v.DunAndBradstreetAction != "" {
+		s.WriteString(schemas.Capabilities_DunAndBradstreetAction, string(v.DunAndBradstreetAction))
 	}
 	if v.EditVisualWithQ != "" {
 		s.WriteString(schemas.Capabilities_EditVisualWithQ, string(v.EditVisualWithQ))
@@ -11205,6 +11647,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FactSetAction != "" {
 		s.WriteString(schemas.Capabilities_FactSetAction, string(v.FactSetAction))
 	}
+	if v.FigmaAction != "" {
+		s.WriteString(schemas.Capabilities_FigmaAction, string(v.FigmaAction))
+	}
 	if v.Flow != "" {
 		s.WriteString(schemas.Capabilities_Flow, string(v.Flow))
 	}
@@ -11217,11 +11662,38 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GithubAction != "" {
 		s.WriteString(schemas.Capabilities_GithubAction, string(v.GithubAction))
 	}
+	if v.GmailAction != "" {
+		s.WriteString(schemas.Capabilities_GmailAction, string(v.GmailAction))
+	}
+	if v.GoogleAnalyticsAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleAnalyticsAction, string(v.GoogleAnalyticsAction))
+	}
 	if v.GoogleCalendarAction != "" {
 		s.WriteString(schemas.Capabilities_GoogleCalendarAction, string(v.GoogleCalendarAction))
 	}
+	if v.GoogleChatAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleChatAction, string(v.GoogleChatAction))
+	}
+	if v.GoogleDocsAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleDocsAction, string(v.GoogleDocsAction))
+	}
+	if v.GoogleDriveAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleDriveAction, string(v.GoogleDriveAction))
+	}
 	if v.GoogleDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_GoogleDriveKnowledgeBase, string(v.GoogleDriveKnowledgeBase))
+	}
+	if v.GoogleMeetAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleMeetAction, string(v.GoogleMeetAction))
+	}
+	if v.GoogleSheetsAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleSheetsAction, string(v.GoogleSheetsAction))
+	}
+	if v.GoogleSlidesAction != "" {
+		s.WriteString(schemas.Capabilities_GoogleSlidesAction, string(v.GoogleSlidesAction))
+	}
+	if v.HGInsightsAction != "" {
+		s.WriteString(schemas.Capabilities_HGInsightsAction, string(v.HGInsightsAction))
 	}
 	if v.HubspotAction != "" {
 		s.WriteString(schemas.Capabilities_HubspotAction, string(v.HubspotAction))
@@ -11268,6 +11740,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MondayAction != "" {
 		s.WriteString(schemas.Capabilities_MondayAction, string(v.MondayAction))
 	}
+	if v.MoodysAction != "" {
+		s.WriteString(schemas.Capabilities_MoodysAction, string(v.MoodysAction))
+	}
 	if v.NewRelicAction != "" {
 		s.WriteString(schemas.Capabilities_NewRelicAction, string(v.NewRelicAction))
 	}
@@ -11280,11 +11755,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OneDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_OneDriveKnowledgeBase, string(v.OneDriveKnowledgeBase))
 	}
+	if v.OneNoteAction != "" {
+		s.WriteString(schemas.Capabilities_OneNoteAction, string(v.OneNoteAction))
+	}
 	if v.OpenAPIAction != "" {
 		s.WriteString(schemas.Capabilities_OpenAPIAction, string(v.OpenAPIAction))
 	}
 	if v.PagerDutyAction != "" {
 		s.WriteString(schemas.Capabilities_PagerDutyAction, string(v.PagerDutyAction))
+	}
+	if v.PagerDutyAgentAction != "" {
+		s.WriteString(schemas.Capabilities_PagerDutyAgentAction, string(v.PagerDutyAgentAction))
 	}
 	if v.PerformFlowUiTask != "" {
 		s.WriteString(schemas.Capabilities_PerformFlowUiTask, string(v.PerformFlowUiTask))
@@ -11297,6 +11778,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.QBusinessKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_QBusinessKnowledgeBase, string(v.QBusinessKnowledgeBase))
+	}
+	if v.QuickBooksAction != "" {
+		s.WriteString(schemas.Capabilities_QuickBooksAction, string(v.QuickBooksAction))
 	}
 	if v.QuickEventTrigger != "" {
 		s.WriteString(schemas.Capabilities_QuickEventTrigger, string(v.QuickEventTrigger))
@@ -11346,6 +11830,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceNowAction != "" {
 		s.WriteString(schemas.Capabilities_ServiceNowAction, string(v.ServiceNowAction))
 	}
+	if v.ShareAdobeAction != "" {
+		s.WriteString(schemas.Capabilities_ShareAdobeAction, string(v.ShareAdobeAction))
+	}
+	if v.ShareAirtableAction != "" {
+		s.WriteString(schemas.Capabilities_ShareAirtableAction, string(v.ShareAirtableAction))
+	}
 	if v.ShareAmazonBedrockARSAction != "" {
 		s.WriteString(schemas.Capabilities_ShareAmazonBedrockARSAction, string(v.ShareAmazonBedrockARSAction))
 	}
@@ -11373,6 +11863,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareBedrockManagedKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareBedrockManagedKnowledgeBase, string(v.ShareBedrockManagedKnowledgeBase))
 	}
+	if v.ShareBeeAction != "" {
+		s.WriteString(schemas.Capabilities_ShareBeeAction, string(v.ShareBeeAction))
+	}
 	if v.ShareBoxAgentAction != "" {
 		s.WriteString(schemas.Capabilities_ShareBoxAgentAction, string(v.ShareBoxAgentAction))
 	}
@@ -11384,6 +11877,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ShareChatAgents != "" {
 		s.WriteString(schemas.Capabilities_ShareChatAgents, string(v.ShareChatAgents))
+	}
+	if v.ShareCiscoWebexMeetingsAction != "" {
+		s.WriteString(schemas.Capabilities_ShareCiscoWebexMeetingsAction, string(v.ShareCiscoWebexMeetingsAction))
+	}
+	if v.ShareCiscoWebexVidcastAction != "" {
+		s.WriteString(schemas.Capabilities_ShareCiscoWebexVidcastAction, string(v.ShareCiscoWebexVidcastAction))
 	}
 	if v.ShareComprehendAction != "" {
 		s.WriteString(schemas.Capabilities_ShareComprehendAction, string(v.ShareComprehendAction))
@@ -11406,8 +11905,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareDatasets != "" {
 		s.WriteString(schemas.Capabilities_ShareDatasets, string(v.ShareDatasets))
 	}
+	if v.ShareDropboxAction != "" {
+		s.WriteString(schemas.Capabilities_ShareDropboxAction, string(v.ShareDropboxAction))
+	}
+	if v.ShareDunAndBradstreetAction != "" {
+		s.WriteString(schemas.Capabilities_ShareDunAndBradstreetAction, string(v.ShareDunAndBradstreetAction))
+	}
 	if v.ShareFactSetAction != "" {
 		s.WriteString(schemas.Capabilities_ShareFactSetAction, string(v.ShareFactSetAction))
+	}
+	if v.ShareFigmaAction != "" {
+		s.WriteString(schemas.Capabilities_ShareFigmaAction, string(v.ShareFigmaAction))
 	}
 	if v.ShareGenericHTTPAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGenericHTTPAction, string(v.ShareGenericHTTPAction))
@@ -11415,11 +11923,38 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareGithubAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGithubAction, string(v.ShareGithubAction))
 	}
+	if v.ShareGmailAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGmailAction, string(v.ShareGmailAction))
+	}
+	if v.ShareGoogleAnalyticsAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleAnalyticsAction, string(v.ShareGoogleAnalyticsAction))
+	}
 	if v.ShareGoogleCalendarAction != "" {
 		s.WriteString(schemas.Capabilities_ShareGoogleCalendarAction, string(v.ShareGoogleCalendarAction))
 	}
+	if v.ShareGoogleChatAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleChatAction, string(v.ShareGoogleChatAction))
+	}
+	if v.ShareGoogleDocsAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleDocsAction, string(v.ShareGoogleDocsAction))
+	}
+	if v.ShareGoogleDriveAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleDriveAction, string(v.ShareGoogleDriveAction))
+	}
 	if v.ShareGoogleDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareGoogleDriveKnowledgeBase, string(v.ShareGoogleDriveKnowledgeBase))
+	}
+	if v.ShareGoogleMeetAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleMeetAction, string(v.ShareGoogleMeetAction))
+	}
+	if v.ShareGoogleSheetsAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleSheetsAction, string(v.ShareGoogleSheetsAction))
+	}
+	if v.ShareGoogleSlidesAction != "" {
+		s.WriteString(schemas.Capabilities_ShareGoogleSlidesAction, string(v.ShareGoogleSlidesAction))
+	}
+	if v.ShareHGInsightsAction != "" {
+		s.WriteString(schemas.Capabilities_ShareHGInsightsAction, string(v.ShareHGInsightsAction))
 	}
 	if v.ShareHubspotAction != "" {
 		s.WriteString(schemas.Capabilities_ShareHubspotAction, string(v.ShareHubspotAction))
@@ -11454,6 +11989,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareMondayAction != "" {
 		s.WriteString(schemas.Capabilities_ShareMondayAction, string(v.ShareMondayAction))
 	}
+	if v.ShareMoodysAction != "" {
+		s.WriteString(schemas.Capabilities_ShareMoodysAction, string(v.ShareMoodysAction))
+	}
 	if v.ShareNewRelicAction != "" {
 		s.WriteString(schemas.Capabilities_ShareNewRelicAction, string(v.ShareNewRelicAction))
 	}
@@ -11466,11 +12004,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareOneDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareOneDriveKnowledgeBase, string(v.ShareOneDriveKnowledgeBase))
 	}
+	if v.ShareOneNoteAction != "" {
+		s.WriteString(schemas.Capabilities_ShareOneNoteAction, string(v.ShareOneNoteAction))
+	}
 	if v.ShareOpenAPIAction != "" {
 		s.WriteString(schemas.Capabilities_ShareOpenAPIAction, string(v.ShareOpenAPIAction))
 	}
 	if v.SharePagerDutyAction != "" {
 		s.WriteString(schemas.Capabilities_SharePagerDutyAction, string(v.SharePagerDutyAction))
+	}
+	if v.SharePagerDutyAgentAction != "" {
+		s.WriteString(schemas.Capabilities_SharePagerDutyAgentAction, string(v.SharePagerDutyAgentAction))
 	}
 	if v.SharePointAction != "" {
 		s.WriteString(schemas.Capabilities_SharePointAction, string(v.SharePointAction))
@@ -11480,6 +12024,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ShareQBusinessKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareQBusinessKnowledgeBase, string(v.ShareQBusinessKnowledgeBase))
+	}
+	if v.ShareQuickBooksAction != "" {
+		s.WriteString(schemas.Capabilities_ShareQuickBooksAction, string(v.ShareQuickBooksAction))
 	}
 	if v.ShareS3KnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareS3KnowledgeBase, string(v.ShareS3KnowledgeBase))
@@ -11517,11 +12064,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareSharePointKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareSharePointKnowledgeBase, string(v.ShareSharePointKnowledgeBase))
 	}
+	if v.ShareShopifyAction != "" {
+		s.WriteString(schemas.Capabilities_ShareShopifyAction, string(v.ShareShopifyAction))
+	}
 	if v.ShareSlackAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSlackAction, string(v.ShareSlackAction))
 	}
 	if v.ShareSmartsheetAction != "" {
 		s.WriteString(schemas.Capabilities_ShareSmartsheetAction, string(v.ShareSmartsheetAction))
+	}
+	if v.ShareSnowFlakeAction != "" {
+		s.WriteString(schemas.Capabilities_ShareSnowFlakeAction, string(v.ShareSnowFlakeAction))
 	}
 	if v.ShareSpaces != "" {
 		s.WriteString(schemas.Capabilities_ShareSpaces, string(v.ShareSpaces))
@@ -11529,17 +12082,38 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareTextractAction != "" {
 		s.WriteString(schemas.Capabilities_ShareTextractAction, string(v.ShareTextractAction))
 	}
+	if v.ShareVisierAgentAction != "" {
+		s.WriteString(schemas.Capabilities_ShareVisierAgentAction, string(v.ShareVisierAgentAction))
+	}
 	if v.ShareWebCrawlerKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_ShareWebCrawlerKnowledgeBase, string(v.ShareWebCrawlerKnowledgeBase))
 	}
+	if v.ShareWhatsAppAction != "" {
+		s.WriteString(schemas.Capabilities_ShareWhatsAppAction, string(v.ShareWhatsAppAction))
+	}
+	if v.ShareZapierAction != "" {
+		s.WriteString(schemas.Capabilities_ShareZapierAction, string(v.ShareZapierAction))
+	}
 	if v.ShareZendeskAction != "" {
 		s.WriteString(schemas.Capabilities_ShareZendeskAction, string(v.ShareZendeskAction))
+	}
+	if v.ShareZoomAction != "" {
+		s.WriteString(schemas.Capabilities_ShareZoomAction, string(v.ShareZoomAction))
+	}
+	if v.ShareZoomInfoAction != "" {
+		s.WriteString(schemas.Capabilities_ShareZoomInfoAction, string(v.ShareZoomInfoAction))
+	}
+	if v.ShopifyAction != "" {
+		s.WriteString(schemas.Capabilities_ShopifyAction, string(v.ShopifyAction))
 	}
 	if v.SlackAction != "" {
 		s.WriteString(schemas.Capabilities_SlackAction, string(v.SlackAction))
 	}
 	if v.SmartsheetAction != "" {
 		s.WriteString(schemas.Capabilities_SmartsheetAction, string(v.SmartsheetAction))
+	}
+	if v.SnowFlakeAction != "" {
+		s.WriteString(schemas.Capabilities_SnowFlakeAction, string(v.SnowFlakeAction))
 	}
 	if v.Space != "" {
 		s.WriteString(schemas.Capabilities_Space, string(v.Space))
@@ -11559,8 +12133,14 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Trigger != "" {
 		s.WriteString(schemas.Capabilities_Trigger, string(v.Trigger))
 	}
+	if v.UseAdobeAction != "" {
+		s.WriteString(schemas.Capabilities_UseAdobeAction, string(v.UseAdobeAction))
+	}
 	if v.UseAgentWebSearch != "" {
 		s.WriteString(schemas.Capabilities_UseAgentWebSearch, string(v.UseAgentWebSearch))
+	}
+	if v.UseAirtableAction != "" {
+		s.WriteString(schemas.Capabilities_UseAirtableAction, string(v.UseAirtableAction))
 	}
 	if v.UseAmazonBedrockARSAction != "" {
 		s.WriteString(schemas.Capabilities_UseAmazonBedrockARSAction, string(v.UseAmazonBedrockARSAction))
@@ -11586,6 +12166,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseBedrockModels != "" {
 		s.WriteString(schemas.Capabilities_UseBedrockModels, string(v.UseBedrockModels))
 	}
+	if v.UseBeeAction != "" {
+		s.WriteString(schemas.Capabilities_UseBeeAction, string(v.UseBeeAction))
+	}
 	if v.UseBoxAgentAction != "" {
 		s.WriteString(schemas.Capabilities_UseBoxAgentAction, string(v.UseBoxAgentAction))
 	}
@@ -11597,6 +12180,12 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UseCanvaAgentAction != "" {
 		s.WriteString(schemas.Capabilities_UseCanvaAgentAction, string(v.UseCanvaAgentAction))
+	}
+	if v.UseCiscoWebexMeetingsAction != "" {
+		s.WriteString(schemas.Capabilities_UseCiscoWebexMeetingsAction, string(v.UseCiscoWebexMeetingsAction))
+	}
+	if v.UseCiscoWebexVidcastAction != "" {
+		s.WriteString(schemas.Capabilities_UseCiscoWebexVidcastAction, string(v.UseCiscoWebexVidcastAction))
 	}
 	if v.UseComprehendAction != "" {
 		s.WriteString(schemas.Capabilities_UseComprehendAction, string(v.UseComprehendAction))
@@ -11610,11 +12199,20 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseConfluenceKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseConfluenceKnowledgeBase, string(v.UseConfluenceKnowledgeBase))
 	}
+	if v.UseDropboxAction != "" {
+		s.WriteString(schemas.Capabilities_UseDropboxAction, string(v.UseDropboxAction))
+	}
+	if v.UseDunAndBradstreetAction != "" {
+		s.WriteString(schemas.Capabilities_UseDunAndBradstreetAction, string(v.UseDunAndBradstreetAction))
+	}
 	if v.UseExcelAddInExtension != "" {
 		s.WriteString(schemas.Capabilities_UseExcelAddInExtension, string(v.UseExcelAddInExtension))
 	}
 	if v.UseFactSetAction != "" {
 		s.WriteString(schemas.Capabilities_UseFactSetAction, string(v.UseFactSetAction))
+	}
+	if v.UseFigmaAction != "" {
+		s.WriteString(schemas.Capabilities_UseFigmaAction, string(v.UseFigmaAction))
 	}
 	if v.UseGenericHTTPAction != "" {
 		s.WriteString(schemas.Capabilities_UseGenericHTTPAction, string(v.UseGenericHTTPAction))
@@ -11622,11 +12220,38 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseGithubAction != "" {
 		s.WriteString(schemas.Capabilities_UseGithubAction, string(v.UseGithubAction))
 	}
+	if v.UseGmailAction != "" {
+		s.WriteString(schemas.Capabilities_UseGmailAction, string(v.UseGmailAction))
+	}
+	if v.UseGoogleAnalyticsAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleAnalyticsAction, string(v.UseGoogleAnalyticsAction))
+	}
 	if v.UseGoogleCalendarAction != "" {
 		s.WriteString(schemas.Capabilities_UseGoogleCalendarAction, string(v.UseGoogleCalendarAction))
 	}
+	if v.UseGoogleChatAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleChatAction, string(v.UseGoogleChatAction))
+	}
+	if v.UseGoogleDocsAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleDocsAction, string(v.UseGoogleDocsAction))
+	}
+	if v.UseGoogleDriveAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleDriveAction, string(v.UseGoogleDriveAction))
+	}
 	if v.UseGoogleDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseGoogleDriveKnowledgeBase, string(v.UseGoogleDriveKnowledgeBase))
+	}
+	if v.UseGoogleMeetAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleMeetAction, string(v.UseGoogleMeetAction))
+	}
+	if v.UseGoogleSheetsAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleSheetsAction, string(v.UseGoogleSheetsAction))
+	}
+	if v.UseGoogleSlidesAction != "" {
+		s.WriteString(schemas.Capabilities_UseGoogleSlidesAction, string(v.UseGoogleSlidesAction))
+	}
+	if v.UseHGInsightsAction != "" {
+		s.WriteString(schemas.Capabilities_UseHGInsightsAction, string(v.UseHGInsightsAction))
 	}
 	if v.UseHubspotAction != "" {
 		s.WriteString(schemas.Capabilities_UseHubspotAction, string(v.UseHubspotAction))
@@ -11658,6 +12283,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseMondayAction != "" {
 		s.WriteString(schemas.Capabilities_UseMondayAction, string(v.UseMondayAction))
 	}
+	if v.UseMoodysAction != "" {
+		s.WriteString(schemas.Capabilities_UseMoodysAction, string(v.UseMoodysAction))
+	}
 	if v.UseNewRelicAction != "" {
 		s.WriteString(schemas.Capabilities_UseNewRelicAction, string(v.UseNewRelicAction))
 	}
@@ -11670,6 +12298,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseOneDriveKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseOneDriveKnowledgeBase, string(v.UseOneDriveKnowledgeBase))
 	}
+	if v.UseOneNoteAction != "" {
+		s.WriteString(schemas.Capabilities_UseOneNoteAction, string(v.UseOneNoteAction))
+	}
 	if v.UseOpenAPIAction != "" {
 		s.WriteString(schemas.Capabilities_UseOpenAPIAction, string(v.UseOpenAPIAction))
 	}
@@ -11679,11 +12310,17 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UsePagerDutyAction != "" {
 		s.WriteString(schemas.Capabilities_UsePagerDutyAction, string(v.UsePagerDutyAction))
 	}
+	if v.UsePagerDutyAgentAction != "" {
+		s.WriteString(schemas.Capabilities_UsePagerDutyAgentAction, string(v.UsePagerDutyAgentAction))
+	}
 	if v.UsePowerpointAddInExtension != "" {
 		s.WriteString(schemas.Capabilities_UsePowerpointAddInExtension, string(v.UsePowerpointAddInExtension))
 	}
 	if v.UseQBusinessKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseQBusinessKnowledgeBase, string(v.UseQBusinessKnowledgeBase))
+	}
+	if v.UseQuickBooksAction != "" {
+		s.WriteString(schemas.Capabilities_UseQuickBooksAction, string(v.UseQuickBooksAction))
 	}
 	if v.UseS3KnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseS3KnowledgeBase, string(v.UseS3KnowledgeBase))
@@ -11721,32 +12358,68 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseSharePointKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseSharePointKnowledgeBase, string(v.UseSharePointKnowledgeBase))
 	}
+	if v.UseShopifyAction != "" {
+		s.WriteString(schemas.Capabilities_UseShopifyAction, string(v.UseShopifyAction))
+	}
 	if v.UseSlackAction != "" {
 		s.WriteString(schemas.Capabilities_UseSlackAction, string(v.UseSlackAction))
 	}
 	if v.UseSmartsheetAction != "" {
 		s.WriteString(schemas.Capabilities_UseSmartsheetAction, string(v.UseSmartsheetAction))
 	}
+	if v.UseSnowFlakeAction != "" {
+		s.WriteString(schemas.Capabilities_UseSnowFlakeAction, string(v.UseSnowFlakeAction))
+	}
 	if v.UseTextractAction != "" {
 		s.WriteString(schemas.Capabilities_UseTextractAction, string(v.UseTextractAction))
+	}
+	if v.UseVisierAgentAction != "" {
+		s.WriteString(schemas.Capabilities_UseVisierAgentAction, string(v.UseVisierAgentAction))
 	}
 	if v.UseWebCrawlerKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_UseWebCrawlerKnowledgeBase, string(v.UseWebCrawlerKnowledgeBase))
 	}
+	if v.UseWhatsAppAction != "" {
+		s.WriteString(schemas.Capabilities_UseWhatsAppAction, string(v.UseWhatsAppAction))
+	}
 	if v.UseWordAddInExtension != "" {
 		s.WriteString(schemas.Capabilities_UseWordAddInExtension, string(v.UseWordAddInExtension))
+	}
+	if v.UseZapierAction != "" {
+		s.WriteString(schemas.Capabilities_UseZapierAction, string(v.UseZapierAction))
 	}
 	if v.UseZendeskAction != "" {
 		s.WriteString(schemas.Capabilities_UseZendeskAction, string(v.UseZendeskAction))
 	}
+	if v.UseZoomAction != "" {
+		s.WriteString(schemas.Capabilities_UseZoomAction, string(v.UseZoomAction))
+	}
+	if v.UseZoomInfoAction != "" {
+		s.WriteString(schemas.Capabilities_UseZoomInfoAction, string(v.UseZoomInfoAction))
+	}
 	if v.ViewAccountSPICECapacity != "" {
 		s.WriteString(schemas.Capabilities_ViewAccountSPICECapacity, string(v.ViewAccountSPICECapacity))
+	}
+	if v.VisierAgentAction != "" {
+		s.WriteString(schemas.Capabilities_VisierAgentAction, string(v.VisierAgentAction))
 	}
 	if v.WebCrawlerKnowledgeBase != "" {
 		s.WriteString(schemas.Capabilities_WebCrawlerKnowledgeBase, string(v.WebCrawlerKnowledgeBase))
 	}
+	if v.WhatsAppAction != "" {
+		s.WriteString(schemas.Capabilities_WhatsAppAction, string(v.WhatsAppAction))
+	}
+	if v.ZapierAction != "" {
+		s.WriteString(schemas.Capabilities_ZapierAction, string(v.ZapierAction))
+	}
 	if v.ZendeskAction != "" {
 		s.WriteString(schemas.Capabilities_ZendeskAction, string(v.ZendeskAction))
+	}
+	if v.ZoomAction != "" {
+		s.WriteString(schemas.Capabilities_ZoomAction, string(v.ZoomAction))
+	}
+	if v.ZoomInfoAction != "" {
+		s.WriteString(schemas.Capabilities_ZoomInfoAction, string(v.ZoomInfoAction))
 	}
 }
 func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
@@ -11772,6 +12445,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.AddOrRunAnomalyDetectionForAnalyses = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_AdobeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_AdobeAction, &ev); err != nil {
+				return err
+			}
+			v.AdobeAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_AirtableAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_AirtableAction, &ev); err != nil {
+				return err
+			}
+			v.AirtableAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_AmazonBedrockARSAction:
 			var ev string
@@ -11850,6 +12537,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.BedrockManagedKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_BeeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_BeeAction, &ev); err != nil {
+				return err
+			}
+			v.BeeAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_BoxAgentAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_BoxAgentAction, &ev); err != nil {
@@ -11885,6 +12579,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ChatAgent = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CiscoWebexMeetingsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CiscoWebexMeetingsAction, &ev); err != nil {
+				return err
+			}
+			v.CiscoWebexMeetingsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CiscoWebexVidcastAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CiscoWebexVidcastAction, &ev); err != nil {
+				return err
+			}
+			v.CiscoWebexVidcastAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ComprehendAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ComprehendAction, &ev); err != nil {
@@ -11912,6 +12620,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ConfluenceKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateAdobeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateAdobeAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateAdobeAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateAirtableAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateAirtableAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateAirtableAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateAmazonBedrockARSAction:
 			var ev string
@@ -11969,6 +12691,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateBedrockManagedKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateBeeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateBeeAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateBeeAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateBoxAgentAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateBoxAgentAction, &ev); err != nil {
@@ -11989,6 +12718,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CreateAndUpdateCanvaAgentAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateCiscoWebexMeetingsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateCiscoWebexMeetingsAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateCiscoWebexMeetingsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateCiscoWebexVidcastAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateCiscoWebexVidcastAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateCiscoWebexVidcastAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateComprehendAction:
 			var ev string
@@ -12039,12 +12782,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateDatasets = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateDropboxAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateDropboxAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateDropboxAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateDunAndBradstreetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateDunAndBradstreetAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateDunAndBradstreetAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateFactSetAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateFactSetAction, &ev); err != nil {
 				return err
 			}
 			v.CreateAndUpdateFactSetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateFigmaAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateFigmaAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateFigmaAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateGenericHTTPAction:
 			var ev string
@@ -12060,6 +12824,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateGithubAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateGmailAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGmailAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGmailAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleAnalyticsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleAnalyticsAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleAnalyticsAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateGoogleCalendarAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleCalendarAction, &ev); err != nil {
@@ -12067,12 +12845,61 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateGoogleCalendarAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleChatAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleChatAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleChatAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleDocsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleDocsAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleDocsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleDriveAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleDriveAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleDriveAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateGoogleDriveKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleDriveKnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.CreateAndUpdateGoogleDriveKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleMeetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleMeetAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleMeetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleSheetsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleSheetsAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleSheetsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateGoogleSlidesAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateGoogleSlidesAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateGoogleSlidesAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateHGInsightsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateHGInsightsAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateHGInsightsAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateHubspotAction:
 			var ev string
@@ -12151,6 +12978,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateMondayAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateMoodysAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateMoodysAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateMoodysAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateNewRelicAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateNewRelicAction, &ev); err != nil {
@@ -12179,6 +13013,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateOneDriveKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateOneNoteAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateOneNoteAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateOneNoteAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateOpenAPIAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateOpenAPIAction, &ev); err != nil {
@@ -12193,12 +13034,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdatePagerDutyAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdatePagerDutyAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdatePagerDutyAgentAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdatePagerDutyAgentAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateQBusinessKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateQBusinessKnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.CreateAndUpdateQBusinessKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateQuickBooksAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateQuickBooksAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateQuickBooksAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateS3KnowledgeBase:
 			var ev string
@@ -12284,6 +13139,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateSharePointKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateShopifyAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateShopifyAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateShopifyAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateSlackAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateSlackAction, &ev); err != nil {
@@ -12297,6 +13159,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CreateAndUpdateSmartsheetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateSnowFlakeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateSnowFlakeAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateSnowFlakeAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateTextractAction:
 			var ev string
@@ -12319,6 +13188,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateThresholdAlerts = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateVisierAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateVisierAgentAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateVisierAgentAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateWebCrawlerKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateWebCrawlerKnowledgeBase, &ev); err != nil {
@@ -12326,12 +13202,40 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CreateAndUpdateWebCrawlerKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_CreateAndUpdateWhatsAppAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateWhatsAppAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateWhatsAppAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateZapierAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateZapierAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateZapierAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_CreateAndUpdateZendeskAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateZendeskAction, &ev); err != nil {
 				return err
 			}
 			v.CreateAndUpdateZendeskAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateZoomAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateZoomAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateZoomAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateZoomInfoAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateZoomInfoAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateZoomInfoAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateChatAgents:
 			var ev string
@@ -12374,6 +13278,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.Dashboard = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_DropboxAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DropboxAction, &ev); err != nil {
+				return err
+			}
+			v.DropboxAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_DunAndBradstreetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_DunAndBradstreetAction, &ev); err != nil {
+				return err
+			}
+			v.DunAndBradstreetAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_EditVisualWithQ:
 			var ev string
@@ -12438,6 +13356,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.FactSetAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_FigmaAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_FigmaAction, &ev); err != nil {
+				return err
+			}
+			v.FigmaAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_Flow:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_Flow, &ev); err != nil {
@@ -12466,6 +13391,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.GithubAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_GmailAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GmailAction, &ev); err != nil {
+				return err
+			}
+			v.GmailAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleAnalyticsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleAnalyticsAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleAnalyticsAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_GoogleCalendarAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_GoogleCalendarAction, &ev); err != nil {
@@ -12473,12 +13412,61 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.GoogleCalendarAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_GoogleChatAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleChatAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleChatAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleDocsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleDocsAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleDocsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleDriveAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleDriveAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleDriveAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_GoogleDriveKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_GoogleDriveKnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.GoogleDriveKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleMeetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleMeetAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleMeetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleSheetsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleSheetsAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleSheetsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_GoogleSlidesAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_GoogleSlidesAction, &ev); err != nil {
+				return err
+			}
+			v.GoogleSlidesAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_HGInsightsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_HGInsightsAction, &ev); err != nil {
+				return err
+			}
+			v.HGInsightsAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_HubspotAction:
 			var ev string
@@ -12585,6 +13573,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.MondayAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_MoodysAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_MoodysAction, &ev); err != nil {
+				return err
+			}
+			v.MoodysAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_NewRelicAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_NewRelicAction, &ev); err != nil {
@@ -12613,6 +13608,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.OneDriveKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_OneNoteAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_OneNoteAction, &ev); err != nil {
+				return err
+			}
+			v.OneNoteAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_OpenAPIAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_OpenAPIAction, &ev); err != nil {
@@ -12626,6 +13628,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.PagerDutyAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_PagerDutyAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_PagerDutyAgentAction, &ev); err != nil {
+				return err
+			}
+			v.PagerDutyAgentAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_PerformFlowUiTask:
 			var ev string
@@ -12654,6 +13663,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.QBusinessKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_QuickBooksAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_QuickBooksAction, &ev); err != nil {
+				return err
+			}
+			v.QuickBooksAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_QuickEventTrigger:
 			var ev string
@@ -12767,6 +13783,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ServiceNowAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareAdobeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareAdobeAction, &ev); err != nil {
+				return err
+			}
+			v.ShareAdobeAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareAirtableAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareAirtableAction, &ev); err != nil {
+				return err
+			}
+			v.ShareAirtableAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareAmazonBedrockARSAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareAmazonBedrockARSAction, &ev); err != nil {
@@ -12830,6 +13860,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareBedrockManagedKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareBeeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareBeeAction, &ev); err != nil {
+				return err
+			}
+			v.ShareBeeAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareBoxAgentAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareBoxAgentAction, &ev); err != nil {
@@ -12857,6 +13894,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ShareChatAgents = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareCiscoWebexMeetingsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareCiscoWebexMeetingsAction, &ev); err != nil {
+				return err
+			}
+			v.ShareCiscoWebexMeetingsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareCiscoWebexVidcastAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareCiscoWebexVidcastAction, &ev); err != nil {
+				return err
+			}
+			v.ShareCiscoWebexVidcastAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareComprehendAction:
 			var ev string
@@ -12907,12 +13958,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareDatasets = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareDropboxAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDropboxAction, &ev); err != nil {
+				return err
+			}
+			v.ShareDropboxAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareDunAndBradstreetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareDunAndBradstreetAction, &ev); err != nil {
+				return err
+			}
+			v.ShareDunAndBradstreetAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareFactSetAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareFactSetAction, &ev); err != nil {
 				return err
 			}
 			v.ShareFactSetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareFigmaAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareFigmaAction, &ev); err != nil {
+				return err
+			}
+			v.ShareFigmaAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareGenericHTTPAction:
 			var ev string
@@ -12928,6 +14000,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareGithubAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareGmailAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGmailAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGmailAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleAnalyticsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleAnalyticsAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleAnalyticsAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareGoogleCalendarAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareGoogleCalendarAction, &ev); err != nil {
@@ -12935,12 +14021,61 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareGoogleCalendarAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareGoogleChatAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleChatAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleChatAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleDocsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleDocsAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleDocsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleDriveAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleDriveAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleDriveAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareGoogleDriveKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareGoogleDriveKnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.ShareGoogleDriveKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleMeetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleMeetAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleMeetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleSheetsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleSheetsAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleSheetsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareGoogleSlidesAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareGoogleSlidesAction, &ev); err != nil {
+				return err
+			}
+			v.ShareGoogleSlidesAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareHGInsightsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareHGInsightsAction, &ev); err != nil {
+				return err
+			}
+			v.ShareHGInsightsAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareHubspotAction:
 			var ev string
@@ -13019,6 +14154,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareMondayAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareMoodysAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareMoodysAction, &ev); err != nil {
+				return err
+			}
+			v.ShareMoodysAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareNewRelicAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareNewRelicAction, &ev); err != nil {
@@ -13047,6 +14189,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareOneDriveKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareOneNoteAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareOneNoteAction, &ev); err != nil {
+				return err
+			}
+			v.ShareOneNoteAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareOpenAPIAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareOpenAPIAction, &ev); err != nil {
@@ -13060,6 +14209,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.SharePagerDutyAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SharePagerDutyAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SharePagerDutyAgentAction, &ev); err != nil {
+				return err
+			}
+			v.SharePagerDutyAgentAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_SharePointAction:
 			var ev string
@@ -13081,6 +14237,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ShareQBusinessKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareQuickBooksAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareQuickBooksAction, &ev); err != nil {
+				return err
+			}
+			v.ShareQuickBooksAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareS3KnowledgeBase:
 			var ev string
@@ -13166,6 +14329,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareSharePointKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareShopifyAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareShopifyAction, &ev); err != nil {
+				return err
+			}
+			v.ShareShopifyAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareSlackAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareSlackAction, &ev); err != nil {
@@ -13179,6 +14349,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ShareSmartsheetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareSnowFlakeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareSnowFlakeAction, &ev); err != nil {
+				return err
+			}
+			v.ShareSnowFlakeAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_ShareSpaces:
 			var ev string
@@ -13194,6 +14371,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareTextractAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareVisierAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareVisierAgentAction, &ev); err != nil {
+				return err
+			}
+			v.ShareVisierAgentAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareWebCrawlerKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareWebCrawlerKnowledgeBase, &ev); err != nil {
@@ -13201,12 +14385,47 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ShareWebCrawlerKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_ShareWhatsAppAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareWhatsAppAction, &ev); err != nil {
+				return err
+			}
+			v.ShareWhatsAppAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareZapierAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareZapierAction, &ev); err != nil {
+				return err
+			}
+			v.ShareZapierAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ShareZendeskAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ShareZendeskAction, &ev); err != nil {
 				return err
 			}
 			v.ShareZendeskAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareZoomAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareZoomAction, &ev); err != nil {
+				return err
+			}
+			v.ShareZoomAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShareZoomInfoAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShareZoomInfoAction, &ev); err != nil {
+				return err
+			}
+			v.ShareZoomInfoAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ShopifyAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ShopifyAction, &ev); err != nil {
+				return err
+			}
+			v.ShopifyAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_SlackAction:
 			var ev string
@@ -13221,6 +14440,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.SmartsheetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_SnowFlakeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_SnowFlakeAction, &ev); err != nil {
+				return err
+			}
+			v.SnowFlakeAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_Space:
 			var ev string
@@ -13264,12 +14490,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Trigger = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseAdobeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseAdobeAction, &ev); err != nil {
+				return err
+			}
+			v.UseAdobeAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseAgentWebSearch:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseAgentWebSearch, &ev); err != nil {
 				return err
 			}
 			v.UseAgentWebSearch = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseAirtableAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseAirtableAction, &ev); err != nil {
+				return err
+			}
+			v.UseAirtableAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseAmazonBedrockARSAction:
 			var ev string
@@ -13327,6 +14567,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseBedrockModels = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseBeeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseBeeAction, &ev); err != nil {
+				return err
+			}
+			v.UseBeeAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseBoxAgentAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseBoxAgentAction, &ev); err != nil {
@@ -13354,6 +14601,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.UseCanvaAgentAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseCiscoWebexMeetingsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseCiscoWebexMeetingsAction, &ev); err != nil {
+				return err
+			}
+			v.UseCiscoWebexMeetingsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseCiscoWebexVidcastAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseCiscoWebexVidcastAction, &ev); err != nil {
+				return err
+			}
+			v.UseCiscoWebexVidcastAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseComprehendAction:
 			var ev string
@@ -13383,6 +14644,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseConfluenceKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseDropboxAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseDropboxAction, &ev); err != nil {
+				return err
+			}
+			v.UseDropboxAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseDunAndBradstreetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseDunAndBradstreetAction, &ev); err != nil {
+				return err
+			}
+			v.UseDunAndBradstreetAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseExcelAddInExtension:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseExcelAddInExtension, &ev); err != nil {
@@ -13396,6 +14671,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.UseFactSetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseFigmaAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseFigmaAction, &ev); err != nil {
+				return err
+			}
+			v.UseFigmaAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseGenericHTTPAction:
 			var ev string
@@ -13411,6 +14693,20 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseGithubAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseGmailAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGmailAction, &ev); err != nil {
+				return err
+			}
+			v.UseGmailAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGoogleAnalyticsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleAnalyticsAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleAnalyticsAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseGoogleCalendarAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseGoogleCalendarAction, &ev); err != nil {
@@ -13418,12 +14714,61 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseGoogleCalendarAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseGoogleChatAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleChatAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleChatAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGoogleDocsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleDocsAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleDocsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGoogleDriveAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleDriveAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleDriveAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseGoogleDriveKnowledgeBase:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseGoogleDriveKnowledgeBase, &ev); err != nil {
 				return err
 			}
 			v.UseGoogleDriveKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGoogleMeetAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleMeetAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleMeetAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGoogleSheetsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleSheetsAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleSheetsAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseGoogleSlidesAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseGoogleSlidesAction, &ev); err != nil {
+				return err
+			}
+			v.UseGoogleSlidesAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseHGInsightsAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseHGInsightsAction, &ev); err != nil {
+				return err
+			}
+			v.UseHGInsightsAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseHubspotAction:
 			var ev string
@@ -13495,6 +14840,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseMondayAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseMoodysAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseMoodysAction, &ev); err != nil {
+				return err
+			}
+			v.UseMoodysAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseNewRelicAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseNewRelicAction, &ev); err != nil {
@@ -13523,6 +14875,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseOneDriveKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseOneNoteAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseOneNoteAction, &ev); err != nil {
+				return err
+			}
+			v.UseOneNoteAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseOpenAPIAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseOpenAPIAction, &ev); err != nil {
@@ -13544,6 +14903,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UsePagerDutyAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UsePagerDutyAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UsePagerDutyAgentAction, &ev); err != nil {
+				return err
+			}
+			v.UsePagerDutyAgentAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UsePowerpointAddInExtension:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UsePowerpointAddInExtension, &ev); err != nil {
@@ -13557,6 +14923,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.UseQBusinessKnowledgeBase = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseQuickBooksAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseQuickBooksAction, &ev); err != nil {
+				return err
+			}
+			v.UseQuickBooksAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseS3KnowledgeBase:
 			var ev string
@@ -13642,6 +15015,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseSharePointKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseShopifyAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseShopifyAction, &ev); err != nil {
+				return err
+			}
+			v.UseShopifyAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseSlackAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseSlackAction, &ev); err != nil {
@@ -13656,12 +15036,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseSmartsheetAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseSnowFlakeAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseSnowFlakeAction, &ev); err != nil {
+				return err
+			}
+			v.UseSnowFlakeAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseTextractAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseTextractAction, &ev); err != nil {
 				return err
 			}
 			v.UseTextractAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseVisierAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseVisierAgentAction, &ev); err != nil {
+				return err
+			}
+			v.UseVisierAgentAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseWebCrawlerKnowledgeBase:
 			var ev string
@@ -13670,12 +15064,26 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseWebCrawlerKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseWhatsAppAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseWhatsAppAction, &ev); err != nil {
+				return err
+			}
+			v.UseWhatsAppAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseWordAddInExtension:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseWordAddInExtension, &ev); err != nil {
 				return err
 			}
 			v.UseWordAddInExtension = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseZapierAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseZapierAction, &ev); err != nil {
+				return err
+			}
+			v.UseZapierAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_UseZendeskAction:
 			var ev string
@@ -13684,12 +15092,33 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseZendeskAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseZoomAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseZoomAction, &ev); err != nil {
+				return err
+			}
+			v.UseZoomAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_UseZoomInfoAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseZoomInfoAction, &ev); err != nil {
+				return err
+			}
+			v.UseZoomInfoAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ViewAccountSPICECapacity:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ViewAccountSPICECapacity, &ev); err != nil {
 				return err
 			}
 			v.ViewAccountSPICECapacity = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_VisierAgentAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_VisierAgentAction, &ev); err != nil {
+				return err
+			}
+			v.VisierAgentAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_WebCrawlerKnowledgeBase:
 			var ev string
@@ -13698,12 +15127,40 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.WebCrawlerKnowledgeBase = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_WhatsAppAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_WhatsAppAction, &ev); err != nil {
+				return err
+			}
+			v.WhatsAppAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ZapierAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ZapierAction, &ev); err != nil {
+				return err
+			}
+			v.ZapierAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_ZendeskAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_ZendeskAction, &ev); err != nil {
 				return err
 			}
 			v.ZendeskAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ZoomAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ZoomAction, &ev); err != nil {
+				return err
+			}
+			v.ZoomAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_ZoomInfoAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_ZoomInfoAction, &ev); err != nil {
+				return err
+			}
+			v.ZoomInfoAction = CapabilityState(ev)
 			return nil
 		}
 		return nil

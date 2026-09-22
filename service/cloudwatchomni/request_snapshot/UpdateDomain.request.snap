@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/UpdateDomain
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿hdomainIdl__DomainId__xidentityProviderConfiguration¿xidentityCenterConfiguration¿xidentityCenterInstanceArnx__IdentityCenterInstanceArn__ÿÿqidentityProvidersŸcIAMcIAMÿdnameh__Name__ÿ

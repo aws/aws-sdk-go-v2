@@ -5304,7 +5304,7 @@ var CalculatedMeasureField_Expression *smithy.Schema
 var Capabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Capabilities",
-}, smithy.ShapeTypeStructure, 279)
+}, smithy.ShapeTypeStructure, 391)
 var Capabilities_ExportToCsv *smithy.Schema
 
 var Capabilities_ExportToExcel *smithy.Schema
@@ -5810,6 +5810,230 @@ var Capabilities_CreateAndUpdateNewRelicAction *smithy.Schema
 var Capabilities_ShareNewRelicAction *smithy.Schema
 
 var Capabilities_UseNewRelicAction *smithy.Schema
+
+var Capabilities_PagerDutyAgentAction *smithy.Schema
+
+var Capabilities_CreateAndUpdatePagerDutyAgentAction *smithy.Schema
+
+var Capabilities_SharePagerDutyAgentAction *smithy.Schema
+
+var Capabilities_UsePagerDutyAgentAction *smithy.Schema
+
+var Capabilities_VisierAgentAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateVisierAgentAction *smithy.Schema
+
+var Capabilities_ShareVisierAgentAction *smithy.Schema
+
+var Capabilities_UseVisierAgentAction *smithy.Schema
+
+var Capabilities_ZoomAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateZoomAction *smithy.Schema
+
+var Capabilities_ShareZoomAction *smithy.Schema
+
+var Capabilities_UseZoomAction *smithy.Schema
+
+var Capabilities_SnowFlakeAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateSnowFlakeAction *smithy.Schema
+
+var Capabilities_ShareSnowFlakeAction *smithy.Schema
+
+var Capabilities_UseSnowFlakeAction *smithy.Schema
+
+var Capabilities_ZapierAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateZapierAction *smithy.Schema
+
+var Capabilities_ShareZapierAction *smithy.Schema
+
+var Capabilities_UseZapierAction *smithy.Schema
+
+var Capabilities_AirtableAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateAirtableAction *smithy.Schema
+
+var Capabilities_ShareAirtableAction *smithy.Schema
+
+var Capabilities_UseAirtableAction *smithy.Schema
+
+var Capabilities_DropboxAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateDropboxAction *smithy.Schema
+
+var Capabilities_ShareDropboxAction *smithy.Schema
+
+var Capabilities_UseDropboxAction *smithy.Schema
+
+var Capabilities_GmailAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGmailAction *smithy.Schema
+
+var Capabilities_ShareGmailAction *smithy.Schema
+
+var Capabilities_UseGmailAction *smithy.Schema
+
+var Capabilities_GoogleAnalyticsAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleAnalyticsAction *smithy.Schema
+
+var Capabilities_ShareGoogleAnalyticsAction *smithy.Schema
+
+var Capabilities_UseGoogleAnalyticsAction *smithy.Schema
+
+var Capabilities_GoogleDocsAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleDocsAction *smithy.Schema
+
+var Capabilities_ShareGoogleDocsAction *smithy.Schema
+
+var Capabilities_UseGoogleDocsAction *smithy.Schema
+
+var Capabilities_GoogleDriveAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleDriveAction *smithy.Schema
+
+var Capabilities_ShareGoogleDriveAction *smithy.Schema
+
+var Capabilities_UseGoogleDriveAction *smithy.Schema
+
+var Capabilities_GoogleMeetAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleMeetAction *smithy.Schema
+
+var Capabilities_ShareGoogleMeetAction *smithy.Schema
+
+var Capabilities_UseGoogleMeetAction *smithy.Schema
+
+var Capabilities_GoogleSheetsAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleSheetsAction *smithy.Schema
+
+var Capabilities_ShareGoogleSheetsAction *smithy.Schema
+
+var Capabilities_UseGoogleSheetsAction *smithy.Schema
+
+var Capabilities_GoogleSlidesAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleSlidesAction *smithy.Schema
+
+var Capabilities_ShareGoogleSlidesAction *smithy.Schema
+
+var Capabilities_UseGoogleSlidesAction *smithy.Schema
+
+var Capabilities_QuickBooksAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateQuickBooksAction *smithy.Schema
+
+var Capabilities_ShareQuickBooksAction *smithy.Schema
+
+var Capabilities_UseQuickBooksAction *smithy.Schema
+
+var Capabilities_FigmaAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateFigmaAction *smithy.Schema
+
+var Capabilities_ShareFigmaAction *smithy.Schema
+
+var Capabilities_UseFigmaAction *smithy.Schema
+
+var Capabilities_WhatsAppAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateWhatsAppAction *smithy.Schema
+
+var Capabilities_ShareWhatsAppAction *smithy.Schema
+
+var Capabilities_UseWhatsAppAction *smithy.Schema
+
+var Capabilities_GoogleChatAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateGoogleChatAction *smithy.Schema
+
+var Capabilities_ShareGoogleChatAction *smithy.Schema
+
+var Capabilities_UseGoogleChatAction *smithy.Schema
+
+var Capabilities_OneNoteAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateOneNoteAction *smithy.Schema
+
+var Capabilities_ShareOneNoteAction *smithy.Schema
+
+var Capabilities_UseOneNoteAction *smithy.Schema
+
+var Capabilities_ShopifyAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateShopifyAction *smithy.Schema
+
+var Capabilities_ShareShopifyAction *smithy.Schema
+
+var Capabilities_UseShopifyAction *smithy.Schema
+
+var Capabilities_AdobeAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateAdobeAction *smithy.Schema
+
+var Capabilities_ShareAdobeAction *smithy.Schema
+
+var Capabilities_UseAdobeAction *smithy.Schema
+
+var Capabilities_CiscoWebexVidcastAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateCiscoWebexVidcastAction *smithy.Schema
+
+var Capabilities_ShareCiscoWebexVidcastAction *smithy.Schema
+
+var Capabilities_UseCiscoWebexVidcastAction *smithy.Schema
+
+var Capabilities_CiscoWebexMeetingsAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateCiscoWebexMeetingsAction *smithy.Schema
+
+var Capabilities_ShareCiscoWebexMeetingsAction *smithy.Schema
+
+var Capabilities_UseCiscoWebexMeetingsAction *smithy.Schema
+
+var Capabilities_DunAndBradstreetAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateDunAndBradstreetAction *smithy.Schema
+
+var Capabilities_ShareDunAndBradstreetAction *smithy.Schema
+
+var Capabilities_UseDunAndBradstreetAction *smithy.Schema
+
+var Capabilities_HGInsightsAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateHGInsightsAction *smithy.Schema
+
+var Capabilities_ShareHGInsightsAction *smithy.Schema
+
+var Capabilities_UseHGInsightsAction *smithy.Schema
+
+var Capabilities_ZoomInfoAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateZoomInfoAction *smithy.Schema
+
+var Capabilities_ShareZoomInfoAction *smithy.Schema
+
+var Capabilities_UseZoomInfoAction *smithy.Schema
+
+var Capabilities_MoodysAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateMoodysAction *smithy.Schema
+
+var Capabilities_ShareMoodysAction *smithy.Schema
+
+var Capabilities_UseMoodysAction *smithy.Schema
+
+var Capabilities_BeeAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateBeeAction *smithy.Schema
+
+var Capabilities_ShareBeeAction *smithy.Schema
+
+var Capabilities_UseBeeAction *smithy.Schema
 
 var Capabilities_Topic *smithy.Schema
 
@@ -38045,6 +38269,230 @@ func init() {
 	Capabilities_ShareNewRelicAction = Capabilities.AddMember("ShareNewRelicAction", CapabilityState)
 
 	Capabilities_UseNewRelicAction = Capabilities.AddMember("UseNewRelicAction", CapabilityState)
+
+	Capabilities_PagerDutyAgentAction = Capabilities.AddMember("PagerDutyAgentAction", CapabilityState)
+
+	Capabilities_CreateAndUpdatePagerDutyAgentAction = Capabilities.AddMember("CreateAndUpdatePagerDutyAgentAction", CapabilityState)
+
+	Capabilities_SharePagerDutyAgentAction = Capabilities.AddMember("SharePagerDutyAgentAction", CapabilityState)
+
+	Capabilities_UsePagerDutyAgentAction = Capabilities.AddMember("UsePagerDutyAgentAction", CapabilityState)
+
+	Capabilities_VisierAgentAction = Capabilities.AddMember("VisierAgentAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateVisierAgentAction = Capabilities.AddMember("CreateAndUpdateVisierAgentAction", CapabilityState)
+
+	Capabilities_ShareVisierAgentAction = Capabilities.AddMember("ShareVisierAgentAction", CapabilityState)
+
+	Capabilities_UseVisierAgentAction = Capabilities.AddMember("UseVisierAgentAction", CapabilityState)
+
+	Capabilities_ZoomAction = Capabilities.AddMember("ZoomAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateZoomAction = Capabilities.AddMember("CreateAndUpdateZoomAction", CapabilityState)
+
+	Capabilities_ShareZoomAction = Capabilities.AddMember("ShareZoomAction", CapabilityState)
+
+	Capabilities_UseZoomAction = Capabilities.AddMember("UseZoomAction", CapabilityState)
+
+	Capabilities_SnowFlakeAction = Capabilities.AddMember("SnowFlakeAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateSnowFlakeAction = Capabilities.AddMember("CreateAndUpdateSnowFlakeAction", CapabilityState)
+
+	Capabilities_ShareSnowFlakeAction = Capabilities.AddMember("ShareSnowFlakeAction", CapabilityState)
+
+	Capabilities_UseSnowFlakeAction = Capabilities.AddMember("UseSnowFlakeAction", CapabilityState)
+
+	Capabilities_ZapierAction = Capabilities.AddMember("ZapierAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateZapierAction = Capabilities.AddMember("CreateAndUpdateZapierAction", CapabilityState)
+
+	Capabilities_ShareZapierAction = Capabilities.AddMember("ShareZapierAction", CapabilityState)
+
+	Capabilities_UseZapierAction = Capabilities.AddMember("UseZapierAction", CapabilityState)
+
+	Capabilities_AirtableAction = Capabilities.AddMember("AirtableAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateAirtableAction = Capabilities.AddMember("CreateAndUpdateAirtableAction", CapabilityState)
+
+	Capabilities_ShareAirtableAction = Capabilities.AddMember("ShareAirtableAction", CapabilityState)
+
+	Capabilities_UseAirtableAction = Capabilities.AddMember("UseAirtableAction", CapabilityState)
+
+	Capabilities_DropboxAction = Capabilities.AddMember("DropboxAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateDropboxAction = Capabilities.AddMember("CreateAndUpdateDropboxAction", CapabilityState)
+
+	Capabilities_ShareDropboxAction = Capabilities.AddMember("ShareDropboxAction", CapabilityState)
+
+	Capabilities_UseDropboxAction = Capabilities.AddMember("UseDropboxAction", CapabilityState)
+
+	Capabilities_GmailAction = Capabilities.AddMember("GmailAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGmailAction = Capabilities.AddMember("CreateAndUpdateGmailAction", CapabilityState)
+
+	Capabilities_ShareGmailAction = Capabilities.AddMember("ShareGmailAction", CapabilityState)
+
+	Capabilities_UseGmailAction = Capabilities.AddMember("UseGmailAction", CapabilityState)
+
+	Capabilities_GoogleAnalyticsAction = Capabilities.AddMember("GoogleAnalyticsAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleAnalyticsAction = Capabilities.AddMember("CreateAndUpdateGoogleAnalyticsAction", CapabilityState)
+
+	Capabilities_ShareGoogleAnalyticsAction = Capabilities.AddMember("ShareGoogleAnalyticsAction", CapabilityState)
+
+	Capabilities_UseGoogleAnalyticsAction = Capabilities.AddMember("UseGoogleAnalyticsAction", CapabilityState)
+
+	Capabilities_GoogleDocsAction = Capabilities.AddMember("GoogleDocsAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleDocsAction = Capabilities.AddMember("CreateAndUpdateGoogleDocsAction", CapabilityState)
+
+	Capabilities_ShareGoogleDocsAction = Capabilities.AddMember("ShareGoogleDocsAction", CapabilityState)
+
+	Capabilities_UseGoogleDocsAction = Capabilities.AddMember("UseGoogleDocsAction", CapabilityState)
+
+	Capabilities_GoogleDriveAction = Capabilities.AddMember("GoogleDriveAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleDriveAction = Capabilities.AddMember("CreateAndUpdateGoogleDriveAction", CapabilityState)
+
+	Capabilities_ShareGoogleDriveAction = Capabilities.AddMember("ShareGoogleDriveAction", CapabilityState)
+
+	Capabilities_UseGoogleDriveAction = Capabilities.AddMember("UseGoogleDriveAction", CapabilityState)
+
+	Capabilities_GoogleMeetAction = Capabilities.AddMember("GoogleMeetAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleMeetAction = Capabilities.AddMember("CreateAndUpdateGoogleMeetAction", CapabilityState)
+
+	Capabilities_ShareGoogleMeetAction = Capabilities.AddMember("ShareGoogleMeetAction", CapabilityState)
+
+	Capabilities_UseGoogleMeetAction = Capabilities.AddMember("UseGoogleMeetAction", CapabilityState)
+
+	Capabilities_GoogleSheetsAction = Capabilities.AddMember("GoogleSheetsAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleSheetsAction = Capabilities.AddMember("CreateAndUpdateGoogleSheetsAction", CapabilityState)
+
+	Capabilities_ShareGoogleSheetsAction = Capabilities.AddMember("ShareGoogleSheetsAction", CapabilityState)
+
+	Capabilities_UseGoogleSheetsAction = Capabilities.AddMember("UseGoogleSheetsAction", CapabilityState)
+
+	Capabilities_GoogleSlidesAction = Capabilities.AddMember("GoogleSlidesAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleSlidesAction = Capabilities.AddMember("CreateAndUpdateGoogleSlidesAction", CapabilityState)
+
+	Capabilities_ShareGoogleSlidesAction = Capabilities.AddMember("ShareGoogleSlidesAction", CapabilityState)
+
+	Capabilities_UseGoogleSlidesAction = Capabilities.AddMember("UseGoogleSlidesAction", CapabilityState)
+
+	Capabilities_QuickBooksAction = Capabilities.AddMember("QuickBooksAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateQuickBooksAction = Capabilities.AddMember("CreateAndUpdateQuickBooksAction", CapabilityState)
+
+	Capabilities_ShareQuickBooksAction = Capabilities.AddMember("ShareQuickBooksAction", CapabilityState)
+
+	Capabilities_UseQuickBooksAction = Capabilities.AddMember("UseQuickBooksAction", CapabilityState)
+
+	Capabilities_FigmaAction = Capabilities.AddMember("FigmaAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateFigmaAction = Capabilities.AddMember("CreateAndUpdateFigmaAction", CapabilityState)
+
+	Capabilities_ShareFigmaAction = Capabilities.AddMember("ShareFigmaAction", CapabilityState)
+
+	Capabilities_UseFigmaAction = Capabilities.AddMember("UseFigmaAction", CapabilityState)
+
+	Capabilities_WhatsAppAction = Capabilities.AddMember("WhatsAppAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateWhatsAppAction = Capabilities.AddMember("CreateAndUpdateWhatsAppAction", CapabilityState)
+
+	Capabilities_ShareWhatsAppAction = Capabilities.AddMember("ShareWhatsAppAction", CapabilityState)
+
+	Capabilities_UseWhatsAppAction = Capabilities.AddMember("UseWhatsAppAction", CapabilityState)
+
+	Capabilities_GoogleChatAction = Capabilities.AddMember("GoogleChatAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateGoogleChatAction = Capabilities.AddMember("CreateAndUpdateGoogleChatAction", CapabilityState)
+
+	Capabilities_ShareGoogleChatAction = Capabilities.AddMember("ShareGoogleChatAction", CapabilityState)
+
+	Capabilities_UseGoogleChatAction = Capabilities.AddMember("UseGoogleChatAction", CapabilityState)
+
+	Capabilities_OneNoteAction = Capabilities.AddMember("OneNoteAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateOneNoteAction = Capabilities.AddMember("CreateAndUpdateOneNoteAction", CapabilityState)
+
+	Capabilities_ShareOneNoteAction = Capabilities.AddMember("ShareOneNoteAction", CapabilityState)
+
+	Capabilities_UseOneNoteAction = Capabilities.AddMember("UseOneNoteAction", CapabilityState)
+
+	Capabilities_ShopifyAction = Capabilities.AddMember("ShopifyAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateShopifyAction = Capabilities.AddMember("CreateAndUpdateShopifyAction", CapabilityState)
+
+	Capabilities_ShareShopifyAction = Capabilities.AddMember("ShareShopifyAction", CapabilityState)
+
+	Capabilities_UseShopifyAction = Capabilities.AddMember("UseShopifyAction", CapabilityState)
+
+	Capabilities_AdobeAction = Capabilities.AddMember("AdobeAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateAdobeAction = Capabilities.AddMember("CreateAndUpdateAdobeAction", CapabilityState)
+
+	Capabilities_ShareAdobeAction = Capabilities.AddMember("ShareAdobeAction", CapabilityState)
+
+	Capabilities_UseAdobeAction = Capabilities.AddMember("UseAdobeAction", CapabilityState)
+
+	Capabilities_CiscoWebexVidcastAction = Capabilities.AddMember("CiscoWebexVidcastAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateCiscoWebexVidcastAction = Capabilities.AddMember("CreateAndUpdateCiscoWebexVidcastAction", CapabilityState)
+
+	Capabilities_ShareCiscoWebexVidcastAction = Capabilities.AddMember("ShareCiscoWebexVidcastAction", CapabilityState)
+
+	Capabilities_UseCiscoWebexVidcastAction = Capabilities.AddMember("UseCiscoWebexVidcastAction", CapabilityState)
+
+	Capabilities_CiscoWebexMeetingsAction = Capabilities.AddMember("CiscoWebexMeetingsAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateCiscoWebexMeetingsAction = Capabilities.AddMember("CreateAndUpdateCiscoWebexMeetingsAction", CapabilityState)
+
+	Capabilities_ShareCiscoWebexMeetingsAction = Capabilities.AddMember("ShareCiscoWebexMeetingsAction", CapabilityState)
+
+	Capabilities_UseCiscoWebexMeetingsAction = Capabilities.AddMember("UseCiscoWebexMeetingsAction", CapabilityState)
+
+	Capabilities_DunAndBradstreetAction = Capabilities.AddMember("DunAndBradstreetAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateDunAndBradstreetAction = Capabilities.AddMember("CreateAndUpdateDunAndBradstreetAction", CapabilityState)
+
+	Capabilities_ShareDunAndBradstreetAction = Capabilities.AddMember("ShareDunAndBradstreetAction", CapabilityState)
+
+	Capabilities_UseDunAndBradstreetAction = Capabilities.AddMember("UseDunAndBradstreetAction", CapabilityState)
+
+	Capabilities_HGInsightsAction = Capabilities.AddMember("HGInsightsAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateHGInsightsAction = Capabilities.AddMember("CreateAndUpdateHGInsightsAction", CapabilityState)
+
+	Capabilities_ShareHGInsightsAction = Capabilities.AddMember("ShareHGInsightsAction", CapabilityState)
+
+	Capabilities_UseHGInsightsAction = Capabilities.AddMember("UseHGInsightsAction", CapabilityState)
+
+	Capabilities_ZoomInfoAction = Capabilities.AddMember("ZoomInfoAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateZoomInfoAction = Capabilities.AddMember("CreateAndUpdateZoomInfoAction", CapabilityState)
+
+	Capabilities_ShareZoomInfoAction = Capabilities.AddMember("ShareZoomInfoAction", CapabilityState)
+
+	Capabilities_UseZoomInfoAction = Capabilities.AddMember("UseZoomInfoAction", CapabilityState)
+
+	Capabilities_MoodysAction = Capabilities.AddMember("MoodysAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateMoodysAction = Capabilities.AddMember("CreateAndUpdateMoodysAction", CapabilityState)
+
+	Capabilities_ShareMoodysAction = Capabilities.AddMember("ShareMoodysAction", CapabilityState)
+
+	Capabilities_UseMoodysAction = Capabilities.AddMember("UseMoodysAction", CapabilityState)
+
+	Capabilities_BeeAction = Capabilities.AddMember("BeeAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateBeeAction = Capabilities.AddMember("CreateAndUpdateBeeAction", CapabilityState)
+
+	Capabilities_ShareBeeAction = Capabilities.AddMember("ShareBeeAction", CapabilityState)
+
+	Capabilities_UseBeeAction = Capabilities.AddMember("UseBeeAction", CapabilityState)
 
 	Capabilities_Topic = Capabilities.AddMember("Topic", CapabilityState)
 

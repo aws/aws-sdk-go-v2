@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/GetAccessProfile
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿iprofileIdm__ProfileId__gspaceIdk__SpaceId__ÿ

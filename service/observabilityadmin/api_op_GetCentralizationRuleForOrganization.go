@@ -42,6 +42,12 @@ type GetCentralizationRuleForOrganizationOutput struct {
 	// The configuration details for the organization centralization rule.
 	CentralizationRule *types.CentralizationRule
 
+	// The status of context graph centralization for this rule. Returns Provisioning
+	// while the context graph is being set up, Healthy once it is active, or Unhealthy
+	// if provisioning failed. This status is independent of the overall RuleHealth
+	// for log delivery.
+	ContextGraphStatus types.ContextGraphStatus
+
 	// The Amazon Web Services region where the organization centralization rule was
 	// created.
 	CreatedRegion *string

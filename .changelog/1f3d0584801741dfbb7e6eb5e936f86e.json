@@ -1,0 +1,8 @@
+{
+    "id": "1f3d0584-8017-41df-bb7e-6eb5e936f86e",
+    "type": "feature",
+    "description": "Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations",
+    "modules": [
+        "service/ec2"
+    ]
+}

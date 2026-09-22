@@ -3216,6 +3216,33 @@ func (StatisticEvaluationLevel) Values() []StatisticEvaluationLevel {
 	}
 }
 
+type SubObjectSourceType string
+
+// Enum values for SubObjectSourceType
+const (
+	SubObjectSourceTypeHiveParquet  SubObjectSourceType = "HIVE_PARQUET"
+	SubObjectSourceTypeHiveOrc      SubObjectSourceType = "HIVE_ORC"
+	SubObjectSourceTypeHiveCsv      SubObjectSourceType = "HIVE_CSV"
+	SubObjectSourceTypeHiveJson     SubObjectSourceType = "HIVE_JSON"
+	SubObjectSourceTypePlainParquet SubObjectSourceType = "PLAIN_PARQUET"
+	SubObjectSourceTypeIceberg      SubObjectSourceType = "ICEBERG"
+)
+
+// Values returns all known values for SubObjectSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubObjectSourceType) Values() []SubObjectSourceType {
+	return []SubObjectSourceType{
+		"HIVE_PARQUET",
+		"HIVE_ORC",
+		"HIVE_CSV",
+		"HIVE_JSON",
+		"PLAIN_PARQUET",
+		"ICEBERG",
+	}
+}
+
 type TableAttributes string
 
 // Enum values for TableAttributes

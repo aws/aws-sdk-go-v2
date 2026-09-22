@@ -50,6 +50,27 @@ func (CentralizationFailureReason) Values() []CentralizationFailureReason {
 	}
 }
 
+type ContextGraphStatus string
+
+// Enum values for ContextGraphStatus
+const (
+	ContextGraphStatusHealthy      ContextGraphStatus = "Healthy"
+	ContextGraphStatusUnhealthy    ContextGraphStatus = "Unhealthy"
+	ContextGraphStatusProvisioning ContextGraphStatus = "Provisioning"
+)
+
+// Values returns all known values for ContextGraphStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextGraphStatus) Values() []ContextGraphStatus {
+	return []ContextGraphStatus{
+		"Healthy",
+		"Unhealthy",
+		"Provisioning",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType

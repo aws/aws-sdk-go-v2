@@ -904,13 +904,29 @@ func TestCheckResponseSnapshot_DescribeApplicationProvider(t *testing.T) {
 
 func TestCheckResponseSnapshot_DescribeInstance(t *testing.T) {
 	want := &DescribeInstanceOutput{
-		InstanceArn:     ptr.String("__InstanceArn__"),
-		IdentityStoreId: ptr.String("__IdentityStoreId__"),
-		OwnerAccountId:  ptr.String("__OwnerAccountId__"),
-		Name:            ptr.String("__Name__"),
-		CreatedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Status:          types.InstanceStatus("CREATE_IN_PROGRESS"),
-		StatusReason:    ptr.String("__StatusReason__"),
+		InstanceArn:      ptr.String("__InstanceArn__"),
+		IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+		IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+		OwnerAccountId:   ptr.String("__OwnerAccountId__"),
+		Name:             ptr.String("__Name__"),
+		CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:           types.InstanceStatus("CREATE_IN_PROGRESS"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		PrimaryRegion:    ptr.String("__PrimaryRegion__"),
+		Regions: []types.RegionMetadata{
+			{
+				RegionName:      ptr.String("__RegionName__"),
+				Status:          types.RegionStatus("ACTIVE"),
+				AddedDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				IsPrimaryRegion: true,
+			},
+			{
+				RegionName:      ptr.String("__RegionName__"),
+				Status:          types.RegionStatus("ACTIVE"),
+				AddedDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				IsPrimaryRegion: true,
+			},
+		},
 		EncryptionConfigurationDetails: &types.EncryptionConfigurationDetails{
 			KeyType:                types.KmsKeyType("AWS_OWNED_KMS_KEY"),
 			KmsKeyArn:              ptr.String("__KmsKeyArn__"),
@@ -1917,14 +1933,15 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 	want := &ListInstancesOutput{
 		Instances: []types.InstanceMetadata{
 			{
-				InstanceArn:     ptr.String("__InstanceArn__"),
-				IdentityStoreId: ptr.String("__IdentityStoreId__"),
-				OwnerAccountId:  ptr.String("__OwnerAccountId__"),
-				Name:            ptr.String("__Name__"),
-				CreatedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Status:          types.InstanceStatus("CREATE_IN_PROGRESS"),
-				StatusReason:    ptr.String("__StatusReason__"),
-				PrimaryRegion:   ptr.String("__PrimaryRegion__"),
+				InstanceArn:      ptr.String("__InstanceArn__"),
+				IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+				IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+				OwnerAccountId:   ptr.String("__OwnerAccountId__"),
+				Name:             ptr.String("__Name__"),
+				CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:           types.InstanceStatus("CREATE_IN_PROGRESS"),
+				StatusReason:     ptr.String("__StatusReason__"),
+				PrimaryRegion:    ptr.String("__PrimaryRegion__"),
 				Regions: []types.RegionMetadata{
 					{
 						RegionName:      ptr.String("__RegionName__"),
@@ -1941,14 +1958,15 @@ func TestCheckResponseSnapshot_ListInstances(t *testing.T) {
 				},
 			},
 			{
-				InstanceArn:     ptr.String("__InstanceArn__"),
-				IdentityStoreId: ptr.String("__IdentityStoreId__"),
-				OwnerAccountId:  ptr.String("__OwnerAccountId__"),
-				Name:            ptr.String("__Name__"),
-				CreatedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Status:          types.InstanceStatus("CREATE_IN_PROGRESS"),
-				StatusReason:    ptr.String("__StatusReason__"),
-				PrimaryRegion:   ptr.String("__PrimaryRegion__"),
+				InstanceArn:      ptr.String("__InstanceArn__"),
+				IdentityStoreId:  ptr.String("__IdentityStoreId__"),
+				IdentityStoreArn: ptr.String("__IdentityStoreArn__"),
+				OwnerAccountId:   ptr.String("__OwnerAccountId__"),
+				Name:             ptr.String("__Name__"),
+				CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:           types.InstanceStatus("CREATE_IN_PROGRESS"),
+				StatusReason:     ptr.String("__StatusReason__"),
+				PrimaryRegion:    ptr.String("__PrimaryRegion__"),
 				Regions: []types.RegionMetadata{
 					{
 						RegionName:      ptr.String("__RegionName__"),

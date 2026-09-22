@@ -1,0 +1,8 @@
+{
+    "id": "53366ccd-66f6-45e1-83f0-f0ddd5514695",
+    "type": "feature",
+    "description": "AWS IAM Identity Center now returns PrimaryRegion and Regions in the DescribeInstance response, providing information about replicated instances, and returns IdentityStoreArn in both the ListInstances and DescribeInstance responses.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}
